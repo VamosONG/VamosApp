@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
 
-    sequelize.define('User', {
+    sequelize.define('Driver', {
         id: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        email:{
+        car:{
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -29,20 +29,13 @@ module.exports = (sequelize) => {
             type: DataTypes.NUMBER,
             allowNull: false,
         },
-        activeReservations:{
+        capacityPassengers:{
             type: DataTypes.NUMBER,
             allowNull: false,
         },
         reviews: {
             type: DataTypes.TEXT,
             allowNull: false, 
-        },
-        dni: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        admin:{
-            type: DataTypes.BOOLEAN
         }
     },
         { timesTamps: false });
