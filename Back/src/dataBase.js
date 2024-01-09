@@ -29,11 +29,19 @@ let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].s
 sequelize.models = Object.fromEntries(capsEntries);
 
 
-const { Users, Trips, Driver, Admin } = sequelize.models;
+const { User, Trip, Driver, Admin, Origin, Destination } = sequelize.models;
 
 
-// Driver.belongsToMany(Trips, { through: 'driverTrips' });
-// Teams.belongsToMany(Driver, { through: 'driverTeams' });
+ User.hasMany(Trip);
+ Trip.belongsTo(User);
+ Admin.hasMany(User);
+ User.belongsTo(Admin);
+ Driver.belongsTo(Admin);
+ Admin.hasMany(Driver);
+ Trip.hasOne(Origin);
+ Origin.belongsTo(Trip);
+ Trip.hasOne(Destination);
+ Destination.belongsTo(Trip);
 
 
 module.exports = {
