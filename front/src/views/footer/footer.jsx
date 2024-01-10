@@ -6,6 +6,6 @@ function Footer() {
         <p>Soy el footer papá</p>
       </>
     )
-  }
+}
   
-  export default Footer
+export default Footer
