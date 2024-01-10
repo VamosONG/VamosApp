@@ -7,6 +7,7 @@ import LoginForm from './views/Forms/Login/Login'
 import {Routes, Route} from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import NavBar from './components/navBar/navBar'
+import About from './components/about/About'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,6 +19,7 @@ function App() {
       
       <Routes>
         <Route path='/login' Component={LoginForm}/>
+        <Route path= '/about' element={<About/>} />
       </Routes>
       
     </>

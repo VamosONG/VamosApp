@@ -27,7 +27,7 @@ const NavBar = () => {
         <Link to="/frecuentes">
          <Button colorScheme="pink">Preguntas Frecuentes</Button>
         </Link>
-        <Link to="/nosotros">
+        <Link to="/about">
          <Button colorScheme="blue">Nosotros</Button>
         </Link>
       </Stack>
