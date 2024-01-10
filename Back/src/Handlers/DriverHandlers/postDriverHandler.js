@@ -1,4 +1,4 @@
-const postAirport=require('../Controllers/airportsController/postAirport');
+const postDriver=require('../Controllers/driverController/postDriver');
 
 module.exports=async(req,res)=>{
     const {name,surname,car,phone,capacityPassengers}=req.body;
