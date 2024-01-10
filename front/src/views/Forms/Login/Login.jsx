@@ -30,7 +30,7 @@ const LoginForm = ({ onSwitchForm }) => {
     const handleClick = () => setShow(!show)
 
     return (
-        <Stack spacing={4} bg='gray.100' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' >
+        <Stack spacing={4} bg='gray.100' p='5' h='auto' borderRadius='20' boxShadow='dark-lg'>
 
             {/* Falta controlar los datos ingresados */}
             <FormControl isInvalid={isError}>

@@ -33,7 +33,7 @@ const RegistroForm = ({ onSwitchForm }) => {
     const handleClick = () => setShow(!show)
 
     return (
-        <Stack spacing={4} bg='gray.100' p='5' w='auto' h='auto' borderRadius='20' boxShadow='dark-lg' >
+        <Stack spacing={4} bg='gray.100' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' >
             <FormControl isInvalid={isError}>
                 <Heading>Formulario de Registro</Heading>
                 <FormLabel>Name</FormLabel>

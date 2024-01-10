@@ -1,45 +1,18 @@
-import { Button, Slide, Box, ScaleFade } from '@chakra-ui/react'
-import LoginForm from './Login/Login';
-import { useDisclosure } from '@chakra-ui/react';
-import RegistroForm from './Registro/Registro';
+import {  Flex } from '@chakra-ui/react'
+import ViewBtnUserForm from './ViewForms/ViewUserForm';
+import ViewBtnChoferForm from './ViewForms/ViewChoferForm';
 import { useState } from 'react';
 
-
-
-
 const SlideEx = () => {
-    //Manejo de boton "ENTRAR" para login o registro
-    const { isOpen, onToggle } = useDisclosure()
-
-    const [isLoginFormVisible, setIsLoginFormVisible] = useState(true);
-
-
-    //Funcion para manjera los formularios
-    const handleSwitchForm = () => {
-        setIsLoginFormVisible(!isLoginFormVisible);
-    };
-
+    //Test de vista de usuario o admin, falta probar con data. 
+    const  {user, setUser} = useState(false)
     return (
         <>
-            <Button onClick={onToggle} bg='blue.200' color='white'  >Entrar</Button>
-            <ScaleFade initialScale={0.9} direction='bottom' in={isOpen} style={{ zIndex: 10 }}>
-                <Box
-                    p='40px'
-                    color='black'
-                    mt='4'
-                    bg='blue.100'
-                    rounded='md'
-                    shadow='lg'
-                    h='auto'
-                >
-                    {/* Validacion para mostrar formularios */}
-                    {isLoginFormVisible ? (
-                        <LoginForm onSwitchForm={handleSwitchForm} />
-                    ) : (
-                        <RegistroForm onSwitchForm={handleSwitchForm} />
-                    )}
-                </Box>
-            </ScaleFade>
+            <Flex minWidth='max-content' gap='2'>
+                {/* Cada componente renderiza una vista para usuarios y admin */}
+                {!user ? <ViewBtnUserForm/> :
+                <ViewBtnChoferForm/> }           
+            </Flex>
         </>
     )
 }
