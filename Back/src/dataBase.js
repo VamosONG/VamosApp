@@ -29,7 +29,7 @@ let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].s
 sequelize.models = Object.fromEntries(capsEntries);
 
 
-const { User, Trip, Driver, Admin, Origin, Destination } = sequelize.models;
+const { User, Trip, Driver, Admin, Zone, Airport } = sequelize.models;
 
 
  User.hasMany(Trip);
@@ -38,10 +38,10 @@ const { User, Trip, Driver, Admin, Origin, Destination } = sequelize.models;
  User.belongsTo(Admin);
  Driver.belongsTo(Admin);
  Admin.hasMany(Driver);
- Trip.hasOne(Origin);
- Origin.belongsTo(Trip);
- Trip.hasOne(Destination);
- Destination.belongsTo(Trip);
+ Trip.hasOne(Zone);
+ Zone.belongsTo(Trip);
+ Trip.hasOne(Airport);
+ Airport.belongsTo(Trip);
 
 
 module.exports = {
