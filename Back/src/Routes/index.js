@@ -7,7 +7,7 @@ router.post('/trips/create', postTripHandler);
 router.put('/trips/update', updateTripHandler);
 router.delete('/trips', deleteTripHandler);
 
-router.get('/user', getUserHandler);
+router.get('/user', getUsersHandler);
 router.post('/user/create', postUserHandler);
 router.put('/user/update', updateUserHandler);
 router.delete('/user', deleteUserHandler);
@@ -18,19 +18,24 @@ router.put('/drivers/update', updateDriverHandler);
 router.delete('/drivers', deleteDriverHandler);
 
 router.get('/airports', getAirportsHandler);
-router.post('/airports/create', postAirportsHandler);
-router.put('/airports/update', updateAirportsHandler);
-router.delete('/airports', deleteAirportsHandler);
+router.post('/airports/create', postAirportHandler);
+router.put('/airports/update', updateAirportHandler);
+router.delete('/airports', deleteAirportHandler);
 
 router.get('/zones', getZonesHandler);
-router.post('/zones/create', postZonesHandler);
-router.put('/zones/update', updateZonesHandler);
-router.delete('/zones', deleteZonesHandler);
+router.post('/zones/create', postZoneHandler);
+router.put('/zones/update', updateZoneHandler);
+router.delete('/zones', deleteZoneHandler);
+
+router.get('/reviews', getReviewsHandler);
+router.post('/reviews/create', postReviewHandler);
+router.put('/reviews/update', updateReviewHandler);
+router.delete('/reviews', deleteReviewHandler);
 
 router.get('/dashboard/admin', getAdminsHandler);
-router.post('/dashboard/admin/create', postAdminsHandler);
-router.put('/dashboard/admin/update', updateAdminsHandler);
-router.delete('/dashboard/admin', deleteAdminsHandler);
+router.post('/dashboard/admin/create', postAdminHandler);
+router.put('/dashboard/admin/update', updateAdminHandler);
+router.delete('/dashboard/admin', deleteAdminHandler);
 
 
 
