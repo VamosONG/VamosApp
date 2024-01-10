@@ -1,5 +1,7 @@
+
 const { Op } = require('sequelize');
 const { Driver } = require('../../dataBase')
+
 
 const getDrivers = async (req, res) => {
 
@@ -42,6 +44,7 @@ const getDrivers = async (req, res) => {
 
 
         else {
+
             const allDrivers = await Driver.findAll()
             
             res.status(200).json(allDrivers.map(driver => ({

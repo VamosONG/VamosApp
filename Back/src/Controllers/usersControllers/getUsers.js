@@ -1,5 +1,7 @@
+
 const { User } = require('../../dataBase')
 const { Op } = require('sequelize');
+
 
 const getUsers = async (req, res) => {
 
@@ -8,6 +10,7 @@ const getUsers = async (req, res) => {
 
 
         if (name) {
+
 
             const UserDBName = await User.findAll({
                 where: {
@@ -20,6 +23,7 @@ const getUsers = async (req, res) => {
                 })
 
 
+
             const allUsers = UserDBName.map(user => ({
                 id: user.id,
                 forename: user.forename,
@@ -30,6 +34,7 @@ const getUsers = async (req, res) => {
                 phone: user.phone,
                 activeReservations: user.activeReservations,
                 reviews: user.reviews,
+
             }))
 
 
@@ -53,6 +58,7 @@ const getUsers = async (req, res) => {
                 phone: user.phone,
                 activeReservations: user.activeReservations,
                 reviews: user.reviews,
+
             }))
 
 
