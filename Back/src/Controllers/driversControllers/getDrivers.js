@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { Driver } = require('../dataBase')
+const { Driver } = require('../../dataBase')
 
 const getDrivers = async (req, res) => {
 

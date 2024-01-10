@@ -1,4 +1,4 @@
-const { Trip } = require('../dataBase')
+const { Trip } = require('../../dataBase')
 
 const getTrips = async (req, res) => {
 

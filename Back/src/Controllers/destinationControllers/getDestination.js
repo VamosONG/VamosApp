@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { Airport, Zone } = require('../dataBase')
+const { Airport, Zone } = require('../../dataBase')
 
 const getDestination = async (req, res) => {
 
