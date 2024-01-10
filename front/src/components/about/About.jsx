@@ -1,8 +1,9 @@
-import { Box, Flex, Heading, Text, Image } from "@chakra-ui/react";
+import { Box,  Heading, Text, Image, Flex} from "@chakra-ui/react";
 import Vamos from "../../assets/Vamos.png"
 const About = () => {
   return (
-    <Box>
+    <Box 
+    backgroundColor="blue.100">
       <Heading as="h1" size="2xl">
         Vamos!
       </Heading>
@@ -13,20 +14,19 @@ const About = () => {
           adultos mayores con ganas de seguir emprendiendo
         </Text>
       </Box>
-      <Box >
-        <Image src={Vamos} alt="vamos"/>
-      </Box>
-      <Flex  justify="space-between">
+<Flex justify="left" >
+  <Box>
 
-      <Box bg="red" m="20px" p="10px">
-        <Text fontSize={{base:"24px", md:"40px", lg:"56px"}}>
+  </Box>
+      <Box  m="20px" p="10px" w="30%">
+        <Text fontSize="20px">
           Mision: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
           commodi eos corporis natus molestiae. Laborum, qui minus? Ut, totam?
           Tempora, nostrum unde magni doloremque eveniet doloribus quos amet ut
           quis?
         </Text>
       </Box>
-      <Box bg="red" m="20px" p="10px">
+      <Box  m="20px" p="10px" w="30%">
         <Text fontSize="20px">
           Vision: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
           commodi eos corporis natus molestiae. Laborum, qui minus? Ut, totam?
@@ -34,7 +34,7 @@ const About = () => {
           quis?
         </Text>
       </Box>
-      <Box bg="red" m="20px" p="10px">
+      <Box  m="20px" p="10px" w="30%">
         <Text fontSize="20px">
           Valores: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
           commodi eos corporis natus molestiae. Laborum, qui minus? Ut, totam?
@@ -42,8 +42,13 @@ const About = () => {
           quis?
         </Text>
       </Box>
-      </Flex>
+
+      <Box bg="blue.400"  m="20px" p="10px" >
+        <Image src={Vamos} alt="vamos"/>
+      </Box>
+</Flex>
     </Box>
+
   );
 };
 export default About;
