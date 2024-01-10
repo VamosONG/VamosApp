@@ -2,7 +2,8 @@ import { Box,  Heading, Text, Image, Flex} from "@chakra-ui/react";
 import Vamos from "../../assets/Vamos.png"
 const About = () => {
   return (
-    <Box 
+    <Box
+     
     backgroundColor="blue.100">
       <Heading as="h1" size="2xl">
         Vamos!
