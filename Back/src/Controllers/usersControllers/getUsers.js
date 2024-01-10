@@ -1,4 +1,7 @@
-const { User } = require('../dataBase')
+
+const { User } = require('../../dataBase')
+const { Op } = require('sequelize');
+
 
 const getUsers = async (req, res) => {
 
@@ -8,16 +11,29 @@ const getUsers = async (req, res) => {
 
         if (name) {
 
-            const UserDBName = await User.findAll({ where: { name: { [Op.iLike]: `%${name}%` } }, include: [Trip, Review] })
+
+            const UserDBName = await User.findAll({
+                where: {
+                    [Op.or]:[
+                        { forename: { [Op.iLike]: `%${name}%` } }, 
+                        { surname: { [Op.iLike]: `%${name}%` } }
+                         
+                    ],include: [Trip, Review]
+                  }              
+                })
+
 
 
             const allUsers = UserDBName.map(user => ({
                 id: user.id,
-                name: user.name,
+                forename: user.forename,
                 surname: user.surname,
+                dni: user.dni,
                 email: user.email,
-                password: user.vehiculo,
-                trip: user.trip,
+                trips: user.trips,
+                phone: user.phone,
+                activeReservations: user.activeReservations,
+                reviews: user.reviews,
 
             }))
 
@@ -34,11 +50,15 @@ const getUsers = async (req, res) => {
             const allUserDB = await User.findAll({ include: [Trip, Review] })
             const allUserDBMap = allUserDB.map(user => ({
                 id: user.id,
-                nombre: user.nombre,
-                apellido: user.apellido,
+                forename: user.forename,
+                surname: user.surname,
+                dni: user.dni,
                 email: user.email,
-                password: user.vehiculo,
-                viajes: user.viajes,
+                trips: user.trips,
+                phone: user.phone,
+                activeReservations: user.activeReservations,
+                reviews: user.reviews,
+
             }))
 
 

@@ -1,4 +1,7 @@
-const { Driver, } = require('../dataBase')
+
+const { Op } = require('sequelize');
+const { Driver } = require('../../dataBase')
+
 
 const getDrivers = async (req, res) => {
 
@@ -8,15 +11,27 @@ const getDrivers = async (req, res) => {
 
         if (name) {
 
-            const driverDBName = await Driver.findAll({ where: { name: { [Op.iLike]: `%${name}%` } } })
-
+            const driverDBName = await Driver.findAll({ 
+                where: {
+                    [Op.or]:[
+                        { forename: { [Op.iLike]: `%${name}%` } }, 
+                        { surname: { [Op.iLike]: `%${name}%` } } 
+                        
+                    ]
+                  }
+                })
+                    
 
             const allDrivers = driverDBName.map(driver => ({
                 id: driver.id,
-                name: driver.name,
+                forename: driver.forename,
                 surname: driver.surname,
+                phone: driver.phone,
                 email: driver.email,
                 car: driver.car,
+                trips: driver.trips,
+                capacityPassengers: driver.capacityPassengers,
+                reviews: driver.reviews
             }))
 
 
@@ -29,17 +44,21 @@ const getDrivers = async (req, res) => {
 
 
         else {
-            const allDriverDB = await Driver.findAll()
-            const allDriverDBMap = allDriverDB.map(driver => ({
+
+            const allDrivers = await Driver.findAll()
+            
+            res.status(200).json(allDrivers.map(driver => ({
                 id: driver.id,
-                name: driver.name,
+                forename: driver.forename,
                 surname: driver.surname,
-                email: driver.email,
                 car: driver.car,
-            }))
+                email: driver.email,
+                trips: driver.trips,
+                phone: driver.phone,
+                capacityPassengers: driver.capacityPassengers,
+                reviews: driver.reviews
+            })))
 
-
-            res.status(200).json(allDriverDBMap)
         }
 
     } catch (error) {
