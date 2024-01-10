@@ -1,21 +1,15 @@
 import { useState } from 'react'
 import './App.css'
-import Landing from './views/landing/landingComponent'
-import LoginForm from './views/Forms/Login/Login'
+import Landing from './views/landing/landingComponent
 import {Routes, Route} from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import RegistroForm from './views/Forms/Registro/Registro'
 import SlideEx from './views/Forms/ViewForm'
-import ChoferForm from './views/Forms/ChoferFormulario/ChoferForm'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       {/* Boton para mostrar formularios de registro (DEBERIA ESTAR INCLUIDO EN EL NAVBAR) */}
       <SlideEx/>
-      {/* <ChoferForm/> */}
     </>
   )
 }
