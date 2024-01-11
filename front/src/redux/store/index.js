@@ -1,23 +1,14 @@
-/* import {createStore, applyMiddleware, compose} from 'redux';
-import thunkMiddleware from 'redux-thunk'
-import { reducer }  from '../reducer/index.js';
-
-const composeEnhacer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-export const store = createStore(
-    reducer,
-    composeEnhacer(applyMiddleware(thunkMiddleware))
-    ); */
-
 import {createStore, applyMiddleware, compose} from 'redux';
 import {reducer} from "../reducer/index";
-import thunkMiddleware from "redux-thunk";
+// import {thunkMiddleware} from 'redux-thunk'
+import thunk from 'redux-thunk';
 
-const composeEnhancer = window._REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose;
+
+
+const composeEnhacer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // esta linea
 
 const store = createStore(
     reducer,
-    composeEnhancer(applyMiddleware(thunkMiddleware))
-);
+    composeEnhacer(applyMiddleware(thunk))); // Esta linea nos permite hacer petic
 
-export default store;
+export default store
