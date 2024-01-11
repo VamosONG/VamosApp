@@ -1,3 +1,6 @@
+
+import { useState } from 'react'
+
 import './App.css'
 import Footer from './views/footer/footer';
 
@@ -22,11 +25,6 @@ function App() {
       <SlideEx/>
       <NavBar/>
 
-  
-
-  return (
-    <>
-    <NavBar/>
       <button><Link to='/login' >Login</Link></button>
       
       <Routes>

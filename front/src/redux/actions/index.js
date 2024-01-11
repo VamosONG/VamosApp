@@ -1,4 +1,5 @@
 /* import axios from 'axios'; */
+import choferes from '../../utils/chofer'
 
 export const PAGINATE="PAGINATE"
 export const GET_ALL_CONDUCTORES="GET_ALL_CONDUCTORES"
@@ -20,8 +21,11 @@ export const paginateConductores = (order) => {
 export const getAllConductores = () => {
     return async (dispatch) => {
         try {
+            const data= await choferes
+            
             return dispatch({
-                type: GET_ALL_CONDUCTORES
+                type: GET_ALL_CONDUCTORES,
+                payload: data
             });
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
