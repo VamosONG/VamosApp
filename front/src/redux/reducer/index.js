@@ -1,5 +1,6 @@
 import {GET_ALL_CONDUCTORES, PAGINATE} from "../actions";
 
+
 const initialState = {
     conductores: [],
     pageConductores: [],
@@ -13,7 +14,7 @@ export const reducer=(state=initialState,action)=>{
         case GET_ALL_CONDUCTORES:
             return {
                 ...state,
-                conductores:['1','2','3','4','5','6','7','8'],
+                conductores:action.payload,
                 pageConductores:state.conductores.splice(0, state.cantConductoresPorPag)
             };
         case PAGINATE:

@@ -5,7 +5,7 @@ function Paginado() {
 
     const dispatch = useDispatch();
 
-    const conductoresPmostrar= useSelector((state)=>state.pageConductores);
+    
     const currentPage= useSelector((state)=>state.currentPage);
 
     const paginate = (e) => {
@@ -38,9 +38,7 @@ function Paginado() {
 
                         </div>
                 </div>
-                <div>
-                    {conductoresPmostrar} {/* Esto es solo para probar, no debería ir aquí */}
-                </div>
+                
               </div>
     )
 }
