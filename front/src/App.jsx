@@ -24,8 +24,6 @@ function App() {
 
   
 
-  return (
-    <>
     <NavBar/>
       <button><Link to='/login' >Login</Link></button>
       
