@@ -1,4 +1,4 @@
-[
+const choferes=[
     {
         "nombre": "Nombre1",
         "apellido": "Apellido1",
@@ -90,3 +90,5 @@
         "maxPasajeros": 4
       }
 ]
+
+export default choferes;
