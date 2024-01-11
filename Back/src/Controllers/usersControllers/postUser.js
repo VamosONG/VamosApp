@@ -13,7 +13,7 @@ const postUser = async ({ name, surname, email, phone, dni }) => {
 
         return newUser;
     } catch (error) {
-        return res.status(500).send({error:error.message})
+        throw new Error({error:error.message})
     }
 }
 
