@@ -1,7 +1,7 @@
 const { Op } = require('sequelize');
 const { Airport, Zone } = require('../../dataBase')
 
-const getDestination = async (req, res) => {
+const getAirports = async (req, res) => {
 
     try {
         const { destination } = req.query;
@@ -52,4 +52,4 @@ const getDestination = async (req, res) => {
     }
 }
 
-module.exports = { getDestination }
+module.exports = { getAirports }
