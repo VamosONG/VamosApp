@@ -1,4 +1,3 @@
-
 const { User } = require('../../dataBase')
 const { Op } = require('sequelize');
 
@@ -10,8 +9,7 @@ const getUsers = async (req, res) => {
 
 
         if (name) {
-
-
+            
             const UserDBName = await User.findAll({
                 where: {
                     [Op.or]:[
