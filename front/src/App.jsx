@@ -1,3 +1,6 @@
+
+import { useState } from 'react'
+
 import './App.css'
 import Footer from './views/footer/footer';
 
@@ -20,9 +23,8 @@ function App() {
     <>
       {/* Boton para mostrar formularios de registro (DEBERIA ESTAR INCLUIDO EN EL NAVBAR) */}
       <SlideEx/>
-      {/* <NavBar/> */}
+      <NavBar/>
 
-    <NavBar/>
       <button><Link to='/login' >Login</Link></button>
       
       <Routes>

@@ -15,6 +15,8 @@ export const reducer=(state=initialState,action)=>{
         case GET_ALL_CONDUCTORES:
             return {
                 ...state,
+                conductores:action.payload,
+                pageConductores:state.conductores.splice(0, state.cantConductoresPorPag)
                 conductores: action.payload,
                 pageConductores: [...action.payload].splice(0, cantConductoresPorPag)
             };

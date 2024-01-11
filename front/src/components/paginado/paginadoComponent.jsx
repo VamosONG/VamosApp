@@ -5,7 +5,7 @@ function Paginado() {
 
     const dispatch = useDispatch();
 
-    const conductoresPmostrar= useSelector((state)=>state.pageConductores);
+    
     const currentPage= useSelector((state)=>state.currentPage);
 
     const paginate = (e) => {
@@ -38,23 +38,10 @@ function Paginado() {
 
                         </div>
                 </div>
-                <div>
-                    {conductoresPmostrar} {/* Esto es solo para probar, no debería ir aquí */}
-                </div>
+                
               </div>
     )
 }
 
 
 export default Paginado
-
-/* const BtnPage = ({ name, onClick, active }) => (
-    <div className={${style.btnIcon} ${active ? style.activeBtn : ''}}>
-        <button className={style.btn} name={name} onClick={onClick}>
-            {name === 'prev' ? '<' : '>'}
-        </button>
-        <p className={style.btnText}>{name.charAt(0).toUpperCase() + name.slice(1)}</p>
-    </div>
-);
-
-export default BtnPage; */
