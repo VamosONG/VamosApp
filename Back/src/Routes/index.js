@@ -1,5 +1,34 @@
 const {Router} = require('express');
 
+const getTripsHandler = require('../Handlers/TripHandlers/getTripsHandler')
+const postTripHandler = require('../Handlers/TripHandlers/postTripHandler')
+const updateTripHandler = require('../Handlers/TripHandlers/updateTripsHandler')
+const deleteTripHandler = require('../Handlers/TripHandlers/deleteTripsHandler')
+const getUsersHandler = require('../Handlers/UserHandlers/getUsersHandler')
+const postUserHandler = require('../Handlers/UserHandlers/postUserHandler')
+const updateUserHandler = require('../Handlers/UserHandlers/updateUserHandler')
+const deleteUserHandler = require('../Handlers/UserHandlers/deleteUserHandler')
+const getDriversHandler = require('../Handlers/DriverHandlers/getDriversHandler')
+const postDriverHandler = require('../Handlers/DriverHandlers/postDriverHandler')
+const updateDriverHandler = require('../Handlers/DriverHandlers/updateDriverHandler')
+const deleteDriverHandler = require('../Handlers/DriverHandlers/deleteDriverHandler')
+const getAirportsHandler = require('../Handlers/AirportsHandlers/getAirportsHandler')
+const postAirportHandler = require('../Handlers/AirportsHandlers/postAirportHandler')
+const updateAirportHandler = require('../Handlers/AirportsHandlers/updateAirportHandler')
+const deleteAirportHandler = require('../Handlers/AirportsHandlers/deleteAirportHandler')
+const getZonesHandler = require('../Handlers/ZonesHandlers/getZonesHandler')
+const postZoneHandler = require('../Handlers/ZonesHandlers/postZoneHandler')
+const updateZoneHandler = require('../Handlers/ZonesHandlers/updateZoneHandler')
+const deleteZoneHandler = require('../Handlers/ZonesHandlers/deleteZoneHandler')
+const getReviewsHandler = require('../Handlers/ReviewsHandlers/getReviewsHandler')
+const postReviewHandler = require('../Handlers/ReviewsHandlers/postReviewHandler')
+const updateReviewHandler = require('../Handlers/ReviewsHandlers/updateReviewHandler')
+const deleteReviewHandler = require('../Handlers/ReviewsHandlers/deleteReviewHandler')
+const getAdminsHandler = require('../Handlers/AdminHandlers/getAdminsHandler')
+const postAdminHandler = require('../Handlers/AdminHandlers/postAdminHandler')
+const updateAdminHandler = require('../Handlers/AdminHandlers/updateAdminHandler')
+const deleteAdminHandler = require('../Handlers/AdminHandlers/deleteAdminHandler')
+
 const router = Router();
 
 router.get('/trips', getTripsHandler);
