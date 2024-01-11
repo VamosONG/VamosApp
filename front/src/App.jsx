@@ -15,6 +15,7 @@ import HomeComponent from './views/home/homeCompone/home';
 
 
 import NavBar from './components/navBar/navBar'
+import About from './components/about/About'
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
       
       <Routes>
         <Route path='/login' Component={LoginForm}/>
+        <Route path= '/about' element={<About/>} />
       </Routes>
       <HomeComponent/>
       <Paginado/>
