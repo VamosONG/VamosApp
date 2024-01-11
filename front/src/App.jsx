@@ -6,7 +6,8 @@ import Footer from './views/footer/footer';
 import LoginForm from './views/Forms/Login/Login'
 import {Routes, Route} from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import NavBar from './components/navBar/navBar'
+import NavBar from './components/navBar/NavBar'
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,6 +15,7 @@ function App() {
   return (
     <>
     <NavBar/>
+
       <button><Link to='/login' >Login</Link></button>
       
       <Routes>
