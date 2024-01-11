@@ -1,24 +1,22 @@
 const { DataTypes } = require('sequelize');
 
-
 module.exports = (sequelize) => {
-
     sequelize.define('User', {
         id: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
         },
-        forename: {
-            type: DataTypes.STRING,
+        name: {
+            type: DataTypes.STRING(30), 
             allowNull: false,
         },
         surname: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(30),
             allowNull: false,
         },
-        email:{
-            type: DataTypes.STRING,
+        email: {
+            type: DataTypes.STRING(50),
             allowNull: false,
         },
         trips:{
@@ -26,24 +24,34 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         phone: {
-            type: DataTypes.NUMBER,
+            type: DataTypes.INTEGER,
             allowNull: false,
+            validate: {
+                isNumeric: true, 
+            },
         },
-        activeReservations:{
-            type: DataTypes.NUMBER,
+        activeReservations: {
+            type: DataTypes.INTEGER, 
             allowNull: false,
+            validate: {
+                isNumeric: true, 
+            },
         },
         reviews: {
             type: DataTypes.TEXT,
-            allowNull: false, 
+            allowNull: false,
         },
         dni: {
-            type: DataTypes.INTEGER,
-            allowNull: false
+            type: DataTypes.INTEGER, 
+            allowNull: false,
+            validate: {
+                isNumeric: true, 
+            },
         },
-        admin:{
-            type: DataTypes.BOOLEAN
+        admin: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false, 
         }
     },
-        { timesTamps: false });
+    { timestamps: false });
 };
