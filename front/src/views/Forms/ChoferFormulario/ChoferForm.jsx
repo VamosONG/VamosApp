@@ -4,6 +4,8 @@ import {
     FormLabel,
     Input, Select, Button, Heading, Stack
 } from '@chakra-ui/react'
+import Swal from 'sweetalert2'
+// import withReactContent from 'sweetalert2-react-content'
 
 import { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
@@ -11,7 +13,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 
 const ChoferForm = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
     const choferData = useSelector((state) => state.conductores)
 
     // These are the default breakpoints
@@ -52,7 +53,11 @@ const ChoferForm = () => {
             const insertData = choferData.push(form)
             if (insertData) {
                 console.log(insertData);
-                alert('Chofer registrado exitosamente')
+                Swal.fire({
+                    title: "Bien Hecho!",
+                    text: "chofer registrado exitosamente!",
+                    icon: "success"
+                });
             }
             setForm({
                 nombre: "",
@@ -72,9 +77,8 @@ const ChoferForm = () => {
                 pasajeros: "",
             })
         } else {
-            alert('Faltan datos en el formulario')
-        }
-    }
+            alert('Flatan datos')
+    }}
 
     return (
         <form onSubmit={handleSubmit}>
