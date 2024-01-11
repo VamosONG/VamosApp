@@ -25,7 +25,7 @@ export const paginateConductores = (order) => {
 export const getAllConductores = () => {
     return async (dispatch) => {
         try {
-            const data= await choferes
+            const data = choferes;
             
             return dispatch({
                 type: GET_ALL_CONDUCTORES,
