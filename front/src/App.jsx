@@ -1,3 +1,6 @@
+
+import { useState } from 'react'
+
 import './App.css'
 import Footer from './views/footer/footer';
 
@@ -12,6 +15,7 @@ import HomeComponent from './views/home/homeCompone/home';
 
 
 import NavBar from './components/navBar/navBar'
+import About from './components/about/About'
 
 
 function App() {
@@ -22,13 +26,11 @@ function App() {
       <SlideEx/>
       <NavBar/>
 
-  
-
-    <NavBar/>
       <button><Link to='/login' >Login</Link></button>
       
       <Routes>
         <Route path='/login' Component={LoginForm}/>
+        <Route path= '/about' element={<About/>} />
       </Routes>
       <HomeComponent/>
       <Paginado/>
