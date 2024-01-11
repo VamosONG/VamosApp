@@ -20,12 +20,8 @@ function App() {
     <>
       {/* Boton para mostrar formularios de registro (DEBERIA ESTAR INCLUIDO EN EL NAVBAR) */}
       <SlideEx/>
-      <NavBar/>
+      {/* <NavBar/> */}
 
-  
-
-  return (
-    <>
     <NavBar/>
       <button><Link to='/login' >Login</Link></button>
       
