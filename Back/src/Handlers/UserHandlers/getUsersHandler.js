@@ -1,4 +1,4 @@
-const getUsers = require('../../Controllers/UsersControllers/getUsers');
+const getUsers = require('../../Controllers/usersControllers/getUsers');
 
 module.exports=async(req,res)=>{
     try{
@@ -10,26 +10,26 @@ module.exports=async(req,res)=>{
         const allUsers=await getUsers();
  
         if(name){
-            const filtered=await allUsers?.filter((user=>user.name && user.name.toLowerCase().includes(name.toLowerCase)));
+            const filtered=await allUsers?.filter((user=>user.name && user.name.toLowerCase().includes(name.toLowerCase())));
             res.status(200).json(filtered);    //Retorna el arreglo tenga elementos o no.
         }
         else{
             if(surname){
-                const filtered=await allUsers?.filter((user=>user.surname && user.surname.toLowerCase().includes(surname.toLowerCase)));               
+                const filtered=await allUsers?.filter((user=>user.surname && user.surname.toLowerCase().includes(surname.toLowerCase())));               
                 res.status(200).json(filtered);    //Retorna el arreglo tenga elementos o no.
             }
             else{
                 if(dni){
-                    const filtered=await allUsers?.filter((user=>user.dni && user.dni.toLowerCase().includes(dni.toLowerCase)));
+                    const filtered=await allUsers?.filter((user=>user.dni && user.dni.toLowerCase().includes(dni.toLowerCase())));
                     res.status(200).json(filtered);    //Retorna el arreglo tenga elementos o no.
                 }
                 else{
                     if(email){
-                        const filtered=await allUsers?.filter((user=>user.email && user.email.toLowerCase().includes(email.toLowerCase)));
+                        const filtered=await allUsers?.filter((user=>user.email && user.email.toLowerCase().includes(email.toLowerCase())));
                         res.status(200).json(filtered);    //Retorna el arreglo tenga elementos o no.
                     }
                     else
-                        res.status(200).json(allAdmins);
+                        res.status(200).json(allUsers);
                 }
             }
         }

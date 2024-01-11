@@ -1,27 +1,28 @@
 const { DataTypes } = require('sequelize');
 
-
 module.exports = (sequelize) => {
-
     sequelize.define('Trip', {
         id: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
         },
-        reservaID: {
-            type: DataTypes.INTEGER,
+        reservationId: {
+            type: DataTypes.INTEGER, 
             allowNull: false,
         },
         date: {
             type: DataTypes.DATE,
             allowNull: false,
+            validate: {
+                isDate: true, 
+            },
         },
-        hour:{
-            type: DataTypes.TIME,
+        hour: {
+            type: DataTypes.TIMEONLY, 
             allowNull: false,
         },
-        origin:{
+        origin: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -29,21 +30,30 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        quantityPassengers:{
-            type: DataTypes.NUMBER,
+        quantityPassengers: {
+            type: DataTypes.INTEGER, 
             allowNull: false,
+            validate: {
+                isNumeric: true, 
+            },
         },
         reviews: {
-            type: DataTypes.TEXT,
-            allowNull: false, 
+            type: DataTypes.TEXT(150),
+            allowNull: false,
         },
         price: {
-            type : DataTypes.NUMBER,
-            allowNull: false
+            type: DataTypes.INTEGER, 
+            allowNull: false,
+            validate: {
+                isNumeric: true, 
+            },
         },
-        stateOfTrip:{
-            type: DataTypes.BOOLEAN
-          }
+        stateOfTrip: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+        }
     },
-        { timesTamps: false });
+
+        { timestamps: false });
+
 };
