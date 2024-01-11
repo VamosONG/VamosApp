@@ -11,4 +11,4 @@ const store = createStore(
     reducer,
     composeEnhacer(applyMiddleware(withExtraArgument))); // Esta linea nos permite hacer petic
 
-export default store
+export default store 
