@@ -10,6 +10,7 @@ import NavBar from './components/navBar/NavBar'
 import About from './components/about/About'
 // Hooks
 import {Routes, Route} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 function App() {
 
