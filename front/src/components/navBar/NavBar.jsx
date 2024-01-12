@@ -1,7 +1,6 @@
 import {
   Button,
   Flex,
-  Stack,
   AvatarGroup,
   Avatar,
   Box,
@@ -9,33 +8,49 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import Vamos from "../../assets/Vamos.png"
+import SlideEx from "../../views/Forms/ViewForm";
+//import LoginForm from "../../views/Forms/Login/Login";
 
 const NavBar = () => {
   
   return (
-    <Flex as="nav" bg="#009ED1" alignItems="center" justify="space-between" h="100px">
-    <Box w="150px" >
+    <Flex as="nav" bg="#009ED1" alignItems="center" justify="space-between" h="100px" >
+    <Box >
         <Image src={Vamos} alt="Vamos" w= "200px"/>
+    </Box >
+
+    <Box h="15%" w="45%">
+      <SlideEx/>
     </Box>
-      <Stack direction="row"  align="center">
+
+    <Box>
         <Link to="/landing">
-          <Button colorScheme="blue">Inicio</Button>
+          <Button colorScheme="#009ED1">Inicio</Button>
         </Link>
+     </Box>
+
+     <Box>
         <Link to="/reservas">
          <Button colorScheme="#009ED1">Reservas</Button>
         </Link>
+      </Box>
+
+      <Box>
         <Link to="/frecuentes">
-         <Button colorScheme="pink">Preguntas Frecuentes</Button>
+         <Button colorScheme="#009ED1">Preguntas Frecuentes</Button>
         </Link>
-        <Link to="/about">
-         <Button colorScheme="blue">Nosotros</Button>
+      </Box>
+
+      <Box>  
+      <Link to="/about">
+         <Button colorScheme="#009ED1">Nosotros</Button>
         </Link>
-      </Stack>
+      </Box> 
       
       <AvatarGroup spacing="1rem">
         <Avatar bg="#009ED1" />
       <Link to="/login">
-      <Button colorScheme="blue" mr="10px">Login</Button>
+      <Button colorScheme="#009ED1" mx="10px">Ingresar</Button>
       </Link>
       </AvatarGroup>
     </Flex>
