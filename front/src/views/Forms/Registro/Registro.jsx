@@ -15,7 +15,7 @@ import {
     Checkbox,
     CheckboxGroup,
     Text,
-    Link
+    Link, Select
 } from '@chakra-ui/react'
 
 
@@ -33,44 +33,51 @@ const RegistroForm = ({ onSwitchForm }) => {
     const handleClick = () => setShow(!show)
 
     return (
-        <Stack spacing={4} bg='gray.100' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' >
+        <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' w={{ base: '20rem', md: '30rem' }} color='white'>
+            <Heading>Formulario de Registro</Heading>
             <FormControl isInvalid={isError}>
-                <Heading>Formulario de Registro</Heading>
-                <FormLabel>Name</FormLabel>
+                <FormLabel>Nombre</FormLabel>
                 <Input type='name' value={input} />
                 {!isError ? (
                     <FormHelperText>
-                        Enter the name.
+                        Ingresa tu nombre
                     </FormHelperText>
                 ) : (
-                    <FormErrorMessage>Name is required.</FormErrorMessage>
+                    <FormErrorMessage>Es necesario tu nombre</FormErrorMessage>
                 )}
+            </FormControl>
+            <FormControl>
 
                 <FormLabel>Telefono</FormLabel>
-                <Input type='name' value={input} />
+                <Input type='name' value={input} placeholder='Ingresa tu nuemro de celular.' />
                 {!isError ? (
                     <FormHelperText>
-                        Enter the phone.
+                        Ingresa tu numero de telefono.
                     </FormHelperText>
                 ) : (
-                    <FormErrorMessage>Name is required.</FormErrorMessage>
+                    <FormErrorMessage>Es necesario tu numero de telefono</FormErrorMessage>
                 )}
+            </FormControl>
 
-                <FormLabel>Email</FormLabel>
-                <Input type='tel' value={input} onChange={handleInputChange} />
+            <FormControl>
+                <FormLabel>Correo Electronico</FormLabel>
+                <Input type='tel' value={input} onChange={handleInputChange} placeholder='Ingresa tu Correo / Email' />
                 {!isError ? (
                     <FormHelperText>
-                        Enter the number.
+                        Ingresa un correo electronico.
                     </FormHelperText>
                 ) : (
-                    <FormErrorMessage>Email is required.</FormErrorMessage>
+                    <FormErrorMessage>El correo es requerido.</FormErrorMessage>
                 )}
+            </FormControl>
 
+            <FormControl>
+            <FormLabel>Contraseña</FormLabel>
                 <InputGroup size='md'>
                     <Input
                         pr='4.5rem'
                         type={show ? 'text' : 'password'}
-                        placeholder='Enter password'
+                        placeholder='ingresa una contraseña'
                     />
                     <InputRightElement width='4.5rem'>
                         <Button h='1.75rem' size='sm' onClick={handleClick}>
@@ -78,23 +85,26 @@ const RegistroForm = ({ onSwitchForm }) => {
                         </Button>
                     </InputRightElement>
                 </InputGroup>
-
-                <CheckboxGroup colorScheme='green' defaultValue={['otro']}>
-                    <Stack spacing={[1, 5]} direction={['column', 'row']}>
-                        <Checkbox value='femenino'>Femenino</Checkbox>
-                        <Checkbox value='masculino'>Masculino</Checkbox>
-                        <Checkbox value='otro'>Otro</Checkbox>
-                    </Stack>
-                </CheckboxGroup>
             </FormControl>
 
-            <Button colorScheme='teal' variant='outline'>
+            <FormControl isRequired>
+                <FormLabel>Sexo</FormLabel>
+                <Select placeholder='Elige Sexo' color='#000' >
+
+                    <option value='f' > Femenino </option>
+                    <option value='m' > Masculino </option>
+                    <option value='o' > Otro </option>
+                </Select>
+            </FormControl>
+
+
+            <Button colorScheme='green'>
                 Registrar
             </Button>
             <Container>
                 <Text>
                     ¿Ya tienes cuenta?{' '}
-                    <Button  color='teal.500' onClick={onSwitchForm}>
+                    <Button color='teal.500' onClick={onSwitchForm}>
                         Iniciar Sesion
                     </Button>
                 </Text>

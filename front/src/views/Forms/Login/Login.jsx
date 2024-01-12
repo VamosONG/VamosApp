@@ -30,27 +30,29 @@ const LoginForm = ({ onSwitchForm }) => {
     const handleClick = () => setShow(!show)
 
     return (
-        <Stack spacing={4} bg='gray.100' p='5' h='auto' borderRadius='20' boxShadow='dark-lg'>
+        <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' color='white'
+        w={{base: '20rem', md: '30rem'}}>
 
             {/* Falta controlar los datos ingresados */}
             <FormControl isInvalid={isError}>
-                <Heading>Iniciar Sesion</Heading>
-
-                <FormLabel>Email</FormLabel>
-                <Input type='email' value={input} onChange={handleInputChange} />
+                <FormLabel>Correo Electronico</FormLabel>
+                <Input type='tel' value={input} onChange={handleInputChange} placeholder='Ingresa tu Correo / Email' />
                 {!isError ? (
                     <FormHelperText>
-                        Enter the email you'd like to receive the newsletter on.
+                        Ingresa un correo electronico.
                     </FormHelperText>
                 ) : (
-                    <FormErrorMessage>Email is required.</FormErrorMessage>
+                    <FormErrorMessage>El correo es requerido.</FormErrorMessage>
                 )}
+            </FormControl>
 
+            <FormControl isInvalid={isError}>
+            <FormLabel>Contraseña</FormLabel>
                 <InputGroup size='md'>
                     <Input
                         pr='4.5rem'
                         type={show ? 'text' : 'password'}
-                        placeholder='Enter password'
+                        placeholder='ingresa una contraseña'
                     />
                     <InputRightElement width='4.5rem'>
                         <Button h='1.75rem' size='sm' onClick={handleClick}>
@@ -60,14 +62,14 @@ const LoginForm = ({ onSwitchForm }) => {
                 </InputGroup>
             </FormControl>
 
-            <Button colorScheme='teal' variant='outline'>
+            <Button colorScheme='green' >
                 Entrar
             </Button>
 
             <Container>
                 <Text>
                     ¿No tienes cuenta?{' '}
-                    <Button  color='teal.500' onClick={onSwitchForm}  >
+                    <Button color='teal.500' onClick={onSwitchForm}  >
                         Registrarme
                     </Button>
                 </Text>
