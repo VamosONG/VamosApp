@@ -9,12 +9,7 @@ const initialState = {
     cantConductoresPorPag: 6
 }
 
-
-
-
-
-export const reducer=(state=initialState,action)=>{
-
+const reducer=(state=initialState,action)=>{
     switch (action.type){
         case GET_ALL_CONDUCTORES:
             console.log(action.payload)
@@ -48,3 +43,4 @@ export const reducer=(state=initialState,action)=>{
             return {...state};
     }
 }
+export default reducer

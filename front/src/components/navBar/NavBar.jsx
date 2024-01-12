@@ -15,21 +15,21 @@ const NavBar = () => {
 
   return (
     <Flex as="nav" bg="#009ED1" alignItems="center" justify="space-between" h="100px" >
-    <Box >
-        <Image src={Vamos} alt="Vamos" w= "200px"/>
-    </Box >
+      <Box >
+        <Image src={Vamos} alt="Vamos" w="200px" />
+      </Box >
 
-    <Box h="15%" w="45%">
-      <SlideEx/>
-    </Box>
+      <Box h="15%" w="45%">
+        <SlideEx />
+      </Box>
 
-    <Box>
+      <Box>
         <Link to="/landing">
           <Button colorScheme="#009ED1">Inicio</Button>
         </Link>
-     </Box>
+      </Box>
 
-     <Box>
+      <Box>
         <Link to="/reservas">
           <Button colorScheme="#009ED1">Reservas</Button>
         </Link>
@@ -37,21 +37,21 @@ const NavBar = () => {
 
       <Box>
         <Link to="/frecuentes">
-         <Button colorScheme="#009ED1">Preguntas Frecuentes</Button>
+          <Button colorScheme="#009ED1">Preguntas Frecuentes</Button>
         </Link>
       </Box>
 
-      <Box>  
-      <Link to="/about">
-         <Button colorScheme="#009ED1">Nosotros</Button>
+      <Box>
+        <Link to="/about">
+          <Button colorScheme="#009ED1">Nosotros</Button>
         </Link>
-      </Box> 
-      
+      </Box>
+
       <AvatarGroup spacing="1rem">
         <Avatar bg="#009ED1" />
-      <Link to="/login">
-      <Button colorScheme="#009ED1" mx="10px">Ingresar</Button>
-      </Link>
+        <Link to="/login">
+          <Button colorScheme="#009ED1" mx="10px">Ingresar</Button>
+        </Link>
       </AvatarGroup>
     </Flex>
   );
