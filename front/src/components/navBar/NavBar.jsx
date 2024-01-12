@@ -24,8 +24,8 @@ const NavBar = () => {
     </Box >
 
     <Box h="15%" w="45%">
-      <SlideEx/>
-    </Box>
+    {/* <SlideEx/> */}
+    <Flex justify="space-between">
 
     {esAdmin?(
       <Box>
@@ -47,13 +47,10 @@ const NavBar = () => {
         <Link to="/landing">
           <Button colorScheme="#009ED1">Inicio</Button>
         </Link>
-     </Box>
 
-     <Box>
         <Link to="/reservas">
          <Button colorScheme="#009ED1">Reservas</Button>
         </Link>
-      </Box>
 
       <Box>
         <Link to="/frecuentes">
@@ -61,18 +58,19 @@ const NavBar = () => {
         </Link>
       </Box>
 
-      <Box>  
+ 
       <Link to="/about">
          <Button colorScheme="#009ED1">Nosotros</Button>
         </Link>
-      </Box> 
-      
-      <AvatarGroup spacing="1rem">
+        </Flex>
+      </Box>
+
+      <AvatarGroup spacing="1rem" mx="20px">
         <Avatar bg="#009ED1" />
-      <Link to="/login">
-      <Button colorScheme="#009ED1" mx="10px">Ingresar</Button>
-      </Link>
+        <SlideEx/>
       </AvatarGroup>
+
+
     </Flex>
   );
 };
