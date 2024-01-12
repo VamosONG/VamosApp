@@ -5,6 +5,16 @@ import bgImage from "../../../assets/Aeropuerto.jpg"
 import { color } from "framer-motion";
 
 const Home = () => {
+   const dispatch= useDispatch();
+
+    const conductoresPmostrar= useSelector((state)=>state.pageConductores);
+    console.log(conductoresPmostrar)
+    
+    useEffect (()=>{
+        console.log("pasa")
+        dispatch(getAllConductores());
+    },[dispatch])
+
 
     return (
         <Box
@@ -74,10 +84,10 @@ const Home = () => {
 
             </Stack>
             </Flex>
-        
         </Box>
     );
 
 }
 
 export default Home;
+
