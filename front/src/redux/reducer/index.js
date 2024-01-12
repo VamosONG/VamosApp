@@ -9,7 +9,12 @@ const initialState = {
     cantConductoresPorPag: 6
 }
 
+
+
+
+
 const reducer=(state=initialState,action)=>{
+
     switch (action.type){
         case GET_ALL_CONDUCTORES:
             console.log(action.payload)
