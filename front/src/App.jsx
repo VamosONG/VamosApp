@@ -17,14 +17,13 @@ function App() {
     <>
       <NavBar/>
 
-      <button><Link to='/login' >Login</Link></button>
 
       <Routes>
         <Route path='/login' element={<LoginForm/>}/>
         <Route path= '/about' element={<About/>} />
       </Routes>
       <HomeComponent/>
-      <Paginado/>
+      {/* <Paginado/> */}
 
       <Footer/>
     </>

@@ -13,7 +13,7 @@ const initialState = {
 
 
 
-export const reducer=(state=initialState,action)=>{
+const reducer=(state=initialState,action)=>{
 
     switch (action.type){
         case GET_ALL_CONDUCTORES:
@@ -48,3 +48,4 @@ export const reducer=(state=initialState,action)=>{
             return {...state};
     }
 }
+export default reducer
