@@ -15,19 +15,36 @@ import {
 Link, Text
 } from '@chakra-ui/react'
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../../redux/actions";
 
 const LoginForm = ({ onSwitchForm }) => {
 
-    const [input, setInput] = useState('')
+    const dispatch=useDispatch()
+
+    const [input, setInput] = useState({
+        email:"",
+        password:""
+    })
     const [show, setShow] = useState(false)
 
     //Falta configurar para el manero de los inputs
-    const handleInputChange = (e) => setInput(e.target.value)
+    const handleInputChange = (e) => setInput({
+        ...input,
+        [e.target.name]:e.target.value}
+    )
 
     const isError = input === ''
 
     //Maneja la vista de la contraseña
     const handleClick = () => setShow(!show)
+
+    const handleSubmit=(event)=>{
+        event.preventDefault();
+        console.log("funciona submit")
+        console.log(input)
+        dispatch(logIn(input))
+    }
 
     return (
         <Stack spacing={4} bg='gray.100' p='5' h='auto' borderRadius='20' boxShadow='dark-lg'>
@@ -37,7 +54,7 @@ const LoginForm = ({ onSwitchForm }) => {
                 <Heading>Iniciar Sesion</Heading>
 
                 <FormLabel>Email</FormLabel>
-                <Input type='email' value={input} onChange={handleInputChange} />
+                <Input type='email' value={input.email} onChange={handleInputChange} name='email'/>
                 {!isError ? (
                     <FormHelperText>
                         Enter the email you'd like to receive the newsletter on.
@@ -51,6 +68,9 @@ const LoginForm = ({ onSwitchForm }) => {
                         pr='4.5rem'
                         type={show ? 'text' : 'password'}
                         placeholder='Enter password'
+
+                        name='password'
+                        onChange={handleInputChange}
                     />
                     <InputRightElement width='4.5rem'>
                         <Button h='1.75rem' size='sm' onClick={handleClick}>
@@ -60,7 +80,7 @@ const LoginForm = ({ onSwitchForm }) => {
                 </InputGroup>
             </FormControl>
 
-            <Button colorScheme='teal' variant='outline'>
+            <Button colorScheme='teal' variant='outline' onClick={handleSubmit}>
                 Entrar
             </Button>
 

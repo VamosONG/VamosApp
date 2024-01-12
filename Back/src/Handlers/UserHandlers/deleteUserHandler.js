@@ -1,4 +1,4 @@
-const deleteUser= require('../../Controllers/UserControllers/deleteUser');
+const deleteUser= require('../../Controllers/usersControllers/deleteUsers');
 
 module.exports=async(req,res)=>{
     const {id} = req.params;
