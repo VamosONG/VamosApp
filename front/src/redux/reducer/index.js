@@ -5,21 +5,25 @@ const initialState = {
     conductores: [],
     pageConductores: [],
     currentPage: 0,
+
     cantConductoresPorPag: 6
 }
 
 
-const reducer=(state=initialState,action)=>{
-    console.log("funciona")
-    console.log(action.type)
-    console.log(action.payload)
+
+
+
+export const reducer=(state=initialState,action)=>{
+
     switch (action.type){
         case GET_ALL_CONDUCTORES:
             console.log(action.payload)
             return {
                 ...state,
                 conductores:action.payload,
-                pageConductores:state.conductores.splice(0, state.cantConductoresPorPag)
+
+                pageConductores:state.conductores.splice(0, state.cantConductoresPorPag),
+
             };
         case PAGINATE:
             const nextPage = state.currentPage + 1;
@@ -44,4 +48,3 @@ const reducer=(state=initialState,action)=>{
             return {...state};
     }
 }
-export default reducer
