@@ -1,4 +1,4 @@
-import {GET_ALL_CONDUCTORES, PAGINATE} from "../actions/index";
+import {GET_ALL_CONDUCTORES, LOGIN, PAGINATE, POST_NEW_VIAJE} from "../actions/index";
 
 
 const initialState = {
@@ -6,7 +6,12 @@ const initialState = {
     pageConductores: [],
     currentPage: 0,
 
-    cantConductoresPorPag: 6
+    cantConductoresPorPag: 6,
+
+    esAdmin:false,
+    esUsuario:false,
+
+    solicitudesDeViajes:[],
 }
 
 
@@ -44,6 +49,21 @@ const reducer=(state=initialState,action)=>{
                 pageConductores: /* [...state.pageConductores] */state.conductores.splice(firstIndex, state.cantConductoresPorPag),
                 currentPage: action.payload === "next" ? nextPage : prevPage,
             };
+        case LOGIN:
+            if (action.payload.email==='asd'&&action.payload.password==='123'){
+                return {
+                ...state,
+                esAdmin:true
+            }}else{
+                return {
+                    ...state,
+                    esUsuario:true
+            }}
+        case POST_NEW_VIAJE:
+            return {
+                ...state,
+                solicitudesDeViajes:[...state.solicitudesDeViajes,`solicitud nueva de fulano`]
+            }
         default:
             return {...state};
     }
