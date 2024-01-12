@@ -7,10 +7,6 @@ module.exports = (sequelize) => {
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
         },
-        reservationId: {
-            type: DataTypes.INTEGER, 
-            allowNull: false,
-        },
         date: {
             type: DataTypes.DATE,
             allowNull: false,
@@ -38,7 +34,7 @@ module.exports = (sequelize) => {
             },
         },
         reviews: {
-            type: DataTypes.TEXT(150),
+            type: DataTypes.STRING,
             allowNull: false,
         },
         price: {
@@ -49,7 +45,7 @@ module.exports = (sequelize) => {
             },
         },
         stateOfTrip: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.STRING,
             allowNull: false,
         }
     },
