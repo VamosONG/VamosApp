@@ -1,4 +1,4 @@
-const postReview = require('../Controllers/reviewsController/postReview');
+const postReview = require('../../Controllers/reviewsControllers/postReview');
 
 module.exports = async (req, res) => {
     const { user, chofer, stars, message } = req.body;

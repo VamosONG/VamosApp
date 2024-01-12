@@ -1,4 +1,4 @@
-const updateZone=require('../Controllers/zonesController/updateZone');
+const updateZone=require('../../Controllers/ZonesControllers/updateZone');
 
 module.exports=async(req,res)=>{
     const {id,name}=req.body;
