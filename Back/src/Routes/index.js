@@ -2,8 +2,8 @@ const {Router} = require('express');
 
 const getTripsHandler = require('../Handlers/TripHandlers/getTripsHandler')
 const postTripHandler = require('../Handlers/TripHandlers/postTripHandler')
-const updateTripHandler = require('../Handlers/TripHandlers/updateTripsHandler')
-const deleteTripHandler = require('../Handlers/TripHandlers/deleteTripsHandler')
+const updateTripHandler = require('../Handlers/TripHandlers/updateTripHandler')
+const deleteTripHandler = require('../Handlers/TripHandlers/deleteTripHandler')
 const getUsersHandler = require('../Handlers/UserHandlers/getUsersHandler')
 const postUserHandler = require('../Handlers/UserHandlers/postUserHandler')
 const updateUserHandler = require('../Handlers/UserHandlers/updateUserHandler')
@@ -62,9 +62,9 @@ router.put('/reviews/update', updateReviewHandler);
 router.delete('/reviews', deleteReviewHandler);
 
 router.get('/dashboard/admin', getAdminsHandler);
-router.post('/dashboard/admin/create', postAdminHandler);
-router.put('/dashboard/admin/update', updateAdminHandler);
+// router.post('/dashboard/admin/create', postAdminHandler);
+// router.put('/dashboard/admin/update', updateAdminHandler);
 router.delete('/dashboard/admin', deleteAdminHandler);
 
-
+module.exports = router;
 
