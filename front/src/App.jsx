@@ -1,6 +1,7 @@
 
-//import './App.css'
-// Components
+import { useState } from 'react'
+import './App.css'
+
 import Footer from './views/footer/footer';
 import Paginado from './components/paginado/paginadoComponent';
 import LoginForm from './views/Forms/Login/Login'
@@ -15,6 +16,9 @@ function App() {
   return (
     <>
       <NavBar/>
+
+      <button><Link to='/login' >Login</Link></button>
+
       <Routes>
         <Route path='/login' element={<LoginForm/>}/>
         <Route path= '/about' element={<About/>} />
