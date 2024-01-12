@@ -1,12 +1,26 @@
-const updateReview=require('../Controllers/reviewsController/updateReview');
+const updateReview = require('../Controllers/reviewsController/updateReview');
 
-module.exports=async(req,res)=>{
-    const {id,user,chofer,stars,message}=req.body;
+module.exports = async (req, res) => {
     try {
-        const updRev=await updateReview(id,user,chofer,stars,message);
-    
-        res.status(200).json(updRev);
+        const { chofer, stars, message } = req.body; 
+        const { id } = req.params;
+        // saque user porque con el id es suficiente
+        if (!stars) {
+            throw new Error ({ error: 'La puntuación debe ser entre 1 y 5.' });
+        }
+        if(!chofer){
+            throw new Error ({error: "Debe seleccionar un chofer"})
+        }
+        if(!message){
+            throw new Error({error: "Debe escribir una reseña"})
+        }
+
+        const updRev = await updateReview(id, { chofer, stars, message });
+
+        if (updRev) {
+            res.status(200).json(updRev);
+        }
     } catch (error) {
-        res.status(400).json({error: error.message})
+        res.status(500).json({ error: error.message });
     }
-}
+};
