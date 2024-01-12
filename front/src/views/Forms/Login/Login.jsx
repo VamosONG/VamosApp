@@ -15,19 +15,36 @@ import {
 Link, Text
 } from '@chakra-ui/react'
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../../redux/actions";
 
 const LoginForm = ({ onSwitchForm }) => {
 
-    const [input, setInput] = useState('')
+    const dispatch=useDispatch()
+
+    const [input, setInput] = useState({
+        email:"",
+        password:""
+    })
     const [show, setShow] = useState(false)
 
     //Falta configurar para el manero de los inputs
-    const handleInputChange = (e) => setInput(e.target.value)
+    const handleInputChange = (e) => setInput({
+        ...input,
+        [e.target.name]:e.target.value}
+    )
 
     const isError = input === ''
 
     //Maneja la vista de la contraseña
     const handleClick = () => setShow(!show)
+
+    const handleSubmit=(event)=>{
+        event.preventDefault();
+        console.log("funciona submit")
+        console.log(input)
+        dispatch(logIn(input))
+    }
 
     return (
         <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' color='white'
@@ -62,7 +79,7 @@ const LoginForm = ({ onSwitchForm }) => {
                 </InputGroup>
             </FormControl>
 
-            <Button colorScheme='green' >
+            <Button colorScheme='green'  onClick={handleSubmit}>
                 Entrar
             </Button>
 
