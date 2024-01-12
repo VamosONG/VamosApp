@@ -9,14 +9,16 @@ const HomeComponent=()=>{
     const dispatch= useDispatch();
 
     const conductoresPmostrar= useSelector((state)=>state.pageConductores);
+    console.log(conductoresPmostrar)
     
     useEffect (()=>{
+        console.log("pasa")
         dispatch(getAllConductores());
-    },[conductoresPmostrar])
+    },[dispatch])
     
     
     return (
         <CardsComponent conductoresPmostrar={conductoresPmostrar}/>
     )
 } 
-export default HomeComponent;
+export default HomeComponent; 

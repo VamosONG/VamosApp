@@ -1,24 +1,25 @@
-import {GET_ALL_CONDUCTORES, PAGINATE} from "../actions";
+import {GET_ALL_CONDUCTORES, PAGINATE} from "../actions/index";
 
 
 const initialState = {
     conductores: [],
     pageConductores: [],
     currentPage: 0,
-    
+    cantConductoresPorPag: 6
 }
 
 
-export const reducer=(state=initialState,action)=>{
-    const cantConductoresPorPag= 6;
+const reducer=(state=initialState,action)=>{
+    console.log("funciona")
+    console.log(action.type)
+    console.log(action.payload)
     switch (action.type){
         case GET_ALL_CONDUCTORES:
+            console.log(action.payload)
             return {
                 ...state,
                 conductores:action.payload,
-                pageConductores:state.conductores.splice(0, state.cantConductoresPorPag),
-                conductores: action.payload,
-                pageConductores: [...action.payload].splice(0, cantConductoresPorPag)
+                pageConductores:state.conductores.splice(0, state.cantConductoresPorPag)
             };
         case PAGINATE:
             const nextPage = state.currentPage + 1;
@@ -43,3 +44,4 @@ export const reducer=(state=initialState,action)=>{
             return {...state};
     }
 }
+export default reducer
