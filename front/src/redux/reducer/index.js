@@ -6,6 +6,8 @@ const initialState = {
     pageConductores: [],
     currentPage: 0,
     cantConductoresPorPag:6,
+
+
 }
 
 
