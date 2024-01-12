@@ -5,8 +5,9 @@ const initialState = {
     conductores: [],
     pageConductores: [],
     currentPage: 0,
-    cantConductoresPorPag: 6
-    
+    cantConductoresPorPag:6,
+
+
 }
 
 
