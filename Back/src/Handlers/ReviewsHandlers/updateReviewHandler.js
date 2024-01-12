@@ -2,7 +2,8 @@ const updateReview = require('../Controllers/reviewsController/updateReview');
 
 module.exports = async (req, res) => {
     try {
-        const { id, chofer, stars, message } = req.body; 
+        const { chofer, stars, message } = req.body; 
+        const { id } = req.params;
         // saque user porque con el id es suficiente
         if (!stars) {
             throw new Error ({ error: 'La puntuación debe ser entre 1 y 5.' });

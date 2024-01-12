@@ -4,9 +4,7 @@ const deleteAdminController = async (id) => {
     if(!id)
         throw new Error('No se recibió el id para eliminar el administrador.');
 
-const existingAdmin=await User.findOne({
-    where:{id: id}
-})
+const existingAdmin=await User.findByPk(id);
 
 if(!existingAdmin)
     throw new Error(`El admin con id ${id} no existe en la base de datos.`);
@@ -16,9 +14,7 @@ else{
         {where: {id: id}}
     )
     
-    const userNoAdmin=await User.findOne({
-        where:{id: id}
-    })
+    const userNoAdmin=await User.findByPk(id);
     return userNoAdmin;
 }
 }
