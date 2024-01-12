@@ -3,7 +3,10 @@ import { Box, Button, Flex, Text, Heading, VStack, Stack } from '@chakra-ui/reac
 import theme from "../../../theme/Theme";
 import bgImage from "../../../assets/Aeropuerto.jpg"
 import { color } from "framer-motion";
-import { useDispatch } from "redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllConductores } from "../../../redux/actions";
 
 const Home = () => {
    const dispatch= useDispatch();
