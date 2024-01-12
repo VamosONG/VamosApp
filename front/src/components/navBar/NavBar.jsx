@@ -22,8 +22,6 @@ const NavBar = () => {
     <Box >
         <Image src={Vamos} alt="Vamos" w= "200px"/>
     </Box >
-
-    <Box h="15%" w="45%">
     {/* <SlideEx/> */}
     <Flex justify="space-between">
 
@@ -43,7 +41,7 @@ const NavBar = () => {
     )}
 
 
-    <Box>
+  
         <Link to="/landing">
           <Button colorScheme="#009ED1">Inicio</Button>
         </Link>
@@ -63,7 +61,6 @@ const NavBar = () => {
          <Button colorScheme="#009ED1">Nosotros</Button>
         </Link>
         </Flex>
-      </Box>
 
       <AvatarGroup spacing="1rem" mx="20px">
         <Avatar bg="#009ED1" />
