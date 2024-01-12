@@ -1,4 +1,4 @@
-const postUser = require('../Controllers/usersControllers/postUser');
+const postUser = require('../../Controllers/usersControllers/postUser');
 
 module.exports = async (req, res) => {
     

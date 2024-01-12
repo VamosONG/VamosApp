@@ -13,11 +13,11 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        Drivers: {
+        Conductores: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        Users: {
+        Usuarios: {
             type: DataTypes.STRING,
             allowNull: false
         }

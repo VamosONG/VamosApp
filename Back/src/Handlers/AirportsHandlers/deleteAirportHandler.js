@@ -1,4 +1,4 @@
-const deleteAirport = require('../../Controllers/AirportsControllers/deleteAirport');
+const deleteAirport = require('../../Controllers/AirportsControllers/deleteAirports');
 
 module.exports=async(req,res)=>{
     const {id} = req.params;

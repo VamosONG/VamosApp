@@ -1,4 +1,4 @@
-const postTrip = require('../../Controllers/tripsControllers/porsTrip');
+const postTrip = require('../../Controllers/tripsControllers/postTrip');
 
 module.exports = async (req, res) => {
     const { date, hour, origin, destination, passengers, price, driver } = req.body;

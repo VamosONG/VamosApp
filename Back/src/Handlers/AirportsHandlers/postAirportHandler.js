@@ -1,4 +1,4 @@
-const postAirport=require('../Controllers/airportsController/postAirport');
+const postAirport=require('../../Controllers/AirportsControllers/postAirport');
 
 module.exports=async(req,res)=>{
     const {name}=req.body;
