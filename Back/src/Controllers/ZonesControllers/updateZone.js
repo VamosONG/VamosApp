@@ -21,9 +21,8 @@ module.exports=async(id,name)=>{
             }
         })
 
-        existingZone=await zone.findOne({
-            where:{id: id}
-        })
+        await existingZone.reload();
+        
         return existingZone;
     }
 }
