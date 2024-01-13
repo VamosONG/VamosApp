@@ -11,7 +11,7 @@ const getTrips = async () => {
             hour: tripa.hour,
             origin: tripa.origin,
             destination: tripa.destination,
-            quantityPassengers: tripa.quantity,
+            passengers: tripa.quantityPassengers,
             reviews: tripa.reviews,
             price: tripa.price,
             stateOfTrip: tripa.stateOfTrip

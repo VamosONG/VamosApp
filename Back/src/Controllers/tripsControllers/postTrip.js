@@ -1,6 +1,6 @@
 const { Trip } = require('../../dataBase');
 
-const postTrip = async (date, hour, origin, destination, passengers, price, driver) => {
+const postTrip = async ({date, hour, origin, destination, quantityPassengers, price, driver}) => {
     try {
         
         const newTrip = await Trip.create({
@@ -8,7 +8,7 @@ const postTrip = async (date, hour, origin, destination, passengers, price, driv
             hour,
             origin,
             destination,
-            quantityPassengers: passengers,
+            quantityPassengers,
             reviews: 0, 
             price,
             stateOfTrip: 'Pending',

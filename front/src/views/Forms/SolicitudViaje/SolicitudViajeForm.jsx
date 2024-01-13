@@ -2,6 +2,14 @@ import { useDispatch } from "react-redux";
 import { postNewViaje } from "../../../redux/actions";
 import { useState } from "react";
 
+import { Box, Center, useDisclosure } from '@chakra-ui/react'
+import {
+    FormControl,
+    FormLabel,
+    Input, Select, Button, Heading, Stack
+} from '@chakra-ui/react'
+import Swal from 'sweetalert2'
+
 import { Box, Center, useDisclosure } from "@chakra-ui/react";
 import {
   FormControl,

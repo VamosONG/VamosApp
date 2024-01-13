@@ -1,20 +1,19 @@
-const {zone}=require('../../Models/zone');
+const {Zone}=require('../../dataBase');
 
-module.exports=async(idZone)=>{
+const deleteZone = async(idZone)=>{
+console.log(idZone);
     if(!idZone)
         throw new Error('No se recibió el id para eliminar la zona.');
 
-    const existingZone=await zone.findOne({
-        where:{id: idZone}
-    })
+    const existingZone=await Zone.findByPk(idZone);
 
     if(!existingZone)
         throw new Error(`La zona con id ${idZone} no existe en la base de datos.`);
     else{
-        await zone.destroy({
-            id: idZone, cascade: true
-        })
+        await existingZone.destroy();
         
         return existingZone;
     }
 }
+
+module.exports = deleteZone;

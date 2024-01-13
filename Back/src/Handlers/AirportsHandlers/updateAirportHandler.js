@@ -1,7 +1,9 @@
-const updateAirport=require('../../Controllers/AirportsControllers/updateAirports');
+const {updateAirport}=require('../../Controllers/AirportsControllers/updateAirports');
 
 module.exports=async(req,res)=>{
-    const {id,name}=req.body;
+    // const {id,name}=req.body;
+    const { id } = req.params;
+    const { name } = req.body;
     try {
         const updAirport=await updateAirport(id,name);
     

@@ -2,16 +2,17 @@ const getAirports = require('../../Controllers/AirportsControllers/getAirports')
 
 module.exports=async(req,res)=>{
     try{
-        const {name} = req.query;
-        const allAirports=await getAirports();
+        const {place} = req.query;
+        const allAirports=await getAirports(place);
  
-        if(name){
-            const filtered=await allAirports?.filter((airp=>airp.name && airp.name.toLowerCase().includes(name.toLowerCase)));
+        if(allAirports.length > 0){
+            // const filtered=await allAirports?.filter((airp=>airp.place && airp.place.toLowerCase().includes(place.toLowerCase())));
             
-            res.status(200).json(filtered);    //Retorna el arreglo tenga elementos o no.
+            res.status(200).json(allAirports);    
         }
         else
-            res.status(200).json(allAirports);
+            // res.status(200).json(allAirports);
+            throw new Error('No Airports found');
     }catch(error){
         res.status(400).json({error: error.message});
     }

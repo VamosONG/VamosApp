@@ -1,8 +1,9 @@
 const deleteZone = require('../../Controllers/ZonesControllers/deleteZone');
 
-module.exports=async(req,res)=>{
-    const {id} = req.params;
+module.exports = async(req, res) => {
+    const {id} = req.body;
     try{
+console.log(id);
         const deletedZ=await deleteZone(id);
  
         if(deletedZ)
