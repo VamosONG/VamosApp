@@ -1,6 +1,6 @@
 const { Driver } = require('../../dataBase');
 
-const postDriver = async ({ name, surname, car, phone, capacityPassengers, email }) => {
+const postDriver = async ( name, surname, car, phone, capacityPassengers, email, city ) => {
     try {
         const newDriver = await Driver.create({
             name,
@@ -8,7 +8,10 @@ const postDriver = async ({ name, surname, car, phone, capacityPassengers, email
             car,
             phone,
             capacityPassengers,
-            email
+            email,
+            city,
+            trips:'',
+            reviews:'',
         });
 
         return newDriver;

@@ -5,7 +5,7 @@ const updateDriver = async(id,newData) => {
         const driverUpdate = await Driver.findByPk(id);
 
         if (!driverUpdate) {
-            throw new Error("Chofer inexistente");
+            throw new Error(`El conductor con id ${id} no existe en la base de datos.`);
         }
 
         await driverUpdate.update(newData);
@@ -13,7 +13,7 @@ const updateDriver = async(id,newData) => {
 
         return driverUpdate;
     } catch (error) {
-        throw new Error('Error al actualizar el chofer');
+        throw new Error(error.message);
     }
 }
 
