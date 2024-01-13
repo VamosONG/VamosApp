@@ -2,6 +2,7 @@ const { Trip } = require('../../dataBase');
 
 const updateTrip = async (id, date, hour, origin, destination, passengers, price, driver, reviews, stateOfTrip) => {
     try {
+        //esta mal hecho
         const tripToUpdate = await Trip.findByPk(id);
 
         if (!tripToUpdate) {

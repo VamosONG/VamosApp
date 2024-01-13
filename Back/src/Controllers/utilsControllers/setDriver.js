@@ -1,17 +1,17 @@
-const {Trip} = require('../../dataBase');
-const {Driver} = require('../../dataBase');
+const { Trip } = require('../../dataBase');
+const { Driver } = require('../../dataBase');
 
 const setDriver = async (tripId, driverId) => {
     try {
         const reserve = await Trip.findByPk(tripId);
         const newDriver = await Driver.findByPk(driverId);
 
-        if(!reserve)
+        if (!reserve)
             throw new Error(`No se encontro trip en oferta con id ${tripId} en base de datos.`)
-        
-        if(!newDriver)
+
+        if (!newDriver)
             throw new Error(`No se encontro conductor con id ${tripId} en base de datos.`)
-            
+
         //Se modifica el chofer asignado al trip, y se pone en estado PENDIENTE.
         await reserve.update(
             {
@@ -27,4 +27,4 @@ const setDriver = async (tripId, driverId) => {
     }
 };
 
-module.exports = doReserve;
+module.exports = setDriver;

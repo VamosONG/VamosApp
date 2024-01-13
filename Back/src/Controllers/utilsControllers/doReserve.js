@@ -7,7 +7,7 @@ const doReserve = async (userId, tripId) => {
         
         if(!newReservation || newReservation.stateOfTrip!='offer')
             throw new Error(`No se encontro trip en oferta con id ${tripId} en base de datos.`)
-        if(!userRed)
+        if(!userRes)
             throw new Error(`No se encontro usuario con id ${userId} en base de datos.`)
         
         //Se modifica el trip, con el estado a RESERVADO, y el id correspondiente al usuario.
