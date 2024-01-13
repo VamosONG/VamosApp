@@ -1,32 +1,62 @@
-
-import { Box, Button, Card, CardBody, CardFooter, CardHeader} from "@chakra-ui/react";
-import { getAllConductores } from "../../redux/actions";
+import {
+  Box,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Input,
+} from "@chakra-ui/react";
+import { getAllConductores, postNewViaje } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const DetailChofer = () => {
+  const conductores = useSelector((state) => state.conductores);
+  const {solicitudesDeViajes} = useSelector(state => state) 
 
-    const conductores = useSelector(state => state.conductores)
-    console.log(conductores);
-    const dispatch= useDispatch()
-   const handleChoferes = () => {
-    dispatch (getAllConductores())
-   }
-    return (
+  const dispatch = useDispatch();
+  const handleChoferes = () => {
+    dispatch(getAllConductores());
+    dispatch(postNewViaje())
+  };
+
+
+
+  return (
+    <Box handleChoferes= {handleChoferes}>
         <Box>
-            <Button onClick={handleChoferes}>conductores</Button>
-            {conductores.map((conductor) => (<Card key={conductor.id}   direction={{ base: 'column', sm: 'row' }}
-  overflow='hidden'
-  variant='outline'>
-               <CardHeader size="md">{conductor.nombre}</CardHeader>
-               <CardBody>{conductor.apellido}</CardBody>
-               <CardBody>{conductor.numeroCelular}</CardBody>
-               <CardBody>{conductor.maxPasajeros}</CardBody>
-               <CardBody>{conductor.aeropuertoOrigen}</CardBody>
-               <CardBody>{conductor.licenciaManejo}</CardBody>
-               <CardFooter>{conductor.fotoChofer}</CardFooter>
-            </Card>
-))}
-</Box>
-)   
-}
+          {
+            solicitudesDeViajes.map((reserva, index)=>{
+              return (<Card 
+                key= {index}
+                >
+                  <CardHeader></CardHeader>
+                  <CardBody>{reserva}</CardBody>
+                </Card>)
+            })
+          }
+        </Box>
+      {conductores.map((conductor) => (
+        <Card
+          key={conductor.id}
+         direction="column" 
+         overflow="hidden"
+         variant="outline"
+         maxW='sm'
+        >
+          <CardHeader size="md">{conductor.nombre}</CardHeader>
+          <CardBody>{conductor.apellido}</CardBody>
+          <CardBody>{conductor.numeroCelular}</CardBody>
+          <CardBody>{conductor.maxPasajeros}</CardBody>
+          <CardBody>{conductor.aeropuertoOrigen}</CardBody>
+          <CardBody>{conductor.fotoChofer}</CardBody>
+          <CardFooter>
+            <Input
+            type="checkbox"
+            ></Input>
+          </CardFooter>
+        </Card>
+      ))}
+    </Box>
+  );
+};
 export default DetailChofer;

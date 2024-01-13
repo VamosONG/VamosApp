@@ -27,9 +27,8 @@ function App() {
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
         <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
         <Route path='/detail' element={<DetailChofer/>}/>
-        <Route path= '/home' element={<HomeComponent/>} />
       </Routes>
-
+      <HomeComponent/>
       {/* <Paginado/> */}
 
       <Footer/>

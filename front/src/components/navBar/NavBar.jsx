@@ -27,7 +27,7 @@ const NavBar = () => {
       <Box>
         <Image src={Vamos} alt="Vamos" w="200px" />
       </Box>
-      {/* <SlideEx/> */}
+
       <Flex justify="space-between">
         {esAdmin ? (
           <Box>
@@ -43,23 +43,33 @@ const NavBar = () => {
           </Box>
         ) : null}
 
+        {
+          esAdmin?
+          (<Box>
+            <Link to="/detail">
+            <Button  colorScheme="#009ED1">Conductores</Button>
+            </Link>
+          </Box>)
+          : null
+        }
+
         <Box>
-          <Link to="/home">
+          <Link to="/landing">
             <Button colorScheme="#009ED1">Inicio</Button>
           </Link>
-
+        </Box>
+        <Box>
           <Link to="/reservas">
             <Button colorScheme="#009ED1">Reservas</Button>
           </Link>
-
-          <Link to="/frecuentes">
-            <Button colorScheme="#009ED1">Preguntas Frecuentes</Button>
-          </Link>
-
-          <Link to="/about">
-            <Button colorScheme="#009ED1">Nosotros</Button>
-          </Link>
         </Box>
+
+        <Link to="/frecuentes">
+          <Button colorScheme="#009ED1">Preguntas Frecuentes</Button>
+        </Link>
+        <Link to="/about">
+          <Button colorScheme="#009ED1">Nosotros</Button>
+        </Link>
       </Flex>
 
       <AvatarGroup spacing="1rem" mx="20px">
