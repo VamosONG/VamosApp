@@ -1,4 +1,4 @@
-const getDrivers = require('../../Controllers/DriversControllers/getDrivers');
+const getDrivers = require('../../Controllers/driversControllers/getDrivers');
 
 module.exports = async (req, res) => {
     try {
@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
             res.status(200).json(filtered);    //Retorna el arreglo tenga elementos o no.
         }
         else
-            res.status(200).json(allAdmins);
+            res.status(200).json(allDrivers);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
