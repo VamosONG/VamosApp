@@ -1,4 +1,4 @@
-const {zone}=require('../../Models/zone');
+const {Zone}=require('../../dataBase');
 
 module.exports=async(id,name)=>{
     if(!id)
@@ -6,19 +6,13 @@ module.exports=async(id,name)=>{
     if(!name)
         throw new Error('No se recibieron datos para modificar la zona.');
 
-    const existingZone=await zone.findOne({
-        where:{id: id}
-    })
+    const existingZone=await Zone.findByPk(id);
+    
     if(!existingZone)
         throw new Error(`No existe zona con el id ${id} en la base de datos.`);
     else{
-        await zone.update({
-            fields:{
-                place:name,
-            },
-            where: {
-                id: id
-            }
+        await existingZone.update({
+                place:name,           
         })
 
         await existingZone.reload();
