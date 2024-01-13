@@ -22,12 +22,12 @@ function App() {
 
 
       <Routes>
-        <Route path='/login' element={<LoginForm/>}/>
+        <Route path='/home' element={<LoginForm/>}/>
         <Route path= '/about' element={<About/>} />
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
         <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
         <Route path='/detail' element={<DetailChofer/>}/>
-        <Route path= '/landing' element={<HomeComponent/>} />
+        <Route path= '/home' element={<HomeComponent/>} />
       </Routes>
 
       {/* <Paginado/> */}
