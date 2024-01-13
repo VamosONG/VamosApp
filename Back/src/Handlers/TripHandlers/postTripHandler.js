@@ -1,10 +1,10 @@
-const postTrip = require('../../Controllers/tripsControllers/postTrip');
+const {postTrip} = require('../../Controllers/tripsControllers/postTrip');
 
 module.exports = async (req, res) => {
-    const { date, hour, origin, destination, passengers, price, driver } = req.body;
+    const { date, hour, origin, destination, quantityPassengers, price, driver } = req.body;
 
     try {
-        const newTrip = await postTrip(date, hour, origin, destination, passengers, price, driver);
+        const newTrip = await postTrip({date, hour, origin, destination, quantityPassengers, price, driver});
 
         res.status(200).json(newTrip);
     } catch (error) {

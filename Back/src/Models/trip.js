@@ -36,8 +36,8 @@ module.exports = (sequelize) => {
         reviews: {
 
             type: DataTypes.STRING,
+            allowNull: true,
 
-            allowNull: false,
         },
         price: {
             type: DataTypes.INTEGER, 

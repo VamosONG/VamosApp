@@ -33,38 +33,38 @@ const router = Router();
 
 router.get('/trips', getTripsHandler);
 router.post('/trips/create', postTripHandler);
-router.put('/trips/update', updateTripHandler);
-router.delete('/trips', deleteTripHandler);
+router.put('/trips/update/:id', updateTripHandler);
+router.delete('/trips/:id', deleteTripHandler);
 
 router.get('/user', getUsersHandler);
 router.post('/user/create', postUserHandler);
-router.put('/user/update', updateUserHandler);
+router.put('/user/update/:id', updateUserHandler);
 router.delete('/user/:id', deleteUserHandler);
 
 router.get('/drivers', getDriversHandler);
 router.post('/drivers/create', postDriverHandler);
-router.put('/drivers/update', updateDriverHandler); 
-router.delete('/drivers', deleteDriverHandler);
+router.put('/drivers/update/:id', updateDriverHandler);
+router.delete('/drivers/:id', deleteDriverHandler);
 
 router.get('/airports', getAirportsHandler);
 router.post('/airports/create', postAirportHandler);
-router.put('/airports/update', updateAirportHandler);
-router.delete('/airports', deleteAirportHandler);
+router.put('/airports/update/:id', updateAirportHandler);
+router.delete('/airports/:id', deleteAirportHandler);
 
 router.get('/zones', getZonesHandler);
 router.post('/zones/create', postZoneHandler);
-router.put('/zones/update', updateZoneHandler);
-router.delete('/zones', deleteZoneHandler);
+router.put('/zones/update/:id', updateZoneHandler);
+router.delete('/zones/:id', deleteZoneHandler);
 
 router.get('/reviews', getReviewsHandler);
 router.post('/reviews/create', postReviewHandler);
-router.put('/reviews/update', updateReviewHandler);
-router.delete('/reviews', deleteReviewHandler);
+router.put('/reviews/update/:id', updateReviewHandler);
+router.delete('/reviews/:id', deleteReviewHandler);
 
 router.get('/dashboard/admin', getAdminsHandler);
 // router.post('/dashboard/admin/create', postAdminHandler);
 // router.put('/dashboard/admin/update', updateAdminHandler);
-router.delete('/dashboard/admin', deleteAdminHandler);
+router.delete('/dashboard/admin/:id', deleteAdminHandler);
 
 module.exports = router;
 
