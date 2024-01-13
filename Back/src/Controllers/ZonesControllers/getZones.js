@@ -1,8 +1,8 @@
-const { zone } = require('../../dataBase');
+const { Zone } = require('../../dataBase');
 
 module.exports=async()=>{
             
-        const zones= await zone.findAll();
+        const zones= await Zone.findAll();
        
         return zones;    
 }
