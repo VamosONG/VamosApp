@@ -12,7 +12,7 @@ const deleteUser = async (id) => {
 
           return userDelete
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        throw new Error( error.message );
     }
 }
 

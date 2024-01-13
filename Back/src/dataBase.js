@@ -10,6 +10,8 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
 
+, 
+
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL
 });
@@ -25,6 +27,7 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialectOptions: {
     ssl: true,
   },
+
 });
 const basename = path.basename(__filename);
 
@@ -45,7 +48,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 
 const { User, Trip, Driver, Admin, Zone, Airport, Review } = sequelize.models;
-
+User.hasMany(Review);
+ Review.belongsTo(User);
 
  User.hasMany(Trip);
  Trip.belongsTo(User);

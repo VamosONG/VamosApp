@@ -25,7 +25,9 @@ module.exports = (sequelize) => {
             },
         },
         comments: {
+
             type: DataTypes.STRING, 
+
             allowNull: false,
         }
     },
