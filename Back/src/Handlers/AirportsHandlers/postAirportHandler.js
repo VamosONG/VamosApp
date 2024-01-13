@@ -1,9 +1,9 @@
-const postAirport=require('../../Controllers/AirportsControllers/postAirport');
+const {postAirport} =require('../../Controllers/AirportsControllers/postAirport');
 
 module.exports=async(req,res)=>{
-    const {name}=req.body;
+    const {place}=req.body;
     try {
-        const newAirp=await postAirport(name);
+        const newAirp=await postAirport(place);
     
         res.status(200).json(newAirp);
     } catch (error) {
