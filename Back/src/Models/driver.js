@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('Driver', {
+    const Driver = sequelize.define('Driver', {
         id: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
@@ -51,4 +51,10 @@ module.exports = (sequelize) => {
         }
     },
         { timestamps: false });
+    
+    Driver.associate = (models) => {
+        Driver.hasMany(models.Review, { foreignKey: 'driverId' });
+    }; 
+
+    return Driver;
 };

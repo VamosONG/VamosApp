@@ -1,7 +1,7 @@
 const deleteReview= require('../../Controllers/ReviewsControllers/deleteReview');
 
 module.exports=async(req,res)=>{
-    const {id} = req.params;
+    const {id} = req.body;
     try{
         const deletedRev=await deleteReview(id);
  
