@@ -1,4 +1,5 @@
-const { User, Trip, Review, Op } = require('../../dataBase');
+const { User, Trip, Review } = require('../../dataBase');
+const { Op } = require('sequelize')
 
 const getUsers = async ({ name, surname, dni, email }) => {
     try {
@@ -30,7 +31,7 @@ const getUsers = async ({ name, surname, dni, email }) => {
 
         return users.map(user => ({
             id: user.id,
-            forename: user.forename,
+            name: user.name,
             surname: user.surname,
             dni: user.dni,
             email: user.email,
