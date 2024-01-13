@@ -41,7 +41,7 @@ const getUsers = async ({ name, surname, dni, email }) => {
             reviews: user.reviews,
         }));
     } catch (error) {
-        throw error;
+        throw error; 
     }
 };
 
