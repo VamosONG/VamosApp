@@ -39,11 +39,11 @@ router.delete('/trips', deleteTripHandler);
 router.get('/user', getUsersHandler);
 router.post('/user/create', postUserHandler);
 router.put('/user/update', updateUserHandler);
-router.delete('/user', deleteUserHandler);
+router.delete('/user/:id', deleteUserHandler);
 
 router.get('/drivers', getDriversHandler);
 router.post('/drivers/create', postDriverHandler);
-router.put('/drivers/update', updateDriverHandler);
+router.put('/drivers/update', updateDriverHandler); 
 router.delete('/drivers', deleteDriverHandler);
 
 router.get('/airports', getAirportsHandler);

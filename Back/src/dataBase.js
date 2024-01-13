@@ -7,7 +7,7 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/VAMOS`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/vamos`, {
   logging: false, 
   native: false, 
 });
@@ -30,7 +30,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 
 const { User, Trip, Driver, Admin, Zone, Airport, Review } = sequelize.models;
-
+User.hasMany(Review);
+ Review.belongsTo(User);
 
  User.hasMany(Trip);
  Trip.belongsTo(User);

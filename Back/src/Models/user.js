@@ -21,7 +21,8 @@ module.exports = (sequelize) => {
         },
         trips:{
             type: DataTypes.STRING,
-            allowNull: false,
+            defaultValue : 0,
+            allowNull:false
         },
         phone: {
             type: DataTypes.INTEGER,
@@ -32,13 +33,15 @@ module.exports = (sequelize) => {
         },
         activeReservations: {
             type: DataTypes.INTEGER, 
+            defaultValue: 0,
             allowNull: false,
             validate: {
                 isNumeric: true, 
             },
         },
         reviews: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING,
+            defaultValue: 0,
             allowNull: false,
         },
         dni: {
