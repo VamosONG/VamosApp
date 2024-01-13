@@ -1,4 +1,4 @@
-const getTrips = require('../../Controllers/tripsControllers/getTrips');
+const {getTrips} = require('../../Controllers/tripsControllers/getTrips');
 
 module.exports = async (req, res) => {
     try {

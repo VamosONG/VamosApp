@@ -25,6 +25,7 @@ const NavBar = () => {
 
     <Box h="15%" w="45%">
     {/* <SlideEx/> */}
+    </Box>
     <Flex justify="space-between">
 
     {esAdmin?(
@@ -57,14 +58,13 @@ const NavBar = () => {
         <Link to="/frecuentes">
          <Button colorScheme="#009ED1">Preguntas Frecuentes</Button>
         </Link>
-      </Box>
+        </Box>
 
- 
       <Link to="/about">
          <Button colorScheme="#009ED1">Nosotros</Button>
         </Link>
         </Flex>
-      </Box>
+
 
       <AvatarGroup spacing="1rem" mx="20px">
         <Avatar bg="#009ED1" />
