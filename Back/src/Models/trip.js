@@ -34,7 +34,9 @@ module.exports = (sequelize) => {
             },
         },
         reviews: {
+
             type: DataTypes.STRING,
+
             allowNull: false,
         },
         price: {

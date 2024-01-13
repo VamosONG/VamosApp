@@ -1,71 +1,47 @@
-const { User } = require('../../dataBase')
-const { Op } = require('sequelize');
+const { User, Trip, Review, Op } = require('../../dataBase');
 
-
-const getUsers = async (req, res) => {
-
+const getUsers = async ({ name, surname, dni, email }) => {
     try {
-        const { name } = req.query;
+        const whereClause = {};
 
-
-        if (name) {
-            
-            const UserDBName = await User.findAll({
-                where: {
-                    [Op.or]:[
-                        { forename: { [Op.iLike]: `%${name}%` } }, 
-                        { surname: { [Op.iLike]: `%${name}%` } }
-                         
-                    ],include: [Trip, Review]
-                  }              
-                })
-
-
-
-            const allUsers = UserDBName.map(user => ({
-                id: user.id,
-                forename: user.forename,
-                surname: user.surname,
-                dni: user.dni,
-                email: user.email,
-                trips: user.trips,
-                phone: user.phone,
-                activeReservations: user.activeReservations,
-                reviews: user.reviews,
-
-            }))
-
-
-            if (allUsers.length === 0) return res.status(404).send({ Error: 'User not found' })
-
-
-            return res.status(200).json(allUsers);
-
+        if (name || surname) {
+            whereClause[Op.or] = [
+                { name: { [Op.iLike]: `%${name}%` } },
+                { surname: { [Op.iLike]: `%${surname}%` } },
+            ];
         }
 
-
-        else {
-            const allUserDB = await User.findAll({ include: [Trip, Review] })
-            const allUserDBMap = allUserDB.map(user => ({
-                id: user.id,
-                forename: user.forename,
-                surname: user.surname,
-                dni: user.dni,
-                email: user.email,
-                trips: user.trips,
-                phone: user.phone,
-                activeReservations: user.activeReservations,
-                reviews: user.reviews,
-
-            }))
-
-
-            res.status(200).json(allUserDBMap)
+        if (dni) {
+            whereClause.dni = { [Op.iLike]: `%${dni}%` };
         }
 
+        if (email) {
+            whereClause.email = { [Op.iLike]: `%${email}%` };
+        }
+
+        const users = await User.findAll({
+            where: whereClause,
+            include: [Trip, Review],
+        });
+
+        if (users.length === 0) {
+            throw new Error('Usuarios no encontrados');
+        }
+
+        return users.map(user => ({
+            id: user.id,
+            forename: user.forename,
+            surname: user.surname,
+            dni: user.dni,
+            email: user.email,
+            trips: user.trips,
+            phone: user.phone,
+            activeReservations: user.activeReservations,
+            reviews: user.reviews,
+        }));
     } catch (error) {
-        return res.status(500).send(error.message)
+        throw error;
     }
-}
+};
 
-module.exports = { getUsers }
+module.exports = getUsers;
