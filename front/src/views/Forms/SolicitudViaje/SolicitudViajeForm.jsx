@@ -2,6 +2,18 @@ import { useDispatch } from "react-redux";
 import { postNewViaje } from "../../../redux/actions";
 import { useState } from "react";
 
+import { Box, Center, useDisclosure } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Select,
+  Button,
+  Heading,
+  Stack,
+} from "@chakra-ui/react";
+import Swal from "sweetalert2";
+
 function SolicitudViajeForm() {
   const dispatch = useDispatch();
 
@@ -17,62 +29,111 @@ function SolicitudViajeForm() {
     event.preventDefault();
     await dispatch(postNewViaje(input));
   };
+  const handleChange = async (e) => {
+    event.preventDefault();
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <select>
-          <option value="" disabled selected>
-            Desde
-          </option>
+        <Stack
+          spacing={4}
+          bg="gray.100"
+          p="5"
+          h="auto"
+          borderRadius="20"
+          boxShadow="dark-lg"
+        >
+          <Heading>Datos del viaje</Heading>
+          <Box>
+            <Center py={2} gap={4}>
+              <FormControl isRequired>
+                <FormLabel>Desde</FormLabel>
+                <Select placeholder="Selecciona el origen" name="aeropuerto">
+                  <option>Aeropuerto Talara</option>
+                  <option>Aeropuerto Tumbes</option>
+                  <option>Zona 1</option>
+                  <option>Zona 2</option>
+                  <option>Zona 3</option>
+                  <option>Zona 4</option>
+                </Select>
+              </FormControl>
+              <FormControl>
+                <FormLabel>Hasta</FormLabel>
+                <Select placeholder="Selecciona el destino" name="aeropuerto">
+                  <option>Aeropuerto Talara</option>
+                  <option>Aeropuerto Tumbes</option>
+                  <option>Zona 1</option>
+                  <option>Zona 2</option>
+                  <option>Zona 3</option>
+                  <option>Zona 4</option>
+                </Select>
+              </FormControl>
+            </Center>
 
-          <option value="Aeropuerto Talara">Aeropuerto Talara</option>
-          <option value="Aeropuerto Tumbes">Aeropuerto Tumbes</option>
-          <option value="Zona 1">Zona 1</option>
-          <option value="Zona 2">Zona 2</option>
-          <option value="Zona 3">Zona 3</option>
-          <option value="Zona 4">Zona 4</option>
-        </select>
-        <select>
-          <option value="" disabled selected>
-            Hacia
-          </option>
+            <Center py={2} gap={4}>
+              <FormControl isRequired>
+                <FormLabel>DÃ­a de recojida</FormLabel>
+                <Input
+                  placeholder="Select Date and Time"
+                  size="md"
+                  type="date"
+                  name="fecha"
+                  value={input.fecha}
+                  onChange={handleChange}
+                />
+              </FormControl>
 
-          <option value="Aeropuerto Talara">Aeropuerto Talara</option>
-          <option value="Aeropuerto Tumbes">Aeropuerto Tumbes</option>
-          <option value="Zona 1">Zona 1</option>
-          <option value="Zona 2">Zona 2</option>
-          <option value="Zona 3">Zona 3</option>
-          <option value="Zona 4">Zona 4</option>
-        </select>
-        <div>
-          <label>Fecha de recojida</label>
-          <input
-            type="date"
-            placeholder="--/--/----"
-            name="fecha"
-            value={input.value}
-          />
-        </div>
-        <div>
-          <label>Hora de recojida</label>
-          <input
-            type="time"
-            placeholder="--:--"
-            name="hora"
-            value={input.value}
-          />
-        </div>
-        <div>
-          <label>Cantidad de pasajeros</label>
-          <input
-            type="number"
-            placeholder="1-20"
-            name="cantPasajeros"
-            value={input.value}
-          />
-        </div>
-        <button type="submit">Solicitar</button>
+              <FormControl isRequired>
+                <FormLabel>Hora de recojida</FormLabel>
+                <Input
+                  type="time"
+                  placeholder="Hora"
+                  name="hora"
+                  value={input.hora}
+                  onChange={handleChange}
+                />
+              </FormControl>
+            </Center>
+
+            <Center py={2} gap={4}>
+              <FormControl as="fieldset" isRequired>
+                <FormLabel htmlFor="pasajeros">Cantidad de pasajeros</FormLabel>
+                <Select
+                  color="#000"
+                  placeholder="Cantidad de pasajeros"
+                  id="pasajeros"
+                  name="pasajeros"
+                >
+                  {[...Array(20).keys()].map((number) => (
+                    <option
+                      key={number + 1}
+                      id={`number-${number + 1}`}
+                      value={number + 1}
+                    >
+                      {number + 1}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+
+              <Box mt={4}>
+                <Button
+                  colorScheme="teal"
+                  variant="outline"
+                  w="100%"
+                  type="submit"
+                >
+                  Reservar viaje
+                </Button>
+              </Box>
+            </Center>
+          </Box>
+        </Stack>
       </form>
     </div>
   );
