@@ -10,6 +10,8 @@ import NavBar from './components/navBar/NavBar'
 import About from './components/about/About'
 // Hooks
 import {Routes, Route} from 'react-router-dom'
+import SolicitudViajeForm from './views/Forms/SolicitudViaje/SolicitudViajeForm';
+import SolicitudesDeViajes from './components/solicitudes/solicitudesDeViajes';
 
 function App() {
 
@@ -21,6 +23,8 @@ function App() {
       <Routes>
         <Route path='/login' element={<LoginForm/>}/>
         <Route path= '/about' element={<About/>} />
+        <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
+        <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
       </Routes>
       <HomeComponent/>
       {/* <Paginado/> */}

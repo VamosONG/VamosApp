@@ -1,5 +1,8 @@
 require("dotenv").config();
 const { Sequelize } = require("sequelize");
+// import pg from 'pg';
+const { Pool } = require('pg');
+
 
 const fs = require('fs');
 const path = require('path');
@@ -7,9 +10,24 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/vamos`, {
-  logging: false, 
-  native: false, 
+, 
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL
+});
+
+// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/vamosdatabase`, {
+//   logging: false, 
+//   native: false, 
+// });
+
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  logging: false,
+  native: false,
+  dialectOptions: {
+    ssl: true,
+  },
+
 });
 const basename = path.basename(__filename);
 
