@@ -8,6 +8,7 @@ import LoginForm from './views/Forms/Login/Login'
 import HomeComponent from './views/home/homeCompone/home';
 import NavBar from './components/navBar/NavBar'
 import About from './components/about/About'
+import DetailChofer from './views/detailChofer/DetailChofer';
 // Hooks
 import {Routes, Route} from 'react-router-dom'
 import SolicitudViajeForm from './views/Forms/SolicitudViaje/SolicitudViajeForm';
@@ -22,10 +23,11 @@ function App() {
 
 
       <Routes>
-        <Route path='/login' element={<LoginForm/>}/>
+        <Route path='/home' element={<LoginForm/>}/>
         <Route path= '/about' element={<About/>} />
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
         <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
+        <Route path='/detail' element={<DetailChofer/>}/>
       </Routes>
       <HomeComponent/>
       {/* <Paginado/> */}

@@ -71,7 +71,7 @@ function SolicitudViajeForm() {
 
                     <Center py={2} gap={4} >
                         <FormControl isRequired>
-                            <FormLabel>Día de recojida</FormLabel>
+                            <FormLabel>DÃ­a de recojida</FormLabel>
                             <Input
                                 placeholder="Select Date and Time"
                                 size="md"

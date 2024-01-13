@@ -1,4 +1,4 @@
-/* import axios from 'axios'; */
+ //import axios from 'axios';
 import choferes from '../../utils/chofer'
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
@@ -26,8 +26,25 @@ export const LOGIN="LOGIN"
         /* console.log(error);
     };
 }; */
+
+// export const getAllConductores= () =>{
+//     const endpoint= choferes
+//     return (dispatch)=>{
+//     try {
+//         const {data} =  (endpoint)
+//         return dispatch({
+//             type: GET_ALL_CONDUCTORES,
+//             payload: data
+//         })
+        
+//     } catch (error) {
+//         console.log(error);
+//     }
+
+//     }
+// }
 export const getAllConductores = ()=>(dispatch) => {
-    console.log(choferes)
+    //console.log(choferes)
     dispatch ({
         type: GET_ALL_CONDUCTORES,
         payload: choferes
