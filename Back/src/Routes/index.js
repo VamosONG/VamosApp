@@ -37,8 +37,10 @@ const router = Router();
 
 router.get('/trips', getTripsHandler);
 router.post('/trips/create', postTripHandler);
+
 router.put('/trips/update', updateTripHandler);
 router.delete('/trips', deleteTripHandler);
+
 
 router.get('/user', getUsersHandler);
 router.post('/user/create', postUserHandler);
