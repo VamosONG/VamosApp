@@ -58,9 +58,10 @@ const reducer=(state=initialState,action)=>{
                     esUsuario:true
             }}
         case POST_NEW_VIAJE:
+            console.log(action.payload)
             return {
                 ...state,
-                solicitudesDeViajes:[...state.solicitudesDeViajes,`solicitud nueva de fulano`]
+                solicitudesDeViajes:[...state.solicitudesDeViajes,action.payload]
             }
         default:
             return {...state};

@@ -47,7 +47,7 @@ function SolicitudViajeForm() {
                         
                         <FormControl isRequired>
                             <FormLabel>Desde</FormLabel>
-                            <Select placeholder='Selecciona el origen' name='aeropuerto' >
+                            <Select placeholder='Selecciona el origen' name='origen' onChange={handleChange}>
                                 <option>Aeropuerto Talara</option>
                                 <option>Aeropuerto Tumbes</option>
                                 <option>Zona 1</option>
@@ -58,7 +58,7 @@ function SolicitudViajeForm() {
                         </FormControl>
                         <FormControl>
                             <FormLabel>Hasta</FormLabel>
-                            <Select placeholder='Selecciona el destino' name='aeropuerto' >
+                            <Select placeholder='Selecciona el destino' name='destino' onChange={handleChange}>
                             <option>Aeropuerto Talara</option>
                                 <option>Aeropuerto Tumbes</option>
                                 <option>Zona 1</option>
@@ -71,7 +71,7 @@ function SolicitudViajeForm() {
 
                     <Center py={2} gap={4} >
                         <FormControl isRequired>
-                            <FormLabel>DÃ­a de recojida</FormLabel>
+                            <FormLabel>Día de recojida</FormLabel>
                             <Input
                                 placeholder="Select Date and Time"
                                 size="md"
@@ -97,7 +97,7 @@ function SolicitudViajeForm() {
                     <Center py={2} gap={4}>
                         <FormControl as='fieldset' isRequired>
                             <FormLabel htmlFor='pasajeros'>Cantidad de pasajeros</FormLabel>
-                            <Select color='#000' placeholder='Cantidad de pasajeros' id='pasajeros' name='pasajeros'   >
+                            <Select color='#000' placeholder='Cantidad de pasajeros' id='pasajeros' name='cantPasajeros'  onChange={handleChange} >
                                 {[...Array(20).keys()].map((number) => (
                                     <option key={number + 1} id={`number-${number + 1}`} value={number + 1}>
                                         {number + 1}

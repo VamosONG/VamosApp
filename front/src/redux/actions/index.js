@@ -9,40 +9,7 @@ export const LOGIN="LOGIN"
 
 
 
-/* export const getAllConductores = () => {
 
-    try {
-        console.log("pasa")
-        return async (dispatch) => {
-            console.log("pasa")
-            const data= await choferes
-            return dispatch({
-                type: GET_ALL_CONDUCTORES,
-                payload: data
-            });
-        };
-    } catch (error) { */
-        /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-        /* console.log(error);
-    };
-}; */
-
-// export const getAllConductores= () =>{
-//     const endpoint= choferes
-//     return (dispatch)=>{
-//     try {
-//         const {data} =  (endpoint)
-//         return dispatch({
-//             type: GET_ALL_CONDUCTORES,
-//             payload: data
-//         })
-        
-//     } catch (error) {
-//         console.log(error);
-//     }
-
-//     }
-// }
 export const getAllConductores = ()=>(dispatch) => {
     //console.log(choferes)
     dispatch ({
@@ -50,8 +17,11 @@ export const getAllConductores = ()=>(dispatch) => {
         payload: choferes
     });
 }
+
+const cont=0;
 export const postNewViaje = (infoViaje) => {
     window.alert("se solicitó un nuevo viaje")
+    infoViaje.id=cont+1
     return ({
         type: POST_NEW_VIAJE,
         payload: infoViaje
