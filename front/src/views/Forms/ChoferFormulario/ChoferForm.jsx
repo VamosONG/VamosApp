@@ -16,7 +16,7 @@ const ChoferForm = () => {
     const [imageUrl, setImageUrl] = useState(null)
     const [file, setFile] = useState(null)
 
-    const urlCloudinary = 'https://api.cloudinary.com/dzd6hfguw/image/upload'
+    const urlCloudinary = 'https://api.cloudinary.com/v1_1/dzd6hfguw/image/upload'
 
     const [form, setForm] = useState({
         nombre: "",
