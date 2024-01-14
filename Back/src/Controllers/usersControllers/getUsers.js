@@ -27,25 +27,15 @@ const getUsers = async ({ name, surname, dni, email }) => {
                 attributes: ['id', 'driverId', 'date', 'qualification', 'comments'],
             }]
         });           
-           
 
         if (users.length === 0) {
             throw new Error('Usuarios no encontrados');
         }
 
-        return users/* .map(user => ({
-            id: user.id,
-            name: user.name,
-            surname: user.surname,
-            dni: user.dni,
-            email: user.email,
-            trips: user.trips,
-            phone: user.phone,
-            activeReservations: user.activeReservations,
-            reviews: user.reviews,
-        })); */
+        return users;
+
     } catch (error) {
-        throw error; 
+        throw Error(`Error al obtener usuarios: ${error.message}`); 
     }
 };
 
