@@ -41,11 +41,10 @@ module.exports = (sequelize) => {
                 isNumeric: true, 
             },
         },
-        reviews: {
+        /* reviews: {
             type: DataTypes.STRING,
-            defaultValue: 0,
             allowNull: false,
-        },
+        }, */
         dni: {
             type: DataTypes.INTEGER, 
             allowNull: false,

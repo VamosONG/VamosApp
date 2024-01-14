@@ -1,11 +1,17 @@
 
-const { Driver } = require('../../dataBase')
+const { Driver, Review } = require('../../dataBase')
 
 
 const getDrivers = async () => {
 
     try {
-        const allDrivers = await Driver.findAll()
+        const allDrivers = await Driver.findAll({
+        include: [{
+            model: Review,
+            attributes: ['id', 'userId', 'date', 'qualification', 'comments'],
+        }]
+        });
+
         return allDrivers;
 
     } catch (error) {

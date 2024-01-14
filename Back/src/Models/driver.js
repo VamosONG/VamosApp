@@ -45,10 +45,10 @@ module.exports = (sequelize) => {
                 isNumeric: true, 
             },
         },
-        reviews: {
+        /* reviews: {
             type: DataTypes.STRING,
             allowNull: false,
-        }
+        } */
     },
         { timestamps: false });
     
