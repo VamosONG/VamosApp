@@ -2,28 +2,11 @@ const { Trip } = require('../../dataBase');
 
 const getTrips = async () => {
     try {
-        const trips = await Trip.findAll();
-
-        const allTrips = trips.map(tripa => ({
-            id: tripa.id,
-            reservaID: tripa.reservaID,
-            date: tripa.date,
-            hour: tripa.hour,
-            origin: tripa.origin,
-            destination: tripa.destination,
-            passengers: tripa.quantityPassengers,
-            reviews: tripa.reviews,
-            price: tripa.price,
-            stateOfTrip: tripa.stateOfTrip
-        }));
-
-        if (allTrips.length === 0) {
-            throw new Error('No trips');
-        }
+        const allTrips = await Trip.findAll();
 
         return allTrips;
     } catch (error) {
-        throw error;
+        throw Error (error.message);
     }
 };
 

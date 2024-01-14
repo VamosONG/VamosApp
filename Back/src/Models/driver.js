@@ -27,10 +27,6 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        trips: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
         phone: {
             type: DataTypes.INTEGER, 
             allowNull: false,
@@ -50,7 +46,8 @@ module.exports = (sequelize) => {
     
     Driver.associate = (models) => {
         Driver.hasMany(models.Review, { foreignKey: 'driverId' });
-    }; 
+        Driver.hasMany(models.Trip, { foreignKey: 'driverId' });
+    };
 
     return Driver;
 };

@@ -22,10 +22,16 @@ const getUsers = async ({ name, surname, dni, email }) => {
 
         const users = await User.findAll({
             where: whereClause,
-            include: [{
+            include: [
+                {
                 model: Review,
                 attributes: ['id', 'driverId', 'date', 'qualification', 'comments'],
-            }]
+                },
+                {
+                    model: Trip, 
+                    attributes: ['id', 'date', 'hour', 'origin', 'destination', 'quantityPassengers', 'price', 'stateOfTrip', 'driverId'],
+                }
+            ]
         });           
 
         if (users.length === 0) {
