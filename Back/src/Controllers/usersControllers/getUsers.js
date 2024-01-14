@@ -22,26 +22,26 @@ const getUsers = async ({ name, surname, dni, email }) => {
 
         const users = await User.findAll({
             where: whereClause,
-            include: [Trip, Review],
-        });
+            include: [
+                {
+                model: Review,
+                attributes: ['id', 'driverId', 'date', 'qualification', 'comments'],
+                },
+                {
+                    model: Trip, 
+                    attributes: ['id', 'date', 'hour', 'origin', 'destination', 'quantityPassengers', 'price', 'stateOfTrip', 'driverId'],
+                }
+            ]
+        });           
 
         if (users.length === 0) {
             throw new Error('Usuarios no encontrados');
         }
 
-        return users.map(user => ({
-            id: user.id,
-            name: user.name,
-            surname: user.surname,
-            dni: user.dni,
-            email: user.email,
-            trips: user.trips,
-            phone: user.phone,
-            activeReservations: user.activeReservations,
-            reviews: user.reviews,
-        }));
+        return users;
+
     } catch (error) {
-        throw error; 
+        throw Error(`Error al obtener usuarios: ${error.message}`); 
     }
 };
 

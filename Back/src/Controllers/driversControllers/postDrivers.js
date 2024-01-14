@@ -10,8 +10,6 @@ const postDriver = async ( name, surname, car, phone, capacityPassengers, email,
             capacityPassengers,
             email,
             city,
-            trips:'',
-            reviews:'',
         });
 
         return newDriver;

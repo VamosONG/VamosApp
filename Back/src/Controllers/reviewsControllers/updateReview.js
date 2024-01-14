@@ -6,7 +6,7 @@ const updateReview = async (id, newData) => {
         const reviewUpdate = await Review.findByPk(id);
 
         if (!reviewUpdate) {
-            return null; 
+            throw new Error(`La reseña con id ${id} no se encuentra en la base de datos.`); 
         }
 
         await reviewUpdate.update(newData);
@@ -14,7 +14,7 @@ const updateReview = async (id, newData) => {
 
         return reviewUpdate;
     } catch (error) {
-        throw new Error('Error al actualizar la reseña');
+        throw new Error(`Error al actualizar la reseña: ${error.message}`);
     }
 };
 
