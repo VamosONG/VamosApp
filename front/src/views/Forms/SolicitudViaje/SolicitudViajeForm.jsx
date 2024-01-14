@@ -8,7 +8,7 @@ import {
     FormLabel,
     Input, Select, Button, Heading, Stack
 } from '@chakra-ui/react'
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2' 
 
 
 function SolicitudViajeForm() {
