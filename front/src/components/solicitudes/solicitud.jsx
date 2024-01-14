@@ -19,8 +19,25 @@ import {
 function Solicitud({solicitud}) {
   
     
-    const {id,origen,destino,fecha,hora,cantPasajeros}=solicitud
-    console.log(fecha)
+    /* const {id,origen,destino,fecha,hora,cantPasajeros}=solicitud
+    console.log(fecha) */
+
+    const id=useSelector((state)=>state.idSolicitud)
+    const solicitudesDeViajes=useSelector((state)=>state.solicitudesDeViajes)
+    const conductores=useSelector((state)=>state.conductores)
+
+    
+    const solicitudFound=solicitudesDeViajes.find((solicitud)=>solicitud.id===id)
+    console.log(solicitudFound)
+    
+    const {origen,destino,fecha,hora,cantPasajeros}= solicitudFound
+
+    let aeropuertoSolicitud
+
+    if(origen==='Aeropuerto Talara'||origen==='Aeropuerto Tumbes') {aeropuertoSolicitud=origen}
+    else{aeropuertoSolicitud=destino}
+    
+    const conductoresFiltrados= conductores.filter((conductor)=>conductor.aeropuertoOrigen===aeropuertoSolicitud)
     return (
   
       <div >
@@ -41,6 +58,27 @@ function Solicitud({solicitud}) {
             
           </CardFooter>
         </Card>
+        {conductoresFiltrados.map((conductor) => (
+        <Card
+          key={conductor.id}
+         direction="column" 
+         overflow="hidden"
+         variant="outline"
+         maxW='sm'
+        >
+          <CardHeader size="md">{conductor.nombre}</CardHeader>
+          <CardBody>{conductor.apellido}</CardBody>
+          <CardBody>{conductor.numeroCelular}</CardBody>
+          <CardBody>{conductor.maxPasajeros}</CardBody>
+          <CardBody>{conductor.aeropuertoOrigen}</CardBody>
+          <CardBody>{conductor.fotoChofer}</CardBody>
+          <CardFooter>
+            {/* <Checkbox
+            
+            ></Checkbox> */}
+          </CardFooter>
+        </Card>
+        ))}
       </div>
       
     )

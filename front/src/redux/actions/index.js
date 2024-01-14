@@ -6,6 +6,7 @@ export const PAGINATE="PAGINATE"
 export const GET_ALL_CONDUCTORES="GET_ALL_CONDUCTORES"
 export const POST_NEW_VIAJE="POST_NEW_VIAJE"
 export const LOGIN="LOGIN"
+export const ID_SOLICITUD="ID_SOLICITUD"
 
 
 
@@ -18,10 +19,10 @@ export const getAllConductores = ()=>(dispatch) => {
     });
 }
 
-const cont=0;
+
 export const postNewViaje = (infoViaje) => {
     window.alert("se solicitó un nuevo viaje")
-    infoViaje.id=cont+1
+    
     return ({
         type: POST_NEW_VIAJE,
         payload: infoViaje
@@ -73,5 +74,16 @@ export const logIn = (input) => {
         };
     };
 };
+export const idDeSolicitud = (id) => {
+    
+    
+            return({
+                type: ID_SOLICITUD,
+                payload: id
+            })
+        
+};
+
+
 
 

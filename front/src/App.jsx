@@ -13,6 +13,7 @@ import DetailChofer from './views/detailChofer/DetailChofer';
 import {Routes, Route} from 'react-router-dom'
 import SolicitudViajeForm from './views/Forms/SolicitudViaje/SolicitudViajeForm';
 import SolicitudesDeViajes from './components/solicitudes/solicitudesDeViajes';
+import Solicitud from './components/solicitudes/solicitud';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
         <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
         <Route path='/detail' element={<DetailChofer/>}/>
+        <Route path='/solicitud' element={<Solicitud/>}/>
       </Routes>
       <HomeComponent/>
       {/* <Paginado/> */}
