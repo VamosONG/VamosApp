@@ -11,14 +11,12 @@ import { useState } from 'react'
 import { useSelector } from "react-redux";
 import choferes from '../../../utils/chofer';
 
-
-import axios from 'axios'
-
 const ChoferForm = () => {
     const choferData = useSelector((state) => state.conductores)
-    const [URL_Image, setURL_Image] = useState('')
-    // These are the default breakpoints
+    const [imageUrl, setImageUrl] = useState(null)
+    const [file, setFile] = useState(null)
 
+    const urlCloudinary = 'https://api.cloudinary.com/dzd6hfguw/image/upload'
 
     const [form, setForm] = useState({
         nombre: "",
@@ -48,61 +46,67 @@ const ChoferForm = () => {
         })
     }
 
-    const handleChangeImage = async (e) => {
-        const file = e.target.files[0];
+    const handleImageChange = async (file) => {
+        
+    };
 
-        const data = new FormData();
-
-        data.append('file', file);
-        data.append('upload_preset', 'VamosONGFormChoferes')
-
-        const response = await axios.post('https://api.cloudinary.com/v1_1/dzd6hfguw/image/upload', data)
-
-        setURL_Image(response.data.secure_url)
-    }
-
-    const changeImgChofer = () => {
-        setURL_Image('');
-    }
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (form) {
-            const insertData = choferData.push(form)
-            if (insertData) {
-                console.log(insertData);
-                Swal.fire({
-                    title: "Bien Hecho!",
-                    text: "chofer registrado exitosamente!",
-                    icon: "success"
-                });
-            }
-            setForm({
-                nombre: "",
-                apellido: "",
-                correo: "",
-                fechaNacimiento: "",
-                dni: "",
-                telefono: "",
-                choferImg: "",
-                aeropuerto: "",
-                vehiculo: "",
-                modelo: "",
-                licencia: "",
-                vehiculoImg: "",
-                soat: "",
-                permisoImg: "",
-                pasajeros: "",
-            })
-        } else {
-            alert('Flatan datos')
-        }
+        const formData = new FormData()
+        formData.append('file', file)
+
+        const response = await fetch(urlCloudinary, {
+            method: 'POST',
+            body: formData,
+        })
+
+        const data = response
+        console.log(data);
+        setImageUrl(data.url)
+        // if (form) {
+        //     const insertData = choferData.push(form)
+        //     if (insertData) {
+        //         console.log(insertData);
+        //         Swal.fire({
+        //             title: "Bien Hecho!",
+        //             text: "chofer registrado exitosamente!",
+        //             icon: "success"
+        //         });
+        //     }
+        //     setForm({
+        //         nombre: "",
+        //         apellido: "",
+        //         correo: "",
+        //         fechaNacimiento: "",
+        //         dni: "",
+        //         telefono: "",
+        //         choferImg: "",
+        //         aeropuerto: "",
+        //         vehiculo: "",
+        //         modelo: "",
+        //         licencia: "",
+        //         vehiculoImg: "",
+        //         soat: "",
+        //         permisoImg: "",
+        //         pasajeros: "",
+        //     })
+        // } else {
+        //     alert('Flatan datos')
+        // }
     }
 
     return (
         <form onSubmit={handleSubmit} >
-            <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' color='white' border='1px solid white' mx='2rem' >
+            <input type="file"
+            onChange={(e) => {
+                setFile(e.target.files[0]);
+            }}/>
+            <button type='submit'> Enviar imagen </button>
+            {imageUrl && (
+                <img src={imageUrl} alt='foto del'/>
+            )}
+            {/* <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' color='white' border='1px solid white' mx='2rem' >
                 <Heading>Datos del chofer</Heading>
                 <Box  >
                     <Flex flexDirection={{ base: 'column' }}>
@@ -148,18 +152,10 @@ const ChoferForm = () => {
 
                             <FormControl>
                                 <FormLabel>Foto del Chofer</FormLabel>
-                                <Input type='file' accept='image/*' name='choferImg' onChange={(e) => { handleChange(e); handleChangeImage; }} value={form.choferImg} />
-                                {URL_Image && (
-                                    <Image
-                                        w='5rem'
-                                        h='5rem'
-                                        overflow='hidden'
-                                        objectFit='cover'
-                                        src={URL_Image}
-                                    />
-                                    // <Text> Imagen renderizada</Text>
-                                )
-                                }
+                                <Input type='file'
+                                    name='choferImg'
+                                    accept="image/*"
+                                    onChange={(e) => handleImageChange(e, 'choferImg')} />
                             </FormControl>
 
 
@@ -188,9 +184,9 @@ const ChoferForm = () => {
                             <FormLabel as='legend' >
                                 Modelo de Vehiculo:
                             </FormLabel>
-                            <Select color='#000'  placeholder='Selecciona un Vehiculo' name='vehiculo' onChange={handleChange} value={form.vehiculo}>
+                            <Select color='#000' placeholder='Selecciona un Vehiculo' name='vehiculo' onChange={handleChange} value={form.vehiculo}>
                                 {choferes.map((aerop, index) => (
-                                    <option  key={aerop.id} value={index}> {aerop.servicioOfrecido} </option>
+                                    <option key={aerop.id} value={index}> {aerop.servicioOfrecido} </option>
                                 ))
                                 }
                             </Select>
@@ -210,7 +206,7 @@ const ChoferForm = () => {
                     <Center py={2} gap={4} flexDirection={{ base: 'column', md: 'row' }}>
                         <FormControl isRequired>
                             <FormLabel>Foto del vehiculo</FormLabel>
-                            <Input type='file' name='vehiculoImg' onChange={handleChange} value={form.vehiculoImg} />
+                            <Input type='file' name='vehiculoImg' onChange={(e) => handleImageChange(e, 'vehiculoImg')} />
                         </FormControl>
 
                         <FormControl isRequired>
@@ -225,7 +221,7 @@ const ChoferForm = () => {
 
                         <FormControl isRequired>
                             <FormLabel>Permiso de Circulacion</FormLabel>
-                            <Input type='file' name='permisoImg' onChange={handleChange} value={form.permisoImg} />
+                            <Input type='file' name='permisoImg' onChange={(e) => handleImageChange(e, 'permisoImg')} />
                         </FormControl>
 
                         <FormControl as='fieldset' isRequired>
@@ -245,7 +241,7 @@ const ChoferForm = () => {
                     <Button colorScheme='green' w='100%' type='submit'>
                         Registrar Chofer</Button>
                 </Box>
-            </Stack>
+            </Stack> */}
         </form>
     )
 }

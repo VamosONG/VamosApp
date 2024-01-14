@@ -53,7 +53,7 @@ const LoginForm = ({ onSwitchForm }) => {
             {/* Falta controlar los datos ingresados */}
             <FormControl isInvalid={isError}>
                 <FormLabel>Correo Electronico</FormLabel>
-                <Input type='tel' value={input} onChange={handleInputChange} placeholder='Ingresa tu Correo / Email' />
+                <Input type='tel' value={input.email} onChange={handleInputChange} placeholder='Ingresa tu Correo / Email' name='email'/>
                 {!isError ? (
                     <FormHelperText>
                         Ingresa un correo electronico.
@@ -69,7 +69,9 @@ const LoginForm = ({ onSwitchForm }) => {
                     <Input
                         pr='4.5rem'
                         type={show ? 'text' : 'password'}
-                        placeholder='ingresa una contraseña'
+                        placeholder='Ingresa una contraseña'
+                        name='password'
+                        onChange={handleInputChange}
                     />
                     <InputRightElement width='4.5rem'>
                         <Button h='1.75rem' size='sm' onClick={handleClick}>

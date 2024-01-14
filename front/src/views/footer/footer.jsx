@@ -100,7 +100,7 @@ function Footer() {
             <Heading>Contacto</Heading>
             <Flex flexDirection='column' fontSize='1.5rem' gap='4'>
               <Text>
-                <h3>Aeropuertos:</h3>
+                <b>Aeropuertos:</b>
                 <div>
                   <address>Talara, Lima, Peru.</address>
                   <address>Tumbes, Lima, Peru.</address>
@@ -108,13 +108,13 @@ function Footer() {
               </Text>
 
               <Text>
-                <h3>Correo electronico:</h3>
+                <b>Correo electronico:</b>
                 <Link href='mailto:kleibertmedina@gmail.com' isExternal>
                   <b>vamos.ong@gmail.com</b> <ExternalLinkIcon mx='2px' />
                 </Link>
               </Text>
               <Text>
-                <h3>Llamanos: </h3>
+                <b>Llamanos: </b>
                 <Link href='tel:+51999999999' isExternal>
                   +51 999-999-999 <ExternalLinkIcon mx='2px' />
                 </Link>
