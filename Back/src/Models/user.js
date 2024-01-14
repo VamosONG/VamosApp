@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('User', {
+    const User = sequelize.define('User', {
         id: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
@@ -22,7 +22,8 @@ module.exports = (sequelize) => {
         //Cambiamos el type a Array?
         trips:{
             type: DataTypes.STRING,
-            allowNull: false,
+            defaultValue : 0,
+            allowNull:false
         },
         phone: {
             type: DataTypes.INTEGER,
@@ -34,6 +35,7 @@ module.exports = (sequelize) => {
         //Cambiamos el type a Array?
         activeReservations: {
             type: DataTypes.INTEGER, 
+            defaultValue: 0,
             allowNull: false,
             validate: {
                 isNumeric: true, 
@@ -41,6 +43,7 @@ module.exports = (sequelize) => {
         },
         reviews: {
             type: DataTypes.STRING,
+            defaultValue: 0,
             allowNull: false,
         },
         dni: {
@@ -58,4 +61,9 @@ module.exports = (sequelize) => {
 
         { timestamps: false });
 
+    User.associate = (models) => {
+        User.hasMany(models.Review, { foreignKey: 'userId' });
+    }; 
+
+    return User;
 };

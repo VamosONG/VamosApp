@@ -19,14 +19,12 @@ const initialState = {
 
 
 const reducer=(state=initialState,action)=>{
-
     switch (action.type){
         case GET_ALL_CONDUCTORES:
-            console.log(action.payload)
+            //console.log(action.payload)
             return {
                 ...state,
                 conductores:action.payload,
-
                 pageConductores:state.conductores.splice(0, state.cantConductoresPorPag),
 
             };
@@ -34,9 +32,9 @@ const reducer=(state=initialState,action)=>{
             const nextPage = state.currentPage + 1;
             const prevPage = state.currentPage - 1;
             const firstIndex = action.payload === "next" ? nextPage * state.cantConductoresPorPag : prevPage * state.cantConductoresPorPag;
-            console.log(action.payload)
-            console.log(firstIndex)
-            console.log(nextPage)
+            // console.log(action.payload)
+            // console.log(firstIndex)
+            // console.log(nextPage)
 
             /* if (action.payload === 'next' && firstIndex >= state.pageConductores.length) {
                 return state
@@ -60,9 +58,10 @@ const reducer=(state=initialState,action)=>{
                     esUsuario:true
             }}
         case POST_NEW_VIAJE:
+            console.log(action.payload)
             return {
                 ...state,
-                solicitudesDeViajes:[...state.solicitudesDeViajes,`solicitud nueva de fulano`]
+                solicitudesDeViajes:[...state.solicitudesDeViajes,action.payload]
             }
         default:
             return {...state};

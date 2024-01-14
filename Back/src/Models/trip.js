@@ -34,18 +34,18 @@ module.exports = (sequelize) => {
             },
         },
         reviews: {
+
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
+
         },
         price: {
-            type: DataTypes.INTEGER, 
+            type: DataTypes.STRING, 
             allowNull: false,
-            validate: {
-                isNumeric: true, 
-            },
+            
         },
         stateOfTrip: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING, 
             allowNull: false,
         }
     },

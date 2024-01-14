@@ -1,35 +1,35 @@
 const { Op } = require('sequelize');
 const { Airport } = require('../../dataBase');
 
-const getAirports = async (name) => {
+const getAirports = async (place) => {
     try {
-        if(name){
+        if(place){
             
             const airportPlace = await Airport.findAll({
-                where: {
-                    [Op.or]: [
-                        { place: { [Op.iLike]: `%${name}%` } }
-                    ]
-                }
+                where: 
+                    
+                        { place: { [Op.iLike]: `%${place}%` } }
+                    
+                
             });
             const allDestinations = airportPlace.map(destination => ({
                 id: destination.id,
                 place: destination.place
             }));
-            
-            if (allDestinations.length === 0) {
-                throw new Error('No Airports found');
-            }
+                    
             
             return allDestinations;
         }
         else {
             const allAirportPlace = await Airport.findAll();
+            
 
-            return allAirportPlace.map(destination => ({
-                id: destination.id,
-                place: destination.place
-            }));
+                return allAirportPlace.map(destination => ({
+                    id: destination.id,
+                    place: destination.place
+                }));
+            
+           
         }
         
 

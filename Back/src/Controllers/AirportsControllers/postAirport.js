@@ -1,12 +1,12 @@
 const { Op } = require('sequelize');
 const { Airport } = require('../../dataBase');
 
-const postAirport = async (name) =>{
+const postAirport = async (place) =>{
     try {
-        if(!name)  throw new Error('Name is required for creating an airport');
+        if(!place)  throw new Error('Name is required for creating an airport');
 
         const [newAirport, created] = await Airport.findOrCreate({
-            where: { name :{ [Op.iLike]: name} }, defaults: { name: name }
+            where: { place :{ [Op.iLike]: place} }, defaults: { place: place }
         })
 
         if(!created) throw new Error('Airport already exists');

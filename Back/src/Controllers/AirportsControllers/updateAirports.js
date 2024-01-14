@@ -13,7 +13,7 @@ const updateAirport = async (id, newName) => {
           if (!newName) {
             throw new Error('Need a name');
         }
-        updateAir.name= newName;
+        updateAir.place= newName;
         await updateAir.save();
 
         return { message: 'Airport update successful' };

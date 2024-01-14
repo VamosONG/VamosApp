@@ -1,4 +1,4 @@
-/* import axios from 'axios'; */
+ //import axios from 'axios';
 import choferes from '../../utils/chofer'
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
@@ -9,32 +9,19 @@ export const LOGIN="LOGIN"
 
 
 
-/* export const getAllConductores = () => {
 
-    try {
-        console.log("pasa")
-        return async (dispatch) => {
-            console.log("pasa")
-            const data= await choferes
-            return dispatch({
-                type: GET_ALL_CONDUCTORES,
-                payload: data
-            });
-        };
-    } catch (error) { */
-        /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-        /* console.log(error);
-    };
-}; */
 export const getAllConductores = ()=>(dispatch) => {
-    console.log(choferes)
+    //console.log(choferes)
     dispatch ({
         type: GET_ALL_CONDUCTORES,
         payload: choferes
     });
 }
+
+const cont=0;
 export const postNewViaje = (infoViaje) => {
     window.alert("se solicitó un nuevo viaje")
+    infoViaje.id=cont+1
     return ({
         type: POST_NEW_VIAJE,
         payload: infoViaje

@@ -14,8 +14,8 @@ import { useSelector } from "react-redux";
 
 const NavBar = () => {
 
-  const esAdmin = useSelector((state) => state.esAdmin)
-  const esUsuario = useSelector((state) => state.esUsuario)
+  const esAdmin=useSelector((state)=>state.esAdmin)
+  const esUsuario=useSelector((state)=>state.esUsuario)
 
   return (
     <Flex as="nav" bg="#009ED1" alignItems="center" justify="space-between" h="100px" >
@@ -42,6 +42,15 @@ const NavBar = () => {
           ) : null
           )}
 
+    {
+      esAdmin?
+      (<Box>
+        <Link to="/detail">
+        <Button  colorScheme="#009ED1">Conductores</Button>
+        </Link>
+      </Box>)
+      : null
+    }
 
           <Box>
             <Flex>
