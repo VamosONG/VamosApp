@@ -8,7 +8,7 @@ const postUser = async ({ name, surname, email, phone, dni }) => {
             surname,
             email,
             phone,
-            dni
+            dni,
         });
 
         return newUser;
