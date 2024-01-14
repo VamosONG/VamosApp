@@ -8,7 +8,7 @@ import {
     FormLabel,
     Input, Select, Button, Heading, Stack
 } from '@chakra-ui/react'
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2' 
 
 
 function SolicitudViajeForm() {
@@ -17,11 +17,11 @@ function SolicitudViajeForm() {
 
     
     const [input,setInput]=useState({
-        origen:"",
-        destino:"",
-        fecha:"",
-        hora:"",
-        cantPasajeros:"",
+        origin:"",
+        destination:"",
+        date:"",
+        hour:"",
+        quantityPassengers:"",
       });
 
 
@@ -50,7 +50,7 @@ function SolicitudViajeForm() {
                         
                         <FormControl isRequired>
                             <FormLabel>Desde</FormLabel>
-                            <Select placeholder='Selecciona el origen' name='origen' onChange={handleChange}>
+                            <Select placeholder='Selecciona el origen' name='origin' onChange={handleChange}>
                                 <option>Aeropuerto Talara</option>
                                 <option>Aeropuerto Tumbes</option>
                                 <option>Zona 1</option>
@@ -61,7 +61,7 @@ function SolicitudViajeForm() {
                         </FormControl>
                         <FormControl>
                             <FormLabel>Hasta</FormLabel>
-                            <Select placeholder='Selecciona el destino' name='destino' onChange={handleChange}>
+                            <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
                             <option>Aeropuerto Talara</option>
                                 <option>Aeropuerto Tumbes</option>
                                 <option>Zona 1</option>
@@ -79,8 +79,8 @@ function SolicitudViajeForm() {
                                 placeholder="Select Date and Time"
                                 size="md"
                                 type="date"
-                                name='fecha'
-                                value={input.fecha}
+                                name='date'
+                                value={input.date}
                                 onChange={handleChange} />
                         </FormControl>
 
@@ -90,8 +90,8 @@ function SolicitudViajeForm() {
                             <Input 
                                 type='time' 
                                 placeholder='Hora' 
-                                name='hora'  
-                                value={input.hora}
+                                name='hour'  
+                                value={input.hour}
                                 onChange={handleChange} />
                         </FormControl>
                     </Center>
@@ -100,7 +100,7 @@ function SolicitudViajeForm() {
                     <Center py={2} gap={4}>
                         <FormControl as='fieldset' isRequired>
                             <FormLabel htmlFor='pasajeros'>Cantidad de pasajeros</FormLabel>
-                            <Select color='#000' placeholder='Cantidad de pasajeros' id='pasajeros' name='cantPasajeros'  onChange={handleChange} >
+                            <Select color='#000' placeholder='Cantidad de pasajeros' id='pasajeros' name='quantityPassengers'  onChange={handleChange} >
                                 {[...Array(20).keys()].map((number) => (
                                     <option key={number + 1} id={`number-${number + 1}`} value={number + 1}>
                                         {number + 1}

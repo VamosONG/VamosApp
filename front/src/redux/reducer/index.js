@@ -61,10 +61,10 @@ const reducer=(state=initialState,action)=>{
             }}
         case POST_NEW_VIAJE:
 
-            return {
+            /* return {
                 ...state,
                 solicitudesDeViajes:[...state.solicitudesDeViajes,action.payload]
-            }
+            } */
         case ID_SOLICITUD:
             return {
                 ...state,

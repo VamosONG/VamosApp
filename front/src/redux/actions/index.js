@@ -27,16 +27,25 @@ export const postNewViaje = (infoViaje) => {
         type: POST_NEW_VIAJE,
         payload: infoViaje
     }); */
+    console.log(infoViaje)
+    /* const info={
+        "userId": "a66bde7e-6716-4da0-b1b0-c84e3fb0298c",
+        "date": "2024-03-10",
+        "hour": "12:30",
+        "origin": "Origen Ejemplo",
+        "destination": "Destino Ejemplo",
+        "quantityPassengers": 3
+      } */
     return async (dispatch)=>{
         try {
             const {data}= await axios.post(`http://localhost:3001/offer/create`,infoViaje);
             /* console.log(data); */
             window.alert('¡solicitud creada con éxito!');
             console.log(data)
-            /* return dispatch({
+            return dispatch({
                             type:POST_NEW_VIAJE,
                             payload:data
-            }) */
+            })
         
         } catch (error) {
         window.alert('¡Error en la solicitud!');

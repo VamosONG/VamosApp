@@ -33,13 +33,13 @@ const NavBar = () => {
       <Link to="/solicitudesDeViajes">
         <Button colorScheme="#009ED1">Solicitudes de viaje</Button>
       </Link>
-   </Box>
+      </Box>
     ):(esUsuario?(
-    <Box>
+      <Box>
         <Link to="/solicitarViaje">
           <Button colorScheme="#009ED1">Solicitar viaje</Button>
         </Link>
-     </Box>
+      </Box>
     ):null
     )}
 
@@ -57,13 +57,12 @@ const NavBar = () => {
         <Link to="/landing">
           <Button colorScheme="#009ED1">Inicio</Button>
         </Link>
-        </Box>
-        <Box>
+      </Box>
+      <Box>
         <Link to="/reservas">
          <Button colorScheme="#009ED1">Reservas</Button>
         </Link>
         </Box>
-
       <Box>
         <Link to="/frecuentes">
          <Button colorScheme="#009ED1">Preguntas Frecuentes</Button>
