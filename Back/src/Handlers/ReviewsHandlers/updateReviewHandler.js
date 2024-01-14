@@ -2,25 +2,14 @@ const updateReview = require('../../Controllers/reviewsControllers/updateReview'
 
 module.exports = async (req, res) => {
     try {
-        const { chofer, stars, message } = req.body; 
-        const { id } = req.params;
-        // saque user porque con el id es suficiente
-        if (!stars) {
-            throw new Error ({ error: 'La puntuación debe ser entre 1 y 5.' });
-        }
-        if(!chofer){
-            throw new Error ({error: "Debe seleccionar un chofer"})
-        }
-        if(!message){
-            throw new Error({error: "Debe escribir una reseña"})
-        }
-
-        const updRev = await updateReview(id, { chofer, stars, message });
+        const { id, driver, qualification, comments } = req.body; 
+        
+        const updRev = await updateReview(id, { driver, qualification, comments });
 
         if (updRev) {
             res.status(200).json(updRev);
         }
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(400).json({ error: error.message });
     }
 };
