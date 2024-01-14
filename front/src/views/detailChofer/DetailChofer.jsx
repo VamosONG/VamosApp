@@ -4,6 +4,7 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
+  Checkbox,
   Input,
 } from "@chakra-ui/react";
 import { getAllConductores, postNewViaje } from "../../redux/actions";
@@ -20,10 +21,10 @@ const DetailChofer = () => {
   };
 
 
-
+console.log(conductores)
   return (
     <Box handleChoferes= {handleChoferes}>
-        <Box>
+        {/* <Box>
           {
             solicitudesDeViajes.map((reserva, index)=>{
               return (<Card 
@@ -34,7 +35,7 @@ const DetailChofer = () => {
                 </Card>)
             })
           }
-        </Box>
+        </Box> */}
       {conductores.map((conductor) => (
         <Card
           key={conductor.id}
@@ -50,9 +51,9 @@ const DetailChofer = () => {
           <CardBody>{conductor.aeropuertoOrigen}</CardBody>
           <CardBody>{conductor.fotoChofer}</CardBody>
           <CardFooter>
-            <Input
-            type="checkbox"
-            ></Input>
+            <Checkbox
+            
+            ></Checkbox>
           </CardFooter>
         </Card>
       ))}
