@@ -1,4 +1,4 @@
-import {GET_ALL_CONDUCTORES, LOGIN, PAGINATE, POST_NEW_VIAJE} from "../actions/index";
+import {GET_ALL_CONDUCTORES, ID_SOLICITUD, LOGIN, PAGINATE, POST_NEW_VIAJE} from "../actions/index";
 
 
 const initialState = {
@@ -12,6 +12,8 @@ const initialState = {
     esUsuario:false,
 
     solicitudesDeViajes:[],
+    idSolicitud:'',
+    
 }
 
 
@@ -58,10 +60,15 @@ const reducer=(state=initialState,action)=>{
                     esUsuario:true
             }}
         case POST_NEW_VIAJE:
-            console.log(action.payload)
-            return {
+
+            /* return {
                 ...state,
                 solicitudesDeViajes:[...state.solicitudesDeViajes,action.payload]
+            } */
+        case ID_SOLICITUD:
+            return {
+                ...state,
+                idSolicitud:action.payload
             }
         default:
             return {...state};

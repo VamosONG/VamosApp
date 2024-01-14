@@ -9,11 +9,11 @@ module.exports = (sequelize) => {
         },
         userId: {
             type: DataTypes.STRING,
-            allowNull: false
+            defaultValue:"0" //es necesario?
         },
         driverId: {
             type: DataTypes.STRING,
-            allowNull: true
+            defaultValue: "0", //es necesario?
         },
         date: {
             type: DataTypes.DATE,
@@ -62,10 +62,10 @@ module.exports = (sequelize) => {
 
         { timestamps: false });
 
-    Trip.associate = (models) => {
-        Trip.belongsTo(models.User, { foreignKey: 'userId' });
-        Trip.belongsTo(models.Driver, { foreignKey: 'driverId' });
-    };
-
-    return Trip;
+        Trip.associate = (models) => {
+            Trip.belongsTo(models.User, { foreignKey: 'userId' });
+            Trip.belongsTo(models.Driver, { foreignKey: 'driverId' });
+        };
+    
+        return Trip;
 };

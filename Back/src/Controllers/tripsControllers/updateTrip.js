@@ -1,6 +1,6 @@
-const { Trip } = require('../../dataBase');
+const { Trip, Driver } = require('../../dataBase');
 
-const updateTrip = async (id, date, hour, origin, destination, passengers, price, driver, reviews, stateOfTrip) => {
+const updateTrip = async (id, newData) => {
     try {
         //esta mal hecho
         const tripToUpdate = await Trip.findByPk(id);
@@ -8,22 +8,24 @@ const updateTrip = async (id, date, hour, origin, destination, passengers, price
         if (!tripToUpdate) {
             throw new Error('Trip not found');
         }
+        const oldDriverId=tripToUpdate.driverId;
+        await tripToUpdate.update(newData);
 
-        tripToUpdate.date = date;
-        tripToUpdate.hour = hour;
-        tripToUpdate.origin = origin;
-        tripToUpdate.destination = destination;
-        tripToUpdate.quantityPassengers = passengers;
-        tripToUpdate.price = price;
-        tripToUpdate.driver = driver;
-        tripToUpdate.reviews = reviews;
-        tripToUpdate.stateOfTrip = stateOfTrip;
+        if(oldDriverId!==tripToUpdate.driverId){
+            const driverId=tripToUpdate.driverId;
+            const driver = await Driver.findByPk(driverId);
 
-        await tripToUpdate.save();
+            if (driver)
+                await driver.addTrip(tripToUpdate);
+            else 
+                throw new Error('No se encontró el nuevo driver.');
+        }
+ 
+        await tripToUpdate.reload();
 
         return tripToUpdate;
     } catch (error) {
-        throw error;
+        throw Error(`Error al actualizar trip: ${error.message}`);
     }
 };
 
