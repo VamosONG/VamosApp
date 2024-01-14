@@ -1,4 +1,4 @@
- //import axios from 'axios';
+import axios from 'axios';
 import choferes from '../../utils/chofer'
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
@@ -21,12 +21,28 @@ export const getAllConductores = ()=>(dispatch) => {
 
 
 export const postNewViaje = (infoViaje) => {
-    window.alert("se solicitó un nuevo viaje")
+    /* window.alert("se solicitó un nuevo viaje")
     
     return ({
         type: POST_NEW_VIAJE,
         payload: infoViaje
-    });
+    }); */
+    return async (dispatch)=>{
+        try {
+            const {data}= await axios.post(`http://localhost:3001/offer/create`,infoViaje);
+            /* console.log(data); */
+            window.alert('¡solicitud creada con éxito!');
+            console.log(data)
+            /* return dispatch({
+                            type:POST_NEW_VIAJE,
+                            payload:data
+            }) */
+        
+        } catch (error) {
+        window.alert('¡Error en la solicitud!');
+        throw new Error(error);
+        }
+    }
 }
 /* export const getAllConductores=()=>{
     try {

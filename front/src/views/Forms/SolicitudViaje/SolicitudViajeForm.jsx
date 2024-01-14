@@ -22,16 +22,12 @@ function SolicitudViajeForm() {
         fecha:"",
         hora:"",
         cantPasajeros:"",
-        id:0
       });
 
 
-    /* const [cont,setCont]=useState(0) */
 
     const handleSubmit=async(event)=>{
         event.preventDefault();
-        /* setCont(cont+1) */
-        setInput({...input,id:input.id+1})
         dispatch(postNewViaje(input));
     }
 
