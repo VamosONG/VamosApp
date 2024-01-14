@@ -15,21 +15,28 @@ function SolicitudViajeForm() {
 
     const dispatch= useDispatch();
 
+    
     const [input,setInput]=useState({
         origen:"",
         destino:"",
         fecha:"",
         hora:"",
-        cantPasajeros:""
+        cantPasajeros:"",
+        id:0
       });
 
-  
-    const handleSubmit=async()=>{
+
+    /* const [cont,setCont]=useState(0) */
+
+    const handleSubmit=async(event)=>{
         event.preventDefault();
-        await dispatch(postNewViaje(input));
+        /* setCont(cont+1) */
+        setInput({...input,id:input.id+1})
+        dispatch(postNewViaje(input));
     }
+
     const handleChange=async(e)=>{
-        event.preventDefault();
+        
         setInput({
             ...input,
             [e.target.name]:e.target.value
