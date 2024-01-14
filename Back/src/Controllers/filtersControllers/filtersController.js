@@ -1,19 +1,19 @@
 const postTrip = require('../tripsControllers/postTrip');
 const {Trip} = require('../../dataBase');
 
-const filterOffer = async ({ origin, destination, date, hour, passengers }) => {
+const filterOffer = async ({ userId, origin, destination, date, hour, passengers }) => {
     try {
-        const price=getPrices(origin, destination, passengers);
+        /* const price=getPrices(origin, destination, passengers);
 
-        const newReservation = await postTrip(origin, destination, date, hour, passengers, price);
+        const newReservation = await postTrip(userId, origin, destination, date, hour, passengers, price);
         //Se crea el objeto trip, con el precio estipulado por origen, destino y cant. pasajeros.
 
-        newReservation = await Trip.update(
-            {stateOfTrip: 'offer'},
-            {where: {id:newReservation.id}}
+        await newReservation.update(
+            {stateOfTrip: 'offer'}
         )
 
-        return newReservation;
+        return newReservation; */
+        return "Funciona ruta"
     } catch (error) {
         throw new Error(`Error al buscar coincidencias: ${error.message}`);
     }
