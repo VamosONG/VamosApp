@@ -26,7 +26,7 @@ const ChoferForm = () => {
         dni: "",
         phone: "",
         driverImg: "",
-        airport: "",
+        airports: "",
         carType: "",
         carModel: "",
         driverLicense: "",
@@ -70,7 +70,7 @@ const ChoferForm = () => {
                         dni: "",
                         phone: "",
                         driverImg: "",
-                        airport: "",
+                        airports: "",
                         carType: "",
                         carModel: "",
                         driverLicense: "",
@@ -93,7 +93,7 @@ const ChoferForm = () => {
     }
 
     const carTypeFount = ['auto', 'camioneta', 'van'];
-    const airportFount = ['tumbes', 'talara', 'lima'];
+    const airportsFount = ['tumbes', 'talara', 'lima'];
 
     const carModelFount = ['toyota', 'hiunday', 'ford'];
 
@@ -152,8 +152,8 @@ const ChoferForm = () => {
 
                             <FormControl isRequired>
                                 <FormLabel>Aeropuerto Origen</FormLabel>
-                                <Select color='#000' placeholder='Selecciona el Aeropuerto' name='airport' onChange={handleChange} value={form.airport}>
-                                    {airportFount.map((aerop, index) => (
+                                <Select color='#000' placeholder='Selecciona el Aeropuerto' name='airports' onChange={handleChange} value={form.airports}>
+                                    {airportsFount.map((aerop, index) => (
                                         <option key={index} value={aerop}> {aerop} </option>
                                     ))
                                     }
