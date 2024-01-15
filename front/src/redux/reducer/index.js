@@ -1,4 +1,4 @@
-import {GET_ALL_CONDUCTORES, ID_SOLICITUD, LOGIN, PAGINATE, POST_NEW_VIAJE} from "../actions/index";
+import {GET_ALL_CONDUCTORES, GET_SOLICITUDES, ID_SOLICITUD, LOGIN, PAGINATE, POST_NEW_VIAJE} from "../actions/index";
 
 
 const initialState = {
@@ -12,7 +12,7 @@ const initialState = {
     esUsuario:false,
 
     solicitudesDeViajes:[],
-    idSolicitud:'',
+    // idSolicitud:'',
     
 }
 
@@ -59,17 +59,21 @@ const reducer=(state=initialState,action)=>{
                     ...state,
                     esUsuario:true
             }}
-        case POST_NEW_VIAJE:
+        case GET_SOLICITUDES:
+            return {
+                ...state,
+                solicitudesDeViajes: action.payload
+            }
 
             /* return {
                 ...state,
                 solicitudesDeViajes:[...state.solicitudesDeViajes,action.payload]
             } */
-        case ID_SOLICITUD:
-            return {
-                ...state,
-                idSolicitud:action.payload
-            }
+        // case ID_SOLICITUD:
+        //     return {
+        //         ...state,
+        //         idSolicitud:action.payload
+        //     }
         default:
             return {...state};
     }
