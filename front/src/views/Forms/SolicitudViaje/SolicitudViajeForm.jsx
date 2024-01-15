@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { postNewViaje } from "../../../redux/actions";
+import { postNewViaje, viajeConfirmado } from "../../../redux/actions";
 import { useState } from "react";
 
 import { Box, Center, useDisclosure } from '@chakra-ui/react'
@@ -13,12 +13,19 @@ import Swal from 'sweetalert2'
 import { renderToString } from 'react-dom/server';
 
 
+
+
 function SolicitudViajeForm() {
 
     const dispatch= useDispatch();
 
-    const infoConfirmacionViaje= useSelector((state)=>state.infoConfirmacionViaje)
-    console.log(infoConfirmacionViaje)
+    /* useEffect(() => {
+        
+     }, [dispatch]); */
+     
+     const infoConfirmacionViaje= useSelector((state)=>state.infoConfirmacionViaje)
+        console.log(infoConfirmacionViaje)
+
 
     
     const [input,setInput]=useState({
@@ -35,7 +42,14 @@ function SolicitudViajeForm() {
 
     const handleSubmit=async(event)=>{
         event.preventDefault();
+        setInput({
+            ...input,userId: "0b9d4f16-0d54-4d13-9498-2453a3808130"
+        })
+        console.log(input)
         await dispatch(postNewViaje(input));
+
+
+        
 
         const confirmationText = (
             <div>
@@ -47,6 +61,11 @@ function SolicitudViajeForm() {
         );
 
         const confirmationHtml = renderToString(confirmationText);
+
+        const infoAmandarAlBack={
+            tripId:infoConfirmacionViaje.id,
+            userId:infoConfirmacionViaje.userId
+          }
 
 
         await Swal.fire({
@@ -60,18 +79,15 @@ function SolicitudViajeForm() {
             htmlMode: true
           }).then(async(result) => {
             if (result.isConfirmed) {
+                await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
               Swal.fire({
                 title: "Viaje reservado",
                 text: "Simulando que se abonó..",
                 icon: "success"
               });
 
-              const infoAmandarAlBack={
-                id:infoConfirmacionViaje.id,
-                userId:infoConfirmacionViaje.userId
-              }
+              
 
-              await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
 
             }
           });
