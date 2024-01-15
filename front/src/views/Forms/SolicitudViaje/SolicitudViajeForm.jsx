@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postNewViaje } from "../../../redux/actions";
 import { useState } from "react";
 
@@ -10,10 +10,15 @@ import {
 } from '@chakra-ui/react'
 import Swal from 'sweetalert2' 
 
+import { renderToString } from 'react-dom/server';
+
 
 function SolicitudViajeForm() {
 
     const dispatch= useDispatch();
+
+    const infoConfirmacionViaje= useSelector((state)=>state.infoConfirmacionViaje)
+    console.log(infoConfirmacionViaje)
 
     
     const [input,setInput]=useState({
@@ -24,11 +29,52 @@ function SolicitudViajeForm() {
         quantityPassengers:"",
       });
 
+      
+
 
 
     const handleSubmit=async(event)=>{
         event.preventDefault();
         await dispatch(postNewViaje(input));
+
+        const confirmationText = (
+            <div>
+              <p>Origen: {infoConfirmacionViaje.origin}</p>
+              <p>Destino: {infoConfirmacionViaje.destination}</p>
+              <p>Cantidad de pasajeros: {infoConfirmacionViaje.quantityPassengers}</p>
+              <p>Precio final: {infoConfirmacionViaje.price}</p>
+            </div>
+        );
+
+        const confirmationHtml = renderToString(confirmationText);
+
+
+        await Swal.fire({
+            title: "Confirmación de traslado",
+            html: confirmationHtml,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Mercado Pago",
+            htmlMode: true
+          }).then(async(result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: "Viaje reservado",
+                text: "Simulando que se abonó..",
+                icon: "success"
+              });
+
+              const infoAmandarAlBack={
+                id:infoConfirmacionViaje.id,
+                userId:infoConfirmacionViaje.userId
+              }
+
+              await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
+
+            }
+          });
     }
 
     const handleChange=async(e)=>{

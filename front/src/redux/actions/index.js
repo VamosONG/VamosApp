@@ -12,6 +12,7 @@ export const GET_SOLICITUDES= "GET_SOLICITUDES"
 export const NEW_USER = 'NEW_USER'
 export const LOGOUT = 'LOGOUT'
 export const CREATE_CHOFER = 'CREATE_CHOFER'
+export const VIAJE_CONFIRMADO = 'VIAJE_CONFIRMADO'
 
 
 export const getAllConductores = () => (dispatch) => {
@@ -38,30 +39,14 @@ export const createNewChofer = (data) => {
 }
 
 export const postNewViaje = (infoViaje) => {
-    /* window.alert("se solicitó un nuevo viaje")
     
-    return ({
-        type: POST_NEW_VIAJE,
-        payload: infoViaje
-    }); */
-    console.log(infoViaje)
-    /* const info={
-        "userId": "a66bde7e-6716-4da0-b1b0-c84e3fb0298c",
-        "date": "2024-03-10",
-        "hour": "12:30",
-        "origin": "Origen Ejemplo",
-        "destination": "Destino Ejemplo",
-        "quantityPassengers": 3
-      } */
     return async (dispatch) => {
         try {
             const { data } = await axios.post(`http://localhost:3001/offer/create`, infoViaje);
-            /* console.log(data); */
-            window.alert('¡solicitud creada con éxito!');
             console.log(data)
             return dispatch({
                 type: POST_NEW_VIAJE,
-                payload: infoViaje
+                payload: data
             })
 
         } catch (error) {
@@ -166,6 +151,21 @@ export const logOutAction = (value) => {
         payload: value
     };
 }
+
+export const viajeConfirmado = (info) => {
+
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`http://localhost:3001/trips/reserves/create`, info);
+            dispatch({
+                type: VIAJE_CONFIRMADO,
+                payload: data
+            })
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+        };
+    };
+};
 
 
 

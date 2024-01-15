@@ -1,7 +1,7 @@
 const doReserve=require('../../Controllers/utilsControllers/doReserve');
 
 module.exports=async(req,res)=>{
-    const { userId, tripId } = req.params;
+    const { userId, tripId } = req.body;
     
     try {
         const reserve=await doReserve(userId, tripId);
