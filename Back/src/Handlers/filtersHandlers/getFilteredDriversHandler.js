@@ -3,17 +3,20 @@ const getDrivers = require('../../Controllers/driversControllers/getDrivers');
 module.exports = async (req, res) => {
     try {
         //
-        const { city, cantPass  } = req.body;
-        const filteredDrivers = await getDrivers();
-
+        const { city, quantityPassengers  } = req.body;
+        let filteredDrivers = await getDrivers();
+        
         if (city) {
             //Filtra conductores por ciudad.
-            filteredDrivers = await filteredDrivers?.filter((driv => driv.city && driv.city.toLowerCase().includes(city.toLowerCase)));
+            filteredDrivers = await filteredDrivers?.filter((driv => driv.city && driv.city.toLowerCase()===(city.toLowerCase())));
         }
-        if (cantPass) {
+console.log(filteredDrivers);
+
+        if (quantityPassengers) {
             //Filtra conductores por capacidad de pasajeros.
-            filteredDrivers = await filteredDrivers?.filter((driv => driv.capacityPassengers>=cantPass));
+            filteredDrivers = await filteredDrivers?.filter((driv => driv.capacityPassengers>=quantityPassengers));
         }
+console.log(filteredDrivers);
 
         if(filteredDrivers)
             res.status(200).json(filteredDrivers); 
