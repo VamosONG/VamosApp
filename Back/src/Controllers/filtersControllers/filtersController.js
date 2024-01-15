@@ -13,7 +13,21 @@ const filterOffer = async ({ userId, origin, destination, date, hour, passengers
         )
 
         return newReservation; */
-        return "Funciona ruta"
+        const objeto={
+            "id": "b572b9aa-b391-4162-bf19-282b2511bbe2",
+            "userId": "a66bde7e-6716-4da0-b1b0-c84e3fb0298c",
+            "driverId": null,
+            "date": "2024-02-05T00:00:00.000Z",
+            "hour": "11:00",
+            "origin": "Disneylandia",
+            "destination": "Miami",
+            "quantityPassengers": 4,
+            "price": "300",
+            "stateOfTrip": "offer",
+            "UserId": null,
+            "DriverId": null
+          }
+        return objeto
     } catch (error) {
         throw new Error(`Error al buscar coincidencias: ${error.message}`);
     }
