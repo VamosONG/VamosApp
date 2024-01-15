@@ -7,6 +7,7 @@ export const GET_ALL_CONDUCTORES="GET_ALL_CONDUCTORES"
 export const POST_NEW_VIAJE="POST_NEW_VIAJE"
 export const LOGIN="LOGIN"
 export const ID_SOLICITUD="ID_SOLICITUD"
+export const GET_SOLICITUDES= "GET_SOLICITUDES"
 
 
 
@@ -53,6 +54,24 @@ export const postNewViaje = (infoViaje) => {
         }
     }
 }
+
+export const getSolicitudes = () =>{
+    return async(dispatch)=> {
+        const endpoint= 'http://localhost:3001/trips'
+        try {
+            const {data}= await axios.get(endpoint)
+            console.log(data);
+            return dispatch({
+                type: GET_SOLICITUDES,
+                payload: data
+            })
+        } catch (error) {
+            console.log(error);
+            alert("error")
+        }
+    }
+    }
+   
 /* export const getAllConductores=()=>{
     try {
 
