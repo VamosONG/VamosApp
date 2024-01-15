@@ -2,6 +2,7 @@ import { useState } from "react";
 import LoginForm from "../Login/Login";
 import RegistroForm from "../Registro/Registro";
 import {Box, Button, Collapse, useDisclosure } from '@chakra-ui/react'
+import LogOut from "../LogOut/logout";
 
 const ViewBtnUserForm = () => {
     const { isOpen, onToggle } = useDisclosure();
@@ -27,9 +28,13 @@ const ViewBtnUserForm = () => {
                         >
                             {/* Validacion para mostrar formularios */}
                             {isLoginFormVisible ? (
+                                <>
                                 <LoginForm onSwitchForm={handleSwitchForm} />
+                                </>
                             ) : (
+                                <>
                                 <RegistroForm onSwitchForm={handleSwitchForm} />
+                                </>
                             )}
                         </Box>
                     </Collapse>

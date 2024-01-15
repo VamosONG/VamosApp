@@ -116,7 +116,7 @@ const ChoferForm = () => {
             {imageUrl && (
                 <img src={imageUrl} alt='foto del'/>
             )} */}
-            <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' color='white' border='1px solid white' mx='2rem' >
+            <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' color='white' border='1px solid white' mx='2rem' w={{ base: '20rem', md: '30rem' }} scrollMarginX='auto'>
                 <Heading>Datos del chofer</Heading>
                 <Box  >
                     <Flex flexDirection={{ base: 'column' }}>

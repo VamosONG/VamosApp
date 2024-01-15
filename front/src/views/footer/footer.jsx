@@ -107,15 +107,15 @@ function Footer() {
                 </div>
               </Text>
 
-              <Text>
+              <Text >
                 <b>Correo electronico:</b>
-                <Link href='mailto:kleibertmedina@gmail.com' isExternal>
-                  <p>vamos.ong@gmail.com</p> <ExternalLinkIcon mx='2px' />
+                <Link href='mailto:kleibertmedina@gmail.com' isExternal >
+                  <p>vamos.ong@gmail.com <ExternalLinkIcon mx='2px' /></p> 
                 </Link>
               </Text>
-              <Text>
+              <Text >
                 <b>Llamanos: </b>
-                <Link href='tel:+51999999999' isExternal>
+                <Link href='tel:+51999999999' isExternal >
                   +51 999-999-999 <ExternalLinkIcon mx='2px' />
                 </Link>
               </Text>

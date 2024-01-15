@@ -1,4 +1,4 @@
-import { GET_ALL_CONDUCTORES, ID_SOLICITUD, LOGIN, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
+import { GET_ALL_CONDUCTORES, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
 
 
 const initialState = {
@@ -12,8 +12,8 @@ const initialState = {
     esUsuario: false,
 
     solicitudesDeViajes: [],
-    idSolicitud:'',
-    
+    idSolicitud: '',
+
 }
 
 
@@ -51,19 +51,7 @@ const reducer = (state = initialState, action) => {
             };
 
         case LOGIN:
-            console.log(newUsuario);
-            // const {email, password} = state.newUsuario;
-            // const loginUser = state.newUsuario;
-
-            // const usuarioEncontrado = loginUser.find(
-            //     user => user.email === action.payload.email && user.password === action.payload.password
-            // );
-            if (action.payload.email === 'luis' && action.payload.password === '1234') {
-                return {
-                    ...state,
-                    esUsuario: true,
-                }
-            } else if (action.payload.email === 'asd' && action.payload.password === '123') {
+            if (action.payload.email === 'asd' && action.payload.password === '123') {
                 return {
                     ...state,
                     esAdmin: true
@@ -71,25 +59,40 @@ const reducer = (state = initialState, action) => {
             } else {
                 return {
                     ...state,
-                    message: 'usuario no existe'
+                    esUsuario: true
                 }
             }
+
+        case LOGOUT: 
+        const value = action.payload;
+        if (value === 'admin') {
+            return {
+                ...state,
+                esAdmin: false
+            }
+        } else if (value === 'user') {
+            return {
+                ...state,
+                esUsuario: false
+            }
+        }
 
         case NEW_USER:
             return {
                 ...state,
                 newUsuario: [action.payload]
             }
+
         case POST_NEW_VIAJE:
 
-            /* return {
-                ...state,
-                solicitudesDeViajes: [...state.solicitudesDeViajes, action.payload]
-            } */
+        /* return {
+            ...state,
+            solicitudesDeViajes: [...state.solicitudesDeViajes, action.payload]
+        } */
         case ID_SOLICITUD:
             return {
                 ...state,
-                idSolicitud:action.payload
+                idSolicitud: action.payload
             }
         default:
             return { ...state };

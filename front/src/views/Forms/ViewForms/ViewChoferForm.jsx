@@ -1,5 +1,6 @@
 import ChoferForm from "../ChoferFormulario/ChoferForm";
 import { Box, Button, Collapse, useDisclosure } from '@chakra-ui/react'
+import LogOut from "../LogOut/logout";
 
 const ViewBtnChoferForm = () => {
     const { isOpen, onToggle } = useDisclosure();

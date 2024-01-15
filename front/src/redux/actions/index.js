@@ -9,8 +9,7 @@ export const POST_NEW_VIAJE="POST_NEW_VIAJE"
 export const LOGIN = "LOGIN"
 export const ID_SOLICITUD="ID_SOLICITUD"
 export const NEW_USER = 'NEW_USER'
-
-
+export const LOGOUT = 'LOGOUT'
 
 
 export const getAllConductores = ()=>(dispatch) => {
@@ -104,6 +103,7 @@ export const paginateConductores = (order) => {
         };
     };
 };
+
 export const logIn = (input) => {
     
     return async (dispatch) => {
@@ -117,6 +117,7 @@ export const logIn = (input) => {
         };
     };
 };
+
 export const idDeSolicitud = (id) => {
     
     
@@ -127,6 +128,12 @@ export const idDeSolicitud = (id) => {
         
 };
 
+export const logOutAction = (value) => {
+    return {
+        type: LOGOUT,
+        payload: value
+    };
+}
 
 
 
