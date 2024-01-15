@@ -12,13 +12,9 @@ const initialState = {
     esUsuario: false,
 
     solicitudesDeViajes: [],
-    // idSolicitud:'',
+    idSolicitud: '',
 
 }
-
-
-
-
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -85,10 +81,21 @@ const reducer = (state = initialState, action) => {
                 newUsuario: [action.payload]
             }
 
+        case POST_NEW_VIAJE: return {
+            ...state,
+            solicitudesDeViajes: [...state.solicitudesDeViajes, action.payload]
+        }
+        
         case GET_SOLICITUDES:
             return {
                 ...state,
                 solicitudesDeViajes: action.payload
+            }
+
+        case ID_SOLICITUD:
+            return {
+                ...state,
+                idSolicitud: action.payload
             }
         default:
             return { ...state };
