@@ -52,8 +52,10 @@ const ChoferForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        console.log(form);
+
         try {
-            const response = await axios.post(`http://localhost:3001/drivers/create`, form)
+            const response = await axios.post('http://localhost:3001/drivers/create', form)
                 if (response) {
                     Swal.fire({
                         title: "Bien hecho!",
@@ -89,6 +91,11 @@ const ChoferForm = () => {
             }))
         }
     }
+
+    const carTypeFount = ['auto', 'camioneta', 'van'];
+    const airportFount = ['tumbes', 'talara', 'lima'];
+
+    const carModelFount = ['toyota', 'hiunday', 'ford'];
 
     return (
         <form onSubmit={handleSubmit} >
@@ -146,8 +153,8 @@ const ChoferForm = () => {
                             <FormControl isRequired>
                                 <FormLabel>Aeropuerto Origen</FormLabel>
                                 <Select color='#000' placeholder='Selecciona el Aeropuerto' name='airport' onChange={handleChange} value={form.airport}>
-                                    {choferes.map((aerop, index) => (
-                                        <option key={aerop.id} value={index}> {aerop.aeropuertoOrigen} </option>
+                                    {airportFount.map((aerop, index) => (
+                                        <option key={index} value={aerop}> {aerop} </option>
                                     ))
                                     }
                                 </Select>
@@ -166,8 +173,8 @@ const ChoferForm = () => {
                                 Tipo de Vehiculo:
                             </FormLabel>
                             <Select color='#000' placeholder='Selecciona un Vehiculo' name='carType' onChange={handleChange} value={form.carType}>
-                                {choferes.map((aerop, index) => (
-                                    <option key={aerop.id} value={index}> {aerop.servicioOfrecido} </option>
+                                {carTypeFount.map((aerop, index) => (
+                                    <option key={index} value={aerop}> {aerop} </option>
                                 ))
                                 }
                             </Select>
@@ -178,8 +185,8 @@ const ChoferForm = () => {
                                 Modelo de Vehiculo:
                             </FormLabel>
                             <Select color='#000' placeholder='Selecciona un Vehiculo' name='carModel' onChange={handleChange} value={form.carModel}>
-                                {choferes.map((aerop, index) => (
-                                    <option key={aerop.id} value={index}> {aerop.modeloVehiculo} </option>
+                                {carModelFount.map((aerop, index) => (
+                                    <option key={index} value={aerop}> {aerop} </option>
                                 ))
                                 }
                             </Select>
