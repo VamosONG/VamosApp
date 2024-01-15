@@ -19,13 +19,13 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING(50), 
             allowNull: false,
         },
-        city: {
-            type: DataTypes.STRING,
-            allowNull: false,
+        birthday: {
+            type: DataTypes.DATE,
+            allowNull: false
         },
-        car: {
-            type: DataTypes.STRING,
-            allowNull: false,
+        dni: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         },
         phone: {
             type: DataTypes.INTEGER, 
@@ -34,6 +34,46 @@ module.exports = (sequelize) => {
                 isNumeric: true, 
             },
         },
+        driverImg: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        airports: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        carType: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                isIn: [['auto', 'camioneta', 'van']],
+            },
+        },
+        carModel: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        driverLicense: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        carImg: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        carPatent: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        carSoat: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        circulationPermit: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+
         capacityPassengers: {
             type: DataTypes.INTEGER, 
             allowNull: false,
