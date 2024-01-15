@@ -34,6 +34,7 @@ const getAdminsHandler = require('../Handlers/AdminHandlers/getAdminsHandler')
 const deleteAdminHandler = require('../Handlers/AdminHandlers/deleteAdminHandler')
 
 const filtershandler = require('../Handlers/filtersHandlers/filtersHandler');
+const doReserveHandler = require('../Handlers/utilsHandlers/doReserveHandler');
 
 const router = Router();
 
@@ -73,6 +74,7 @@ router.get('/dashboard/admin', getAdminsHandler);
 router.delete('/dashboard/admin', deleteAdminHandler);
 
 router.post('/offer/create', filtershandler);
+router.put('/offer/reserve', doReserveHandler);
 
 module.exports = router;
 
