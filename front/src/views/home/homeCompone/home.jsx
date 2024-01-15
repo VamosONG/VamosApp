@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllConductores } from "../../../redux/actions";
+import Testimonials from "../../Testimonials/Testimonials";
 
 const Home = () => {
     const dispatch= useDispatch();
@@ -187,6 +188,7 @@ const Home = () => {
                 maxW={{ base: '100%', md: '200px'}}
                 />
         </Box>
+        <Testimonials/>
     </>
 );
 
