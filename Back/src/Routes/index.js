@@ -34,6 +34,7 @@ const getAdminsHandler = require('../Handlers/AdminHandlers/getAdminsHandler')
 const deleteAdminHandler = require('../Handlers/AdminHandlers/deleteAdminHandler')
 
 const filtershandler = require('../Handlers/filtersHandlers/filtersHandler');
+
 const getFilteredDriversHandler = require('../Handlers/filtersHandlers/getFilteredDriversHandler');
 const getReservesHandler = require('../Handlers/filtersHandlers/getReservesHandler');
 const doReservesHandler = require('../Handlers/utilsHandlers/doReserveHandler');
@@ -79,6 +80,7 @@ router.get('/drivers/filter', getFilteredDriversHandler);
 router.get('/trips/reserves', getReservesHandler);
 router.get('/trips/reserves/create', doReservesHandler);
 router.put('/trip/reserves/update',setDriverHandler);
+
 
 module.exports = router;
 

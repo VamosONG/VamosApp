@@ -34,8 +34,6 @@ const postTrip = async (userId, driverId, date, hour, origin, destination, quant
             await user.addTrip(newTrip);
             if (driver) 
                 await driver.addTrip(newTrip);
-            else 
-                throw new Error('No se encontró el usuario.');
         } else {
             throw new Error('No se encontró el usuario.');
         }

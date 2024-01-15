@@ -9,21 +9,23 @@ module.exports = (sequelize) => {
         },
         userId: {
             type: DataTypes.STRING,
-            defaultValue:"0" //es necesario?
+            allowNull: false
+            //defaultValue:"0" //es necesario?
         },
         driverId: {
             type: DataTypes.STRING,
-            defaultValue: "0", //es necesario?
+            allowNull: true
+            //defaultValue: "0", //es necesario?
         },
         date: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false,
             validate: {
                 isDate: true, 
             },
         },
         hour: {
-            type: DataTypes.STRING, //Probe en string por si el formato generaba el problema pero sigue igual.
+            type: DataTypes.TIME, //Probe en string por si el formato generaba el problema pero sigue igual.
             allowNull: true,
             validate: {
                 isValidHourFormat(value) {
