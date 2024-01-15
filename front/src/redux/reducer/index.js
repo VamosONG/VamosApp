@@ -11,9 +11,9 @@ const initialState = {
     esAdmin: false,
     esUsuario: false,
 
-    solicitudesDeViajes:[],
+    solicitudesDeViajes: [],
     // idSolicitud:'',
-    
+
 }
 
 
@@ -64,20 +64,20 @@ const reducer = (state = initialState, action) => {
             }
 
         //BTN de salida o cerrar sesion
-        case LOGOUT: 
-        const value = action.payload;
+        case LOGOUT:
+            const value = action.payload;
 
-        if (value === 'admin') {
-            return {
-                ...state,
-                esAdmin: false
+            if (value === 'admin') {
+                return {
+                    ...state,
+                    esAdmin: false
+                }
+            } else if (value === 'user') {
+                return {
+                    ...state,
+                    esUsuario: false
+                }
             }
-        } else if (value === 'user') {
-            return {
-                ...state,
-                esUsuario: false
-            }
-        }
         //Creando un nuevo usuario
         case NEW_USER:
             return {
@@ -85,17 +85,11 @@ const reducer = (state = initialState, action) => {
                 newUsuario: [action.payload]
             }
 
-        case POST_NEW_VIAJE:
-
-            /* return {
+        case GET_SOLICITUDES:
+            return {
                 ...state,
-                solicitudesDeViajes:[...state.solicitudesDeViajes,action.payload]
-            } */
-        // case ID_SOLICITUD:
-        //     return {
-        //         ...state,
-        //         idSolicitud:action.payload
-        //     }
+                solicitudesDeViajes: action.payload
+            }
         default:
             return { ...state };
     }

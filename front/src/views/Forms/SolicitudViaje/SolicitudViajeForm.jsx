@@ -28,7 +28,7 @@ function SolicitudViajeForm() {
 
     const handleSubmit=async(event)=>{
         event.preventDefault();
-        dispatch(postNewViaje(input));
+        await dispatch(postNewViaje(input));
     }
 
     const handleChange=async(e)=>{
