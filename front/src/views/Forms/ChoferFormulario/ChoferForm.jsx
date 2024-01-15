@@ -10,11 +10,12 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import choferes from '../../../utils/chofer'
 import { createNewChofer } from '../../../redux/actions';
+import axios from "axios"
 
 const ChoferForm = () => {
     const dispatch = useDispatch();
     const choferData = useSelector((state) => state.conductores)
-    const [imageUrl, setImageUrl] = useState(null)
+    const [image_Url, setImage_Url] = useState("")
     const [file, setFile] = useState(null)
 
     const [form, setForm] = useState({
@@ -48,25 +49,37 @@ const ChoferForm = () => {
 
     const urlCloudinary = 'https://api.cloudinary.com/v1_1/dzd6hfguw/image/upload'
 
+    const changeUploadImage = async (event) => {
+        const fileChofer= event.target.files[0];
+        const data = new FormData()
+
+        data.append("file", fileChofer)
+        data.append("upload_preset", "Presets_vamos")
+        const response= await axios.post('https://api.cloudinary.com/v1_1/dcjdkojad/image/upload', data)
+
+        console.log(response.data);
+
+        setImage_Url(response.data.secure_url)
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const formData = new FormData()
-        formData.append('file', file)
-        formData.append('upload_preset', 'VamosONGFormChoferes')
+    // //     const formData = new FormData()
+    // //     formData.append('file', file)
+    // //     formData.append('upload_preset', 'VamosONGFormChoferes')
 
-        console.log(file);
+    // //     console.log(file);
 
-        const response = await fetch(urlCloudinary, {
-            method: 'POST',
-            body: formData,
-        })
-        const data = response
-        console.log(data);
-        setImageUrl(data.url)
+    // //     const response = await fetch(urlCloudinary, {
+    // //         method: 'POST',
+    // //         body: formData,
+    // //     })
+    // //     const data = response
+    // //     console.log(data);
+    // //     setImage_Url(data.url)
 
-        if (!response.ok) {
-            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+    // //     if (!response.ok) {
+    // //         throw new Error(`Error: ${response.status} - ${response.statusText}`);
         }
 
         // const choferCreate = await dispatch(createNewChofer(form))
@@ -103,17 +116,19 @@ const ChoferForm = () => {
         //         text: "Hubo un error en el registro"
         //     });
         // }
-    }
+    
 
     return (
         <form onSubmit={handleSubmit} >
             <input type="file"
-            onChange={(e) => {
-                setFile(e.target.files[0]);
-            }}/>
-            <button type='submit'> Enviar imagen </button>
-            {imageUrl && (
-                <img src={imageUrl} alt='foto del'/>
+            accept='image/*'
+            onChange={changeUploadImage}
+            />
+                    <button type='submit'> Enviar imagen </button>
+            {image_Url && (
+                <div>
+                    <img src={image_Url} alt='foto del'/>
+                </div>
             )}
             {/* <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' color='white' border='1px solid white' mx='2rem' w={{ base: '20rem', md: '40rem' }} scrollMarginX='auto'>
                 <Heading>Datos del chofer</Heading>
@@ -249,6 +264,6 @@ const ChoferForm = () => {
             </Stack> */}
         </form>
     )
-}
 
+}
 export default ChoferForm;
