@@ -15,7 +15,7 @@ function Footer() {
     <>
       <Flex flexDirection={{ base: 'column', md: 'column' }} w='100%'  >
 
-      <Flex bg='#009ED1' minWidth='max-content' alignItems='start' gap='2' pt='1rem' boxSize='sm' w='100%' h='auto' color='white' justify='space-between' px='2rem' flexDirection={{ base: 'column', md: 'row' }} borderTopRadius='50'>
+      <Flex bg='#009ED1' minWidth='max-content' alignItems='start' gap='2' pt='1rem' boxSize='sm' w='100%' h='auto' color='white' justify='space-evenly' px='2rem' flexDirection={{ base: 'column', md: 'row' }} borderTopRadius='50'>
 
           <Box w='300px' h='auto' gap='8' >
             <Image
@@ -100,22 +100,22 @@ function Footer() {
             <Heading>Contacto</Heading>
             <Flex flexDirection='column' fontSize='1.5rem' gap='4'>
               <Text>
-                <h3>Aeropuertos:</h3>
+                <b>Aeropuertos:</b>
                 <div>
                   <address>Talara, Lima, Peru.</address>
                   <address>Tumbes, Lima, Peru.</address>
                 </div>
               </Text>
 
-              <Text>
-                <h3>Correo electronico:</h3>
-                <Link href='mailto:kleibertmedina@gmail.com' isExternal>
-                  <b>vamos.ong@gmail.com</b> <ExternalLinkIcon mx='2px' />
+              <Text >
+                <b>Correo electronico:</b>
+                <Link href='mailto:kleibertmedina@gmail.com' isExternal >
+                  <p>vamos.ong@gmail.com <ExternalLinkIcon mx='2px' /></p> 
                 </Link>
               </Text>
-              <Text>
-                <h3>Llamanos: </h3>
-                <Link href='tel:+51999999999' isExternal>
+              <Text >
+                <b>Llamanos: </b>
+                <Link href='tel:+51999999999' isExternal >
                   +51 999-999-999 <ExternalLinkIcon mx='2px' />
                 </Link>
               </Text>

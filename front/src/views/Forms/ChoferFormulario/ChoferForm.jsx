@@ -2,35 +2,35 @@ import { Box, Center, useDisclosure } from '@chakra-ui/react'
 import {
     FormControl,
     FormLabel,
-    Input, Select, Button, Heading, Stack
+    Input, Select, Button, Heading, Stack, Image, Text, Flex
 } from '@chakra-ui/react'
 import Swal from 'sweetalert2'
 // import withReactContent from 'sweetalert2-react-content'
-
 import { useState } from 'react'
-import { useSelector, useDispatch } from "react-redux";
-
-
+import { useDispatch, useSelector } from "react-redux";
+import choferes from '../../../utils/chofer'
+import { createNewChofer } from '../../../redux/actions';
 
 const ChoferForm = () => {
+    const dispatch = useDispatch();
     const choferData = useSelector((state) => state.conductores)
-
-    // These are the default breakpoints
-
+    const [imageUrl, setImageUrl] = useState(null)
+    const [file, setFile] = useState(null)
 
     const [form, setForm] = useState({
-        nombre: "",
+        name: "",
         apellido: "",
-        correo: "",
-        fechaNacimiento: "",
+        email: "",
+        date: "",
         dni: "",
-        telefono: "",
+        phone: "",
         choferImg: "",
         aeropuerto: "",
         vehiculo: "",
         modelo: "",
         licencia: "",
         vehiculoImg: "",
+        placaVehiculo: '',
         soat: "",
         permisoImg: "",
         pasajeros: "",
@@ -39,127 +39,166 @@ const ChoferForm = () => {
     const handleChange = (e) => {
         const property = e.target.name;
         const value = e.target.value;
-        console.log(property + value);
+        console.log(property + ' ' + value);
         setForm({
             ...form,
             [property]: value
         })
     }
 
-    const handleSubmit = (e) => {
+    const urlCloudinary = 'https://api.cloudinary.com/v1_1/dzd6hfguw/image/upload'
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (form) {
-            const insertData = choferData.push(form)
-            if (insertData) {
-                console.log(insertData);
-                Swal.fire({
-                    title: "Bien Hecho!",
-                    text: "chofer registrado exitosamente!",
-                    icon: "success"
-                });
-            }
+        // const formData = new FormData()
+        // formData.append('file', file)
+        // formData.append('upload_preset', 'VamosONGFormChoferes')
+
+        // console.log(file);
+
+        // const response = await fetch(urlCloudinary, {
+        //     method: 'POST',
+        //     body: formData,
+        //     mode: "cors",
+        //     headers: {
+        //         'Content-Type': 'multipart/form-data'
+        //     }
+        // })
+        // const data = response
+        // console.log(data);
+        // setImageUrl(data.url)
+
+        // if (!response.ok) {
+        //     throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        // }
+
+        const choferCreate = await dispatch(createNewChofer(form))
+        if (choferCreate) {
+
+            Swal.fire({
+                title: "Bien hecho!",
+                text: "Datos registrados!",
+                icon: "success"
+            });
             setForm({
-                nombre: "",
+                name: "",
                 apellido: "",
-                correo: "",
-                fechaNacimiento: "",
+                email: "",
+                date: "",
                 dni: "",
-                telefono: "",
+                phone: "",
                 choferImg: "",
                 aeropuerto: "",
                 vehiculo: "",
                 modelo: "",
                 licencia: "",
                 vehiculoImg: "",
+                placaVehiculo: '',
                 soat: "",
                 permisoImg: "",
                 pasajeros: "",
             })
+            
         } else {
-            alert('Flatan datos')
-    }}
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Hubo un error en el registro"
+            });
+        }
+    }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <Stack spacing={4} bg='gray.100' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' >
+        <form onSubmit={handleSubmit} >
+            {/* <input type="file"
+            onChange={(e) => {
+                setFile(e.target.files[0]);
+            }}/>
+            <button type='submit'> Enviar imagen </button>
+            {imageUrl && (
+                <img src={imageUrl} alt='foto del'/>
+            )} */}
+            <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' color='white' border='1px solid white' mx='2rem' w={{ base: '20rem', md: '40rem' }} scrollMarginX='auto'>
                 <Heading>Datos del chofer</Heading>
-                <Box>
-                    <Center py={2} gap={4} >
-                        <FormControl isRequired>
-                            <FormLabel>Nombre</FormLabel>
-                            <Input type='text' placeholder='Nombre' name='nombre' onChange={handleChange} value={form.nombre} />
-                        </FormControl>
-                        <FormControl isRequired>
-                            <FormLabel>Apellido</FormLabel>
-                            <Input type='text' placeholder='Apellido' name='apellido' onChange={handleChange} value={form.apellido} />
-                        </FormControl>
-                        <FormControl>
-                            <FormLabel>Correo electronico</FormLabel>
-                            <Input type='mail' placeholder='Correo Electronico' name='correo' onChange={handleChange} value={form.correo} />
-                        </FormControl>
-                    </Center>
+                <Box  >
+                    <Flex flexDirection={{ base: 'column' }}>
 
-                    <Center py={2} gap={4} >
-                        <FormControl isRequired>
-                            <FormLabel>Fecha de Nac.</FormLabel>
-                            <Input
-                                placeholder="Select Date and Time"
-                                size="md"
-                                type="date"
-                                name='fechaNacimiento'
-                                onChange={handleChange} value={form.fechaNacimiento} />
-                        </FormControl>
+                        <Center py={2} gap={4} flexDirection={{ base: 'column', md: 'row' }}>
+                            <FormControl isRequired>
+                                <FormLabel>name</FormLabel>
+                                <Input type='text' placeholder='name' name='name' onChange={handleChange} value={form.name} />
+                            </FormControl>
+                            <FormControl isRequired>
+                                <FormLabel>Apellido</FormLabel>
+                                <Input type='text' placeholder='Apellido' name='apellido' onChange={handleChange} value={form.apellido} />
+                            </FormControl>
+                            <FormControl isRequired>
+                                <FormLabel>email electronico</FormLabel>
+                                <Input type='mail' placeholder='email Electronico' name='email' onChange={handleChange} value={form.email} />
+                            </FormControl>
+                        </Center>
 
-                        <FormControl isRequired>
-                            <FormLabel>DNI</FormLabel>
-                            <Input type='number' placeholder='Numero de DNI' name='dni' onChange={handleChange} value={form.dni} />
-                        </FormControl>
+                        <Center py={2} gap={4} flexDirection={{ base: 'column', md: 'row' }}>
+                            <FormControl isRequired>
+                                <FormLabel>Fecha de Nac.</FormLabel>
+                                <Input
+                                    placeholder="Select Date and Time"
+                                    size="md"
+                                    type="date"
+                                    name='date'
+                                    onChange={handleChange} value={form.date} />
+                            </FormControl>
 
-                        <FormControl isRequired>
-                            <FormLabel>Numero de Celular</FormLabel>
-                            <Input type='number' placeholder='Numero de celular' name='telefono' onChange={handleChange} value={form.telefono} />
-                        </FormControl>
-                    </Center>
+                            <FormControl isRequired>
+                                <FormLabel>DNI</FormLabel>
+                                <Input type='number' placeholder='Numero de DNI' name='dni' onChange={handleChange} value={form.dni} />
+                            </FormControl>
 
-                    <Center py={2} gap={4}>
+                            <FormControl isRequired>
+                                <FormLabel>Numero de Celular</FormLabel>
+                                <Input type='number' placeholder='Numero de celular' name='phone' onChange={handleChange} value={form.phone} />
+                            </FormControl>
+                        </Center>
 
-                        <FormControl>
-                            <FormLabel>Foto del Chofer</FormLabel>
-                            <Input type='file' name='choferImg' onChange={handleChange} value={form.choferImg} />
-                        </FormControl>
+                        <Center py={2} gap={4} flexDirection={{ base: 'column', md: 'row' }}>
 
+                            <FormControl>
+                                <FormLabel>Foto del Chofer</FormLabel>
+                                <Input type='file'
+                                    name='choferImg'
+                                    accept="image/*"
+                                    onChange={handleChange} />
+                            </FormControl>
 
-                        <FormControl>
-                            <FormLabel>Aeropuerto Origen</FormLabel>
-                            <Select placeholder='Selecciona el Aeropuerto' name='aeropuerto' onChange={handleChange} value={form.aeropuerto}>
-                                <option>Talara</option>
-                                <option>Tumbes</option>
-                            </Select>
-                        </FormControl>
+                            <FormControl isRequired>
+                                <FormLabel>Aeropuerto Origen</FormLabel>
+                                <Select color='#000' placeholder='Selecciona el Aeropuerto' name='aeropuerto' onChange={handleChange} value={form.aeropuerto}>
+                                    {choferes.map((aerop, index) => (
+                                        <option key={aerop.id} value={index}> {aerop.aeropuertoOrigen} </option>
+                                    ))
+                                    }
+                                </Select>
+                            </FormControl>
 
-                        <FormControl as='fieldset'>
-                            <FormLabel as='legend'>
-                                Servicio que ofrece:
-                            </FormLabel>
-                            <Select placeholder='Selecciona un Vehiculo' name='vehiculo' onChange={handleChange} value={form.vehiculo}>
-                                <option value='auto' >Auto</option>
-                                <option value='vans'>Mini Vans</option>
-                                <option value='todos'>Ambos</option>
-                            </Select>
-                        </FormControl>
-
-
-                    </Center>
+                        </Center>
+                    </Flex>
                 </Box>
 
-                <Box bg='blue.200' py={4} px={2} borderRadius={10}>
+                <Box bg='#10447E' py={4} px={2} borderRadius={10} color='white'>
                     <Heading>Datos del vehiculo</Heading>
-                    <Center py={2} gap={4}>
+                    <Center py={2} gap={4} flexDirection={{ base: 'column', md: 'row' }}>
 
                         <FormControl as='fieldset' isRequired>
-                            <FormLabel>Modelo</FormLabel>
-                            <Input type='text' placeholder='Modelo' name='modelo' onChange={handleChange} value={form.modelo} />
+                            <FormLabel as='legend' >
+                                Modelo de Vehiculo:
+                            </FormLabel>
+                            <Select color='#000' placeholder='Selecciona un Vehiculo' name='vehiculo' onChange={handleChange} value={form.vehiculo}>
+                                {choferes.map((aerop, index) => (
+                                    <option key={aerop.id} value={index}> {aerop.servicioOfrecido} </option>
+                                ))
+                                }
+                            </Select>
                         </FormControl>
 
                         <FormControl as='fieldset' isRequired>
@@ -173,10 +212,10 @@ const ChoferForm = () => {
                         </FormControl>
                     </Center>
 
-                    <Center py={2} gap={4}>
+                    <Center py={2} gap={4} flexDirection={{ base: 'column', md: 'row' }}>
                         <FormControl isRequired>
                             <FormLabel>Foto del vehiculo</FormLabel>
-                            <Input type='file' name='vehiculoImg' onChange={handleChange} value={form.vehiculoImg} />
+                            <Input type='file' name='vehiculoImg' accept="image/*" onChange={handleChange}/>
                         </FormControl>
 
                         <FormControl isRequired>
@@ -191,18 +230,24 @@ const ChoferForm = () => {
 
                         <FormControl isRequired>
                             <FormLabel>Permiso de Circulacion</FormLabel>
-                            <Input type='file' name='permisoImg' onChange={handleChange} value={form.permisoImg} />
+                            <Input type='file' name='permisoImg' accept="image/*" onChange={handleChange} />
                         </FormControl>
 
                         <FormControl as='fieldset' isRequired>
-                            <FormLabel>Maximo de pasajeros</FormLabel>
-                            <Input type='text' name='pasajeros' onChange={handleChange} value={form.pasajeros} maxLength={2} />
+                            <FormLabel htmlFor='pasajeros'>Maximo de pasajeros</FormLabel>
+                            <Select color='#000' placeholder='Cantidad de pasajeros' id='pasajeros' name='pasajeros' onChange={handleChange} value={form.pasajeros} >
+                                {[...Array(20).keys()].map((number) => (
+                                    <option key={number + 1} id={`number-${number + 1}`} value={number + 1}>
+                                        {number + 1}
+                                    </option>
+                                ))}
+                            </Select>
                         </FormControl>
                     </Center>
                 </Box>
 
-                <Box mt={4}>
-                    <Button colorScheme='teal' variant='outline' w='100%' type='submit'>
+                <Box mt={4} >
+                    <Button colorScheme='green' w='100%' type='submit'>
                         Registrar Chofer</Button>
                 </Box>
             </Stack>
