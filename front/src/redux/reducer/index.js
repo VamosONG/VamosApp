@@ -1,4 +1,4 @@
-import { GET_ALL_CONDUCTORES, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
+import { CREATE_CHOFER, GET_ALL_CONDUCTORES, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
 
 
 const initialState = {
@@ -63,8 +63,10 @@ const reducer = (state = initialState, action) => {
                 }
             }
 
+        //BTN de salida o cerrar sesion
         case LOGOUT: 
         const value = action.payload;
+
         if (value === 'admin') {
             return {
                 ...state,
@@ -76,7 +78,7 @@ const reducer = (state = initialState, action) => {
                 esUsuario: false
             }
         }
-
+        //Creando un nuevo usuario
         case NEW_USER:
             return {
                 ...state,
@@ -94,6 +96,14 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 idSolicitud: action.payload
             }
+
+        //Creando nuevo chofer
+        case CREATE_CHOFER: 
+        return {
+            ...state,
+            conductores: action.payload
+        }
+
         default:
             return { ...state };
     }
