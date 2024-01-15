@@ -39,7 +39,7 @@ export const createNewChofer = (data) => {
 }
 
 export const postNewViaje = (infoViaje) => {
-    
+    console.log(infoViaje)
     return async (dispatch) => {
         try {
             const { data } = await axios.post(`http://localhost:3001/offer/create`, infoViaje);
@@ -153,16 +153,18 @@ export const logOutAction = (value) => {
 }
 
 export const viajeConfirmado = (info) => {
-
+    console.log(info)
     return async (dispatch) => {
         try {
             const { data } = await axios.post(`http://localhost:3001/trips/reserves/create`, info);
+            console.log(data)
             dispatch({
                 type: VIAJE_CONFIRMADO,
                 payload: data
             })
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            console.log(error.message)
         };
     };
 };
