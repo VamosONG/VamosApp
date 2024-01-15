@@ -33,6 +33,8 @@ const deleteReviewHandler = require('../Handlers/ReviewsHandlers/deleteReviewHan
 const getAdminsHandler = require('../Handlers/AdminHandlers/getAdminsHandler')
 const deleteAdminHandler = require('../Handlers/AdminHandlers/deleteAdminHandler')
 
+const filtershandler = require('../Handlers/filtersHandlers/filtersHandler');
+
 const router = Router();
 
 router.get('/trips', getTripsHandler);
@@ -69,6 +71,8 @@ router.delete('/reviews', deleteReviewHandler);
 
 router.get('/dashboard/admin', getAdminsHandler);
 router.delete('/dashboard/admin', deleteAdminHandler);
+
+router.post('/offer/create', filtershandler);
 
 module.exports = router;
 

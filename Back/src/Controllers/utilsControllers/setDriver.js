@@ -1,5 +1,5 @@
-const { Trip } = require('../../dataBase');
-const { Driver } = require('../../dataBase');
+const { Trip, Driver } = require('../../dataBase');
+const updateTrip = require('../tripsControllers/updateTrip');
 
 const setDriver = async (tripId, driverId) => {
     try {
@@ -13,11 +13,7 @@ const setDriver = async (tripId, driverId) => {
             throw new Error(`No se encontro conductor con id ${tripId} en base de datos.`)
 
         //Se modifica el chofer asignado al trip, y se pone en estado PENDIENTE.
-        await reserve.update(
-            {
-                driverId: driverId,
-                stateOfTrip: 'pending'
-            }
+        await updateTrip(tripId, {driverId: driverId, stateOfTrip: 'pending'}
         )
         await reserve.reload();
 

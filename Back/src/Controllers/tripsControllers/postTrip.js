@@ -1,24 +1,49 @@
-const { Trip } = require('../../dataBase');
+const { Trip, User, Driver } = require('../../dataBase');
 
-const postTrip = async ({date, hour, origin, destination, quantityPassengers, price, driver}) => {
+const postTrip = async (userId, driverId, date, hour, origin, destination, quantityPassengers, price) => {
     try {
-        
-        const newTrip = await Trip.create({
-            date,
-            hour,
-            origin,
-            destination,
-            quantityPassengers,
-            reviews: 0, 
-            price,
-            stateOfTrip: 'Pending',
-            driver 
+        const [newTrip, created] = await Trip.findOrCreate({
+            where: {
+                userId: userId,
+                driverId: driverId,
+                date: date,
+                hour: hour,
+                origin: origin,
+                destination: destination,
+                quantityPassengers: quantityPassengers
+            },
+            defaults: {
+                userId,
+                driverId,
+                date,
+                hour,
+                origin,
+                destination,
+                quantityPassengers,
+                price,
+            }
         });
+
+        if (!created)
+            throw new Error(`Ya existe un viaje para el usuario, mismo día, hora, origen y destino en la base de datos.`);
+
+        const user = await User.findByPk(userId);
+        const driver = await Driver.findByPk(driverId);
+
+        if (user) {
+            await user.addTrip(newTrip);
+            if (driver) 
+                await driver.addTrip(newTrip);
+            else 
+                throw new Error('No se encontró el usuario.');
+        } else {
+            throw new Error('No se encontró el usuario.');
+        }
 
         return newTrip;
     } catch (error) {
-        throw error;
+        throw new Error(`Error al crear viaje: ${error.message}`);
     }
 };
 
-module.exports = { postTrip };
+module.exports = postTrip;
