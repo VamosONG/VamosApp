@@ -56,7 +56,7 @@ function SolicitudesDeViajes() {
             <Button /* colorScheme='teal' variant='outline' */ /* w='100%' */ type='submit'>
               <Link to='/solicitud' onClick={handlerClick(solicitud.id)}>
                 {/* <Solicitud solicitud={solicitud}/> */}
-                Solicitud de viaje {solicitud.id}
+                Solicitud de viaje a {solicitud.destination}
               </Link>
             </Button>
           </Box>

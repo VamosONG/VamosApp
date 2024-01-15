@@ -14,6 +14,8 @@ const initialState = {
     solicitudesDeViajes: [],
     idSolicitud: '',
 
+    infoConfirmacionViaje:{}
+
 }
 
 const reducer = (state = initialState, action) => {
@@ -81,9 +83,11 @@ const reducer = (state = initialState, action) => {
                 newUsuario: [action.payload]
             }
 
-        case POST_NEW_VIAJE: return {
+        case POST_NEW_VIAJE: 
+            console.log(action.payload)
+            return {
             ...state,
-            solicitudesDeViajes: [...state.solicitudesDeViajes, action.payload]
+            infoConfirmacionViaje: action.payload
         }
         
         case GET_SOLICITUDES:
