@@ -19,7 +19,7 @@ const ChoferForm = () => {
 
     const [form, setForm] = useState({
         name: "",
-        apellido: "",
+        surname: "",
         email: "",
         date: "",
         dni: "",
@@ -51,75 +51,71 @@ const ChoferForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // const formData = new FormData()
-        // formData.append('file', file)
-        // formData.append('upload_preset', 'VamosONGFormChoferes')
+        const formData = new FormData()
+        formData.append('file', file)
+        formData.append('upload_preset', 'VamosONGFormChoferes')
 
-        // console.log(file);
+        console.log(file);
 
-        // const response = await fetch(urlCloudinary, {
-        //     method: 'POST',
-        //     body: formData,
-        //     mode: "cors",
-        //     headers: {
-        //         'Content-Type': 'multipart/form-data'
-        //     }
-        // })
-        // const data = response
-        // console.log(data);
-        // setImageUrl(data.url)
+        const response = await fetch(urlCloudinary, {
+            method: 'POST',
+            body: formData,
+        })
+        const data = response
+        console.log(data);
+        setImageUrl(data.url)
 
-        // if (!response.ok) {
-        //     throw new Error(`Error: ${response.status} - ${response.statusText}`);
-        // }
-
-        const choferCreate = await dispatch(createNewChofer(form))
-        if (choferCreate) {
-
-            Swal.fire({
-                title: "Bien hecho!",
-                text: "Datos registrados!",
-                icon: "success"
-            });
-            setForm({
-                name: "",
-                apellido: "",
-                email: "",
-                date: "",
-                dni: "",
-                phone: "",
-                choferImg: "",
-                aeropuerto: "",
-                vehiculo: "",
-                modelo: "",
-                licencia: "",
-                vehiculoImg: "",
-                placaVehiculo: '',
-                soat: "",
-                permisoImg: "",
-                pasajeros: "",
-            })
-            
-        } else {
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Hubo un error en el registro"
-            });
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
         }
+
+        // const choferCreate = await dispatch(createNewChofer(form))
+        // if (choferCreate) {
+
+        //     Swal.fire({
+        //         title: "Bien hecho!",
+        //         text: "Datos registrados!",
+        //         icon: "success"
+        //     });
+        //     setForm({
+        //         name: "",
+        //         surname: "",
+        //         email: "",
+        //         date: "",
+        //         dni: "",
+        //         phone: "",
+        //         choferImg: "",
+        //         aeropuerto: "",
+        //         vehiculo: "",
+        //         modelo: "",
+        //         licencia: "",
+        //         vehiculoImg: "",
+        //         placaVehiculo: '',
+        //         soat: "",
+        //         permisoImg: "",
+        //         pasajeros: "",
+        //     })
+            
+        // } else {
+        //     Swal.fire({
+        //         icon: "error",
+        //         title: "Oops...",
+        //         text: "Hubo un error en el registro"
+        //     });
+        // }
     }
 
     return (
         <form onSubmit={handleSubmit} >
-            {/* <input type="file"
+            <input type="file"
             onChange={(e) => {
                 setFile(e.target.files[0]);
             }}/>
             <button type='submit'> Enviar imagen </button>
             {imageUrl && (
                 <img src={imageUrl} alt='foto del'/>
-            )} */}
-            <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' color='white' border='1px solid white' mx='2rem' w={{ base: '20rem', md: '40rem' }} scrollMarginX='auto'>
+            )}
+            {/* <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' color='white' border='1px solid white' mx='2rem' w={{ base: '20rem', md: '40rem' }} scrollMarginX='auto'>
                 <Heading>Datos del chofer</Heading>
                 <Box  >
                     <Flex flexDirection={{ base: 'column' }}>
@@ -130,8 +126,8 @@ const ChoferForm = () => {
                                 <Input type='text' placeholder='name' name='name' onChange={handleChange} value={form.name} />
                             </FormControl>
                             <FormControl isRequired>
-                                <FormLabel>Apellido</FormLabel>
-                                <Input type='text' placeholder='Apellido' name='apellido' onChange={handleChange} value={form.apellido} />
+                                <FormLabel>surname</FormLabel>
+                                <Input type='text' placeholder='surname' name='surname' onChange={handleChange} value={form.surname} />
                             </FormControl>
                             <FormControl isRequired>
                                 <FormLabel>email electronico</FormLabel>
@@ -250,7 +246,7 @@ const ChoferForm = () => {
                     <Button colorScheme='green' w='100%' type='submit'>
                         Registrar Chofer</Button>
                 </Box>
-            </Stack>
+            </Stack> */}
         </form>
     )
 }

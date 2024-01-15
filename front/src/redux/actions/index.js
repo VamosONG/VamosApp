@@ -61,7 +61,7 @@ export const postNewViaje = (infoViaje) => {
             console.log(data)
             return dispatch({
                 type: POST_NEW_VIAJE,
-                payload: data
+                payload: infoViaje
             })
 
         } catch (error) {
@@ -153,8 +153,6 @@ export const logIn = (input) => {
 };
 
 export const idDeSolicitud = (id) => {
-
-
     return ({
         type: ID_SOLICITUD,
         payload: id
