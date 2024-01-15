@@ -6,17 +6,14 @@ import {
 } from '@chakra-ui/react'
 import Swal from 'sweetalert2'
 // import withReactContent from 'sweetalert2-react-content'
-
 import { useState } from 'react'
 import { useSelector } from "react-redux";
-import choferes from '../../../utils/chofer';
+import choferes from '../../../utils/chofer'
 
 const ChoferForm = () => {
     const choferData = useSelector((state) => state.conductores)
     const [imageUrl, setImageUrl] = useState(null)
     const [file, setFile] = useState(null)
-
-    const urlCloudinary = 'https://api.cloudinary.com/v1_1/dzd6hfguw/image/upload'
 
     const [form, setForm] = useState({
         nombre: "",
@@ -47,66 +44,79 @@ const ChoferForm = () => {
     }
 
     const handleImageChange = async (file) => {
-        
+
     };
+
+    const urlCloudinary = 'https://api.cloudinary.com/v1_1/dzd6hfguw/image/upload'
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const formData = new FormData()
-        formData.append('file', file)
+        // const formData = new FormData()
+        // formData.append('file', file)
+        // formData.append('upload_preset', 'VamosONGFormChoferes')
 
-        const response = await fetch(urlCloudinary, {
-            method: 'POST',
-            body: formData,
-        })
+        // console.log(file);
 
-        const data = response
-        console.log(data);
-        setImageUrl(data.url)
-        // if (form) {
-        //     const insertData = choferData.push(form)
-        //     if (insertData) {
-        //         console.log(insertData);
-        //         Swal.fire({
-        //             title: "Bien Hecho!",
-        //             text: "chofer registrado exitosamente!",
-        //             icon: "success"
-        //         });
+        // const response = await fetch(urlCloudinary, {
+        //     method: 'POST',
+        //     body: formData,
+        //     mode: "cors",
+        //     headers: {
+        //         'Content-Type': 'multipart/form-data'
         //     }
-        //     setForm({
-        //         nombre: "",
-        //         apellido: "",
-        //         correo: "",
-        //         fechaNacimiento: "",
-        //         dni: "",
-        //         telefono: "",
-        //         choferImg: "",
-        //         aeropuerto: "",
-        //         vehiculo: "",
-        //         modelo: "",
-        //         licencia: "",
-        //         vehiculoImg: "",
-        //         soat: "",
-        //         permisoImg: "",
-        //         pasajeros: "",
-        //     })
-        // } else {
-        //     alert('Flatan datos')
+        // })
+        // const data = response
+        // console.log(data);
+        // setImageUrl(data.url)
+
+        // if (!response.ok) {
+        //     throw new Error(`Error: ${response.status} - ${response.statusText}`);
         // }
+
+        if (!hasErrors) {
+            setForm({
+                nombre: "",
+                apellido: "",
+                correo: "",
+                fechaNacimiento: "",
+                dni: "",
+                telefono: "",
+                choferImg: "",
+                aeropuerto: "",
+                vehiculo: "",
+                modelo: "",
+                licencia: "",
+                vehiculoImg: "",
+                soat: "",
+                permisoImg: "",
+                pasajeros: "",
+            })
+            Swal.fire({
+                title: "Bien hecho!",
+                text: "Datos registrados!",
+                icon: "success"
+            });
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Hubo un error en el registro"
+            });
+        }
     }
 
     return (
         <form onSubmit={handleSubmit} >
-            <input type="file"
+            {/* <input type="file"
             onChange={(e) => {
                 setFile(e.target.files[0]);
             }}/>
             <button type='submit'> Enviar imagen </button>
             {imageUrl && (
                 <img src={imageUrl} alt='foto del'/>
-            )}
-            {/* <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' color='white' border='1px solid white' mx='2rem' >
+            )} */}
+            <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' color='white' border='1px solid white' mx='2rem' >
                 <Heading>Datos del chofer</Heading>
                 <Box  >
                     <Flex flexDirection={{ base: 'column' }}>
@@ -155,7 +165,7 @@ const ChoferForm = () => {
                                 <Input type='file'
                                     name='choferImg'
                                     accept="image/*"
-                                    onChange={(e) => handleImageChange(e, 'choferImg')} />
+                                    onChange={handleChange} />
                             </FormControl>
 
 
@@ -206,7 +216,9 @@ const ChoferForm = () => {
                     <Center py={2} gap={4} flexDirection={{ base: 'column', md: 'row' }}>
                         <FormControl isRequired>
                             <FormLabel>Foto del vehiculo</FormLabel>
-                            <Input type='file' name='vehiculoImg' onChange={(e) => handleImageChange(e, 'vehiculoImg')} />
+                            <Input type='file' name='vehiculoImg' onChange={(e) => {
+                                setFile(e.target.files[0]);
+                            }} />
                         </FormControl>
 
                         <FormControl isRequired>
@@ -221,7 +233,9 @@ const ChoferForm = () => {
 
                         <FormControl isRequired>
                             <FormLabel>Permiso de Circulacion</FormLabel>
-                            <Input type='file' name='permisoImg' onChange={(e) => handleImageChange(e, 'permisoImg')} />
+                            <Input type='file' name='permisoImg' onChange={(e) => {
+                                setFile(e.target.files[0]);
+                            }} />
                         </FormControl>
 
                         <FormControl as='fieldset' isRequired>
@@ -241,7 +255,7 @@ const ChoferForm = () => {
                     <Button colorScheme='green' w='100%' type='submit'>
                         Registrar Chofer</Button>
                 </Box>
-            </Stack> */}
+            </Stack>
         </form>
     )
 }

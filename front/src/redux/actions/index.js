@@ -1,11 +1,13 @@
  //import axios from 'axios';
 import choferes from '../../utils/chofer'
+import Swal from 'sweetalert2'
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE="PAGINATE"
 export const GET_ALL_CONDUCTORES="GET_ALL_CONDUCTORES"
 export const POST_NEW_VIAJE="POST_NEW_VIAJE"
-export const LOGIN="LOGIN"
+export const LOGIN = "LOGIN"
+export const NEW_USER = 'NEW_USER'
 
 
 
@@ -45,6 +47,22 @@ export const postNewViaje = (infoViaje) => {
 }
  */
 
+
+export const postNewUser = (form) => {
+    console.log(form);
+    return async (dispatch) => {
+        try {
+            return dispatch ({
+                type: NEW_USER,
+                payload: form
+            }) 
+        } catch (error) {
+            console.error("Error en la creacion del usuario:", error);
+            throw error;
+        }
+    }
+    
+}
 
 export const paginateConductores = (order) => {
     

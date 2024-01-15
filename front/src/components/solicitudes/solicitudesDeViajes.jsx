@@ -22,7 +22,6 @@ function SolicitudesDeViajes() {
   
       <div >
         <ul>
-
            {solicitudesDeViajes.map((solicitud)=>(
                 <Box mt={4}>
                     <Button /* colorScheme='teal' variant='outline' */ /* w='100%' */ type='submit'>

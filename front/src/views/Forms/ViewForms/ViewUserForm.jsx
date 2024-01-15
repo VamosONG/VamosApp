@@ -13,13 +13,17 @@ const ViewBtnUserForm = () => {
         setIsLoginFormVisible(!isLoginFormVisible);
     };
     return (
-        <Box zIndex={99} mx='3rem'>
-                    <Button onClick={onToggle} bg='blue.200' color='white'  >Entrar</Button>
+        <Box zIndex={99} >
+                    <Button onClick={onToggle} >Entrar</Button>
                     <Collapse initialScale={0.9} direction='bottom' in={isOpen} style={{ zIndex: 10 }}>
                         <Box
                             h='auto'
                             mt='4'
+                            w='auto'
+                            overflow='hidden'
                             position='absolute'
+                            right='1rem'
+                            borderRadius={20}
                         >
                             {/* Validacion para mostrar formularios */}
                             {isLoginFormVisible ? (

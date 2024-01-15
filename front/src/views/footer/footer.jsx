@@ -15,7 +15,7 @@ function Footer() {
     <>
       <Flex flexDirection={{ base: 'column', md: 'column' }} w='100%'  >
 
-      <Flex bg='#009ED1' minWidth='max-content' alignItems='start' gap='2' pt='1rem' boxSize='sm' w='100%' h='auto' color='white' justify='space-between' px='2rem' flexDirection={{ base: 'column', md: 'row' }} borderTopRadius='50'>
+      <Flex bg='#009ED1' minWidth='max-content' alignItems='start' gap='2' pt='1rem' boxSize='sm' w='100%' h='auto' color='white' justify='space-evenly' px='2rem' flexDirection={{ base: 'column', md: 'row' }} borderTopRadius='50'>
 
           <Box w='300px' h='auto' gap='8' >
             <Image
@@ -110,7 +110,7 @@ function Footer() {
               <Text>
                 <b>Correo electronico:</b>
                 <Link href='mailto:kleibertmedina@gmail.com' isExternal>
-                  <b>vamos.ong@gmail.com</b> <ExternalLinkIcon mx='2px' />
+                  <p>vamos.ong@gmail.com</p> <ExternalLinkIcon mx='2px' />
                 </Link>
               </Text>
               <Text>

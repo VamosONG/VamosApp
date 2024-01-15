@@ -24,12 +24,12 @@ function SolicitudViajeForm() {
       });
 
   
-    const handleSubmit=async()=>{
+    const handleSubmit=async(event)=>{
         event.preventDefault();
         await dispatch(postNewViaje(input));
     }
     const handleChange=async(e)=>{
-        event.preventDefault();
+        e.preventDefault();
         setInput({
             ...input,
             [e.target.name]:e.target.value
