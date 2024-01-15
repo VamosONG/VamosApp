@@ -34,16 +34,18 @@ const getAdminsHandler = require('../Handlers/AdminHandlers/getAdminsHandler')
 const deleteAdminHandler = require('../Handlers/AdminHandlers/deleteAdminHandler')
 
 const filtershandler = require('../Handlers/filtersHandlers/filtersHandler');
-const doReserveHandler = require('../Handlers/utilsHandlers/doReserveHandler');
+
+const getFilteredDriversHandler = require('../Handlers/filtersHandlers/getFilteredDriversHandler');
+const getReservesHandler = require('../Handlers/filtersHandlers/getReservesHandler');
+const doReservesHandler = require('../Handlers/utilsHandlers/doReserveHandler');
+const setDriverHandler = require('../Handlers/utilsHandlers/setDriverHandler');
 
 const router = Router();
 
 router.get('/trips', getTripsHandler);
 router.post('/trips/create', postTripHandler);
-
 router.put('/trips/update', updateTripHandler);
 router.delete('/trips', deleteTripHandler);
-
 
 router.get('/user', getUsersHandler);
 router.post('/user/create', postUserHandler);
@@ -74,7 +76,11 @@ router.get('/dashboard/admin', getAdminsHandler);
 router.delete('/dashboard/admin', deleteAdminHandler);
 
 router.post('/offer/create', filtershandler);
-router.put('/offer/reserve', doReserveHandler);
+router.get('/drivers/filter', getFilteredDriversHandler);
+router.get('/trips/reserves', getReservesHandler);
+router.get('/trips/reserves/create', doReservesHandler);
+router.put('/trip/reserves/update',setDriverHandler);
+
 
 module.exports = router;
 

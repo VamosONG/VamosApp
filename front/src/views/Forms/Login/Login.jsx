@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+
 import {
     Container,
     FormControl,
@@ -12,63 +12,59 @@ import {
     InputRightElement,
     Stack,
     InputLeftAddon,
-Link, Text
+    Link, Text
 } from '@chakra-ui/react'
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { logIn } from "../../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import Swal from 'sweetalert2'
+import { logIn } from '../../../redux/actions';
 
 const LoginForm = ({ onSwitchForm }) => {
-
-    const dispatch=useDispatch()
+    const dispatch = useDispatch()
+    const [show, setShow] = useState(false)
+    const handleClick = () => setShow(!show)
 
     const [input, setInput] = useState({
-        email:"",
-        password:""
+        email: "",
+        password: ""
     })
-    const [show, setShow] = useState(false)
 
     //Falta configurar para el manero de los inputs
     const handleInputChange = (e) => setInput({
         ...input,
-        [e.target.name]:e.target.value}
+        [e.target.name]: e.target.value
+    }
     )
-
     const isError = input === ''
-
     //Maneja la vista de la contraseña
-    const handleClick = () => setShow(!show)
-
-    const handleSubmit=(event)=>{
+    const handleSubmit= async (event)=>{
         event.preventDefault();
+
         console.log("funciona submit")
         console.log(input)
-        dispatch(logIn(input))
+        await dispatch(logIn(input))
     }
 
     return (
-        <Stack spacing={4} bg='gray.100' p='5' h='auto' borderRadius='20' boxShadow='dark-lg'>
+        <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' color='white'
+            w={{ base: '20rem', md: '30rem' }}>
 
             {/* Falta controlar los datos ingresados */}
-            <FormControl isInvalid={isError}>
-                <Heading>Iniciar Sesion</Heading>
+            <FormControl isInvalid={isError} isRequired>
+                <FormLabel>Correo Electronico</FormLabel>
+                <Input type='text' value={input.email} onChange={handleInputChange} placeholder='Ingresa tu Correo / Email' name='email' />
+                {isError ? (
+                    <FormErrorMessage>El correo es requerido.</FormErrorMessage>
+                ) : null}
+            </FormControl>
 
-                <FormLabel>Email</FormLabel>
-                <Input type='email' value={input.email} onChange={handleInputChange} name='email'/>
-                {!isError ? (
-                    <FormHelperText>
-                        Enter the email you'd like to receive the newsletter on.
-                    </FormHelperText>
-                ) : (
-                    <FormErrorMessage>Email is required.</FormErrorMessage>
-                )}
-
+            <FormControl isInvalid={isError} isRequired>
+                <FormLabel>Contraseña</FormLabel>
                 <InputGroup size='md'>
                     <Input
                         pr='4.5rem'
                         type={show ? 'text' : 'password'}
-                        placeholder='Enter password'
-
+                        placeholder='Ingresa una contraseña'
                         name='password'
                         onChange={handleInputChange}
                     />
@@ -80,14 +76,14 @@ const LoginForm = ({ onSwitchForm }) => {
                 </InputGroup>
             </FormControl>
 
-            <Button colorScheme='teal' variant='outline' onClick={handleSubmit}>
+            <Button colorScheme='green' onClick={handleSubmit}>
                 Entrar
             </Button>
 
             <Container>
                 <Text>
                     ¿No tienes cuenta?{' '}
-                    <Button  color='teal.500' onClick={onSwitchForm}  >
+                    <Button color='teal.500' onClick={onSwitchForm}  >
                         Registrarme
                     </Button>
                 </Text>
