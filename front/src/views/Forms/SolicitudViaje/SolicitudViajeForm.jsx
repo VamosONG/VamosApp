@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { postNewViaje, viajeConfirmado } from "../../../redux/actions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Box, Center, useDisclosure } from '@chakra-ui/react'
 import {
@@ -18,13 +18,9 @@ import { renderToString } from 'react-dom/server';
 function SolicitudViajeForm() {
 
     const dispatch= useDispatch();
-
-    /* useEffect(() => {
-        
-     }, [dispatch]); */
      
-     const infoConfirmacionViaje= useSelector((state)=>state.infoConfirmacionViaje)
-        console.log(infoConfirmacionViaje)
+    const infoConfirmacionViaje= useSelector((state)=>state.infoConfirmacionViaje)
+    console.log(infoConfirmacionViaje)
 
 
     
@@ -36,41 +32,25 @@ function SolicitudViajeForm() {
         quantityPassengers:"",
       });
 
-      
+    const confirmationText = (
+        <div>
+          <p>Origen: {infoConfirmacionViaje.origin}</p>
+          <p>Destino: {infoConfirmacionViaje.destination}</p>
+          <p>Cantidad de pasajeros: {infoConfirmacionViaje.quantityPassengers}</p>
+          <p>Precio final: {infoConfirmacionViaje.price}</p>
+        </div>
+    );
 
-
-
-    const handleSubmit=async(event)=>{
-        event.preventDefault();
-        setInput({
-            ...input,userId: "0b9d4f16-0d54-4d13-9498-2453a3808130"
-        })
-        console.log(input)
-        await dispatch(postNewViaje(input));
-
-
+    useEffect(() => {
+        if (infoConfirmacionViaje.id) {
+            const infoAmandarAlBack={
+                tripId:infoConfirmacionViaje.id,
+                userId:infoConfirmacionViaje.userId
+            }
         
-
-        const confirmationText = (
-            <div>
-              <p>Origen: {infoConfirmacionViaje.origin}</p>
-              <p>Destino: {infoConfirmacionViaje.destination}</p>
-              <p>Cantidad de pasajeros: {infoConfirmacionViaje.quantityPassengers}</p>
-              <p>Precio final: {infoConfirmacionViaje.price}</p>
-            </div>
-        );
-
-        const confirmationHtml = renderToString(confirmationText);
-
-        const infoAmandarAlBack={
-            tripId:infoConfirmacionViaje.id,
-            userId:infoConfirmacionViaje.userId
-          }
-
-
-        await Swal.fire({
+        Swal.fire({
             title: "Confirmación de traslado",
-            html: confirmationHtml,
+            html: renderToString(confirmationText),
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -85,12 +65,30 @@ function SolicitudViajeForm() {
                 text: "Simulando que se abonó..",
                 icon: "success"
               });
-
-              
-
-
             }
           });
+
+        }
+
+     }, [infoConfirmacionViaje/* , dispatch, confirmationText */]);
+
+      
+
+
+
+    const handleSubmit=async(event)=>{
+        event.preventDefault();
+        setInput({
+            ...input,
+        })
+        const newInput={
+            ...input,
+            userId: "3027b2fa-4997-4068-9f6d-c847baa02291"
+        }
+        setInput(newInput);
+        console.log(input)
+        await dispatch(postNewViaje(input));
+        
     }
 
     const handleChange=async(e)=>{

@@ -156,7 +156,7 @@ export const viajeConfirmado = (info) => {
     console.log(info)
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`http://localhost:3001/trips/reserves/create`, info);
+            const { data } = await axios.put(`http://localhost:3001/trips/reserves/create`, info);
             console.log(data)
             dispatch({
                 type: VIAJE_CONFIRMADO,
