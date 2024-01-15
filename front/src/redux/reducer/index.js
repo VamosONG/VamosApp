@@ -1,4 +1,4 @@
-import { CREATE_CHOFER, GET_ALL_CONDUCTORES, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
+import { CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_SOLICITUDES, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
 
 
 const initialState = {
@@ -11,9 +11,9 @@ const initialState = {
     esAdmin: false,
     esUsuario: false,
 
-    solicitudesDeViajes: [],
-    idSolicitud: '',
-
+    solicitudesDeViajes:[],
+    // idSolicitud:'',
+    
 }
 
 
@@ -87,23 +87,15 @@ const reducer = (state = initialState, action) => {
 
         case POST_NEW_VIAJE:
 
-        /* return {
-            ...state,
-            solicitudesDeViajes: [...state.solicitudesDeViajes, action.payload]
-        } */
-        case ID_SOLICITUD:
-            return {
+            /* return {
                 ...state,
-                idSolicitud: action.payload
-            }
-
-        //Creando nuevo chofer
-        case CREATE_CHOFER: 
-        return {
-            ...state,
-            conductores: action.payload
-        }
-
+                solicitudesDeViajes:[...state.solicitudesDeViajes,action.payload]
+            } */
+        // case ID_SOLICITUD:
+        //     return {
+        //         ...state,
+        //         idSolicitud:action.payload
+        //     }
         default:
             return { ...state };
     }
