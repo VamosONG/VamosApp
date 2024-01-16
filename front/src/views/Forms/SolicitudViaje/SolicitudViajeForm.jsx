@@ -108,15 +108,14 @@ function SolicitudViajeForm() {
 
 
 
+    const handleSubmit=async(event)=>{
+        event.preventDefault();
+        await setInput({
+            ...input,
+        })
 
-        const handleSubmit = async (event) => {
-            event.preventDefault();
-            setInput({
-              ...input,
-            })
-            console.log(input)
-            await dispatch(postNewViaje(input));
-          }
+        await dispatch(postNewViaje(input));
+
         
           const handleChange = async (e) => {
             setInput({
@@ -127,83 +126,109 @@ function SolicitudViajeForm() {
 
     return (
 
-        <div >
-            <form onSubmit={handleSubmit}>
-                <Stack spacing={4} bg='gray.100' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' >
-                    <Heading>Datos del viaje</Heading>
-                    <Box>
-                        <Center py={2} gap={4} >
-
-                            <FormControl isRequired>
-                                <FormLabel>Desde</FormLabel>
-                                <Select placeholder='Selecciona el origen' name='origin' onChange={handleChange}>
-                                    <option>Aeropuerto Talara</option>
-                                    <option>Aeropuerto Tumbes</option>
-                                    <option>Zona 1</option>
-                                    <option>Zona 2</option>
-                                    <option>Zona 3</option>
-                                    <option>Zona 4</option>
-                                </Select>
-                            </FormControl>
-                            <FormControl>
-                                <FormLabel>Hasta</FormLabel>
+  
+      <div >
+        <form onSubmit={handleSubmit}>
+            <Stack spacing={4} bg='gray.100' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' >
+                <Heading>Datos del viaje</Heading>
+                <Box>
+                    <Center py={2} gap={4} >
+                        
+                        <FormControl isRequired>
+                            <FormLabel>Desde</FormLabel>
+                            <Select placeholder='Selecciona el origen' name='origin' onChange={handleChange}>
+                                <option>AEROPUERTO TALARA</option>
+                                <option>AEROPUERTO TUMBES</option>
+                                <option>DECAMERON PUNTA SAL</option>
+                                <option>ZORRITOS</option>
+                                <option>MANCORA</option>
+                                <option>DECAMERON</option>
+                            </Select>
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Hasta</FormLabel>
+                            {input.origin==='AEROPUERTO TALARA'?(
                                 <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
-                                    <option>Aeropuerto Talara</option>
-                                    <option>Aeropuerto Tumbes</option>
-                                    <option>Zona 1</option>
-                                    <option>Zona 2</option>
-                                    <option>Zona 3</option>
-                                    <option>Zona 4</option>
+                                <option>MANCORA</option>
+                                <option>DECAMERON</option>
                                 </Select>
-                            </FormControl>
-                        </Center>
-
-                        <Center py={2} gap={4} >
-                            <FormControl isRequired>
-                                <FormLabel>Día de recojida</FormLabel>
-                                <Input
-                                    placeholder="Select Date and Time"
-                                    size="md"
-                                    type="date"
-                                    name='date'
-                                    value={input.date}
-                                    onChange={handleChange} />
-                            </FormControl>
-
-
-                            <FormControl isRequired>
-                                <FormLabel>Hora de recojida</FormLabel>
-                                <Input
-                                    type='time'
-                                    placeholder='Hora'
-                                    name='hour'
-                                    value={input.hour}
-                                    onChange={handleChange} />
-                            </FormControl>
-                        </Center>
-
-
-                        <Center py={2} gap={4}>
-                            <FormControl as='fieldset' isRequired>
-                                <FormLabel htmlFor='pasajeros'>Cantidad de pasajeros</FormLabel>
-                                <Select color='#000' placeholder='Cantidad de pasajeros' id='pasajeros' name='quantityPassengers' onChange={handleChange} >
-                                    {[...Array(20).keys()].map((number) => (
-                                        <option key={number + 1} id={`number-${number + 1}`} value={number + 1}>
-                                            {number + 1}
-                                        </option>
-                                    ))}
+                            ):(
+                                input.origin==='AEROPUERTO TUMBES'?(
+                                    <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
+                                    <option>DECAMERON PUNTA SAL</option>
+                                    <option>ZORRITOS</option>
+                                    <option>MANCORA</option>
+                                    </Select>
+                            ):(
+                                input.origin==='MANCORA'?(
+                                <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
+                                <option>AEROPUERTO TALARA</option>
+                                <option>AEROPUERTO TUMBES</option>
                                 </Select>
-                            </FormControl>
+                                ):(input.origin==='DECAMERON PUNTA SAL'?(
+                                    <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
+                                    <option>AEROPUERTO TUMBES</option>
+                                    </Select>
+                                    ):(input.origin==='ZORRITOS'?(
+                                        <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
+                                        <option>AEROPUERTO TUMBES</option>
+                                        </Select>
+                                        ):(input.origin==='DECAMERON'?(
+                                            <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
+                                            <option>AEROPUERTO TALARA</option>
+                                            </Select>
+                                            ):(null))))))}
+                       
+                        </FormControl>
+                    </Center>
 
-                            <Box mt={4}>
-                                <Button colorScheme='teal' variant='outline' w='100%' type='submit'>
-                                    Reservar viaje</Button>
-                            </Box>
-                        </Center>
-                    </Box>
-                </Stack>
-            </form>
-        </div>
+                    <Center py={2} gap={4} >
+                        <FormControl isRequired>
+                            <FormLabel>Día de recojida</FormLabel>
+                            <Input
+                                placeholder="Select Date and Time"
+                                size="md"
+                                type="date"
+                                name='date'
+                                value={input.date}
+                                onChange={handleChange} />
+                        </FormControl>
+
+
+                        <FormControl isRequired>
+                            <FormLabel>Hora de recojida</FormLabel>
+                            <Input 
+                                type='time' 
+                                placeholder='Hora' 
+                                name='hour'  
+                                value={input.hour}
+                                onChange={handleChange} />
+                        </FormControl>
+                    </Center>
+
+
+                    <Center py={2} gap={4}>
+                        <FormControl as='fieldset' isRequired>
+                            <FormLabel htmlFor='pasajeros'>Cantidad de pasajeros</FormLabel>
+                            <Select color='#000' placeholder='Cantidad de pasajeros' id='pasajeros' name='quantityPassengers'  onChange={handleChange} >
+                                {[...Array(20).keys()].map((number) => (
+                                    <option key={number + 1} id={`number-${number + 1}`} value={number + 1}>
+                                        {number + 1}
+                                    </option>
+                                ))}
+                            </Select>
+                        </FormControl>
+
+                <Box mt={4}>
+                    <Button colorScheme='teal' variant='outline' w='100%' type='submit'>
+                        Reservar viaje</Button>
+                </Box>
+                    </Center>
+                </Box>
+            </Stack>
+        </form>
+      </div>
+      
 
     )
 }
