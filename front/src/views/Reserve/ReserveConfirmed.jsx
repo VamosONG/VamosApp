@@ -1,6 +1,6 @@
-import { UseSelector, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-const Reserve = () => {
+const ReserveComfirmed = () => {
 
     const reserva = useSelector((state)=>state.infoConfirmacionViaje)
     return(
@@ -16,4 +16,4 @@ const Reserve = () => {
     )
 }
 
-export default Reserve;
+export default ReserveComfirmed;
