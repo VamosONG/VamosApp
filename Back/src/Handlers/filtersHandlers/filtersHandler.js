@@ -24,7 +24,7 @@ const getPrices=(origin, destination, quantityPassengers, fecha)=>{
 
     const orig = origin.toLowerCase();
     const dest = destination.toLowerCase();
-    let toRet = 0;
+    let toRet = 0; 
 
     if(((orig==='aeropuerto tumbes')&&(dest==='decameron punta sal')) || ((orig==='decameron punta sal')&&(dest==='aeropuerto tumbes'))){
         switch(true){
