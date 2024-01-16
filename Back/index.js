@@ -1,5 +1,11 @@
-const server = require("./src/app");
+const server = require("./src/server");
+const { conn } = require('./src/dataBase');
 
-const PORT= 3001;
 
-server.listen(PORT,()=>{console.log(`Listening on port ${PORT}`)})
+const port = process.env.PORT || 3001;
+
+conn.sync({ force: false }).then(() => {
+server.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+})
+}).catch(error => console.error(error))

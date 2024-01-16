@@ -1,16 +1,47 @@
+
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import Landing from './views/landing/landingComponent'
+
+import Footer from './views/footer/footer';
+import Paginado from './components/paginado/paginadoComponent';
+import LoginForm from './views/Forms/Login/Login'
+import HomeComponent from './views/home/homeCompone/home';
+import NavBar from './components/navBar/NavBar'
+import About from './components/about/About'
+import DetailChofer from './views/detailChofer/DetailChofer';
+import Product from './components/product/Product';
+// Hooks
+import {Routes, Route} from 'react-router-dom'
+import SolicitudViajeForm from './views/Forms/SolicitudViaje/SolicitudViajeForm';
+import SolicitudesDeViajes from './components/solicitudes/solicitudesDeViajes';
+import Solicitud from './components/solicitudes/solicitud';
+import { Link } from 'react-router-dom';
+import ReserveComfirmed from './views/Reserve/ReserveConfirmed';
+import ReserveReject from './views/Reserve/ReserveReject';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <Landing/>
+      <NavBar/>
 
+
+      <Routes>
+        <Route path='/home' element={<LoginForm/>}/>
+        <Route path= '/about' element={<About/>} />
+        <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
+        <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
+        <Route path='/detail' element={<DetailChofer/>}/>
+        <Route path='/solicitud' element={<Solicitud/>}/>
+        <Route path='/reserve/confirmed' element={<ReserveComfirmed/>}/>
+        <Route path='/reserve/rejected' element={<ReserveReject/>}/>
+
+
+      </Routes>
+      <HomeComponent/>
+      {/* <Paginado/> */}
+
+      <Footer/>
     </>
   )
 }
