@@ -11,13 +11,11 @@ module.exports = async (req, res) => {
             //Ver, muestra todos los que su airports INCLUYE lo pasado por parametro.
             filteredDrivers = await filteredDrivers?.filter((driv => driv.airports && driv.airports.toLowerCase().includes(airports.toLowerCase())));
         }
-console.log(filteredDrivers);
 
         if (quantityPassengers) {
             //Filtra conductores por capacidad de pasajeros.
             filteredDrivers = await filteredDrivers?.filter((driv => driv.capacityPassengers>=quantityPassengers));
         }
-console.log(filteredDrivers);
 
         if(filteredDrivers)
             res.status(200).json(filteredDrivers); 
