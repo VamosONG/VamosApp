@@ -3,12 +3,13 @@ const getDrivers = require('../../Controllers/driversControllers/getDrivers');
 module.exports = async (req, res) => {
     try {
         //
-        const { city, quantityPassengers  } = req.body;
+        const { airports, quantityPassengers  } = req.body;
         let filteredDrivers = await getDrivers();
         
-        if (city) {
+        if (airports) {
             //Filtra conductores por ciudad.
-            filteredDrivers = await filteredDrivers?.filter((driv => driv.city && driv.city.toLowerCase()===(city.toLowerCase())));
+            //Ver, muestra todos los que su airports INCLUYE lo pasado por parametro.
+            filteredDrivers = await filteredDrivers?.filter((driv => driv.airports && driv.airports.toLowerCase().includes(airports.toLowerCase())));
         }
 console.log(filteredDrivers);
 
@@ -21,7 +22,7 @@ console.log(filteredDrivers);
         if(filteredDrivers)
             res.status(200).json(filteredDrivers); 
         else    
-            res.status(400).send(`No se encontraron conductores en ${city} con capacidad para ${cantPass} pasajeros.`);   
+            res.status(400).send(`No se encontraron conductores en ${airports} con capacidad para ${cantPass} pasajeros.`);   
 
     } catch (error) {
         res.status(400).json({ error: error.message });
