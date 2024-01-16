@@ -26,7 +26,7 @@ const getPrices=(origin, destination, quantityPassengers, fecha)=>{
     const dest = destination.toLowerCase();
     let toRet = 0;
 
-    if(((orig==='tumbes')&&(dest==='decameron punta sal')) || ((origin==='decameron punta sal')&&(destination==='tumbes'))){
+    if(((orig==='aeropuerto tumbes')&&(dest==='decameron punta sal')) || ((origin==='decameron punta sal')&&(destination==='aeropuerto tumbes'))){
         switch(true){
             case (quantityPassengers>0 && quantityPassengers<=4): 
                 toRet = 200;
@@ -41,7 +41,7 @@ const getPrices=(origin, destination, quantityPassengers, fecha)=>{
         }
     }
     
-    if(((orig==='tumbes')&&(dest==='zorritos')) || ((orig==='zorritos')&&(dest==='tumbes'))){
+    if(((orig==='aeropuerto tumbes')&&(dest==='zorritos')) || ((orig==='zorritos')&&(dest==='aeropuerto tumbes'))){
         switch(true){
             case (quantityPassengers>0 && quantityPassengers<=4): 
                 toRet = 100;
@@ -53,7 +53,7 @@ const getPrices=(origin, destination, quantityPassengers, fecha)=>{
         }
     }
 
-    if(((orig==='tumbes')&&(dest==='mancora')) || ((orig==='mancora')&&(dest==='tumbes'))){
+    if(((orig==='aeropuerto tumbes')&&(dest==='mancora')) || ((orig==='mancora')&&(dest==='aeropuerto tumbes'))){
         switch(true){
             case (quantityPassengers>0 && quantityPassengers<=4): 
                 toRet = 240;
@@ -68,7 +68,7 @@ const getPrices=(origin, destination, quantityPassengers, fecha)=>{
         }
     }
 
-    if(((orig==='talara')&&(dest==='mancora')) || ((orig==='mancora')&&(dest==='talara'))){
+    if(((orig==='aeropuerto talara')&&(dest==='mancora')) || ((orig==='mancora')&&(dest==='aeropuerto talara'))){
         switch(true){
             case (quantityPassengers>0 && quantityPassengers<=4): 
                 toRet = 169;
@@ -86,7 +86,7 @@ const getPrices=(origin, destination, quantityPassengers, fecha)=>{
         }
     }
 
-    if(((orig==='talara')&&(dest==='decameron')) || ((orig==='decameron')&&(dest==='talara'))){
+    if(((orig==='aeropuerto talara')&&(dest==='decameron')) || ((orig==='decameron')&&(dest==='aeropuerto talara'))){
         switch(true){
             case (quantityPassengers>0 && quantityPassengers<=4): 
                 toRet = 240;
