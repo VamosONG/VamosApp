@@ -1,4 +1,4 @@
-import { CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_SOLICITUDES, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
+import { CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_FILTERED, GET_SOLICITUDES, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
 
 
 const initialState = {
@@ -14,7 +14,9 @@ const initialState = {
     solicitudesDeViajes: [],
     idSolicitud: '',
 
-    infoConfirmacionViaje:{}
+    infoConfirmacionViaje:{},
+
+    conductoresFiltrados:[]
 
 }
 
@@ -100,6 +102,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 idSolicitud: action.payload
+            }
+        case GET_FILTERED:
+            return {
+                ...state,
+                conductoresFiltrados: action.payload
             }
         default:
             return { ...state };

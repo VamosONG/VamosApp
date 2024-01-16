@@ -25,40 +25,42 @@ function SolicitudesDeViajes() {
 
 
   const handlerClick=(id)=>{
-    dispatch(idDeSolicitud(id))}
+    dispatch(idDeSolicitud(id))
+  }
 
   useEffect(() => {
     dispatch(getSolicitudes())
-  }, [dispatch])
+  }, [/* dispatch */])
+
+  const estiloParrafo = {
+    /* backgroundColor: '#81DAF5', */
+    backgroundColor: '#009ED1',
+    padding: '10px',
+    color: 'white',
+  };
+
+  const estiloTarjeta = {
+    marginBottom: "30px", 
+  };
 
 
   return (
-    //   <Grid templateColumns="repeat(5, 1fr)" gap={6}>
-    //   {solicitudesDeViajes.map((trip) => (
-    //     <GridItem key={trip.id}>
-    //       <Card>
-    //         <Link to="/detail">
-    //           <CardBody>{trip.id}</CardBody>
-    //           <CardBody>{trip.date}</CardBody>
-    //           <CardBody>{trip.destination}</CardBody>
-    //         </Link>
-    //       </Card>
-    //     </GridItem>
-    //   ))}
-    // </Grid>
-    // )
     <div >
       <ul>
 
         {solicitudesDeViajes.map((solicitud) => (
 
-          <Box mt={4} key={solicitud.id}>
-            <Button /* colorScheme='teal' variant='outline' */ /* w='100%' */ type='submit'>
+          <Box mt={4} key={solicitud.id} style={estiloTarjeta}>
               <Link to='/solicitud' onClick={handlerClick(solicitud.id)}>
-                {/* <Solicitud solicitud={solicitud}/> */}
-                Solicitud de viaje a {solicitud.destination}
-              </Link>
+            <Button /* colorScheme='teal' variant='outline' */ /* w='100%' */ type='submit'>
+            | ASIGNAR CONDUCTOR | 
+            <p style={estiloParrafo}>
+            Solicitud de viaje desde {solicitud.origin} hacia {solicitud.destination} ||
+            Usuario: Carlitos || Fecha : {solicitud.date} || Hora: {solicitud.hour} || 
+            </p>
             </Button>
+            
+              </Link>
           </Box>
         ))}
       </ul>
