@@ -1,7 +1,5 @@
-
 import { useState } from 'react'
 import './App.css'
-
 import Footer from './views/footer/footer';
 import Paginado from './components/paginado/paginadoComponent';
 import LoginForm from './views/Forms/Login/Login'
@@ -15,6 +13,7 @@ import SolicitudViajeForm from './views/Forms/SolicitudViaje/SolicitudViajeForm'
 import SolicitudesDeViajes from './components/solicitudes/solicitudesDeViajes';
 import Solicitud from './components/solicitudes/solicitud';
 import { Link } from 'react-router-dom';
+import Product from './components/Product/product';
 
 function App() {
 
@@ -30,6 +29,7 @@ function App() {
         <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
         <Route path='/detail' element={<DetailChofer/>}/>
         <Route path='/solicitud' element={<Solicitud/>}/>
+        <Route path='/mercadopago' element={<Product/>}/>
       </Routes>
       <HomeComponent/>
       {/* <Paginado/> */}

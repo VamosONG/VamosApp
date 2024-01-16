@@ -40,7 +40,11 @@ const getReservesHandler = require('../Handlers/filtersHandlers/getReservesHandl
 const doReservesHandler = require('../Handlers/utilsHandlers/doReserveHandler');
 const setDriverHandler = require('../Handlers/utilsHandlers/setDriverHandler');
 
+const mpController = require("../Controllers/mercadopago")
+
 const router = Router();
+
+router.post("/mp", mpController)
 
 router.get('/trips', getTripsHandler);
 router.post('/trips/create', postTripHandler);
