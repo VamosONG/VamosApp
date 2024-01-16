@@ -35,7 +35,7 @@ function SolicitudViajeForm() {
         quantityPassengers: "",
     });
 
-    const [preferenceId, setPreferenceId] = useState(null);
+    
 
     const confirmationText = (
         <div>
@@ -99,6 +99,7 @@ function SolicitudViajeForm() {
                 preConfirm: async () => {
                   // Aquí manejas la lógica de reservar y pagar con Mercado Pago
                   await handlePayment();
+                  await dispatch(viajeConfirmado(infoMandarAlBack));
                 }
               });
             }
