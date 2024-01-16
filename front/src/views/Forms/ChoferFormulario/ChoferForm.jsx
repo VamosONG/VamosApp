@@ -72,14 +72,14 @@ const choferData = useSelector((state) => state.conductores)
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const validationForm = ValidateNewDriver(form)
-        setError(validationForm)
-        const hasError = Object.values(validationForm).some((error) => !!error)
+        // const validationForm = ValidateNewDriver(form)
+        // setError(validationForm)
+        // const hasError = Object.values(validationForm).some((error) => !!error)
 
-        console.log(form);
-        console.log(error);
+        // console.log(form);
+        // console.log(error);
 
-        if (!hasError) {
+        if (form) {
             const response = await axios.post('http://localhost:3001/drivers/create', form)
             if (response) {
                 Swal.fire({
@@ -129,7 +129,7 @@ const choferData = useSelector((state) => state.conductores)
 
         return (
             <form onSubmit={handleSubmit} >
-                <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' color='white' border='1px solid white' mx='2rem' w={{ base: '20rem', md: '40rem' }} scrollMarginX='auto'>
+                <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' color='white' border='1px solid white' mx='2rem' w={{ base: '20rem', md: '50rem' }} scrollMarginX='auto'>
                     <Heading>Datos del chofer</Heading>
                     <Box  >
                         <Flex flexDirection={{ base: 'column' }}>
@@ -137,12 +137,12 @@ const choferData = useSelector((state) => state.conductores)
                             <Center py={2} gap={4} flexDirection={{ base: 'column', md: 'row' }}>
                                 <FormControl isRequired>
                                     <FormLabel>Nombre</FormLabel>
-                                    <Input type='text' placeholder='name' name='name' onChange={handleChange} value={form.name} />
+                                    <Input type='text' placeholder='Ingrese su nombre' name='name' onChange={handleChange} value={form.name} />
                                     {error.name && <p>{error.name}</p>}
                                 </FormControl>
                                 <FormControl isRequired >
                                     <FormLabel>Apellido</FormLabel>
-                                    <Input type='text' placeholder='surname' name='surname' onChange={handleChange} value={form.surname} />
+                                    <Input type='text' placeholder='Ingrese su apellido' name='surname' onChange={handleChange} value={form.surname} />
                                     {error.surname && <p>{error.surname}</p>}
                                 </FormControl>
                                 <FormControl isRequired>
@@ -252,7 +252,7 @@ const choferData = useSelector((state) => state.conductores)
                                 {error.carImg && <p>{error.carImg}</p>}
                             </FormControl>
 
-                            <FormControl isRequired>
+                            <FormControl isRequired >
                                 <FormLabel>Fecha de Nac. SOAT</FormLabel>
                                 <Input
                                     placeholder="Select birthday and Time"
