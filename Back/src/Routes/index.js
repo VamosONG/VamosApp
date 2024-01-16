@@ -34,10 +34,13 @@ const getAdminsHandler = require('../Handlers/AdminHandlers/getAdminsHandler')
 const deleteAdminHandler = require('../Handlers/AdminHandlers/deleteAdminHandler')
 
 const filtershandler = require('../Handlers/filtersHandlers/filtersHandler');
+
 const getFilteredDriversHandler = require('../Handlers/filtersHandlers/getFilteredDriversHandler');
 const getReservesHandler = require('../Handlers/filtersHandlers/getReservesHandler');
-const doReservesHandler = require('../Handlers/utilsHandlers/doReserveHandler');
+const doReserveHandler = require('../Handlers/utilsHandlers/doReserveHandler');
 const setDriverHandler = require('../Handlers/utilsHandlers/setDriverHandler');
+
+const postPreference = require('../Handlers/MercadoPagoHandler/postPreference')
 
 const router = Router();
 
@@ -77,8 +80,11 @@ router.delete('/dashboard/admin', deleteAdminHandler);
 router.post('/offer/create', filtershandler);
 router.get('/drivers/filter', getFilteredDriversHandler);
 router.get('/trips/reserves', getReservesHandler);
-router.get('/trips/reserves/create', doReservesHandler);
-router.put('/trip/reserves/update',setDriverHandler);
+router.put('/trips/reserves/create', doReserveHandler);
+router.put('/trips/reserves/update',setDriverHandler);
+
+
+router.post('/merpago/create', postPreference);
 
 module.exports = router;
 

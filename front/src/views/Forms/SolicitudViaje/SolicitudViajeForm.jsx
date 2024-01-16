@@ -1,6 +1,6 @@
-import { useDispatch } from "react-redux";
-import { postNewViaje } from "../../../redux/actions";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { postNewViaje, viajeConfirmado } from "../../../redux/actions";
+import { useEffect, useState } from "react";
 
 import { Box, Center, useDisclosure } from '@chakra-ui/react'
 import {
@@ -10,10 +10,18 @@ import {
 } from '@chakra-ui/react'
 import Swal from 'sweetalert2' 
 
+import { renderToString } from 'react-dom/server';
+
+
+
 
 function SolicitudViajeForm() {
 
     const dispatch= useDispatch();
+     
+    const infoConfirmacionViaje= useSelector((state)=>state.infoConfirmacionViaje)
+    console.log(infoConfirmacionViaje)
+
 
     
     const [input,setInput]=useState({
@@ -24,11 +32,78 @@ function SolicitudViajeForm() {
         quantityPassengers:"",
       });
 
+    const confirmationText = (
+        <div>
+          <p>Origen: {infoConfirmacionViaje.origin}</p>
+          <p>Destino: {infoConfirmacionViaje.destination}</p>
+          <p>Cantidad de pasajeros: {infoConfirmacionViaje.quantityPassengers}</p>
+          <p>Precio final: {infoConfirmacionViaje.price}</p>
+        </div>
+    );
+
+
+    useEffect(() => {
+        if (infoConfirmacionViaje.id) {
+            const infoAmandarAlBack={
+                tripId:infoConfirmacionViaje.id,
+                userId:infoConfirmacionViaje.userId
+            }
+
+            Swal.fire({
+                title: "Confirmación de traslado",
+                html: renderToString(confirmationText),
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Mercado Pago",
+                htmlMode: true
+              }).then(async(result) => {
+                if (result.isConfirmed) {
+                    await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
+                  Swal.fire({
+                    title: "Viaje reservado",
+                    text: "Simulando que se abonó..",
+                    icon: "success"
+                  });
+                }
+              });
+    
+            }    
+
+     }, [infoConfirmacionViaje, dispatch, confirmationText]/* [dispatch, input, handleConfirmation] */);
+
+      
+
 
 
     const handleSubmit=async(event)=>{
         event.preventDefault();
+        await setInput({
+            ...input,
+            /* userId: "3027b2fa-4997-4068-9f6d-c847baa02291" */
+        })
+        /* const newInput={
+            ...input,
+            
+        } */
+        /* setInput(newInput); */
+        console.log(input)
         await dispatch(postNewViaje(input));
+        /* try {
+            const confirmedData = await dispatch(postNewViaje(input));
+    
+            if (confirmedData.id) {
+                handleConfirmation(confirmedData);
+            } else {
+                // Mostrar mensaje de error si la confirmación no tiene el formato esperado
+                console.error('Error: El objeto confirmado no tiene el formato esperado');
+            }
+        } catch (error) {
+            // Mostrar mensaje de error si hay un problema con la solicitud
+            console.error('Error en la solicitud:', error.message);
+        } */
+        
     }
 
     const handleChange=async(e)=>{

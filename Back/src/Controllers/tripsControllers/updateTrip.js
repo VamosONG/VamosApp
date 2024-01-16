@@ -29,4 +29,4 @@ const updateTrip = async (id, newData) => {
     }
 };
 
-module.exports = { updateTrip };
+module.exports = updateTrip;

@@ -9,6 +9,7 @@ import HomeComponent from './views/home/homeCompone/home';
 import NavBar from './components/navBar/NavBar'
 import About from './components/about/About'
 import DetailChofer from './views/detailChofer/DetailChofer';
+import Product from './components/product/Product';
 // Hooks
 import {Routes, Route} from 'react-router-dom'
 import SolicitudViajeForm from './views/Forms/SolicitudViaje/SolicitudViajeForm';
@@ -30,6 +31,8 @@ function App() {
         <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
         <Route path='/detail' element={<DetailChofer/>}/>
         <Route path='/solicitud' element={<Solicitud/>}/>
+        <Route path='/product' element={<Product/>}/>
+
       </Routes>
       <HomeComponent/>
       {/* <Paginado/> */}
