@@ -1,6 +1,7 @@
 import axios from 'axios';
 import choferes from '../../utils/chofer'
 import Swal from 'sweetalert2'
+import { DELETE_DRIVER } from './action.types';
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE = "PAGINATE"
@@ -43,6 +44,20 @@ export const createNewChofer = (data) => {
         } catch (error) {
             alert('¡Error en la craecion de chofer!');
             throw new Error(error);
+        }
+    }
+}
+
+export const deleteDriverAction = (id) => {
+    return async (dispatch) => {
+        try {
+            const {data} = await axios.delete(`http://localhost:3001/drivers/${id}`)
+            dispatch({
+                type: DELETE_DRIVER,
+                payload: data
+            })
+        } catch (error) {
+            console.error(error);
         }
     }
 }

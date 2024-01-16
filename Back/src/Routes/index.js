@@ -57,7 +57,7 @@ router.delete('/user', deleteUserHandler);
 router.get('/drivers', getDriversHandler);
 router.post('/drivers/create', postDriverHandler);
 router.put('/drivers/update', updateDriverHandler);
-router.delete('/drivers', deleteDriverHandler);
+router.delete('/drivers/:id', deleteDriverHandler);
 
 router.get('/airports', getAirportsHandler);
 router.post('/airports/create', postAirportHandler);

@@ -1,3 +1,4 @@
+import { DELETE_DRIVER } from "../actions/action.types";
 import { CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_SOLICITUDES, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
 
 
@@ -28,6 +29,12 @@ const reducer = (state = initialState, action) => {
                 pageConductores: state.conductores.splice(0, state.cantConductoresPorPag),
 
             };
+        
+        case DELETE_DRIVER:
+            return {
+                ...state, 
+                conductores: action.payload
+            }
         case PAGINATE:
             const nextPage = state.currentPage + 1;
             const prevPage = state.currentPage - 1;
