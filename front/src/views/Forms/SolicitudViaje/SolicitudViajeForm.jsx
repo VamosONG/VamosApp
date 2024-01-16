@@ -117,12 +117,15 @@ function SolicitudViajeForm() {
         await dispatch(postNewViaje(input));
 
         
-          const handleChange = async (e) => {
-            setInput({
-              ...input,
-              [e.target.name]: e.target.value
-            })
-          }
+
+        setInput({
+            ...input,
+            [e.target.name]:e.target.value
+        })
+    }
+  
+    const currentDate = new Date().toISOString().split('T')[0];
+
 
     return (
 
@@ -184,19 +187,20 @@ function SolicitudViajeForm() {
 
                     <Center py={2} gap={4} >
                         <FormControl isRequired>
-                            <FormLabel>Día de recojida</FormLabel>
+                            <FormLabel>Fecha</FormLabel>
                             <Input
                                 placeholder="Select Date and Time"
                                 size="md"
                                 type="date"
                                 name='date'
                                 value={input.date}
-                                onChange={handleChange} />
+                                onChange={handleChange}
+                                min={currentDate} />
                         </FormControl>
 
 
                         <FormControl isRequired>
-                            <FormLabel>Hora de recojida</FormLabel>
+                            <FormLabel>Hora</FormLabel>
                             <Input 
                                 type='time' 
                                 placeholder='Hora' 
