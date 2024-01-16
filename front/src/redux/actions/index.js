@@ -13,6 +13,7 @@ export const NEW_USER = 'NEW_USER'
 export const LOGOUT = 'LOGOUT'
 export const CREATE_CHOFER = 'CREATE_CHOFER'
 export const VIAJE_CONFIRMADO = 'VIAJE_CONFIRMADO'
+export const GET_FILTERED = 'GET_FILTERED'
 
 
 export const getAllConductores = () => (dispatch) => {
@@ -60,7 +61,7 @@ export const postNewViaje = (infoViaje) => {
 
 export const getSolicitudes = () =>{
     return async(dispatch)=> {
-        const endpoint= 'http://localhost:3001/trips'
+        const endpoint= 'http://localhost:3001/trips/reserves' //Se cambió a la ruta con viajes reservados
         try {
             const {data}= await axios.get(endpoint)
             console.log(data);
@@ -162,6 +163,23 @@ export const viajeConfirmado = (info) => {
             console.log(data)
             dispatch({
                 type: VIAJE_CONFIRMADO,
+                payload: data
+            })
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            console.log(error.message)
+        };
+    };
+};
+
+export const filtrarConductores = (info) => {
+    console.log(info)
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`http://localhost:3001/drivers/filter`, info);
+            console.log(data)
+            dispatch({
+                type: GET_FILTERED,
                 payload: data
             })
         } catch (error) {
