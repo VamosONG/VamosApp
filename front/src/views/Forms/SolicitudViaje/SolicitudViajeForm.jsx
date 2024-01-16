@@ -2,6 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { postNewViaje, viajeConfirmado } from "../../../redux/actions";
 import { useEffect, useState } from "react";
 
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+import axios from 'axios';
+
 import { Box, Center, useDisclosure } from '@chakra-ui/react'
 import {
     FormControl,
@@ -32,6 +35,8 @@ function SolicitudViajeForm() {
         quantityPassengers:"",
       });
 
+      const [preferenceId, setPreferenceId] = useState(null);
+
     const confirmationText = (
         <div>
           <p>Origen: {infoConfirmacionViaje.origin}</p>
@@ -41,6 +46,70 @@ function SolicitudViajeForm() {
         </div>
     );
 
+    useEffect(() => {
+        initMercadoPago('TEST-35665577-40d5-4aa6-8db1-3f478f995b3b', {
+            locale: "es-PE"
+        });
+    }, []);
+
+    const createPreference = async () => {
+        try {
+            const response = await axios.post("http://localhost:3001/merpago/create", {
+                origin: input.origin,
+                destination: input.destination,
+                price: 100, // Cambia esto según el precio real
+                quantityPassengers: input.quantityPassengers,
+            });
+
+            const { id } = response.data;
+            return id;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handlePayment = async () => {
+        const id = await createPreference();
+        if (id) {
+            setPreferenceId(id);
+
+            await Swal.fire({
+                title: "Procesando pago...",
+                html: "<p>Redirigiendo a Mercado Pago...</p>",
+                icon: "info",
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+            });
+
+
+
+            const mercadoPagoWindow = window.open(`https://www.mercadopago.com.pe/checkout/v1/redirect?preference_id=${id}`, '_blank');
+            
+            const checkPaymentStatus = setInterval(async () => {
+                if (mercadoPagoWindow.closed) {
+                    clearInterval(checkPaymentStatus);
+                    // Verificar el estado del pago aquí, por ejemplo, haciendo una solicitud al servidor
+                    const paymentStatus = await verificarEstadoDePago(preferenceId);
+                    if (paymentStatus === 'approved') {
+                                         
+                        await dispatch(viajeConfirmado(infoAmandarAlBack));
+                        
+                        Swal.fire({
+                            title: "Viaje reservado",
+                            text: "El pago se ha completado con éxito.",
+                            icon: "success"
+                        });
+                    } else {
+                        // El pago no fue aprobado, puedes manejarlo de acuerdo a tus necesidades
+                        console.log('El pago no fue aprobado');
+                    }
+                }
+            }, 1000); // Puedes ajustar el intervalo según tus necesidades
+        
+        }
+    };
 
     useEffect(() => {
         if (infoConfirmacionViaje.id) {
@@ -56,18 +125,18 @@ function SolicitudViajeForm() {
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Mercado Pago",
-                htmlMode: true
-              }).then(async(result) => {
-                if (result.isConfirmed) {
-                    await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
-                  Swal.fire({
-                    title: "Viaje reservado",
-                    text: "Simulando que se abonó..",
-                    icon: "success"
-                  });
+                confirmButtonText: "Reservar y pagar",
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown',
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp',
+                },
+                preConfirm: async () => {
+                    // Aquí manejas la lógica de reservar y pagar con Mercado Pago
+                    await handlePayment();
                 }
-              });
+            })
     
             }    
 

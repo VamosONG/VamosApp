@@ -9,8 +9,8 @@ const postPreference = async (req, res) => {
       const body = {
         items: [
           {
-            title: req.body.titulo,
-            quantity: Number(req.body.quantity),
+            title:`${req.body.origin} ${req.body.destination}` ,
+            quantity: Number(req.body.quantityPassengers),
             unit_price: Number(req.body.price),
             currency_id: "PE",
           },
