@@ -40,6 +40,8 @@ const getReservesHandler = require('../Handlers/filtersHandlers/getReservesHandl
 const doReserveHandler = require('../Handlers/utilsHandlers/doReserveHandler');
 const setDriverHandler = require('../Handlers/utilsHandlers/setDriverHandler');
 
+const postPreference = require('../Handlers/MercadoPagoHandler/postPreference')
+
 const router = Router();
 
 router.get('/trips', getTripsHandler);
@@ -81,6 +83,8 @@ router.get('/trips/reserves', getReservesHandler);
 router.put('/trips/reserves/create', doReserveHandler);
 router.put('/trips/reserves/update',setDriverHandler);
 
+
+router.post('/merpago/create', postPreference);
 
 module.exports = router;
 
