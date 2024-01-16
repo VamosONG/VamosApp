@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { postNewViaje, viajeConfirmado } from "../../../redux/actions";
 import { useEffect, useState } from "react";
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 
 import { Box, Center, useDisclosure } from '@chakra-ui/react'
 import {
@@ -41,8 +42,35 @@ function SolicitudViajeForm() {
         </div>
     );
 
+    const handleBuy = async () => {
+        const id = await createPreference();
+        if (id) {
+          setPreferenceId(id);
+      
+          // Inicializa MercadoPago con tu clave de API
+          initMercadoPago('TEST-35665577-40d5-4aa6-8db1-3f478f995b3b', {
+            locale: "es-PE"
+        });
+        }
+      };
+      const [preferenceId, setPreferenceId] = useState(null);
+    const createPreference = async () => {
+        try {
+          const response = await axios.post("http://localhost:3001/merpago/create", { 
+            titulo: `${input.origin}-${input.destination}`,
+            price: 4, //saca precio del excel
+            quantity: 1,
+          });
 
+          const { id } = response.data;
+          return id;
+        } catch (error) {
+          console.log(error);
+        }
+      };
     useEffect(() => {
+       
+        
         if (infoConfirmacionViaje.id) {
             const infoAmandarAlBack={
                 tripId:infoConfirmacionViaje.id,
@@ -56,11 +84,12 @@ function SolicitudViajeForm() {
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Mercado Pago",
+                confirmButtonText: Mp,
                 htmlMode: true
               }).then(async(result) => {
                 if (result.isConfirmed) {
-                    await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
+                    await dispatch(viajeConfirmado(infoAmandarAlBack)) 
+                    //Agregado para guardar viaje en DB
                   Swal.fire({
                     title: "Viaje reservado",
                     text: "Simulando que se abonó..",
@@ -185,7 +214,7 @@ function SolicitudViajeForm() {
                         </FormControl>
 
                 <Box mt={4}>
-                    <Button colorScheme='teal' variant='outline' w='100%' type='submit'>
+                    <Button colorScheme='teal' variant='outline' w='100%' type='submit' onClick={handleBuy}>
                         Reservar viaje</Button>
                 </Box>
                     </Center>

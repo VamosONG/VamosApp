@@ -22,23 +22,7 @@ const postPreference = async (req, res) => {
         },
         auto_return: "approved",
       };
-    // try {
-    //   const items = req.body.items.map((item) => ({
-    //     title: item.description,
-    //     quantity: Number(item.quantity),
-    //     unit_price: Number(item.price),
-    //     currency_id: "PE",
-    //   }));
-  
-    //   const body = {
-    //     items,
-    //     back_urls: {
-    //       success: "https://www.youtube.com/@onthecode",
-    //       failure: "https://www.youtube.com/@onthecode",
-    //       pending: "https://www.youtube.com/@onthecode",
-    //     },
-    //     auto_return: "approved",
-    //   };
+    
   
       const preference = new Preference(/*req.mercadoPagoClient*/ client);
       const result = await preference.create({ body });
