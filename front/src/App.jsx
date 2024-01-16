@@ -16,6 +16,8 @@ import SolicitudViajeForm from './views/Forms/SolicitudViaje/SolicitudViajeForm'
 import SolicitudesDeViajes from './components/solicitudes/solicitudesDeViajes';
 import Solicitud from './components/solicitudes/solicitud';
 import { Link } from 'react-router-dom';
+import ReserveComfirmed from './views/Reserve/ReserveConfirmed';
+import ReserveReject from './views/Reserve/ReserveReject';
 
 function App() {
 
@@ -31,7 +33,9 @@ function App() {
         <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
         <Route path='/detail' element={<DetailChofer/>}/>
         <Route path='/solicitud' element={<Solicitud/>}/>
-        <Route path='/product' element={<Product/>}/>
+        <Route path='/reserve/confirmed' element={<ReserveComfirmed/>}/>
+        <Route path='/reserve/rejected' element={<ReserveReject/>}/>
+
 
       </Routes>
       <HomeComponent/>

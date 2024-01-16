@@ -1,7 +1,7 @@
 const {MercadoPagoConfig, Preference} = require("mercadopago");
 
 const client = new MercadoPagoConfig({
-    accessToken: "TEST-6471920902445661-011513-d17ca612b6c065b84fa9d327e05c61fb-1388941507",
+    accessToken: "TEST-5388314586948191-011612-cbea2e66ec6860a857492458a2203a82-59024896",
   });
 
 const postPreference = async (req, res) => {
@@ -9,10 +9,10 @@ const postPreference = async (req, res) => {
       const body = {
         items: [
           {
-            title: req.body.titulo,
-            quantity: Number(req.body.quantity),
+            title:`${req.body.origin} ${req.body.destination}` ,
+            quantity: Number(req.body.quantityPassengers),
             unit_price: Number(req.body.price),
-            currency_id: "PE",
+            currency_id: "ARS",
           },
         ],
         back_urls: {
@@ -22,24 +22,7 @@ const postPreference = async (req, res) => {
         },
         auto_return: "approved",
       };
-    // try {
-    //   const items = req.body.items.map((item) => ({
-    //     title: item.description,
-    //     quantity: Number(item.quantity),
-    //     unit_price: Number(item.price),
-    //     currency_id: "PE",
-    //   }));
-  
-    //   const body = {
-    //     items,
-    //     back_urls: {
-    //       success: "https://www.youtube.com/@onthecode",
-    //       failure: "https://www.youtube.com/@onthecode",
-    //       pending: "https://www.youtube.com/@onthecode",
-    //     },
-    //     auto_return: "approved",
-    //   };
-  
+    
       const preference = new Preference(/*req.mercadoPagoClient*/ client);
       const result = await preference.create({ body });
       res.json({
