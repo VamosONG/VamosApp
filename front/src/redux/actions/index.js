@@ -40,18 +40,20 @@ export const createNewChofer = (data) => {
 
 export const postNewViaje = (infoViaje) => {
     console.log(infoViaje)
+    infoViaje.userId= "3027b2fa-4997-4068-9f6d-c847baa02291"
     return async (dispatch) => {
         try {
             const { data } = await axios.post(`http://localhost:3001/offer/create`, infoViaje);
             console.log(data)
-            return dispatch({
+            await dispatch({
                 type: POST_NEW_VIAJE,
                 payload: data
             })
 
         } catch (error) {
             window.alert('¡Error en la solicitud!');
-            throw new Error(error);
+            /* throw new Error(error); */
+            console.log(error.message)
         }
     }
 }
