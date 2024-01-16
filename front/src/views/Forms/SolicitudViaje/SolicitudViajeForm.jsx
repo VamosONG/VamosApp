@@ -116,8 +116,9 @@ function SolicitudViajeForm() {
 
         await dispatch(postNewViaje(input));
 
+    }
+    const handleChange=async(e)=>{
         
-
         setInput({
             ...input,
             [e.target.name]:e.target.value
