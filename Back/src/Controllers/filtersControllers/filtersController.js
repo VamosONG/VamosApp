@@ -1,10 +1,11 @@
 const postTrip = require('../tripsControllers/postTrip');
-const {Trip} = require('../../dataBase');
 
 const filterOffer = async ( userId, driverId, origin, destination, date, hour, quantityPassengers ) => {
     try {
         const price=getPrices(origin, destination, quantityPassengers);
-console.log(userId, driverId, origin, destination, date, hour, quantityPassengers, price);
+        if(price===0)
+            throw new Error(`No se encontraron viajes disponibles desde ${origin} a ${destination} para ${quantityPassengers} pasajeros.`)
+
         const newReservation = await postTrip(userId, driverId, date, hour, origin, destination, quantityPassengers, price);
         //Se crea el objeto trip, con el precio estipulado por origen, destino y cant. pasajeros.
 
@@ -12,22 +13,7 @@ console.log(userId, driverId, origin, destination, date, hour, quantityPassenger
             {stateOfTrip: 'offer'}
         )
 
-        return newReservation;
-        /* const objeto={
-            "id": "b572b9aa-b391-4162-bf19-282b2511bbe2",
-            "userId": "a66bde7e-6716-4da0-b1b0-c84e3fb0298c",
-            "driverId": null,
-            "date": "2024-02-05T00:00:00.000Z",
-            "hour": "11:00",
-            "origin": "Disneylandia",
-            "destination": "Miami",
-            "quantityPassengers": 4,
-            "price": "300",
-            "stateOfTrip": "offer",
-            "UserId": null,
-            "DriverId": null
-          } 
-        return objeto*/
+        return newReservation;        
     } catch (error) {
         throw new Error(`Error al buscar coincidencias: ${error.message}`);
     }
@@ -35,28 +21,83 @@ console.log(userId, driverId, origin, destination, date, hour, quantityPassenger
 
 const getPrices=(origin, destination, quantityPassengers)=>{
 
-    //Ejemplo. Cuando tengamos los datos se solicitaran a bd.
+    const orig = origin.toLowerCase();
+    const dest = destination.toLowerCase();
 
-    /* //Desde airp1 a zon1 o visceversa, en auto valor 100, en van valor 200.
-    if(((origin==='airp1')&&(destination==='zon1')) || ((origin==='zon1')&&(destination==='airp1'))){
-        if(quantityPassengers<=4 && quantityPassengers>0)
-            return 100;
-        else{
-            if(quantityPassengers>4 && quantityPassengers<=15)
-            return 200;
+    if(((orig==='tumbes')&&(dest==='decameron punta sal')) || ((origin==='decameron punta sal')&&(destination==='tumbes'))){
+        switch(quantityPassengers){
+            case (quantityPassengers>0 && quantityPassengers<=4): 
+                return 200;
+                break;
+            case (quantityPassengers>4 && quantityPassengers<=6): 
+                return 240;
+                break;
+            case (quantityPassengers>6 && quantityPassengers<=10): 
+                return 280;
+                break;  
+            default:0;
         }
     }
     
-    //Desde airp2 a zon1 o visceversa, en auto valor 150, en van valor 300.
-    if(((origin==='airp2')&&(destination==='zon1')) || ((origin==='zon1')&&(destination==='airp2'))){
-        if(passengers<=4 && passengers>0)
-            return 150;
-        else{
-            if(passengers>4 && passengers<=15)
-            return 350;
+    if(((orig==='tumbes')&&(dest==='zorritos')) || ((orig==='zorritos')&&(dest==='tumbes'))){
+        switch(quantityPassengers){
+            case (quantityPassengers>0 && quantityPassengers<=4): 
+                return 100;
+                break;
+            case (quantityPassengers>4 && quantityPassengers<=6): 
+                return 220;
+                break;  
+            default:0;
         }
-    } */
-    return '100.00'
+    }
+
+    if(((orig==='tumbes')&&(dest==='mancora')) || ((orig==='mancora')&&(dest==='tumbes'))){
+        switch(quantityPassengers){
+            case (quantityPassengers>0 && quantityPassengers<=4): 
+                return 240;
+                break;
+            case (quantityPassengers>4 && quantityPassengers<=6): 
+                return 300;
+                break;
+            case (quantityPassengers>6 && quantityPassengers<=10): 
+                return 340;
+                break;  
+            default:0;
+        }
+    }
+
+    if(((orig==='talara')&&(dest==='mancora')) || ((orig==='mancora')&&(dest==='talara'))){
+        switch(quantityPassengers){
+            case (quantityPassengers>0 && quantityPassengers<=4): 
+                return 169;
+                break;
+            case (quantityPassengers>4 && quantityPassengers<=6): 
+                return 240;
+                break;
+            case (quantityPassengers>6 && quantityPassengers<=10): 
+                return 289;
+                break;
+            case (quantityPassengers>10 && quantityPassengers<=15): 
+                return 380;
+                break;  
+            default:0;
+        }
+    }
+
+    if(((orig==='talara')&&(dest==='decameron')) || ((orig==='decameron')&&(dest==='talara'))){
+        switch(quantityPassengers){
+            case (quantityPassengers>0 && quantityPassengers<=4): 
+                return 240;
+                break;
+            case (quantityPassengers>4 && quantityPassengers<=6): 
+                return 300;
+                break;
+            case (quantityPassengers>6 && quantityPassengers<=10): 
+                return 360;
+                break;
+            default:0;
+        }
+    }
 }
 
 module.exports = filterOffer;
