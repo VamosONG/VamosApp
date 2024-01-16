@@ -36,6 +36,6 @@ export async function POST(req, res) {
         return response
     } catch (error) {
         console.error('Error al subir imagen a Cloudinary:', error);
-        return res.status(500).json({ message: 'Error interno del servidor' });
+        return res.status(500).json({ message: 'Error interno del serv|idor' });
     }
 }

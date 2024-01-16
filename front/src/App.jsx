@@ -16,6 +16,7 @@ import SolicitudViajeForm from './views/Forms/SolicitudViaje/SolicitudViajeForm'
 import SolicitudesDeViajes from './components/solicitudes/solicitudesDeViajes';
 import Solicitud from './components/solicitudes/solicitud';
 import { Link } from 'react-router-dom';
+import DriverTableView from './views/driversViewAdmin/driverTable';
 
 function App() {
 
@@ -29,7 +30,8 @@ function App() {
         <Route path= '/about' element={<About/>} />
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
         <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
-        <Route path='/detail' element={<DetailChofer/>}/>
+        {/* <Route path='/detail' element={<DetailChofer/>}/> */}
+        <Route path='/detail' element={<DriverTableView/>}/>
         <Route path='/solicitud' element={<Solicitud/>}/>
         <Route path='/product' element={<Product/>}/>
 

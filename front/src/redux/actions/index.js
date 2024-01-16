@@ -8,19 +8,28 @@ export const GET_ALL_CONDUCTORES = "GET_ALL_CONDUCTORES"
 export const POST_NEW_VIAJE = "POST_NEW_VIAJE"
 export const LOGIN = "LOGIN"
 export const ID_SOLICITUD = "ID_SOLICITUD"
-export const GET_SOLICITUDES= "GET_SOLICITUDES"
+export const GET_SOLICITUDES = "GET_SOLICITUDES"
 export const NEW_USER = 'NEW_USER'
 export const LOGOUT = 'LOGOUT'
 export const CREATE_CHOFER = 'CREATE_CHOFER'
 export const VIAJE_CONFIRMADO = 'VIAJE_CONFIRMADO'
 
 
-export const getAllConductores = () => (dispatch) => {
-    //console.log(choferes)
-    dispatch({
-        type: GET_ALL_CONDUCTORES,
-        payload: choferes
-    });
+export const getAllConductores = () => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios(`http://localhost:3001/drivers`);
+            dispatch({
+                type: GET_ALL_CONDUCTORES,
+                payload: data
+            });
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+
 }
 
 export const createNewChofer = (data) => {
@@ -40,7 +49,7 @@ export const createNewChofer = (data) => {
 
 export const postNewViaje = (infoViaje) => {
     console.log(infoViaje)
-    infoViaje.userId= "3027b2fa-4997-4068-9f6d-c847baa02291"
+    infoViaje.userId = "3027b2fa-4997-4068-9f6d-c847baa02291"
     return async (dispatch) => {
         try {
             const { data } = await axios.post(`http://localhost:3001/offer/create`, infoViaje);
@@ -58,11 +67,11 @@ export const postNewViaje = (infoViaje) => {
     }
 }
 
-export const getSolicitudes = () =>{
-    return async(dispatch)=> {
-        const endpoint= 'http://localhost:3001/trips'
+export const getSolicitudes = () => {
+    return async (dispatch) => {
+        const endpoint = 'http://localhost:3001/trips'
         try {
-            const {data}= await axios.get(endpoint)
+            const { data } = await axios.get(endpoint)
             console.log(data);
             return dispatch({
                 type: GET_SOLICITUDES,
@@ -73,8 +82,8 @@ export const getSolicitudes = () =>{
             alert("error")
         }
     }
-    }
-   
+}
+
 /* export const getAllConductores=()=>{
     try {
 
