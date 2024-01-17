@@ -51,7 +51,7 @@ function SolicitudesDeViajes() {
         {solicitudesDeViajes.map((solicitud) => (
 
           <Box mt={4} key={solicitud.id} style={estiloTarjeta}>
-              <Link to='/solicitud' onClick={handlerClick(solicitud.id)}>
+              <Link to='/solicitud' onClick={()=>handlerClick(solicitud.id)}>
             <Button /* colorScheme='teal' variant='outline' */ /* w='100%' */ type='submit'>
             | ASIGNAR CONDUCTOR | 
             <p style={estiloParrafo}>

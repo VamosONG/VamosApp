@@ -90,19 +90,28 @@ function SolicitudViajeForm() {
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Pagar con MercadoPago",
-                showClass: {
-                  popup: 'animate__animated animate__fadeInDown',
-                },
-                hideClass: {
-                  popup: 'animate__animated animate__fadeOutUp',
-                },
-                preConfirm: async () => {
-                  // Aquí manejas la lógica de reservar y pagar con Mercado Pago
-                  await handlePayment();
-                  await dispatch(viajeConfirmado(infoMandarAlBack));
-                }
-              });
-            }
+
+                /* showClass: {
+                    popup: 'animate__animated animate__fadeInDown',
+                  },
+                  hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp',
+                  },
+                  preConfirm: async () => {
+                    
+                    await handlePayment(); */
+
+
+                htmlMode: true
+            }).then(async(result) => {
+              if (result.isConfirmed) {
+                  await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
+                Swal.fire({
+                  title: "Viaje reservado",
+                  text: "Simulando que se abonó..",
+                  icon: "success"
+                });
+            }})}
           }, [infoConfirmacionViaje, dispatch, confirmationText]);
         ;
 

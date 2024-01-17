@@ -25,6 +25,7 @@ const Solicitud =()=> {
   // console.log(date) 
 
   const id = useSelector((state) => state.idSolicitud)
+  console.log(id)
   const solicitudesDeViajes = useSelector((state) => state.solicitudesDeViajes)
   const conductores = useSelector((state) => state.conductoresFiltrados)
 
