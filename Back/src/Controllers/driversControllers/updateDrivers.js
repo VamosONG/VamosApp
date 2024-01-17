@@ -1,6 +1,6 @@
 const {Driver} = require ("../../dataBase");
 
-const updateDriver = async(id,newData) => {
+const updateDriver = async (id,newData) => {
     try {
         const driverUpdate = await Driver.findByPk(id);
 
@@ -8,10 +8,14 @@ const updateDriver = async(id,newData) => {
             throw new Error(`El conductor con id ${id} no existe en la base de datos.`);
         }
 
-        await driverUpdate.update(newData);
-        await driverUpdate.reload();
-
-        return driverUpdate;
+        const dataUpdate = await Driver.update(newData,{
+            where: {id: id}
+        });
+        if (!dataUpdate) {
+            throw new Error(`No se actualizaron los datos al id: ${id}`);
+        }
+        
+        return { message: 'Conductor actualizado exitosamente', dataUpdate};
     } catch (error) {
         throw new Error(error.message);
     }
