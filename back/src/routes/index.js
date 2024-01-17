@@ -39,6 +39,7 @@ const getFilteredDriversHandler = require('../handlers/filtersHandlers/getFilter
 const getReservesHandler = require('../handlers/filtersHandlers/getReservesHandler');
 const doReserveHandler = require('../handlers/utilsHandlers/doReserveHandler');
 const setDriverHandler = require('../handlers/utilsHandlers/setDriverHandler');
+const getDriversDispHandler = require('../handlers/filtersHandlers/getDriversDispHandler');
 
 const postPreference = require('../handlers/mercadoPagoHandler/postPreference')
 
@@ -81,6 +82,7 @@ router.delete('/dashboard/admin', deleteAdminHandler);
 
 router.post('/offer/create', filtershandler);
 router.get('/drivers/filter', getFilteredDriversHandler);
+router.post('/drivers/disp', getDriversDispHandler);
 router.get('/trips/reserves', getReservesHandler);
 router.put('/trips/reserves/create', doReserveHandler);
 router.put('/trips/reserves/update',setDriverHandler);
