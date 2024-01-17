@@ -2,13 +2,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { postNewViaje, viajeConfirmado } from "../../../redux/actions";
 import { useEffect, useState } from "react";
 
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+import axios from 'axios';
+
 import { Box, Center, useDisclosure } from '@chakra-ui/react'
 import {
     FormControl,
     FormLabel,
     Input, Select, Button, Heading, Stack
 } from '@chakra-ui/react'
-import Swal from 'sweetalert2' 
+import Swal from 'sweetalert2'
 
 import { renderToString } from 'react-dom/server';
 
@@ -17,61 +20,93 @@ import { renderToString } from 'react-dom/server';
 
 function SolicitudViajeForm() {
 
-    const dispatch= useDispatch();
-     
-    const infoConfirmacionViaje= useSelector((state)=>state.infoConfirmacionViaje)
+    const dispatch = useDispatch();
+
+    const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
     console.log(infoConfirmacionViaje)
 
 
+
+    const [input, setInput] = useState({
+        origin: "",
+        destination: "",
+        date: "",
+        hour: "",
+        quantityPassengers: "",
+    });
+
     
-    const [input,setInput]=useState({
-        origin:"",
-        destination:"",
-        date:"",
-        hour:"",
-        quantityPassengers:"",
-      });
 
     const confirmationText = (
         <div>
-          <p>Origen: {infoConfirmacionViaje.origin}</p>
-          <p>Destino: {infoConfirmacionViaje.destination}</p>
-          <p>Cantidad de pasajeros: {infoConfirmacionViaje.quantityPassengers}</p>
-          <p>Precio final: {infoConfirmacionViaje.price}</p>
+            <p>Origen: {infoConfirmacionViaje.origin}</p>
+            <p>Destino: {infoConfirmacionViaje.destination}</p>
+            <p>Cantidad de pasajeros: {infoConfirmacionViaje.quantityPassengers}</p>
+            <p>Precio final: {infoConfirmacionViaje.price}</p>
         </div>
     );
 
-
     useEffect(() => {
-        if (infoConfirmacionViaje.id) {
-            const infoAmandarAlBack={
-                tripId:infoConfirmacionViaje.id,
-                userId:infoConfirmacionViaje.userId
-            }
+        initMercadoPago('TEST-42b04001-0641-4889-8b14-97f17f509594', {
+            locale: "es-PE"
+        });
+    }, []);
 
-            Swal.fire({
+    const createPreference = async () => {
+        try {
+          const response = await axios.post("http://localhost:3001/merpago/create", {
+            origin: input.origin,
+            destination: input.destination,
+            price: 100, // Cambia esto según el precio real
+            quantityPassengers: input.quantityPassengers,
+          });
+    
+          const { id } = response.data;
+          return id;
+        } catch (error) {
+          console.log(error);
+        }}
+
+        const handlePayment = async () => {
+            const id = await createPreference();
+            if (id) {
+              // Redirigir a la página de pago de MercadoPago
+              window.location.href = `https://www.mercadopago.com.ar/checkout/v1/redirect?preference_id=${id}`;
+            }
+          };
+
+          useEffect(() => {
+            if (infoConfirmacionViaje.id) {
+              const infoAmandarAlBack = {
+                tripId: infoConfirmacionViaje.id,
+                userId: infoConfirmacionViaje.userId
+              }
+        
+              Swal.fire({
                 title: "Confirmación de traslado",
                 html: renderToString(confirmationText),
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Mercado Pago",
-                htmlMode: true
-              }).then(async(result) => {
-                if (result.isConfirmed) {
-                    await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
-                  Swal.fire({
-                    title: "Viaje reservado",
-                    text: "Simulando que se abonó..",
-                    icon: "success"
-                  });
+                confirmButtonText: "Pagar con MercadoPago",
+                showClass: {
+                  popup: 'animate__animated animate__fadeInDown',
+                },
+                hideClass: {
+                  popup: 'animate__animated animate__fadeOutUp',
+                },
+                preConfirm: async () => {
+                  // Aquí manejas la lógica de reservar y pagar con Mercado Pago
+                  await handlePayment();
+                  await dispatch(viajeConfirmado(infoMandarAlBack));
                 }
               });
-    
-            }    
+            }
+          }, [infoConfirmacionViaje, dispatch, confirmationText]);
+        ;
 
-     }, [infoConfirmacionViaje, dispatch, confirmationText]/* [dispatch, input, handleConfirmation] */);
+
 
 
     const handleSubmit=async(event)=>{
@@ -81,9 +116,8 @@ function SolicitudViajeForm() {
         })
 
         await dispatch(postNewViaje(input));
-        
-    }
 
+    }
     const handleChange=async(e)=>{
         
         setInput({
@@ -92,7 +126,11 @@ function SolicitudViajeForm() {
         })
     }
   
+    const currentDate = new Date().toISOString().split('T')[0];
+
+
     return (
+
   
       <div >
         <form onSubmit={handleSubmit}>
@@ -151,19 +189,20 @@ function SolicitudViajeForm() {
 
                     <Center py={2} gap={4} >
                         <FormControl isRequired>
-                            <FormLabel>Día de recojida</FormLabel>
+                            <FormLabel>Fecha</FormLabel>
                             <Input
                                 placeholder="Select Date and Time"
                                 size="md"
                                 type="date"
                                 name='date'
                                 value={input.date}
-                                onChange={handleChange} />
+                                onChange={handleChange}
+                                min={currentDate} />
                         </FormControl>
 
 
                         <FormControl isRequired>
-                            <FormLabel>Hora de recojida</FormLabel>
+                            <FormLabel>Hora</FormLabel>
                             <Input 
                                 type='time' 
                                 placeholder='Hora' 
@@ -196,7 +235,8 @@ function SolicitudViajeForm() {
         </form>
       </div>
       
+
     )
-  }
-  
-  export default SolicitudViajeForm
+}
+
+export default SolicitudViajeForm
