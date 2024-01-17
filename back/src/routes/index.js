@@ -33,8 +33,12 @@ const deleteReviewHandler = require('../handlers/reviewsHandlers/deleteReviewHan
 const getAdminsHandler = require('../handlers/adminHandlers/getAdminsHandler')
 const deleteAdminHandler = require('../handlers/adminHandlers/deleteAdminHandler')
 
-const filtershandler = require('../handlers/filtersHandlers/filtersHandler');
+const getPriceHandler = require('../handlers/pricesHandlers/getPriceHandler')
+const postPriceHandler = require('../handlers/pricesHandlers/postPriceHandler')
+const updatePriceHandler = require('../handlers/pricesHandlers/updatePriceHandler')
+const deletePriceHandler = require('../handlers/pricesHandlers/deletePriceHandler')
 
+const filtershandler = require('../handlers/filtersHandlers/filtersHandler');
 const getFilteredDriversHandler = require('../handlers/filtersHandlers/getFilteredDriversHandler');
 const getReservesHandler = require('../handlers/filtersHandlers/getReservesHandler');
 const doReserveHandler = require('../handlers/utilsHandlers/doReserveHandler');
@@ -80,6 +84,11 @@ router.delete('/reviews', deleteReviewHandler);
 
 router.get('/dashboard/admin', getAdminsHandler);
 router.delete('/dashboard/admin', deleteAdminHandler);
+
+router.get('/prices', getPriceHandler);
+router.post('/price/create', postPriceHandler);
+router.put('/price/update', updatePriceHandler);
+router.delete('/price', deletePriceHandler);
 
 router.post('/offer/create', filtershandler);
 router.get('/drivers/filter', getFilteredDriversHandler);

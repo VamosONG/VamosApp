@@ -1,18 +1,18 @@
 const {Airport} = require('../../dataBase')
-const { Op } = require('sequelize');
 
 const deleteAirport = async (id) => {
-
     try {
-          const delAir = await Airport.destroy({where: {id: id}});
+        const delAir = await Airport.findOne({where: {id: id}});
 
-          if (delAir === 0) {
-            return null; 
-        }
+        if(!delAir)
+            throw new Error(`No se encontro aeropuerto con id ${id} en base de datos.`);
+    else{        
+        await delAir.destroy();
 
-        return { message: 'Airport eliminated successfully' };
+        return delAir;
+    }
     } catch (error) {
-        throw new Error(error.message);
+        throw new Error(`Error al eliminar aeropuerto: ${error.message}`);
     }
 }
 
