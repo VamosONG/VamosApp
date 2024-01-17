@@ -3,7 +3,7 @@ const getDrivers = require('../../controllers/driversControllers/getDrivers');
 module.exports = async (req, res) => {
     try {
         //
-        const { airports, quantityPassengers  } = req.body;
+        const { airports, quantityPassengers, date } = req.body;
         let filteredDrivers = await getDrivers();
         
         if (airports) {
@@ -15,6 +15,13 @@ module.exports = async (req, res) => {
         if (quantityPassengers) {
             //Filtra conductores por capacidad de pasajeros.
             filteredDrivers = await filteredDrivers?.filter((driv => driv.capacityPassengers>=quantityPassengers));
+        }
+
+        if (date) {
+            //Filtra conductores disponibles en la fecha especificada.
+            filteredDrivers = await filteredDrivers?.filter((driv => {
+                return(!driv.trips?.some(viaje => viaje.date.split('T')[0] === date));               
+            }))
         }
 
         if(filteredDrivers)

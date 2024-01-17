@@ -5,7 +5,7 @@ module.exports=async(req,res)=>{
     
     try {
         const tripUpdated=await setDriver(tripId, driverId);
-        //Actualiza el estado del viaje a RESERVADO.
+        //Actualiza el estado del viaje a PENDIENTE.
 
         res.status(200).json(tripUpdated);
     } catch (error) {
