@@ -73,36 +73,14 @@ function SolicitudViajeForm() {
 
      }, [infoConfirmacionViaje, dispatch, confirmationText]/* [dispatch, input, handleConfirmation] */);
 
-      
-
-
 
     const handleSubmit=async(event)=>{
         event.preventDefault();
         await setInput({
             ...input,
-            /* userId: "3027b2fa-4997-4068-9f6d-c847baa02291" */
         })
-        /* const newInput={
-            ...input,
-            
-        } */
-        /* setInput(newInput); */
-        console.log(input)
+
         await dispatch(postNewViaje(input));
-        /* try {
-            const confirmedData = await dispatch(postNewViaje(input));
-    
-            if (confirmedData.id) {
-                handleConfirmation(confirmedData);
-            } else {
-                // Mostrar mensaje de error si la confirmación no tiene el formato esperado
-                console.error('Error: El objeto confirmado no tiene el formato esperado');
-            }
-        } catch (error) {
-            // Mostrar mensaje de error si hay un problema con la solicitud
-            console.error('Error en la solicitud:', error.message);
-        } */
         
     }
 
@@ -126,24 +104,48 @@ function SolicitudViajeForm() {
                         <FormControl isRequired>
                             <FormLabel>Desde</FormLabel>
                             <Select placeholder='Selecciona el origen' name='origin' onChange={handleChange}>
-                                <option>Aeropuerto Talara</option>
-                                <option>Aeropuerto Tumbes</option>
-                                <option>Zona 1</option>
-                                <option>Zona 2</option>
-                                <option>Zona 3</option>
-                                <option>Zona 4</option>
+                                <option>AEROPUERTO TALARA</option>
+                                <option>AEROPUERTO TUMBES</option>
+                                <option>DECAMERON PUNTA SAL</option>
+                                <option>ZORRITOS</option>
+                                <option>MANCORA</option>
+                                <option>DECAMERON</option>
                             </Select>
                         </FormControl>
                         <FormControl>
                             <FormLabel>Hasta</FormLabel>
-                            <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
-                            <option>Aeropuerto Talara</option>
-                                <option>Aeropuerto Tumbes</option>
-                                <option>Zona 1</option>
-                                <option>Zona 2</option>
-                                <option>Zona 3</option>
-                                <option>Zona 4</option>
-                            </Select>
+                            {input.origin==='AEROPUERTO TALARA'?(
+                                <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
+                                <option>MANCORA</option>
+                                <option>DECAMERON</option>
+                                </Select>
+                            ):(
+                                input.origin==='AEROPUERTO TUMBES'?(
+                                    <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
+                                    <option>DECAMERON PUNTA SAL</option>
+                                    <option>ZORRITOS</option>
+                                    <option>MANCORA</option>
+                                    </Select>
+                            ):(
+                                input.origin==='MANCORA'?(
+                                <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
+                                <option>AEROPUERTO TALARA</option>
+                                <option>AEROPUERTO TUMBES</option>
+                                </Select>
+                                ):(input.origin==='DECAMERON PUNTA SAL'?(
+                                    <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
+                                    <option>AEROPUERTO TUMBES</option>
+                                    </Select>
+                                    ):(input.origin==='ZORRITOS'?(
+                                        <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
+                                        <option>AEROPUERTO TUMBES</option>
+                                        </Select>
+                                        ):(input.origin==='DECAMERON'?(
+                                            <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
+                                            <option>AEROPUERTO TALARA</option>
+                                            </Select>
+                                            ):(null))))))}
+                       
                         </FormControl>
                     </Center>
 

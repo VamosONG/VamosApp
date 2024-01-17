@@ -6,15 +6,15 @@ import {
     Tr,
     Th,
     Td,
-    TableCaption,
-    TableContainer, Button, Flex, useDisclosure, Link
+    TableCaption, Avatar, Tooltip,
+    TableContainer, Button, Flex, useDisclosure, Link, Collapse, Box
 } from '@chakra-ui/react'
 
 import { DeleteIcon, EditIcon, WarningIcon } from '@chakra-ui/icons'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteDriverAction, getAllConductores } from '../../redux/actions'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import {
     AlertDialog,
@@ -26,12 +26,18 @@ import {
     AlertDialogCloseButton,
 } from '@chakra-ui/react'
 import Swal from 'sweetalert2'
+import UpdateDriverData from '../Forms/ChoferFormulario/UpdateChoferForm'
+import ViewBtnUpdateDriver from '../Forms/ViewForms/ViewUpdateDriverForm'
+import ViewBtnDetailDriver from './DetailDriver/ViewBtnDetailDriver'
 
 
 const DriverTableView = () => {
     const driverData = useSelector((state) => state.conductores)
     const dispatch = useDispatch();
-
+    const [isOpen, setIsOpen] = useState(false);
+    const onToggle = () => {
+        setIsOpen(!isOpen);
+    };
 
     const deleteDriver = (id) => {
         Swal.fire({
@@ -42,10 +48,9 @@ const DriverTableView = () => {
             confirmButtonText: "Si, eliminalo!",
             cancelButtonText: "No, cancelar!",
             reverseButtons: true
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
-                console.log(id);
-                const deleteOk = dispatch(deleteDriverAction(id))
+                const deleteOk = await dispatch(deleteDriverAction(id))
                 if (deleteOk) {
                     Swal.fire({
                         title: "¡Eliminado!",
@@ -53,6 +58,8 @@ const DriverTableView = () => {
                         icon: "success"
                     });
                 }
+                await dispatch(getAllConductores())
+
             } else if (
                 /* Read more about handling dismissals below */
                 result.dismiss === Swal.DismissReason.cancel
@@ -66,84 +73,11 @@ const DriverTableView = () => {
         });
     }
 
-    useEffect(() => {
-        // Este efecto se ejecutará cuando driverData cambie
-        console.log("Driver data actualizado:", driverData);
-    }, [driverData]);
-
     return (
-        // <>
-        // {Array.isArray(driverData) ? (
-        //     <TableContainer >
-        //     <Table variant='simple' >
-        //         <TableCaption>Imperial to metric conversion factors</TableCaption>
-        //         <Thead>
-        //             <Tr>
-        //                 <Th>Cant.</Th>
-        //                 <Th>Aeropuerto</Th>
-        //                 <Th>Nombre</Th>
-        //                 <Th>Vehiculo</Th>
-        //                 <Th>telefono</Th>
-        //                 <Th isNumeric>Max. Pasejeros</Th>
-        //                 <Th >Aciones</Th>
-        //                 <Th >Detalles</Th>
-        //             </Tr>
-        //         </Thead>
-        //         <Tbody >
-        //             {driverData.map((driver, index) => (
-        //                 <Tr key={driver.id} >
-        //                     <Td>{index + 1}</Td>
-        //                     <Td>{driver.airports}</Td>
-        //                     <Td>{driver.name}</Td>
-        //                     <Td>{driver.carType}</Td>
-        //                     <Td>{driver.phone}</Td>
-        //                     <Td>{driver.capacityPassengers}</Td>
-
-        //                     <Tr justifyContent='center' >
-        //                         <Flex gap={2} justifyContent={'center'}>
-        //                             <Button onClick={() => deleteDriver(driver.id)} bg='#E83D6F'
-        //                                 fontSize='1.2rem' id={driver.id} >
-        //                                 <DeleteIcon />
-        //                             </Button>
-
-        //                             <Button bg='#009ED1' color='white' fontSize='1.2rem' >
-        //                                 <EditIcon />
-        //                             </Button>
-        //                         </Flex>
-        //                     </Tr>
-        //                     <Td>
-        //                         <Link href='#'>
-        //                             Ver mas
-        //                         </Link>
-        //                     </Td>
-        //                 </Tr>
-        //             ))}
-
-        //         </Tbody>
-        //         <Tfoot>
-        //             <Tr>
-        //                 <Th>Cant.</Th>
-        //                 <Th>Aeropuerto</Th>
-        //                 <Th>Nombre</Th>
-        //                 <Th>Vehiculo</Th>
-        //                 <Th>telefono</Th>
-        //                 <Th isNumeric>Max. Pasejeros</Th>
-        //                 <Th >Aciones</Th>
-        //                 <Th >Detalles</Th>
-        //             </Tr>
-        //         </Tfoot>
-        //     </Table>
-
-
-        // </TableContainer>
-        // ): (
-        //     <p>loading..</p>
-        // )}
-        // </>
 
         <TableContainer >
             <Table variant='simple' >
-                <TableCaption>Imperial to metric conversion factors</TableCaption>
+                <TableCaption>Conductores registrados</TableCaption>
                 <Thead>
                     <Tr>
                         <Th>Cant.</Th>
@@ -161,27 +95,58 @@ const DriverTableView = () => {
                         <Tr key={driver.id} >
                             <Td>{index + 1}</Td>
                             <Td>{driver.airports}</Td>
+
                             <Td>{driver.name}</Td>
                             <Td>{driver.carType}</Td>
                             <Td>{driver.phone}</Td>
                             <Td>{driver.capacityPassengers}</Td>
 
-                            <Tr justifyContent='center' >
-                                <Flex gap={2} justifyContent={'center'}>
-                                    <Button onClick={() => deleteDriver(driver.id)} bg='#E83D6F'
-                                        fontSize='1.2rem' id={driver.id} >
-                                        <DeleteIcon />
-                                    </Button>
+                            <Td justifyContent='center'  >
+                                <Flex gap={2} justifyContent={'center'}  >
+                                    <Tooltip hasArrow label='ELiminar' bg='#E83D6F' placement='left-start'>
 
-                                    <Button bg='#009ED1' color='white' fontSize='1.2rem' >
-                                        <EditIcon />
-                                    </Button>
+                                        <Button onClick={() => deleteDriver(driver.id)} bg='#E83D6F'
+                                            fontSize='1.2rem' id={driver.id} >
+                                            <DeleteIcon />
+                                        </Button>
+                                    </Tooltip>
+                                    <ViewBtnUpdateDriver id={driver.id}
+                                        name={driver.name}
+                                        surname={driver.surname}
+                                        email={driver.email}
+                                        birthday={driver.birthday}
+                                        dni={driver.dni}
+                                        phone={driver.phone}
+                                        driverImg={driver.driverImg}
+                                        airports={driver.airports}
+                                        carType={driver.carType}
+                                        carModel={driver.carModel}
+                                        driverLicense={driver.driverLicense}
+                                        carImg={driver.carImg}
+                                        carPatent={driver.carPatent}
+                                        carSoat={driver.carSoat}
+                                        circulationPermit={driver.circulationPermit}
+                                        capacityPassengers={driver.capacityPassengers} />
                                 </Flex>
-                            </Tr>
+                            </Td>
                             <Td>
-                                <Link href='#'>
-                                    Ver mas
-                                </Link>
+                            <ViewBtnDetailDriver id={driver.id}
+                                        name={driver.name}
+                                        surname={driver.surname}
+                                        email={driver.email}
+                                        birthday={driver.birthday}
+                                        dni={driver.dni}
+                                        phone={driver.phone}
+                                        driverImg={driver.driverImg}
+                                        airports={driver.airports}
+                                        carType={driver.carType}
+                                        carModel={driver.carModel}
+                                        driverLicense={driver.driverLicense}
+                                        carImg={driver.carImg}
+                                        carPatent={driver.carPatent}
+                                        carSoat={driver.carSoat}
+                                        circulationPermit={driver.circulationPermit}
+                                        capacityPassengers={driver.capacityPassengers} />
                             </Td>
                         </Tr>
                     ))}

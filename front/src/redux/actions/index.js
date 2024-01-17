@@ -1,7 +1,7 @@
 import axios from 'axios';
 import choferes from '../../utils/chofer'
 import Swal from 'sweetalert2'
-import { DELETE_DRIVER } from './action.types';
+import { DELETE_DRIVER, UPDATE_DRIVER_DATA } from './action.types';
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE = "PAGINATE"
@@ -14,6 +14,7 @@ export const NEW_USER = 'NEW_USER'
 export const LOGOUT = 'LOGOUT'
 export const CREATE_CHOFER = 'CREATE_CHOFER'
 export const VIAJE_CONFIRMADO = 'VIAJE_CONFIRMADO'
+export const GET_FILTERED = 'GET_FILTERED'
 
 
 export const getAllConductores = () => {
@@ -24,8 +25,9 @@ export const getAllConductores = () => {
                 type: GET_ALL_CONDUCTORES,
                 payload: data
             });
+            return data
         } catch (error) {
-            console.error(error);
+            console.error('Error al obtener conductores:', error);
             throw error;
         }
     }
@@ -62,6 +64,19 @@ export const deleteDriverAction = (id) => {
     }
 }
 
+export const updateDriverData = (id, newData) => {
+    return async (dispatch) => {
+        try {
+            dispatch({
+                type: UPDATE_DRIVER_DATA,
+                payload: data
+            })
+        } catch (error) {
+            console.error({message: 'Error en action', error});
+        }
+    }
+}
+
 export const postNewViaje = (infoViaje) => {
     console.log(infoViaje)
     infoViaje.userId = "3027b2fa-4997-4068-9f6d-c847baa02291"
@@ -82,9 +97,9 @@ export const postNewViaje = (infoViaje) => {
     }
 }
 
-export const getSolicitudes = () => {
-    return async (dispatch) => {
-        const endpoint = 'http://localhost:3001/trips'
+export const getSolicitudes = () =>{
+    return async(dispatch)=> {
+        const endpoint= 'http://localhost:3001/trips/reserves' //Se cambió a la ruta con viajes reservados
         try {
             const { data } = await axios.get(endpoint)
             console.log(data);
@@ -186,6 +201,23 @@ export const viajeConfirmado = (info) => {
             console.log(data)
             dispatch({
                 type: VIAJE_CONFIRMADO,
+                payload: data
+            })
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            console.log(error.message)
+        };
+    };
+};
+
+export const filtrarConductores = (info) => {
+    console.log(info)
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`http://localhost:3001/drivers/filter`, info);
+            console.log(data)
+            dispatch({
+                type: GET_FILTERED,
                 payload: data
             })
         } catch (error) {

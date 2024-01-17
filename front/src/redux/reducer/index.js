@@ -1,5 +1,5 @@
 import { DELETE_DRIVER } from "../actions/action.types";
-import { CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_SOLICITUDES, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
+import { CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_FILTERED, GET_SOLICITUDES, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
 
 
 const initialState = {
@@ -15,7 +15,9 @@ const initialState = {
     solicitudesDeViajes: [],
     idSolicitud: '',
 
-    infoConfirmacionViaje:{}
+    infoConfirmacionViaje:{},
+
+    conductoresFiltrados:[]
 
 }
 
@@ -27,13 +29,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 conductores: action.payload,
                 pageConductores: state.conductores.splice(0, state.cantConductoresPorPag),
-
             };
         
         case DELETE_DRIVER:
             return {
                 ...state, 
-                conductores: action.payload
+                conductores: state.conductores.filter(driver => driver.id !== action.payload)
             }
         case PAGINATE:
             const nextPage = state.currentPage + 1;
@@ -107,6 +108,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 idSolicitud: action.payload
+            }
+        case GET_FILTERED:
+            return {
+                ...state,
+                conductoresFiltrados: action.payload
             }
         default:
             return { ...state };
