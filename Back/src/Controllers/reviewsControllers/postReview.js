@@ -1,24 +1,28 @@
-const { Review, User, Driver } = require("../../dataBase");
-
-const postReview = async ( userId, driverId, date, qualification, comments ) => {
+const postReview = async (userId, driverId, date, qualification, comments, stateOfTrip) => {
     try {
-        const [reviewPost, created]=await Review.findOrCreate({
-            where:{
+        
+        if (stateOfTrip !== 'reserved') {
+            throw new Error('No puedes dejar una revisión en este momento.');
+        }
+
+        const [reviewPost, created] = await Review.findOrCreate({
+            where: {
                 userId: userId,
-                driverId: driverId
-            }, 
+                driverId: driverId,
+            },
             defaults: {
                 userId,
                 driverId,
-                date, 
-                qualification, 
-                comments
-            }
-        })
+                date,
+                qualification,
+                comments,
+            },
+        });
 
-        if(!created)
-            throw new Error(`Ya existe una reseña del usuario para el mismo chofer en la base de datos.`);
-        
+        if (!created) {
+            throw new Error('Ya existe una reseña del usuario para el mismo chofer en la base de datos.');
+        }
+
         const user = await User.findByPk(userId);
         const driver = await Driver.findByPk(driverId);
 
@@ -28,11 +32,11 @@ const postReview = async ( userId, driverId, date, qualification, comments ) => 
         } else {
             console.error('No se encontró el usuario o el conductor.');
         }
-        return reviewPost;
 
+        return reviewPost;
     } catch (error) {
-        throw new Error(error.message)
+        throw new Error(error.message);
     }
-}
+};
 
 module.exports = postReview;
