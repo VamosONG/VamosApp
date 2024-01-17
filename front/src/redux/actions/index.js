@@ -1,6 +1,7 @@
 import axios from 'axios';
 import choferes from '../../utils/chofer'
 import Swal from 'sweetalert2'
+import { DELETE_DRIVER, UPDATE_DRIVER_DATA } from './action.types';
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE = "PAGINATE"
@@ -8,7 +9,7 @@ export const GET_ALL_CONDUCTORES = "GET_ALL_CONDUCTORES"
 export const POST_NEW_VIAJE = "POST_NEW_VIAJE"
 export const LOGIN = "LOGIN"
 export const ID_SOLICITUD = "ID_SOLICITUD"
-export const GET_SOLICITUDES= "GET_SOLICITUDES"
+export const GET_SOLICITUDES = "GET_SOLICITUDES"
 export const NEW_USER = 'NEW_USER'
 export const LOGOUT = 'LOGOUT'
 export const CREATE_CHOFER = 'CREATE_CHOFER'
@@ -16,12 +17,22 @@ export const VIAJE_CONFIRMADO = 'VIAJE_CONFIRMADO'
 export const GET_FILTERED = 'GET_FILTERED'
 
 
-export const getAllConductores = () => (dispatch) => {
-    //console.log(choferes)
-    dispatch({
-        type: GET_ALL_CONDUCTORES,
-        payload: choferes
-    });
+export const getAllConductores = () => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios(`http://localhost:3001/drivers`);
+            dispatch({
+                type: GET_ALL_CONDUCTORES,
+                payload: data
+            });
+            return data
+        } catch (error) {
+            console.error('Error al obtener conductores:', error);
+            throw error;
+        }
+    }
+
+
 }
 
 export const createNewChofer = (data) => {
@@ -39,10 +50,37 @@ export const createNewChofer = (data) => {
     }
 }
 
+export const deleteDriverAction = (id) => {
+    return async (dispatch) => {
+        try {
+            const {data} = await axios.delete(`http://localhost:3001/drivers/${id}`)
+            dispatch({
+                type: DELETE_DRIVER,
+                payload: data
+            })
+        } catch (error) {
+            console.error(error);
+        }
+    }
+}
+
+export const updateDriverData = (id, newData) => {
+    return async (dispatch) => {
+        try {
+            dispatch({
+                type: UPDATE_DRIVER_DATA,
+                payload: data
+            })
+        } catch (error) {
+            console.error({message: 'Error en action', error});
+        }
+    }
+}
+
 export const postNewViaje = (infoViaje) => {
-    console.log(infoViaje)
+
     infoViaje.userId= "3027b2fa-4997-4068-9f6d-c847baa02291"
-    console.log(infoViaje)
+
     return async (dispatch) => {
         try {
             const { data } = await axios.post(`http://localhost:3001/offer/create`, infoViaje);
@@ -64,7 +102,7 @@ export const getSolicitudes = () =>{
     return async(dispatch)=> {
         const endpoint= 'http://localhost:3001/trips/reserves' //Se cambió a la ruta con viajes reservados
         try {
-            const {data}= await axios.get(endpoint)
+            const { data } = await axios.get(endpoint)
             console.log(data);
             return dispatch({
                 type: GET_SOLICITUDES,
@@ -75,8 +113,8 @@ export const getSolicitudes = () =>{
             alert("error")
         }
     }
-    }
-   
+}
+
 /* export const getAllConductores=()=>{
     try {
 

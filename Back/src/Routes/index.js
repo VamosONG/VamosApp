@@ -51,13 +51,15 @@ router.delete('/trips', deleteTripHandler);
 
 router.get('/user', getUsersHandler);
 router.post('/user/create', postUserHandler);
-router.put('/user/update', updateUserHandler);
+router.patch('/user/update', updateUserHandler);
 router.delete('/user', deleteUserHandler);
 
+//Cambio a metodo PATCH: Mas versatil para actulizar campos individualmente.
+//Add ID al final para recibirlo por params.
 router.get('/drivers', getDriversHandler);
 router.post('/drivers/create', postDriverHandler);
-router.put('/drivers/update', updateDriverHandler);
-router.delete('/drivers', deleteDriverHandler);
+router.patch('/drivers/update/:id', updateDriverHandler);
+router.delete('/drivers/:id', deleteDriverHandler);
 
 router.get('/airports', getAirportsHandler);
 router.post('/airports/create', postAirportHandler);
