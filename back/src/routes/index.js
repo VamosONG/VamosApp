@@ -88,6 +88,7 @@ router.get('/trips/reserves', getReservesHandler);
 router.put('/trips/reserves/create', doReserveHandler);
 router.put('/trips/reserves/update',setDriverHandler);
 router.get('/trips/completed', getTripsCompletedHandler);
+router.get('/trips/pending', getTripsPendingHandler);
 
 
 router.post('/merpago/create', postPreference);
