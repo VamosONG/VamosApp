@@ -41,8 +41,12 @@ const UpdateDriverData = (props, {closeFormEdit}) => {
     const { id } = props;
     const handleChange = (e) => {
         const property = e.target.name;
-        const value = e.target.value;
+        let value = e.target.value;
         console.log(property + " " + value);
+        if (property === 'phone' || property === 'capacityPassengers' || property === 'dni') {
+            value = Number(value)
+        } 
+        console.log(typeof(value));
         setNewData({
             ...newData,
             [property]: value,
@@ -104,8 +108,8 @@ const UpdateDriverData = (props, {closeFormEdit}) => {
             });
         }
     }
-    const carTypeFount = ["auto", "camioneta", "van"];
-    const airportsFount = ["tumbes", "talara", "lima"];
+    const carTypeFount = ["auto", "camioneta", "van", 'van plus'];
+    const airportsFount = ["Aeropuerto Tumbes", "Aeropuerto Talara"];
     const carModelFount = ["toyota", "hiunday", "ford"];
     return (
         <form onSubmit={handleSubmit}>
@@ -150,7 +154,7 @@ const UpdateDriverData = (props, {closeFormEdit}) => {
                                 <InputLeftAddon bg='yellow.200'>
                                     {props.surname}
                                 </InputLeftAddon>
-                                <Input type='text' placeholder='Nuevo' bg='lightgreen' />
+                                <Input type='text' placeholder='Nuevo' bg='lightgreen' name='surname' onChange={handleChange} value={newData.surname}/>
                             </InputGroup>
                         </FormControl>
                         <FormControl>
@@ -159,7 +163,7 @@ const UpdateDriverData = (props, {closeFormEdit}) => {
                                 <InputLeftAddon bg='yellow.200'>
                                     {props.dni}
                                 </InputLeftAddon>
-                                <Input type='number' placeholder='Nuevo' bg='lightgreen' />
+                                <Input type='number' placeholder='Nuevo' bg='lightgreen' name='dni' onChange={handleChange} value={newData.dni} />
                             </InputGroup>
                         </FormControl>
                     </Flex>
@@ -171,7 +175,7 @@ const UpdateDriverData = (props, {closeFormEdit}) => {
                                 <InputLeftAddon bg='yellow.200' w='50%' overflow='hidden' scrollSnapType='revert'>
                                     {props.email}
                                 </InputLeftAddon>
-                                <Input type='mail' placeholder='Nuevo' bg='lightgreen' />
+                                <Input type='mail' placeholder='Nuevo' bg='lightgreen' name='email' onChange={handleChange} value={newData.email} />
                             </InputGroup>
                         </FormControl>
                         <FormControl>
@@ -180,7 +184,7 @@ const UpdateDriverData = (props, {closeFormEdit}) => {
                                 <InputLeftAddon bg='yellow.200'>
                                     {props.phone}
                                 </InputLeftAddon>
-                                <Input type='tel' placeholder='Nuevo' bg='lightgreen' />
+                                <Input type='number' placeholder='Nuevo' bg='lightgreen' name='phone' onChange={handleChange} value={newData.phone} />
                             </InputGroup>
                         </FormControl>
 
@@ -191,13 +195,13 @@ const UpdateDriverData = (props, {closeFormEdit}) => {
                             <FormLabel>Fec. Nac.</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
                                 <InputLeftAddon bg='yellow.200'>
-                                    {props.birthday}
+                                    {props.birthday.split('T')[0]}
                                 </InputLeftAddon>
-                                <Input type='date' placeholder='Nuevo' bg='lightgreen' w='auto' />
+                                <Input type='date' placeholder='Nuevo' bg='lightgreen' onChange={handleChange} value={newData.birthday} name='birthday' />
                             </InputGroup>
                         </FormControl>
                         <FormControl>
-                            <FormLabel>Aeropuerto</FormLabel>
+                            <FormLabel>Zona</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
                                 <InputLeftAddon bg='yellow.200'>
                                     {props.airports}

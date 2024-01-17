@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         birthday: {
-            type: DataTypes.STRING,
+            type: DataTypes.DATEONLY,
             allowNull: false
         },
         dni: {
@@ -46,7 +46,7 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                isIn: [['auto', 'camioneta', 'van']],
+                isIn: [['auto', 'camioneta', 'van', 'van plus']],
             },
         },
         carModel: {
@@ -66,7 +66,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         carSoat: {
-            type: DataTypes.STRING,
+            type: DataTypes.DATEONLY,
             allowNull: false
         },
         circulationPermit: {
