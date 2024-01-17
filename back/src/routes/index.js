@@ -41,6 +41,7 @@ const doReserveHandler = require('../handlers/utilsHandlers/doReserveHandler');
 const setDriverHandler = require('../handlers/utilsHandlers/setDriverHandler');
 const getDriversDispHandler = require('../handlers/filtersHandlers/getDriversDispHandler');
 const getTripsCompletedHandler = require('../handlers/filtersHandlers/getTripsCompletedHandler');
+const getTripsPendingHandler = require('../handlers/filtersHandlers/getTripsPendingHandler');
 
 const postPreference = require('../handlers/mercadoPagoHandler/postPreference')
 
