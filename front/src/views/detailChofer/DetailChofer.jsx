@@ -10,13 +10,13 @@ import {
   GridItem,
   Input,
 } from "@chakra-ui/react";
-import { getAllConductores, getSolicitudes, postNewViaje } from "../../redux/actions";
+import { getAllConductores } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 const DetailChofer = () => {
   const conductores = useSelector((state) => state.conductores);
-  const { solicitudesDeViajes } = useSelector(state => state)
+  /* const { solicitudesDeViajes } = useSelector(state => state) */
 
   const dispatch = useDispatch();
   const handleChoferes = () => {
