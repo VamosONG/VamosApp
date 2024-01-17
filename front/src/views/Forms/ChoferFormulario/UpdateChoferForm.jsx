@@ -43,6 +43,7 @@ const UpdateDriverData = (props, {closeFormEdit}) => {
         const property = e.target.name;
         const value = e.target.value;
         console.log(property + " " + value);
+        console.log(typeof(value));
         setNewData({
             ...newData,
             [property]: value,
@@ -180,7 +181,7 @@ const UpdateDriverData = (props, {closeFormEdit}) => {
                                 <InputLeftAddon bg='yellow.200'>
                                     {props.phone}
                                 </InputLeftAddon>
-                                <Input type='tel' placeholder='Nuevo' bg='lightgreen' />
+                                <Input type='tel' placeholder='Nuevo' bg='lightgreen' onChange={handleChange} />
                             </InputGroup>
                         </FormControl>
 
