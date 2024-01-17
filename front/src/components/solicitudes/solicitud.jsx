@@ -9,11 +9,12 @@ import {
   CardFooter,
   CardHeader,
   Input,
-  Checkbox
+  Checkbox,
+  Button
 } from "@chakra-ui/react";
 import { filtrarConductores, getAllConductores, postNewViaje } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 
 
@@ -47,6 +48,22 @@ const Solicitud =()=> {
   useEffect(() => {
     dispatch(filtrarConductores(info))
   }, [/* conductores */])
+
+
+  const [conductorSeleccionado,setConductorSeleccionado]=useState(false)
+
+  const handleCheckboxChange = (conductorId) => {
+    setConductorSeleccionado(!conductorSeleccionado)
+    // Agrega la lógica para manejar el cambio de estado del checkbox
+    /* dispatch(toggleCheckbox(conductorId)); */
+  };
+  const handleClick = () => {
+    Swal.fire({
+      title: "Conductor confirmado para el viaje",
+      text: "Simulando que se retorna a pagina de solicitudes luego de aceptar",
+      icon: "success"
+    });
+  };
   
 
   /* const conductoresFiltrados = conductores.filter((conductor) => conductor.aeropuertoOrigen === aeropuertoSolicitud) */
@@ -86,11 +103,23 @@ const Solicitud =()=> {
           {/* <CardBody>{conductor.driverimg}</CardBody> */}
           <CardFooter>
             <Checkbox
-            
-            ></Checkbox>
+              onChange={() => handleCheckboxChange(conductor.id)}
+              isChecked={conductor.checked} // esta línea es para controlar el estado del checkbox
+            >
+              Seleccionar
+            </Checkbox>
           </CardFooter>
         </Card>
       ))}
+      {conductorSeleccionado?(
+          <Box mt={4}>
+            <Button colorScheme='teal' variant='outline' w='100%' type='submit'
+            onClick={() => handleClick()}>
+              Confirmar
+            </Button>
+          </Box>
+      ):(null)
+      }
     </div>
 
   )
