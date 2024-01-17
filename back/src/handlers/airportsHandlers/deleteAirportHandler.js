@@ -1,7 +1,7 @@
 const {deleteAirport} = require('../../controllers/airportsControllers/deleteAirports');
 
 module.exports=async(req,res)=>{
-    const {id} = req.params;
+    const {id} = req.body;
     try{
         const deletedAirp=await deleteAirport(id);
  
