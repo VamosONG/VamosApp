@@ -106,7 +106,7 @@ const reducer = (state = initialState, action) => {
         case GET_FILTERED:
             return {
                 ...state,
-                conductoresFiltrados: action.payload
+                conductoresFiltrados: action.payload,
             }
         default:
             return { ...state };

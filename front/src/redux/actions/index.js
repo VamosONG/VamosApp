@@ -42,6 +42,7 @@ export const createNewChofer = (data) => {
 export const postNewViaje = (infoViaje) => {
     console.log(infoViaje)
     infoViaje.userId= "3027b2fa-4997-4068-9f6d-c847baa02291"
+    console.log(infoViaje)
     return async (dispatch) => {
         try {
             const { data } = await axios.post(`http://localhost:3001/offer/create`, infoViaje);
@@ -176,7 +177,7 @@ export const filtrarConductores = (info) => {
     console.log(info)
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`http://localhost:3001/drivers/filter`, info);
+            const { data } = await axios.post(`http://localhost:3001/drivers/filter`, info);
             console.log(data)
             dispatch({
                 type: GET_FILTERED,
