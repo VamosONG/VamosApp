@@ -1,4 +1,4 @@
-const getUsers = require('../../Controllers/usersControllers/getUsers');
+const getUsers = require('../../controllers/usersControllers/getUsers');
 
 module.exports = async (req, res) => {
     try {

@@ -1,4 +1,4 @@
-const doReserve=require('../../Controllers/utilsControllers/doReserve');
+const doReserve=require('../../controllers/utilsControllers/doReserve');
 
 module.exports=async(req,res)=>{
     const { userId, tripId } = req.body;

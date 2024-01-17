@@ -1,4 +1,4 @@
-const getDrivers = require('../../Controllers/driversControllers/getDrivers');
+const getDrivers = require('../../controllers/driversControllers/getDrivers');
 
 module.exports = async (req, res) => {
     try {

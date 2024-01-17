@@ -1,4 +1,4 @@
-const deleteUser = require('../../Controllers/usersControllers/deleteUsers');
+const deleteUser = require('../../controllers/usersControllers/deleteUsers');
 
 module.exports = async (req, res) => {
     try {

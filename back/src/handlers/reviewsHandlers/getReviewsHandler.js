@@ -1,4 +1,4 @@
-const getReviews = require('../../Controllers/ReviewsControllers/getReviews');
+const getReviews = require('../../controllers/reviewsControllers/getReviews');
 
 module.exports=async(req,res)=>{
     try{

@@ -1,4 +1,4 @@
-const updateReview = require('../../Controllers/reviewsControllers/updateReview');
+const updateReview = require('../../controllers/reviewsControllers/updateReview');
 
 module.exports = async (req, res) => {
     try {

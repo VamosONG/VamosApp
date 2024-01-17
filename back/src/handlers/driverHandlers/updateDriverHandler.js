@@ -1,4 +1,4 @@
-const updateDriver = require('../../Controllers/driversControllers/updateDrivers');
+const updateDriver = require('../../controllers/driversControllers/updateDrivers');
 
 module.exports = async (req, res) => {
     const { id, name, surname, car, phone, capacityPassengers, trips, reviews } = req.body;

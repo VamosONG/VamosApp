@@ -1,4 +1,4 @@
-const deleteReview= require('../../Controllers/ReviewsControllers/deleteReview');
+const deleteReview= require('../../controllers/reviewsControllers/deleteReview');
 
 module.exports=async(req,res)=>{
     const {id} = req.body;

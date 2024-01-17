@@ -1,4 +1,4 @@
-const { deleteTrip } = require('../../Controllers/tripsControllers/deleteTrip')
+const { deleteTrip } = require('../../controllers/tripsControllers/deleteTrip')
 
 module.exports = async (req, res) => {
     

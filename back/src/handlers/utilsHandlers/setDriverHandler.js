@@ -1,4 +1,4 @@
-const setDriver=require('../../Controllers/utilsControllers/setDriver');
+const setDriver=require('../../controllers/utilsControllers/setDriver');
 
 module.exports=async(req,res)=>{
     const { tripId, driverId } = req.body;

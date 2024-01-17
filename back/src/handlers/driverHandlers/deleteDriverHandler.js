@@ -1,4 +1,4 @@
-const deleteDriver = require('../../Controllers/DriversControllers/deleteDriver');
+const deleteDriver = require('../../controllers/driversControllers/deleteDriver');
 
 module.exports = async (req, res) => {
     const { id } = req.body;

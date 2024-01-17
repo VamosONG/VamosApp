@@ -1,4 +1,4 @@
-const getAirports = require('../../Controllers/AirportsControllers/getAirports');
+const getAirports = require('../../controllers/airportsControllers/getAirports');
 
 module.exports=async(req,res)=>{
     try{

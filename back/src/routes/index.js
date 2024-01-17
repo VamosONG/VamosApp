@@ -1,46 +1,46 @@
 const {Router} = require('express');
 
-const getTripsHandler = require('../Handlers/TripHandlers/getTripsHandler')
-const postTripHandler = require('../Handlers/TripHandlers/postTripHandler')
-const updateTripHandler = require('../Handlers/TripHandlers/updateTripHandler')
-const deleteTripHandler = require('../Handlers/TripHandlers/deleteTripHandler')
+const getTripsHandler = require('../handlers/tripHandlers/getTripsHandler')
+const postTripHandler = require('../handlers/tripHandlers/postTripHandler')
+const updateTripHandler = require('../handlers/tripHandlers/updateTripHandler')
+const deleteTripHandler = require('../handlers/tripHandlers/deleteTripHandler')
 
-const getUsersHandler = require('../Handlers/UserHandlers/getUsersHandler')
-const postUserHandler = require('../Handlers/UserHandlers/postUserHandler')
-const updateUserHandler = require('../Handlers/UserHandlers/updateUserHandler')
-const deleteUserHandler = require('../Handlers/UserHandlers/deleteUserHandler')
+const getUsersHandler = require('../handlers/userHandlers/getUsersHandler')
+const postUserHandler = require('../handlers/userHandlers/postUserHandler')
+const updateUserHandler = require('../handlers/userHandlers/updateUserHandler')
+const deleteUserHandler = require('../handlers/userHandlers/deleteUserHandler')
 
-const getDriversHandler = require('../Handlers/DriverHandlers/getDriversHandler')
-const postDriverHandler = require('../Handlers/DriverHandlers/postDriverHandler')
-const updateDriverHandler = require('../Handlers/DriverHandlers/updateDriverHandler')
-const deleteDriverHandler = require('../Handlers/DriverHandlers/deleteDriverHandler')
+const getDriversHandler = require('../handlers/driverHandlers/getDriversHandler')
+const postDriverHandler = require('../handlers/driverHandlers/postDriverHandler')
+const updateDriverHandler = require('../handlers/driverHandlers/updateDriverHandler')
+const deleteDriverHandler = require('../handlers/driverHandlers/deleteDriverHandler')
 
-const getAirportsHandler = require('../Handlers/AirportsHandlers/getAirportsHandler')
-const postAirportHandler = require('../Handlers/AirportsHandlers/postAirportHandler')
-const updateAirportHandler = require('../Handlers/AirportsHandlers/updateAirportHandler')
-const deleteAirportHandler = require('../Handlers/AirportsHandlers/deleteAirportHandler')
+const getAirportsHandler = require('../handlers/airportsHandlers/getAirportsHandler')
+const postAirportHandler = require('../handlers/airportsHandlers/postAirportHandler')
+const updateAirportHandler = require('../handlers/airportsHandlers/updateAirportHandler')
+const deleteAirportHandler = require('../handlers/airportsHandlers/deleteAirportHandler')
 
-const getZonesHandler = require('../Handlers/ZonesHandlers/getZonesHandler')
-const postZoneHandler = require('../Handlers/ZonesHandlers/postZoneHandler')
-const updateZoneHandler = require('../Handlers/ZonesHandlers/updateZoneHandler')
-const deleteZoneHandler = require('../Handlers/ZonesHandlers/deleteZoneHandler')
+const getZonesHandler = require('../handlers/zonesHandlers/getZonesHandler')
+const postZoneHandler = require('../handlers/zonesHandlers/postZoneHandler')
+const updateZoneHandler = require('../handlers/zonesHandlers/updateZoneHandler')
+const deleteZoneHandler = require('../handlers/zonesHandlers/deleteZoneHandler')
 
-const getReviewsHandler = require('../Handlers/ReviewsHandlers/getReviewsHandler')
-const postReviewHandler = require('../Handlers/ReviewsHandlers/postReviewHandler')
-const updateReviewHandler = require('../Handlers/ReviewsHandlers/updateReviewHandler')
-const deleteReviewHandler = require('../Handlers/ReviewsHandlers/deleteReviewHandler')
+const getReviewsHandler = require('../handlers/reviewsHandlers/getReviewsHandler')
+const postReviewHandler = require('../handlers/reviewsHandlers/postReviewHandler')
+const updateReviewHandler = require('../handlers/reviewsHandlers/updateReviewHandler')
+const deleteReviewHandler = require('../handlers/reviewsHandlers/deleteReviewHandler')
 
-const getAdminsHandler = require('../Handlers/AdminHandlers/getAdminsHandler')
-const deleteAdminHandler = require('../Handlers/AdminHandlers/deleteAdminHandler')
+const getAdminsHandler = require('../handlers/adminHandlers/getAdminsHandler')
+const deleteAdminHandler = require('../handlers/adminHandlers/deleteAdminHandler')
 
-const filtershandler = require('../Handlers/filtersHandlers/filtersHandler');
+const filtershandler = require('../handlers/filtersHandlers/filtersHandler');
 
-const getFilteredDriversHandler = require('../Handlers/filtersHandlers/getFilteredDriversHandler');
-const getReservesHandler = require('../Handlers/filtersHandlers/getReservesHandler');
-const doReserveHandler = require('../Handlers/utilsHandlers/doReserveHandler');
-const setDriverHandler = require('../Handlers/utilsHandlers/setDriverHandler');
+const getFilteredDriversHandler = require('../handlers/filtersHandlers/getFilteredDriversHandler');
+const getReservesHandler = require('../handlers/filtersHandlers/getReservesHandler');
+const doReserveHandler = require('../handlers/utilsHandlers/doReserveHandler');
+const setDriverHandler = require('../handlers/utilsHandlers/setDriverHandler');
 
-const postPreference = require('../Handlers/MercadoPagoHandler/postPreference')
+const postPreference = require('../handlers/mercadoPagoHandler/postPreference')
 
 const router = Router();
 

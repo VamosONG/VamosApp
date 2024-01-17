@@ -1,4 +1,4 @@
-const updateUser = require('../../Controllers/usersControllers/updateUsers');
+const updateUser = require('../../controllers/usersControllers/updateUsers');
 
 module.exports = async (req, res) => {
     const { id, name, surname, email, phone, dni, trips, activeReservations, reviews, admin } = req.body;

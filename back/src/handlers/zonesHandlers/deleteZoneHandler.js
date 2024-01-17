@@ -1,4 +1,4 @@
-const deleteZone = require('../../Controllers/ZonesControllers/deleteZone');
+const deleteZone = require('../../controllers/zonesControllers/deleteZone');
 
 module.exports = async(req, res) => {
     const {id} = req.body;

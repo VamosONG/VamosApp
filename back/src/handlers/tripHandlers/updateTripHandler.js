@@ -1,4 +1,4 @@
-const { updateTrip } = require('../../Controllers/tripsControllers/updateTrip');
+const { updateTrip } = require('../../controllers/tripsControllers/updateTrip');
 
 module.exports = async (req, res) => {
     const { id, userId, driverId, date, hour, origin, destination, passengers, price, driver, reviews, stateOfTrip } = req.body;

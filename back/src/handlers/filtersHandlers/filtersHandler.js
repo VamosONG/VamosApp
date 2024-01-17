@@ -1,4 +1,4 @@
-const postTrip = require('../../Controllers/tripsControllers/postTrip');
+const postTrip = require('../../controllers/tripsControllers/postTrip');
 
 module.exports=async(req,res)=>{
 

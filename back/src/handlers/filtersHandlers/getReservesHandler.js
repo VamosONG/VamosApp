@@ -1,4 +1,4 @@
-const getReserves = require('../../Controllers/filtersControllers/getReserves');
+const getReserves = require('../../controllers/filtersControllers/getReserves');
 
 module.exports = async (req, res) => {
     try {
