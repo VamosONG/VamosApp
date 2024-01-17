@@ -40,6 +40,7 @@ const getReservesHandler = require('../handlers/filtersHandlers/getReservesHandl
 const doReserveHandler = require('../handlers/utilsHandlers/doReserveHandler');
 const setDriverHandler = require('../handlers/utilsHandlers/setDriverHandler');
 const getDriversDispHandler = require('../handlers/filtersHandlers/getDriversDispHandler');
+const getTripsCompletedHandler = require('../handlers/filtersHandlers/getTripsCompletedHandler');
 
 const postPreference = require('../handlers/mercadoPagoHandler/postPreference')
 
@@ -86,6 +87,7 @@ router.post('/drivers/disp', getDriversDispHandler);
 router.get('/trips/reserves', getReservesHandler);
 router.put('/trips/reserves/create', doReserveHandler);
 router.put('/trips/reserves/update',setDriverHandler);
+router.get('/trips/completed', getTripsCompletedHandler);
 
 
 router.post('/merpago/create', postPreference);
