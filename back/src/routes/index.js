@@ -88,7 +88,7 @@ router.post('/drivers/disp', getDriversDispHandler);
 router.get('/trips/reserves', getReservesHandler);
 router.put('/trips/reserves/create', doReserveHandler);
 router.put('/trips/reserves/update',setDriverHandler);
-router.get('/trips/completed', getTripsCompletedHandler);
+router.put('/trips/completed', getTripsCompletedHandler);
 router.get('/trips/pending', getTripsPendingHandler);
 
 
