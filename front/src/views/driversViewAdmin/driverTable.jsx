@@ -35,10 +35,7 @@ const DriverTableView = () => {
     const driverData = useSelector((state) => state.conductores)
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
-    const onToggle = () => {
-        setIsOpen(!isOpen);
-    };
-
+    
     const deleteDriver = (id) => {
         Swal.fire({
             title: "¿Seguro quieres eliminar?",
@@ -80,12 +77,12 @@ const DriverTableView = () => {
                 <TableCaption>Conductores registrados</TableCaption>
                 <Thead>
                     <Tr>
-                        <Th>Cant.</Th>
-                        <Th>Aeropuerto</Th>
+                        <Th>#</Th>
+                        <Th>Zona</Th>
                         <Th>Nombre</Th>
                         <Th>Vehiculo</Th>
                         <Th>telefono</Th>
-                        <Th isNumeric>Max. Pasejeros</Th>
+                        <Th>Max. Psjr</Th>
                         <Th >Aciones</Th>
                         <Th >Detalles</Th>
                     </Tr>
@@ -146,7 +143,8 @@ const DriverTableView = () => {
                                         carPatent={driver.carPatent}
                                         carSoat={driver.carSoat}
                                         circulationPermit={driver.circulationPermit}
-                                        capacityPassengers={driver.capacityPassengers} />
+                                        capacityPassengers={driver.capacityPassengers}
+                                    />
                             </Td>
                         </Tr>
                     ))}
@@ -154,12 +152,12 @@ const DriverTableView = () => {
                 </Tbody>
                 <Tfoot>
                     <Tr>
-                        <Th>Cant.</Th>
-                        <Th>Aeropuerto</Th>
+                        <Th>#</Th>
+                        <Th>Zona</Th>
                         <Th>Nombre</Th>
                         <Th>Vehiculo</Th>
                         <Th>telefono</Th>
-                        <Th isNumeric>Max. Pasejeros</Th>
+                        <Th>Max. Psjr</Th>
                         <Th >Aciones</Th>
                         <Th >Detalles</Th>
                     </Tr>

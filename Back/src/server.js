@@ -1,6 +1,6 @@
 const express= require("express");
 const morgan = require("morgan");
-
+const bodyParser = require('body-parser');
 const cors = require("cors")
 // import { express } from "express";
 // import {cors} from "cors";
@@ -22,6 +22,10 @@ const server = express();
 server.use(morgan("dev"));
 server.use(express.json());
 server.use(cors());
+
+server.use(bodyParser.json());
+
+
 
 // server.use((req, res, next) => {
 //     // Pasar el cliente a las solicitudes
