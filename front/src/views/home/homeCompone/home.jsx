@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { getAllConductores } from "../../../redux/actions";
 import Testimonials from "../../Testimonials/Testimonials";
 import Services from "../../ServicesSection/services";
+import { Link } from "react-router-dom";
 
 const Home = () => {
     const dispatch= useDispatch();
@@ -22,6 +23,12 @@ const Home = () => {
 
     return (
         <>
+        <Link to='/review&reseña'>
+        <Button>
+            
+            ReviewAndReseña
+        </Button>
+        </Link>
         <Box
         h='100vh'
     

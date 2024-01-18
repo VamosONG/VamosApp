@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom';
 import DriverTableView from './views/driversViewAdmin/driverTable';
 import ReserveComfirmed from './views/Reserve/ReserveConfirmed';
 import ReserveReject from './views/Reserve/ReserveReject';
+import ReviewAndReseña from './components/ReviewAndReseña/reviewAndReseña';
 
 function App() {
 
@@ -37,6 +38,8 @@ function App() {
         <Route path='/solicitud' element={<Solicitud/>}/>
         <Route path='/reserve/confirmed' element={<ReserveComfirmed/>}/>
         <Route path='/reserve/rejected' element={<ReserveReject/>}/>
+
+        <Route path='/review&reseña' element={<ReviewAndReseña/>}/>
 
 
       </Routes>
