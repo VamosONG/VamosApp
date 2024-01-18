@@ -29,16 +29,14 @@ import Swal from 'sweetalert2'
 import UpdateDriverData from '../Forms/ChoferFormulario/UpdateChoferForm'
 import ViewBtnUpdateDriver from '../Forms/ViewForms/ViewUpdateDriverForm'
 import ViewBtnDetailDriver from './DetailDriver/ViewBtnDetailDriver'
+import OrderFilterAlphabetical from './filtersData/orderFilter'
 
 
 const DriverTableView = () => {
     const driverData = useSelector((state) => state.conductores)
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
-    const onToggle = () => {
-        setIsOpen(!isOpen);
-    };
-
+    
     const deleteDriver = (id) => {
         Swal.fire({
             title: "¿Seguro quieres eliminar?",
@@ -76,16 +74,17 @@ const DriverTableView = () => {
     return (
 
         <TableContainer >
+            <Flex bg='gray.200' color='#000' justify={'center'} ><OrderFilterAlphabetical/></Flex>
             <Table variant='simple' >
                 <TableCaption>Conductores registrados</TableCaption>
                 <Thead>
                     <Tr>
-                        <Th>Cant.</Th>
-                        <Th>Aeropuerto</Th>
+                        <Th>#</Th>
+                        <Th>Zona</Th>
                         <Th>Nombre</Th>
                         <Th>Vehiculo</Th>
                         <Th>telefono</Th>
-                        <Th isNumeric>Max. Pasejeros</Th>
+                        <Th>Max. Psjr</Th>
                         <Th >Aciones</Th>
                         <Th >Detalles</Th>
                     </Tr>
@@ -146,7 +145,8 @@ const DriverTableView = () => {
                                         carPatent={driver.carPatent}
                                         carSoat={driver.carSoat}
                                         circulationPermit={driver.circulationPermit}
-                                        capacityPassengers={driver.capacityPassengers} />
+                                        capacityPassengers={driver.capacityPassengers}
+                                    />
                             </Td>
                         </Tr>
                     ))}
@@ -154,12 +154,12 @@ const DriverTableView = () => {
                 </Tbody>
                 <Tfoot>
                     <Tr>
-                        <Th>Cant.</Th>
-                        <Th>Aeropuerto</Th>
+                        <Th>#</Th>
+                        <Th>Zona</Th>
                         <Th>Nombre</Th>
                         <Th>Vehiculo</Th>
                         <Th>telefono</Th>
-                        <Th isNumeric>Max. Pasejeros</Th>
+                        <Th>Max. Psjr</Th>
                         <Th >Aciones</Th>
                         <Th >Detalles</Th>
                     </Tr>
