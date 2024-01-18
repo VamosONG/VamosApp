@@ -65,6 +65,7 @@ module.exports = (sequelize) => {
         Trip.associate = (models) => {
             Trip.belongsTo(models.User, { foreignKey: 'userId' });
             Trip.belongsTo(models.Driver, { foreignKey: 'driverId' });
+            Trip.hasOne(models.Review, { foreignKey: 'tripId' });
         };
     
         return Trip;
