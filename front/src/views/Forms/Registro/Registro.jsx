@@ -86,7 +86,8 @@ const RegistroForm = ({ onSwitchForm }) => {
         e.preventDefault();
       
         try {
-          await auth.register(input.email, input.password, {displayName}); 
+          await auth.register(input.email, input.password); 
+          console.log(auth.register);
           const userCreated = await dispatch(postNewUser(input));
       
           if (userCreated) {
