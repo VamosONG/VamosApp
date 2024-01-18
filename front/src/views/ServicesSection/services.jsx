@@ -4,7 +4,7 @@ import { Box, Heading, SimpleGrid, Image, Text, Button, Card, CardHeader, CardBo
 import Basic from '../../assets/vamosBasic.jpg'
 import Comfort from '../../assets/vamosComfort.jpg'
 import Premium from '../../assets/vamosPremium.jpg'
-import Pago from '../../assets/MercadoPago.png'
+import Pago from '../../assets/mercadoPago.png'
 
 
 const Services = () =>{
