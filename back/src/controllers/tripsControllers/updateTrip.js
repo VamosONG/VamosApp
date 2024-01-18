@@ -2,7 +2,6 @@ const { Trip, Driver } = require('../../dataBase');
 
 const updateTrip = async (id, newData) => {
     try {
-        //esta mal hecho
         const tripToUpdate = await Trip.findByPk(id);
 
         if (!tripToUpdate) {

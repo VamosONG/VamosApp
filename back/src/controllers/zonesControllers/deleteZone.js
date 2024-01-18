@@ -1,7 +1,6 @@
 const {Zone}=require('../../dataBase');
 
 const deleteZone = async(idZone)=>{
-console.log(idZone);
     if(!idZone)
         throw new Error('No se recibió el id para eliminar la zona.');
 
