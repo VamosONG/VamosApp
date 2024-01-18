@@ -18,26 +18,9 @@ import axios from "axios";
 import { getAllConductores } from "../../../redux/actions";
 
 
-const UpdateDriverData = (props, {closeFormEdit}) => {
+const UpdateDriverData = (props) => {
     const dispatch = useDispatch();
-    const [newData, setNewData] = useState({
-        name: props.name,
-        surname: props.surname,
-        email: props.email,
-        birthday: props.birthday,
-        dni: props.dni,
-        phone: props.phone,
-        driverImg: props.driverImg,
-        airports: props.airports,
-        carType: props.carType,
-        carModel: props.carModel,
-        driverLicense: props.driverLicense,
-        carImg: props.carImg,
-        carPatent: props.carPatent,
-        carSoat: props.carSoat,
-        circulationPermit: props.circulationPermit,
-        capacityPassengers: props.capacityPassengers,
-    });
+    const [newData, setNewData] = useState('');
     const { id } = props;
     const handleChange = (e) => {
         const property = e.target.name;
@@ -45,8 +28,8 @@ const UpdateDriverData = (props, {closeFormEdit}) => {
         console.log(property + " " + value);
         if (property === 'phone' || property === 'capacityPassengers' || property === 'dni') {
             value = Number(value)
-        } 
-        console.log(typeof(value));
+        }
+        console.log(typeof (value));
         setNewData({
             ...newData,
             [property]: value,
@@ -59,37 +42,20 @@ const UpdateDriverData = (props, {closeFormEdit}) => {
         e.preventDefault();
         console.log("Antes de la actualización:", newData);
         if (newData) {
-            const response = await axios.patch(`https://vamosappserver.onrender.com/drivers/update/${id}`, newData)
-            if (response) {
+
+            console.log('data antes de la ruta' + JSON.stringify(newData));
+            const response = await axios.patch(`https://vamosappserver.onrender.com/drivers/update/${id}`, {newData});
+            console.log('data luego de la ruta' + newData);
+            if (response.status === 200) {
+
                 console.log("des1 de la actualización:", newData);
                 Swal.fire({
                     title: "Bien hecho!",
                     text: "Datos actualizados",
                     icon: "success",
                 });
-                setNewData({
-                    name: "",
-                    surname: "",
-                    email: "",
-                    birthday: "",
-                    dni: "",
-                    phone: "",
-                    driverImg: "",
-                    airports: "",
-                    carType: "",
-                    carModel: "",
-                    driverLicense: "",
-                    carImg: "",
-                    carPatent: "",
-                    carSoat: "",
-                    circulationPermit: "",
-                    capacityPassengers: "",
-                })
-                console.log("des2 de la actualización:", newData);
                 await dispatch(getAllConductores())
-                console.log("des3 de la actualización:", newData);
-                await closeFormEdit();
-                console.log("des4 de la actualización:", newData);
+                
             } else {
                 throw new Error(
                     Swal.fire({
@@ -127,9 +93,10 @@ const UpdateDriverData = (props, {closeFormEdit}) => {
                 scrollMarginX="auto"
             >
                 <Box w='100%'>
-                    <Flex justify='center' gap='4'>
+                    <Flex justify='center' gap='4' align='center'>
                         <Text fontSize='4xl'>Modificar Datos de: {props.name}</Text>
                         <Avatar
+                            alignSelf='center' justifySelf='center'
                             border='1px solid black'
                             size='lg'
                             name={props.name}
@@ -137,6 +104,7 @@ const UpdateDriverData = (props, {closeFormEdit}) => {
                         />{' '}
                     </Flex>
                 </Box>
+
                 <Box>
                     <Flex flexDirection={{ base: "column", md: 'row' }} gap='4'>
                         <FormControl>
@@ -154,7 +122,7 @@ const UpdateDriverData = (props, {closeFormEdit}) => {
                                 <InputLeftAddon bg='yellow.200'>
                                     {props.surname}
                                 </InputLeftAddon>
-                                <Input type='text' placeholder='Nuevo' bg='lightgreen' name='surname' onChange={handleChange} value={newData.surname}/>
+                                <Input type='text' placeholder='Nuevo' bg='lightgreen' name='surname' onChange={handleChange} value={newData.surname} />
                             </InputGroup>
                         </FormControl>
                         <FormControl>
@@ -315,9 +283,9 @@ const UpdateDriverData = (props, {closeFormEdit}) => {
                                     onChange={handleChange}
                                     value={newData.capacityPassengers}
                                 >
-                                    {[...Array(20).keys()].map((number) => (
+                                    {[...Array(20).keys()].map((number, index) => (
                                         <option
-                                            key={number + 1}
+                                            key={index}
                                             id={`number-${number + 1}`}
                                             value={number + 1}
                                         >

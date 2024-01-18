@@ -1,7 +1,7 @@
 import axios from 'axios';
 import choferes from '../../utils/chofer'
 
-import { DELETE_DRIVER, UPDATE_DRIVER_DATA } from './action.types';
+import { DELETE_DRIVER, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA } from './action.types';
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE = "PAGINATE"
@@ -11,6 +11,7 @@ export const LOGIN = "LOGIN"
 export const ID_SOLICITUD = "ID_SOLICITUD"
 export const GET_RESERVED_TRIPS = "GET_RESERVED_TRIPS"
 export const GET_PENDING_TRIPS = "GET_PENDING_TRIPS"
+export const GET_COMPLETED_TRIPS = "GET_COMPLETED_TRIPS"
 export const NEW_USER = 'NEW_USER'
 export const LOGOUT = 'LOGOUT'
 export const CREATE_CHOFER = 'CREATE_CHOFER'
@@ -65,18 +66,18 @@ export const deleteDriverAction = (id) => {
     }
 }
 
-export const updateDriverData = (id, newData) => {
-    return async (dispatch) => {
-        try {
-            dispatch({
-                type: UPDATE_DRIVER_DATA,
-                payload: data
-            })
-        } catch (error) {
-            console.error({message: 'Error en action', error});
-        }
-    }
-}
+// export const updateDriverData = (id, newData) => {
+//     return async (dispatch) => {
+//         try {
+//             dispatch({
+//                 type: UPDATE_DRIVER_DATA,
+//                 payload: data
+//             })
+//         } catch (error) {
+//             console.error({message: 'Error en action', error});
+//         }
+//     }
+// }
 
 export const postNewViaje = (infoViaje) => {
 
@@ -131,24 +132,22 @@ export const getPendingTrips = () =>{
         }
     }
 }
-
-/* export const getAllConductores=()=>{
-    try {
-
-        return async (dispatch)=>{
-            const data= choferes
-            console.log(data)
+export const getCanceledTrips = () =>{
+    return async(dispatch)=> {
+        const endpoint= 'http://localhost:3001/trips/completed' //ruta con viajes completados
+        try {
+            const { data } = await axios.get(endpoint)
+            console.log(data);
             return dispatch({
-                type:GET_ALL_CONDUCTORES,
-                payload:data
+                type: GET_COMPLETED_TRIPS,
+                payload: data
             })
+        } catch (error) {
+            console.log(error);
+            alert("error")
         }
-    } catch (error) {
-        console.log(error);
     }
-    
 }
- */
 
 
 export const postNewUser = (form) => {
@@ -260,6 +259,72 @@ export const conductorAsignado = (info) => {
         };
     };
 };
+
+export const alphabeticalOrder = (order) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: ORDER_ALPHABETICAL,
+                payload: order
+            });
+        } catch (error) {
+            throw new Error(error);
+        };
+    };
+};
+
+export const passengerOrder = (data) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: ORDER_PASSENGER,
+                payload: data
+            })
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+}
+
+
+export const ratingOrder = (data) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: ORDER_RATING,
+                payload: data
+            })
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+}
+
+export const carFilter = (data) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: FILTER_CAR,
+                payload: data
+            })
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+}
+
+export const airportFilter = (data) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: FILTER_AIRPORT,
+                payload: data
+            })
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+}
 
 
 

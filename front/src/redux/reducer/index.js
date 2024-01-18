@@ -1,19 +1,23 @@
-import { DELETE_DRIVER } from "../actions/action.types";
+
+import { DELETE_DRIVER, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING } from "../actions/action.types";
 import { CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
 
 
+
 const initialState = {
+    
+    allData: [],//Este estado servidara para mantener la data general de la base de datos
     conductores: [],
     pageConductores: [],
     currentPage: 0,
     newUsuario: [],
-    cantConductoresPorPag: 6,
 
     esAdmin: false,
     esUsuario: false,
 
     viajesReservados: [],
     viajesPendientes: [],
+    viajesCompletados: [],
     idSolicitud: '',
 
     infoConfirmacionViaje:{},
@@ -23,13 +27,18 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
+    const PAGE_DATA = 6;
     switch (action.type) {
         case GET_ALL_CONDUCTORES:
-            //console.log(action.payload)
             return {
                 ...state,
                 conductores: action.payload,
-                pageConductores: state.conductores.splice(0, state.cantConductoresPorPag),
+
+
+
+                pageConductores: action.payload,
+                allData: action.payload
+
             };
         
         case DELETE_DRIVER:
@@ -109,6 +118,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 viajesPendientes: action.payload
             }
+        case GET_COMPLETED_TRIPS:
+            return {
+                ...state,
+                viajesCompletados: action.payload
+            }
 
         case ID_SOLICITUD:
             return {
@@ -119,6 +133,61 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 conductoresFiltrados: action.payload,
+            }
+        case ORDER_ALPHABETICAL:
+            let orderedList = [...state.conductores];
+            if (action.payload === "A") {
+                orderedList.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1);
+            } else if (action.payload === "D") {
+                orderedList.sort((a, b) => a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1);
+            }
+            return {
+                ...state,
+                conductores: orderedList,
+                pageConductores: orderedList
+            }
+
+        case ORDER_PASSENGER:
+            let orderedListPassenger = [...state.conductores];
+            if (action.payload === 'A') {
+                orderedListPassenger.sort((a,b) => a.capacityPassengers < b.capacityPassengers ? 1 : -1)
+            } else if (action.payload === 'D') {
+                orderedListPassenger.sort((a,b) => a.capacityPassengers > b.capacityPassengers ? 1 : -1)
+            }
+            return {
+                ...state,
+                conductores: orderedListPassenger,
+                pageConductores: orderedListPassenger
+            }
+
+        case ORDER_RATING:
+            let orderedListRating = [...state.conductores]
+            if (action.payload === 'A') {
+                orderedListRating.sort((a,b) => a.rating < b.rating ? 1 : -1)
+            } else if (action.payload === 'D') {
+                orderedListRating.sort((a,b) => a.rating > b.rating ? 1 : -1)
+            }
+            return {
+                ...state,
+                conductores: orderedListRating,
+                pageConductores: orderedListRating
+            }
+
+        case FILTER_CAR:
+            const filterCarList = state.allData.filter((car) => car.carType === action.payload)
+            return {
+                ...state,
+                conductores: filterCarList,
+                pageConductores:filterCarList
+            }
+
+        case FILTER_AIRPORT:
+            const filterAirportList = state.allData.filter((zone) => zone.airports === action.payload)
+
+            return {
+                ...state,
+                conductores: [...filterAirportList],
+                pageConductores: filterAirportList
             }
         default:
             return { ...state };
