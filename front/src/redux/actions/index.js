@@ -1,7 +1,7 @@
 import axios from 'axios';
 import choferes from '../../utils/chofer'
 
-import { DELETE_DRIVER, UPDATE_DRIVER_DATA } from './action.types';
+import { DELETE_DRIVER, UPDATE_DRIVER_DATA,GET_TRIP_ID } from './action.types';
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE = "PAGINATE"
@@ -34,6 +34,20 @@ export const getAllConductores = () => {
     }
 
 
+}
+
+export const getTripById = (id) => {
+    return async (dispatch) => {
+        try {
+            const {data} = await axios.get(`http://localhost:3001/trips/${id}`)
+            return dispatch({
+                type:GET_TRIP_ID,
+                payload: data
+            })
+        } catch (error) {
+            throw error
+        }
+    }
 }
 
 export const createNewChofer = (data) => {

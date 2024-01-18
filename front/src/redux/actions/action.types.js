@@ -1,2 +1,3 @@
 export const DELETE_DRIVER = 'DELETE_DRIVER'
 export const UPDATE_DRIVER_DATA = 'UPDATE_DRIVER_DATA'
+export const GET_TRIP_ID = 'GET_TRIP_ID'

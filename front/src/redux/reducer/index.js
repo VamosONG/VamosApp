@@ -1,4 +1,4 @@
-import { DELETE_DRIVER } from "../actions/action.types";
+import { DELETE_DRIVER,GET_TRIP_ID } from "../actions/action.types";
 import { CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
 
 
@@ -18,7 +18,8 @@ const initialState = {
 
     infoConfirmacionViaje:{},
 
-    conductoresFiltrados:[]
+    conductoresFiltrados:[],
+    trip:[]
 
 }
 
@@ -31,7 +32,11 @@ const reducer = (state = initialState, action) => {
                 conductores: action.payload,
                 pageConductores: state.conductores.splice(0, state.cantConductoresPorPag),
             };
-        
+        case GET_TRIP_ID:
+            return{
+                ...state,
+                trip:action.payload
+            }
         case DELETE_DRIVER:
             return {
                 ...state, 
