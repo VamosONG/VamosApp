@@ -18,6 +18,8 @@ export const LOGOUT = 'LOGOUT'
 export const CREATE_CHOFER = 'CREATE_CHOFER'
 export const VIAJE_CONFIRMADO = 'VIAJE_CONFIRMADO'
 export const GET_FILTERED = 'GET_FILTERED'
+export const GET_TRIPS_BY_ID = 'GET_TRIPS_BY_ID'
+export const POST_REVIEW = 'POST_REVIEW'
 
 
 export const getAllConductores = () => {
@@ -100,6 +102,10 @@ export const postNewViaje = (infoViaje) => {
 
     return async (dispatch) => {
         try {
+
+            /* const { data } = await axios.post(`https://vamosappserver.onrender.com/offer/create`, infoViaje); */
+
+
             const { data } = await axios.post(`http://localhost:3001/offer/create`, infoViaje);
             console.log(data)
             await dispatch({
@@ -334,6 +340,31 @@ export const airportFilter = (data) => {
             return dispatch({
                 type: FILTER_AIRPORT,
                 payload: data
+            })
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+}
+export const getTripsById = (id) => {
+    return async (dispatch) => {
+        const endpoint= 'http://localhost:3001/trips/tripsById'
+        try {
+            return dispatch({
+                type: GET_TRIPS_BY_ID,
+                payload: id
+            })
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+}
+export const postReview = (info) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: POST_REVIEW,
+                payload: info
             })
         } catch (error) {
             throw new Error(error);
