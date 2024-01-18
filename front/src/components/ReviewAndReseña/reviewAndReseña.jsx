@@ -46,7 +46,7 @@ const ReviewAndReseña=()=> {
           qualification:rating,
           tripId:"0642a055-2d76-425a-9b04-a1a67e456b69"
         })
-        console.log(input)
+        dispatch(postReview(input))
     }
 
 
