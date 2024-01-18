@@ -1,11 +1,5 @@
 {
     "rewrites": [
         {"source": "/(.*)", "destination": "/"}
-    ],
-    "builds": [
-        {
-            "command": "VITE_VERSION=5.0.8 vite build"  
-          }
-        
-      ]
+    ]
 }
