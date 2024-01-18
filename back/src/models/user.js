@@ -22,25 +22,22 @@ module.exports = (sequelize) => {
         phone: {
             type: DataTypes.INTEGER,
             // allowNull: true,
-            validate: {
-                isNumeric: true, 
-            },
+            // validate: {
+            //     isNumeric: true, 
+            // },
         },
         //Cambiamos el type a Array?
         activeReservations: {
             type: DataTypes.INTEGER, 
             defaultValue: 0,
-            // allowNull: false,
+            allowNull: true,
             validate: {
                 isNumeric: true, 
             },
         },
         dni: {
-            type: DataTypes.INTEGER, 
-            // allowNull: false,
-            validate: {
-                isNumeric: true, 
-            },
+            type: DataTypes.INTEGER,
+            // allowNull: false
         },
         admin: {
             type: DataTypes.BOOLEAN,

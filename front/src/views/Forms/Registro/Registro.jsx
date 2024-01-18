@@ -23,15 +23,17 @@ import { useState } from "react";
 import { postNewUser } from '../../../redux/actions';
 
 import { useAuth } from '../../../context/authContext';
+import axios from "axios";
 
 const RegistroForm = ({ onSwitchForm }) => {
     const dispatch = useDispatch()
     const [input, setInput] = useState({
         name: '',
+        surname: '',
         phone: '',
         email: '',
-        password: '',
-        DNI: '',
+        // password: '',
+        dni: '',
     })
     //  surname, email, phone, dni
 
@@ -52,12 +54,12 @@ const RegistroForm = ({ onSwitchForm }) => {
     const handleClick = () => setShow(!show)
 
     const auth = useAuth();
-   const {displayName, email, uid} = auth.user
+    const { displayName, email, uid } = auth.user
 
     // const handleSubmit = async (e) => {
     //     e.preventDefault();
     //     auth.register(input.email, input.password)
-        
+
     //     const userCreado = await dispatch(postNewUser(input))
     //     console.log(userCreado);
     //     if (userCreado) {
@@ -84,53 +86,64 @@ const RegistroForm = ({ onSwitchForm }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-      
+
         try {
-          await auth.register(input.email, input.password, {displayName}); 
-          const userCreated = await dispatch(postNewUser(input));
-      
-          if (userCreated) {
-            setInput({
-              name: '',
-              phone: '',
-              email: '',
-              DNI:""
-            });
-            Swal.fire({
-                          title: "Bien hecho!",
-                             text: "Datos registrados!",
-                            icon: "success"
-                   });
-          } else {
-            Swal.fire({
-                title: "noooooooooooooo!",
-                   text: "Datos registrados!",
-                  icon: "success"
-         });
-          }
+            // await auth.register(input.email, input.password, { displayName });
+            console.log( 'input data', input);
+            const userCreated = await axios.post(`http://localhost:3001/user/create`, input);
+
+            if (userCreated) {
+                Swal.fire({
+                    title: "Bien hecho!",
+                    text: "Datos registrados!",
+                    icon: "success"
+                });
+                setInput({
+                    name: '',
+                    surname: '',
+                    phone: '',
+                    email: '',
+                    // password: '',
+                    dni: '',
+                });
+            } else {
+                Swal.fire({
+                    title: "noooooooooooooo!",
+                    text: "no se registro!",
+                    icon: "error"
+                });
+            }
         } catch (error) {
-          console.error(error);
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Hubo un error en el registro",
-          });
+            console.log(input);
+            console.error(error);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Hubo un error en el registro",
+            });
         }
-      
-        return true;
-      };
+
+        // return true;
+    };
     return (
         <form onSubmit={handleSubmit}>
             <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' w={{ base: '20rem', md: '30rem' }} color='white' >
                 <Heading>Formulario de Registro</Heading>
                 <FormControl isInvalid={isError} isRequired>
-                    <FormLabel>Nombre y apellido</FormLabel>
+                    <FormLabel>Nombre</FormLabel>
                     <Input type='text' name='name' value={input.name} onChange={handleInputChange} placeholder='Ingresa tu name' />
                     {!isError ? (
                         <FormErrorMessage>Es necesario tu name</FormErrorMessage>
                     ) : null}
                 </FormControl>
 
+                <FormControl isInvalid={isError} isRequired>
+                    <FormLabel>Apellido</FormLabel>
+                    <Input type='text' name='surname' value={input.surname} onChange={handleInputChange} placeholder='Ingresa tu name' />
+                    {!isError ? (
+                        <FormErrorMessage>Es necesario tu surname</FormErrorMessage>
+                    ) : null}
+                </FormControl>
                 <FormControl isRequired>
 
                     <FormLabel>phone</FormLabel>
@@ -150,12 +163,12 @@ const RegistroForm = ({ onSwitchForm }) => {
 
                 <FormControl isRequired>
 
-<FormLabel>DNI</FormLabel>
-<Input type='number' name='DNI' value={input.DNI} placeholder='Ingresa tu nuemro de celular.' onChange={handleInputChange} />
-{isError ? (
-    <FormErrorMessage>Es necesario tu numero de phone</FormErrorMessage>
-) : null}
-</FormControl>
+                    <FormLabel>DNI</FormLabel>
+                    <Input type='number' name='dni' value={input.dni} placeholder='Ingresa tu nuemro de celular.' onChange={handleInputChange} />
+                    {isError ? (
+                        <FormErrorMessage>Es necesario tu numero de phone</FormErrorMessage>
+                    ) : null}
+                </FormControl>
 
                 <FormControl isRequired>
                     <FormLabel>password</FormLabel>
@@ -175,7 +188,7 @@ const RegistroForm = ({ onSwitchForm }) => {
                         </InputRightElement>
                     </InputGroup>
                 </FormControl>
-{/* 
+                {/* 
                 <FormControl isRequired>
                     <FormLabel>Sexo</FormLabel>
                     <Select placeholder='Elige Sexo' name='sexo' color='#000' onChange={handleInputChange} value={input.sexo} >
