@@ -1,5 +1,5 @@
 
-import { DELETE_DRIVER, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING } from "../actions/action.types";
+import { DELETE_DRIVER,GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING } from "../actions/action.types";
 import { CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_COMPLETED_TRIPS, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
 
 
@@ -22,7 +22,8 @@ const initialState = {
 
     infoConfirmacionViaje:{},
 
-    conductoresFiltrados:[]
+    conductoresFiltrados:[],
+    trip:[]
 
 }
 
@@ -33,14 +34,13 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 conductores: action.payload,
-
-
-
                 pageConductores: action.payload,
-                allData: action.payload
-
-            };
-        
+                allData: action.payload            };
+        case GET_TRIP_ID:
+            return{
+                ...state,
+                trip:action.payload
+            }
         case DELETE_DRIVER:
             return {
                 ...state, 
