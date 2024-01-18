@@ -60,10 +60,10 @@ const LoginForm = ({ onSwitchForm }) => {
     try {
       const google= await auth.loginWithGoogle();
       console.log(google);
-      dispatch(postNewUser({
-        name:displayName,
-        email: email,
-        id:uid
+       dispatch(postNewUser({google
+        // // name:displayName,
+        // // email: email,
+        // id:uid
       }))
     } catch (error) {
       console.error("Error al iniciar sesión con Google:", error.message);

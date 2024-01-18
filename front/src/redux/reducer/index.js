@@ -87,9 +87,10 @@ const reducer = (state = initialState, action) => {
             }
         //Creando un nuevo usuario
         case NEW_USER:
+            console.log(action.payload);
             return {
                 ...state,
-                newUsuario: [action.payload]
+                newUsuario: [...state.newUsuario, action.payload]
             }
 
         case POST_NEW_VIAJE: 

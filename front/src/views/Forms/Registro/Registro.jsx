@@ -31,8 +31,9 @@ const RegistroForm = ({ onSwitchForm }) => {
         phone: '',
         email: '',
         password: '',
-        sexo: '',
+        DNI: '',
     })
+    //  surname, email, phone, dni
 
     const handleInputChange = (e) => {
         e.preventDefault();
@@ -51,43 +52,80 @@ const RegistroForm = ({ onSwitchForm }) => {
     const handleClick = () => setShow(!show)
 
     const auth = useAuth();
+   const {displayName, email, uid} = auth.user
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     auth.register(input.email, input.password)
+        
+    //     const userCreado = await dispatch(postNewUser(input))
+    //     console.log(userCreado);
+    //     if (userCreado) {
+    //         setInput({
+    //             name: '',
+    //             phone: '',
+    //             email: '',
+    //             // password: '',
+    //             // sexo: '',
+    //         })
+    //         Swal.fire({
+    //             title: "Bien hecho!",
+    //             text: "Datos registrados!",
+    //             icon: "success"
+    //         });
+    //     } else {
+    //         Swal.fire({
+    //             icon: "error",
+    //             title: "Oops...",
+    //             text: "Hubo un error en el registro"
+    //         });
+    //     }
+    // }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        auth.register(input.email, input.password)
-
-
-
-        const userCreado = await dispatch(postNewUser(input))
-        if (userCreado) {
+      
+        try {
+          await auth.register(input.email, input.password, {displayName}); 
+          const userCreated = await dispatch(postNewUser(input));
+      
+          if (userCreated) {
             setInput({
-                name: '',
-                phone: '',
-                email: '',
-                password: '',
-                sexo: '',
-            })
-            Swal.fire({
-                title: "Bien hecho!",
-                text: "Datos registrados!",
-                icon: "success"
+              name: '',
+              phone: '',
+              email: '',
+              DNI:""
             });
-        } else {
             Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Hubo un error en el registro"
-            });
+                          title: "Bien hecho!",
+                             text: "Datos registrados!",
+                            icon: "success"
+                   });
+          } else {
+            Swal.fire({
+                title: "noooooooooooooo!",
+                   text: "Datos registrados!",
+                  icon: "success"
+         });
+          }
+        } catch (error) {
+          console.error(error);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Hubo un error en el registro",
+          });
         }
-    }
-
+      
+        return true;
+      };
     return (
         <form onSubmit={handleSubmit}>
             <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' w={{ base: '20rem', md: '30rem' }} color='white' >
                 <Heading>Formulario de Registro</Heading>
                 <FormControl isInvalid={isError} isRequired>
-                    <FormLabel>name</FormLabel>
-                    <Input type='name' name='name' value={input.name} onChange={handleInputChange} placeholder='Ingresa tu name' />
+                    <FormLabel>Nombre y apellido</FormLabel>
+                    <Input type='text' name='name' value={input.name} onChange={handleInputChange} placeholder='Ingresa tu name' />
                     {!isError ? (
                         <FormErrorMessage>Es necesario tu name</FormErrorMessage>
                     ) : null}
@@ -111,6 +149,15 @@ const RegistroForm = ({ onSwitchForm }) => {
                 </FormControl>
 
                 <FormControl isRequired>
+
+<FormLabel>DNI</FormLabel>
+<Input type='number' name='DNI' value={input.DNI} placeholder='Ingresa tu nuemro de celular.' onChange={handleInputChange} />
+{isError ? (
+    <FormErrorMessage>Es necesario tu numero de phone</FormErrorMessage>
+) : null}
+</FormControl>
+
+                <FormControl isRequired>
                     <FormLabel>password</FormLabel>
                     <InputGroup size='md'>
                         <Input
@@ -128,7 +175,7 @@ const RegistroForm = ({ onSwitchForm }) => {
                         </InputRightElement>
                     </InputGroup>
                 </FormControl>
-
+{/* 
                 <FormControl isRequired>
                     <FormLabel>Sexo</FormLabel>
                     <Select placeholder='Elige Sexo' name='sexo' color='#000' onChange={handleInputChange} value={input.sexo} >
@@ -137,7 +184,7 @@ const RegistroForm = ({ onSwitchForm }) => {
                         <option value='m' > Masculino </option>
                         <option value='o' > Otro </option>
                     </Select>
-                </FormControl>
+                </FormControl> */}
 
 
                 <Button colorScheme='green' type='submit'>

@@ -25,7 +25,6 @@ export const useAuth = () => {
 export function AuthProvider ({children}){
 
     const [user, setUser]= useState("")
-    console.log(user);
     useEffect(()=> {
         const suscribed= onAuthStateChanged(auth, (currentUser)=>{
             if(!currentUser){
@@ -41,17 +40,17 @@ export function AuthProvider ({children}){
         return () => suscribed()
     },[])
 
-    const render = () => {
-        if (!user) {
-          return <p>No hay usuario conectado</p>
-        } else {
-          if (user.getCustomClaims().isAdmin) {
-            return <p>El usuario actual es administrador</p>
-          } else {
-            return <p>El usuario actual no es administrador</p>
-          }
-        }
-      }
+    // const render = () => {
+    //     if (!user) {
+    //       return <p>No hay usuario conectado</p>
+    //     } else {
+    //       if (user.getCustomClaims().isAdmin) {
+    //         return <p>El usuario actual es administrador</p>
+    //       } else {
+    //         return <p>El usuario actual no es administrador</p>
+    //       }
+    //     }
+    //   }
 
  
     const register = async ( email,password) => {
@@ -81,7 +80,7 @@ export function AuthProvider ({children}){
         loginWithGoogle,
         logOut,
         user,
-        render
+        // render
     }}>
         {children}
     </authContext.Provider>) 
