@@ -7,7 +7,7 @@
       }
       if (result.status === 'approved') {
         
-        console.log('El pago fue aceptado. Realizando acciones adicionales...');
+        console.log('El pago fue aceptado. Realizando acciones adicionales.. .');
       }
       
       res.json({
