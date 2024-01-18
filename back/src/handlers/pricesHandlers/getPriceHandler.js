@@ -2,16 +2,10 @@ const getPrices = require('../../controllers/pricesControllers/getPrices');
 
 module.exports=async(req,res)=>{
     try{
-        const {airport, zone} = req.body;
-        const allPrices=await getPrices();
+        const {airport, zone, quantityPassengers} = req.body;
+        const cost=await getPrices(airport, zone, quantityPassengers);
  
-        if(airport && zone){
-            const filtered=await allPrices?.filter((price=>price.airport.toLowerCase()===(airport.toLowerCase())) && (price=>price.zone.toLowerCase()===(zone.toLowerCase())));
-            
-            res.status(200).json(filtered);    //Retorna el arreglo tenga elementos o no.
-        }
-        else
-            res.status(200).json(allPrices);
+        res.status(200).json(cost);
     }catch(error){
         res.status(400).json({error: error.message});
     }
