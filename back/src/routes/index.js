@@ -93,8 +93,8 @@ router.delete('/price', deletePriceHandler);
 router.post('/offer/create', filtershandler);
 router.get('/drivers/filter', getFilteredDriversHandler);
 router.get('/trips/reserves', getReservesHandler);
-router.put('/trips/reserves/create', doReserveHandler);
-router.put('/trips/reserves/update',setDriverHandler);
+router.put('/trips/reserves/create', doReserveHandler); //Se genera la reserva, cuando se paga el viaje.
+router.put('/trips/reserves/update',setDriverHandler); //Se asigna el chofer a la reserva.
 router.put('/trips/completed', getTripsCompletedHandler);
 router.get('/trips/pending', getTripsPendingHandler);
 
