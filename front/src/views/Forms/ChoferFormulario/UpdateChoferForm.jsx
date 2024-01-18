@@ -59,7 +59,7 @@ const UpdateDriverData = (props, {closeFormEdit}) => {
         e.preventDefault();
         console.log("Antes de la actualización:", newData);
         if (newData) {
-            const response = await axios.patch(`http://localhost:3001/drivers/update/${id}`, newData)
+            const response = await axios.patch(`https://vamosappserver.onrender.com/drivers/update/${id}`, newData)
             if (response) {
                 console.log("des1 de la actualización:", newData);
                 Swal.fire({
