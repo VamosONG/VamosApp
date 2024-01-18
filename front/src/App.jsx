@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import './App.css'
 
-import Footer from './views/footer/footerw';
+import Footer from './views/footer/footer';
 import Paginado from './components/paginado/paginadoComponent';
 import LoginForm from './views/Forms/Login/Login'
 import HomeComponent from './views/home/homeCompone/home';
