@@ -22,7 +22,7 @@ export const GET_FILTERED = 'GET_FILTERED'
 export const getAllConductores = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios(`http://localhost:3001/drivers`);
+            const { data } = await axios(`https://vamosappserver.onrender.com/drivers`);
             dispatch({
                 type: GET_ALL_CONDUCTORES,
                 payload: data
@@ -55,7 +55,7 @@ export const createNewChofer = (data) => {
 export const deleteDriverAction = (id) => {
     return async (dispatch) => {
         try {
-            const {data} = await axios.delete(`http://localhost:3001/drivers/${id}`)
+            const {data} = await axios.delete(`https://vamosappserver.onrender.com/drivers/${id}`)
             dispatch({
                 type: DELETE_DRIVER,
                 payload: data
@@ -85,7 +85,7 @@ export const postNewViaje = (infoViaje) => {
 
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`http://localhost:3001/offer/create`, infoViaje);
+            const { data } = await axios.post(`https://vamosappserver.onrender.com/offer/create`, infoViaje);
             console.log(data)
             await dispatch({
                 type: POST_NEW_VIAJE,
@@ -102,7 +102,7 @@ export const postNewViaje = (infoViaje) => {
 
 export const getReservedTrips = () =>{
     return async(dispatch)=> {
-        const endpoint= 'http://localhost:3001/trips/reserves' //Se cambió a la ruta con viajes reservados
+        const endpoint= 'https://vamosappserver.onrender.com/trips/reserves' //Se cambió a la ruta con viajes reservados
         try {
             const { data } = await axios.get(endpoint)
             console.log(data);
@@ -118,7 +118,7 @@ export const getReservedTrips = () =>{
 }
 export const getPendingTrips = () =>{
     return async(dispatch)=> {
-        const endpoint= 'http://localhost:3001/trips/pending' //ruta con viajes pendientes
+        const endpoint= 'https://vamosappserver.onrender.com/trips/pending' //ruta con viajes pendientes
         try {
             const { data } = await axios.get(endpoint)
             console.log(data);
@@ -214,7 +214,7 @@ export const viajeConfirmado = (info) => {
     console.log(info)
     return async (dispatch) => {
         try {
-            const { data } = await axios.put(`http://localhost:3001/trips/reserves/create`, info);
+            const { data } = await axios.put(`https://vamosappserver.onrender.com/trips/reserves/create`, info);
             console.log(data)
             dispatch({
                 type: VIAJE_CONFIRMADO,
@@ -231,7 +231,7 @@ export const filtrarConductores = (info) => {
     console.log(info)
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`http://localhost:3001/drivers/filter`, info);
+            const { data } = await axios.post(`https://vamosappserver.onrender.com/drivers/filter`, info);
             console.log(data)
             dispatch({
                 type: GET_FILTERED,
@@ -247,7 +247,7 @@ export const conductorAsignado = (info) => {
     console.log(info)
     return async (dispatch) => {
         try {
-            const { data } = await axios.put(`http://localhost:3001/trips/reserves/update`, info);
+            const { data } = await axios.put(`https://vamosappserver.onrender.com/trips/reserves/update`, info);
             console.log(data)
             /* dispatch({
                 type: GET_FILTERED,
