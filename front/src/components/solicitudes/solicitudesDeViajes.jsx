@@ -136,7 +136,6 @@ function SolicitudesDeViajes() {
                     </Tr>
                 </Thead>
                 <Tbody >
-                  
                     {viajesPendientes?.map((solicitud, index) => (
                         <Tr key={solicitud.id} >
                             <Td>{index + 1}</Td>
