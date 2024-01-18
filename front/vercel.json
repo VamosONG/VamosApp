@@ -4,19 +4,10 @@
     ],
     "builds": [
         {
-          "src": "path/to/your/project",
-          "use": "@vercel/static-build",
-          "config": {
-            "functions": "path/to/your/functions",
-            "routes": "path/to/your/routes",
-            "cleanUrls": true,
-            "output": "path/to/output",
-            "entrypoint": "path/to/entrypoint",
-            "use": "@vercel/static-build",
-            "dist": "path/to/your/dist",
+
             "env": {},
              "command": "VITE_VERSION=5.0.8 vite build"  
           }
-        }
+        
       ]
 }
