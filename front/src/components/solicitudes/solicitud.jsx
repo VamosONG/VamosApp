@@ -37,10 +37,12 @@ const Solicitud =()=> {
   const id = useSelector((state) => state.idSolicitud)
   console.log(id)
   const viajesReservados = useSelector((state) => state.viajesReservados)
+  const viajesPendientes = useSelector((state) => state.viajesPendientes)
   const conductores = useSelector((state) => state.conductoresFiltrados)
 
 
-  const solicitudFound = viajesReservados.find((solicitud) => solicitud.id === id)
+  let solicitudFound = viajesReservados.find((solicitud) => solicitud.id === id)
+  if (!solicitudFound){solicitudFound = viajesPendientes.find((solicitud) => solicitud.id === id)}
   console.log(solicitudFound)
 
   const { origin, destination, date, hour, quantityPassengers } = solicitudFound
@@ -72,6 +74,9 @@ const Solicitud =()=> {
       title: "Conductor confirmado para el viaje",
       text: "Para cambiar de conductor ir a Solicitudes de viaje --> Viajes con conductor asignado",
       icon: "success"
+    }).then(() => {
+      // Redirigir a la página anterior
+      window.history.back();
     });
   };
   
@@ -96,30 +101,6 @@ const Solicitud =()=> {
 
         </CardFooter>
       </Card>
-      {/* {conductores.map((conductor) => (
-        <Card
-          key={conductor.id}
-          direction="column"
-          overflow="hidden"
-          variant="outline"
-          maxW='sm'
-        >
-          <CardHeader size="md">{conductor.name}</CardHeader>
-          <CardBody>{conductor.surname}</CardBody>
-          <CardBody>{conductor.phone}</CardBody>
-          <CardBody>{conductor.capacityPassengers}</CardBody>
-          <CardBody>{conductor.airports}</CardBody>
-          <CardBody>{conductor.driverimg}</CardBody>
-          <CardFooter>
-            <Checkbox
-              onChange={() => handleCheckboxChange(conductor.id)}
-              isChecked={conductor.checked} 
-            >
-              Seleccionar
-            </Checkbox>
-          </CardFooter>
-        </Card>
-      ))} */}
       <TableContainer >
             <Table variant='simple' >
                 <TableCaption>Conductores filtrados para esta solicitud según aeropuerto y cantidad de pasajeros</TableCaption>

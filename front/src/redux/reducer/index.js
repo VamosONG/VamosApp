@@ -1,5 +1,13 @@
 import { DELETE_DRIVER } from "../actions/action.types";
-import { CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
+import { CREATE_CHOFER,
+     GET_ALL_CONDUCTORES,
+      GET_COMPLETED_TRIPS,
+      GET_FILTERED,
+       GET_PENDING_TRIPS,
+        GET_RESERVED_TRIPS,
+         ID_SOLICITUD,
+          LOGIN,
+           LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
 
 
 const initialState = {
@@ -14,6 +22,7 @@ const initialState = {
 
     viajesReservados: [],
     viajesPendientes: [],
+    viajesCompletados: [],
     idSolicitud: '',
 
     infoConfirmacionViaje:{},
@@ -25,11 +34,10 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_ALL_CONDUCTORES:
-            //console.log(action.payload)
             return {
                 ...state,
                 conductores: action.payload,
-                pageConductores: state.conductores.splice(0, state.cantConductoresPorPag),
+                /* pageConductores: state.conductores.splice(0, state.cantConductoresPorPag), */
             };
         
         case DELETE_DRIVER:
@@ -108,6 +116,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 viajesPendientes: action.payload
+            }
+        case GET_COMPLETED_TRIPS:
+            return {
+                ...state,
+                viajesCompletados: action.payload
             }
 
         case ID_SOLICITUD:
