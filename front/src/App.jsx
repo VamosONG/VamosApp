@@ -15,14 +15,16 @@ import {Routes, Route} from 'react-router-dom'
 import SolicitudViajeForm from './views/Forms/SolicitudViaje/SolicitudViajeForm';
 import SolicitudesDeViajes from './components/solicitudes/solicitudesDeViajes';
 import Solicitud from './components/solicitudes/solicitud';
-import { Link } from 'react-router-dom';
+import { AuthProvider } from './context/authContext';
+
 
 function App() {
 
   return (
     <>
-      <NavBar/>
+    <AuthProvider>
 
+      <NavBar/>
 
       <Routes>
         <Route path='/home' element={<LoginForm/>}/>
@@ -32,12 +34,13 @@ function App() {
         <Route path='/detail' element={<DetailChofer/>}/>
         <Route path='/solicitud' element={<Solicitud/>}/>
         <Route path='/product' element={<Product/>}/>
-
       </Routes>
       <HomeComponent/>
       {/* <Paginado/> */}
 
       <Footer/>
+    </AuthProvider>
+
     </>
   )
 }

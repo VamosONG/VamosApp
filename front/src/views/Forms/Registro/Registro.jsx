@@ -22,6 +22,8 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { postNewUser } from '../../../redux/actions';
 
+import { useAuth } from '../../../context/authContext';
+
 const RegistroForm = ({ onSwitchForm }) => {
     const dispatch = useDispatch()
     const [input, setInput] = useState({
@@ -48,8 +50,13 @@ const RegistroForm = ({ onSwitchForm }) => {
     const [show, setShow] = useState(false)
     const handleClick = () => setShow(!show)
 
+    const auth = useAuth();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        auth.register(input.email, input.password)
+
+
 
         const userCreado = await dispatch(postNewUser(input))
         if (userCreado) {
