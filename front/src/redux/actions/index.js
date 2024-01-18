@@ -1,6 +1,6 @@
 import axios from 'axios';
 import choferes from '../../utils/chofer'
-import Swal from 'sweetalert2'
+
 import { DELETE_DRIVER, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA } from './action.types';
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
@@ -9,7 +9,8 @@ export const GET_ALL_CONDUCTORES = "GET_ALL_CONDUCTORES"
 export const POST_NEW_VIAJE = "POST_NEW_VIAJE"
 export const LOGIN = "LOGIN"
 export const ID_SOLICITUD = "ID_SOLICITUD"
-export const GET_SOLICITUDES = "GET_SOLICITUDES"
+export const GET_RESERVED_TRIPS = "GET_RESERVED_TRIPS"
+export const GET_PENDING_TRIPS = "GET_PENDING_TRIPS"
 export const NEW_USER = 'NEW_USER'
 export const LOGOUT = 'LOGOUT'
 export const CREATE_CHOFER = 'CREATE_CHOFER'
@@ -98,14 +99,30 @@ export const postNewViaje = (infoViaje) => {
     }
 }
 
-export const getSolicitudes = () =>{
+export const getReservedTrips = () =>{
     return async(dispatch)=> {
         const endpoint= 'http://localhost:3001/trips/reserves' //Se cambió a la ruta con viajes reservados
         try {
             const { data } = await axios.get(endpoint)
             console.log(data);
             return dispatch({
-                type: GET_SOLICITUDES,
+                type: GET_RESERVED_TRIPS,
+                payload: data
+            })
+        } catch (error) {
+            console.log(error);
+            alert("error")
+        }
+    }
+}
+export const getPendingTrips = () =>{
+    return async(dispatch)=> {
+        const endpoint= 'http://localhost:3001/trips/pending' //ruta con viajes pendientes
+        try {
+            const { data } = await axios.get(endpoint)
+            console.log(data);
+            return dispatch({
+                type: GET_PENDING_TRIPS,
                 payload: data
             })
         } catch (error) {
@@ -221,6 +238,22 @@ export const filtrarConductores = (info) => {
                 type: GET_FILTERED,
                 payload: data
             })
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            console.log(error.message)
+        };
+    };
+};
+export const conductorAsignado = (info) => {
+    console.log(info)
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.put(`http://localhost:3001/trips/reserves/update`, info);
+            console.log(data)
+            /* dispatch({
+                type: GET_FILTERED,
+                payload: data
+            }) */
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
             console.log(error.message)
