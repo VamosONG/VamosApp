@@ -7,7 +7,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import Vamos from "../../assets/Vamos.png"
+import Vamos from "../../assets/vamos.png"
 import SlideEx from "../../views/Forms/ViewForm";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from '@chakra-ui/react';

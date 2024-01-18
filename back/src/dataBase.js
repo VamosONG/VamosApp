@@ -44,7 +44,7 @@ let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].s
 sequelize.models = Object.fromEntries(capsEntries);
 
 
-const { User, Trip, Driver, Zone, Airport, Review } = sequelize.models;
+const { User, Trip, Driver, Zone, Airport, Review, Price } = sequelize.models;
 
 User.hasMany(Review);
 Review.belongsTo(User);

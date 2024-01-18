@@ -55,7 +55,7 @@ function SolicitudViajeForm() {
 
     const createPreference = async () => {
         try {
-          const response = await axios.post("http://localhost:3001/merpago/create", {
+          const response = await axios.post("https://vamosappserver.onrender.com/merpago/create", {
             origin: input.origin,
             destination: input.destination,
             price: 100, // Cambia esto según el precio real
