@@ -91,11 +91,11 @@ router.put('/price/update', updatePriceHandler);
 router.delete('/price', deletePriceHandler);
 
 router.post('/offer/create', filtershandler);
-router.get('/drivers/filter', getFilteredDriversHandler);
+router.post('/drivers/filter', getFilteredDriversHandler);//
 router.get('/trips/reserves', getReservesHandler);
 router.put('/trips/reserves/create', doReserveHandler);
 router.put('/trips/reserves/update',setDriverHandler);
-router.put('/trips/completed', getTripsCompletedHandler);
+router.get('/trips/completed', getTripsCompletedHandler);//
 router.get('/trips/pending', getTripsPendingHandler);
 
 

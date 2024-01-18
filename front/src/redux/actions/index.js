@@ -11,6 +11,7 @@ export const LOGIN = "LOGIN"
 export const ID_SOLICITUD = "ID_SOLICITUD"
 export const GET_RESERVED_TRIPS = "GET_RESERVED_TRIPS"
 export const GET_PENDING_TRIPS = "GET_PENDING_TRIPS"
+export const GET_COMPLETED_TRIPS = "GET_COMPLETED_TRIPS"
 export const NEW_USER = 'NEW_USER'
 export const LOGOUT = 'LOGOUT'
 export const CREATE_CHOFER = 'CREATE_CHOFER'
@@ -131,24 +132,22 @@ export const getPendingTrips = () =>{
         }
     }
 }
-
-/* export const getAllConductores=()=>{
-    try {
-
-        return async (dispatch)=>{
-            const data= choferes
-            console.log(data)
+export const getCanceledTrips = () =>{
+    return async(dispatch)=> {
+        const endpoint= 'http://localhost:3001/trips/completed' //ruta con viajes completados
+        try {
+            const { data } = await axios.get(endpoint)
+            console.log(data);
             return dispatch({
-                type:GET_ALL_CONDUCTORES,
-                payload:data
+                type: GET_COMPLETED_TRIPS,
+                payload: data
             })
+        } catch (error) {
+            console.log(error);
+            alert("error")
         }
-    } catch (error) {
-        console.log(error);
     }
-    
 }
- */
 
 
 export const postNewUser = (form) => {

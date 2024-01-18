@@ -1,5 +1,7 @@
+
 import { DELETE_DRIVER, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING } from "../actions/action.types";
 import { CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
+
 
 
 const initialState = {
@@ -9,13 +11,13 @@ const initialState = {
     pageConductores: [],
     currentPage: 0,
     newUsuario: [],
-    cantConductoresPorPag: 6,
 
     esAdmin: false,
     esUsuario: false,
 
     viajesReservados: [],
     viajesPendientes: [],
+    viajesCompletados: [],
     idSolicitud: '',
 
     infoConfirmacionViaje:{},
@@ -28,12 +30,15 @@ const reducer = (state = initialState, action) => {
     const PAGE_DATA = 6;
     switch (action.type) {
         case GET_ALL_CONDUCTORES:
-            //console.log(action.payload)
             return {
                 ...state,
                 conductores: action.payload,
+
+
+
                 pageConductores: action.payload,
                 allData: action.payload
+
             };
         
         case DELETE_DRIVER:
@@ -112,6 +117,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 viajesPendientes: action.payload
+            }
+        case GET_COMPLETED_TRIPS:
+            return {
+                ...state,
+                viajesCompletados: action.payload
             }
 
         case ID_SOLICITUD:
