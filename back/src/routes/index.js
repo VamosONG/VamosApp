@@ -42,7 +42,7 @@ const setDriverHandler = require('../handlers/utilsHandlers/setDriverHandler');
 const getTripsCompletedHandler = require('../handlers/filtersHandlers/getTripsCompletedHandler');
 const getTripsPendingHandler = require('../handlers/filtersHandlers/getTripsPendingHandler');
 
-const postPreference = require('../handlers/mercadoPagoHandler/postPreference')
+const postPreference = require('../controllers/mercadoPagoController/postPreference')
 
 const router = Router();
 
