@@ -29,6 +29,7 @@ import Swal from 'sweetalert2'
 import UpdateDriverData from '../Forms/ChoferFormulario/UpdateChoferForm'
 import ViewBtnUpdateDriver from '../Forms/ViewForms/ViewUpdateDriverForm'
 import ViewBtnDetailDriver from './DetailDriver/ViewBtnDetailDriver'
+import OrderFilterAlphabetical from './filtersData/orderFilter'
 
 
 const DriverTableView = () => {
@@ -73,6 +74,7 @@ const DriverTableView = () => {
     return (
 
         <TableContainer >
+            <Flex bg='gray.200' color='#000' justify={'center'} ><OrderFilterAlphabetical/></Flex>
             <Table variant='simple' >
                 <TableCaption>Conductores registrados</TableCaption>
                 <Thead>
