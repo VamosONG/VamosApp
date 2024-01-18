@@ -14,6 +14,7 @@ import {
 import Swal from 'sweetalert2'
 
 import { renderToString } from 'react-dom/server';
+import price from '../../excelTrips/priceTrips'
 
 
 
