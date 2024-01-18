@@ -11,7 +11,7 @@ import {
 import {Button, useDisclosure, Image,Box
 } from '@chakra-ui/react'
 
-import Vamos from "../../../assets/Vamos.png"
+import Vamos from "../../../assets/vamos.png"
 import { Link } from 'react-router-dom';
 import SlideEx from '../../../views/Forms/ViewForm';
 import { useRef, useState } from 'react';
