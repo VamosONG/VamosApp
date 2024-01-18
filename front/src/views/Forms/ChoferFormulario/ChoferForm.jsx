@@ -21,14 +21,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 // DEPENDECIES
 import axios from "axios";
+import { createNewChofer, getAllConductores } from "../../../redux/actions";
 
-import choferes from "../../../utils/chofer";
-import { createNewChofer } from "../../../redux/actions";
-import { ValidateNewDriver } from "../../../components/Validate/validateNewDriver";
-
-const ChoferForm = () => {
+const ChoferForm = ({ closeForm }) => {
   const dispatch = useDispatch();
-  const choferData = useSelector((state) => state.conductores);
   const [image_Url, setImage_Url] = useState("");
 
   const [form, setForm] = useState({
@@ -73,33 +69,34 @@ const ChoferForm = () => {
     const property = e.target.name;
     const value = e.target.value;
     console.log(property + " " + value);
-    setForm({
-      ...form,
+    setForm((prevForm) => ({
+      ...prevForm,
       [property]: value,
-    });
+    }));
   };
 
-  const changeUploadImage = async (event) => {
+  const changeUploadImage = async (event, imageField) => {
     const fileChofer = event.target.files[0];
     const data = new FormData();
 
     data.append("file", fileChofer);
     data.append("upload_preset", "Presets_vamos");
-    const response = await axios.post(
-      "https://api.cloudinary.com/v1_1/drgnsbah9/image/upload",
-      data
-    );
 
-    console.log(response.data);
-    setImage_Url(response.data.secure_url);
-    console.log(image_Url);
+    try {
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/drgnsbah9/image/upload",
+        data
+      );
 
-    setForm({
-      ...form,
-      driverImg: response.data.secure_url,
-      carImg: response.data.secure_url,
-      circulationPermit: response.data.secure_url,
-    });
+      console.log(response.data);
+
+      setForm((prevForm) => ({
+        ...prevForm,
+        [imageField]: response.data.secure_url,
+      }));
+    } catch (error) {
+      console.error("Error al cargar la imagen:", error);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -134,6 +131,8 @@ const ChoferForm = () => {
           circulationPermit: "",
           capacityPassengers: "",
         });
+        await dispatch(getAllConductores())
+        closeForm();
       } else {
         throw new Error(
           Swal.fire({
@@ -154,8 +153,8 @@ const ChoferForm = () => {
     }
   };
 
-  const carTypeFount = ["auto", "camioneta", "van"];
-  const airportsFount = ["tumbes", "talara", "lima"];
+  const carTypeFount = ["auto", "camioneta", "van", 'van plus'];
+  const airportsFount = ["Aeropuerto Tumbes", "Aeropuerto Talara"];
   const carModelFount = ["toyota", "hiunday", "ford"];
 
   return (
@@ -269,7 +268,7 @@ const ChoferForm = () => {
                   type="file"
                   name="driverImg"
                   accept="image/*"
-                  onChange={changeUploadImage}
+                  onChange={(e) => changeUploadImage(e, 'driverImg')}
                 />
                 {error.driverImg && <p>{error.driverImg}</p>}
               </FormControl>
@@ -370,7 +369,7 @@ const ChoferForm = () => {
                 type="file"
                 name="carImg"
                 accept="image/*"
-                onChange={changeUploadImage}
+                onChange={(e) => changeUploadImage(e, 'carImg')}
               />
               {error.carImg && <p>{error.carImg}</p>}
             </FormControl>
@@ -394,7 +393,7 @@ const ChoferForm = () => {
                 type="file"
                 name="circulationPermit"
                 accept="image/*"
-                onChange={changeUploadImage}
+                onChange={(e) => changeUploadImage(e, 'circulationPermit')}
               />
               {error.circulationPermit && <p>{error.circulationPermit}</p>}
             </FormControl>

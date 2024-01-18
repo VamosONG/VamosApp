@@ -17,6 +17,10 @@ import SolicitudesDeViajes from './components/solicitudes/solicitudesDeViajes';
 import Solicitud from './components/solicitudes/solicitud';
 import { AuthProvider } from './context/authContext';
 
+import { Link } from 'react-router-dom';
+import DriverTableView from './views/driversViewAdmin/driverTable';
+import ReserveComfirmed from './views/Reserve/ReserveConfirmed';
+import ReserveReject from './views/Reserve/ReserveReject';
 
 function App() {
 
@@ -31,9 +35,14 @@ function App() {
         <Route path= '/about' element={<About/>} />
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
         <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
-        <Route path='/detail' element={<DetailChofer/>}/>
+        {/* <Route path='/detail' element={<DetailChofer/>}/> */}
+        <Route path='/detail' element={<DriverTableView/>}/>
         <Route path='/solicitud' element={<Solicitud/>}/>
         <Route path='/product' element={<Product/>}/>
+        <Route path='/reserve/confirmed' element={<ReserveComfirmed/>}/>
+        <Route path='/reserve/rejected' element={<ReserveReject/>}/>
+
+
       </Routes>
       <HomeComponent/>
       {/* <Paginado/> */}

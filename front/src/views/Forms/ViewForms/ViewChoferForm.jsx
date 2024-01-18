@@ -1,9 +1,18 @@
 import ChoferForm from "../ChoferFormulario/ChoferForm";
 import { Box, Button, Collapse, useDisclosure } from '@chakra-ui/react'
 import LogOut from "../LogOut/logout";
+import { useState } from "react";
 
 const ViewBtnChoferForm = () => {
-    const { isOpen, onToggle } = useDisclosure();
+    const [isOpen, setIsOpen] = useState(false);
+
+  const onToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const closeForm = () => {
+    setIsOpen(false);
+  };
     return (
         <Box zIndex={99}   >
             <Button onClick={onToggle}  >Nuevo Chofer</Button>
@@ -17,7 +26,7 @@ const ViewBtnChoferForm = () => {
                     position='absolute'
                     right='1rem'
                 >
-                    <ChoferForm />
+                    <ChoferForm closeForm={closeForm}/>
                 </Box>
             </Collapse>
         </Box>
