@@ -18,6 +18,7 @@ import { renderToString } from 'react-dom/server';
 
 
 
+
 function SolicitudViajeForm() {
 
     const dispatch = useDispatch();
@@ -54,7 +55,7 @@ function SolicitudViajeForm() {
 
     const createPreference = async () => {
         try {
-          const response = await axios.post("https://vamosappserver.onrender.com/merpago/create", {
+          const response = await axios.post("http://localhost:3001/merpago/create", {
             origin: input.origin,
             destination: input.destination,
             price: 100, // Cambia esto según el precio real
@@ -68,10 +69,10 @@ function SolicitudViajeForm() {
         }}
 
         const handlePayment = async () => {
-            const id = await createPreference();
+            var mpid = await createPreference();
             if (id) {
               // Redirigir a la página de pago de MercadoPago
-              window.location.href = `https://www.mercadopago.com.ar/checkout/v1/redirect?preference_id=${id}`;
+              window.location.href = `https://www.mercadopago.com.ar/checkout/v1/redirect?preference_id=${mpid}`;
             }
           };
 
@@ -79,7 +80,8 @@ function SolicitudViajeForm() {
             if (infoConfirmacionViaje.id) {
               const infoAmandarAlBack = {
                 tripId: infoConfirmacionViaje.id,
-                userId: infoConfirmacionViaje.userId
+                userId: infoConfirmacionViaje.userId,
+                idMP: mpid
               }
         
               Swal.fire({
