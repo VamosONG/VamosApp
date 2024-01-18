@@ -1,5 +1,9 @@
 {
     "rewrites": [
         {"source": "/(.*)", "destination": "/"}
-    ]
+    ],
+    "paths": {
+        "*": ["*", "*.tsx"]
+      }
+      
 }
