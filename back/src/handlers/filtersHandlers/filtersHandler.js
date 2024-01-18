@@ -1,4 +1,5 @@
 const postTrip = require('../../controllers/tripsControllers/postTrip');
+const getPrices = require('../../controllers/pricesControllers/getPrices');
 
 module.exports=async(req,res)=>{
 
@@ -7,7 +8,7 @@ module.exports=async(req,res)=>{
     try {
         const driverId=null;
         const fecha =new Date(date);
-        const price=getPrices(origin, destination, quantityPassengers, fecha);
+        const price=await calculatePrices(origin, destination, quantityPassengers, fecha);
         if(price===0)
             throw new Error(`No se encontraron viajes disponibles desde ${origin} a ${destination} para ${quantityPassengers} pasajeros.`)
 
@@ -20,87 +21,18 @@ module.exports=async(req,res)=>{
     }
 }
 
-const getPrices=(origin, destination, quantityPassengers, fecha)=>{
+const calculatePrices=async(origin, destination, quantityPassengers, fecha)=>{
 
-    const orig = origin.toLowerCase();
-    const dest = destination.toLowerCase();
-    let toRet = 0; 
-
-    if(((orig==='aeropuerto tumbes')&&(dest==='decameron punta sal')) || ((orig==='decameron punta sal')&&(dest==='aeropuerto tumbes'))){
-        switch(true){
-            case (quantityPassengers>0 && quantityPassengers<=4): 
-                toRet = 200;
-                break;
-            case (quantityPassengers>4 && quantityPassengers<=6): 
-                toRet = 240;
-                break;
-            case (quantityPassengers>6 && quantityPassengers<=10): 
-                toRet = 280;
-                break;  
-            default:toRet = 0;
-        }
+try{
+    let airport=''
+    let zone=''
+    if(origin.includes("AEROPUERTO")){
+        airport=origin;
+        zone=destination;
+    }else{
+        airport=destination;
+        zone=origin;
     }
-    
-    if(((orig==='aeropuerto tumbes')&&(dest==='zorritos')) || ((orig==='zorritos')&&(dest==='aeropuerto tumbes'))){
-        switch(true){
-            case (quantityPassengers>0 && quantityPassengers<=4): 
-                toRet = 100;
-                break;
-            case (quantityPassengers>4 && quantityPassengers<=6): 
-                toRet = 220;
-                break;  
-            default:toRet = 0;
-        }
-    }
-
-    if(((orig==='aeropuerto tumbes')&&(dest==='mancora')) || ((orig==='mancora')&&(dest==='aeropuerto tumbes'))){
-        switch(true){
-            case (quantityPassengers>0 && quantityPassengers<=4): 
-                toRet = 240;
-                break;
-            case (quantityPassengers>4 && quantityPassengers<=6): 
-                toRet = 300;
-                break;
-            case (quantityPassengers>6 && quantityPassengers<=10): 
-                toRet = 340;
-                break;  
-            default:toRet = 0;
-        }
-    }
-
-    if(((orig==='aeropuerto talara')&&(dest==='mancora')) || ((orig==='mancora')&&(dest==='aeropuerto talara'))){
-        switch(true){
-            case (quantityPassengers>0 && quantityPassengers<=4): 
-                toRet = 169;
-                break;
-            case (quantityPassengers>4 && quantityPassengers<=6): 
-                toRet = 240;
-                break;
-            case (quantityPassengers>6 && quantityPassengers<=10): 
-                toRet = 289;
-                break;
-            case (quantityPassengers>10 && quantityPassengers<=15): 
-                toRet = 380;
-                break;  
-            default:toRet = 0;
-        }
-    }
-
-    if(((orig==='aeropuerto talara')&&(dest==='decameron')) || ((orig==='decameron')&&(dest==='aeropuerto talara'))){
-        switch(true){
-            case (quantityPassengers>0 && quantityPassengers<=4): 
-                toRet = 240;
-                break;
-            case (quantityPassengers>4 && quantityPassengers<=6): 
-                toRet = 300;
-                break;
-            case (quantityPassengers>6 && quantityPassengers<=10): 
-                toRet = 360;
-                break;
-            default:toRet = 0;
-        }
-    }
-    
     const esFeriado = (
         (fecha.getDate() === 27 && fecha.getMonth() === 6) || // 28 de Julio
         (fecha.getDate() === 28 && fecha.getMonth() === 6) || // 29 de Julio
@@ -108,8 +40,16 @@ const getPrices=(origin, destination, quantityPassengers, fecha)=>{
         (fecha.getDate() === 31 && fecha.getMonth() === 11) // Asumimos 1 de Enero
     );
 
-    if (esFeriado)
-        toRet*=1.5;
+    let prices = await getPrices(airport, zone);
 
-    return toRet;
+    const ordenados= await prices?.sort((a,b)=>a.quantityPassengers - b.quantityPassengers);
+    let cost = parseFloat(await ordenados.find(opcion => opcion.quantityPassengers>=quantityPassengers).value);
+
+    if (esFeriado)
+        cost*=1.5;
+
+        return cost;
+    }catch (error) {
+        throw new Error(`Error al obtener costo de viaje: ${error.message}`);
+    }
 }
