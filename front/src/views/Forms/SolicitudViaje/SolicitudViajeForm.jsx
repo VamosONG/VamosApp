@@ -74,14 +74,14 @@ function SolicitudViajeForm() {
               // Redirigir a la página de pago de MercadoPago
               window.location.href = `https://www.mercadopago.com.ar/checkout/v1/redirect?preference_id=${mpid}`;
             }
-          };
+        };
 
           useEffect(() => {
             if (infoConfirmacionViaje.id) {
               const infoAmandarAlBack = {
                 tripId: infoConfirmacionViaje.id,
                 userId: infoConfirmacionViaje.userId,
-                idMP: mpid
+                /* idMP: mpid */
               }
         
               Swal.fire({
@@ -112,7 +112,10 @@ function SolicitudViajeForm() {
                   title: "Viaje reservado",
                   text: "Simulando que se abonó..",
                   icon: "success"
-                });
+                }).then(() => {
+                    // Redirigir a la página anterior
+                    window.history.back();
+                  });
             }})}
           }, [infoConfirmacionViaje, dispatch, confirmationText]);
         ;
