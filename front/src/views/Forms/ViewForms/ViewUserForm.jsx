@@ -19,7 +19,7 @@ const ViewBtnUserForm = () => {
                     <Collapse initialScale={0.9} direction='bottom' in={isOpen} style={{ zIndex: 10 }}>
                         <Box
                             h='auto'
-                            mt='4'
+                            mt='8'
                             w='auto'
                             overflow='hidden'
                             position='absolute'

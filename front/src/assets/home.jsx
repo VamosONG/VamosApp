@@ -2,9 +2,9 @@ import React from "react";
 import { Box, Button, Flex, Text, Heading, Stack, Card, CardBody, Divider, CardFooter, HStack, Image, Center } from '@chakra-ui/react';
 import theme from "../../theme/Theme";
 import bgImage from "../../assets/Aeropuerto.jpg"
-import Basic from '../../assets/VamosBasic.jpg'
-import Comfort from '../../assets/VamosComfort.jpg'
-import Premium from '../../assets/VamosPremium.jpg'
+import Basic from '../../assets/vamosBasic.jpg'
+import Comfort from '../../assets/vamosComfort.jpg'
+import Premium from '../../assets/vamosPremium.jpg'
 // import { color } from "framer-motion";
 
 const Home = () => {

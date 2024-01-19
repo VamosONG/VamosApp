@@ -1,33 +1,53 @@
-import { CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_SOLICITUDES, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
+import { DELETE_DRIVER,GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING } from "../actions/action.types";
+import { CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_TRIPS_BY_ID, GET_COMPLETED_TRIPS, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
+
 
 
 const initialState = {
+    
+    allData: [],//Este estado servidara para mantener la data general de la base de datos
     conductores: [],
     pageConductores: [],
     currentPage: 0,
     newUsuario: [],
-    cantConductoresPorPag: 6,
 
     esAdmin: false,
     esUsuario: false,
 
-    solicitudesDeViajes: [],
+    viajesReservados: [],
+    viajesPendientes: [],
+    viajesCompletados: [],
     idSolicitud: '',
 
-    infoConfirmacionViaje:{}
+    infoConfirmacionViaje:{},
+
+    conductoresFiltrados:[],
+
+    tripsById:[],
+
+    trip:[]
 
 }
 
 const reducer = (state = initialState, action) => {
+    const PAGE_DATA = 6;
     switch (action.type) {
         case GET_ALL_CONDUCTORES:
-            //console.log(action.payload)
             return {
                 ...state,
                 conductores: action.payload,
-                pageConductores: state.conductores.splice(0, state.cantConductoresPorPag),
-
-            };
+                pageConductores: action.payload,
+                allData: action.payload            };
+        case GET_TRIP_ID:
+            return{
+                ...state,
+                trip:action.payload
+            }
+        case DELETE_DRIVER:
+            return {
+                ...state, 
+                conductores: state.conductores.filter(driver => driver.id !== action.payload)
+            }
         case PAGINATE:
             const nextPage = state.currentPage + 1;
             const prevPage = state.currentPage - 1;
@@ -90,10 +110,20 @@ const reducer = (state = initialState, action) => {
             infoConfirmacionViaje: action.payload
         }
         
-        case GET_SOLICITUDES:
+        case GET_RESERVED_TRIPS:
             return {
                 ...state,
-                solicitudesDeViajes: action.payload
+                viajesReservados: action.payload
+            }
+        case GET_PENDING_TRIPS:
+            return {
+                ...state,
+                viajesPendientes: action.payload
+            }
+        case GET_COMPLETED_TRIPS:
+            return {
+                ...state,
+                viajesCompletados: action.payload
             }
 
         case ID_SOLICITUD:
@@ -101,6 +131,76 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 idSolicitud: action.payload
             }
+        case GET_FILTERED:
+            return {
+                ...state,
+                conductoresFiltrados: action.payload,
+            }
+        case ORDER_ALPHABETICAL:
+            let orderedList = [...state.conductores];
+            if (action.payload === "A") {
+                orderedList.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1);
+            } else if (action.payload === "D") {
+                orderedList.sort((a, b) => a.name.toLowerCase() < b.name.toLowerCase() ? 1 : -1);
+            }
+            return {
+                ...state,
+                conductores: orderedList,
+                pageConductores: orderedList
+            }
+
+        case ORDER_PASSENGER:
+            let orderedListPassenger = [...state.conductores];
+            if (action.payload === 'A') {
+                orderedListPassenger.sort((a,b) => a.capacityPassengers < b.capacityPassengers ? 1 : -1)
+            } else if (action.payload === 'D') {
+                orderedListPassenger.sort((a,b) => a.capacityPassengers > b.capacityPassengers ? 1 : -1)
+            }
+            return {
+                ...state,
+                conductores: orderedListPassenger,
+                pageConductores: orderedListPassenger
+            }
+
+        case ORDER_RATING:
+            let orderedListRating = [...state.conductores]
+            if (action.payload === 'A') {
+                orderedListRating.sort((a,b) => a.rating < b.rating ? 1 : -1)
+            } else if (action.payload === 'D') {
+                orderedListRating.sort((a,b) => a.rating > b.rating ? 1 : -1)
+            }
+            return {
+                ...state,
+                conductores: orderedListRating,
+                pageConductores: orderedListRating
+            }
+
+        case FILTER_CAR:
+            const filterCarList = state.allData.filter((car) => car.carType === action.payload)
+            return {
+                ...state,
+                conductores: filterCarList,
+                pageConductores:filterCarList
+            }
+
+        case FILTER_AIRPORT:
+            const filterAirportList = state.allData.filter((zone) => zone.airports === action.payload)
+
+            return {
+                ...state,
+                conductores: [...filterAirportList],
+                pageConductores: filterAirportList
+            }
+        case GET_TRIPS_BY_ID:
+            return {
+                ...state,
+                tripsById: action.payload
+            }
+        /* case POST_REVIEW:
+            return {
+                ...state,
+                tripsById: action.payload
+            } */
         default:
             return { ...state };
     }

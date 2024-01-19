@@ -1,107 +1,96 @@
 import React from "react";
-import { Box, Heading, SimpleGrid, Image, Text, Button, Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
+import { 
+    Box, 
+    Heading, 
+    SimpleGrid, 
+    Image, 
+    Text, 
+    Card,
+    Flex
+} from "@chakra-ui/react";
 
-import Basic from '../../assets/VamosBasic.jpg'
-import Comfort from '../../assets/VamosComfort.jpg'
-import Premium from '../../assets/VamosPremium.jpg'
-import Pago from '../../assets/MercadoPago.png'
+import Persona from '../../assets/equipajepersona.jpg';
+import Equipaje from '../../assets/equipajeavion.jpeg';
 
-
-const Services = () =>{
+const Services = () => {
 
     return (
         <>
-        <Box textAlign="center" mt={8}>
-            <Heading as="h1" size="4xl" mb={8} fontFamily="'DIN Alternate Black', sans-serif">
-            NUESTROS SERVICIOS
-            </Heading>
-            <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8} maxW="1200px" mx="auto">
-            <Card borderWidth="2px" borderRadius="lg">
-                <Image src={Basic} alt='Plan Basico' borderRadius='lg' />
-                <CardHeader>
-                    <Heading 
-                    fontSize='2xl'
-                    fontFamily="'DIN Alternate Black', sans-serif" 
-                    size='md'>"La opcion economica para tus traslados"</Heading>
-                </CardHeader>
-                <CardBody>
-                    <Text
-                    fontFamily="DIN Alternate, sans-serif"
-                    >Servicio estándar con tarifas asequibles.</Text>
-                </CardBody>
-                    <Text 
-                    color='rgb(232, 61, 111)' 
-                    fontSize='4xl' 
-                    textAlign= 'center'
-                    fontFamily="'DIN Alternate Black', sans-serif"
-                    >
-                    $20 Soles
-                    </Text>
-                <CardFooter justifyContent="center">
-                    <Button>RESERVA</Button>
-                </CardFooter>
+            <Box position="relative" textAlign="center" mt={0}>
+
+            <SimpleGrid columns={{ base: 1, md: 2 }} gap={0}>
+            <Card
+            overflow='hidden'
+            bgColor='#009ED1'
+            maxW={{ base: '100%', md: '865px' }}
+            borderRadius={0}
+            >
+            <Flex 
+            alignItems="center">
+                <Image
+                objectFit='cover'
+                maxW={{ base: '50%', md: '120px' }}
+                h="auto"
+                src={Equipaje}
+                alt='Equipaje'
+                />
+                <Box p={4} textAlign="left" flex="1">
+                    <Flex justifyContent="center">
+                        <Box>
+                            <Heading
+                            color='white'
+                            fontSize='3xl'
+                            fontFamily="'DIN Alternate Black', sans-serif"
+                            textShadow='2px 2px 4px rgb(0, 0, 0, 0.3)'
+                            size='md'
+                            >
+                                Del Aeropuerto a la ciudad.
+                            </Heading>
+                            <Text my='4' color='white' fontSize='2xl' fontFamily="'DIN Alternate Black', sans-serif" textShadow='2px 2px 4px rgb(0, 0, 0, 0.3)'>
+                                Atencion inmediata y menos tiempo de espera.
+                            </Text>
+                        </Box>
+                    </Flex>
+                </Box>
+                </Flex>
             </Card>
-            <Card borderWidth="2px" borderRadius="lg">
-                <Image src={Comfort} alt='Plan Comfort' borderRadius='lg' />
-                <CardHeader>
-                    <Heading 
-                    fontSize='2xl'
-                    fontFamily="'DIN Alternate Black', sans-serif" 
-                    size='md'>"Viaja con estilo y confort a un precio asequible"</Heading>
-                </CardHeader>
-                <CardBody>
-                    <Text
-                    fontFamily="DIN Alternate, sans-serif"
-                    >Servicio intermedio con mayor comodidad y prestaciones.</Text>
-                </CardBody>
-                    <Text 
-                    color='rgb(232, 61, 111)' 
-                    fontSize='4xl' 
-                    textAlign= 'center'
-                    fontFamily="'DIN Alternate Black', sans-serif"
-                    >
-                    $20 Soles
-                    </Text>
-                <CardFooter justifyContent="center">
-                    <Button>RESERVA</Button>
-                </CardFooter>
-            </Card>
-            <Card borderWidth="2px" borderRadius="lg">
-                <Image src={Premium} alt='Plan Premium' borderRadius='lg'  />
-                <CardHeader>
-                    <Heading 
-                    fontSize='2xl'
-                    fontFamily="'DIN Alternate Black', sans-serif" 
-                    size='md'>"La excelencia en cada viaje, sin compromisos"</Heading>
-                </CardHeader>
-                <CardBody>
-                    <Text
-                    fontFamily="DIN Alternate, sans-serif"
-                    >Servicio de lujo con vehículos de mayor tamaño y comodidades premium.
-                    </Text>
-                </CardBody>
-                    <Text 
-                    color='rgb(232, 61, 111)' 
-                    fontSize='4xl' 
-                    textAlign= 'center'
-                    fontFamily="'DIN Alternate Black', sans-serif"
-                    >
-                    $20 Soles
-                    </Text>
-                <CardFooter justifyContent="center">
-                    <Button>RESERVA</Button>
-                </CardFooter>
+            <Card
+            overflow='hidden'
+            bgColor='#009ED1'
+            maxW={{ base: '100%', md: '865px' }}
+            borderRadius={0}
+            >
+            <Flex alignItems="center">
+                <Image
+                objectFit='cover'
+                maxW={{ base: '50%', md: '120px' }}
+                h="auto"
+                src={Persona}
+                alt='Persona'
+                />
+                <Box p={4} textAlign="left" flex="1">
+                    <Flex justifyContent="center">
+                        <Box>
+                            <Heading
+                            color='white'
+                            fontSize='3xl'
+                            fontFamily="'DIN Alternate Black', sans-serif"
+                            textShadow='2px 2px 4px rgb(0, 0, 0, 0.3)'
+                            size='md'
+                            >
+                                De La Ciudad al Aeropuerto.
+                            </Heading>
+                            <Text my='4' color='white' fontSize='2xl' fontFamily="'DIN Alternate Black', sans-serif" textShadow='2px 2px 4px rgb(0, 0, 0, 0.3)'>
+                                ¡Reducimos las tarifas hacia al Aeropuerto!
+                            </Text>
+                        </Box>
+                    </Flex>
+                </Box>
+                </Flex>
             </Card>
             </SimpleGrid>
-                <Image 
-                src={Pago} 
-                alt="Logo de Mercado Pago" 
-                mx="auto" 
-                mt={4}
-                maxW={{ base: '100%', md: '200px'}}
-                />
         </Box>
-        </>
+    </>
     );
 };
 

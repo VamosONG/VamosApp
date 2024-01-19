@@ -1,9 +1,8 @@
 import { Flex, Box, Stack, Link, Image, Text, Heading, Button } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-import { Highlight } from '@chakra-ui/react'
-import IconPage from '../../assets/VAMOS.png'
+
+
 import IconFace from '../../assets/icons/LOGOFACE.png'
-import IconWhatsApp from '../../assets/icons/LOGOWSP.png'
 import IconLinkdIn from '../../assets/icons/LOGOLINK.png'
 import IconInstagram from '../../assets/icons/LOGOINSTA.png'
 
