@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { getTripsById, postReview } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Card, CardBody, CardHeader, Flex, Heading, Stack, StackDivider,Text, Textarea } from "@chakra-ui/react";
+import Swal from "sweetalert2";
 
 const ReviewAndReseña=()=> {
 
@@ -48,6 +49,14 @@ const ReviewAndReseña=()=> {
           tripId:tripsById.id
         })
         dispatch(postReview(input))
+        Swal.fire({
+          title: "Reseña enviada",
+          text: "Muchas gracias por tu tiempo",
+          icon: "success"
+        }).then(() => {
+          // Redirigir a la página anterior
+          window.history.back();
+        });
     }
 
 
@@ -79,7 +88,7 @@ const ReviewAndReseña=()=> {
                     Fecha - Hora
                   </Heading>
                   <Text pt='2' fontSize='sm'>
-                  {tripsById.date}{" - "}{tripsById.hour} {/* Aquí debería colocar variables date hour */}
+                  {trip.date}{" - "}{trip.hour} {/* Aquí debería colocar variables date hour */}
                   </Text>
                 </Box>
                 <Box>
