@@ -1,5 +1,5 @@
 import { Box, Heading, Text, Image, Grid, GridItem } from "@chakra-ui/react";
-import Vamos from "../../assets/Vamos.png";
+import Vamos from "../../assets/vamos.png";
 const About = () => {
   return (
     <Box bg="blue.200">

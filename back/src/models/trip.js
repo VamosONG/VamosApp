@@ -53,6 +53,9 @@ module.exports = (sequelize) => {
             allowNull: false,
             
         },
+        idMP: {
+            type: DataTypes.STRING
+        },
         stateOfTrip: {
             type: DataTypes.STRING, 
             allowNull: true,
@@ -65,6 +68,7 @@ module.exports = (sequelize) => {
         Trip.associate = (models) => {
             Trip.belongsTo(models.User, { foreignKey: 'userId' });
             Trip.belongsTo(models.Driver, { foreignKey: 'driverId' });
+            Trip.hasOne(models.Review, { foreignKey: 'tripId' });
         };
     
         return Trip;

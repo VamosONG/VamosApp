@@ -16,6 +16,10 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        tripId: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         date: {
             type: DataTypes.DATE,
             allowNull: false,
@@ -45,6 +49,7 @@ module.exports = (sequelize) => {
     Review.associate = (models) => {
         Review.belongsTo(models.User, { foreignKey: 'userId' });
         Review.belongsTo(models.Driver, { foreignKey: 'driverId' });
+        Review.belongsTo(models.Trip, { foreignKey: 'tripId' });
     };
 
     return Review;

@@ -10,9 +10,9 @@ const ViewBtnDetailDriver = (props) => {
       setIsOpen(!isOpen);
     };
   
-    const closeFormEdit = () => {
-      setIsOpen(false);
-    };
+    // const closeFormEdit = () => {
+    //   setIsOpen(false);
+    // };
     
     return (
         <Box  >
@@ -31,7 +31,7 @@ const ViewBtnDetailDriver = (props) => {
                     borderRadius={20}
                     zIndex={99}
                 >
-                    <DriverDetail {...props} />
+                    <DriverDetail {...props}  />
                 </Box>
             </Collapse>
         </Box>

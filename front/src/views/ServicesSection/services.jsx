@@ -1,10 +1,10 @@
 import React from "react";
 import { Box, Heading, SimpleGrid, Image, Text, Button, Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 
-import Basic from '../../assets/VamosBasic.jpg'
-import Comfort from '../../assets/VamosComfort.jpg'
-import Premium from '../../assets/VamosPremium.jpg'
-import Pago from '../../assets/MercadoPago.png'
+import Basic from '../../assets/vamosBasic.jpg'
+import Comfort from '../../assets/vamosComfort.jpg'
+import Premium from '../../assets/vamosPremium.jpg'
+import Pago from '../../assets/mercadoPago.png'
 
 
 const Services = () =>{
