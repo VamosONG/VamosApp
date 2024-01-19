@@ -112,7 +112,10 @@ function SolicitudViajeForm() {
                   title: "Viaje reservado",
                   text: "Simulando que se abonó..",
                   icon: "success"
-                });
+                }).then(() => {
+                    // Redirigir a la página anterior
+                    window.history.back();
+                  });
             }})}
           }, [infoConfirmacionViaje, dispatch, confirmationText]);
         ;
