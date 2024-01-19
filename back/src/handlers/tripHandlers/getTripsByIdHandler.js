@@ -2,7 +2,7 @@ const {getTripById} = require('../../controllers/tripsControllers/getTripById');
 
 module.exports = async (req, res) => {
     try {
-        const { id } = req.body;
+        const { id } = req.params;
         const oneTrip = await getTripById(id);
 
 
