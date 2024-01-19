@@ -26,6 +26,14 @@ module.exports = (sequelize) => {
                 isNumeric: true, 
             },
         },
+        activeReservations: {
+            type: DataTypes.INTEGER, 
+            defaultValue: 0,
+            // allowNull: false,
+            validate: {
+                isNumeric: true, 
+            },
+        },
         dni: {
             type: DataTypes.INTEGER, 
             // allowNull: false,
