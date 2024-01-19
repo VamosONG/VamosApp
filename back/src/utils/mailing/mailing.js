@@ -1,10 +1,12 @@
+require("dotenv").config();
+
 const { OAuth2Client } = require('google-auth-library');
 const nodemailer = require('nodemailer');
 const { google } = require('googleapis');
-const CLIENT_ID="771850335075-cna7sh5pn4aa2smjh0c1p6rs984l1run.apps.googleusercontent.com";
-const CLIENT_SECRET="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";
+const CLIENT_ID=process.env.CLIENT_ID;
+const CLIENT_SECRET=process.env.CLIENT_SECRET;
 const REDIRECT_URI="https://developers.google.com/oauthplayground";
-const REFRESH_TOKEN="1//04We6PB6BCsTGCgYIARAAGAQSNgF-L9Irbs6Q03jf4uAuc7AZXK-O3IkndHCWvuPyowK_OeNDO0KkyOhbC3m9ixDcPOzTyXLf_g";
+const REFRESH_TOKEN=process.env.REFRESH_TOKEN;
 
 module.exports = async(name, email, preSubject, message, res)=>{
     
@@ -29,8 +31,8 @@ module.exports = async(name, email, preSubject, message, res)=>{
                 from: '"VAMOS!!" <ezantoinedeveloper@gmail.com>', // sender address
                 to: email, // list of receivers
                 subject: `${preSubject}`, 
-                text: `${message}`, // plain text body
-                //html: `<b>Hello VAMOS</b>`, // html body
+                //text: `${message}`, // plain text body
+                html: `${message}`, // html body
             }
 
             const result = await transporter.sendMail(mailOptions)
