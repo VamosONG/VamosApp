@@ -19,7 +19,7 @@ const ReviewAndReseña=()=> {
     })
     
     
-    const id = "3027b2fa-4997-4068-9f6d-c847baa02291"
+    const id = "c9f86a72-c6b4-4ac2-9b31-0d8eaee8b23b"
     useEffect(() => {
         dispatch(getTripsById(id))
     }, []);
@@ -40,7 +40,7 @@ const ReviewAndReseña=()=> {
     const handleSubmit=()=>{
       setInput({
           ...input,
-          userId:"3027b2fa-4997-4068-9f6d-c847baa02291",
+          userId:"c9f86a72-c6b4-4ac2-9b31-0d8eaee8b23b",
           driverId:"1ea150d6-9fa0-40cb-bb38-9493a0969e6f",
           date:"2024-01-26",
           qualification:rating,
