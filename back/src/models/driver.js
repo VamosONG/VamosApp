@@ -81,6 +81,10 @@ module.exports = (sequelize) => {
                 isNumeric: true, 
             },
         },
+        driverState: { //creado para manejar el borrado logico.
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+        },
     },
         { timestamps: false });
     

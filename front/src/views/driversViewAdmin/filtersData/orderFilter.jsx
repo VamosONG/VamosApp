@@ -1,6 +1,6 @@
 import { Select, Box, Text, Flex, Heading } from '@chakra-ui/react'
 import { useSelector, useDispatch } from 'react-redux'
-import { airportFilter, alphabeticalOrder, carFilter, passengerOrder, ratingOrder } from '../../../redux/actions'
+import { airportFilter, alphabeticalOrder, carFilter, passengerOrder, ratingOrder, stateFilter, stateOrder } from '../../../redux/actions'
 
 
 const OrderFilterAlphabetical = () => {
@@ -27,9 +27,19 @@ const OrderFilterAlphabetical = () => {
     const handleFilterAirport = (e) => {
         dispatch(airportFilter(e.target.value))
     }
+
+    // const handleFilterDriverState = (e) => {
+    //     dispatch(stateFilter(e.target.value))
+    // }
+
+    const handleOrderDriverState = (e) => {
+        dispatch(stateOrder(e.target.value))
+    }   
+
     const airportsFound = ["Aeropuerto Tumbes", "Aeropuerto Talara"];
 
     const carTypeFound = ["auto", "camioneta", "van", 'van plus'];
+
     return (
         <>
         <Flex gap='4' justify={'center'} align={'center'}>
@@ -52,6 +62,15 @@ const OrderFilterAlphabetical = () => {
                         <option value='D'>➖ - ➕</option>
                     </Select>
                 </Box>
+                <Box>
+                    <Select
+                        name='driverState'
+                        onChange={handleOrderDriverState}>
+                            <option isDisabled>Estado</option>
+                            <option value='A'>Activo</option>
+                            <option value='D'>Descanso</option>
+                    </Select>
+                </Box>
 
                 {/* //Cuando se agregren review lo activo */}
                 {/* <Box>
@@ -70,9 +89,9 @@ const OrderFilterAlphabetical = () => {
                     <Select
                         name='cartype'
                         onChange={handleFilterCar}>
-                            <option disabled>Vehiculo</option>
+                            <option isDisabled>Vehiculo</option>
                             {carTypeFound.map((car, index) => (
-                                <option key={index} value={car}>{car}</option>
+                                <option key={index}  value={car}>{car}</option>
                             ))}
                     </Select>
                 </Box>
@@ -81,12 +100,24 @@ const OrderFilterAlphabetical = () => {
                     <Select
                         name='airpots'
                         onChange={handleFilterAirport}>
-                            <option disabled>Zona</option>
+                            <option isDisabled>Zona</option>
                             {airportsFound.map((airports, index) => (
                                 <option key={index} value={airports} >{airports}</option>
                             ))}
                     </Select>
                 </Box>
+
+                {/* <Box>
+                    <Select
+                        name='driverState'
+                        onChange={handleFilterDriverState}>
+                            <option isDisabled>Estado</option>
+                            <option value={true}>Activo</option>
+                            <option value={false}>Descanso</option>
+                    </Select>
+                </Box> */}
+
+                
                 
                 {/* //Cuando se agregren review lo activo */}
                 {/* <Box>
