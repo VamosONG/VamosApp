@@ -15,14 +15,7 @@ function Footer() {
 
       <Flex bg='#009ED1' minWidth='max-content' alignItems='center' gap='4' pt='1rem' boxSize='sm' w='100%' h='auto' color='white' justify='space-evenly' px='2rem' flexDirection={{ base: 'column', md: 'row' }}>
 
-          <Box w='300px' h='auto' gap='8' >
-            <Image
-              boxSize='sm'
-              w='300px' h='auto' objectFit='contain'
-              src={IconPage}
-              alt='Vamos ONG'
-            />
-
+          <Box w='300px' h='auto'>
             <Flex gap='4' justify='center'>
               <Link href='#' target='_blank' >
                 <Image
@@ -61,32 +54,10 @@ function Footer() {
                 >
                 AHORRA TIEMPO CON VAMOS EN LOS TRASLADOS A TU DESTINO FAVORITO.
                 </Heading>
-                <Button
-                textShadow='2px 2px 4px rgb(0, 0, 0, 0.5)'
-                colorScheme='white'
-                variant='outline'
-                fontSize={{ base: '1rem', md: '1.4rem' }}
-                _hover={{
-                bg: 'green.500',
-                color: 'white',
-                }}
-                >
-                INICIAR CHAT
-                <Link href='#' target='_blank'>
-                <Image
-                w='1.5rem'
-                h='1.5rem'
-                src={IconWhatsApp}
-                alt='Whatsapp Vamos ONG'
-                borderRadius='full'
-                ml='2'
-                />
-                </Link>
-                </Button>
             </Flex>
           </Box>
 
-          <Box w='auto' h='auto' p='4' textAlign='center' order={{ base: 3, md: 2 }} textShadow='2px 2px 4px rgb(0, 0, 0, 0.5)'>
+          <Box w='auto' h='auto' p='1' textAlign='center' order={{ base: 3, md: 2 }} textShadow='2px 2px 4px rgb(0, 0, 0, 0.5)'>
             <Heading>Nosotros</Heading>
             <Flex flexDirection='column' fontSize='1.4rem'>
                 <Link href='#' isExternal>
@@ -104,7 +75,7 @@ function Footer() {
             </Flex>
           </Box>
 
-          <Box w='auto' h='auto' p='4' textAlign='center'  order={{ base: 3, md: 2 }} textShadow='2px 2px 4px rgb(0, 0, 0, 0.5)' >
+          <Box w='auto' h='auto' p='1' textAlign='center'  order={{ base: 3, md: 2 }} textShadow='2px 2px 4px rgb(0, 0, 0, 0.5)' >
             <Heading>Contacto</Heading>
             <Flex flexDirection='column' fontSize='1.4rem' gap='4'>
               <Text>
@@ -116,13 +87,11 @@ function Footer() {
               </Text>
 
               <Text >
-                <b>Correo electronico:</b>
                 <Link href='mailto:kleibertmedina@gmail.com' isExternal >
                   <p>vamos.ong@gmail.com <ExternalLinkIcon mx='2px' /></p> 
                 </Link>
               </Text>
               <Text >
-                <b>Llamanos: </b>
                 <Link href='tel:+51999999999' isExternal >
                   +51 999-999-999 <ExternalLinkIcon mx='2px' />
                 </Link>
