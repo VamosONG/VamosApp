@@ -18,6 +18,7 @@ import { renderToString } from 'react-dom/server';
 
 
 
+
 function SolicitudViajeForm() {
 
     const dispatch = useDispatch();
@@ -68,22 +69,23 @@ function SolicitudViajeForm() {
         }
     }
 
-    const handlePayment = async () => {
-        const id = await createPreference();
-        if (id) {
-            // Redirigir a la página de pago de MercadoPago
-            window.location.href = `https://www.mercadopago.com.ar/checkout/v1/redirect?preference_id=${id}`;
-        }
-    };
+        const handlePayment = async () => {
+            var mpid = await createPreference();
+            if (id) {
+              // Redirigir a la página de pago de MercadoPago
+              window.location.href = `https://www.mercadopago.com.ar/checkout/v1/redirect?preference_id=${mpid}`;
+            }
+        };
 
     useEffect(() => {
         if (infoConfirmacionViaje.id) {
             const infoAmandarAlBack = {
                 tripId: infoConfirmacionViaje.id,
-                userId: infoConfirmacionViaje.userId
-            }
-
-            Swal.fire({
+                userId: infoConfirmacionViaje.userId,
+                /* idMP: mpid */
+              }
+        
+              Swal.fire({
                 title: "Confirmación de traslado",
                 html: renderToString(confirmationText),
                 icon: "warning",

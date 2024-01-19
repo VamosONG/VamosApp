@@ -7,7 +7,7 @@ import {
     Th,
     Td,
     TableCaption, Avatar, Tooltip,
-    TableContainer, Button, Flex, useDisclosure, Link, Collapse, Box
+    TableContainer, Button, Flex, useDisclosure, Link, Collapse, Box, Badge
 } from '@chakra-ui/react'
 
 import { DeleteIcon, EditIcon, WarningIcon } from '@chakra-ui/icons'
@@ -21,8 +21,6 @@ import UpdateDriverData from '../Forms/ChoferFormulario/UpdateChoferForm'
 import ViewBtnUpdateDriver from '../Forms/ViewForms/ViewUpdateDriverForm'
 import ViewBtnDetailDriver from './DetailDriver/ViewBtnDetailDriver'
 import OrderFilterAlphabetical from './filtersData/orderFilter'
-import DriverState from './DetailDriver/driverState'
-import driver from '../../../../Back/src/models/driver'
 
 
 const DriverTableView = () => {
@@ -93,9 +91,10 @@ const DriverTableView = () => {
                         <Th >Estado</Th>
                     </Tr>
                 </Thead>
-                <Tbody >
+                
+                <Tbody>
                     {driverData?.map((driver, index) => (
-                        <Tr key={driver.id} >
+                        <Tr key={driver.id} bg={driver.driverState ? '#EEFFF5' : ' #FFEEEE'}>
                             <Td>{index + 1}</Td>
                             <Td>{driver.airports}</Td>
 
@@ -108,8 +107,10 @@ const DriverTableView = () => {
                                 <Flex gap={2} justifyContent={'center'}  >
                                     <Tooltip hasArrow label='ELiminar' bg='#E83D6F' placement='left-start'>
 
-                                        <Button onClick={() => deleteDriver(driver.id)} bg='#E83D6F'
-                                            fontSize='1.2rem' id={driver.id} >
+                                        <Button onClick={() => deleteDriver(driver.id)} 
+                                        bg='#E83D6F'
+                                            fontSize='1.2rem' 
+                                            id={driver.id} >
                                             <DeleteIcon />
                                         </Button>
                                     </Tooltip>
@@ -154,7 +155,8 @@ const DriverTableView = () => {
                                     />
                             </Td>
 
-                            <Td> {!driver.driverState ? ('Descanso') : ('Activo')} </Td>
+                            <Td> {driver.driverState ? (<Badge colorScheme='green' borderRadius={5} px='2'>Activo</Badge>) : (<Badge colorScheme='red'  borderRadius={5} px='2'>Descanso</Badge>)} </Td>
+
                         </Tr>
                     ))}
 

@@ -10,6 +10,9 @@ export const ORDER_RATING = 'ORDER_RATING'
 //Metodos de filtrado
 export const FILTER_AIRPORT = 'FILTER_AIRPORT'
 export const FILTER_CAR = 'FILTER_CAR'
+export const FILTER_STATE = 'FILTER_STATE'
+
+export const GET_TRIP_ID = 'GET_TRIP_ID'
 
 //Funcion estado del Driver 
 export const DRIVER_STATE = 'DRIVER_STATE'

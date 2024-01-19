@@ -1,7 +1,8 @@
 import axios from 'axios';
 import choferes from '../../utils/chofer'
 
-import { DELETE_DRIVER, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA } from './action.types';
+import { DELETE_DRIVER,GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE } from './action.types';
+
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE = "PAGINATE"
@@ -11,11 +12,14 @@ export const LOGIN = "LOGIN"
 export const ID_SOLICITUD = "ID_SOLICITUD"
 export const GET_RESERVED_TRIPS = "GET_RESERVED_TRIPS"
 export const GET_PENDING_TRIPS = "GET_PENDING_TRIPS"
+export const GET_COMPLETED_TRIPS = "GET_COMPLETED_TRIPS"
 export const NEW_USER = 'NEW_USER'
 export const LOGOUT = 'LOGOUT'
 export const CREATE_CHOFER = 'CREATE_CHOFER'
 export const VIAJE_CONFIRMADO = 'VIAJE_CONFIRMADO'
 export const GET_FILTERED = 'GET_FILTERED'
+export const GET_TRIPS_BY_ID = 'GET_TRIPS_BY_ID'
+export const POST_REVIEW = 'POST_REVIEW'
 
 
 export const getAllConductores = () => {
@@ -34,6 +38,20 @@ export const getAllConductores = () => {
     }
 
 
+}
+
+export const getTripById = (id) => {
+    return async (dispatch) => {
+        try {
+            const {data} = await axios.get(`http://localhost:3001/trips/${id}`)
+            return dispatch({
+                type:GET_TRIP_ID,
+                payload: data
+            })
+        } catch (error) {
+            throw error
+        }
+    }
 }
 
 export const createNewChofer = (data) => {
@@ -80,8 +98,9 @@ export const deleteDriverAction = (id) => {
 
 export const postNewViaje = (infoViaje) => {
 
-    infoViaje.userId= "3027b2fa-4997-4068-9f6d-c847baa02291"
-
+    infoViaje.userId= "c9f86a72-c6b4-4ac2-9b31-0d8eaee8b23b"
+    //infoViaje.userId= "74c99ae0-61f9-4d85-bcb6-fcf680183c48" //(con permisos de admin)
+    console.log(infoViaje)
     return async (dispatch) => {
         try {
             const { data } = await axios.post(`http://localhost:3001/offer/create`, infoViaje);
@@ -131,24 +150,22 @@ export const getPendingTrips = () =>{
         }
     }
 }
-
-/* export const getAllConductores=()=>{
-    try {
-
-        return async (dispatch)=>{
-            const data= choferes
-            console.log(data)
+export const getCanceledTrips = () =>{
+    return async(dispatch)=> {
+        const endpoint= 'http://localhost:3001/trips/completed' //ruta con viajes completados
+        try {
+            const { data } = await axios.get(endpoint)
+            console.log(data);
             return dispatch({
-                type:GET_ALL_CONDUCTORES,
-                payload:data
+                type: GET_COMPLETED_TRIPS,
+                payload: data
             })
+        } catch (error) {
+            console.log(error);
+            alert("error")
         }
-    } catch (error) {
-        console.log(error);
     }
-    
 }
- */
 
 
 export const postNewUser = (form) => {
@@ -301,6 +318,19 @@ export const ratingOrder = (data) => {
     }
 }
 
+export const stateOrder = (data) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: FILTER_STATE,
+                payload: data
+            })
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+}
+
 export const carFilter = (data) => {
     return async (dispatch) => {
         try {
@@ -319,6 +349,52 @@ export const airportFilter = (data) => {
         try {
             return dispatch({
                 type: FILTER_AIRPORT,
+                payload: data
+            })
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+}
+
+export const stateFilter = (data) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: FILTER_STATE,
+                payload: data
+            })
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+}
+
+
+export const getTripsById = (id) => {
+    console.log(id)
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`http://localhost:3001/trips/tripId/${id}`)
+            console.log(data)
+            return dispatch({
+                type: GET_TRIPS_BY_ID,
+                payload: data
+            })
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+}
+export const postReview = (info) => {
+    /* info.driverId='46d639a7-5468-495b-b9a7-f666517d3bfb' */
+    console.log(info)
+    return async (dispatch) => {
+        const { data } = await axios.post(`http://localhost:3001/review/create`, info);
+        console.log(data)
+        try {
+            return dispatch({
+                type: POST_REVIEW,
                 payload: data
             })
         } catch (error) {

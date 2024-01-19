@@ -16,7 +16,6 @@ import { useDispatch } from 'react-redux'
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getAllConductores } from "../../../redux/actions";
-import DriverState from "../../driversViewAdmin/DetailDriver/driverState";
 
 
 const UpdateDriverData = (props) => {
@@ -47,10 +46,12 @@ const UpdateDriverData = (props) => {
         e.preventDefault();
         console.log("Antes de la actualización:", newData);
         if (newData) {
+
             console.log('data antes de la ruta' + JSON.stringify(newData));
             const response = await axios.patch(`http://localhost:3001/drivers/update/${id}`, { newData });
             console.log('data luego de la ruta' + newData);
             if (response.status === 200) {
+
                 console.log("des1 de la actualización:", newData);
                 Swal.fire({
                     title: "Bien hecho!",

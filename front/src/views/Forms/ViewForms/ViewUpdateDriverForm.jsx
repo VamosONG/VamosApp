@@ -7,18 +7,20 @@ const ViewBtnUpdateDriver = (props) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const onToggle = () => {
-      setIsOpen(!isOpen);
+        setIsOpen(!isOpen);
     };
-  
+
     const closeFormEdit = () => {
-      setIsOpen(false);
+        setIsOpen(false);
     };
-    
+
     return (
         <Box  >
             <Tooltip hasArrow label='Editar' bg='#009ED1' placement='right-end'>
 
-                <Button onClick={onToggle} bg='#009ED1'><EditIcon /></Button>
+                <Button onClick={onToggle} bg='#009ED1'>   
+                    <EditIcon />
+                </Button>
             </Tooltip>
             <Collapse initialScale={0.7} direction='bottom' in={isOpen} style={{ zIndex: 10 }}>
                 <Box
@@ -31,7 +33,7 @@ const ViewBtnUpdateDriver = (props) => {
                     borderRadius={20}
                     zIndex={99}
                 >
-                    <UpdateDriverData {...props} closeFormEdit={closeFormEdit}/>
+                    <UpdateDriverData {...props} closeFormEdit={closeFormEdit} />
                 </Box>
             </Collapse>
         </Box>
