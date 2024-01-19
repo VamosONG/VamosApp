@@ -1,8 +1,8 @@
 const { User, Trip, Review, Driver } = require('../../dataBase');
 const getPendingTrips = require('../../handlers/filtersHandlers/getTripsPendingHandler');
 
-const postReview = async (userId, driverId, date, qualification, comments, tripId) => {
-    console.log(userId, driverId, date, qualification, comments, tripId)
+const postReview = async (userId, driverId, date, qualification, comments) => {
+    console.log(userId, driverId, date, qualification, comments)
     try {
         const user = await User.findByPk(userId);
 
@@ -16,26 +16,28 @@ const postReview = async (userId, driverId, date, qualification, comments, tripI
             throw new Error('No tienes un viaje pendiente para dejar una reseña.');
         } */
 
-        const trip = await Trip.findByPk(tripId);
+        // const trip = await Trip.findByPk(tripId);
 
-        if (!trip) {
-            throw new Error('No se encontró el viaje asociado a la revisión.');
-        }
-        console.log("estrip",trip,"estrip")
-        /* if (trip.stateOfTrip !== 'pending') {
-            throw new Error('No puedes dejar una revisión en este momento.');
-        } */
-
-        const [reviewPost, created] = await Review.findOrCreate({
+        // if (!trip) {
+        //     throw new Error('No se encontró el viaje asociado a la revisión.');
+        // }
+        // console.log("estrip",trip,"estrip")
+        // /* if (trip.stateOfTrip !== 'pending') {
+        //     throw new Error('No puedes dejar una revisión en este momento.');
+        // } */
+        const driver = await Driver.findByPk(driverId);
+        console.log(driver);
+        const [reviewPost,created] = await Review.findOrCreate({
+            
             where: {
                 userId: userId,
                 driverId: driverId,
-                tripId: tripId,
+                // tripId: tripId,
             },
             defaults: {
                 userId,
                 driverId,
-                tripId,//Agregado R
+                // tripId,//Agregado R
                 date,
                 qualification,
                 comments,
@@ -48,11 +50,11 @@ const postReview = async (userId, driverId, date, qualification, comments, tripI
             throw new Error('Ya existe una reseña del usuario para el mismo chofer en la base de datos.');
         }
 
-        const driver = await Driver.findByPk(driverId);
-
+        
         if (user && driver) {
             await user.addReview(reviewPost);
             await driver.addReview(reviewPost);
+            // await trip.addReview(reviewPost)
         } else {
             console.error('No se encontró el usuario o el conductor.');
         }
