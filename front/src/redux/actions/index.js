@@ -150,25 +150,25 @@ export const getPendingTrips = () => {
 }
  */
 
-export const postNewUser = (form) => {
-  console.log(form);
-  const endpoint = `http://localhost:3001/user/create`;
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.post(endpoint, form);
-      console.log(data); // ACA NO RECIBE LA DATA 
-      alert("usuario creado");
-      return await dispatch({
-        type: NEW_USER,
-        payload: data,
-      });
-    } catch (error) {
-      console.error(`Error en la creacion del usuario:${error.message}`);
-      alert("Error")
-      throw error;
-    }
-  };
-};
+// export const postNewUser = (form) => {
+//   console.log(form);
+//   const endpoint = `http://localhost:3001/user/create`;
+//   return async (dispatch) => {
+//     try {
+//       const { data } = await axios.post(endpoint, form);
+//       console.log(data); // ACA NO RECIBE LA DATA 
+//       alert("usuario creado");
+//       return await dispatch({
+//         type: NEW_USER,
+//         payload: data,
+//       });
+//     } catch (error) {
+//       console.error(`Error en la creacion del usuario:${error.message}`);
+//       alert("Error")
+//       throw error;
+//     }
+//   };
+// };
 
 export const paginateConductores = (order) => {
   return async (dispatch) => {

@@ -1,22 +1,23 @@
+// HOOKS
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-
+//DEPENDENCIES
+import axios from "axios";
+// STYLES
 import {
   Container,
   FormControl,
   FormLabel,
   FormErrorMessage,
   Input,
-  Heading,
   InputGroup,
   Button,
   InputRightElement,
   Stack,
   Text,
 } from "@chakra-ui/react";
+// AUTH FIREBASE
 import { useAuth } from "../../../context/authContext";
-import LogOut from "../LogOut/logout";
-import { postNewUser } from "../../../redux/actions";
+
 
 
 const LoginForm = ({ onSwitchForm }) => {
@@ -29,7 +30,6 @@ const LoginForm = ({ onSwitchForm }) => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
-  const dispatch = useDispatch()
 
   const [input, setInput] = useState({
     email: "",
@@ -60,11 +60,8 @@ const LoginForm = ({ onSwitchForm }) => {
     try {
       const google= await auth.loginWithGoogle();
       console.log(google);
-       dispatch(postNewUser({google
-        // // name:displayName,
-        // // email: email,
-        // id:uid
-      }))
+      //const userCreated = await axios.post(`http://localhost:3001/user/create`, input)
+      //console.log(userCreated);
     } catch (error) {
       console.error("Error al iniciar sesión con Google:", error.message);
     }
@@ -137,29 +134,6 @@ const LoginForm = ({ onSwitchForm }) => {
         </Text>
       </Container>
     </Stack>
-
-  //   <form>
-  //     <label>Mail</label>
-  //     <input     type="text"
-  //         value={input.email}
-  //         onChange={handleInputChange}
-  //         placeholder="Ingresa tu Correo / Email"
-  //         name="email"/>
-  //     <label>Password</label>
-  //     <input
-  //           type={show ? "text" : "password"}
-  //           placeholder="Ingresa una contraseña"
-  //           name="password"
-  //           onChange={handleInputChange}/>
-  //           <Button onClick={handleSubmit}>Entrar</Button>
-  //           <Button onClick={handleGoogleLogin}>Continuar con Google</Button>
-  //           <Button onClick={handleLogOut}>Salir</Button>
-            
-  //           {
-  //             email && displayName && <h1>ADENTRO</h1>
-  
-  //           }
-  //   </form>
    );
 };
 
