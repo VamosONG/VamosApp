@@ -1,7 +1,7 @@
 import axios from 'axios';
 import choferes from '../../utils/chofer'
 
-import { DELETE_DRIVER,GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA } from './action.types';
+import { DELETE_DRIVER,GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE } from './action.types';
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE = "PAGINATE"
@@ -316,6 +316,19 @@ export const ratingOrder = (data) => {
     }
 }
 
+export const stateOrder = (data) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: FILTER_STATE,
+                payload: data
+            })
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+}
+
 export const carFilter = (data) => {
     return async (dispatch) => {
         try {
@@ -341,6 +354,21 @@ export const airportFilter = (data) => {
         }
     }
 }
+
+export const stateFilter = (data) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: FILTER_STATE,
+                payload: data
+            })
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+}
+
+
 export const getTripsById = (id) => {
     console.log(id)
     return async (dispatch) => {
@@ -373,6 +401,19 @@ export const postReview = (info) => {
         }
     }
 }
+
+// export const driverState = (data) => {
+//     return async (dispatch) => {
+//         try {
+//             return dispatch({
+//                 type: DRIVER_STATE,
+//                 payload: data
+//             })
+//         } catch (error) {
+//             throw new Error(error);
+//         }
+//     }
+// }
 
 
 

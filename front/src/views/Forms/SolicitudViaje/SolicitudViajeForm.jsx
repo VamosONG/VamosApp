@@ -36,7 +36,7 @@ function SolicitudViajeForm() {
         quantityPassengers: "",
     });
 
-    
+
 
     const confirmationText = (
         <div>
@@ -55,18 +55,19 @@ function SolicitudViajeForm() {
 
     const createPreference = async () => {
         try {
-          const response = await axios.post("http://localhost:3001/merpago/create", {
-            origin: input.origin,
-            destination: input.destination,
-            price: 100, // Cambia esto según el precio real
-            quantityPassengers: input.quantityPassengers,
-          });
-    
-          const { id } = response.data;
-          return id;
+            const response = await axios.post("http://localhost:3001/merpago/create", {
+                origin: input.origin,
+                destination: input.destination,
+                price: 100, // Cambia esto según el precio real
+                quantityPassengers: input.quantityPassengers,
+            });
+
+            const { id } = response.data;
+            return id;
         } catch (error) {
-          console.log(error);
-        }}
+            console.log(error);
+        }
+    }
 
         const handlePayment = async () => {
             var mpid = await createPreference();
@@ -76,9 +77,9 @@ function SolicitudViajeForm() {
             }
         };
 
-          useEffect(() => {
-            if (infoConfirmacionViaje.id) {
-              const infoAmandarAlBack = {
+    useEffect(() => {
+        if (infoConfirmacionViaje.id) {
+            const infoAmandarAlBack = {
                 tripId: infoConfirmacionViaje.id,
                 userId: infoConfirmacionViaje.userId,
                 /* idMP: mpid */
@@ -105,7 +106,7 @@ function SolicitudViajeForm() {
 
 
                 htmlMode: true
-            }).then(async(result) => {
+             }).then(async(result) => {
               if (result.isConfirmed) {
                   await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
                 Swal.fire({
@@ -123,7 +124,7 @@ function SolicitudViajeForm() {
 
 
 
-    const handleSubmit=async(event)=>{
+    const handleSubmit = async (event) => {
         event.preventDefault();
         await setInput({
             ...input,
@@ -132,14 +133,14 @@ function SolicitudViajeForm() {
         await dispatch(postNewViaje(input));
 
     }
-    const handleChange=async(e)=>{
-        
+    const handleChange = async (e) => {
+
         setInput({
             ...input,
-            [e.target.name]:e.target.value
+            [e.target.name]: e.target.value
         })
     }
-  
+
     const currentDate = new Date().toISOString().split('T')[0];
 
 

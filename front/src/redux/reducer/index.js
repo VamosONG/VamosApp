@@ -1,10 +1,16 @@
-import { DELETE_DRIVER,GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING } from "../actions/action.types";
+
+
+
+import { DELETE_DRIVER, GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, FILTER_STATE } from "../actions/action.types";
+
+
+
 import { CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_TRIPS_BY_ID, GET_COMPLETED_TRIPS, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
 
 
 
 const initialState = {
-    
+
     allData: [],//Este estado servidara para mantener la data general de la base de datos
     conductores: [],
     pageConductores: [],
@@ -19,13 +25,15 @@ const initialState = {
     viajesCompletados: [],
     idSolicitud: '',
 
-    infoConfirmacionViaje:{},
+    infoConfirmacionViaje: {},
 
-    conductoresFiltrados:[],
+    conductoresFiltrados: [],
+
 
     tripsById:[],
 
-    trip:[]
+
+    trip: [],
 
 }
 
@@ -37,15 +45,16 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 conductores: action.payload,
                 pageConductores: action.payload,
-                allData: action.payload            };
+                allData: action.payload
+            };
         case GET_TRIP_ID:
-            return{
+            return {
                 ...state,
-                trip:action.payload
+                trip: action.payload
             }
         case DELETE_DRIVER:
             return {
-                ...state, 
+                ...state,
                 conductores: state.conductores.filter(driver => driver.id !== action.payload)
             }
         case PAGINATE:
@@ -103,13 +112,13 @@ const reducer = (state = initialState, action) => {
                 newUsuario: [action.payload]
             }
 
-        case POST_NEW_VIAJE: 
+        case POST_NEW_VIAJE:
             console.log(action.payload)
             return {
-            ...state,
-            infoConfirmacionViaje: action.payload
-        }
-        
+                ...state,
+                infoConfirmacionViaje: action.payload
+            }
+
         case GET_RESERVED_TRIPS:
             return {
                 ...state,
@@ -152,9 +161,9 @@ const reducer = (state = initialState, action) => {
         case ORDER_PASSENGER:
             let orderedListPassenger = [...state.conductores];
             if (action.payload === 'A') {
-                orderedListPassenger.sort((a,b) => a.capacityPassengers < b.capacityPassengers ? 1 : -1)
+                orderedListPassenger.sort((a, b) => a.capacityPassengers < b.capacityPassengers ? 1 : -1)
             } else if (action.payload === 'D') {
-                orderedListPassenger.sort((a,b) => a.capacityPassengers > b.capacityPassengers ? 1 : -1)
+                orderedListPassenger.sort((a, b) => a.capacityPassengers > b.capacityPassengers ? 1 : -1)
             }
             return {
                 ...state,
@@ -165,13 +174,13 @@ const reducer = (state = initialState, action) => {
         case ORDER_RATING:
             let orderedListRating = [...state.conductores]
             if (action.payload === 'A') {
-                orderedListRating.sort((a,b) => a.rating < b.rating ? 1 : -1)
+                orderedListRating.sort((a, b) => a.rating < b.rating ? 1 : -1)
             } else if (action.payload === 'D') {
-                orderedListRating.sort((a,b) => a.rating > b.rating ? 1 : -1)
+                orderedListRating.sort((a, b) => a.rating > b.rating ? 1 : -1)
             }
             return {
                 ...state,
-                conductores: orderedListRating,
+                conductores: [...orderedListRating],
                 pageConductores: orderedListRating
             }
 
@@ -179,8 +188,8 @@ const reducer = (state = initialState, action) => {
             const filterCarList = state.allData.filter((car) => car.carType === action.payload)
             return {
                 ...state,
-                conductores: filterCarList,
-                pageConductores:filterCarList
+                conductores: [...filterCarList],
+                pageConductores: filterCarList
             }
 
         case FILTER_AIRPORT:
@@ -191,6 +200,20 @@ const reducer = (state = initialState, action) => {
                 conductores: [...filterAirportList],
                 pageConductores: filterAirportList
             }
+
+        case FILTER_STATE:
+            let orderedListState = [...state.conductores]
+            if (action.payload === 'A') {
+                orderedListState.sort((a, b) => a.driverState < b.driverState ? 1 : -1)
+            } else if (action.payload === 'D') {
+                orderedListState.sort((a, b) => a.driverState > b.driverState ? 1 : -1)
+            }
+            return {
+                ...state,
+                conductores: [...orderedListState],
+                pageConductores: orderedListState
+            }
+
         case GET_TRIPS_BY_ID:
             return {
                 ...state,

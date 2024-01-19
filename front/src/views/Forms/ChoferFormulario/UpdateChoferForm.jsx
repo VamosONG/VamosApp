@@ -22,14 +22,18 @@ const UpdateDriverData = (props) => {
     const dispatch = useDispatch();
     const [newData, setNewData] = useState('');
     const { id } = props;
+    const {driverState} = props;
+
     const handleChange = (e) => {
         const property = e.target.name;
         let value = e.target.value;
         console.log(property + " " + value);
         if (property === 'phone' || property === 'capacityPassengers' || property === 'dni') {
             value = Number(value)
+        } else if (property === 'driverState') {
+            value = value === 'Activo'
         }
-        console.log(typeof (value));
+        console.log(typeof (value) + value);
         setNewData({
             ...newData,
             [property]: value,
@@ -44,7 +48,7 @@ const UpdateDriverData = (props) => {
         if (newData) {
 
             console.log('data antes de la ruta' + JSON.stringify(newData));
-            const response = await axios.patch(`http://localhost:3001/drivers/update/${id}`, {newData});
+            const response = await axios.patch(`http://localhost:3001/drivers/update/${id}`, { newData });
             console.log('data luego de la ruta' + newData);
             if (response.status === 200) {
 
@@ -55,7 +59,7 @@ const UpdateDriverData = (props) => {
                     icon: "success",
                 });
                 await dispatch(getAllConductores())
-                
+
             } else {
                 throw new Error(
                     Swal.fire({
@@ -77,6 +81,7 @@ const UpdateDriverData = (props) => {
     const carTypeFount = ["auto", "camioneta", "van", 'van plus'];
     const airportsFount = ["Aeropuerto Tumbes", "Aeropuerto Talara"];
     const carModelFount = ["toyota", "hiunday", "ford"];
+    const state = ['Activo', 'Descanso'];
     return (
         <form onSubmit={handleSubmit}>
             <Stack
@@ -102,6 +107,31 @@ const UpdateDriverData = (props) => {
                             name={props.name}
                             src={props.driverImg}
                         />{' '}
+
+                        <Flex>
+                            <FormControl>
+                                <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
+                                    <InputLeftAddon bg='yellow.200'>
+                                        {driverState ? ('Activo') : ('Descanso')}
+                                    </InputLeftAddon>
+                                    <Select
+                                        color="#000"
+                                        placeholder="Estado"
+                                        id='driverState'
+                                        name="driverState"
+                                        bg='lightgreen'
+                                        onChange={handleChange}
+                                        value={newData.driverState}
+                                    >
+                                        {state.map((bool, index) => (
+                                            <option key={index} value={bool}>
+                                                {bool}
+                                            </option>
+                                        ))}
+                                    </Select>
+                                </InputGroup>
+                            </FormControl>
+                        </Flex>
                     </Flex>
                 </Box>
 
@@ -196,6 +226,7 @@ const UpdateDriverData = (props) => {
                 <Box bg="gray.300" py={4} px={2} borderRadius={10} color="black">
                     <Heading>Datos del vehiculo</Heading>
                     <Flex flexDirection={{ base: "column", md: 'row' }} gap='4'>
+
                         <FormControl>
                             <FormLabel>Tipo / Vehiculo</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
@@ -206,6 +237,7 @@ const UpdateDriverData = (props) => {
                                     color="#000"
                                     placeholder="Selecciona un Tipo"
                                     name="carType"
+                                    bg='lightgreen'
                                     onChange={handleChange}
                                     value={newData.carType}
                                 >
@@ -217,6 +249,7 @@ const UpdateDriverData = (props) => {
                                 </Select>
                             </InputGroup>
                         </FormControl>
+
                         <FormControl>
                             <FormLabel>Modelo de Vehiculo</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
@@ -227,6 +260,7 @@ const UpdateDriverData = (props) => {
                                     color="#000"
                                     placeholder="Selecciona un Vehiculo"
                                     name="carModel"
+                                    bg='lightgreen'
                                     onChange={handleChange}
                                     value={newData.carModel}
                                 >
@@ -239,6 +273,7 @@ const UpdateDriverData = (props) => {
                                 </Select>
                             </InputGroup>
                         </FormControl>
+
                         <FormControl>
                             <FormLabel>Placa</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
@@ -260,15 +295,17 @@ const UpdateDriverData = (props) => {
                                 <Input type='text' placeholder='Nuevo' bg='lightgreen' name='driverLicense' onChange={handleChange} value={newData.driverLicense} />
                             </InputGroup>
                         </FormControl>
+
                         <FormControl>
                             <FormLabel>Vencimiento del Soat</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
                                 <InputLeftAddon bg='yellow.200'>
                                     {props.carSoat}
                                 </InputLeftAddon>
-                                <Input type='date' placeholder='Nuevo' bg='lightgreen' name="carSoat" onChange={handleChange} value={newData.carSoat} />
+                                <Input type='date' placeholder='Nuevo' bg='lightgreen'  name="carSoat" onChange={handleChange} value={newData.carSoat} />
                             </InputGroup>
                         </FormControl>
+
                         <FormControl>
                             <FormLabel>MAx. Pasajeros</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
@@ -280,6 +317,7 @@ const UpdateDriverData = (props) => {
                                     placeholder="Cantidad de pasajeros"
                                     id="capacityPassengers"
                                     name="capacityPassengers"
+                                    bg='lightgreen'
                                     onChange={handleChange}
                                     value={newData.capacityPassengers}
                                 >
