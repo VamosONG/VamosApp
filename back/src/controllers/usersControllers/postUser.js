@@ -1,8 +1,7 @@
-
 const { User } = require("../../dataBase")
 
 
-const postUser = async ({ name, email, phone, dni }) => {
+const postUser = async ({ name, surname, email, phone, dni }) => {
     try {
         const newUser = await User.create({
             name,
