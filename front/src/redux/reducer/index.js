@@ -1,5 +1,5 @@
 import { DELETE_DRIVER,GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING } from "../actions/action.types";
-import { CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_TRIPS_BY_ID, GET_COMPLETED_TRIPS, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE } from "../actions/index";
+import { CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_TRIPS_BY_ID, GET_COMPLETED_TRIPS, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE, USER_BY_EMAIL } from "../actions/index";
 
 
 
@@ -11,8 +11,10 @@ const initialState = {
     currentPage: 0,
     newUsuario: [],
 
-    esAdmin: false,
-    esUsuario: false,
+    currentUser:{},
+
+    // esAdmin: false,
+    // esUsuario: false,
 
     viajesReservados: [],
     viajesPendientes: [],
@@ -201,6 +203,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 tripsById: action.payload
             } */
+            case USER_BY_EMAIL:
+                return {
+                    ...state,
+                    currentUser: action.payload
+                }
+
         default:
             return { ...state };
     }

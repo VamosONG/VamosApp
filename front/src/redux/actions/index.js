@@ -19,6 +19,8 @@ export const VIAJE_CONFIRMADO = 'VIAJE_CONFIRMADO'
 export const GET_FILTERED = 'GET_FILTERED'
 export const GET_TRIPS_BY_ID = 'GET_TRIPS_BY_ID'
 export const POST_REVIEW = 'POST_REVIEW'
+export const USER_BY_EMAIL = 'USER_BY_EMAIL'
+
 
 export const getAllConductores = () => {
     return async (dispatch) => {
@@ -366,6 +368,22 @@ export const postReview = (info) => {
     }
 }
 
+export const getUserByEmail = (email) => {
+    console.log(email)
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`http://localhost:3001/`, email);
+            console.log(data)
+            dispatch({
+                type: USER_BY_EMAIL,
+                payload: data
+            })
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            console.log(error.message)
+        }
+    };
+};
 
 
 

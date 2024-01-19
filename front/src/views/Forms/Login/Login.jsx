@@ -1,5 +1,6 @@
 // HOOKS
 import { useState } from "react";
+
 //DEPENDENCIES
 import axios from "axios";
 // STYLES
@@ -17,6 +18,9 @@ import {
 } from "@chakra-ui/react";
 // AUTH FIREBASE
 import { useAuth } from "../../../context/authContext";
+import NavBar from "../../../components/navBar/NavBar";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserByEmail } from "../../../redux/actions";
 
 
 
@@ -24,11 +28,14 @@ const LoginForm = ({ onSwitchForm }) => {
 
   // Auth de Firebase
   const auth = useAuth();
-  const {displayName, uid, email}= auth.user
+  const {displayName, uid, operationType}= auth.user
   console.log(displayName, uid);
   // Estados Locales para form de Login
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
+
+  const dispatch= useDispatch()
+  const {role} = useSelector(state=> state)
 
 
   const [input, setInput] = useState({
@@ -50,6 +57,10 @@ const LoginForm = ({ onSwitchForm }) => {
     event.preventDefault();
     try {
       await auth.login(input.email, input.password);
+      if(auth.user.operationType === "signIn"){
+       dispatch( getUserByEmail({email:  input.email}))
+       console.log(input.email);
+      }
     } catch (error) {
       console.error("Error al iniciar sesión:", error.message);
     }
@@ -74,6 +85,7 @@ const LoginForm = ({ onSwitchForm }) => {
   //     console.log("error");
   //   }
   // }
+
 
   return (
     <Stack
@@ -121,7 +133,6 @@ const LoginForm = ({ onSwitchForm }) => {
       <Button colorScheme="green" onClick={handleSubmit}>
         Entrar
       </Button>
-
       <Container>
         <Text>
           ¿No tienes cuenta?{" "}

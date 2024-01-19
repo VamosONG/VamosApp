@@ -16,12 +16,14 @@ import MobileMenu from "./mobileMenu/mobileMenu";
 
 const NavBar = () => {
 
-  const esAdmin = useSelector((state) => state.esAdmin)
-  const esUsuario = useSelector((state) => state.esUsuario)
+  // const esAdmin = useSelector((state) => state.esAdmin)
+  // const esUsuario = useSelector((state) => state.esUsuario)
+
+  const {currentUser}= useSelector((state) => state)
   const [isMobile] = useMediaQuery('(max-width: 768px)');
   return (
     <Flex as="nav" bg="#009ED1" alignItems="center" justify="space-between" h="100px" w='100%' >
-      {!isMobile ? (
+      {/* {!isMobile ? ( */}
         <>
           <Box >
             <Image src={Vamos} alt="Vamos" w="200px" />
@@ -31,30 +33,31 @@ const NavBar = () => {
             {/* <SlideEx/> */}
             <Flex justify='space-evenly' alignItems="center">
 
-              {esAdmin ? (
+              { currentUser.admin &&
+              currentUser.admin ?  (
                 <Box>
                   <Link to="/solicitudesDeViajes">
                     <Button colorScheme="#009ED1">Solicitudes de viaje</Button>
                   </Link>
                 </Box>
-              ) : (esUsuario ? (
+              ) : (!currentUser.admin ? (
                 <Box>
                   <Link to="/solicitarViaje">
                     <Button colorScheme="#009ED1">Solicitar viaje</Button>
                   </Link>
                 </Box>
-              ) : null
+              ) :( null)
               )}
 
-              {
-                esAdmin ?
+              {/* {
+                esAdmin ? */}
                   (<Box>
                     <Link to="/detail">
                       <Button colorScheme="#009ED1">Conductores</Button>
                     </Link>
                   </Box>)
-                  : null
-              }
+                  {/* : null
+              } */}
 
               <Box>
                 <Flex>
@@ -77,11 +80,12 @@ const NavBar = () => {
 
           <AvatarGroup spacing="1rem" mx="20px">
             <Avatar bg="#009ED1" />
-            <SlideEx />
+            {/* <SlideEx /> */}
 
           </AvatarGroup>
-        </>) :
-        <MobileMenu esAdmin={esAdmin} esUsuario={esUsuario} />}
+        </>
+        {/* //) : */}
+       {/* // <MobileMenu esAdmin={esAdmin} esUsuario={esUsuario} />} */}
     </Flex>
   );
 };
