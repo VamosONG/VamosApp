@@ -360,7 +360,7 @@ export const postReview = (info) => {
     /* info.driverId='46d639a7-5468-495b-b9a7-f666517d3bfb' */
     console.log(info)
     return async (dispatch) => {
-        const { data } = await axios.post(`http://localhost:3001/review/create`, info);
+        const { data } = await axios.post(`http://localhost:3001/reviews/create`, info);
         console.log(data)
         try {
             return dispatch({
@@ -368,7 +368,8 @@ export const postReview = (info) => {
                 payload: data
             })
         } catch (error) {
-            throw new Error(error);
+           /*  throw new Error(error); */
+           console.log(error.message)
         }
     }
 }

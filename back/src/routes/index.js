@@ -79,7 +79,7 @@ router.put('/zones/update', updateZoneHandler);
 router.delete('/zones', deleteZoneHandler);
 
 router.get('/reviews', getReviewsHandler);
-router.post('/reviews/create', postReviewHandler);
+router.post('/reviews/create', postReviewHandler);//
 router.put('/reviews/update', updateReviewHandler);
 router.delete('/reviews', deleteReviewHandler);
 
