@@ -64,6 +64,8 @@ Zone.belongsTo(Trip);
 Trip.hasOne(Airport);
 Airport.belongsTo(Trip);
 
+// Trip.hasMany(Review);
+// Review.belongsTo(Trip)
 
 module.exports = {
   ...sequelize.models,
