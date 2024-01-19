@@ -3,7 +3,6 @@ import choferes from '../../utils/chofer'
 
 import { DELETE_DRIVER,GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA } from './action.types';
 
-
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE = "PAGINATE"
 export const GET_ALL_CONDUCTORES = "GET_ALL_CONDUCTORES"
@@ -18,12 +17,13 @@ export const LOGOUT = 'LOGOUT'
 export const CREATE_CHOFER = 'CREATE_CHOFER'
 export const VIAJE_CONFIRMADO = 'VIAJE_CONFIRMADO'
 export const GET_FILTERED = 'GET_FILTERED'
-
+export const GET_TRIPS_BY_ID = 'GET_TRIPS_BY_ID'
+export const POST_REVIEW = 'POST_REVIEW'
 
 export const getAllConductores = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios(`https://vamosappserver.onrender.com/drivers`);
+            const { data } = await axios(`http://localhost:3001/drivers`);
             dispatch({
                 type: GET_ALL_CONDUCTORES,
                 payload: data
@@ -34,7 +34,6 @@ export const getAllConductores = () => {
             throw error;
         }
     }
-
 
 }
 
@@ -70,7 +69,7 @@ export const createNewChofer = (data) => {
 export const deleteDriverAction = (id) => {
     return async (dispatch) => {
         try {
-            const {data} = await axios.delete(`https://vamosappserver.onrender.com/drivers/${id}`)
+            const {data} = await axios.delete(`http://localhost:3001/drivers/${id}`)
             dispatch({
                 type: DELETE_DRIVER,
                 payload: data
@@ -96,11 +95,15 @@ export const deleteDriverAction = (id) => {
 
 export const postNewViaje = (infoViaje) => {
 
-    infoViaje.userId= "3027b2fa-4997-4068-9f6d-c847baa02291"
-
+    infoViaje.userId= "c9f86a72-c6b4-4ac2-9b31-0d8eaee8b23b"
+    //infoViaje.userId= "74c99ae0-61f9-4d85-bcb6-fcf680183c48" //(con permisos de admin)
+    console.log(infoViaje)
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`https://vamosappserver.onrender.com/offer/create`, infoViaje);
+
+            /* const { data } = await axios.post(`https://vamosappserver.onrender.com/offer/create`, infoViaje); */
+
+            const { data } = await axios.post(`http://localhost:3001/offer/create`, infoViaje);
             console.log(data)
             await dispatch({
                 type: POST_NEW_VIAJE,
@@ -117,7 +120,7 @@ export const postNewViaje = (infoViaje) => {
 
 export const getReservedTrips = () =>{
     return async(dispatch)=> {
-        const endpoint= 'https://vamosappserver.onrender.com/trips/reserves' //Se cambió a la ruta con viajes reservados
+        const endpoint= 'http://localhost:3001/trips/reserves' //Se cambió a la ruta con viajes reservados
         try {
             const { data } = await axios.get(endpoint)
             console.log(data);
@@ -133,7 +136,7 @@ export const getReservedTrips = () =>{
 }
 export const getPendingTrips = () =>{
     return async(dispatch)=> {
-        const endpoint= 'https://vamosappserver.onrender.com/trips/pending' //ruta con viajes pendientes
+        const endpoint= 'http://localhost:3001/trips/pending' //ruta con viajes pendientes
         try {
             const { data } = await axios.get(endpoint)
             console.log(data);
@@ -163,7 +166,6 @@ export const getCanceledTrips = () =>{
         }
     }
 }
-
 
 export const postNewUser = (form) => {
     console.log(form);
@@ -229,7 +231,7 @@ export const viajeConfirmado = (info) => {
     console.log(info)
     return async (dispatch) => {
         try {
-            const { data } = await axios.put(`https://vamosappserver.onrender.com/trips/reserves/create`, info);
+            const { data } = await axios.put(`http://localhost:3001/trips/reserves/create`, info);
             console.log(data)
             dispatch({
                 type: VIAJE_CONFIRMADO,
@@ -246,7 +248,7 @@ export const filtrarConductores = (info) => {
     console.log(info)
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`https://vamosappserver.onrender.com/drivers/filter`, info);
+            const { data } = await axios.post(`http://localhost:3001/drivers/filter`, info);
             console.log(data)
             dispatch({
                 type: GET_FILTERED,
@@ -262,7 +264,7 @@ export const conductorAsignado = (info) => {
     console.log(info)
     return async (dispatch) => {
         try {
-            const { data } = await axios.put(`https://vamosappserver.onrender.com/trips/reserves/update`, info);
+            const { data } = await axios.put(`http://localhost:3001/trips/reserves/update`, info);
             console.log(data)
             /* dispatch({
                 type: GET_FILTERED,
@@ -300,7 +302,6 @@ export const passengerOrder = (data) => {
         }
     }
 }
-
 
 export const ratingOrder = (data) => {
     return async (dispatch) => {
@@ -340,6 +341,38 @@ export const airportFilter = (data) => {
         }
     }
 }
+export const getTripsById = (id) => {
+    console.log(id)
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(`http://localhost:3001/trips/tripId/${id}`)
+            console.log(data)
+            return dispatch({
+                type: GET_TRIPS_BY_ID,
+                payload: data
+            })
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+}
+export const postReview = (info) => {
+    /* info.driverId='46d639a7-5468-495b-b9a7-f666517d3bfb' */
+    console.log(info)
+    return async (dispatch) => {
+        const { data } = await axios.post(`http://localhost:3001/review/create`, info);
+        console.log(data)
+        try {
+            return dispatch({
+                type: POST_REVIEW,
+                payload: data
+            })
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+}
+
 
 
 

@@ -105,7 +105,7 @@ router.put('/trips/reserves/update',setDriverHandler);
 router.get('/trips/completed', getTripsCompletedHandler);//
 router.get('/trips/pending', getTripsPendingHandler);
 
-router.get('/trips/:id', getTripsByIdHandler)
+router.get('/trips/tripId/:id', getTripsByIdHandler)
 
 router.post('/send-mail', sendMailHandler)
 

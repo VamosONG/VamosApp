@@ -13,7 +13,7 @@ const postUser = async ({ name, surname, email, phone, dni }) => {
 
         return newUser;
     } catch (error) {
-        throw new Error(error.message)
+        throw new Error(`Error al crear el usuario ${error.message}`)
     }
 }
 

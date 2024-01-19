@@ -6,6 +6,7 @@ const getTripById = async (id) => {
     try {
         const trip = await Trip.findByPk(id);
 
+
         if (!trip) {
             throw new Error(`Error, no existe viaje con id ${id} en BD.`)
         }

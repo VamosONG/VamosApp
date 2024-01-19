@@ -53,9 +53,10 @@ module.exports = (sequelize) => {
             allowNull: false,
             
         },
-        idMP: {
-            type: DataTypes.STRING
-        },
+       /*  idMP: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        }, */
         stateOfTrip: {
             type: DataTypes.STRING, 
             allowNull: true,

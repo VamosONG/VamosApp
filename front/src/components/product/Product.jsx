@@ -15,7 +15,7 @@
 
 //     const createPreference = async () => {
 //         try {
-//           const response = await axios.post("https://vamosappserver.onrender.com/merpago/create", 
+//           const response = await axios.post("http://localhost:3001/merpago/create", 
           
 //           {
 //             items: [
@@ -89,7 +89,7 @@ const Product = () => {
     const [preferenceId, setPreferenceId] = useState(null);
     const createPreference = async () => {
         try {
-          const response = await axios.post("https://vamosappserver.onrender.com/merpago/create", { 
+          const response = await axios.post("http://localhost:3001/merpago/create", { 
             titulo: "Viaje",
             price: 100,
             quantity: 1,
