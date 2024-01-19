@@ -23,12 +23,12 @@ const Home = () => {
 
     return (
         <>
-        {/* <Link to='/review&reseña'>
+        <Link to='/review&reseña'>
         <Button>
             
             ReviewAndReseña
         </Button>
-        </Link> */} {/* No me borren esta vaina, después le encontraré un lugar */}
+        </Link> {/* No me borren esta vaina, después le encontraré un lugar */}
         <Box
         h='100vh'
     

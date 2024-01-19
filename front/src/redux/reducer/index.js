@@ -27,7 +27,7 @@ const initialState = {
     conductoresFiltrados:[],
 
 
-    tripsById:[]
+    tripsById:[],
 
     trip:[]
 
