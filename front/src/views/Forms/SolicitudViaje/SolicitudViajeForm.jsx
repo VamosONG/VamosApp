@@ -106,20 +106,17 @@ function SolicitudViajeForm() {
 
 
                 htmlMode: true
-            }).then(async (result) => {
-                if (result.isConfirmed) {
-                    await handlePayment()
-                    // await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
-                    // Swal.fire({
-                    //     title: "Viaje reservado",
-                    //     text: "Simulando que se abonó..",
-                    //     icon: "success"
-                    // });
-                }
-            })
-        }
-    }, [infoConfirmacionViaje, dispatch, confirmationText]);
-    ;
+             }).then(async(result) => {
+              if (result.isConfirmed) {
+                  await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
+                Swal.fire({
+                  title: "Viaje reservado",
+                  text: "Simulando que se abonó..",
+                  icon: "success"
+                });
+            }})}
+          }, [infoConfirmacionViaje, dispatch, confirmationText]);
+        ;
 
 
 
