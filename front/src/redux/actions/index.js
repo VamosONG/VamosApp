@@ -3,7 +3,6 @@ import choferes from '../../utils/chofer'
 
 import { DELETE_DRIVER,GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA } from './action.types';
 
-
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE = "PAGINATE"
 export const GET_ALL_CONDUCTORES = "GET_ALL_CONDUCTORES"
@@ -21,7 +20,6 @@ export const GET_FILTERED = 'GET_FILTERED'
 export const GET_TRIPS_BY_ID = 'GET_TRIPS_BY_ID'
 export const POST_REVIEW = 'POST_REVIEW'
 
-
 export const getAllConductores = () => {
     return async (dispatch) => {
         try {
@@ -36,7 +34,6 @@ export const getAllConductores = () => {
             throw error;
         }
     }
-
 
 }
 
@@ -103,6 +100,9 @@ export const postNewViaje = (infoViaje) => {
     console.log(infoViaje)
     return async (dispatch) => {
         try {
+
+            /* const { data } = await axios.post(`https://vamosappserver.onrender.com/offer/create`, infoViaje); */
+
             const { data } = await axios.post(`http://localhost:3001/offer/create`, infoViaje);
             console.log(data)
             await dispatch({
@@ -166,7 +166,6 @@ export const getCanceledTrips = () =>{
         }
     }
 }
-
 
 export const postNewUser = (form) => {
     console.log(form);
@@ -304,7 +303,6 @@ export const passengerOrder = (data) => {
     }
 }
 
-
 export const ratingOrder = (data) => {
     return async (dispatch) => {
         try {
@@ -374,6 +372,7 @@ export const postReview = (info) => {
         }
     }
 }
+
 
 
 

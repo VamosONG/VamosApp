@@ -17,6 +17,7 @@
     "@mercadopago/sdk-react": "^0.0.16",
     "axios": "^1.6.5",
     "cloudinary": "^1.41.2",
+    "firebase": "^10.7.1",
     "exceljs": "^4.4.0",
     "framer-motion": "^10.17.12",
     "react": "^18.2.0",
