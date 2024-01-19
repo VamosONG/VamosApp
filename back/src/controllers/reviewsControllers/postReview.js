@@ -1,4 +1,5 @@
-const getReserves = require('../filtersControllers/getReserves')
+const { User, Trip, Review, Driver } = require('../../dataBase');
+const getPendingTrips = require('../../handlers/filtersHandlers/getTripsPendingHandler');
 
 const postReview = async (userId, driverId, date, qualification, comments, tripId) => {
     try {
@@ -8,10 +9,10 @@ const postReview = async (userId, driverId, date, qualification, comments, tripI
             throw new Error('Usuario no encontrado.');
         }
 
-        const reservedTrips = await getReserves();
+        const pendingTrips = await getPendingTrips();
 
-        if (reservedTrips.length === 0) {
-            throw new Error('No tienes un viaje reservado para dejar una reseña.');
+        if (pendingTrips.length === 0) {
+            throw new Error('No tienes un viaje pendiente para dejar una reseña.');
         }
 
         const trip = await Trip.findByPk(tripId);
@@ -20,7 +21,7 @@ const postReview = async (userId, driverId, date, qualification, comments, tripI
             throw new Error('No se encontró el viaje asociado a la revisión.');
         }
 
-        if (trip.stateOfTrip !== 'reserved') {
+        if (trip.stateOfTrip !== 'pending') {
             throw new Error('No puedes dejar una revisión en este momento.');
         }
 

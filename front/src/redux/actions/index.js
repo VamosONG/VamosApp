@@ -95,8 +95,9 @@ export const deleteDriverAction = (id) => {
 
 export const postNewViaje = (infoViaje) => {
 
-    infoViaje.userId= "3027b2fa-4997-4068-9f6d-c847baa02291"
-
+    infoViaje.userId= "c9f86a72-c6b4-4ac2-9b31-0d8eaee8b23b"
+    //infoViaje.userId= "74c99ae0-61f9-4d85-bcb6-fcf680183c48" //(con permisos de admin)
+    console.log(infoViaje)
     return async (dispatch) => {
         try {
 
@@ -341,12 +342,14 @@ export const airportFilter = (data) => {
     }
 }
 export const getTripsById = (id) => {
+    console.log(id)
     return async (dispatch) => {
-        const endpoint= 'http://localhost:3001/trips/tripsById'
         try {
+            const { data } = await axios.get(`http://localhost:3001/trips/tripId/${id}`)
+            console.log(data)
             return dispatch({
                 type: GET_TRIPS_BY_ID,
-                payload: id
+                payload: data
             })
         } catch (error) {
             throw new Error(error);
@@ -354,11 +357,15 @@ export const getTripsById = (id) => {
     }
 }
 export const postReview = (info) => {
+    /* info.driverId='46d639a7-5468-495b-b9a7-f666517d3bfb' */
+    console.log(info)
     return async (dispatch) => {
+        const { data } = await axios.post(`http://localhost:3001/review/create`, info);
+        console.log(data)
         try {
             return dispatch({
                 type: POST_REVIEW,
-                payload: info
+                payload: data
             })
         } catch (error) {
             throw new Error(error);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getTripsById } from "../../redux/actions";
+import { getTripsById, postReview } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Card, CardBody, CardHeader, Flex, Heading, Stack, StackDivider,Text, Textarea } from "@chakra-ui/react";
 
@@ -7,7 +7,8 @@ const ReviewAndReseña=()=> {
 
     const dispatch= useDispatch()
     const tripsById = useSelector((state) => state.tripsById)
-    const tripsByIdPrueba=[1/* ,2,3 */]
+    console.log(tripsById)
+    
 
     const [input,setInput]=useState({
         userId:"",
@@ -19,10 +20,10 @@ const ReviewAndReseña=()=> {
     })
     
     
-    const id = "3027b2fa-4997-4068-9f6d-c847baa02291"
+    const id = "c9f86a72-c6b4-4ac2-9b31-0d8eaee8b23b"
     useEffect(() => {
         dispatch(getTripsById(id))
-    }, []);
+    }, [dispatch]);
 
     const [rating, setRating] = useState(0);
 
@@ -40,11 +41,11 @@ const ReviewAndReseña=()=> {
     const handleSubmit=()=>{
       setInput({
           ...input,
-          userId:"3027b2fa-4997-4068-9f6d-c847baa02291",
-          driverId:"1ea150d6-9fa0-40cb-bb38-9493a0969e6f",
-          date:"2024-01-26",
+          userId:"c9f86a72-c6b4-4ac2-9b31-0d8eaee8b23b",
+          driverId:tripsById.driverId/* '46d639a7-5468-495b-b9a7-f666517d3bfb' */,
+          date:tripsById.date,
           qualification:rating,
-          tripId:"0642a055-2d76-425a-9b04-a1a67e456b69"
+          tripId:tripsById.id
         })
         dispatch(postReview(input))
     }
@@ -57,7 +58,7 @@ const ReviewAndReseña=()=> {
         /* height="100vh" */
         direction="column"
       >
-        {tripsByIdPrueba.map((trip, index) => (
+        {tripsById.map((trip, index) => (
             <Card width="md">
             <CardHeader>
               <Heading size='md'>Reseña de tu viaje</Heading>
@@ -70,7 +71,7 @@ const ReviewAndReseña=()=> {
                     Ruta
                   </Heading>
                   <Text pt='2' fontSize='sm'>
-                    Aeropuerto Talara - Decameron {/* Aquí debería colocar variables origin destination */}
+                    {trip.origin}{"----->"}{trip.destination} {/* Aquí debería colocar variables origin destination */}
                   </Text>
                 </Box>
                 <Box>
@@ -78,7 +79,7 @@ const ReviewAndReseña=()=> {
                     Fecha - Hora
                   </Heading>
                   <Text pt='2' fontSize='sm'>
-                    05/01/2024   -    20:30 hs {/* Aquí debería colocar variables date hour */}
+                  {tripsById.date}{" - "}{tripsById.hour} {/* Aquí debería colocar variables date hour */}
                   </Text>
                 </Box>
                 <Box>
@@ -86,7 +87,7 @@ const ReviewAndReseña=()=> {
                     Conductor
                   </Heading>
                   <Text pt='2' fontSize='sm'>
-                    Juan Montaron {/* Aquí debería colocar variables driverName */}
+                    Juan Montaron 
                   </Text>
                 </Box>
                 
@@ -126,7 +127,7 @@ const ReviewAndReseña=()=> {
               </Stack>
             </CardBody>
           </Card>
-        ))}
+         ))} 
 
         
   
