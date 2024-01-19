@@ -130,6 +130,7 @@ export const postNewViaje = (infoViaje) => {
         }
     }
 }
+
   return async (dispatch) => {
     try {
       const { data } = await axios.post(
@@ -146,8 +147,7 @@ export const postNewViaje = (infoViaje) => {
       /* throw new Error(error); */
       console.log(error.message);
     }
-  };
-};
+
 
 export const getReservedTrips = () => {
   return async (dispatch) => {
@@ -179,6 +179,7 @@ export const getPendingTrips = () => {
       console.log(error);
       alert("error");
     }
+  }
 }
 export const getCanceledTrips = () =>{
     return async(dispatch)=> {
@@ -188,7 +189,7 @@ export const getCanceledTrips = () =>{
             console.log(data);
   };
 };
-
+}
 /* export const getAllConductores=()=>{
     try {
 
