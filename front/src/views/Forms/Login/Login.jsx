@@ -1,8 +1,8 @@
 // HOOKS
+import { useDispatch} from "react-redux";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
-//DEPENDENCIES
-import axios from "axios";
 // STYLES
 import {
   Container,
@@ -18,9 +18,9 @@ import {
 } from "@chakra-ui/react";
 // AUTH FIREBASE
 import { useAuth } from "../../../context/authContext";
-import NavBar from "../../../components/navBar/NavBar";
-import { useDispatch, useSelector } from "react-redux";
+//ACTIONS
 import { getUserByEmail } from "../../../redux/actions";
+
 
 
 
@@ -35,7 +35,7 @@ const LoginForm = ({ onSwitchForm }) => {
   const handleClick = () => setShow(!show);
 
   const dispatch= useDispatch()
-  const {role} = useSelector(state=> state)
+  const navigate = useNavigate()
 
 
   const [input, setInput] = useState({
@@ -57,6 +57,7 @@ const LoginForm = ({ onSwitchForm }) => {
     event.preventDefault();
     try {
       await auth.login(input.email, input.password);
+      navigate('/landing')
       if(auth.user.operationType === "signIn"){
        dispatch( getUserByEmail({email:  input.email}))
        console.log(input.email);
@@ -71,20 +72,20 @@ const LoginForm = ({ onSwitchForm }) => {
     try {
       const google= await auth.loginWithGoogle();
       console.log(google);
-      //const userCreated = await axios.post(`http://localhost:3001/user/create`, input)
-      //console.log(userCreated);
+      navigate("/formLogInWithGoogle")
     } catch (error) {
       console.error("Error al iniciar sesión con Google:", error.message);
     }
   };
 
-  // const handleLogOut = async() => {
-  //   try {
-  //     await auth.logOut()
-  //   } catch (error) {
-  //     console.log("error");
-  //   }
-  // }
+  const handleLogOut = async() => {
+    try {
+      await auth.logOut()
+      navigate("/landing")
+    } catch (error) {
+      console.log("error");
+    }
+  }
 
 
   return (
@@ -133,6 +134,12 @@ const LoginForm = ({ onSwitchForm }) => {
       <Button colorScheme="green" onClick={handleSubmit}>
         Entrar
       </Button>
+
+      <Button colorScheme="green" onClick={handleLogOut}>
+        Salir
+      </Button>
+     
+
       <Container>
         <Text>
           ¿No tienes cuenta?{" "}
@@ -143,6 +150,7 @@ const LoginForm = ({ onSwitchForm }) => {
             Continuar con Google
           </Button>
         </Text>
+
       </Container>
     </Stack>
    );

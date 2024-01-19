@@ -12,6 +12,7 @@ import SlideEx from "../../views/Forms/ViewForm";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from '@chakra-ui/react';
 import MobileMenu from "./mobileMenu/mobileMenu";
+import LogOut from "../../views/Forms/LogOut/logout";
 //import LoginForm from "../../views/Forms/Login/Login";
 
 const NavBar = () => {
@@ -20,7 +21,7 @@ const NavBar = () => {
   // const esUsuario = useSelector((state) => state.esUsuario)
 
   const {currentUser}= useSelector((state) => state)
-  const [isMobile] = useMediaQuery('(max-width: 768px)');
+  // const [isMobile] = useMediaQuery('(max-width: 768px)');
   return (
     <Flex as="nav" bg="#009ED1" alignItems="center" justify="space-between" h="100px" w='100%' >
       {/* {!isMobile ? ( */}
@@ -48,16 +49,17 @@ const NavBar = () => {
                 </Box>
               ) :( null)
               )}
+              
 
-              {/* {
-                esAdmin ? */}
-                  (<Box>
+              {currentUser.admin &&
+              currentUser.admin 
+              ? (<Box>
                     <Link to="/detail">
                       <Button colorScheme="#009ED1">Conductores</Button>
                     </Link>
                   </Box>)
-                  {/* : null
-              } */}
+              : null
+              } 
 
               <Box>
                 <Flex>
@@ -80,9 +82,8 @@ const NavBar = () => {
 
           <AvatarGroup spacing="1rem" mx="20px">
             <Avatar bg="#009ED1" />
-            {/* <SlideEx /> */}
-
           </AvatarGroup>
+         <SlideEx />
         </>
         {/* //) : */}
        {/* // <MobileMenu esAdmin={esAdmin} esUsuario={esUsuario} />} */}
