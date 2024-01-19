@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { postNewViaje, viajeConfirmado } from "../../../redux/actions";
 import { useEffect, useState } from "react";
 
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import axios from 'axios';
 
 import { Box, Center, useDisclosure } from '@chakra-ui/react'
@@ -18,16 +17,15 @@ import { renderToString } from 'react-dom/server';
 
 
 
-
 function SolicitudViajeForm() {
-
+    
     const dispatch = useDispatch();
-
+    
     const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
     console.log(infoConfirmacionViaje)
-
-
-
+    
+    
+    
     const [input, setInput] = useState({
         origin: "",
         destination: "",
@@ -35,6 +33,29 @@ function SolicitudViajeForm() {
         hour: "",
         quantityPassengers: "",
     });
+    
+    /////////*****************MERCADOPAGO*************************************************************** */
+    
+    
+    
+    
+        const product = {
+            viaje:`${input.origin}${input.destination}`, 
+            price: 100,
+            quantityPassengers: input.quantityPassengers,
+          }
+        
+        const handlePayment = async (/*product*/) => {
+            const response = await axios.post("http://localhost:3001/mepago/create-order", product)
+    
+            window.location.href = response.data
+        };
+    
+    
+    
+    
+    
+    /////////*****************MERCADOPAGO*************************************************************** */
 
     
 
@@ -47,34 +68,9 @@ function SolicitudViajeForm() {
         </div>
     );
 
-    useEffect(() => {
-        initMercadoPago('TEST-42b04001-0641-4889-8b14-97f17f509594', {
-            locale: "es-PE"
-        });
-    }, []);
 
-    const createPreference = async () => {
-        try {
-          const response = await axios.post("http://localhost:3001/merpago/create", {
-            origin: input.origin,
-            destination: input.destination,
-            price: 100, // Cambia esto según el precio real
-            quantityPassengers: input.quantityPassengers,
-          });
+
     
-          const { id } = response.data;
-          return id;
-        } catch (error) {
-          console.log(error);
-        }}
-
-        const handlePayment = async () => {
-            var mpid = await createPreference();
-            if (id) {
-              // Redirigir a la página de pago de MercadoPago
-              window.location.href = `https://www.mercadopago.com.ar/checkout/v1/redirect?preference_id=${mpid}`;
-            }
-        };
 
           useEffect(() => {
             if (infoConfirmacionViaje.id) {
