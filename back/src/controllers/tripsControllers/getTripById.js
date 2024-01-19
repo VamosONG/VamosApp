@@ -3,24 +3,17 @@ const { Trip } = require('../../dataBase');
 
 const getTripById = async (id) => {
     
-    console.log(id)
     try {
-        const trip = await Trip.findAll({
-            where: { userId: id },
-            include: [
-                // Include any associations you want to retrieve, e.g., User, Driver
-                // { model: User },
-                // { model: Driver },
-            ],
-        });
+        const trip = await Trip.findByPk(id);
+
 
         if (!trip) {
-            return null
+            throw new Error(`Error, no existe viaje con id ${id} en BD.`)
         }
 
         return trip;
     } catch (error) {
-        throw error
+        throw new Error(`Error al obtener viaje: ${error.message}`)
     }
 };
 

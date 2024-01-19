@@ -9,6 +9,8 @@ const getUsersHandler = require('../handlers/userHandlers/getUsersHandler')
 const postUserHandler = require('../handlers/userHandlers/postUserHandler')
 const updateUserHandler = require('../handlers/userHandlers/updateUserHandler')
 const deleteUserHandler = require('../handlers/userHandlers/deleteUserHandler')
+const getUserByIdHandler = require('../handlers/userHandlers/getUserByIdHandler')
+const getUserByEmailHandler = require('../handlers/userHandlers/getUserByEmailHandler')
 
 const getDriversHandler = require('../handlers/driverHandlers/getDriversHandler')
 const postDriverHandler = require('../handlers/driverHandlers/postDriverHandler')
@@ -48,6 +50,7 @@ const getTripsPendingHandler = require('../handlers/filtersHandlers/getTripsPend
 
 const postPreference = require('../controllers/mercadoPagoController/postPreference');
 const getTripsByIdHandler = require('../handlers/tripHandlers/getTripsByIdHandler');
+const sendMailHandler = require('../utils/mailing/sendMailHandler');
 
 const router = Router();
 
@@ -60,6 +63,9 @@ router.get('/user', getUsersHandler);
 router.post('/user/create', postUserHandler);
 router.patch('/user/update', updateUserHandler);
 router.delete('/user', deleteUserHandler);
+router.post('/user/id', getUserByIdHandler); //Busca un usuario por ID.
+router.post('/user/email', getUserByEmailHandler); //Busca un usuario por Email.
+
 
 //Cambio a metodo PATCH: Mas versatil para actulizar campos individualmente.
 //Add ID al final para recibirlo por params.
@@ -101,6 +107,7 @@ router.get('/trips/pending', getTripsPendingHandler);
 
 router.get('/trips/tripId/:id', getTripsByIdHandler)
 
+router.post('/send-mail', sendMailHandler)
 
 router.post('/merpago/create', postPreference);
 
