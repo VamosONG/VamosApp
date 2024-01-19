@@ -16,27 +16,30 @@ import { useSelector, useDispatch } from 'react-redux'
 import { deleteDriverAction, getAllConductores } from '../../redux/actions'
 import { useEffect, useRef, useState } from 'react'
 
-import {
-    AlertDialog,
-    AlertDialogBody,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogContent,
-    AlertDialogOverlay,
-    AlertDialogCloseButton,
-} from '@chakra-ui/react'
 import Swal from 'sweetalert2'
 import UpdateDriverData from '../Forms/ChoferFormulario/UpdateChoferForm'
 import ViewBtnUpdateDriver from '../Forms/ViewForms/ViewUpdateDriverForm'
 import ViewBtnDetailDriver from './DetailDriver/ViewBtnDetailDriver'
 import OrderFilterAlphabetical from './filtersData/orderFilter'
+import DriverState from './DetailDriver/driverState'
+import driver from '../../../../Back/src/models/driver'
 
 
 const DriverTableView = () => {
     const driverData = useSelector((state) => state.conductores)
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        dispatch(getAllConductores())
+    },[])
+
+    // const driverStateShow = driverData.driverState;
     
+    const stateNow = () => {
+        
+    }
+
     const deleteDriver = (id) => {
         Swal.fire({
             title: "¿Seguro quieres eliminar?",
@@ -87,6 +90,7 @@ const DriverTableView = () => {
                         <Th>Max. Psjr</Th>
                         <Th >Aciones</Th>
                         <Th >Detalles</Th>
+                        <Th >Estado</Th>
                     </Tr>
                 </Thead>
                 <Tbody >
@@ -125,7 +129,8 @@ const DriverTableView = () => {
                                         carPatent={driver.carPatent}
                                         carSoat={driver.carSoat}
                                         circulationPermit={driver.circulationPermit}
-                                        capacityPassengers={driver.capacityPassengers} />
+                                        capacityPassengers={driver.capacityPassengers}
+                                        driverState={driver.driverState} />
                                 </Flex>
                             </Td>
                             <Td>
@@ -148,6 +153,8 @@ const DriverTableView = () => {
                                         capacityPassengers={driver.capacityPassengers}
                                     />
                             </Td>
+
+                            <Td> {!driver.driverState ? ('Descanso') : ('Activo')} </Td>
                         </Tr>
                     ))}
 
