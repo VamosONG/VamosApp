@@ -57,10 +57,10 @@ const LoginForm = ({ onSwitchForm }) => {
     event.preventDefault();
     try {
       await auth.login(input.email, input.password);
-      navigate('/landing')
+      dispatch(getUserByEmail({email:  input.email}))
       if(auth.user.operationType === "signIn"){
-       dispatch( getUserByEmail({email:  input.email}))
-       console.log(input.email);
+        navigate('/landing')
+      
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error.message);

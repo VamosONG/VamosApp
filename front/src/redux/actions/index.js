@@ -380,7 +380,7 @@ export const getUserByEmail = (email) => {
     console.log(email)
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`http://localhost:3001/`, email);
+            const { data } = await axios.post(`http://localhost:3001/user/email`, email);
             console.log(data)
             dispatch({
                 type: USER_BY_EMAIL,
