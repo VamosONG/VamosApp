@@ -99,7 +99,7 @@ router.put('/trips/reserves/update',setDriverHandler);
 router.get('/trips/completed', getTripsCompletedHandler);//
 router.get('/trips/pending', getTripsPendingHandler);
 
-router.get('/trips/:id', getTripsByIdHandler)
+router.get('/trips/tripId', getTripsByIdHandler)
 
 
 router.post('/merpago/create', postPreference);
