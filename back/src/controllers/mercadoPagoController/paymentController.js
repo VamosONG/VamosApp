@@ -23,58 +23,45 @@ const createOrder = async (req, res) => {
           // picture_url: "",
         }],
       back_urls: {
+        // success: "http://localhost:5173/paymentStatus",
         success: "http://localhost:3001/mepago/success",
         failure: "http://localhost:3001/mepago/fail",
         pending: "http://localhost:3001/mepago/pending",
       },  
-      notification_url: "http://localhost:3001/mepago/webhook",
+      notification_url: "https://7ea7-186-11-90-154.ngrok-free.app/mepago/webhook",
       
-      auto_return: "approved"
+      auto_return: "all"
       }
 
       const respuesta = await mercadopago.preferences.create(preference);
      
       res.status(200).json(respuesta.response.init_point);
 
-    // const result = await mercadopago.preferences.create({
-    //   items: [
-    //     {
-    //       title: "Laptop",
-    //       unit_price: 500,
-    //       currency_id: "PEN",
-    //       quantity: 1,
-    //     },
-    //   ],
-    //   notification_url: "https://e720-190-237-16-208.sa.ngrok.io/webhook",
-    //   back_urls: {
-    //     success: "http://localhost:3001/success",
-    //     // pending: "https://e720-190-237-16-208.sa.ngrok.io/pending",
-    //     // failure: "https://e720-190-237-16-208.sa.ngrok.io/failure",
-    //   },
-    // });
-
-    // console.log(result);
-
-    // // res.json({ message: "Payment creted" });
-    // res.json(result.body);
+    
   } catch (error) {
     return res.status(500).json({ message: "Something goes wrong" });
   }
+
 };
 
  const receiveWebhook = async (req, res) => {
   try {
     const payment = req.query;
-    console.log("payment",payment);
+    // const {date_created, user_id} = req.body
+
+  //  console.log(date_created, user_id);
+
+
     if (payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
-      console.log("data,",data);
+    
+   
       //aqui se guarda en la base de datos
     }
 
     res.sendStatus(204);
   } catch (error) {
-    console.log(error);
+    console.error("Error:", error);
     return res.status(500).json({ message: "Something goes wrong" });
   }
 };

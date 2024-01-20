@@ -22,6 +22,7 @@ import DriverTableView from './views/driversViewAdmin/driverTable';
 import ReserveComfirmed from './views/Reserve/ReserveConfirmed';
 import ReserveReject from './views/Reserve/ReserveReject';
 import ReviewAndReseña from './components/ReviewAndReseña/reviewAndReseña';
+import paymentStatus from './views/payments/paymentStatus';
 
 function App() {
 
@@ -44,6 +45,8 @@ function App() {
         <Route path='/reserve/rejected' element={<ReserveReject/>}/>
 
         <Route path='/review&reseña' element={<ReviewAndReseña/>}/>
+
+        <Route path='/paymentStatus' element={<paymentStatus/>}/>
 
 
       </Routes>
