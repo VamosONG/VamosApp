@@ -32,22 +32,20 @@ function App() {
       <NavBar/>
 
       <Routes>
+        <Route path='/' element={<HomeComponent/>}/> 
+        {/* Renderizando HomeComponent en la ruta para evitar pisar cada ves que se abre una pestaña */}
         <Route path='/home' element={<LoginForm/>}/>
         <Route path= '/about' element={<About/>} />
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
         <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
-       
         <Route path='/detail' element={<DriverTableView/>}/>
         <Route path='/solicitud' element={<Solicitud/>}/>
         <Route path='/product' element={<Product/>}/>
         <Route path='/reserve/confirmed' element={<ReserveComfirmed/>}/>
         <Route path='/reserve/rejected' element={<ReserveReject/>}/>
-
         <Route path='/review&reseña' element={<ReviewAndReseña/>}/>
-
-
       </Routes>
-      <HomeComponent/>
+      {/* <HomeComponent/>  */}
       {/* <Paginado/> */}
 
       <Footer/>

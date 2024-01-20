@@ -75,7 +75,7 @@ const DriverTableView = () => {
 
     return (
 
-        <TableContainer  >
+        <TableContainer mt={'100px'} >
             <Flex bg='gray.200' color='#000' justify={'center'} ><OrderFilterAlphabetical/></Flex>
             <Table variant='simple' >
                 <TableCaption>Conductores registrados</TableCaption>

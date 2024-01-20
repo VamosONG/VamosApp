@@ -24,8 +24,8 @@ const DriverDetail = (props) => {
               {props.name} 
             </Badge> 
           </Heading>
-          <Flex gap='4' flexDirection={{base: 'column', md: 'row'}}>
-            <Flex boxShadow={'0 0px 20px black'} borderRadius='lg'>
+          <Flex gap='4' flexDirection={{base: 'column', md: 'row'}} w='100%' >
+            <Flex boxShadow={'0 0px 20px black'} borderRadius='lg' w='100%' >
               <Image
                 src={props.driverImg}
                 alt={props.name}
