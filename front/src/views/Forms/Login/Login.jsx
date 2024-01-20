@@ -1,7 +1,8 @@
 // HOOKS
+import { useDispatch} from "react-redux";
 import { useState } from "react";
-//DEPENDENCIES
-import axios from "axios";
+import { useNavigate } from "react-router";
+
 // STYLES
 import {
   Container,
@@ -17,6 +18,9 @@ import {
 } from "@chakra-ui/react";
 // AUTH FIREBASE
 import { useAuth } from "../../../context/authContext";
+//ACTIONS
+import { getUserByEmail } from "../../../redux/actions";
+
 
 
 
@@ -24,11 +28,14 @@ const LoginForm = ({ onSwitchForm }) => {
 
   // Auth de Firebase
   const auth = useAuth();
-  const {displayName, uid, email}= auth.user
+  const {displayName, uid, operationType}= auth.user
   console.log(displayName, uid);
   // Estados Locales para form de Login
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
+
+  const dispatch= useDispatch()
+  const navigate = useNavigate()
 
 
   const [input, setInput] = useState({
@@ -50,6 +57,11 @@ const LoginForm = ({ onSwitchForm }) => {
     event.preventDefault();
     try {
       await auth.login(input.email, input.password);
+      dispatch(getUserByEmail({email:  input.email}))
+      if(auth.user.operationType === "signIn"){
+        navigate('/landing')
+      
+      }
     } catch (error) {
       console.error("Error al iniciar sesión:", error.message);
     }
@@ -60,20 +72,21 @@ const LoginForm = ({ onSwitchForm }) => {
     try {
       const google= await auth.loginWithGoogle();
       console.log(google);
-      //const userCreated = await axios.post(`http://localhost:3001/user/create`, input)
-      //console.log(userCreated);
+      navigate("/formLogInWithGoogle")
     } catch (error) {
       console.error("Error al iniciar sesión con Google:", error.message);
     }
   };
 
-  // const handleLogOut = async() => {
-  //   try {
-  //     await auth.logOut()
-  //   } catch (error) {
-  //     console.log("error");
-  //   }
-  // }
+  const handleLogOut = async() => {
+    try {
+      await auth.logOut()
+      navigate("/landing")
+    } catch (error) {
+      console.log("error");
+    }
+  }
+
 
   return (
     <Stack
@@ -122,6 +135,11 @@ const LoginForm = ({ onSwitchForm }) => {
         Entrar
       </Button>
 
+      <Button colorScheme="green" onClick={handleLogOut}>
+        Salir
+      </Button>
+     
+
       <Container>
         <Text>
           ¿No tienes cuenta?{" "}
@@ -132,6 +150,7 @@ const LoginForm = ({ onSwitchForm }) => {
             Continuar con Google
           </Button>
         </Text>
+
       </Container>
     </Stack>
    );
