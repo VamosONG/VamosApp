@@ -1,20 +1,21 @@
 import { useContext, createContext, useState, useEffect } from "react";
-import {auth} from "../firebase/firebase.config"
+import { auth } from "../firebase/firebase.config"
 
-import { 
+import {
     onAuthStateChanged,
-    createUserWithEmailAndPassword ,
-    signInWithEmailAndPassword, 
-    GoogleAuthProvider, 
-    signInWithPopup, 
-    signOut} from "firebase/auth"
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut
+} from "firebase/auth"
 
 
 export const authContext = createContext();
 
 export const useAuth = () => {
     const context = useContext(authContext)
-    if(!context){
+    if (!context) {
         console.log("no context");
     } else {
         return context
@@ -22,23 +23,23 @@ export const useAuth = () => {
 
 }
 
-export function AuthProvider ({children}){
+export function AuthProvider({ children }) {
 
-    const [user, setUser]= useState("")
-    useEffect(()=> {
-        const suscribed= onAuthStateChanged(auth, (currentUser)=>{
-            if(!currentUser){
+    const [user, setUser] = useState("")
+    useEffect(() => {
+        const suscribed = onAuthStateChanged(auth, (currentUser) => {
+            if (!currentUser) {
                 console.log("no hay usuario login");
                 setUser("")
-            } else{
+            } else {
                 setUser(currentUser)
                 console.log(currentUser);
                 currentUser
-                
+
             }
         })
         return () => suscribed()
-    },[])
+    }, [])
 
     // const render = () => {
     //     if (!user) {
@@ -52,36 +53,43 @@ export function AuthProvider ({children}){
     //     }
     //   }
 
- 
-    const register = async ( email,password) => {
-        const response = await createUserWithEmailAndPassword (auth ,email, password)
+
+    const register = async (email, password) => {
+        const response = await createUserWithEmailAndPassword(auth, email, password)
         console.log(response);
     }
 
-    const login = async(email, password) => {
-        const response = await signInWithEmailAndPassword( auth ,email, password)
+    const login = async (email, password) => {
+        const response = await signInWithEmailAndPassword(auth, email, password)
+        console.log(response);
+
+        // Extraigo el operationType par poder pasarle al componente login.
+        const { operationType, user } = response;
+
+        // Puedes hacer más cosas aquí si es necesario
+
+        return { operationType, user };
+    }
+
+    const loginWithGoogle = async () => {
+        const responseGoogle = new GoogleAuthProvider()
+        return signInWithPopup(auth, responseGoogle)
+    }
+
+    const logOut = async () => {
+        const response = await signOut(auth)
         console.log(response);
     }
 
-   const loginWithGoogle = async () => {
-    const responseGoogle= new GoogleAuthProvider()
-    return signInWithPopup (auth, responseGoogle)
-   } 
-
-   const logOut= async () => {
-    const response = await signOut(auth)
-    console.log(response);
-   } 
-    
-    return( <authContext.Provider
-    value={ {
-        register,
-        login,
-        loginWithGoogle,
-        logOut,
-        user,
-        // render
-    }}>
+    return (<authContext.Provider
+        value={{
+            register,
+            login,
+            loginWithGoogle,
+            logOut,
+            user,
+            // render
+        }}>
         {children}
-    </authContext.Provider>) 
+    </authContext.Provider>)
 }

@@ -10,12 +10,15 @@ import {
   TableCaption,
   TableContainer, Flex, Box, Link, Tooltip
 } from '@chakra-ui/react'
+import { useMediaQuery } from "@chakra-ui/react";
 import { BsEnvelopeArrowUp, BsWhatsapp } from "react-icons/bs";
+import DriverDetailMobile from './driverDetailMobile';
 
 
 const DriverDetail = (props) => {
+  const [isMobile] = useMediaQuery('(max-width: 640px)');
   return (
-    <Card boxSize='4xl' overflowX='scroll' w={{base: '20rem', md: '90vw'}}>
+    <Card boxSize='4xl' overflowX='scroll' w={{base: '25rem', md: '90vw'}}>
       <CardBody>
         <Stack mt='6' spacing='3'>
           <Heading bg='gray.200' py='2' px='4'  borderRadius='8' >
@@ -24,7 +27,7 @@ const DriverDetail = (props) => {
               {props.name} 
             </Badge> 
           </Heading>
-          <Flex gap='4' flexDirection={{base: 'column', md: 'row'}} w='100%' >
+          <Flex gap='4' flexDirection={{base: 'column', md: 'row'}} w='100%'>
             <Flex boxShadow={'0 0px 20px black'} borderRadius='lg' w='100%' >
               <Image
                 src={props.driverImg}
@@ -33,6 +36,7 @@ const DriverDetail = (props) => {
                 objectFit={'cover'}
               />
             </Flex>
+            {!isMobile ? (
             <Flex gap={4} w='100%' justify='center' m='0 auto' flexDirection={'column'}>
               <TableContainer w='auto' h='auto' >
                 <Table variant='striped' bg='gray.300'  >
@@ -102,6 +106,9 @@ const DriverDetail = (props) => {
                 </Table>
               </TableContainer>
             </Flex>
+            ) : (
+              <DriverDetailMobile {...props}/>
+            )}
 
           </Flex>
 

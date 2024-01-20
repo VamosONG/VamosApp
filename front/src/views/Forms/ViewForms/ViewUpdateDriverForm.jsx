@@ -1,28 +1,44 @@
 import { Box, Button, Collapse, useDisclosure, Tooltip } from '@chakra-ui/react'
 import { EditIcon, WarningIcon } from '@chakra-ui/icons'
 import UpdateDriverData from '../ChoferFormulario/UpdateChoferForm';
-import { useState } from 'react';
+import {
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+  } from '@chakra-ui/react'
 
 const ViewBtnUpdateDriver = (props) => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const onToggle = () => {
-        setIsOpen(!isOpen);
-    };
-
-    const closeFormEdit = () => {
-        setIsOpen(false);
-    };
-
+    const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <Box  >
             <Tooltip hasArrow label='Editar' bg='#009ED1' placement='right-end'>
 
-                <Button onClick={onToggle} bg='#009ED1'>   
+                <Button onClick={onOpen} bg='#009ED1'>   
                     <EditIcon />
                 </Button>
             </Tooltip>
-            <Collapse initialScale={0.7} direction='bottom' in={isOpen} style={{ zIndex: 10 }}>
+
+            <Modal isOpen={isOpen} onClose={onClose} size={{base: 'xl', md: 'auto'}} > 
+                <ModalOverlay />
+                <ModalContent justifyContent={'center'} size={{base: 'xl', md: 'auto'}} w={{base:'23rem', md: 'auto'}}>
+                    <ModalHeader>Modificar Datos del Conductor</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody display='flex' justifyContent={'center'} w='100%' >
+                    <UpdateDriverData {...props}  />
+                    </ModalBody>
+
+                    <ModalFooter>
+                        <Button colorScheme='blue' mr={3} onClick={onClose}>
+                            Close
+                        </Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
+            {/* <Collapse initialScale={0.7} direction='bottom' in={isOpen} style={{ zIndex: 10 }}>
                 <Box
                     h='auto'
                     mt='8'
@@ -33,9 +49,9 @@ const ViewBtnUpdateDriver = (props) => {
                     borderRadius={20}
                     zIndex={99}
                 >
-                    <UpdateDriverData {...props} closeFormEdit={closeFormEdit} />
+                    
                 </Box>
-            </Collapse>
+            </Collapse> */}
         </Box>
     )
 }

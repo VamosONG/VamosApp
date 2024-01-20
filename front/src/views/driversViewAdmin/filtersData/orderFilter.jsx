@@ -73,7 +73,7 @@ const OrderFilterAlphabetical = () => {
                             </Select>
                         </FormControl>
                     </Box>
-                    <Box>
+                    {/* <Box>
                         <FormControl>
                             <FormLabel>Estado</FormLabel>
                             <Select
@@ -83,7 +83,7 @@ const OrderFilterAlphabetical = () => {
                                 <option value='D'>Descanso</option>
                             </Select>
                         </FormControl>
-                    </Box>
+                    </Box> */}
 
                     {/* //Cuando se agregren review lo activo */}
                     {/* <Box>
