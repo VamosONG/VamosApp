@@ -31,7 +31,7 @@ const EditPrices = () => {
         setInput({
             airport:airport,
             zone:zone,
-            quantityPassengers,quantityPassengers,
+            quantityPassengers,
             value:Number(inputValue)
         })
     
