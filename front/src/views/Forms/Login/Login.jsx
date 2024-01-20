@@ -29,6 +29,7 @@ const LoginForm = ({ onSwitchForm }) => {
   // Auth de Firebase
   const auth = useAuth();
   const {displayName, uid, operationType}= auth.user
+  console.log('operaTypr ' + operationType);
   console.log(displayName, uid);
   // Estados Locales para form de Login
   const [show, setShow] = useState(false);
@@ -56,10 +57,10 @@ const LoginForm = ({ onSwitchForm }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await auth.login(input.email, input.password);
+      const {operationType} = await auth.login(input.email, input.password); //Destruturing del operationType de la funsion login
       dispatch(getUserByEmail({email:  input.email}))
-      if(auth.user.operationType === "signIn"){
-        navigate('/landing')
+      if(operationType === "signIn"){ //Modifique para refireccionar al home
+        navigate('/')
       
       }
     } catch (error) {

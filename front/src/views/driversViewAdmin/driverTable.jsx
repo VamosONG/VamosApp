@@ -21,6 +21,7 @@ import UpdateDriverData from '../Forms/ChoferFormulario/UpdateChoferForm'
 import ViewBtnUpdateDriver from '../Forms/ViewForms/ViewUpdateDriverForm'
 import ViewBtnDetailDriver from './DetailDriver/ViewBtnDetailDriver'
 import OrderFilterAlphabetical from './filtersData/orderFilter'
+import Paginado from '../../components/paginado/paginadoComponent'
 
 
 const DriverTableView = () => {
@@ -74,7 +75,7 @@ const DriverTableView = () => {
 
     return (
 
-        <TableContainer >
+        <TableContainer mt={'100px'} >
             <Flex bg='gray.200' color='#000' justify={'center'} ><OrderFilterAlphabetical/></Flex>
             <Table variant='simple' >
                 <TableCaption>Conductores registrados</TableCaption>
@@ -152,6 +153,7 @@ const DriverTableView = () => {
                                         carSoat={driver.carSoat}
                                         circulationPermit={driver.circulationPermit}
                                         capacityPassengers={driver.capacityPassengers}
+                                        driverState={driver.driverState}
                                     />
                             </Td>
 
@@ -163,7 +165,7 @@ const DriverTableView = () => {
                 </Tbody>
                 <Tfoot>
                     <Tr>
-                        <Th>#</Th>
+                    <Th>#</Th>
                         <Th>Zona</Th>
                         <Th>Nombre</Th>
                         <Th>Vehiculo</Th>
@@ -171,9 +173,12 @@ const DriverTableView = () => {
                         <Th>Max. Psjr</Th>
                         <Th >Aciones</Th>
                         <Th >Detalles</Th>
+                        <Th >Estado</Th>
                     </Tr>
                 </Tfoot>
             </Table>
+            {/* COMPONENTE DE PAGINADO */}
+            {/* <Paginado/>  */}
         </TableContainer>
 
     )

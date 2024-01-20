@@ -1,7 +1,7 @@
 import axios from 'axios';
 import choferes from '../../utils/chofer'
 
-import { DELETE_DRIVER,GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE } from './action.types';
+import { DELETE_DRIVER,GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE } from './action.types';
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE = "PAGINATE"
@@ -190,16 +190,16 @@ export const postNewUser = (form) => {
 }
 
 export const paginateConductores = (order) => {
-
+    console.log(order);
     return async (dispatch) => {
         try {
-
             dispatch({
                 type: PAGINATE,
                 payload: order
             })
         } catch (error) {
-            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            throw new Error(error);
+            //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
         };
     };
 };
@@ -326,7 +326,7 @@ export const stateOrder = (data) => {
     return async (dispatch) => {
         try {
             return dispatch({
-                type: FILTER_STATE,
+                type: ORDER_STATE,
                 payload: data
             })
         } catch (error) {

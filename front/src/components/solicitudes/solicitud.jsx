@@ -118,7 +118,7 @@ const Solicitud =()=> {
                 </Thead>
                 <Tbody >
                     {conductores?.map((driver, index) => (
-                        <Tr key={driver.id} >
+                        <Tr key={driver.id} bg={driver.driverState ? '#EEFFF5' : '#FFEEEE'}  >
                             <Td>{index + 1}</Td>
                             <Td>{driver.airports}</Td>
 
@@ -129,9 +129,13 @@ const Solicitud =()=> {
 
                             <Td justifyContent='center'  >
                                 <Flex gap={2} justifyContent={'center'}  >
-                                    <Tooltip hasArrow label='Seleccionar' bg='#009ED1' placement='left-start'>
-                                        <Button onClick={() => handleClick(driver.id)} bg='#009ED1'
-                                            fontSize='1.2rem' id={driver.id} >
+                                    <Tooltip hasArrow label='Seleccionar' 
+                                      bg='#009ED1' placement='left-start'>
+                                        <Button onClick={() => handleClick(driver.id)} 
+                                          bg='#009ED1'
+                                          fontSize='1.2rem' 
+                                          id={driver.id} 
+                                          isDisabled={!driver.driverState ? 'disabled' : null} >
                                             <AddIcon />
                                         </Button>
                                     </Tooltip>
@@ -155,7 +159,8 @@ const Solicitud =()=> {
                                         carPatent={driver.carPatent}
                                         carSoat={driver.carSoat}
                                         circulationPermit={driver.circulationPermit}
-                                        capacityPassengers={driver.capacityPassengers} />
+                                        capacityPassengers={driver.capacityPassengers}
+                                        driverState={driver.driverState} />
                             </Td>
                         </Tr>
                     ))}

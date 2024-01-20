@@ -18,7 +18,6 @@ const LogOut = () => {
           }
     }
 
-
     return (
         // import { MdBuild , MdCall } from "react-icons/md"
 

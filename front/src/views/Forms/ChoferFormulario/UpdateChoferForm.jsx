@@ -98,8 +98,10 @@ const UpdateDriverData = (props) => {
                 scrollMarginX="auto"
             >
                 <Box w='100%'>
-                    <Flex justify='center' gap='4' align='center'>
-                        <Text fontSize='4xl'>Modificar Datos de: {props.name}</Text>
+                    <Flex justify='space-between' gap='4' align='center'>
+                        <Flex gap='4'>
+
+                        <Text fontSize='4xl'>{props.name}</Text>
                         <Avatar
                             alignSelf='center' justifySelf='center'
                             border='1px solid black'
@@ -107,16 +109,17 @@ const UpdateDriverData = (props) => {
                             name={props.name}
                             src={props.driverImg}
                         />{' '}
+                        </Flex>
 
                         <Flex>
                             <FormControl>
+                            <FormLabel>Estado</FormLabel>
                                 <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
                                     <InputLeftAddon bg='yellow.200'>
                                         {driverState ? ('Activo') : ('Descanso')}
                                     </InputLeftAddon>
                                     <Select
                                         color="#000"
-                                        placeholder="Estado"
                                         id='driverState'
                                         name="driverState"
                                         bg='lightgreen'
