@@ -1,95 +1,140 @@
-
-import {
-    Container,
-    FormControl,
-    FormLabel,
-    FormErrorMessage,
-    FormHelperText,
-    Input,
-    Heading,
-    InputGroup,
-    Button,
-    InputRightElement,
-    Stack,
-    InputLeftAddon,
-    Link, Text
-} from '@chakra-ui/react'
+// HOOKS
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Swal from 'sweetalert2'
-import { logIn } from '../../../redux/actions';
+//DEPENDENCIES
+import axios from "axios";
+// STYLES
+import {
+  Container,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  Input,
+  InputGroup,
+  Button,
+  InputRightElement,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
+// AUTH FIREBASE
+import { useAuth } from "../../../context/authContext";
+
+
 
 const LoginForm = ({ onSwitchForm }) => {
-    const dispatch = useDispatch()
-    const [show, setShow] = useState(false)
-    const handleClick = () => setShow(!show)
 
-    const [input, setInput] = useState({
-        email: "",
-        password: ""
-    })
+  // Auth de Firebase
+  const auth = useAuth();
+  const {displayName, uid, email}= auth.user
+  console.log(displayName, uid);
+  // Estados Locales para form de Login
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
 
-    //Falta configurar para el manero de los inputs
-    const handleInputChange = (e) => setInput({
-        ...input,
-        [e.target.name]: e.target.value
+
+  const [input, setInput] = useState({
+    email: "",
+    password: "",
+  });
+
+
+
+  const handleInputChange = (e) =>
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+
+  const isError = input.email === "" || input.password === "";
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await auth.login(input.email, input.password);
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error.message);
     }
-    )
-    const isError = input === ''
-    //Maneja la vista de la contraseña
-    const handleSubmit= async (event)=>{
-        event.preventDefault();
+  };
 
-        console.log("funciona submit")
-        console.log(input)
-        await dispatch(logIn(input))
+
+  const handleGoogleLogin = async () => {
+    try {
+      const google= await auth.loginWithGoogle();
+      console.log(google);
+      //const userCreated = await axios.post(`http://localhost:3001/user/create`, input)
+      //console.log(userCreated);
+    } catch (error) {
+      console.error("Error al iniciar sesión con Google:", error.message);
     }
+  };
 
-    return (
-        <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' color='white'
-            w={{ base: '20rem', md: '30rem' }}>
+  // const handleLogOut = async() => {
+  //   try {
+  //     await auth.logOut()
+  //   } catch (error) {
+  //     console.log("error");
+  //   }
+  // }
 
-            {/* Falta controlar los datos ingresados */}
-            <FormControl isInvalid={isError} isRequired>
-                <FormLabel>Correo Electronico</FormLabel>
-                <Input type='text' value={input.email} onChange={handleInputChange} placeholder='Ingresa tu Correo / Email' name='email' />
-                {isError ? (
-                    <FormErrorMessage>El correo es requerido.</FormErrorMessage>
-                ) : null}
-            </FormControl>
+  return (
+    <Stack
+      spacing={4}
+      bg="#009ED1"
+      p="5"
+      h="auto"
+      borderRadius="20"
+      boxShadow="dark-lg"
+      color="white"
+      w={{ base: "20rem", md: "30rem" }}
+    >
+      <FormControl isInvalid={isError} isRequired>
+        <FormLabel>Correo Electrónico</FormLabel>
+        <Input
+          type="text"
+          value={input.email}
+          onChange={handleInputChange}
+          placeholder="Ingresa tu Correo / Email"
+          name="email"
+        />
+        {isError ? (
+          <FormErrorMessage>El correo es requerido.</FormErrorMessage>
+        ) : null}
+      </FormControl>
 
-            <FormControl isInvalid={isError} isRequired>
-                <FormLabel>Contraseña</FormLabel>
-                <InputGroup size='md'>
-                    <Input
-                        pr='4.5rem'
-                        type={show ? 'text' : 'password'}
-                        placeholder='Ingresa una contraseña'
-                        name='password'
-                        onChange={handleInputChange}
-                    />
-                    <InputRightElement width='4.5rem'>
-                        <Button h='1.75rem' size='sm' onClick={handleClick}>
-                            {show ? 'Hide' : 'Show'}
-                        </Button>
-                    </InputRightElement>
-                </InputGroup>
-            </FormControl>
-
-            <Button colorScheme='green' onClick={handleSubmit}>
-                Entrar
+      <FormControl isInvalid={isError} isRequired>
+        <FormLabel>Contraseña</FormLabel>
+        <InputGroup size="md">
+          <Input
+            pr="4.5rem"
+            type={show ? "text" : "password"}
+            placeholder="Ingresa una contraseña"
+            name="password"
+            onChange={handleInputChange}
+          />
+          <InputRightElement width="4.5rem">
+            <Button h="1.75rem" size="sm" onClick={handleClick}>
+              {show ? "Hide" : "Show"}
             </Button>
+          </InputRightElement>
+        </InputGroup>
+      </FormControl>
 
-            <Container>
-                <Text>
-                    ¿No tienes cuenta?{' '}
-                    <Button color='teal.500' onClick={onSwitchForm}  >
-                        Registrarme
-                    </Button>
-                </Text>
-            </Container>
-        </Stack>
-    )
-}
+      <Button colorScheme="green" onClick={handleSubmit}>
+        Entrar
+      </Button>
+
+      <Container>
+        <Text>
+          ¿No tienes cuenta?{" "}
+          <Button color="teal.500" onClick={onSwitchForm}>
+            Registrarme
+          </Button>
+          <Button colorScheme="red" onClick={handleGoogleLogin}>
+            Continuar con Google
+          </Button>
+        </Text>
+      </Container>
+    </Stack>
+   );
+};
 
 export default LoginForm;

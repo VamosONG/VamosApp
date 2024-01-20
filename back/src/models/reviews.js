@@ -16,16 +16,16 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        tripId: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
+        // tripId: {
+        //     type: DataTypes.STRING,
+        //     // allowNull: false
+        // },
         date: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                isDate: true, 
-            },
+            // validate: {
+            //     isDate: true, 
+            // },
         },
         qualification: {
             type: DataTypes.INTEGER, 
@@ -49,7 +49,7 @@ module.exports = (sequelize) => {
     Review.associate = (models) => {
         Review.belongsTo(models.User, { foreignKey: 'userId' });
         Review.belongsTo(models.Driver, { foreignKey: 'driverId' });
-        Review.belongsTo(models.Trip, { foreignKey: 'tripId' });
+        // Review.belongsTo(models.Trip, { foreignKey: 'tripId' });
     };
 
     return Review;

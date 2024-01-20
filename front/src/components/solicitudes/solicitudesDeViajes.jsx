@@ -92,7 +92,7 @@ function SolicitudesDeViajes() {
                             <Td>{solicitud.origin}</Td>
 
                             <Td>{solicitud.destination}</Td>
-                            <Td>Panchito</Td>{/* Luego hay que cambiar por nombre de usuario */}
+                            <Td>José Bravo</Td>{/* Luego hay que cambiar por nombre de usuario */}
                             <Td>{solicitud.date}</Td>
                             <Td>{solicitud.hour}</Td>
 
@@ -142,10 +142,10 @@ function SolicitudesDeViajes() {
                             <Td>{solicitud.origin}</Td>
 
                             <Td>{solicitud.destination}</Td>
-                            <Td>Panchito</Td>{/* Luego hay que cambiar por nombre de usuario */}
+                            <Td>José Bravo</Td>{/* Luego hay que cambiar por nombre de usuario */}
                             <Td>{solicitud.date}</Td>
                             <Td>{solicitud.hour}</Td>
-                            <Td>Riquelme</Td>
+                            <Td>Han T. Solo</Td>
 
                             <Td justifyContent='center'  >
                                 <Flex gap={2} justifyContent={'center'}  >

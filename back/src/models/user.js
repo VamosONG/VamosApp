@@ -9,35 +9,34 @@ module.exports = (sequelize) => {
         },
         name: {
             type: DataTypes.STRING(30), 
-            allowNull: false,
+            // allowNull: true,
         },
         surname: {
             type: DataTypes.STRING(30),
-            allowNull: false,
+            // allowNull: true,
         },
         email: {
             type: DataTypes.STRING(50),
-            allowNull: false,
+            // allowNull: false,
         },
         phone: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            // allowNull: true,
             validate: {
                 isNumeric: true, 
             },
         },
-        //Cambiamos el type a Array?
         activeReservations: {
             type: DataTypes.INTEGER, 
             defaultValue: 0,
-            allowNull: false,
+            // allowNull: false,
             validate: {
                 isNumeric: true, 
             },
         },
         dni: {
             type: DataTypes.INTEGER, 
-            allowNull: false,
+            // allowNull: false,
             validate: {
                 isNumeric: true, 
             },
@@ -46,7 +45,7 @@ module.exports = (sequelize) => {
             type: DataTypes.BOOLEAN,
             defaultValue: false, 
         }
-    },
+   },
 
         { timestamps: false });
 
@@ -55,6 +54,5 @@ module.exports = (sequelize) => {
         User.hasMany(models.Review, { foreignKey: 'userId' }),
         User.hasMany(models.Trip, { foreignKey: 'userId' })
     }; 
-
-    return User;
-};
+     return User
+    }
