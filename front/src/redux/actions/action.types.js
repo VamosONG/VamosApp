@@ -5,6 +5,7 @@ export const UPDATE_DRIVER_DATA = 'UPDATE_DRIVER_DATA'
 export const ORDER_ALPHABETICAL = 'ORDER_ALPHABETICAL'
 export const ORDER_PASSENGER = 'ORDER_PASSENGER'
 export const ORDER_RATING = 'ORDER_RATING'
+export const ORDER_STATE = 'ORDER_STATE'
 
 
 //Metodos de filtrado
