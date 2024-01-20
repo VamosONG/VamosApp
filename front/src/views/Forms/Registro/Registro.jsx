@@ -19,6 +19,9 @@ import {
 //HOOKS
 import { useState } from "react";
 import { useAuth } from '../../../context/authContext';
+import { useNavigate } from "react-router";
+
+
 
 const RegistroForm = ({ onSwitchForm }) => {
 
@@ -48,9 +51,11 @@ const RegistroForm = ({ onSwitchForm }) => {
     const [show, setShow] = useState(false)
     const handleClick = () => setShow(!show)
 
+    //Autenticacion
     const auth = useAuth();
-    const { displayName, email, uid } = auth.user
-console.log(displayName, email, uid);
+    const { displayName } = auth.user
+
+    const navigate= useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -66,6 +71,9 @@ console.log(displayName, email, uid);
                     text: "Datos registrados!",
                     icon: "success"
                 });
+
+                navigate('/solicitarViaje')
+
                 setInput({
                      name: '',
                     surname: '',
@@ -114,7 +122,7 @@ console.log(displayName, email, uid);
                 </FormControl>
                 <FormControl isRequired>
 
-                    <FormLabel>phone</FormLabel>
+                    <FormLabel>Telefono</FormLabel>
                     <Input type='number' name='phone' value={input.phone} placeholder='Ingresa tu nuemro de celular.' onChange={handleInputChange} />
                     {isError ? (
                         <FormErrorMessage>Es necesario tu numero de phone</FormErrorMessage>
@@ -139,7 +147,7 @@ console.log(displayName, email, uid);
                 </FormControl>
 
                 <FormControl isRequired>
-                    <FormLabel>password</FormLabel>
+                    <FormLabel>Password</FormLabel>
                     <InputGroup size='md'>
                         <Input
                             pr='4.5rem'
@@ -156,21 +164,11 @@ console.log(displayName, email, uid);
                         </InputRightElement>
                     </InputGroup>
                 </FormControl>
-                {/* 
-                <FormControl isRequired>
-                    <FormLabel>Sexo</FormLabel>
-                    <Select placeholder='Elige Sexo' name='sexo' color='#000' onChange={handleInputChange} value={input.sexo} >
-
-                        <option value='f' > Femenino </option>
-                        <option value='m' > Masculino </option>
-                        <option value='o' > Otro </option>
-                    </Select>
-                </FormControl> */}
-
 
                 <Button colorScheme='green' type='submit'>
                     Registrar
                 </Button>
+
                 <Container>
                     <Text>
                         ¿Ya tienes cuenta?{' '}
@@ -179,6 +177,7 @@ console.log(displayName, email, uid);
                         </Button>
                     </Text>
                 </Container>
+
             </Stack>
         </form>
     )

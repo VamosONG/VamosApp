@@ -9,8 +9,13 @@ const LogOut = () => {
     const esUsuario = useSelector((state) => state.esUsuario)
     const dispatch = useDispatch();
 
-    const handleLogOut = (esAdmin) => {
-        dispatch(logOutAction(esAdmin ? 'admin' : 'user'));
+    const handleLogOut =async (esAdmin) => {
+        try {
+            dispatch(logOutAction(esAdmin ? 'admin' : 'user'));
+            await auth.logOut()
+          } catch (error) {
+            console.log("error");
+          }
     }
 
 

@@ -1,13 +1,29 @@
 import React from "react";
-import { Box, Button, Flex, Text, Heading, Stack, } from '@chakra-ui/react';
-import bgImage from "../../../assets/Aeropuerto1.jpg"
+import { 
+    Box, 
+    Button, 
+    Flex, 
+    Text, 
+    Heading, 
+    Stack, 
+    Skeleton, 
+    UnorderedList, 
+    ListItem, 
+    Grid,
+    Image 
+} from '@chakra-ui/react';
+import bgImage from "../../../assets/Aeropuerto1.jpg";
+
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllConductores } from "../../../redux/actions";
 import Testimonials from "../../Testimonials/Testimonials";
 import Services from "../../ServicesSection/services";
-import { Link } from "react-router-dom";
+import WhatsAppButton from "../../whatsAppButton/whatsAppButton";
+import CompanySlider from "../../carouselVamos/carouselVamos";
+import InfoVamos from "../../infoVamos/infoVamos";
+import Publi from "../../publiVamos/publiVamos";
 
 const Home = () => {
     const dispatch= useDispatch();
@@ -37,7 +53,6 @@ const Home = () => {
         </Link> */} {/* Esta tampoco */}
         <Box
         h='100vh'
-    
         position= 'relative'
         >
             <Box
@@ -49,7 +64,7 @@ const Home = () => {
             bgImage={`url(${bgImage})`}
             bgSize='cover'
             bgPosition='center'
-            filter='blur(2px)'
+            filter='blur(2px) brightness(0.8)'
             zIndex='-1'
             />
             <Flex
@@ -69,21 +84,24 @@ const Home = () => {
             fontSize={['2xl', null, '5xl']}
             mb='2'
             textShadow='2px 2px 4px rgb(0, 0, 0, 0.9)'
+            mt={{ base: "2rem", md: "0" }}
             >
-            Bienvenido a "Vamos", una empresa social comprometida con brindar servicios de taxi aeropuerto.
+            Bienvenido a "Vamos", una empresa social de taxi aeropuerto.
             </Heading>
-            <Text
+            <UnorderedList
             textAlign={['left', null, 'left']}
             fontFamily="'DIN Medium',"
             color="white"
-            fontSize={['lg', null, '3xl']}
-            mt='4'
+            fontSize={['lg', null, '2xl']}
+            mt='1px'
             textShadow='2px 2px 4px rgb(0, 0, 0, 0.9)'
             >
-            Nos enorgullece ofrecer traslados desde Tumbes e Talar hacia domicilios y hoteles, con tarifas asequibles.
-            Nuestra misión va más allá de brindar un servicio de transporte; también creamos oportunidades laborales para adultos mayores que desean seguir emprendiendo.
-            Con 'Vamos', tienes la garantía de vehículos nuevos y cómodos, con amplia variedad de disponibilidad horaria.
-            </Text>
+            <ListItem>Traslados disponibles desde Tumbes e Talar hacia domicilios y hoteles.</ListItem>
+            <ListItem>Tarifas asequibles para nuestros servicios de transporte.</ListItem>
+            <ListItem>Brindamos oportunidades laborales a emprendedores adultos mayores.</ListItem>
+            <ListItem>Garantizamos vehículos nuevos y cómodos para tu comodidad.</ListItem>
+            <ListItem>Amplia disponibilidad horaria para adaptarse a tus necesidades.</ListItem>
+            </UnorderedList>
             <Stack
             direction={{ base: 'column', md: 'row' }}
             spacing={['20px', null, '40px']}
@@ -93,12 +111,16 @@ const Home = () => {
                 <Button
                 colorScheme='blue'
                 size='lg'
+                bg='rgb(232, 61, 111)'
+                _hover={{ bg: 'green.400' }}
                 >
                 RESERVA
                 </Button>
                 <Button
                 colorScheme='blue'
                 size='lg'
+                bg='rgb(0, 158, 209)'
+                _hover={{ bg: 'green.400' }}
                 >
                 + INFO
                 </Button>
@@ -106,7 +128,11 @@ const Home = () => {
             </Flex>
         </Box>
         <Services/>
-        <Testimonials/>
+        <Publi/>
+        <CompanySlider/>
+        <InfoVamos/>
+        {/* <Testimonials/> */}
+        <WhatsAppButton/>
     </>
 );
 
