@@ -19,7 +19,8 @@ const postDriver = async ( name, surname, email, birthday, dni, phone, driverImg
             carSoat, 
             circulationPermit, 
             capacityPassengers,
-            driverState: true
+            driverState: true,
+            inactive: false
         });
 
         return newDriver;
