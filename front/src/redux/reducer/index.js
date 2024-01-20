@@ -5,7 +5,11 @@ import { DELETE_DRIVER, GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETI
 
 
 
+
+import { CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_TRIPS_BY_ID, GET_COMPLETED_TRIPS, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE, GET_ALL_PRICES } from "../actions/index";
+
 import { CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_TRIPS_BY_ID, GET_COMPLETED_TRIPS, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE, USER_BY_EMAIL } from "../actions/index";
+
 
 
 
@@ -36,6 +40,8 @@ const initialState = {
 
 
     trip: [],
+
+    allPrices:[],
 
 }
 
@@ -239,6 +245,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 tripsById: action.payload
+            }
+        case GET_ALL_PRICES:
+            return {
+                ...state,
+                allPrices: action.payload
             }
         /* case POST_REVIEW:
             return {

@@ -19,7 +19,11 @@ export const VIAJE_CONFIRMADO = 'VIAJE_CONFIRMADO'
 export const GET_FILTERED = 'GET_FILTERED'
 export const GET_TRIPS_BY_ID = 'GET_TRIPS_BY_ID'
 export const POST_REVIEW = 'POST_REVIEW'
+
+export const GET_ALL_PRICES = 'GET_ALL_PRICES'
+
 export const USER_BY_EMAIL = 'USER_BY_EMAIL'
+
 
 
 export const getAllConductores = () => {
@@ -433,6 +437,37 @@ export const getUserByEmail = (email) => {
     };
 };
 
+export const getAllPrices = () => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios(`http://localhost:3001/prices`);
+            dispatch({
+                type: GET_ALL_PRICES,
+                payload: data
+            });
+            return data
+        } catch (error) {
+            console.error('Error al obtener precios:', error);
+            throw error;
+        }
+    }
+
+}
 
 
-
+export const updatePrice = (info) => {
+    console.log(info)
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.put(`http://localhost:3001/price/update`, info);
+            console.log(data)
+            /* dispatch({
+                type: GET_FILTERED,
+                payload: data
+            }) */
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            console.log(error.message)
+        };
+    };
+};

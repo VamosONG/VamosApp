@@ -45,6 +45,12 @@ const Home = () => {
             ReviewAndReseña
         </Button>
         </Link> */} {/* No me borren esta vaina, después le encontraré un lugar */}
+        {/* <Link to='/editPrices'>
+        <Button>
+            
+            Cambiar precios de viajes
+        </Button>
+        </Link> */} {/* Esta tampoco */}
         <Box
         h='100vh'
         position= 'relative'
