@@ -39,7 +39,7 @@ module.exports = async(name, email, preSubject, message, res)=>{
 
             return result;
         } catch (error) {
-            throw new Error(`Error al enviar correo: ${error.message}`);
+            throw new Error(`Error al enviar correo. ${error.message}`);
         }
     }
     sendMail()
