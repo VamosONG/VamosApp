@@ -7,15 +7,13 @@ const updateDriver = async (id,newData) => {
         if (!driverUpdate) {
             throw new Error(`El conductor con id ${id} no existe en la base de datos.`);
         }
-        const dataUpdate = await Driver.update(newData,{
-            where: {id: id}
-        });
-        if (!dataUpdate) {
-            throw new Error(`No se actualizaron los datos al id: ${id}`);
-        }
-        return { message: 'Conductor actualizado exitosamente'};
+        
+        await driverUpdate.update(newData);
+        await driverUpdate.reload();
+        
+        return driverUpdate;
     } catch (error) {
-        throw new Error(error.message);
+        throw new Error(`Error al actualizar: ${error.message}`);
     }
 }
 
