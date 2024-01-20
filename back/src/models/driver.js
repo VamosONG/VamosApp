@@ -85,6 +85,10 @@ module.exports = (sequelize) => {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
         },
+        inactive: { //creado para manejar el borrado logico, como alternativa a deleteDriver.
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+        },
     },
         { timestamps: false });
     

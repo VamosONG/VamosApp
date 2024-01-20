@@ -63,8 +63,8 @@ router.get('/user', getUsersHandler);
 router.post('/user/create', postUserHandler);
 router.patch('/user/update', updateUserHandler);
 router.delete('/user', deleteUserHandler);
-router.get('/user/id/:id', getUserByIdHandler); //Busca un usuario por ID.
-router.get('/user/email/:email', getUserByEmailHandler); //Busca un usuario por Email.
+router.get('/user/id', getUserByIdHandler); //Busca un usuario por ID.
+router.get('/user/email', getUserByEmailHandler); //Busca un usuario por Email.
 
 
 //Cambio a metodo PATCH: Mas versatil para actulizar campos individualmente.
