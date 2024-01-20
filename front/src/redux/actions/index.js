@@ -416,6 +416,22 @@ export const postReview = (info) => {
 //         }
 //     }
 // }
+export const getUserByEmail = (email) => {
+    console.log(email)
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`http://localhost:3001/user/email`, email);
+            console.log(data)
+            dispatch({
+                type: USER_BY_EMAIL,
+                payload: data
+            })
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            console.log(error.message)
+        }
+    };
+};
 
 
 

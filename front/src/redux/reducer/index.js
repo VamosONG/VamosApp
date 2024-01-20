@@ -17,7 +17,7 @@ const initialState = {
     currentPage: 0,
     newUsuario: [],
 
-    currentUser:{},
+    currentUser:{}, // este es un objeto con todas las propiedades del usuario filtrado por email
 
     // esAdmin: false,
     // esUsuario: false,
