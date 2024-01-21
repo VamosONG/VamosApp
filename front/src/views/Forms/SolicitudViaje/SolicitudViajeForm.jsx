@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { postNewViaje, viajeConfirmado } from "../../../redux/actions";
 import { useEffect, useState } from "react";
 
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import axios from 'axios';
 
 import { Box, Center, useDisclosure } from '@chakra-ui/react'
@@ -18,17 +17,13 @@ import { renderToString } from 'react-dom/server';
 
 
 
-
 function SolicitudViajeForm() {
-
+    
     const dispatch = useDispatch();
-
+    //trae la info del viaje de redux, donde se calcula el precio
     const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
     const currentUser = useSelector((state) => state.currentUser)
     console.log(infoConfirmacionViaje)
-    console.log(currentUser)
-
-
 
     const [input, setInput] = useState({
         origin: "",
@@ -37,10 +32,35 @@ function SolicitudViajeForm() {
         hour: "",
         quantityPassengers: "",
     });
+    
+    /////////*****************MERCADOPAGO*************************************************************** */
+    
+    
+    
+    
+        const product = {
+            viaje:`${input.origin}${input.destination}`, 
+            price: 100,
+            quantityPassengers: input.quantityPassengers
+          }
+        
+        const handlePayment = async (/*product*/) => {
+            console.log("aadd");
+            const response = await axios.post("http://localhost:3001/mepago/create-order", product)
+    
+            window.location.href = response.data
+        };
+    
+    
+    
+    
+    
+    /////////*****************MERCADOPAGO*************************************************************** */
 
     const [confirmed, setConfirmed] = useState(false);
 
     
+
 
     useEffect(() => {
         initMercadoPago('TEST-42b04001-0641-4889-8b14-97f17f509594', {
@@ -79,7 +99,7 @@ function SolicitudViajeForm() {
             const infoAmandarAlBack = {
                 tripId: infoConfirmacionViaje.id,
                 userId: infoConfirmacionViaje.userId,
-                /* idMP: mpid */
+             
               }
               const confirmationText = (
                 <div>
@@ -99,7 +119,7 @@ function SolicitudViajeForm() {
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Pagar con MercadoPago",
 
-                /* showClass: {
+                 showClass: {
                     popup: 'animate__animated animate__fadeInDown',
                   },
                   hideClass: {
@@ -107,12 +127,12 @@ function SolicitudViajeForm() {
                   },
                   preConfirm: async () => {
                     
-                    await handlePayment(); */
-                    
 
-                htmlMode: true
-             }).then(async(result) => {
+
+                htmlMode: true}
+            }).then(async(result) => {
               if (result.isConfirmed) {
+
                   await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
                   
                   /* setInput({
@@ -122,6 +142,7 @@ function SolicitudViajeForm() {
                     hour: "",
                     quantityPassengers: "",
                 }); */
+
                 Swal.fire({
                   title: "Viaje reservado",
                   text: "Simulando que se abonó..",

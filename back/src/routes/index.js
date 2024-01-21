@@ -49,6 +49,9 @@ const getTripsCompletedHandler = require('../handlers/filtersHandlers/getTripsCo
 const getTripsPendingHandler = require('../handlers/filtersHandlers/getTripsPendingHandler');
 
 const postPreference = require('../controllers/mercadoPagoController/postPreference');
+const {createOrder, receiveWebhook} = require('../controllers/mercadoPagoController/paymentController')
+const {success, fail, pending} = require('../controllers/mercadoPagoController/backUrlsController')
+
 const getTripsByIdHandler = require('../handlers/tripHandlers/getTripsByIdHandler');
 const sendMailHandler = require('../utils/mailing/sendMailHandler');
 
@@ -109,7 +112,11 @@ router.get('/trips/tripId/:id', getTripsByIdHandler)
 
 router.post('/send-mail', sendMailHandler)
 
-router.post('/merpago/create', postPreference);
+router.post('/mepago/create-order', createOrder);
+router.get('/mepago/success',success);
+router.get('/mepago/fail', fail);
+router.get('/mepago/pending', pending);
+router.post('/mepago/webhook', receiveWebhook);
 
 module.exports = router;
 

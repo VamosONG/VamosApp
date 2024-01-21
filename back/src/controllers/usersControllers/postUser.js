@@ -1,9 +1,9 @@
-const { User } = require("../../dataBase")
+const { User, Trip } = require("../../dataBase")
 
 
 const postUser = async ({ name, surname, email, phone, dni }) => {
     try {
-        const newUser = await User.create({
+        let newUser = await User.create({
             name,
             surname,
             email,
@@ -11,7 +11,16 @@ const postUser = async ({ name, surname, email, phone, dni }) => {
             dni,
         });
 
+        newUser = User.findOne({
+            where:{email: email},
+            include: [{
+                model: Trip,
+                attributes: ['id', 'date', 'hour', 'origin', 'destination', 'quantityPassengers', 'price', 'stateOfTrip', 'driverId'],
+            }]
+        });
+
         return newUser;
+
     } catch (error) {
         throw new Error(`Error al crear el usuario ${error.message}`)
     }
