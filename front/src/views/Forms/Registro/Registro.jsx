@@ -30,7 +30,6 @@ const RegistroForm = ({ onSwitchForm }) => {
         surname: '',
         phone: '',
         email: '',
-        // password: '',
         dni: '',
     })
     //  surname, email, phone, dni
@@ -60,47 +59,77 @@ const RegistroForm = ({ onSwitchForm }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-             await auth.register(input.email, input.password, { displayName });
-            console.log( 'input data', input);
-            const userCreated = await axios.post(`http://localhost:3001/user/create`, input);
-            console.log("usuario:", {displayName});
-            if (userCreated) {
-                Swal.fire({
-                    title: "Bien hecho!",
-                    text: "Datos registrados!",
-                    icon: "success"
-                });
+        // try {
+            // const [registroFire, crearUser, obtenerUserByEmail, sendMail ] = await Promise.all([
+                
+            //     await auth.register(input.email, input.password, { displayName });
+            //  console.log( 'input data', input);
+            //    const {data} =await axios.post(`http://localhost:3001/user/create`, input);
+            //    console.log(data);
+            //    const dataUser= {
+            //     userId: data.id,
+            //     option: "signIn"
+            // }
 
-                navigate('/solicitarViaje')
+            let dataUser = {};
 
-                setInput({
-                     name: '',
-                    surname: '',
-                    phone: '',
-                    email: '',
-                    // password: '',
-                    dni: '',
-                });
-            } else {
-                Swal.fire({
-                    title: "Error al crear usuario!",
-                    text: "no se registro!",
-                    icon: "error"
-                });
-            }
-        } catch (error) {
-            console.log(input);
-            console.error(error);
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Hubo un error en el registro",
-            });
-        }
+Promise.all([
+    auth.register(input.email, input.password, { displayName }),
+    axios.post(`http://localhost:3001/user/create`, input)])
+    .then(([authResponse, {data}]) => {
+    console.log('input data', input);
+    console.log(data);
 
-        // return true;
+    dataUser = {
+        userId: data.id,
+        option: "signIn"
     };
+
+    return axios.post(`http://localhost:3001/send-mail`, dataUser);
+}).then((response) => {
+    // Maneja la respuesta de send-mail aquí
+    console.log(response);
+}).catch((error) => {
+    error.message
+ });
+//             if (userCreated) {
+//                 console.log(userCreated);
+//                 Swal.fire({
+//                     title: "Bien hecho!",
+//                     text: "Datos registrados!",
+//                     icon: "success"
+//                 });
+
+//                 navigate('/solicitarViaje')
+
+//                 // setInput({
+//                 //      name: '',
+//                 //     surname: '',
+//                 //     phone: '',
+//                 //     email: '',
+//                 //     // password: '',
+//                 //     dni: '',
+//                 // });
+//             } else {
+//                 Swal.fire({
+//                     title: "Error al crear usuario!",
+//                     text: "no se registro!",
+//                     icon: "error"
+//                 });
+//             }
+//         } catch (error) {
+//             console.log(input);
+//             console.error(error);
+//             Swal.fire({
+//                 icon: "error",
+//                 title: "Oops...",
+//                 text: "Hubo un error en el registro",
+//             });
+//         }
+
+//         // return true;
+//     };
+    }
     return (
         <form onSubmit={handleSubmit}>
             <Stack spacing={4} bg='#009ED1' p='5' h='auto' borderRadius='20' boxShadow='dark-lg' w={{ base: '20rem', md: '30rem' }} color='white' >

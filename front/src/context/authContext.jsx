@@ -9,6 +9,8 @@ import {
     signInWithPopup,
     signOut
 } from "firebase/auth"
+import { useNavigate } from "react-router";
+
 
 
 export const authContext = createContext();
@@ -23,14 +25,17 @@ export const useAuth = () => {
 
 }
 
+
 export function AuthProvider({ children }) {
 
+    const navigate = useNavigate()
     const [user, setUser] = useState("")
     useEffect(() => {
         const suscribed = onAuthStateChanged(auth, (currentUser) => {
             if (!currentUser) {
                 console.log("no hay usuario login");
                 setUser("")
+                
             } else {
                 setUser(currentUser)
                 console.log(currentUser);
@@ -75,10 +80,13 @@ export function AuthProvider({ children }) {
         const responseGoogle = new GoogleAuthProvider()
         return signInWithPopup(auth, responseGoogle)
     }
-
     const logOut = async () => {
-        const response = await signOut(auth)
-        console.log(response);
+        try {
+            await signOut(auth);
+            console.log('Logout exitoso');
+        } catch (error) {
+            console.log(`${error.message}`);
+        }
     }
 
     return (<authContext.Provider

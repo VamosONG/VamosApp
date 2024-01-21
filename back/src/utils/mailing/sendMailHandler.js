@@ -18,7 +18,7 @@ module.exports=async(req,res)=>{
         let chofer=null;
         let trip=null;
 
-        if(option==="signIn" || option==="reserve" || option==="assignDriver" || option==="update" || option==="infoDriver"){
+        if( option==="reserve" || option==="assignDriver" || option==="update" || option==="infoDriver"){
             trip = await getTripById(tripId);
             if(!trip)
                 throw new Error(`Error al obtener viaje. ${error.message}`);
