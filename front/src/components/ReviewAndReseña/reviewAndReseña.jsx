@@ -2,21 +2,21 @@ import { useEffect, useState } from "react"
 import { getTripsById, postReview } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Card, CardBody, CardHeader, Flex, Heading, Stack, StackDivider,Text, Textarea } from "@chakra-ui/react";
+import Swal from "sweetalert2";
 
 const ReviewAndReseña=()=> {
 
     const dispatch= useDispatch()
     const tripsById = useSelector((state) => state.tripsById)
+    const tripPending=tripsById.find((trip)=>trip.stateOfTrip==="pending") //Después que venga filtrado del back
     console.log(tripsById)
+    console.log(tripPending)
     
 
     const [input,setInput]=useState({
-        userId:"",
-        driverId:"",
-        date:"",
-        qualification:"",
+        qualification:0,
         comments:"",
-        tripId:""
+     
     })
     
     
@@ -34,20 +34,33 @@ const ReviewAndReseña=()=> {
   const handleChange=(e)=>{
       setInput({
           ...input,
+          userId:id, //Luego cambiar esto cuando funcione Log
+          driverId:tripPending.driverId,
+          date:tripPending.date,
+          qualification:rating,
+          tripId:tripPending.id,
           comments:e.target.value
         })
     }
 
     const handleSubmit=()=>{
-      setInput({
+      /* setInput({
           ...input,
           userId:"c9f86a72-c6b4-4ac2-9b31-0d8eaee8b23b",
-          driverId:tripsById.driverId/* '46d639a7-5468-495b-b9a7-f666517d3bfb' */,
-          date:tripsById.date,
+          driverId:tripPending.driverId,
+          date:tripPending.date,
           qualification:rating,
-          tripId:tripsById.id
-        })
+          tripId:tripPending.id
+        }) */
         dispatch(postReview(input))
+        Swal.fire({
+          title: "Reseña enviada",
+          text: "Muchas gracias por tu tiempo",
+          icon: "success"
+        }).then(() => {
+          // Redirigir a la página anterior
+          /* window.history.back(); */
+        });
     }
 
 
@@ -58,7 +71,7 @@ const ReviewAndReseña=()=> {
         /* height="100vh" */
         direction="column"
       >
-        {tripsById.map((trip, index) => (
+        {/* {tripspending.map((trip, index) => ( */}
             <Card width="md">
             <CardHeader>
               <Heading size='md'>Reseña de tu viaje</Heading>
@@ -71,7 +84,7 @@ const ReviewAndReseña=()=> {
                     Ruta
                   </Heading>
                   <Text pt='2' fontSize='sm'>
-                    {trip.origin}{"----->"}{trip.destination} {/* Aquí debería colocar variables origin destination */}
+                    {tripPending?.origin}{"----->"}{tripPending?.destination} 
                   </Text>
                 </Box>
                 <Box>
@@ -79,7 +92,7 @@ const ReviewAndReseña=()=> {
                     Fecha - Hora
                   </Heading>
                   <Text pt='2' fontSize='sm'>
-                  {tripsById.date}{" - "}{tripsById.hour} {/* Aquí debería colocar variables date hour */}
+                  {tripPending?.date}{" - "}{tripPending?.hour} 
                   </Text>
                 </Box>
                 <Box>
@@ -127,8 +140,8 @@ const ReviewAndReseña=()=> {
               </Stack>
             </CardBody>
           </Card>
-         ))} 
-
+         {/* ))} 
+ */}
         
   
   

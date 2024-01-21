@@ -1,7 +1,7 @@
 import axios from 'axios';
 import choferes from '../../utils/chofer'
 
-import { DELETE_DRIVER,GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA } from './action.types';
+import { DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE } from './action.types';
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE = "PAGINATE"
@@ -19,6 +19,12 @@ export const VIAJE_CONFIRMADO = 'VIAJE_CONFIRMADO'
 export const GET_FILTERED = 'GET_FILTERED'
 export const GET_TRIPS_BY_ID = 'GET_TRIPS_BY_ID'
 export const POST_REVIEW = 'POST_REVIEW'
+
+export const GET_ALL_PRICES = 'GET_ALL_PRICES'
+
+export const USER_BY_EMAIL = 'USER_BY_EMAIL'
+
+
 
 export const getAllConductores = () => {
     return async (dispatch) => {
@@ -184,16 +190,16 @@ export const postNewUser = (form) => {
 }
 
 export const paginateConductores = (order) => {
-
+    console.log(order);
     return async (dispatch) => {
         try {
-
             dispatch({
                 type: PAGINATE,
                 payload: order
             })
         } catch (error) {
-            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            throw new Error(error);
+            //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
         };
     };
 };
@@ -316,6 +322,19 @@ export const ratingOrder = (data) => {
     }
 }
 
+export const stateOrder = (data) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: ORDER_STATE,
+                payload: data
+            })
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+}
+
 export const carFilter = (data) => {
     return async (dispatch) => {
         try {
@@ -341,6 +360,21 @@ export const airportFilter = (data) => {
         }
     }
 }
+
+export const stateFilter = (data) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: FILTER_STATE,
+                payload: data
+            })
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+}
+
+
 export const getTripsById = (id) => {
     console.log(id)
     return async (dispatch) => {
@@ -360,7 +394,7 @@ export const postReview = (info) => {
     /* info.driverId='46d639a7-5468-495b-b9a7-f666517d3bfb' */
     console.log(info)
     return async (dispatch) => {
-        const { data } = await axios.post(`http://localhost:3001/review/create`, info);
+        const { data } = await axios.post(`http://localhost:3001/reviews/create`, info);
         console.log(data)
         try {
             return dispatch({
@@ -368,11 +402,72 @@ export const postReview = (info) => {
                 payload: data
             })
         } catch (error) {
-            throw new Error(error);
+           /*  throw new Error(error); */
+           console.log(error.message)
         }
     }
 }
 
+// export const driverState = (data) => {
+//     return async (dispatch) => {
+//         try {
+//             return dispatch({
+//                 type: DRIVER_STATE,
+//                 payload: data
+//             })
+//         } catch (error) {
+//             throw new Error(error);
+//         }
+//     }
+// }
+export const getUserByEmail = (email) => {
+    console.log(email)
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`http://localhost:3001/user/email`, email);
+            console.log(data)
+            dispatch({
+                type: USER_BY_EMAIL,
+                payload: data
+            })
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            console.log(error.message)
+        }
+    };
+};
+
+export const getAllPrices = () => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios(`http://localhost:3001/prices`);
+            dispatch({
+                type: GET_ALL_PRICES,
+                payload: data
+            });
+            return data
+        } catch (error) {
+            console.error('Error al obtener precios:', error);
+            throw error;
+        }
+    }
+
+}
 
 
-
+export const updatePrice = (info) => {
+    console.log(info)
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.put(`http://localhost:3001/price/update`, info);
+            console.log(data)
+            /* dispatch({
+                type: GET_FILTERED,
+                payload: data
+            }) */
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            console.log(error.message)
+        };
+    };
+};

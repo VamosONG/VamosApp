@@ -26,7 +26,6 @@ module.exports = (sequelize) => {
                 isNumeric: true, 
             },
         },
-        //Cambiamos el type a Array?
         activeReservations: {
             type: DataTypes.INTEGER, 
             defaultValue: 0,

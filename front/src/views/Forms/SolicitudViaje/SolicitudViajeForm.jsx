@@ -58,7 +58,7 @@ function SolicitudViajeForm() {
     
     /////////*****************MERCADOPAGO*************************************************************** */
 
-    
+
 
     const confirmationText = (
         <div>
@@ -70,16 +70,42 @@ function SolicitudViajeForm() {
     );
 
 
+    useEffect(() => {
+        initMercadoPago('TEST-42b04001-0641-4889-8b14-97f17f509594', {
+            locale: "es-PE"
+        });
+    }, []);
 
-    
+    const createPreference = async () => {
+        try {
+            const response = await axios.post("http://localhost:3001/merpago/create", {
+                origin: input.origin,
+                destination: input.destination,
+                price: 100, // Cambia esto según el precio real
+                quantityPassengers: input.quantityPassengers,
+            });
 
-          useEffect(() => {
-            if (infoConfirmacionViaje.id) {
-                console.log("info")
-              const infoAmandarAlBack = {
+            const { id } = response.data;
+            return id;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+        const handlePayment = async () => {
+            var mpid = await createPreference();
+            if (id) {
+              // Redirigir a la página de pago de MercadoPago
+              window.location.href = `https://www.mercadopago.com.ar/checkout/v1/redirect?preference_id=${mpid}`;
+            }
+        };
+
+    useEffect(() => {
+        if (infoConfirmacionViaje.id) {
+            const infoAmandarAlBack = {
                 tripId: infoConfirmacionViaje.id,
                 userId: infoConfirmacionViaje.userId,
-                /* idMP: mpid */
+             
               }
         
               Swal.fire({
@@ -102,6 +128,7 @@ function SolicitudViajeForm() {
                     await handlePayment(); 
 
 
+
                 htmlMode: true}
             }).then(async(result) => {
               if (result.isConfirmed) {
@@ -110,7 +137,10 @@ function SolicitudViajeForm() {
                   title: "Viaje reservado",
                   text: "Simulando que se abonó..",
                   icon: "success"
-                });
+                }).then(() => {
+                    // Redirigir a la página anterior
+                    window.history.back();
+                  });
             }})}
           }, [infoConfirmacionViaje, dispatch, confirmationText]);
         ;
@@ -118,7 +148,7 @@ function SolicitudViajeForm() {
 
 
 
-    const handleSubmit=async(event)=>{
+    const handleSubmit = async (event) => {
         event.preventDefault();
         await setInput({
             ...input,
@@ -127,14 +157,14 @@ function SolicitudViajeForm() {
         await dispatch(postNewViaje(input));
 
     }
-    const handleChange=async(e)=>{
-        
+    const handleChange = async (e) => {
+
         setInput({
             ...input,
-            [e.target.name]:e.target.value
+            [e.target.name]: e.target.value
         })
     }
-  
+
     const currentDate = new Date().toISOString().split('T')[0];
 
 

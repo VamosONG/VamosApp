@@ -5,6 +5,8 @@ module.exports = async (req, res) => {
         //
         const { airports, quantityPassengers, date } = req.body;
         let filteredDrivers = await getDrivers();
+
+        filteredDrivers=filteredDrivers.filter(driver=>driver.driverState===true);
         
         if (airports) {
             //Filtra conductores por ciudad.

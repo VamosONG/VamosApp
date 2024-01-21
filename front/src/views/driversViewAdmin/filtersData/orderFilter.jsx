@@ -1,6 +1,7 @@
-import { Select, Box, Text, Flex, Heading } from '@chakra-ui/react'
+import { Select, Box, Text, Flex, Heading, FormControl, FormLabel, Button} from '@chakra-ui/react'
 import { useSelector, useDispatch } from 'react-redux'
-import { airportFilter, alphabeticalOrder, carFilter, passengerOrder, ratingOrder } from '../../../redux/actions'
+import { airportFilter, alphabeticalOrder, carFilter, getAllConductores, passengerOrder, ratingOrder, stateFilter, stateOrder } from '../../../redux/actions'
+import { BsAirplaneEngines, BsBootstrapReboot,BsArrowClockwise } from "react-icons/bs";
 
 
 const OrderFilterAlphabetical = () => {
@@ -27,34 +28,65 @@ const OrderFilterAlphabetical = () => {
     const handleFilterAirport = (e) => {
         dispatch(airportFilter(e.target.value))
     }
+
+    const handleFilterDriverState = (e) => {
+        dispatch(stateFilter(e.target.value))
+    }
+
+    const handleOrderDriverState = (e) => {
+        dispatch(stateOrder(e.target.value))
+    }
+
+    const resetFilter = ()=> {
+        dispatch(getAllConductores())
+    }
+
     const airportsFound = ["Aeropuerto Tumbes", "Aeropuerto Talara"];
 
     const carTypeFound = ["auto", "camioneta", "van", 'van plus'];
+
     return (
         <>
-        <Flex gap='4' justify={'center'} align={'center'}>
-            <Flex justify='center' align={'center'} gap='4'  >
-                <Heading>Orden</Heading>
-                <Box>
-                    <Select placeholder='Alfabetico'
-                        name='alphabetical'
-                        onChange={handleOrderAlpha}>
-                        <option value='A'>A - Z</option>
-                        <option value='D'>Z - A</option>
-                    </Select>
-                </Box>
+            <Flex gap='4' justify={'center'} align={'center'} mx='2rem' py='.5rem'>
+                <Flex justify='center' align={'center'} gap='4'  >
+                    <Heading>Orden</Heading>
+                    <Box>
+                        <FormControl>
+                            <FormLabel>Nombre</FormLabel>
+                            <Select
+                                name='alphabetical'
+                                onChange={handleOrderAlpha}>
+                                <option value='A'>A - Z</option>
+                                <option value='D'>Z - A</option>
+                            </Select>
+                        </FormControl>
+                    </Box>
 
-                <Box>
-                    <Select placeholder='Cantida de Pasajeros'
-                        name='passenfers'
-                        onChange={handleOrderPassenger}>
-                        <option value='A'>➕ - ➖</option>
-                        <option value='D'>➖ - ➕</option>
-                    </Select>
-                </Box>
+                    <Box>
+                        <FormControl>
+                            <FormLabel>Pasajeros</FormLabel>
+                            <Select
+                                name='passenfers'
+                                onChange={handleOrderPassenger}>
+                                <option value='A'>➕ - ➖</option>
+                                <option value='D'>➖ - ➕</option>
+                            </Select>
+                        </FormControl>
+                    </Box>
+                    {/* <Box>
+                        <FormControl>
+                            <FormLabel>Estado</FormLabel>
+                            <Select
+                                name='driverState'
+                                onChange={handleOrderDriverState}>
+                                <option value='A'>Activo</option>
+                                <option value='D'>Descanso</option>
+                            </Select>
+                        </FormControl>
+                    </Box> */}
 
-                {/* //Cuando se agregren review lo activo */}
-                {/* <Box>
+                    {/* //Cuando se agregren review lo activo */}
+                    {/* <Box>
                     <Select placeholder='Puntuacion'
                         name='rating'
                         onChange={handleOrderRating}>
@@ -62,34 +94,53 @@ const OrderFilterAlphabetical = () => {
                         <option value='D'>➖ - ➕</option>
                     </Select>
                 </Box> */}
-            </Flex>
+                </Flex>
 
-            <Flex justify='center' align={'center'} gap='4'  >
-                <Heading>Filtrar</Heading>
-                <Box>
-                    <Select
-                        name='cartype'
-                        onChange={handleFilterCar}>
-                            <option disabled>Vehiculo</option>
-                            {carTypeFound.map((car, index) => (
-                                <option key={index} value={car}>{car}</option>
-                            ))}
-                    </Select>
-                </Box>
+                <Flex justify='center' align={'center'} gap='4'  >
+                    <Heading>Filtrar</Heading>
+                    <Box>
+                        <FormControl>
+                            <FormLabel>Vehiculo</FormLabel>
+                            <Select
+                                name='cartype'
+                                onChange={handleFilterCar}>
+                                {carTypeFound.map((car, index) => (
+                                    <option key={index} value={car}>{car}</option>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </Box>
 
-                <Box>
-                    <Select
-                        name='airpots'
-                        onChange={handleFilterAirport}>
-                            <option disabled>Zona</option>
-                            {airportsFound.map((airports, index) => (
-                                <option key={index} value={airports} >{airports}</option>
-                            ))}
-                    </Select>
-                </Box>
-                
-                {/* //Cuando se agregren review lo activo */}
-                {/* <Box>
+                    <Box>
+                        <FormControl >
+                            <FormLabel > Zona </FormLabel>
+                            <Select
+                                name='airpots'
+                                onChange={handleFilterAirport}>
+                                {airportsFound.map((airports, index) => (
+                                    <option key={index} value={airports} >{airports}</option>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </Box>
+
+                    <Box>
+                        <FormControl>
+                            <FormLabel>Estado</FormLabel>
+                            <Select
+                                name='driverState'
+                                onChange={handleFilterDriverState}>
+                                <option value={'all'}>Todos</option>
+                                <option value={true}>Activo</option>
+                                <option value={false}>Descanso</option>
+                            </Select>
+                        </FormControl>
+                    </Box>
+
+
+
+                    {/* //Cuando se agregren review lo activo */}
+                    {/* <Box>
                     <Select placeholder='Puntuacion'
                         name='rating'
                         onChange={handleOrderRating}>
@@ -97,8 +148,10 @@ const OrderFilterAlphabetical = () => {
                         <option value='D'>➖ - ➕</option>
                     </Select>
                 </Box> */}
+                </Flex>
+
+                <Flex onClick={resetFilter} ><Button bg='blue.200' color='#000' fontSize='1.2rem' > <BsArrowClockwise/> </Button></Flex>
             </Flex>
-        </Flex>
         </>
     )
 }
