@@ -113,6 +113,7 @@ const Home = () => {
                 size='lg'
                 bg='rgb(232, 61, 111)'
                 _hover={{ bg: 'green.400' }}
+                boxShadow='lg'
                 >
                 RESERVA
                 </Button>
@@ -121,6 +122,7 @@ const Home = () => {
                 size='lg'
                 bg='rgb(0, 158, 209)'
                 _hover={{ bg: 'green.400' }}
+                boxShadow='lg'
                 >
                 + INFO
                 </Button>
