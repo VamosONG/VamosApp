@@ -1,56 +1,107 @@
-import { Box, Heading, Text, Image, Grid, GridItem } from "@chakra-ui/react";
-import Vamos from "../../assets/vamos.png";
+import React from "react";
+import { Box, Flex, VStack, Heading, Text, Image, Divider } from "@chakra-ui/react";
+
 const About = () => {
   return (
-    <Box bg="blue.200">
-      <Heading as="h1" size="2xl" textAlign="center">
-        Vamos!
-      </Heading>
-      <Box m="20px" p="30px" textAlign="center">
-        <Text fontSize="2xl">
-          Somos una empresa que brinda servicio de taxi aeropuerto y cuyo
-          principal objetivo como ONG es brindar oportunidades de trabajo a
-          adultos mayores con ganas de seguir emprendiendo
-        </Text>
-      </Box>
-      <Grid
-        templateAreas={`"text nav"
-                  "text2 nav"
-                  "text3 nav"`}
-        gridTemplateRows={"1fr 1fr 1fr"}
-        gridTemplateColumns={"50% 1fr"}
-        h="200px"
-        color="blackAlpha.700"
+    <Flex direction="column" minHeight="100vh">
+
+      <Flex
+        flex="1"
+        direction={{ base: "column", md: "row" }}
+        p="100px"
+        align="center"
+        bg="blue.200"
       >
-        <GridItem pl="30px" bg="blue.200" area={"text"}>
-          <Text fontSize="xl">
-            <b>Valores:</b> Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Quas commodi eos corporis natus molestiae. Laborum, qui minus?
-            Ut, totam? Tempora, nostrum unde magni doloremque eveniet doloribus
-            quos amet ut quis?
+        {/* Contenido de la página */}
+        <VStack 
+        align={{ base: "start", md: "left" }}
+        spacing={8} 
+        flex={{ base: "1", md: "0.7" }}
+        mt={{ base: "20px", md: "0" }}
+        >
+          <Heading as="h1" 
+          size="2xl" 
+          fontFamily='DIN Alternate Black, sans-serif'
+          textShadow='2px 2px 4px rgb(0, 0, 0, 0.4)'
+          >
+            Sobre VAMOS!!
+          </Heading>
+          <Text 
+          fontFamily='DIN Alternate, sans-serif' 
+          fontSize="xl" 
+          textAlign={{ base: "start", md: "left" }} 
+          maxW="800px"
+          textShadow='1px 1px 2px rgb(0, 0, 0, 0.2)'
+          >
+            Somos una empresa social que brinda el servicio de taxi aeropuerto 
+            y que, al mismo tiempo, da trabajo a adultos mayores sin oportunidades 
+            en el mundo laboral que tienen muchas ganas de seguir emprendiendo.
+            Nos esforzamos por construir no solo viajes, sino también caminos hacia 
+            un futuro más brillante y enriquecedor para nuestra comunidad.
           </Text>
-        </GridItem>
-        <GridItem pl="30px" area={"text2"} bg="blue.200">
-          <Text fontSize="xl">
-            <b>Vision:</b> Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Quas commodi eos corporis natus molestiae. Laborum, qui minus?
-            Ut, totam? Tempora, nostrum unde magni doloremque eveniet doloribus
-            quos amet ut quis?
-          </Text>
-        </GridItem>
-        <GridItem pl="30px" area={"text3"} bg="blue.200">
-          <Text fontSize="xl">
-            <b>Mision:</b> Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Quas commodi eos corporis natus molestiae. Laborum, qui minus?
-            Ut, totam? Tempora, nostrum unde magni doloremque eveniet doloribus
-            quos amet ut quis?
-          </Text>
-        </GridItem>
-        <GridItem pl="30px" area={"nav"} bg="blue.200">
-          <Image src={Vamos} alt="vamos" />
-        </GridItem>
-      </Grid>
-    </Box>
+
+          <VStack align="start" spacing={1} textAlign="start">
+            <Box maxW="800px">
+              <Heading 
+              fontFamily='DIN Alternate Black, sans-serif' 
+              as="h2" 
+              size="lg"
+              textShadow='2px 2px 4px rgb(0, 0, 0, 0.2)'
+              >
+                Misión
+              </Heading>
+              <Text 
+              fontFamily='DIN Alternate, sans-serif' 
+              fontSize="xl"
+              textShadow='1px 1px 2px rgb(0, 0, 0, 0.2)'
+              >
+              Emprenderemos nuestro compromiso de proporcionar un servicio de traslado 
+              de excelencia, asequible, puntual, confiable y seguro, especializado en 
+              conexiones con los aeropuertos de Tumbes y Talara. Nos enorgullece no 
+              solo brindar un transporte eficiente, sino también ser una fuente de 
+              oportunidades para adultos mayores que desean continuar emprendiendo.
+              </Text>
+            </Box>
+
+            <Box maxW="800px">
+              <Heading 
+              fontFamily='DIN Alternate Black, sans-serif' 
+              as="h2" 
+              size="lg"
+              textShadow='2px 2px 4px rgb(0, 0, 0, 0.2)'
+              >
+                Visión
+              </Heading>
+              <Text 
+              fontFamily='DIN Alternate, sans-serif' 
+              fontSize="xl"
+              textShadow='1px 1px 2px rgb(0, 0, 0, 0.2)'
+              >
+              Visualizamos un futuro donde VAMOS!! se consolida como una alternativa 
+              líder, sostenible y responsable en el transporte, compitiendo con empresas 
+              de renombre a nivel nacional e internacional. Aspiramos a ser reconocidos 
+              por nuestra calidad, compromiso con la sostenibilidad y la contribución al 
+              bienestar de las comunidades que servimos.
+              </Text>
+            </Box>
+          </VStack>
+        </VStack>
+
+        {/* Imagen a la derecha */}
+        <Box flex={{ base: "1", md: "0.3" }} boxShadow="xl">
+          <Image 
+          src="https://res.cloudinary.com/drgnsbah9/image/upload/v1705876708/Vamos/nqaqy25yicurtalhre1z.jpg" 
+          alt="Vamos" 
+          objectFit="cover" 
+          w="100%" 
+          h="auto" 
+          borderRadius="lg"
+          />
+        </Box>
+      </Flex>
+
+    </Flex>
   );
 };
+
 export default About;
