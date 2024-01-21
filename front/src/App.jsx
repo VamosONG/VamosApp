@@ -22,6 +22,7 @@ import DriverTableView from './views/driversViewAdmin/driverTable';
 import ReserveComfirmed from './views/Reserve/ReserveConfirmed';
 import ReserveReject from './views/Reserve/ReserveReject';
 import ReviewAndReseña from './components/ReviewAndReseña/reviewAndReseña';
+import PaymentStatus from './views/payments/PaymentStatus';
 
 import EditPrices from './components/editPrices/editPricesComponent';
 
@@ -52,11 +53,12 @@ function App() {
         <Route path='/reserve/rejected' element={<ReserveReject/>}/>
         <Route path='/review&reseña' element={<ReviewAndReseña/>}/>
         <Route path='/editPrices' element={<EditPrices/>}/>
-
+        <Route path='/paymentStatus' element={<PaymentStatus/>}/>
         <Route path="/login" element={<LoginForm/>}/>
         <Route path="/formLogInWithGoogle" element={<FormLogInWithGoogle/>}/>
         <Route path="/register" element={<RegistroForm/>}/>
         <Route path="/profile" element={<UserProfile/>}/>
+
 
       </Routes>
       {/* <Paginado/> */}

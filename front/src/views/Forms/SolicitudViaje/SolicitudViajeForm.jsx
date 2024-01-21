@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { postNewViaje, viajeConfirmado } from "../../../redux/actions";
 import { useEffect, useState } from "react";
 
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import axios from 'axios';
 
 import { Box, Center, useDisclosure } from '@chakra-ui/react'
@@ -18,15 +17,13 @@ import { renderToString } from 'react-dom/server';
 
 
 
-
 function SolicitudViajeForm() {
-
+    
     const dispatch = useDispatch();
-
+    //trae la info del viaje de redux, donde se calcula el precio
     const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
+    const currentUser = useSelector((state) => state.currentUser)
     console.log(infoConfirmacionViaje)
-
-
 
     const [input, setInput] = useState({
         origin: "",
@@ -35,55 +32,58 @@ function SolicitudViajeForm() {
         hour: "",
         quantityPassengers: "",
     });
-
-
-
-    const confirmationText = (
-        <div>
-            <p>Origen: {infoConfirmacionViaje.origin}</p>
-            <p>Destino: {infoConfirmacionViaje.destination}</p>
-            <p>Cantidad de pasajeros: {infoConfirmacionViaje.quantityPassengers}</p>
-            <p>Precio final: {infoConfirmacionViaje.price}</p>
-        </div>
-    );
-
-    useEffect(() => {
-        initMercadoPago('TEST-42b04001-0641-4889-8b14-97f17f509594', {
-            locale: "es-PE"
-        });
-    }, []);
-
-    const createPreference = async () => {
-        try {
-            const response = await axios.post("http://localhost:3001/merpago/create", {
-                origin: input.origin,
-                destination: input.destination,
-                price: 100, // Cambia esto según el precio real
-                quantityPassengers: input.quantityPassengers,
-            });
-
-            const { id } = response.data;
-            return id;
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-        const handlePayment = async () => {
-            var mpid = await createPreference();
-            if (id) {
-              // Redirigir a la página de pago de MercadoPago
-              window.location.href = `https://www.mercadopago.com.ar/checkout/v1/redirect?preference_id=${mpid}`;
-            }
+    
+    /////////*****************MERCADOPAGO*************************************************************** */
+    
+    
+    
+    
+        const product = {
+            viaje:`${input.origin}${input.destination}`, 
+            price: 100,
+            quantityPassengers: input.quantityPassengers
+          }
+        
+        const handlePayment = async (/*product*/) => {
+           
+            const response = await axios.post("http://localhost:3001/mepago/create-order", product)
+    
+            window.location.href = response.data
         };
+    
+    
+    
+    
+    
+    /////////*****************MERCADOPAGO*************************************************************** */
 
+    const [confirmed, setConfirmed] = useState(false);
+
+    
+
+   
+
+   
+
+   
+ 
     useEffect(() => {
-        if (infoConfirmacionViaje.id) {
+        console.log(currentUser)
+        if (infoConfirmacionViaje.id && !confirmed) {
+            setConfirmed(true);
             const infoAmandarAlBack = {
                 tripId: infoConfirmacionViaje.id,
                 userId: infoConfirmacionViaje.userId,
-                /* idMP: mpid */
+             
               }
+              const confirmationText = (
+                <div>
+                    <p>Origen: {infoConfirmacionViaje.origin}</p>
+                    <p>Destino: {infoConfirmacionViaje.destination}</p>
+                    <p>Cantidad de pasajeros: {infoConfirmacionViaje.quantityPassengers}</p>
+                    <p>Precio final: {infoConfirmacionViaje.price}</p>
+                </div>
+            );
         
               Swal.fire({
                 title: "Confirmación de traslado",
@@ -94,7 +94,7 @@ function SolicitudViajeForm() {
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Pagar con MercadoPago",
 
-                /* showClass: {
+                 showClass: {
                     popup: 'animate__animated animate__fadeInDown',
                   },
                   hideClass: {
@@ -102,23 +102,42 @@ function SolicitudViajeForm() {
                   },
                   preConfirm: async () => {
                     
-                    await handlePayment(); */
 
 
-                htmlMode: true
-             }).then(async(result) => {
+                htmlMode: true}
+            }).then(async(result) => {
               if (result.isConfirmed) {
+
                   await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
+                  
+                  /* setInput({
+                    origin: "",
+                    destination: "",
+                    date: "",
+                    hour: "",
+                    quantityPassengers: "",
+                }); */
+
                 Swal.fire({
                   title: "Viaje reservado",
                   text: "Simulando que se abonó..",
                   icon: "success"
                 }).then(() => {
-                    // Redirigir a la página anterior
+                    
+                    
                     window.history.back();
                   });
+            }else {
+                // Restablecer valores al cancelar
+                setInput({
+                    origin: "",
+                    destination: "",
+                    date: "",
+                    hour: "",
+                    quantityPassengers: "",
+                });
             }})}
-          }, [infoConfirmacionViaje, dispatch, confirmationText]);
+          }, [infoConfirmacionViaje, dispatch, /* confirmationText */]);
         ;
 
 
@@ -130,15 +149,34 @@ function SolicitudViajeForm() {
             ...input,
         })
 
+
+        setConfirmed(false); // Restablecer a false al enviar el formulario
+
         await dispatch(postNewViaje(input));
+        
 
     }
     const handleChange = async (e) => {
-
+        /* if (e.target.name==='origin'&&(e.target.value==='ZORRITOS'||e.target.value==='DECAMERON')){
+            let defaultDestination
+            if (e.target.value==='ZORRITOS'){
+            defaultDestination='AEROPUERTO TUMBES'
+            }
+            if (e.target.value==='DECAMERON'){
+            defaultDestination='AEROPUERTO TALARA'
+            }
+            setInput({
+                ...input,
+                destination: defaultDestination
+            })
+        } */
+        
         setInput({
             ...input,
             [e.target.name]: e.target.value
         })
+
+        
     }
 
     const currentDate = new Date().toISOString().split('T')[0];
@@ -225,18 +263,25 @@ function SolicitudViajeForm() {
                                 value={input.hour}
                                 onChange={handleChange} />
                         </FormControl>
-                    </Center>
+                    
 
 
-                    <Center py={2} gap={4}>
+                    {/* <Center py={2} gap={4}> */}
                         <FormControl as='fieldset' isRequired>
                             <FormLabel htmlFor='pasajeros'>Cantidad de pasajeros</FormLabel>
                             <Select color='#000' placeholder='Cantidad de pasajeros' id='pasajeros' name='quantityPassengers'  onChange={handleChange} >
-                                {[...Array(20).keys()].map((number) => (
+                                {((input.origin === "AEROPUERTO TALARA" && input.destination === "MANCORA") ||
+          (input.origin === "MANCORA" && input.destination === "AEROPUERTO TALARA"))?([...Array(15).keys()].map((number) => (
                                     <option key={number + 1} id={`number-${number + 1}`} value={number + 1}>
                                         {number + 1}
                                     </option>
-                                ))}
+                                ))):(
+                                    [...Array(10).keys()].map((number) => (
+                                        <option key={number + 1} id={`number-${number + 1}`} value={number + 1}>
+                                            {number + 1}
+                                        </option>
+                                    ))
+                                )}
                             </Select>
                         </FormControl>
 
@@ -244,6 +289,7 @@ function SolicitudViajeForm() {
                     <Button colorScheme='teal' variant='outline' w='100%' type='submit'>
                         Reservar viaje</Button>
                 </Box>
+                    {/* </Center> */}
                     </Center>
                 </Box>
             </Stack>
