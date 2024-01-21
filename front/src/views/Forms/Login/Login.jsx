@@ -58,8 +58,9 @@ const LoginForm = ({ onSwitchForm }) => {
     event.preventDefault();
     try {
       const {operationType} = await auth.login(input.email, input.password); //Destruturing del operationType de la funsion login
-      dispatch(getUserByEmail(input.email))
-      if(operationType === "signIn"){ //Modifique para refireccionar al home
+      if(operationType === "signIn"){ //Modifique para redireccionar al home
+        const getUser= dispatch(getUserByEmail(input.email))
+        console.log(getUser);
         navigate('/')
       
       }

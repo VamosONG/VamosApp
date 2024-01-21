@@ -64,6 +64,10 @@ const RegistroForm = ({ onSwitchForm }) => {
              await auth.register(input.email, input.password, { displayName });
             console.log( 'input data', input);
             const userCreated = await axios.post(`http://localhost:3001/user/create`, input);
+            // await axios.post(`http://localhost:3001/send-mail`, {
+            //     userId: userCreated.id,
+            //     option: "signIn"
+            // })
             console.log("usuario:", {displayName});
             if (userCreated) {
                 Swal.fire({
