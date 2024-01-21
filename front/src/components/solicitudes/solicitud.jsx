@@ -28,8 +28,6 @@ import { useEffect, useState } from 'react';
 import ViewBtnDetailDriver from '../../views/driversViewAdmin/DetailDriver/ViewBtnDetailDriver';
 
 
-
-
 const Solicitud =()=> {
 
   const dispatch=useDispatch() 
