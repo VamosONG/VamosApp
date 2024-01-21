@@ -23,6 +23,7 @@ export const POST_REVIEW = 'POST_REVIEW'
 export const GET_ALL_PRICES = 'GET_ALL_PRICES'
 
 export const USER_BY_EMAIL = 'USER_BY_EMAIL'
+export const GET_PAYMENT_DATA = 'GET_PAYMENT_DATA'
 
 
 
@@ -455,6 +456,8 @@ export const getAllPrices = () => {
 }
 
 
+
+
 export const updatePrice = (info) => {
     console.log(info)
     return async (dispatch) => {
@@ -471,3 +474,44 @@ export const updatePrice = (info) => {
         };
     };
 };
+
+export const getDataMePago = () => {
+    // return async (dispatch) => {
+    //     try {
+    //         const { data } = await axios.get(`http://localhost:3001/mepago/success`);
+    //         console.log(data)
+    //         dispatch({
+    //             type: GET_PAYMENT_DATA,
+    //             payload: data
+    //         });
+    //         return data
+    //     } catch (error) {
+    //         console.error('Error al obtener conductores:', error);
+    //         throw error;
+    //     }
+    // }
+    return async (dispatch) => {
+        try {
+            const currentUrl = window.location.href;
+            const urlParams = new URLSearchParams(currentUrl);
+            
+            const paymentData = {};
+            urlParams.forEach((value, key) => {
+                paymentData[key] = value;
+            });
+
+            console.log(paymentData);
+
+            dispatch({
+                type: GET_PAYMENT_DATA,
+                payload: paymentData
+            });
+
+            return paymentData;
+        } catch (error) {
+            console.error('Error al obtener datos de pago:', error);
+            throw error;
+        }
+    }
+
+}
