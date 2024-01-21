@@ -24,7 +24,9 @@ function SolicitudViajeForm() {
     const dispatch = useDispatch();
 
     const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
+    const currentUser = useSelector((state) => state.currentUser)
     console.log(infoConfirmacionViaje)
+    console.log(currentUser)
 
 
 
@@ -36,16 +38,9 @@ function SolicitudViajeForm() {
         quantityPassengers: "",
     });
 
+    const [confirmed, setConfirmed] = useState(false);
 
-
-    const confirmationText = (
-        <div>
-            <p>Origen: {infoConfirmacionViaje.origin}</p>
-            <p>Destino: {infoConfirmacionViaje.destination}</p>
-            <p>Cantidad de pasajeros: {infoConfirmacionViaje.quantityPassengers}</p>
-            <p>Precio final: {infoConfirmacionViaje.price}</p>
-        </div>
-    );
+    
 
     useEffect(() => {
         initMercadoPago('TEST-42b04001-0641-4889-8b14-97f17f509594', {
@@ -69,21 +64,31 @@ function SolicitudViajeForm() {
         }
     }
 
-        const handlePayment = async () => {
+    const handlePayment = async () => {
             var mpid = await createPreference();
             if (id) {
               // Redirigir a la página de pago de MercadoPago
               window.location.href = `https://www.mercadopago.com.ar/checkout/v1/redirect?preference_id=${mpid}`;
             }
-        };
-
+    };
+ 
     useEffect(() => {
-        if (infoConfirmacionViaje.id) {
+        console.log(currentUser)
+        if (infoConfirmacionViaje.id && !confirmed) {
+            setConfirmed(true);
             const infoAmandarAlBack = {
                 tripId: infoConfirmacionViaje.id,
                 userId: infoConfirmacionViaje.userId,
                 /* idMP: mpid */
               }
+              const confirmationText = (
+                <div>
+                    <p>Origen: {infoConfirmacionViaje.origin}</p>
+                    <p>Destino: {infoConfirmacionViaje.destination}</p>
+                    <p>Cantidad de pasajeros: {infoConfirmacionViaje.quantityPassengers}</p>
+                    <p>Precio final: {infoConfirmacionViaje.price}</p>
+                </div>
+            );
         
               Swal.fire({
                 title: "Confirmación de traslado",
@@ -103,22 +108,40 @@ function SolicitudViajeForm() {
                   preConfirm: async () => {
                     
                     await handlePayment(); */
-
+                    
 
                 htmlMode: true
              }).then(async(result) => {
               if (result.isConfirmed) {
                   await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
+                  
+                  /* setInput({
+                    origin: "",
+                    destination: "",
+                    date: "",
+                    hour: "",
+                    quantityPassengers: "",
+                }); */
                 Swal.fire({
                   title: "Viaje reservado",
                   text: "Simulando que se abonó..",
                   icon: "success"
                 }).then(() => {
-                    // Redirigir a la página anterior
-                    window.history.back();
+                    
+                    
+                    /* window.history.back(); */
                   });
+            }else {
+                // Restablecer valores al cancelar
+                setInput({
+                    origin: "",
+                    destination: "",
+                    date: "",
+                    hour: "",
+                    quantityPassengers: "",
+                });
             }})}
-          }, [infoConfirmacionViaje, dispatch, confirmationText]);
+          }, [infoConfirmacionViaje, dispatch, /* confirmationText */]);
         ;
 
 
@@ -130,11 +153,28 @@ function SolicitudViajeForm() {
             ...input,
         })
 
+
+        setConfirmed(false); // Restablecer a false al enviar el formulario
+
         await dispatch(postNewViaje(input));
+        
 
     }
     const handleChange = async (e) => {
-
+        if (e.target.name==='origin'&&(e.target.value==='ZORRITOS'||e.target.value==='DECAMERON')){
+            let defaultDestination
+            if (e.target.value==='ZORRITOS'){
+            defaultDestination='AEROPUERTO TUMBES'
+            }
+            if (e.target.value==='DECAMERON'){
+            defaultDestination='AEROPUERTO TALARA'
+            }
+            setInput({
+                ...input,
+                destination: defaultDestination
+            })
+        }
+        
         setInput({
             ...input,
             [e.target.name]: e.target.value
@@ -232,7 +272,7 @@ function SolicitudViajeForm() {
                         <FormControl as='fieldset' isRequired>
                             <FormLabel htmlFor='pasajeros'>Cantidad de pasajeros</FormLabel>
                             <Select color='#000' placeholder='Cantidad de pasajeros' id='pasajeros' name='quantityPassengers'  onChange={handleChange} >
-                                {[...Array(20).keys()].map((number) => (
+                                {[...Array(15).keys()].map((number) => (
                                     <option key={number + 1} id={`number-${number + 1}`} value={number + 1}>
                                         {number + 1}
                                     </option>
