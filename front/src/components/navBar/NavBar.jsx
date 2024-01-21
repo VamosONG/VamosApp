@@ -60,7 +60,7 @@ const NavBar = () => {
           <Box w="100%" alignContent='center' justifyContent='center'>
             <Flex justify='center' alignItems="center">
               {
-                currentUser.admin && currentUser.admin ?
+                 currentUser.admin ?
                   (
                     <Box>
                       <Flex>
