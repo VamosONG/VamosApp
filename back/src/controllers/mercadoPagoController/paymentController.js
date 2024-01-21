@@ -1,11 +1,11 @@
-const {mercadopago} = require("mercadopago");
+const mercadopago = require("mercadopago");
 // import { MERCADOPAGO_API_KEY } from "../config.js";
 const dotenv = require("dotenv");
 dotenv.config();
 
 
 const createOrder = async (req, res) => {
-  console.log(body);
+
   mercadopago.configure({
     access_token: process.env.ACCESS_TOKEN
   });
