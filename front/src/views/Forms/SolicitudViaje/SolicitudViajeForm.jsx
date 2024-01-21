@@ -45,7 +45,7 @@ function SolicitudViajeForm() {
           }
         
         const handlePayment = async (/*product*/) => {
-            console.log("aadd");
+           
             const response = await axios.post("http://localhost:3001/mepago/create-order", product)
     
             window.location.href = response.data
@@ -61,28 +61,9 @@ function SolicitudViajeForm() {
 
     
 
+   
 
-    useEffect(() => {
-        initMercadoPago('TEST-42b04001-0641-4889-8b14-97f17f509594', {
-            locale: "es-PE"
-        });
-    }, []);
-
-    const createPreference = async () => {
-        try {
-            const response = await axios.post("http://localhost:3001/merpago/create", {
-                origin: input.origin,
-                destination: input.destination,
-                price: 100, // Cambia esto según el precio real
-                quantityPassengers: input.quantityPassengers,
-            });
-
-            const { id } = response.data;
-            return id;
-        } catch (error) {
-            console.log(error);
-        }
-    }
+   
 
    
  
