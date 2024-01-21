@@ -20,12 +20,12 @@ import { renderToString } from 'react-dom/server';
 function SolicitudViajeForm() {
     
     const dispatch = useDispatch();
-    
+    //trae la info del viaje de redux, donde se calcula el precio
     const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
     console.log(infoConfirmacionViaje)
     
     
-    
+    //estado local para guardar los input
     const [input, setInput] = useState({
         origin: "",
         destination: "",
@@ -42,10 +42,11 @@ function SolicitudViajeForm() {
         const product = {
             viaje:`${input.origin}${input.destination}`, 
             price: 100,
-            quantityPassengers: input.quantityPassengers,
+            quantityPassengers: input.quantityPassengers
           }
         
         const handlePayment = async (/*product*/) => {
+            console.log("aadd");
             const response = await axios.post("http://localhost:3001/mepago/create-order", product)
     
             window.location.href = response.data
@@ -74,6 +75,7 @@ function SolicitudViajeForm() {
 
           useEffect(() => {
             if (infoConfirmacionViaje.id) {
+                console.log("info")
               const infoAmandarAlBack = {
                 tripId: infoConfirmacionViaje.id,
                 userId: infoConfirmacionViaje.userId,
@@ -89,7 +91,7 @@ function SolicitudViajeForm() {
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Pagar con MercadoPago",
 
-                /* showClass: {
+                 showClass: {
                     popup: 'animate__animated animate__fadeInDown',
                   },
                   hideClass: {
@@ -97,13 +99,13 @@ function SolicitudViajeForm() {
                   },
                   preConfirm: async () => {
                     
-                    await handlePayment(); */
+                    await handlePayment(); 
 
 
-                htmlMode: true
+                htmlMode: true}
             }).then(async(result) => {
               if (result.isConfirmed) {
-                  await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
+                //   await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
                 Swal.fire({
                   title: "Viaje reservado",
                   text: "Simulando que se abonó..",
