@@ -129,7 +129,7 @@ function SolicitudViajeForm() {
                 }).then(() => {
                     
                     
-                    /* window.history.back(); */
+                    window.history.back();
                   });
             }else {
                 // Restablecer valores al cancelar
@@ -161,7 +161,7 @@ function SolicitudViajeForm() {
 
     }
     const handleChange = async (e) => {
-        if (e.target.name==='origin'&&(e.target.value==='ZORRITOS'||e.target.value==='DECAMERON')){
+        /* if (e.target.name==='origin'&&(e.target.value==='ZORRITOS'||e.target.value==='DECAMERON')){
             let defaultDestination
             if (e.target.value==='ZORRITOS'){
             defaultDestination='AEROPUERTO TUMBES'
@@ -173,12 +173,14 @@ function SolicitudViajeForm() {
                 ...input,
                 destination: defaultDestination
             })
-        }
+        } */
         
         setInput({
             ...input,
             [e.target.name]: e.target.value
         })
+
+        
     }
 
     const currentDate = new Date().toISOString().split('T')[0];
@@ -265,18 +267,25 @@ function SolicitudViajeForm() {
                                 value={input.hour}
                                 onChange={handleChange} />
                         </FormControl>
-                    </Center>
+                    
 
 
-                    <Center py={2} gap={4}>
+                    {/* <Center py={2} gap={4}> */}
                         <FormControl as='fieldset' isRequired>
                             <FormLabel htmlFor='pasajeros'>Cantidad de pasajeros</FormLabel>
                             <Select color='#000' placeholder='Cantidad de pasajeros' id='pasajeros' name='quantityPassengers'  onChange={handleChange} >
-                                {[...Array(15).keys()].map((number) => (
+                                {((input.origin === "AEROPUERTO TALARA" && input.destination === "MANCORA") ||
+          (input.origin === "MANCORA" && input.destination === "AEROPUERTO TALARA"))?([...Array(15).keys()].map((number) => (
                                     <option key={number + 1} id={`number-${number + 1}`} value={number + 1}>
                                         {number + 1}
                                     </option>
-                                ))}
+                                ))):(
+                                    [...Array(10).keys()].map((number) => (
+                                        <option key={number + 1} id={`number-${number + 1}`} value={number + 1}>
+                                            {number + 1}
+                                        </option>
+                                    ))
+                                )}
                             </Select>
                         </FormControl>
 
@@ -284,6 +293,7 @@ function SolicitudViajeForm() {
                     <Button colorScheme='teal' variant='outline' w='100%' type='submit'>
                         Reservar viaje</Button>
                 </Box>
+                    {/* </Center> */}
                     </Center>
                 </Box>
             </Stack>
