@@ -9,7 +9,6 @@ console.log('paymentData', paymentData)
   useEffect(() => {
     const datosCompra = async () => {
       try {
-        // Realizar solicitud a tu backend para obtener datos del pago
         const response = await axios.get("http://localhost:3001/mepago/success");
         setPaymentData(response.data);
       } catch (error) {
