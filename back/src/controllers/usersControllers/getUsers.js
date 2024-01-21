@@ -1,31 +1,13 @@
 const { User, Trip, Review } = require('../../dataBase');
-const { Op } = require('sequelize')
 
-const getUsers = async ({ name, surname, dni, email }) => {
+const getUsers = async () => {
     try {
-        const whereClause = {};
-
-        if (name || surname) {
-            whereClause[Op.or] = [
-                { name: { [Op.iLike]: `%${name}%` } },
-                { surname: { [Op.iLike]: `%${surname}%` } },
-            ];
-        }
-
-        if (dni) {
-            whereClause.dni = { [Op.iLike]: `%${dni}%` };
-        }
-
-        if (email) {
-            whereClause.email = { [Op.iLike]: `%${email}%` };
-        }
 
         const users = await User.findAll({
-            where: whereClause,
             include: [
                 {
-                model: Review,
-                attributes: ['id', 'driverId', 'date', 'qualification', 'comments'],
+                    model: Review,
+                    attributes: ['id', 'driverId', 'date', 'qualification', 'comments'],
                 },
                 {
                     model: Trip, 
@@ -33,10 +15,6 @@ const getUsers = async ({ name, surname, dni, email }) => {
                 }
             ]
         });           
-
-        if (users.length === 0) {
-            throw new Error('Usuarios no encontrados');
-        }
 
         return users;
 
