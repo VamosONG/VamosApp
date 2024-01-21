@@ -3,6 +3,8 @@ import { Button, ButtonGroup, Stack } from '@chakra-ui/react'
 import { useSelector, useDispatch } from 'react-redux'
 import { logOutAction } from '../../../redux/actions'
 import { useAuth } from '../../../context/authContext'
+import { useNavigate } from 'react-router'
+import NavBar from '../../../components/navBar/NavBar'
 
 //import { unstable_HistoryRouter } from 'react-router-dom'
 
@@ -11,13 +13,16 @@ const LogOut = () => {
     // const esAdmin = useSelector((state) => state.esAdmin)
     // const esUsuario = useSelector((state) => state.esUsuario)
     //const dispatch = useDispatch();
+    const navigate = useNavigate()
     const auth = useAuth()
+    const {currentUser} = useSelector(state=> state)
 
     const handleLogOut =async () => {
         try {
             //dispatch(logOutAction(esAdmin ? 'admin' : 'user'));
             await auth.logOut()
-            window.location.href = '/';
+            currentUser === null
+            location.href = '/';
           } catch (error) {
             console.log(`funciona${error.message}`);
           }
@@ -32,6 +37,10 @@ const LogOut = () => {
                     Salir
                 </Button>)
                 : ( */}
+                {/* {
+                    (!currentUser) &&  <NavBar/>
+        
+                } */}
                     <Button colorScheme='#E83D6F' variant='solid' onClick={() => handleLogOut(false)}>
                         Salir
                     </Button>

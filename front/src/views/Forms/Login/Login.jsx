@@ -29,7 +29,7 @@ const LoginForm = ({ onSwitchForm }) => {
   // Auth de Firebase
   const auth = useAuth();
   const {displayName, uid, operationType}= auth.user
-  console.log('operaTypr ' + operationType);
+  // console.log('operaTypr ' + operationType);
   console.log(displayName, uid);
   // Estados Locales para form de Login
   const [show, setShow] = useState(false);
@@ -57,17 +57,35 @@ const LoginForm = ({ onSwitchForm }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const {operationType} = await auth.login(input.email, input.password); //Destruturing del operationType de la funsion login
+      await auth.login(input.email, input.password); //Destruturing del operationType de la funsion login
+      const getUser= await dispatch(getUserByEmail(input.email))
       if(operationType === "signIn"){ //Modifique para redireccionar al home
-        const getUser= dispatch(getUserByEmail(input.email))
         console.log(getUser);
-        navigate('/')
+        // navigate('/')
       
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error.message);
     }
   };
+
+
+  //   const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const[loginres, usuarioActual, mailres] = await Promise.all([
+  //       await auth.login(input.email, input.password); //Destruturing del operationType de la funsion login
+  //       const getUser= await dispatch(getUserByEmail(input.email))
+  //       const 
+
+  //     ])
+ 
+      
+  //     }
+  //   } catch (error) {
+  //     console.error("Error al iniciar sesión:", error.message);
+  //   }
+  // };
 
 
   const handleGoogleLogin = async () => {
@@ -136,10 +154,10 @@ const LoginForm = ({ onSwitchForm }) => {
       <Button colorScheme="green" onClick={handleSubmit}>
         Entrar
       </Button>
-
+{/* 
       <Button colorScheme="green" onClick={handleLogOut}>
         Salir
-      </Button>
+      </Button> */}
      
 
       <Container>
