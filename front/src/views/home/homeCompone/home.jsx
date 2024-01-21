@@ -32,7 +32,6 @@ const Home = () => {
     console.log(conductoresPmostrar)
     
     useEffect (()=>{
-        console.log("pasa")
         dispatch(getAllConductores());
     },[dispatch])
 
@@ -121,11 +120,11 @@ const Home = () => {
             </Stack>
             </Flex>
         </Box>
+        <Testimonials/>
         <Services/>
         <Publi/>
         <CompanySlider/>
         <InfoVamos/>
-        {/* <Testimonials/> */}
         <WhatsAppButton/>
     </>
 );

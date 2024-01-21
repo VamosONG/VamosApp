@@ -17,3 +17,7 @@ export const GET_TRIP_ID = 'GET_TRIP_ID'
 
 //Funcion estado del Driver 
 export const DRIVER_STATE = 'DRIVER_STATE'
+
+
+//Reviews 
+export const GET_REVIEWS = 'GET_REVIEWS'

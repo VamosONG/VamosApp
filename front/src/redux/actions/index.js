@@ -21,6 +21,8 @@ export const GET_TRIPS_BY_ID = 'GET_TRIPS_BY_ID'
 export const POST_REVIEW = 'POST_REVIEW'
 export const USER_BY_EMAIL = 'USER_BY_EMAIL'
 
+const URL = 'http://localhost:3001'
+
 
 export const getAllConductores = () => {
     return async (dispatch) => {
@@ -36,7 +38,6 @@ export const getAllConductores = () => {
             throw error;
         }
     }
-
 }
 
 export const getTripById = (id) => {
@@ -386,6 +387,8 @@ export const getTripsById = (id) => {
         }
     }
 }
+
+
 export const postReview = (info) => {
     /* info.driverId='46d639a7-5468-495b-b9a7-f666517d3bfb' */
     console.log(info)

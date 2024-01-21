@@ -30,10 +30,8 @@ const initialState = {
     infoConfirmacionViaje: {},
 
     conductoresFiltrados: [],
-
-
+    
     tripsById:[],
-
 
     trip: [],
 
