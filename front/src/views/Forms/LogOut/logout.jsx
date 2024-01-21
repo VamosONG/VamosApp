@@ -3,7 +3,7 @@ import { Button, ButtonGroup, Stack } from '@chakra-ui/react'
 import { useSelector, useDispatch } from 'react-redux'
 import { logOutAction } from '../../../redux/actions'
 import { useAuth } from '../../../context/authContext'
-import { Redirect } from 'react-router-dom';
+
 //import { unstable_HistoryRouter } from 'react-router-dom'
 
 

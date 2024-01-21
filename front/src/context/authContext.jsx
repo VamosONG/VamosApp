@@ -9,7 +9,7 @@ import {
     signInWithPopup,
     signOut
 } from "firebase/auth"
-import { useNavigate } from "react-router";
+
 
 
 export const authContext = createContext();
@@ -26,7 +26,7 @@ export const useAuth = () => {
 
 
 export function AuthProvider({ children }) {
-const navigate= useNavigate()
+
     const [user, setUser] = useState("")
     useEffect(() => {
         const suscribed = onAuthStateChanged(auth, (currentUser) => {
