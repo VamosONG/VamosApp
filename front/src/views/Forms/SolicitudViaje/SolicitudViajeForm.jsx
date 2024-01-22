@@ -39,9 +39,9 @@ function SolicitudViajeForm() {
     
     
         const product = {
-            viaje:`${input.origin}${input.destination}`, 
-            price: 100,
-            quantityPassengers: input.quantityPassengers
+            viaje:`${input?.origin}${input?.destination}`, 
+            price: Number(infoConfirmacionViaje?.price),
+            quantityPassengers: (input?.quantityPassengers).toString()
           }
         
         const handlePayment = async (/*product*/) => {
@@ -49,6 +49,7 @@ function SolicitudViajeForm() {
             const response = await axios.post("http://localhost:3001/mepago/create-order", product)
     
             window.location.href = response.data
+            console.log(response.data)
         };
     
     
@@ -109,7 +110,7 @@ function SolicitudViajeForm() {
               if (result.isConfirmed) {
 
                   await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
-                  
+                  handlePayment()
                   /* setInput({
                     origin: "",
                     destination: "",
