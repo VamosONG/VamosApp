@@ -1,5 +1,5 @@
 // HOOKS
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -15,6 +15,8 @@ import {
   InputRightElement,
   Stack,
   Text,
+  Heading,
+  Box
 } from "@chakra-ui/react";
 // AUTH FIREBASE
 import { useAuth } from "../../../context/authContext";
@@ -29,14 +31,17 @@ const LoginForm = ({ onSwitchForm }) => {
   // Auth de Firebase
   const auth = useAuth();
   const {displayName, uid, operationType}= auth.user
-  console.log('operaTypr ' + operationType);
+  // console.log('operaTypr ' + operationType);
   console.log(displayName, uid);
   // Estados Locales para form de Login
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
+
   const dispatch= useDispatch()
   const navigate = useNavigate()
+
+  const {currentUser} = useSelector(state => state)
 
 
   const [input, setInput] = useState({
@@ -57,17 +62,17 @@ const LoginForm = ({ onSwitchForm }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const {operationType} = await auth.login(input.email, input.password); //Destruturing del operationType de la funsion login
-      dispatch(getUserByEmail({email:  input.email}))
-      if(operationType === "signIn"){ //Modifique para refireccionar al home
-        navigate('/')
+      await auth.login(input.email, input.password); //Destruturing del operationType de la funsion login
+      const getUser= await dispatch(getUserByEmail(input.email))
+      if(operationType === "signIn"){ //Modifique para redireccionar al home
+        console.log(getUser);
+        // navigate('/')
       
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error.message);
     }
   };
-
 
   const handleGoogleLogin = async () => {
     try {
@@ -79,29 +84,35 @@ const LoginForm = ({ onSwitchForm }) => {
     }
   };
 
-  const handleLogOut = async() => {
-    try {
-      await auth.logOut()
-      navigate("/landing")
-    } catch (error) {
-      console.log("error");
-    }
+
+  const handleRegister = () => {
+    navigate("/register")
   }
+  // const handleLogOut = async() => {
+  //   try {
+  //     await auth.logOut()
+  //     navigate("/")
+  //   } catch (error) {
+  //     console.log("error");
+  //   }
+  // }
 
 
   return (
     <Stack
       spacing={4}
-      bg="#009ED1"
+      bg="rgb(0, 158, 209, 0.8)"
       p="5"
       h="auto"
-      borderRadius="20"
+      borderRadius="2%"
       boxShadow="dark-lg"
       color="white"
       w={{ base: "20rem", md: "30rem" }}
     >
+    {!currentUser.id &&
+      <>
       <FormControl isInvalid={isError} isRequired>
-        <FormLabel>Correo Electrónico</FormLabel>
+        <FormLabel fontSize="xl">Correo Electrónico</FormLabel>
         <Input
           type="text"
           value={input.email}
@@ -115,7 +126,7 @@ const LoginForm = ({ onSwitchForm }) => {
       </FormControl>
 
       <FormControl isInvalid={isError} isRequired>
-        <FormLabel>Contraseña</FormLabel>
+        <FormLabel fontSize="xl" >Contraseña</FormLabel>
         <InputGroup size="md">
           <Input
             pr="4.5rem"
@@ -132,19 +143,18 @@ const LoginForm = ({ onSwitchForm }) => {
         </InputGroup>
       </FormControl>
 
-      <Button colorScheme="green" onClick={handleSubmit}>
-        Entrar
-      </Button>
+ 
 
+{/* /* 
       <Button colorScheme="green" onClick={handleLogOut}>
         Salir
-      </Button>
+      </Button> */} 
      
 
       <Container>
         <Text>
           ¿No tienes cuenta?{" "}
-          <Button color="teal.500" onClick={onSwitchForm}>
+          <Button color="teal.500" onClick={handleRegister}>
             Registrarme
           </Button>
           <Button colorScheme="red" onClick={handleGoogleLogin}>
@@ -153,6 +163,22 @@ const LoginForm = ({ onSwitchForm }) => {
         </Text>
 
       </Container>
+    <Box>
+      {!currentUser.id && 
+        (<Button colorScheme="green" onClick={handleSubmit}>
+        Entrar
+        </Button>)
+      }
+      </Box>
+      </>
+} {
+  currentUser.id &&
+  <Box>
+    <Heading fontSize="xl">{currentUser.name}</Heading>
+    <Text fontSize="xl">{currentUser.email}</Text>
+  </Box>
+}
+
     </Stack>
    );
 };

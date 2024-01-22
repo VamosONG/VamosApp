@@ -21,3 +21,6 @@ export const DRIVER_STATE = 'DRIVER_STATE'
 
 //Reviews 
 export const GET_REVIEWS = 'GET_REVIEWS'
+
+//User Methods
+export const GET_DETAIL_USER = 'GET_DETAIL_USER'

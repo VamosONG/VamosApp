@@ -3,6 +3,7 @@ import LoginForm from "../Login/Login";
 import RegistroForm from "../Registro/Registro";
 import {Box, Button, Collapse, useDisclosure } from '@chakra-ui/react'
 import LogOut from "../LogOut/logout";
+import { Avatar } from "@chakra-ui/react";
 
 const ViewBtnUserForm = () => {
     const { isOpen, onToggle } = useDisclosure();
@@ -15,7 +16,7 @@ const ViewBtnUserForm = () => {
     };
     return (
         <Box zIndex={99} >
-                    <Button onClick={onToggle} >Entrar</Button>
+                    <Avatar onClick={onToggle} bg= "teal.600" />
                     <Collapse initialScale={0.9} direction='bottom' in={isOpen} style={{ zIndex: 10 }}>
                         <Box
                             h='auto'

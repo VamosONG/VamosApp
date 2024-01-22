@@ -1,11 +1,11 @@
-const {mercadopago} = require("mercadopago");
+const mercadopago = require("mercadopago");
 // import { MERCADOPAGO_API_KEY } from "../config.js";
 const dotenv = require("dotenv");
 dotenv.config();
 
 
 const createOrder = async (req, res) => {
-  console.log(body);
+
   mercadopago.configure({
     access_token: process.env.ACCESS_TOKEN
   });
@@ -24,12 +24,12 @@ console.log(product)
           // picture_url: "",
         }],
       back_urls: {
-        // success: "http://localhost:5173/paymentStatus",
-        success: "http://localhost:3001/mepago/success",
+        success: "http://localhost:5173/paymentStatus",
+        // success: "http://localhost:3001/mepago/success",
         failure: "http://localhost:3001/mepago/fail",
         pending: "http://localhost:3001/mepago/pending",
       },  
-      notification_url: "https://7ea7-186-11-90-154.ngrok-free.app/mepago/webhook",
+      notification_url: "https://27d6-186-11-8-46.ngrok-free.app/mepago/webhook",
       
       auto_return: "all"
       }
@@ -50,12 +50,12 @@ console.log(product)
     const payment = req.query;
     // const {date_created, user_id} = req.body
 
-  //  console.log(date_created, user_id);
+  //  console.log(payment)
 
 
     if (payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
-    
+    // console.log(data)
    
       //aqui se guarda en la base de datos
     }

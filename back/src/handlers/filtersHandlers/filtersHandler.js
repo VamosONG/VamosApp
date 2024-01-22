@@ -6,6 +6,9 @@ module.exports=async(req,res)=>{
     const { userId, date, hour, origin, destination, quantityPassengers }=req.body;
 
     try {
+        if(!userId || !date || !hour || !origin || !destination || !quantityPassengers)
+            throw new Error(`Error, no se recibieron los datos necesarios para crear la oferta.`)
+        
         const driverId=null;
         const fecha =new Date(date);
         const price=await calculatePrices(origin, destination, quantityPassengers, fecha);

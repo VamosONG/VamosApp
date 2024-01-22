@@ -24,10 +24,7 @@ function SolicitudViajeForm() {
     const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
     const currentUser = useSelector((state) => state.currentUser)
     console.log(infoConfirmacionViaje)
-        console.log(currentUser)
 
-    
-    //estado local para guardar los input
     const [input, setInput] = useState({
         origin: "",
         destination: "",
@@ -42,16 +39,17 @@ function SolicitudViajeForm() {
     
     
         const product = {
-            viaje:`${input.origin}${input.destination}`, 
-            price: 100,
-            quantityPassengers: input.quantityPassengers
+            viaje:`${input?.origin}${input?.destination}`, 
+            price: Number(infoConfirmacionViaje?.price),
+            quantityPassengers: (input?.quantityPassengers).toString()
           }
         
         const handlePayment = async (/*product*/) => {
-            console.log("aadd");
+           
             const response = await axios.post("http://localhost:3001/mepago/create-order", product)
     
             window.location.href = response.data
+            console.log(response.data)
         };
     
     
@@ -64,36 +62,11 @@ function SolicitudViajeForm() {
 
     
 
+   
 
-    useEffect(() => {
-        initMercadoPago('TEST-42b04001-0641-4889-8b14-97f17f509594', {
-            locale: "es-PE"
-        });
-    }, []);
+   
 
-    const createPreference = async () => {
-        try {
-            const response = await axios.post("http://localhost:3001/merpago/create", {
-                origin: input.origin,
-                destination: input.destination,
-                price: 100, // Cambia esto según el precio real
-                quantityPassengers: input.quantityPassengers,
-            });
-
-            const { id } = response.data;
-            return id;
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    // const handlePayment = async () => {
-    //         var mpid = await createPreference();
-    //         if (id) {
-    //           // Redirigir a la página de pago de MercadoPago
-    //           window.location.href = `https://www.mercadopago.com.ar/checkout/v1/redirect?preference_id=${mpid}`;
-    //         }
-    // };
+   
  
     useEffect(() => {
         console.log(currentUser)
@@ -130,15 +103,14 @@ function SolicitudViajeForm() {
                   },
                   preConfirm: async () => {
                     
-                    await handlePayment(); 
 
-                    
 
                 htmlMode: true}
             }).then(async(result) => {
               if (result.isConfirmed) {
-                //   await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
-                  
+
+                  await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
+                  handlePayment()
                   /* setInput({
                     origin: "",
                     destination: "",
@@ -146,6 +118,7 @@ function SolicitudViajeForm() {
                     hour: "",
                     quantityPassengers: "",
                 }); */
+
                 Swal.fire({
                   title: "Viaje reservado",
                   text: "Simulando que se abonó..",

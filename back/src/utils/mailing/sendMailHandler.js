@@ -14,11 +14,11 @@ module.exports=async(req,res)=>{
             throw new Error(`El usuario con id ${userId} no existe en base de datos.`);
 
         const userName=usuario.name;
-        let email="ezequielantoine@gmail.com"; //usuario.email;
+        let email=usuario.email;
         let chofer=null;
         let trip=null;
 
-        if(option==="signIn" || option==="reserve" || option==="assignDriver" || option==="update" || option==="infoDriver"){
+        if( option==="reserve" || option==="assignDriver" || option==="update" || option==="infoDriver"){
             trip = await getTripById(tripId);
             if(!trip)
                 throw new Error(`Error al obtener viaje. ${error.message}`);

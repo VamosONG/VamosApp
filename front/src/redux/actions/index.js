@@ -1,7 +1,7 @@
 import axios from 'axios';
 import choferes from '../../utils/chofer'
 
-import { DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE } from './action.types';
+import { DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER } from './action.types';
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE = "PAGINATE"
@@ -19,10 +19,11 @@ export const VIAJE_CONFIRMADO = 'VIAJE_CONFIRMADO'
 export const GET_FILTERED = 'GET_FILTERED'
 export const GET_TRIPS_BY_ID = 'GET_TRIPS_BY_ID'
 export const POST_REVIEW = 'POST_REVIEW'
-
+export const CLEAN_USER_BY_EMAIL = "CLEAN_USER_BY_EMAIL"
 export const GET_ALL_PRICES = 'GET_ALL_PRICES'
 
 export const USER_BY_EMAIL = 'USER_BY_EMAIL'
+export const GET_PAYMENT_DATA = 'GET_PAYMENT_DATA'
 
 const URL = 'http://localhost:3001'
 
@@ -186,7 +187,20 @@ export const postNewUser = (form) => {
             throw error;
         }
     }
+}
 
+export const getDetailUserById = (id) => {
+    return async (dispatch)=> {
+        try {
+            const {data} = axios.get(`http://localhost:3001/user/${id}`)
+            return dispatch({
+                type: GET_DETAIL_USER,
+                payload: data
+            })
+        } catch (error) {
+            console.error("Error en el detail user:", error);
+        }
+    }
 }
 
 export const paginateConductores = (order) => {
@@ -237,11 +251,21 @@ export const viajeConfirmado = (info) => {
     console.log(info)
     return async (dispatch) => {
         try {
-            const { data } = await axios.put(`http://localhost:3001/trips/reserves/create`, info);
-            console.log(data)
+            const mailReserve = {
+                userId: info.userId,
+                tripId: info.tripId,
+                option: "reserve"
+            }
+            const[reserveResp, mailResp] = await Promise.all([
+                axios.put(`http://localhost:3001/trips/reserves/create`, info),
+                axios.post(`http://localhost:3001/send-mail`,mailReserve)
+            ])
+            
+            console.log(reserveResp.data)
+            console.log(`Estado de mail reserva: ${mailResp}`);
             dispatch({
                 type: VIAJE_CONFIRMADO,
-                payload: data
+                payload: reserveResp.data
             })
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
@@ -270,8 +294,18 @@ export const conductorAsignado = (info) => {
     console.log(info)
     return async (dispatch) => {
         try {
-            const { data } = await axios.put(`http://localhost:3001/trips/reserves/update`, info);
-            console.log(data)
+            const mailReserve = {
+                userId: info.userId,
+                tripId: info.tripId,
+                option: "assignDriver"
+            }
+
+            const[reserveResp, mailResp] = await Promise.all([
+                axios.put(`http://localhost:3001/trips/reserves/update`, info),
+                axios.post(`http://localhost:3001/send-mail`,mailReserve)
+            ])
+            console.log(reserveResp.data)
+            console.log(`Estado de mail reserva: ${mailResp}`);
             /* dispatch({
                 type: GET_FILTERED,
                 payload: data
@@ -426,7 +460,7 @@ export const getUserByEmail = (email) => {
     console.log(email)
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`http://localhost:3001/user/email`, email);
+            const { data } = await axios.get(`http://localhost:3001/user/email?email=${email}`);
             console.log(data)
             dispatch({
                 type: USER_BY_EMAIL,
@@ -457,6 +491,8 @@ export const getAllPrices = () => {
 }
 
 
+
+
 export const updatePrice = (info) => {
     console.log(info)
     return async (dispatch) => {
@@ -473,3 +509,60 @@ export const updatePrice = (info) => {
         };
     };
 };
+
+
+
+export const getDataMePago = () => {
+    // return async (dispatch) => {
+    //     try {
+    //         const { data } = await axios.get(`http://localhost:3001/mepago/success`);
+    //         console.log(data)
+    //         dispatch({
+    //             type: GET_PAYMENT_DATA,
+    //             payload: data
+    //         });
+    //         return data
+    //     } catch (error) {
+    //         console.error('Error al obtener conductores:', error);
+    //         throw error;
+    //     }
+    // }
+    return async (dispatch) => {
+        try {
+            const currentUrl = window.location.href;
+            const urlParams = new URLSearchParams(currentUrl);
+            
+            const paymentData = {};
+            urlParams.forEach((value, key) => {
+                paymentData[key] = value;
+            });
+
+            console.log(paymentData);
+
+            dispatch({
+                type: GET_PAYMENT_DATA,
+                payload: paymentData
+            });
+
+            return paymentData;
+        } catch (error) {
+            console.error('Error al obtener datos de pago:', error);
+            throw error;
+        }
+    }
+}
+
+export const cleanCurrentUser = (userVacio) => {
+    return async (dispatch) => {
+        try {
+            dispatch({
+                type: CLEAN_USER_BY_EMAIL,
+                payload: userVacio
+            })
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            console.log(error.message)
+        }
+    };
+
+}

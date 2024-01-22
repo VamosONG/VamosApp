@@ -3,15 +3,20 @@ const { User } = require("../../dataBase")
 
 const postUser = async ({ name, surname, email, phone, dni }) => {
     try {
-        const newUser = await User.create({
-            name,
-            surname,
-            email,
-            phone,
-            dni,
-        });
+    
+        const [newUser, created] = await User.findOrCreate({ email },
+            {
+                name,
+                surname,
+                phone,
+                dni,
+          });
+        
+        if(!created)
+          throw new Error(`Error al crear usuario, el email ya esta registrado.`)
 
         return newUser;
+
     } catch (error) {
         throw new Error(`Error al crear el usuario ${error.message}`)
     }
