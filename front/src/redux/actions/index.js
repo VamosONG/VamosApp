@@ -237,11 +237,21 @@ export const viajeConfirmado = (info) => {
     console.log(info)
     return async (dispatch) => {
         try {
-            const { data } = await axios.put(`http://localhost:3001/trips/reserves/create`, info);
-            console.log(data)
+            const mailReserve = {
+                userId: info.userId,
+                tripId: info.tripId,
+                option: "reserve"
+            }
+            const[reserveResp, mailResp] = await Promise.all([
+                axios.put(`http://localhost:3001/trips/reserves/create`, info),
+                axios.post(`http://localhost:3001/send-mail`,mailReserve)
+            ])
+            
+            console.log(reserveResp.data)
+            console.log(`Estado de mail reserva: ${mailResp}`);
             dispatch({
                 type: VIAJE_CONFIRMADO,
-                payload: data
+                payload: reserveResp.data
             })
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
@@ -270,8 +280,18 @@ export const conductorAsignado = (info) => {
     console.log(info)
     return async (dispatch) => {
         try {
-            const { data } = await axios.put(`http://localhost:3001/trips/reserves/update`, info);
-            console.log(data)
+            const mailReserve = {
+                userId: info.userId,
+                tripId: info.tripId,
+                option: "assignDriver"
+            }
+
+            const[reserveResp, mailResp] = await Promise.all([
+                axios.put(`http://localhost:3001/trips/reserves/update`, info),
+                axios.post(`http://localhost:3001/send-mail`,mailReserve)
+            ])
+            console.log(reserveResp.data)
+            console.log(`Estado de mail reserva: ${mailResp}`);
             /* dispatch({
                 type: GET_FILTERED,
                 payload: data
