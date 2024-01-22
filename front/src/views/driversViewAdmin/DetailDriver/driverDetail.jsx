@@ -18,7 +18,7 @@ import DriverDetailMobile from './driverDetailMobile';
 const DriverDetail = (props) => {
   const [isMobile] = useMediaQuery('(max-width: 640px)');
   return (
-    <Card boxSize='4xl' overflowX='scroll' w={{base: '25rem', md: '90vw'}}>
+    <Card boxSize='4xl' overflowX='scroll' w={{base: '25rem', md: '60vw'}}>
       <CardBody>
         <Stack mt='6' spacing='3'>
           <Heading bg='gray.200' py='2' px='4'  borderRadius='8' >
@@ -28,16 +28,17 @@ const DriverDetail = (props) => {
             </Badge> 
           </Heading>
           <Flex gap='4' flexDirection={{base: 'column', md: 'row'}} w='100%'>
-            <Flex boxShadow={'0 0px 20px black'} borderRadius='lg' w='100%' >
+            <Flex boxShadow={'0 0px 20px black'} borderRadius='lg' w='100%'  justify={'space-between'}>
               <Image
                 src={props.driverImg}
                 alt={props.name}
                 borderRadius='lg'
                 objectFit={'cover'}
+                w='100%'
               />
             </Flex>
             {!isMobile ? (
-            <Flex gap={4} w='100%' justify='center' m='0 auto' flexDirection={'column'}>
+            <Flex gap={4} w='50%' justify='center' m='0 auto' flexDirection={'column'} >
               <TableContainer w='auto' h='auto' >
                 <Table variant='striped' bg='gray.300'  >
                   <TableCaption fontSize={'1.2rem'}>Datos del Conductor</TableCaption>

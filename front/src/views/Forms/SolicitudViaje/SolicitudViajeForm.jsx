@@ -77,7 +77,7 @@ function SolicitudViajeForm() {
             const infoAmandarAlBack = {
                 tripId: infoConfirmacionViaje.id,
                 userId: infoConfirmacionViaje.userId,
-             
+                /* idMP: mpid */
               }
               const confirmationText = (
                 <div>

@@ -1,8 +1,9 @@
 const getUserById = require('../../controllers/usersControllers/getUserById');
 
 module.exports = async (req, res) => {
+    const {id} =req.params; 
     try {
-        const { id } = req.query;
+        // const { id } = req.query;
         const usuario = await getUserById(id);
 
         res.status(200).json(usuario);

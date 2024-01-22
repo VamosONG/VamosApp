@@ -63,16 +63,16 @@ const CarouselVamos = () => {
         mb={4} 
         color="black"
         fontFamily="'DIN Alternate Black', sans-serif"
-        fontSize={['2xl', null, '5xl']}
+        // fontSize={['2xl', null, '5xl']} //Error por que est adeclarada dos veces. 
         textShadow='2px 2px 4px rgb(0, 0, 0, 0.4)'
         >
           EMPLEADOS VAMOS!!
         </Text>
         <Text 
-        fontSize="md" 
+        fontSize="md"  //Aca ya lo has declarado. tira error 
         color="black"
         fontFamily="'DIN Alternate Black', sans-serif"
-        fontSize={['lg', null, '1xl']}
+        // fontSize={['lg', null, '1xl']} //Error por que est adeclarada dos veces. 
         textShadow='2px 2px 4px rgb(0, 0, 0, 0.3)'
         >
         Compuesto en un 75 % por adultos mayores, nuestro equipo refleja dedicación y diversidad. 
