@@ -88,7 +88,7 @@ const Solicitud =()=> {
       <Card
         key={id}
         direction='row'
-        
+        marginTop={'10rem'}
       >
         <CardHeader size="md">ASIGNACION DE CONDUCTOR PARA SOLICITUD DE VIAJE</CardHeader>
         

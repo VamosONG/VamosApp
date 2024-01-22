@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getTripsById, postReview } from "../../redux/actions";
+import { getPendingTrips, getTripsById, postReview } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Card, CardBody, CardHeader, Flex, Heading, Stack, StackDivider,Text, Textarea } from "@chakra-ui/react";
 import Swal from "sweetalert2";
@@ -7,9 +7,10 @@ import Swal from "sweetalert2";
 const ReviewAndReseña=()=> {
 
     const dispatch= useDispatch()
-    const tripsById = useSelector((state) => state.tripsById)
-    const tripPending=tripsById.find((trip)=>trip.stateOfTrip==="pending") //Después que venga filtrado del back
-    console.log(tripsById)
+    /* const tripsById = useSelector((state) => state.tripsById) */
+    const viajesPendientes = useSelector((state) => state.viajesPendientes)
+    const tripPending=viajesPendientes.find((trip)=>trip.userId==="762baea5-4422-44de-ae36-ddf9c6a9e43b") //Luego find con el id del usuario
+    console.log(viajesPendientes)
     console.log(tripPending)
     
 
@@ -18,11 +19,12 @@ const ReviewAndReseña=()=> {
         comments:"",
      
     })
+     
     
-    
-    const id = "c9f86a72-c6b4-4ac2-9b31-0d8eaee8b23b"
+    const id = "762baea5-4422-44de-ae36-ddf9c6a9e43b"
     useEffect(() => {
-        dispatch(getTripsById(id))
+        /* dispatch(getTripsById(id)) */
+        dispatch(getPendingTrips())
     }, [dispatch]);
 
     const [rating, setRating] = useState(0);
@@ -59,7 +61,7 @@ const ReviewAndReseña=()=> {
           icon: "success"
         }).then(() => {
           // Redirigir a la página anterior
-          /* window.history.back(); */
+          window.history.back();
         });
     }
 
@@ -100,7 +102,7 @@ const ReviewAndReseña=()=> {
                     Conductor
                   </Heading>
                   <Text pt='2' fontSize='sm'>
-                    Juan Montaron 
+                  {tripPending?.driverFullName} 
                   </Text>
                 </Box>
                 
