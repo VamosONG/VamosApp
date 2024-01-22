@@ -3,7 +3,7 @@ function Landing() {
   
     return (
       <>
-        <p>Funciona Landing</p>
+        <p>Funciona Landing!</p>
       </>
     )
   }

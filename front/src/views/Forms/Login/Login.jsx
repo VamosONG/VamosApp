@@ -1,5 +1,5 @@
 // HOOKS
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -15,6 +15,7 @@ import {
   InputRightElement,
   Stack,
   Text,
+  Box
 } from "@chakra-ui/react";
 // AUTH FIREBASE
 import { useAuth } from "../../../context/authContext";
@@ -35,8 +36,11 @@ const LoginForm = ({ onSwitchForm }) => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
+
   const dispatch= useDispatch()
   const navigate = useNavigate()
+
+  const {currentUser} = useSelector(state => state)
 
 
   const [input, setInput] = useState({
@@ -69,25 +73,6 @@ const LoginForm = ({ onSwitchForm }) => {
     }
   };
 
-
-  //   const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   try {
-  //     const[loginres, usuarioActual, mailres] = await Promise.all([
-  //       await auth.login(input.email, input.password); //Destruturing del operationType de la funsion login
-  //       const getUser= await dispatch(getUserByEmail(input.email))
-  //       const 
-
-  //     ])
- 
-      
-  //     }
-  //   } catch (error) {
-  //     console.error("Error al iniciar sesión:", error.message);
-  //   }
-  // };
-
-
   const handleGoogleLogin = async () => {
     try {
       const google= await auth.loginWithGoogle();
@@ -98,14 +83,14 @@ const LoginForm = ({ onSwitchForm }) => {
     }
   };
 
-  const handleLogOut = async() => {
-    try {
-      await auth.logOut()
-      navigate("/")
-    } catch (error) {
-      console.log("error");
-    }
-  }
+  // const handleLogOut = async() => {
+  //   try {
+  //     await auth.logOut()
+  //     navigate("/")
+  //   } catch (error) {
+  //     console.log("error");
+  //   }
+  // }
 
 
   return (
@@ -151,13 +136,12 @@ const LoginForm = ({ onSwitchForm }) => {
         </InputGroup>
       </FormControl>
 
-      <Button colorScheme="green" onClick={handleSubmit}>
-        Entrar
-      </Button>
-{/* 
+ 
+
+{/* /* 
       <Button colorScheme="green" onClick={handleLogOut}>
         Salir
-      </Button> */}
+      </Button> */} 
      
 
       <Container>
@@ -172,6 +156,13 @@ const LoginForm = ({ onSwitchForm }) => {
         </Text>
 
       </Container>
+    <Box>
+      {!currentUser.id && 
+        (<Button colorScheme="green" onClick={handleSubmit}>
+        Entrar
+        </Button>)
+      }
+      </Box>
     </Stack>
    );
 };

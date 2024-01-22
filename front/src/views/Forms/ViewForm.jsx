@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux'
 import LogOut from './LogOut/logout';
 
-
 const SlideEx = () => {
     const {currentUser}  = useSelector((state) => state)
     //Test de vista de usuario o admin, falta probar con data. 

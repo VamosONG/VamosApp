@@ -19,7 +19,7 @@ export const VIAJE_CONFIRMADO = 'VIAJE_CONFIRMADO'
 export const GET_FILTERED = 'GET_FILTERED'
 export const GET_TRIPS_BY_ID = 'GET_TRIPS_BY_ID'
 export const POST_REVIEW = 'POST_REVIEW'
-
+export const CLEAN_USER_BY_EMAIL = "CLEAN_USER_BY_EMAIL"
 export const GET_ALL_PRICES = 'GET_ALL_PRICES'
 
 export const USER_BY_EMAIL = 'USER_BY_EMAIL'
@@ -475,6 +475,7 @@ export const updatePrice = (info) => {
     };
 };
 
+
 export const getDataMePago = () => {
     // return async (dispatch) => {
     //     try {
@@ -513,5 +514,19 @@ export const getDataMePago = () => {
             throw error;
         }
     }
+
+
+export const cleanCurrentUser = (userVacio) => {
+    return async (dispatch) => {
+        try {
+            dispatch({
+                type: CLEAN_USER_BY_EMAIL,
+                payload: userVacio
+            })
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            console.log(error.message)
+        }
+    };
 
 }

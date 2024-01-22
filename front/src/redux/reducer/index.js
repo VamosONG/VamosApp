@@ -6,7 +6,9 @@ import { DELETE_DRIVER, GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETI
 
 
 
-import { GET_PAYMENT_DATA, CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_TRIPS_BY_ID, GET_COMPLETED_TRIPS, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE, USER_BY_EMAIL, GET_ALL_PRICES } from "../actions/index";
+
+import { GET_PAYMENT_DATA, CLEAN_USER_BY_EMAIL, CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_TRIPS_BY_ID, GET_COMPLETED_TRIPS, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE, USER_BY_EMAIL, GET_ALL_PRICES } from "../actions/index";
+
 
 
 
@@ -257,6 +259,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 tripsById: action.payload
             } */
+
         case USER_BY_EMAIL:
             return {
                 ...state,
@@ -269,6 +272,13 @@ const reducer = (state = initialState, action) => {
                 mePagoData: action.payload
             }
 
+
+
+            case CLEAN_USER_BY_EMAIL:
+                return{
+                    ...state,
+                    currentUser: action.payload
+                }
 
 
         default:
