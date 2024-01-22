@@ -15,6 +15,7 @@ import {
   InputRightElement,
   Stack,
   Text,
+  Heading,
   Box
 } from "@chakra-ui/react";
 // AUTH FIREBASE
@@ -83,6 +84,10 @@ const LoginForm = ({ onSwitchForm }) => {
     }
   };
 
+
+  const handleRegister = () => {
+    navigate("/register")
+  }
   // const handleLogOut = async() => {
   //   try {
   //     await auth.logOut()
@@ -96,16 +101,18 @@ const LoginForm = ({ onSwitchForm }) => {
   return (
     <Stack
       spacing={4}
-      bg="#009ED1"
+      bg="rgb(0, 158, 209, 0.8)"
       p="5"
       h="auto"
-      borderRadius="20"
+      borderRadius="2%"
       boxShadow="dark-lg"
       color="white"
       w={{ base: "20rem", md: "30rem" }}
     >
+    {!currentUser.id &&
+      <>
       <FormControl isInvalid={isError} isRequired>
-        <FormLabel>Correo Electrónico</FormLabel>
+        <FormLabel fontSize="xl">Correo Electrónico</FormLabel>
         <Input
           type="text"
           value={input.email}
@@ -119,7 +126,7 @@ const LoginForm = ({ onSwitchForm }) => {
       </FormControl>
 
       <FormControl isInvalid={isError} isRequired>
-        <FormLabel>Contraseña</FormLabel>
+        <FormLabel fontSize="xl" >Contraseña</FormLabel>
         <InputGroup size="md">
           <Input
             pr="4.5rem"
@@ -147,7 +154,7 @@ const LoginForm = ({ onSwitchForm }) => {
       <Container>
         <Text>
           ¿No tienes cuenta?{" "}
-          <Button color="teal.500" onClick={onSwitchForm}>
+          <Button color="teal.500" onClick={handleRegister}>
             Registrarme
           </Button>
           <Button colorScheme="red" onClick={handleGoogleLogin}>
@@ -163,6 +170,15 @@ const LoginForm = ({ onSwitchForm }) => {
         </Button>)
       }
       </Box>
+      </>
+} {
+  currentUser.id &&
+  <Box>
+    <Heading fontSize="xl">{currentUser.name}</Heading>
+    <Text fontSize="xl">{currentUser.email}</Text>
+  </Box>
+}
+
     </Stack>
    );
 };

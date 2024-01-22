@@ -47,8 +47,8 @@ const UpdateDriverData = (props) => {
         console.log("Antes de la actualización:", newData);
         if (newData) {
 
-            console.log('data antes de la ruta' + JSON.stringify(newData));
-            const response = await axios.patch(`http://localhost:3001/drivers/update/${id}`, { newData });
+            //console.log('data antes de la ruta' + JSON.stringify(newData));
+            const response = await axios.patch(`http://localhost:3001/drivers/update/${id}`, newData);
             console.log('data luego de la ruta' + newData);
             if (response.status === 200) {
 
