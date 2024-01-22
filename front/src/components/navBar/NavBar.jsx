@@ -89,6 +89,9 @@ const NavBar = () => {
                         <Link to="/frecuentes">
                           <Button colorScheme="#009ED1" fontSize='1xl'>PREGUNTAS FRECUENTES</Button>
                         </Link>
+                        <Link to='/review&reseña'>
+                          <Button colorScheme="#009ED1" fontSize='1xl'>RESEÑA DE TU VIAJE</Button>
+                        </Link>
                       </Flex>
                     </Box>
                   ) : (
