@@ -1,7 +1,7 @@
 import axios from 'axios';
 import choferes from '../../utils/chofer'
 
-import { DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE } from './action.types';
+import { DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER } from './action.types';
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE = "PAGINATE"
@@ -25,6 +25,8 @@ export const GET_ALL_PRICES = 'GET_ALL_PRICES'
 export const USER_BY_EMAIL = 'USER_BY_EMAIL'
 export const GET_PAYMENT_DATA = 'GET_PAYMENT_DATA'
 
+const URL = 'http://localhost:3001'
+
 
 
 export const getAllConductores = () => {
@@ -41,7 +43,6 @@ export const getAllConductores = () => {
             throw error;
         }
     }
-
 }
 
 export const getTripById = (id) => {
@@ -137,7 +138,7 @@ export const getReservedTrips = () =>{
             })
         } catch (error) {
             console.log(error);
-            alert("error")
+            alert("error en getReservedTrips")
         }
     }
 }
@@ -153,7 +154,7 @@ export const getPendingTrips = () =>{
             })
         } catch (error) {
             console.log(error);
-            alert("error")
+            alert("error en getPendingTrips ")
         }
     }
 }
@@ -169,7 +170,6 @@ export const getCanceledTrips = () =>{
             })
         } catch (error) {
             console.log(error);
-            alert("error")
         }
     }
 }
@@ -187,7 +187,20 @@ export const postNewUser = (form) => {
             throw error;
         }
     }
+}
 
+export const getDetailUserById = (id) => {
+    return async (dispatch)=> {
+        try {
+            const {data} = axios.get(`http://localhost:3001/user/${id}`)
+            return dispatch({
+                type: GET_DETAIL_USER,
+                payload: data
+            })
+        } catch (error) {
+            console.error("Error en el detail user:", error);
+        }
+    }
 }
 
 export const paginateConductores = (order) => {
@@ -411,6 +424,8 @@ export const getTripsById = (id) => {
         }
     }
 }
+
+
 export const postReview = (info) => {
     /* info.driverId='46d639a7-5468-495b-b9a7-f666517d3bfb' */
     console.log(info)

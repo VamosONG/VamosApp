@@ -30,6 +30,7 @@ import EditPrices from './components/editPrices/editPricesComponent';
 import FormLogInWithGoogle from './views/logInWithGoogle/formLogInWithGoogle';
 import RegistroForm from './views/Forms/Registro/Registro';
 import UserProfile from './components/userProfile/userProfile'
+import AdminProfile from './components/userProfile/adminProfile';
 
 function App() {
   const location = useLocation();
@@ -59,7 +60,8 @@ function App() {
         <Route path="/login" element={<LoginForm/>}/>
         <Route path="/formLogInWithGoogle" element={<FormLogInWithGoogle/>}/>
         <Route path="/register" element={<RegistroForm/>}/>
-        <Route path="/profile" element={<UserProfile/>}/>
+        {/* <Route path="/profile" element={<UserProfile/>}/> */}
+        <Route path="/profile" element={<AdminProfile/>}/>
 
 
       </Routes>

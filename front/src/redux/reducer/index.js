@@ -1,16 +1,13 @@
 
 
 
-import { DELETE_DRIVER, GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, FILTER_STATE, ORDER_STATE } from "../actions/action.types";
+import { DELETE_DRIVER, GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER } from "../actions/action.types";
 
 
+// //import { CLEAN_USER_BY_EMAIL, CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_TRIPS_BY_ID, GET_COMPLETED_TRIPS, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE, USER_BY_EMAIL, GET_ALL_PRICES } from "../actions/index";
 
 
-
-//import { CLEAN_USER_BY_EMAIL, CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_TRIPS_BY_ID, GET_COMPLETED_TRIPS, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE, USER_BY_EMAIL, GET_ALL_PRICES } from "../actions/index";
-
-
-import { GET_PAYMENT_DATA, CLEAN_USER_BY_EMAIL, CREATE_CHOFER, GET_ALL_CONDUCTORES, GET_TRIPS_BY_ID, GET_COMPLETED_TRIPS, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE, USER_BY_EMAIL, GET_ALL_PRICES } from "../actions/index";
+import { GET_PAYMENT_DATA, CREATE_CHOFER, CLEAN_USER_BY_EMAIL, GET_ALL_CONDUCTORES, GET_TRIPS_BY_ID, GET_COMPLETED_TRIPS, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE, USER_BY_EMAIL, GET_ALL_PRICES } from "../actions/index";
 
 
 
@@ -204,6 +201,7 @@ const reducer = (state = initialState, action) => {
             const filterCarList = state.allData.filter((car) => car.carType === action.payload)
             return {
                 ...state,
+                // conductores: filterCarList,
                 conductores: [...filterCarList].slice(0, PAGE_DATA),
                 pageConductores: filterCarList
             }
@@ -213,6 +211,7 @@ const reducer = (state = initialState, action) => {
 
             return {
                 ...state,
+                // conductores: filterAirportList,
                 conductores: [...filterAirportList].slice(0, PAGE_DATA),
                 pageConductores: filterAirportList
             }
@@ -263,6 +262,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 tripsById: action.payload
             } */
+            // setea la data del usuario conectado actualmente.
+        case GET_DETAIL_USER:
+            return {
+                ...state,
+                currentUser: action.payload
+            }
 
         case USER_BY_EMAIL:
             return {
