@@ -28,6 +28,7 @@ const LogOut = () => {
             // location.href = '/';
             dispatch(cleanCurrentUser({}))
             navigate("/")
+          
           } catch (error) {
             console.log(`funciona${error.message}`);
           }

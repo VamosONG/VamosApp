@@ -26,7 +26,9 @@ import { getUserByEmail } from "../../../redux/actions";
 
 const RegistroForm = ({ onSwitchForm }) => {
 
+
   const bgImg= "https://res.cloudinary.com/drgnsbah9/image/upload/v1705767597/Vamos/Aeropuerto_loqc3q.jpg"
+
   const [input, setInput] = useState({
     name: "",
     surname: "",
@@ -102,6 +104,7 @@ const RegistroForm = ({ onSwitchForm }) => {
 
   return (
     <form onSubmit={handleSubmit}>
+
       <Flex
       justify="center"
       alignContent="center"
@@ -120,6 +123,7 @@ const RegistroForm = ({ onSwitchForm }) => {
         w={{ base: "20rem", md: "30rem" }}
         color="white"
       >
+
         <Heading fontSize="x-large">REGISTRATE!</Heading>
         <FormControl isInvalid={isError} isRequired>
           <FormLabel fontSize="xl">Nombre</FormLabel>
@@ -148,6 +152,7 @@ const RegistroForm = ({ onSwitchForm }) => {
             <FormErrorMessage>Es necesario tu surname</FormErrorMessage>
           ) : null}
         </FormControl>
+
         <FormControl isRequired>
           <FormLabel fontSize="xl">Telefono</FormLabel>
           <Input

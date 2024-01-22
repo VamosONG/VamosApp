@@ -15,8 +15,8 @@ import {
   InputRightElement,
   Stack,
   Text,
-  Box,
-  Heading
+  Heading,
+  Box
 } from "@chakra-ui/react";
 // AUTH FIREBASE
 import { useAuth } from "../../../context/authContext";
@@ -84,9 +84,18 @@ const LoginForm = ({ onSwitchForm }) => {
     }
   };
 
+
   const handleRegister = () => {
     navigate("/register")
   }
+  // const handleLogOut = async() => {
+  //   try {
+  //     await auth.logOut()
+  //     navigate("/")
+  //   } catch (error) {
+  //     console.log("error");
+  //   }
+  // }
 
 
   return (
@@ -169,6 +178,7 @@ const LoginForm = ({ onSwitchForm }) => {
     <Text fontSize="xl">{currentUser.email}</Text>
   </Box>
 }
+
     </Stack>
    );
 };
