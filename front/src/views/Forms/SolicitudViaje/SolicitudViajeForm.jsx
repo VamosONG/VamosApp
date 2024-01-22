@@ -211,7 +211,7 @@ function SolicitudViajeForm() {
             boxShadow='dark-lg'
             
             >
-                <Heading>Datos del viaje</Heading>
+                <Heading>DATOS DEL VIAJE</Heading>
                 <Box>
                     {/* <Center py={2} gap={4} > */}
                         
@@ -317,8 +317,9 @@ function SolicitudViajeForm() {
                 </Box>
 
                 <Box mt={4}>
-                    <Button colorScheme='teal' variant='outline' w='100%' type='submit'>
-                        Reservar viaje</Button>
+                    <Button bg= "rgb(0, 160, 112, 0.8)" variant='outline' w='100%' type='submit' fontSize="xl">
+                        RESERVAR
+                        </Button>
                 </Box>
                     {/* </Center> */}
                     {/* </Center> */}
