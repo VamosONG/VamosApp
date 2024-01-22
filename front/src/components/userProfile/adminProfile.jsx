@@ -1,9 +1,10 @@
 import { Box, Flex, } from '@chakra-ui/react'
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
+import { Link, useLocation } from 'react-router-dom';
 
 import {
-    Avatar, Badge, Text, Heading, Center, Progress, Stack, Image, Button, Link
+    Avatar, Badge, Text, Heading, Center, Progress, Stack, Image, Button, Link as ChakraLink,
 } from '@chakra-ui/react'
 import { getAllConductores, getAllPrices, getCanceledTrips, getDetailUserById, getPendingTrips, getReservedTrips } from '../../redux/actions';
 import { StarIcon, EditIcon } from '@chakra-ui/icons';
@@ -13,6 +14,7 @@ import { useParams } from "react-router-dom";
 import ImgMancora from '../../assets/imgPlaces/mancora.jpeg'
 import ImgZorrito from '../../assets/imgPlaces/zorritos.jpg'
 import ImgDecameron from '../../assets/imgPlaces/decameron.jpg'
+import { FaArrowLeft } from 'react-icons/fa';
 
 const AdminProfile = () => {
     const { id } = useParams();
@@ -63,14 +65,34 @@ const AdminProfile = () => {
         fetchData();
     }, [id])
 
+    const handleClick=()=>{
+        window.history.back();
+    }
+
     return (
         <>
             <Box  bg='gray.100' h='auto' py='1rem' w='100%' position={'relative'} my='1rem'>
+            <Link to="/" className="back-button">
+                <Button 
+                onClick={()=>handleClick()}
+                display="inline-flex"
+                alignItems="center"
+                padding="8px 16px"
+                borderRadius="md"
+                borderWidth="1px"
+                borderColor="#10447E"
+                color="#10447E"
+                fontWeight="semibold"
+                _hover={{ bg: '#009ED1', color: 'white' }}
+                >
+                <FaArrowLeft style={{ marginRight: '8px' }} /> INICIO
+                </Button>
+                </Link>
                 <Flex display={'flex'}  justify={{ base: 'center', md: 'center' }} align={{ base: 'center', md: 'center' }} flexWrap={'nowrap'} overflow={'hidden'} position={'relative'} gap={8} w='100%' p='1rem'>
                     <Flex flexDirection={{ base: 'column', md: 'row' }} gap={8}>
 
                         <Flex w={{ base: '10rem', md: '200px' }} h={{ base: '10rem', md: '250px' }} bg='#009ED1' borderRadius={'lg'} p='.5rem' flexDirection={'column'} gap={1} overflowY={'auto'} css={scrollbarStyles}>
-                            <Heading fontSize={'1rem'} position={'relative'}>Reservas</Heading>
+                            <Heading fontSize={'1rem'} position={'relative'}>Perfil</Heading>
                             {users ? (
                                 <Flex key={users?.id} bg='gray.100' borderRadius={5} py='1' >
                                     <Box ml='3' textAlign={'start'} overflow={'hidden'} >
