@@ -117,10 +117,10 @@ const RegistroForm = ({ onSwitchForm }) => {
             name="name"
             value={input.name}
             onChange={handleInputChange}
-            placeholder="Ingresa tu name"
+            placeholder="Nombre"
           />
           {!isError ? (
-            <FormErrorMessage>Es necesario tu name</FormErrorMessage>
+            <FormErrorMessage>Por favor ingrese su nombre.</FormErrorMessage>
           ) : null}
         </FormControl>
 
@@ -131,10 +131,10 @@ const RegistroForm = ({ onSwitchForm }) => {
             name="surname"
             value={input.surname}
             onChange={handleInputChange}
-            placeholder="Ingresa tu name"
+            placeholder="Apellido"
           />
           {!isError ? (
-            <FormErrorMessage>Es necesario tu surname</FormErrorMessage>
+            <FormErrorMessage>Por favor ingrese su apellido.</FormErrorMessage>
           ) : null}
         </FormControl>
         <FormControl isRequired>
@@ -143,25 +143,25 @@ const RegistroForm = ({ onSwitchForm }) => {
             type="number"
             name="phone"
             value={input.phone}
-            placeholder="Ingresa tu nuemro de celular."
+            placeholder="Teléfono."
             onChange={handleInputChange}
           />
           {isError ? (
-            <FormErrorMessage>Es necesario tu numero de phone</FormErrorMessage>
+            <FormErrorMessage>Por favor ingrese su número de teléfono.</FormErrorMessage>
           ) : null}
         </FormControl>
 
         <FormControl isRequired>
-          <FormLabel>Correo Electronico</FormLabel>
+          <FormLabel>Correo electrónico</FormLabel>
           <Input
             type="mail"
             name="email"
             value={input.email}
             onChange={handleInputChange}
-            placeholder="Ingresa tu email"
+            placeholder="Email"
           />
           {isError ? (
-            <FormErrorMessage>El email es requerido.</FormErrorMessage>
+            <FormErrorMessage>Por favor ingrese su email.</FormErrorMessage>
           ) : null}
         </FormControl>
 
@@ -171,11 +171,11 @@ const RegistroForm = ({ onSwitchForm }) => {
             type="number"
             name="dni"
             value={input.dni}
-            placeholder="Ingresa tu nuemro de celular."
+            placeholder="DNI."
             onChange={handleInputChange}
           />
           {isError ? (
-            <FormErrorMessage>Es necesario tu numero de phone</FormErrorMessage>
+            <FormErrorMessage>Por favor ingrese su DNI.</FormErrorMessage>
           ) : null}
         </FormControl>
 
