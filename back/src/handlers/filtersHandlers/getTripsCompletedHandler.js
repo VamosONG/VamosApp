@@ -15,11 +15,13 @@ module.exports = async (req, res) => {
         const completeTrips = allTrips?.filter(tr=>(tr.stateOfTrip==='completed') && (tr.driverId));
 
         const mapeo = await Promise.all(completeTrips?.map(async tr=>{
-            const {dataValues, driverFullName} = tr;
+            const {dataValues, driverFullName, userEmail} = tr;
             const chofer=await getDriverById(tr.driverId);
+            const usuario = await getUserById(tr.userId)
             const newTrip={
                 ...dataValues,
-                driverFullName: `${chofer.name} ${chofer.surname}`
+                driverFullName: `${chofer.name} ${chofer.surname}`,
+                userEmail: `${usuario.email}`
             }
 
             return newTrip;
