@@ -11,7 +11,7 @@ const createOrder = async (req, res) => {
   });
 
   const product = req.body
-console.log(product)
+console.log('pruduct',product)
   try {
       let preference = {
         items:[
@@ -26,7 +26,8 @@ console.log(product)
       back_urls: {
         success: "http://localhost:5173/paymentStatus",
         // success: "http://localhost:3001/mepago/success",
-        failure: "http://localhost:3001/mepago/fail",
+        /* failure: "http://localhost:3001/mepago/fail", */
+        failure: "http://localhost:3001/",
         pending: "http://localhost:3001/mepago/pending",
       },  
       notification_url: "https://27d6-186-11-8-46.ngrok-free.app/mepago/webhook",

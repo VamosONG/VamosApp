@@ -72,6 +72,7 @@ const ReviewAndReseña=()=> {
         justify="center"
         /* height="100vh" */
         direction="column"
+        marginTop={'10rem'}
       >
         {/* {tripspending.map((trip, index) => ( */}
             <Card width="md">

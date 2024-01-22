@@ -103,7 +103,7 @@ export const deleteDriverAction = (id) => {
 
 export const postNewViaje = (infoViaje) => {
 
-    infoViaje.userId= "762baea5-4422-44de-ae36-ddf9c6a9e43b"
+    /* infoViaje.userId= "762baea5-4422-44de-ae36-ddf9c6a9e43b" */
     //infoViaje.userId= "74c99ae0-61f9-4d85-bcb6-fcf680183c48" //(con permisos de admin)
     console.log(infoViaje)
     return async (dispatch) => {
@@ -251,21 +251,21 @@ export const viajeConfirmado = (info) => {
     console.log(info)
     return async (dispatch) => {
         try {
-            const mailReserve = {
+            const {data}=await axios.put(`http://localhost:3001/trips/reserves/create`, info)
+            /* const mailReserve = {
                 userId: info.userId,
                 tripId: info.tripId,
                 option: "reserve"
             }
             const[reserveResp, mailResp] = await Promise.all([
-                axios.put(`http://localhost:3001/trips/reserves/create`, info),
                 axios.post(`http://localhost:3001/send-mail`,mailReserve)
             ])
             
             console.log(reserveResp.data)
-            console.log(`Estado de mail reserva: ${mailResp}`);
+            console.log(`Estado de mail reserva: ${mailResp}`); */
             dispatch({
                 type: VIAJE_CONFIRMADO,
-                payload: reserveResp.data
+                payload: data
             })
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK

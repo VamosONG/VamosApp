@@ -26,6 +26,7 @@ function SolicitudViajeForm() {
     const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
     const currentUser = useSelector((state) => state.currentUser)
     console.log(infoConfirmacionViaje)
+    console.log(currentUser)
 
     const [input, setInput] = useState({
         origin: "",
@@ -42,12 +43,13 @@ function SolicitudViajeForm() {
     
         const product = {
             viaje:`${input?.origin}${input?.destination}`, 
-            price: Number(infoConfirmacionViaje?.price),
-            quantityPassengers: (input?.quantityPassengers).toString()
+            price: /* Number(infoConfirmacionViaje?.price) */100,
+            /* quantityPassengers: (input?.quantityPassengers).toString() */
+            quantityPassengers: Number(input?.quantityPassengers)
           }
         
         const handlePayment = async (/*product*/) => {
-           
+           console.log(product)
             const response = await axios.post("http://localhost:3001/mepago/create-order", product)
     
             window.location.href = response.data
@@ -122,8 +124,8 @@ function SolicitudViajeForm() {
                 }); */
 
                 Swal.fire({
-                  title: "Viaje reservado",
-                  text: "Simulando que se abonó..",
+                  title: "Redirigiendo a Mercado Pago",
+                  text: "Aguarde unos segundos",
                   icon: "success"
                 }).then(() => {
                     
@@ -176,7 +178,8 @@ function SolicitudViajeForm() {
         
         setInput({
             ...input,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            userId:currentUser.id
         })
 
         
