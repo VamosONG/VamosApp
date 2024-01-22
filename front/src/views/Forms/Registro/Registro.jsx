@@ -15,6 +15,7 @@ import {
   InputRightElement,
   Stack,
   Text,
+  Flex
 } from "@chakra-ui/react";
 //HOOKS
 import { useState } from "react";
@@ -24,6 +25,8 @@ import { useDispatch } from "react-redux";
 import { getUserByEmail } from "../../../redux/actions";
 
 const RegistroForm = ({ onSwitchForm }) => {
+
+  const bgImg= "https://res.cloudinary.com/drgnsbah9/image/upload/v1705767597/Vamos/Aeropuerto_loqc3q.jpg"
   const [input, setInput] = useState({
     name: "",
     surname: "",
@@ -99,19 +102,27 @@ const RegistroForm = ({ onSwitchForm }) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <Flex
+      justify="center"
+      alignContent="center"
+      p={20}
+      bgImage={bgImg}
+      bgSize="cover"
+      bgRepeat="no-repeat"
+      >
       <Stack
         spacing={4}
-        bg="#009ED1"
+        bg="rgb(0, 158, 209, 0.6)"
         p="5"
         h="auto"
-        borderRadius="20"
+        borderRadius="2%"
         boxShadow="dark-lg"
         w={{ base: "20rem", md: "30rem" }}
         color="white"
       >
-        <Heading>Formulario de Registro</Heading>
+        <Heading fontSize="x-large">REGISTRATE!</Heading>
         <FormControl isInvalid={isError} isRequired>
-          <FormLabel>Nombre</FormLabel>
+          <FormLabel fontSize="xl">Nombre</FormLabel>
           <Input
             type="text"
             name="name"
@@ -125,7 +136,7 @@ const RegistroForm = ({ onSwitchForm }) => {
         </FormControl>
 
         <FormControl isInvalid={isError} isRequired>
-          <FormLabel>Apellido</FormLabel>
+          <FormLabel fontSize="xl">Apellido</FormLabel>
           <Input
             type="text"
             name="surname"
@@ -138,7 +149,7 @@ const RegistroForm = ({ onSwitchForm }) => {
           ) : null}
         </FormControl>
         <FormControl isRequired>
-          <FormLabel>Telefono</FormLabel>
+          <FormLabel fontSize="xl">Telefono</FormLabel>
           <Input
             type="number"
             name="phone"
@@ -152,7 +163,7 @@ const RegistroForm = ({ onSwitchForm }) => {
         </FormControl>
 
         <FormControl isRequired>
-          <FormLabel>Correo Electronico</FormLabel>
+          <FormLabel fontSize="xl">Correo Electronico</FormLabel>
           <Input
             type="mail"
             name="email"
@@ -166,7 +177,7 @@ const RegistroForm = ({ onSwitchForm }) => {
         </FormControl>
 
         <FormControl isRequired>
-          <FormLabel>DNI</FormLabel>
+          <FormLabel fontSize="xl">DNI</FormLabel>
           <Input
             type="number"
             name="dni"
@@ -180,7 +191,7 @@ const RegistroForm = ({ onSwitchForm }) => {
         </FormControl>
 
         <FormControl isRequired>
-          <FormLabel>Password</FormLabel>
+          <FormLabel fontSize="xl">Password</FormLabel>
           <InputGroup size="md">
             <Input
               pr="4.5rem"
@@ -198,19 +209,12 @@ const RegistroForm = ({ onSwitchForm }) => {
           </InputGroup>
         </FormControl>
 
-        <Button colorScheme="green" type="submit">
-          Registrar
+        <Button fontSize="xl" bg="rgb(0, 290, 209, 0.6)" type="submit">
+          ENVIAR
         </Button>
-
-        <Container>
-          <Text>
-            ¿Ya tienes cuenta?{" "}
-            <Button color="teal.500" onClick={onSwitchForm}>
-              Iniciar Sesion
-            </Button>
-          </Text>
-        </Container>
       </Stack>
+      </Flex>
+
     </form>
   );
 };

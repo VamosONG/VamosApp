@@ -108,7 +108,7 @@ const FormLogInWithGoogle = () => {
         bg="rgb(0, 158, 209, 0.6)"
         p="5"
         h="auto"
-        borderRadius="3%"
+        borderRadius="2%"
         boxShadow="dark-lg"
         w={{ base: "20rem", md: "30rem" }}
         color="black"

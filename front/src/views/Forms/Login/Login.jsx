@@ -84,14 +84,9 @@ const LoginForm = ({ onSwitchForm }) => {
     }
   };
 
-  // const handleLogOut = async() => {
-  //   try {
-  //     await auth.logOut()
-  //     navigate("/")
-  //   } catch (error) {
-  //     console.log("error");
-  //   }
-  // }
+  const handleRegister = () => {
+    navigate("/register")
+  }
 
 
   return (
@@ -100,7 +95,7 @@ const LoginForm = ({ onSwitchForm }) => {
       bg="rgb(0, 158, 209, 0.8)"
       p="5"
       h="auto"
-      borderRadius="3%"
+      borderRadius="2%"
       boxShadow="dark-lg"
       color="white"
       w={{ base: "20rem", md: "30rem" }}
@@ -150,7 +145,7 @@ const LoginForm = ({ onSwitchForm }) => {
       <Container>
         <Text>
           ¿No tienes cuenta?{" "}
-          <Button color="teal.500" onClick={onSwitchForm}>
+          <Button color="teal.500" onClick={handleRegister}>
             Registrarme
           </Button>
           <Button colorScheme="red" onClick={handleGoogleLogin}>
