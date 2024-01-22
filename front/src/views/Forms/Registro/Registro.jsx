@@ -92,7 +92,7 @@ const RegistroForm = ({ onSwitchForm }) => {
         console.log(response);
       })
       .catch((error) => {
-        console.log(error);
+        console.log("error no se pudo cargar");
         Swal.fire({
           icon: "error",
           title: "Oops...",
