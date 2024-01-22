@@ -102,7 +102,7 @@ export const deleteDriverAction = (id) => {
 
 export const postNewViaje = (infoViaje) => {
 
-    infoViaje.userId= "c9f86a72-c6b4-4ac2-9b31-0d8eaee8b23b"
+    infoViaje.userId= "762baea5-4422-44de-ae36-ddf9c6a9e43b"
     //infoViaje.userId= "74c99ae0-61f9-4d85-bcb6-fcf680183c48" //(con permisos de admin)
     console.log(infoViaje)
     return async (dispatch) => {
@@ -137,7 +137,7 @@ export const getReservedTrips = () =>{
             })
         } catch (error) {
             console.log(error);
-            alert("error")
+            alert("error en getReservedTrips")
         }
     }
 }
@@ -153,7 +153,7 @@ export const getPendingTrips = () =>{
             })
         } catch (error) {
             console.log(error);
-            alert("error")
+            alert("error en getPendingTrips ")
         }
     }
 }
@@ -169,7 +169,6 @@ export const getCanceledTrips = () =>{
             })
         } catch (error) {
             console.log(error);
-            alert("error")
         }
     }
 }
