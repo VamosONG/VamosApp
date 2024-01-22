@@ -514,7 +514,7 @@ export const getDataMePago = () => {
             throw error;
         }
     }
-
+}
 
 export const cleanCurrentUser = (userVacio) => {
     return async (dispatch) => {
