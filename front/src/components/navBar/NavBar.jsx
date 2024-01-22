@@ -86,9 +86,6 @@ const NavBar = () => {
                         <Link to="/perfil">
                           <Button colorScheme="#009ED1" fontSize='1xl'>MI PERFIL</Button>
                         </Link>
-                        <Link to="/frecuentes">
-                          <Button colorScheme="#009ED1" fontSize='1xl'>PREGUNTAS FRECUENTES</Button>
-                        </Link>
                       </Flex>
                     </Box>
                   ) : (
@@ -101,6 +98,10 @@ const NavBar = () => {
 
                         <Link to="/about">
                           <Button colorScheme="#009ED1" fontSize='1xl'>NOSOTROS</Button>
+                        </Link>
+
+                        <Link to="/questions">
+                          <Button colorScheme="#009ED1" fontSize='1xl'>PREGUNTAS FRECUENTES</Button>
                         </Link>
                       </Flex>
                     </Box>
