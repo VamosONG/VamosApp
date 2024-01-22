@@ -15,7 +15,8 @@ import {
   InputRightElement,
   Stack,
   Text,
-  Box
+  Box,
+  Heading
 } from "@chakra-ui/react";
 // AUTH FIREBASE
 import { useAuth } from "../../../context/authContext";
@@ -96,16 +97,18 @@ const LoginForm = ({ onSwitchForm }) => {
   return (
     <Stack
       spacing={4}
-      bg="#009ED1"
+      bg="rgb(0, 158, 209, 0.8)"
       p="5"
       h="auto"
-      borderRadius="20"
+      borderRadius="3%"
       boxShadow="dark-lg"
       color="white"
       w={{ base: "20rem", md: "30rem" }}
     >
+    {!currentUser.id &&
+      <>
       <FormControl isInvalid={isError} isRequired>
-        <FormLabel>Correo Electrónico</FormLabel>
+        <FormLabel fontSize="xl">Correo Electrónico</FormLabel>
         <Input
           type="text"
           value={input.email}
@@ -119,7 +122,7 @@ const LoginForm = ({ onSwitchForm }) => {
       </FormControl>
 
       <FormControl isInvalid={isError} isRequired>
-        <FormLabel>Contraseña</FormLabel>
+        <FormLabel fontSize="xl" >Contraseña</FormLabel>
         <InputGroup size="md">
           <Input
             pr="4.5rem"
@@ -163,6 +166,14 @@ const LoginForm = ({ onSwitchForm }) => {
         </Button>)
       }
       </Box>
+      </>
+} {
+  currentUser.id &&
+  <Box>
+    <Heading fontSize="xl">{currentUser.name}</Heading>
+    <Text fontSize="xl">{currentUser.email}</Text>
+  </Box>
+}
     </Stack>
    );
 };
