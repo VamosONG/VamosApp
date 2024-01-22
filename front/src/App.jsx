@@ -9,6 +9,7 @@ import LoginForm from './views/Forms/Login/Login'
 import HomeComponent from './views/home/homeCompone/home';
 import NavBar from './components/navBar/NavBar'
 import About from './components/about/About'
+import Questions from './views/questions/questions';
 
 import Product from './components/product/Product';
 // Hooks
@@ -45,6 +46,7 @@ function App() {
         {/* Renderizando HomeComponent en la ruta para evitar pisar cada ves que se abre una pestaña */}
         <Route path='/home' element={<LoginForm/>}/>
         <Route path= '/about' element={<About/>} />
+        <Route path='/questions' element={<Questions/>}/>
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
         <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
         <Route path='/detail' element={<DriverTableView/>}/>

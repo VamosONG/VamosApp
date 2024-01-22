@@ -59,9 +59,9 @@ function SolicitudesDeViajes() {
   };
 
   return (
-    <div >
-      
-      <Tabs isFitted variant="enclosed" marginTop={'1rem'}>
+    
+      <Flex bg="blue.200" /* align='center' direction={{base:'column',md:'row'}} */ alignItem='center' justifyContent='center'>
+      <Tabs isFitted variant="enclosed" /* marginTop={'1rem'} */marginTop={'10rem'} bg="gray.100">
       <TabList mb="1em" /* borderBottom="2px solid #009ED1" */>
         <Tab _focus={tabStyles} >Viajes sin conductor asignado</Tab>
         <Tab _focus={tabStyles}>Viajes con conductor asignado</Tab>
@@ -78,7 +78,7 @@ function SolicitudesDeViajes() {
                         <Th>Nro</Th>
                         <Th>Origen</Th>
                         <Th>Destino</Th>
-                        <Th>Usuario</Th>
+                        {/* <Th>Usuario</Th> */}
                         <Th>Fecha</Th>
                         <Th /* isNumeric */>Hora</Th>
                         <Th >Buscar conductor</Th>
@@ -92,7 +92,7 @@ function SolicitudesDeViajes() {
                             <Td>{solicitud.origin}</Td>
 
                             <Td>{solicitud.destination}</Td>
-                            <Td>José Bravo</Td>{/* Luego hay que cambiar por nombre de usuario */}
+                            {/* <Td>José Bravo</Td> */}{/* Luego hay que cambiar por nombre de usuario */}
                             <Td>{solicitud.date}</Td>
                             <Td>{solicitud.hour}</Td>
 
@@ -127,7 +127,7 @@ function SolicitudesDeViajes() {
                         <Th>Nro</Th>
                         <Th>Origen</Th>
                         <Th>Destino</Th>
-                        <Th>Usuario</Th>
+                        {/* <Th>Usuario</Th> */}
                         <Th>Fecha</Th>
                         <Th /* isNumeric */>Hora</Th>
                         <Th >Conductor</Th>
@@ -142,10 +142,10 @@ function SolicitudesDeViajes() {
                             <Td>{solicitud.origin}</Td>
 
                             <Td>{solicitud.destination}</Td>
-                            <Td>José Bravo</Td>{/* Luego hay que cambiar por nombre de usuario */}
+                            {/* <Td>José Bravo</Td> */}{/* Luego hay que cambiar por nombre de usuario */}
                             <Td>{solicitud.date}</Td>
                             <Td>{solicitud.hour}</Td>
-                            <Td>Han T. Solo</Td>
+                            <Td>{solicitud.driverFullName}</Td>
 
                             <Td justifyContent='center'  >
                                 <Flex gap={2} justifyContent={'center'}  >
@@ -178,7 +178,7 @@ function SolicitudesDeViajes() {
                         <Th>Nro</Th>
                         <Th>Origen</Th>
                         <Th>Destino</Th>
-                        <Th>Usuario</Th>
+                        {/* <Th>Usuario</Th> */}
                         <Th>Fecha</Th>
                         <Th>Hora</Th>
                         <Th>Conductor</Th>
@@ -193,10 +193,10 @@ function SolicitudesDeViajes() {
                             <Td>{solicitud.origin}</Td>
 
                             <Td>{solicitud.destination}</Td>
-                            <Td>Panchito</Td>{/* Luego hay que cambiar por nombre de usuario */}
+                            {/* <Td>Panchito</Td> */}{/* Luego hay que cambiar por nombre de usuario */}
                             <Td>{solicitud.date}</Td>
                             <Td>{solicitud.hour}</Td>
-                            <Td>Riquelme</Td>
+                            <Td>{solicitud.driverFullName}</Td>
 
                             <Td justifyContent='center'  >
                             ★★★✰✰
@@ -211,8 +211,8 @@ function SolicitudesDeViajes() {
         </TabPanel>
       </TabPanels>
     </Tabs>
-  
-    </div>
+    </Flex>
+    
 
   )
 }
