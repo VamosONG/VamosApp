@@ -35,7 +35,7 @@ const NavBar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
+ 
   return (
     <> 
     {isMobile ? (<MobileNavbar/>) : (
