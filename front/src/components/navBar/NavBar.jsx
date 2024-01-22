@@ -71,8 +71,11 @@ const NavBar = () => {
                         <Link to="/detail">
                           <Button colorScheme="#009ED1" fontSize='1xl'>CONDUCTORES</Button>
                         </Link>
-                        <Link to="/reservas">
+                        {/* <Link to="/reservas">
                           <Button colorScheme="#009ED1" fontSize='1xl'>RESERVAS</Button>
+                        </Link> */}
+                        <Link to="/">
+                          <Button colorScheme="#009ED1" fontSize='1xl'>INICIO</Button>
                         </Link>
                       </Flex>
                     </Box>
@@ -83,14 +86,17 @@ const NavBar = () => {
                         <Link to="/solicitarViaje">
                           <Button colorScheme="#009ED1" fontSize='1xl'>SOLICITAR VIAJE</Button>
                         </Link>
-                        <Link to="/perfil">
+                        <Link to="/profile">
                           <Button colorScheme="#009ED1" fontSize='1xl'>MI PERFIL</Button>
                         </Link>
-                        <Link to="/frecuentes">
+                        {/* <Link to="/frecuentes">
                           <Button colorScheme="#009ED1" fontSize='1xl'>PREGUNTAS FRECUENTES</Button>
-                        </Link>
+                        </Link> */}
                         <Link to='/review&reseña'>
                           <Button colorScheme="#009ED1" fontSize='1xl'>RESEÑA DE TU VIAJE</Button>
+                        </Link>
+                        <Link to="/">
+                          <Button colorScheme="#009ED1" fontSize='1xl'>INICIO</Button>
                         </Link>
                       </Flex>
                     </Box>
@@ -106,9 +112,9 @@ const NavBar = () => {
                           <Button colorScheme="#009ED1" fontSize='1xl'>NOSOTROS</Button>
                         </Link>
 
-                        <Link to="/questions">
+                        {/* <Link to="/questions">
                           <Button colorScheme="#009ED1" fontSize='1xl'>PREGUNTAS FRECUENTES</Button>
-                        </Link>
+                        </Link> */}
                       </Flex>
                     </Box>
                   )
