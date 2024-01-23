@@ -86,7 +86,7 @@ function SolicitudViajeForm() {
                     <p>Origen: {infoConfirmacionViaje.origin}</p>
                     <p>Destino: {infoConfirmacionViaje.destination}</p>
                     <p>Cantidad de pasajeros: {infoConfirmacionViaje.quantityPassengers}</p>
-                    <p style={{ fontWeight: 'bold', fontSize: 'larger', textDecoration: 'underline'  }}>PRECIO FINAL: {infoConfirmacionViaje.price} soles</p>
+                    <p>Precio final: {infoConfirmacionViaje.price}</p>
                 </div>
             );
         
