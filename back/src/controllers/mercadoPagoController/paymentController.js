@@ -14,6 +14,9 @@ const createOrder = async (req, res) => {
 console.log('pruduct',product)
   try {
       let preference = {
+
+        metadata:{userId:"762baea5-4422-44de-ae36-ddf9c6a9e43b"},
+
         items:[
           {
           title: product.viaje,
@@ -30,7 +33,7 @@ console.log('pruduct',product)
         failure: "http://localhost:3001/",
         pending: "http://localhost:3001/mepago/pending",
       },  
-      notification_url: "https://27d6-186-11-8-46.ngrok-free.app/mepago/webhook",
+      notification_url: "https://853c-200-30-254-123.ngrok-free.app/mepago/webhook",
       
       auto_return: "all"
       }
@@ -56,7 +59,7 @@ console.log('pruduct',product)
 
     if (payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
-    // console.log(data)
+    console.log(data)
    
       //aqui se guarda en la base de datos
     }
