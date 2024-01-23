@@ -27,7 +27,7 @@ console.log('pruduct',product)
         success: "http://localhost:5173/paymentStatus",
         // success: "http://localhost:3001/mepago/success",
         /* failure: "http://localhost:3001/mepago/fail", */
-        failure: "http://localhost:3001/",
+        failure: "http://localhost:5173/",
         pending: "http://localhost:3001/mepago/pending",
       },  
       notification_url: "https://27d6-186-11-8-46.ngrok-free.app/mepago/webhook",

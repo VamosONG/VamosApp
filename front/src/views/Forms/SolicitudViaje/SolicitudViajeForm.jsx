@@ -179,7 +179,7 @@ function SolicitudViajeForm() {
         setInput({
             ...input,
             [e.target.name]: e.target.value,
-            userId:currentUser.id
+            /* userId:currentUser.id */
         })
 
         
