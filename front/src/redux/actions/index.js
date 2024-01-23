@@ -15,7 +15,6 @@ export const GET_COMPLETED_TRIPS = "GET_COMPLETED_TRIPS"
 export const NEW_USER = 'NEW_USER'
 export const LOGOUT = 'LOGOUT'
 export const CREATE_CHOFER = 'CREATE_CHOFER'
-export const VIAJE_CONFIRMADO = 'VIAJE_CONFIRMADO'
 export const GET_FILTERED = 'GET_FILTERED'
 export const GET_TRIPS_BY_ID = 'GET_TRIPS_BY_ID'
 export const POST_REVIEW = 'POST_REVIEW'
@@ -249,32 +248,33 @@ export const logOutAction = (value) => {
     };
 }
 
-export const viajeConfirmado = (info) => {
-    console.log(info)
-    return async (dispatch) => {
-        try {
-            const {data}=await axios.put(`http://localhost:3001/trips/reserves/create`, info)
-            /* const mailReserve = {
-                userId: info.userId,
-                tripId: info.tripId,
-                option: "reserve"
-            }
-            const[reserveResp, mailResp] = await Promise.all([
-                axios.post(`http://localhost:3001/send-mail`,mailReserve)
-            ])
+//NO SE VA A USAR!!!
+// export const viajeConfirmado = (info) => {
+//     console.log(info)
+//     return async (dispatch) => {
+//         try {
+//             const {data}=await axios.put(`http://localhost:3001/trips/reserves/create`, info)
+//             /* const mailReserve = {
+//                 userId: info.userId,
+//                 tripId: info.tripId,
+//                 option: "reserve"
+//             }
+//             const[reserveResp, mailResp] = await Promise.all([
+//                 axios.post(`http://localhost:3001/send-mail`,mailReserve)
+//             ])
             
-            console.log(reserveResp.data)
-            console.log(`Estado de mail reserva: ${mailResp}`); */
-            dispatch({
-                type: VIAJE_CONFIRMADO,
-                payload: data
-            })
-        } catch (error) {
-            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-            console.log(error.message)
-        };
-    };
-};
+//             console.log(reserveResp.data)
+//             console.log(`Estado de mail reserva: ${mailResp}`); */
+//             dispatch({
+//                 type: VIAJE_CONFIRMADO,
+//                 payload: data
+//             })
+//         } catch (error) {
+//             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+//             console.log(error.message)
+//         };
+//     };
+// };
 
 export const filtrarConductores = (info) => {
     console.log(info)
