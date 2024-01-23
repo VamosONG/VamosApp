@@ -61,7 +61,7 @@ function SolicitudesDeViajes() {
   return (
     
       <Flex bg="blue.200" /* align='center' direction={{base:'column',md:'row'}} */ alignItem='center' justifyContent='center'>
-      <Tabs isFitted variant="enclosed" /* marginTop={'1rem'} */marginTop={'10rem'} bg="gray.100">
+      <Tabs isFitted variant="enclosed" /* marginTop={'1rem'} */ bg="gray.100">
       <TabList mb="1em" /* borderBottom="2px solid #009ED1" */>
         <Tab _focus={tabStyles} >Viajes sin conductor asignado</Tab>
         <Tab _focus={tabStyles}>Viajes con conductor asignado</Tab>

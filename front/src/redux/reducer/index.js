@@ -73,9 +73,6 @@ const reducer = (state = initialState, action) => {
             const nextPage = state.currentPage + 1;
             const prevPage = state.currentPage - 1;
             const firstIndex = action.payload === "next" ? nextPage * PAGE_DATA : prevPage * PAGE_DATA;
-            // console.log(action.payload)
-            // console.log(firstIndex)
-            // console.log(nextPage)
 
             if (action.payload === 'next' && firstIndex >= state.pageConductores.length) {
                 return state

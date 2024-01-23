@@ -292,6 +292,7 @@ export const filtrarConductores = (info) => {
         };
     };
 };
+
 export const conductorAsignado = (info) => {
     console.log(info)
     return async (dispatch) => {
@@ -436,7 +437,6 @@ export const stateFilter = (data) => {
     }
 }
 
-
 export const getTripsById = (id) => {
     console.log(id)
     return async (dispatch) => {
@@ -452,7 +452,6 @@ export const getTripsById = (id) => {
         }
     }
 }
-
 
 export const postReview = (info) => {
     /* info.driverId='46d639a7-5468-495b-b9a7-f666517d3bfb' */
@@ -522,9 +521,6 @@ export const getAllPrices = () => {
 
 }
 
-
-
-
 export const updatePrice = (info) => {
     console.log(info)
     return async (dispatch) => {
@@ -541,8 +537,6 @@ export const updatePrice = (info) => {
         };
     };
 };
-
-
 
 export const getDataMePago = () => {
     // return async (dispatch) => {

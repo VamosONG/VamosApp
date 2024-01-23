@@ -30,7 +30,7 @@ const ReviewAdmin = () => {
     }, [dispatch])
 
     return (
-        <TableContainer mt={'100px'} >
+        <TableContainer >
             <Flex bg='gray.200' color='#000' justify={'center'} ><ReviewFilter /></Flex>
             <Flex px='1rem' >
                 <Table variant='striped' colorScheme='gray.100' >

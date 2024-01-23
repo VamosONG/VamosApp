@@ -50,8 +50,10 @@ function App() {
         <Route path= '/about' element={<About/>} />
         <Route path='/questions' element={<Questions/>}/>
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
-        <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
-        <Route path='/detail' element={<DriverTableView/>}/>
+        {/* No son necesario estas rutas, ya que todo estara dentro el componente del admin */}
+        {/* <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} /> */}
+        {/* <Route path='/detail' element={<DriverTableView/>}/> */}
+        
         <Route path='/solicitud' element={<Solicitud/>}/>
         <Route path='/product' element={<Product/>}/>
         <Route path='/reserve/confirmed' element={<ReserveComfirmed/>}/>
@@ -64,8 +66,9 @@ function App() {
         <Route path="/register" element={<RegistroForm/>}/>
         {/* <Route path="/profile" element={<UserProfile/>}/> */}
         <Route path="/profile" element={<AdminProfile/>}/>
-        <Route path="/reviewAdmin" element={<ReviewAdmin/>}/>  
-        <Route path="/user" element={<UserViewAdmin/>}/>
+        {/* No son necesario estas rutas, ya que todo estara dentro el componente del admin */}
+        {/* <Route path="/reviewAdmin" element={<ReviewAdmin/>}/>  
+        <Route path="/user" element={<UserViewAdmin/>}/> */}
 
       </Routes>
       {/* <Paginado/> */}

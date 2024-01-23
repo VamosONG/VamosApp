@@ -27,7 +27,7 @@ const UserViewAdmin = () => {
     }, [])
 
     return (
-        <TableContainer mt={'100px'} >
+        <TableContainer  >
             <Flex bg='gray.200' color='#000' justify={'center'} >
                 <UserFilter/>
             </Flex>
