@@ -33,7 +33,7 @@ function SolicitudViajeForm() {
         destination: "",
         date: "",
         hour: "",
-        quantityPassengers: "",
+        quantityPassengers: ""
     });
     
     /////////*****************MERCADOPAGO*************************************************************** */
@@ -43,9 +43,9 @@ function SolicitudViajeForm() {
     
         const product = {
             viaje:`${input?.origin}${input?.destination}`, 
-            price: /* Number(infoConfirmacionViaje?.price) */100,
-            /* quantityPassengers: (input?.quantityPassengers).toString() */
-            quantityPassengers: Number(input?.quantityPassengers)
+            price: Number(infoConfirmacionViaje?.price) ,
+            // quantityPassengers: "1",
+            userId: infoConfirmacionViaje?.userId
           }
         
         const handlePayment = async (/*product*/) => {
@@ -79,14 +79,14 @@ function SolicitudViajeForm() {
             const infoAmandarAlBack = {
                 tripId: infoConfirmacionViaje.id,
                 userId: infoConfirmacionViaje.userId,
-                /* idMP: mpid */
+       
               }
               const confirmationText = (
                 <div>
                     <p>Origen: {infoConfirmacionViaje.origin}</p>
                     <p>Destino: {infoConfirmacionViaje.destination}</p>
                     <p>Cantidad de pasajeros: {infoConfirmacionViaje.quantityPassengers}</p>
-                    <p>Precio final: {infoConfirmacionViaje.price}</p>
+                    <p style={{ fontWeight: 'bold', fontSize: 'larger', textDecoration: 'underline'  }}>PRECIO FINAL: {infoConfirmacionViaje.price} soles</p>
                 </div>
             );
         
@@ -139,7 +139,7 @@ function SolicitudViajeForm() {
                     destination: "",
                     date: "",
                     hour: "",
-                    quantityPassengers: "",
+                    quantityPassengers: ""
                 });
             }})}
           }, [infoConfirmacionViaje, dispatch, /* confirmationText */]);
@@ -179,7 +179,7 @@ function SolicitudViajeForm() {
         setInput({
             ...input,
             [e.target.name]: e.target.value,
-            userId:currentUser.id
+             userId:currentUser.id 
         })
 
         
