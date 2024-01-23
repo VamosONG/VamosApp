@@ -66,7 +66,8 @@ const NavBar = () => {
           <Box w="100%" alignContent='center' justifyContent='center'>
             <Flex justify='center' alignItems="center">
               {
-                 /* currentUser.admin && currentUser.admin */ role==='admin'?
+                  currentUser.admin && currentUser.admin  ?
+                  // role==='admin'?
                   (
                     <Box>
                       <Flex>
@@ -95,18 +96,15 @@ const NavBar = () => {
                       </Flex>
                     </Box>
 
-                  ) : /* currentUser.admin === false */ role==='user'? (
+                  ) :  currentUser.admin === false  ?(
+                  // role==='user'? 
+                  
                     <Box>
                       <Flex>
                         <Link to="/solicitarViaje">
                           <Button colorScheme="#009ED1" fontSize='1xl'>SOLICITAR VIAJE</Button>
                         </Link>
-                        {/* <Link to="/profile">
-                          <Button colorScheme="#009ED1" fontSize='1xl'>MI PERFIL</Button>
-                        </Link> */}
-                        {/* <Link to="/frecuentes">
-                          <Button colorScheme="#009ED1" fontSize='1xl'>PREGUNTAS FRECUENTES</Button>
-                        </Link> */}
+                        
                         <Link to='/review&reseña'>
                           <Button colorScheme="#009ED1" fontSize='1xl'>RESEÑA DE TU VIAJE</Button>
                         </Link>
@@ -138,12 +136,12 @@ const NavBar = () => {
               
             </Flex>
           </Box>
-                      <Button colorScheme='teal' size='xs' marginLeft={'25rem'} onClick={()=>handleClick("usuario")}>
+                     {/* <Button colorScheme='teal' size='xs' marginLeft={'25rem'} onClick={()=>handleClick("usuario")}>
     Usuario
   </Button>
-                        <Button colorScheme='teal' size='xs' /* marginLeft={'25rem'} */ onClick={()=>handleClick("admin")}>
+                        <Button colorScheme='teal' size='xs'  onClick={()=>handleClick("admin")}>
     Admin
-  </Button>
+  </Button>  */}
 
           <Box >
             <AvatarGroup spacing="1rem" mx="20px" >
