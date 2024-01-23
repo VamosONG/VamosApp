@@ -68,7 +68,7 @@ const DriverTableView = () => {
     }
 
     return (
-
+        <Flex  /* align='center' direction={{base:'column',md:'row'}} */ alignItem='center' justifyContent='center'>
         <TableContainer >
             <Flex bg='gray.200' color='#000' justify={'center'} ><OrderFilterAlphabetical/></Flex>
             <Table variant='simple' >
@@ -191,7 +191,7 @@ const DriverTableView = () => {
             {/* COMPONENTE DE PAGINADO */}
             {/* <Paginado/>  */}
         </TableContainer>
-
+        </Flex>
     )
 }
 

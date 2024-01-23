@@ -36,6 +36,12 @@ const NavBar = () => {
     };
   }, []);
 
+  const [role,setRole]=useState("notUser")
+ const handleClick=(role)=>{
+  if (role==='usuario'){setRole('user')}
+  if (role==='admin'){setRole('admin')}
+  
+ }
   return (
     <> 
     {isMobile ? (<MobileNavbar/>) : (
@@ -60,7 +66,7 @@ const NavBar = () => {
           <Box w="100%" alignContent='center' justifyContent='center'>
             <Flex justify='center' alignItems="center">
               {
-                 currentUser.admin && currentUser.admin ?
+                 /* currentUser.admin && currentUser.admin */ role==='admin'?
                   (
                     <Box>
                       <Flex>
@@ -71,20 +77,41 @@ const NavBar = () => {
                         <Link to="/detail">
                           <Button colorScheme="#009ED1" fontSize='1xl'>CONDUCTORES</Button>
                         </Link>
-                        <Link to="/reservas">
+                        {/* <Link to="/reservas">
                           <Button colorScheme="#009ED1" fontSize='1xl'>RESERVAS</Button>
+                        </Link> */}
+                        <Link to="/">
+                          <Button colorScheme="#009ED1" fontSize='1xl'>INICIO</Button>
                         </Link>
+                        <Link to="/profile">
+                          <Button colorScheme="#009ED1" fontSize='1xl'>MI PERFIL</Button>
+                        </Link>
+                        <Link to='/editPrices'>
+        <Button colorScheme="#009ED1" fontSize='1xl'>
+            
+            CAMBIAR PRECIOS DE VIAJES
+        </Button>
+        </Link> 
                       </Flex>
                     </Box>
 
-                  ) : currentUser.admin === false ? (
+                  ) : /* currentUser.admin === false */ role==='user'? (
                     <Box>
                       <Flex>
                         <Link to="/solicitarViaje">
                           <Button colorScheme="#009ED1" fontSize='1xl'>SOLICITAR VIAJE</Button>
                         </Link>
-                        <Link to="/perfil">
+                        {/* <Link to="/profile">
                           <Button colorScheme="#009ED1" fontSize='1xl'>MI PERFIL</Button>
+                        </Link> */}
+                        {/* <Link to="/frecuentes">
+                          <Button colorScheme="#009ED1" fontSize='1xl'>PREGUNTAS FRECUENTES</Button>
+                        </Link> */}
+                        <Link to='/review&reseña'>
+                          <Button colorScheme="#009ED1" fontSize='1xl'>RESEÑA DE TU VIAJE</Button>
+                        </Link>
+                        <Link to="/">
+                          <Button colorScheme="#009ED1" fontSize='1xl'>INICIO</Button>
                         </Link>
                       </Flex>
                     </Box>
@@ -103,6 +130,7 @@ const NavBar = () => {
                         <Link to="/questions">
                           <Button colorScheme="#009ED1" fontSize='1xl'>PREGUNTAS FRECUENTES</Button>
                         </Link>
+                        
                       </Flex>
                     </Box>
                   )
@@ -110,6 +138,12 @@ const NavBar = () => {
               
             </Flex>
           </Box>
+                      <Button colorScheme='teal' size='xs' marginLeft={'25rem'} onClick={()=>handleClick("usuario")}>
+    Usuario
+  </Button>
+                        <Button colorScheme='teal' size='xs' /* marginLeft={'25rem'} */ onClick={()=>handleClick("admin")}>
+    Admin
+  </Button>
 
           <Box >
             <AvatarGroup spacing="1rem" mx="20px" >

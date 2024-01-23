@@ -73,7 +73,7 @@ const EditPrices = () => {
 
 
   return (
-    <TableContainer>
+    <TableContainer marginTop={'10rem'}>
       <Table variant='striped' colorScheme='teal'>
         <TableCaption>Precios según ruta y vehículo</TableCaption>
         <Thead>

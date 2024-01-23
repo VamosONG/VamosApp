@@ -27,6 +27,8 @@ const UserViewAdmin = () => {
     }, [])
 
     return (
+        <Flex /* align='center' direction={{base:'column',md:'row'}} */ alignItem='center' justifyContent='center'>
+
         <TableContainer  >
             <Flex bg='gray.200' color='#000' justify={'center'} >
                 <UserFilter/>
@@ -79,6 +81,7 @@ const UserViewAdmin = () => {
             {/* COMPONENTE DE PAGINADO */}
             {/* <Paginado/>  */}
         </TableContainer>
+        </Flex>
     )
 }
 

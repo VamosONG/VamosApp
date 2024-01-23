@@ -11,25 +11,33 @@ const createOrder = async (req, res) => {
   });
 
   const product = req.body
-console.log(product)
+console.log('pruduct',product)
   try {
       let preference = {
+
+        metadata:{userId:product.userId},
+
+
+
         items:[
           {
           title: product.viaje,
           unit_price: product.price,
           currency_id: "PEN",
-          quantity: product.quantityPassengers, 
-          // description: product.description, 
+          // quantity: 1, 
+           description: product.quantityPassengers, 
           // picture_url: "",
         }],
       back_urls: {
         success: "http://localhost:5173/paymentStatus",
         // success: "http://localhost:3001/mepago/success",
-        failure: "http://localhost:3001/mepago/fail",
+        /* failure: "http://localhost:3001/mepago/fail", */
+        failure: "http://localhost:5173/",
         pending: "http://localhost:3001/mepago/pending",
       },  
-      notification_url: "https://27d6-186-11-8-46.ngrok-free.app/mepago/webhook",
+
+      notification_url: "https://4623-181-31-90-235.ngrok-free.app/mepago/webhook",
+
       
       auto_return: "all"
       }
@@ -55,7 +63,7 @@ console.log(product)
 
     if (payment.type === "payment") {
       const data = await mercadopago.payment.findById(payment["data.id"]);
-    // console.log(data)
+    console.log(data)
    
       //aqui se guarda en la base de datos
     }

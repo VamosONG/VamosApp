@@ -30,6 +30,8 @@ const ReviewAdmin = () => {
     }, [dispatch])
 
     return (
+        <Flex /* align='center' direction={{base:'column',md:'row'}} */ alignItem='center' justifyContent='center'>
+
         <TableContainer >
             <Flex bg='gray.200' color='#000' justify={'center'} ><ReviewFilter /></Flex>
             <Flex px='1rem' >
@@ -96,6 +98,7 @@ const ReviewAdmin = () => {
             {/* COMPONENTE DE PAGINADO */}
             {/* <Paginado/>  */}
         </TableContainer>
+        </Flex>
     )
 }
 
