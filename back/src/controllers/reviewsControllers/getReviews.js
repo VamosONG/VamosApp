@@ -1,4 +1,4 @@
-const { Review, User } = require('../../dataBase')
+const { Review, User, Driver } = require('../../dataBase')
 
 const getReviews = async () => {
 
@@ -8,7 +8,12 @@ const getReviews = async () => {
                 {
                     model: User, // Utiliza el modelo User definido en tu sequelize instance
                     as: 'User', // Alias definido en tu asociación
-                    attributes: ['name'],
+                    attributes: ['name', 'email'],
+                },
+                {
+                    model: Driver,
+                    as: 'Driver',
+                    attributes: ['name', 'phone']
                 },
             ],
         });
@@ -21,6 +26,9 @@ const getReviews = async () => {
             qualification: review.qualification,
             comments: review.comments,
             userName: review.User ? review.User.name : null, // Utiliza el alias User
+            userMail: review.User ? review.User.email : 'Email bloqueado',
+            driverName: review.Driver ? review.Driver.name : 'Nombre oculto',
+            driverPhone: review.Driver ? review.Driver.phone : 'Numero oculto'
         }));
 
         return transformedReviews;
