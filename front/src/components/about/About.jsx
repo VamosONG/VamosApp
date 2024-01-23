@@ -3,14 +3,17 @@ import { Box, Flex, VStack, Heading, Text, Image, Divider } from "@chakra-ui/rea
 
 const About = () => {
   return (
-    <Flex direction="column" minHeight="100vh">
+    <Flex 
+    direction="column" 
+    minHeight="100vh"
+    bgImage='https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/eqdrrjmlkojpiiwlhwjo.jpg'
+    >
 
       <Flex
         flex="1"
         direction={{ base: "column", md: "row" }}
         p="100px"
         align="center"
-        bg="blue.200"
       >
         {/* Contenido de la página */}
         <VStack 
@@ -22,16 +25,18 @@ const About = () => {
           <Heading as="h1" 
           size="2xl" 
           fontFamily='DIN Alternate Black, sans-serif'
-          textShadow='2px 2px 4px rgb(0, 0, 0, 0.4)'
+          textShadow='2px 2px 4px rgb(0, 0, 0, 0.8)'
+          color='white'
           >
             Sobre VAMOS!!
           </Heading>
           <Text 
           fontFamily='DIN Alternate, sans-serif' 
-          fontSize="xl" 
+          fontSize={{ base: "lg", md: "xl" }}
           textAlign={{ base: "start", md: "left" }} 
           maxW="800px"
-          textShadow='1px 1px 2px rgb(0, 0, 0, 0.2)'
+          textShadow='2px 2px 2px rgb(0, 0, 0, 0.8)'
+          color='white'
           >
             Somos una empresa social que brinda el servicio de taxi aeropuerto 
             y que, al mismo tiempo, da trabajo a adultos mayores sin oportunidades 
@@ -40,20 +45,22 @@ const About = () => {
             un futuro más brillante y enriquecedor para nuestra comunidad.
           </Text>
 
-          <VStack align="start" spacing={1} textAlign="start">
+          <VStack align="start" spacing={2} textAlign="start">
             <Box maxW="800px">
               <Heading 
               fontFamily='DIN Alternate Black, sans-serif' 
               as="h2" 
               size="lg"
-              textShadow='2px 2px 4px rgb(0, 0, 0, 0.2)'
+              textShadow='2px 2px 4px rgb(0, 0, 0, 0.8)'
+              color='white'
               >
                 Misión
               </Heading>
               <Text 
               fontFamily='DIN Alternate, sans-serif' 
-              fontSize="xl"
-              textShadow='1px 1px 2px rgb(0, 0, 0, 0.2)'
+              fontSize={{ base: "lg", md: "xl" }}
+              textShadow='2px 2px 2px rgb(0, 0, 0, 0.8)'
+              color='white'
               >
               Emprenderemos nuestro compromiso de proporcionar un servicio de traslado 
               de excelencia, asequible, puntual, confiable y seguro, especializado en 
@@ -68,14 +75,16 @@ const About = () => {
               fontFamily='DIN Alternate Black, sans-serif' 
               as="h2" 
               size="lg"
-              textShadow='2px 2px 4px rgb(0, 0, 0, 0.2)'
+              textShadow='2px 2px 4px rgb(0, 0, 0, 0.8)'
+              color='white'
               >
                 Visión
               </Heading>
               <Text 
               fontFamily='DIN Alternate, sans-serif' 
-              fontSize="xl"
-              textShadow='1px 1px 2px rgb(0, 0, 0, 0.2)'
+              fontSize={{ base: "lg", md: "xl" }}
+              textShadow='2px 2px 2px rgb(0, 0, 0, 0.8)'
+              color='white'
               >
               Visualizamos un futuro donde VAMOS!! se consolida como una alternativa 
               líder, sostenible y responsable en el transporte, compitiendo con empresas 

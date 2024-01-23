@@ -8,25 +8,22 @@ import {
   Avatar,
   AvatarGroup,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Vamos from "../../assets/logoblanco.png";
 import MobileNavbar from "../navBar/mobileNavbar/mobileNavbar";
 import { useMediaQuery } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import SlideEx from "../../views/Forms/ViewForm";
-const NavBar = () => {
 
-  const { currentUser } = useSelector(state => state)
+const NavBar = () => {
+  const { currentUser } = useSelector((state) => state);
   const [navBackground, setNavBackground] = useState(false);
-  const [isMobile] = useMediaQuery('(max-width: 640px)');
+  const [isMobile] = useMediaQuery("(max-width: 640px)");
+  const location = useLocation();
 
   const handleScroll = () => {
     const offset = window.scrollY;
     setNavBackground(offset > 50);
-  };
-
-  const handleResize = () => {
-    setWindowWidth(window.innerWidth);
   };
 
   useEffect(() => {
@@ -41,7 +38,7 @@ const NavBar = () => {
     {isMobile ? (<MobileNavbar/>) : (
       <Flex
         as="nav"
-        bg={navBackground ? "#009ED1" : "transparent"}
+        bg={location.pathname === "/" ? (navBackground ? "#009ED1" : "transparent") : "#009ED1"}
         alignItems="center"
         justify="space-between"
         h="100px"
@@ -89,9 +86,9 @@ const NavBar = () => {
                         <Link to="/profile">
                           <Button colorScheme="#009ED1" fontSize='1xl'>MI PERFIL</Button>
                         </Link>
-                        {/* <Link to="/frecuentes">
+                        <Link to="/questions">
                           <Button colorScheme="#009ED1" fontSize='1xl'>PREGUNTAS FRECUENTES</Button>
-                        </Link> */}
+                        </Link>
                         <Link to='/review&reseña'>
                           <Button colorScheme="#009ED1" fontSize='1xl'>RESEÑA DE TU VIAJE</Button>
                         </Link>
@@ -112,9 +109,9 @@ const NavBar = () => {
                           <Button colorScheme="#009ED1" fontSize='1xl'>NOSOTROS</Button>
                         </Link>
 
-                        {/* <Link to="/questions">
+                        <Link to="/questions">
                           <Button colorScheme="#009ED1" fontSize='1xl'>PREGUNTAS FRECUENTES</Button>
-                        </Link> */}
+                        </Link>
                       </Flex>
                     </Box>
                   )
