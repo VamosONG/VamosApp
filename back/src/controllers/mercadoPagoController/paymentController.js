@@ -1,6 +1,8 @@
 const mercadopago = require("mercadopago");
 // import { MERCADOPAGO_API_KEY } from "../config.js";
 const dotenv = require("dotenv");
+const trip = require("../../models/trip");
+const User = require ("../../dataBase")
 dotenv.config();
 
 
@@ -24,8 +26,8 @@ console.log('pruduct',product)
           title: product.viaje,
           unit_price: product.price,
           currency_id: "PEN",
-          // quantity: 1, 
-           description: product.quantityPassengers, 
+          quantity: 1, 
+          //  description: product.quantityPassengers, 
           // picture_url: "",
         }],
       back_urls: {
@@ -62,8 +64,10 @@ console.log('pruduct',product)
 
 
     if (payment.type === "payment") {
-      const data = await mercadopago.payment.findById(payment["data.id"]);
+      const {data} = await mercadopago.payment.findById(payment["data.id"]);
     console.log(data)
+    // const userPayment = User.findById({where: {id : data.metadata.user_id}})
+    // console.log(userPayment)
    
       //aqui se guarda en la base de datos
     }

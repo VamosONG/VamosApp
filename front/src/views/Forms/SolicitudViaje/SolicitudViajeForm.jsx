@@ -33,8 +33,7 @@ function SolicitudViajeForm() {
         destination: "",
         date: "",
         hour: "",
-        quantityPassengers: "",
-        userId: ""
+        quantityPassengers: ""
     });
     
     /////////*****************MERCADOPAGO*************************************************************** */
@@ -45,8 +44,8 @@ function SolicitudViajeForm() {
         const product = {
             viaje:`${input?.origin}${input?.destination}`, 
             price: Number(infoConfirmacionViaje?.price) ,
-            quantityPassengers: 1,
-            userId: infoConfirmacionViaje.userId
+            // quantityPassengers: "1",
+            userId: infoConfirmacionViaje?.userId
           }
         
         const handlePayment = async (/*product*/) => {
@@ -140,8 +139,7 @@ function SolicitudViajeForm() {
                     destination: "",
                     date: "",
                     hour: "",
-                    quantityPassengers: "",
-                    userId: ""
+                    quantityPassengers: ""
                 });
             }})}
           }, [infoConfirmacionViaje, dispatch, /* confirmationText */]);
@@ -181,7 +179,7 @@ function SolicitudViajeForm() {
         setInput({
             ...input,
             [e.target.name]: e.target.value,
-            /* userId:currentUser.id */
+             userId:currentUser.id 
         })
 
         
