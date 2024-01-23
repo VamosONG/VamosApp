@@ -68,6 +68,8 @@ const receiveWebhook = async (req, res) => {
       const userPayment = await Trip.findOne({ where: { id: data.body.metadata.trip_id } });//BUSCA EL TRIP
       await userPayment.update({ stateOfTrip: "reserved" }); //CAMBIA DE OFFER A RESERVED
       await userPayment.reload();
+
+      
       // AGREGAR LO DE ENVIAR MAIL
 
     }
@@ -80,3 +82,14 @@ const receiveWebhook = async (req, res) => {
 };
 
 module.exports = { createOrder, receiveWebhook }
+
+
+
+
+
+
+
+
+
+
+
