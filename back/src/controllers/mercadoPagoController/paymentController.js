@@ -14,7 +14,11 @@ const createOrder = async (req, res) => {
 console.log('pruduct',product)
   try {
       let preference = {
+
         metadata:{userId:product.userId},
+
+
+
         items:[
           {
           title: product.viaje,
@@ -31,7 +35,9 @@ console.log('pruduct',product)
         failure: "http://localhost:5173/",
         pending: "http://localhost:3001/mepago/pending",
       },  
+
       notification_url: "https://4623-181-31-90-235.ngrok-free.app/mepago/webhook",
+
       
       auto_return: "all"
       }
