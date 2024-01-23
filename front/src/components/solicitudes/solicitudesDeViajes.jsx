@@ -23,7 +23,7 @@ import { Link } from "react-router-dom"
 import Solicitud from "./solicitud"
 
 import { getCanceledTrips, getPendingTrips, getReservedTrips, idDeSolicitud } from "../../redux/actions"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 
 
@@ -35,9 +35,11 @@ function SolicitudesDeViajes() {
   const viajesReservados = useSelector((state) => state.viajesReservados)
   const viajesPendientes = useSelector((state) => state.viajesPendientes)
   const viajesCompletados = useSelector((state) => state.viajesCompletados)
-  const conductores = useSelector((state) => state.conductores)
+  /* const conductores = useSelector((state) => state.conductores) */
 
-
+  const [solicitudesReservedToShow, setSolicitudesReservedToShow]= useState([]);
+  const [solicitudesPendingToShow, setSolicitudesPendingToShow]= useState([]);
+  const [solicitudesCompletedToShow, setSolicitudesCompletedToShow]= useState([]);
 
 
   const handlerClick=(id)=>{
@@ -48,6 +50,10 @@ function SolicitudesDeViajes() {
     dispatch(getReservedTrips())
     dispatch(getPendingTrips())
     dispatch(getCanceledTrips())
+
+    setSolicitudesReservedToShow([...viajesReservados].splice(0, 15));
+    setSolicitudesPendingToShow([...viajesPendientes].splice(0, 6));
+    setSolicitudesCompletedToShow([...viajesCompletados].splice(0, 6));
     
   }, [/* dispatch */])
 
@@ -81,12 +87,13 @@ function SolicitudesDeViajes() {
                         {/* <Th>Usuario</Th> */}
                         <Th>Fecha</Th>
                         <Th /* isNumeric */>Hora</Th>
+                        <Th >Usuario</Th>
                         <Th >Buscar conductor</Th>
                         {/* <Th >Detalles</Th> */}
                     </Tr>
                 </Thead>
                 <Tbody >
-                    {viajesReservados?.map((solicitud, index) => (
+                    {solicitudesReservedToShow?.map((solicitud, index) => (
                         <Tr key={solicitud.id} >
                             <Td>{index + 1}</Td>
                             <Td>{solicitud.origin}</Td>
@@ -95,6 +102,7 @@ function SolicitudesDeViajes() {
                             {/* <Td>José Bravo</Td> */}{/* Luego hay que cambiar por nombre de usuario */}
                             <Td>{solicitud.date}</Td>
                             <Td>{solicitud.hour}</Td>
+                            <Td><Link>usuarioPrueba@gmail.com</Link></Td>
 
                             <Td justifyContent='center'  >
                                 <Flex gap={2} justifyContent={'center'}  >
@@ -131,6 +139,7 @@ function SolicitudesDeViajes() {
                         <Th>Fecha</Th>
                         <Th /* isNumeric */>Hora</Th>
                         <Th >Conductor</Th>
+                        <Th >Usuario</Th>
                         <Th >Cambiar conductor</Th>
                         {/* <Th >Detalles</Th> */}
                     </Tr>
@@ -146,6 +155,7 @@ function SolicitudesDeViajes() {
                             <Td>{solicitud.date}</Td>
                             <Td>{solicitud.hour}</Td>
                             <Td>{solicitud.driverFullName}</Td>
+                            <Td><Link>{solicitud.userEmail}</Link></Td>
 
                             <Td justifyContent='center'  >
                                 <Flex gap={2} justifyContent={'center'}  >
@@ -182,6 +192,8 @@ function SolicitudesDeViajes() {
                         <Th>Fecha</Th>
                         <Th>Hora</Th>
                         <Th>Conductor</Th>
+                        <Th>Usuario</Th>
+                        
                         <Th >Puntación del usuario</Th>
                         {/* <Th >Detalles</Th> */}
                     </Tr>
@@ -193,10 +205,13 @@ function SolicitudesDeViajes() {
                             <Td>{solicitud.origin}</Td>
 
                             <Td>{solicitud.destination}</Td>
-                            {/* <Td>Panchito</Td> */}{/* Luego hay que cambiar por nombre de usuario */}
+                            {/* <Td>mail</Td> */}
+                           
                             <Td>{solicitud.date}</Td>
                             <Td>{solicitud.hour}</Td>
-                            <Td>{solicitud.driverFullName}</Td>
+                            {/* <Td>{solicitud.driverFullName}</Td> */}
+                            <Td>Vicente</Td>
+                            <Td><Link>{solicitud.userEmail}</Link></Td>
 
                             <Td justifyContent='center'  >
                             ★★★✰✰
