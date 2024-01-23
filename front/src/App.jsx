@@ -23,7 +23,7 @@ import DriverTableView from './views/driversViewAdmin/driverTable';
 import ReserveComfirmed from './views/Reserve/ReserveConfirmed';
 import ReserveReject from './views/Reserve/ReserveReject';
 import ReviewAndReseña from './components/ReviewAndReseña/reviewAndReseña';
-import PaymentStatus from './views/payments/PaymentStatus';
+import PaymentStatus from './views/payments/paymentStatus';
 
 import EditPrices from './components/editPrices/editPricesComponent';
 
