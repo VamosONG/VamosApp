@@ -10,7 +10,7 @@ import {
     TableContainer, Button, Flex, useDisclosure, Link, Collapse, Box, Badge
 } from '@chakra-ui/react'
 
-import { DeleteIcon, EditIcon, WarningIcon } from '@chakra-ui/icons'
+import { DeleteIcon, EditIcon, WarningIcon, RepeatClockIcon } from '@chakra-ui/icons'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteDriverAction, getAllConductores } from '../../redux/actions'
@@ -22,7 +22,7 @@ import ViewBtnUpdateDriver from '../Forms/ViewForms/ViewUpdateDriverForm'
 import ViewBtnDetailDriver from './DetailDriver/ViewBtnDetailDriver'
 import OrderFilterAlphabetical from './filtersData/orderFilter'
 import Paginado from '../../components/paginado/paginadoComponent'
-
+import axios from 'axios'
 
 const DriverTableView = () => {
     const driverData = useSelector((state) => state.conductores)
@@ -32,12 +32,6 @@ const DriverTableView = () => {
     useEffect(() => {
         dispatch(getAllConductores())
     },[])
-
-    // const driverStateShow = driverData.driverState;
-    
-    const stateNow = () => {
-        
-    }
 
     const deleteDriver = (id) => {
         Swal.fire({
@@ -50,8 +44,8 @@ const DriverTableView = () => {
             reverseButtons: true
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const deleteOk = await dispatch(deleteDriverAction(id))
-                if (deleteOk) {
+                const response = await dispatch(deleteDriverAction(id))
+                if (response) {
                     Swal.fire({
                         title: "¡Eliminado!",
                         text: "Ha sido eliminado el registro.",
@@ -95,7 +89,7 @@ const DriverTableView = () => {
                 
                 <Tbody>
                     {driverData?.map((driver, index) => (
-                        <Tr key={driver.id} bg={driver.driverState ? '#EEFFF5' : ' #FFEEEE'}>
+                        <Tr key={driver.id} bg={driver.inactive  ? 'gray.300' : driver.driverState ? '#EEFFF5' : ' #FFEEEE'}>
                             <Td>{index + 1}</Td>
                             <Td>{driver.airports}</Td>
 
@@ -106,15 +100,28 @@ const DriverTableView = () => {
 
                             <Td justifyContent='center'  >
                                 <Flex gap={2} justifyContent={'center'}  >
+                                    {!driver.inactive ? (
+
                                     <Tooltip hasArrow label='ELiminar' bg='#E83D6F' placement='left-start'>
 
-                                        <Button onClick={() => deleteDriver(driver.id)} 
+                                        <Button onClick={()=> deleteDriver(driver.id) }
                                         bg='#E83D6F'
                                             fontSize='1.2rem' 
                                             id={driver.id} >
                                             <DeleteIcon />
                                         </Button>
                                     </Tooltip>
+                                    ) : (
+                                        <Tooltip hasArrow label='Reactivar' bg='purple.200' placement='left-start'>
+
+                                        <Button onClick={()=> deleteDriver(driver.id) }
+                                        bg='purple.200'
+                                            fontSize='1.2rem' 
+                                            id={driver.id} >
+                                            <RepeatClockIcon />
+                                        </Button>
+                                    </Tooltip>
+                                    )}
                                     <ViewBtnUpdateDriver id={driver.id}
                                         name={driver.name}
                                         surname={driver.surname}
@@ -157,7 +164,10 @@ const DriverTableView = () => {
                                     />
                             </Td>
 
-                            <Td> {driver.driverState ? (<Badge colorScheme='green' borderRadius={5} px='2'>Activo</Badge>) : (<Badge colorScheme='red'  borderRadius={5} px='2'>Descanso</Badge>)} </Td>
+                            <Td> {driver.driverState ? (<Badge colorScheme='green' borderRadius={5} px='2'>Trabajo</Badge>) : (<Badge colorScheme='red'  borderRadius={5} px='2'>Descanso</Badge>)} </Td>
+
+                            {/* SIRVE PARA MOSTRAR SI EL USUARIO ESTA ELIMINADO DE LA BASE DE DATOS. */}
+                            {/* <Td>{!driver.inactive ? (<Badge colorScheme='green' borderRadius={5} px='2'>Activo</Badge>) : (<Badge colorScheme='red'  borderRadius={5} px='2'>Retirado</Badge>)}</Td> */}
 
                         </Tr>
                     ))}
@@ -174,6 +184,7 @@ const DriverTableView = () => {
                         <Th >Aciones</Th>
                         <Th >Detalles</Th>
                         <Th >Estado</Th>
+                        {/* <Th >Eliminado</Th> */}
                     </Tr>
                 </Tfoot>
             </Table>

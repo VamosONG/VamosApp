@@ -1,7 +1,7 @@
 import axios from 'axios';
 import choferes from '../../utils/chofer'
 
-import { DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER } from './action.types';
+import { DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, ORDER_DATE, FILTER_RATING } from './action.types';
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE = "PAGINATE"
@@ -74,32 +74,20 @@ export const createNewChofer = (data) => {
     }
 }
 
+//Borrado logico
 export const deleteDriverAction = (id) => {
     return async (dispatch) => {
         try {
-            const {data} = await axios.delete(`http://localhost:3001/drivers/${id}`)
+            const {data} = await axios.patch(`http://localhost:3001/drivers/logic/${id}`)
             dispatch({
                 type: DELETE_DRIVER,
                 payload: data
             })
         } catch (error) {
-            console.error(error);
+            console.error('Error en deleteDriverAction ' + error);
         }
     }
 }
-
-// export const updateDriverData = (id, newData) => {
-//     return async (dispatch) => {
-//         try {
-//             dispatch({
-//                 type: UPDATE_DRIVER_DATA,
-//                 payload: data
-//             })
-//         } catch (error) {
-//             console.error({message: 'Error en action', error});
-//         }
-//     }
-// }
 
 export const postNewViaje = (infoViaje) => {
 
@@ -356,6 +344,19 @@ export const ratingOrder = (data) => {
     }
 }
 
+export const dateOrder = (data) => {
+    return async (dispatch) => {
+        try {
+            return dispatch ({
+                type: ORDER_DATE,
+                payload: data
+            })
+        } catch (error) {
+            console.error('error en dateOrder ' + error);
+        }
+    }
+}
+
 export const stateOrder = (data) => {
     return async (dispatch) => {
         try {
@@ -365,6 +366,19 @@ export const stateOrder = (data) => {
             })
         } catch (error) {
             throw new Error(error);
+        }
+    }
+}
+
+export const ratingFilter = (data) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: FILTER_RATING,
+                payload: data
+            })
+        } catch (error) {
+            console.error('Error en ratingFilter ' + error);
         }
     }
 }
@@ -444,18 +458,22 @@ export const postReview = (info) => {
     }
 }
 
-// export const driverState = (data) => {
-//     return async (dispatch) => {
-//         try {
-//             return dispatch({
-//                 type: DRIVER_STATE,
-//                 payload: data
-//             })
-//         } catch (error) {
-//             throw new Error(error);
-//         }
-//     }
-// }
+export const getReviewsData = () => {
+    return async (dispatch) => {
+        try {
+            const {data} = await axios.get(`http://localhost:3001/reviews`)
+            console.log('review data ' + data );
+            return dispatch({
+                type: GET_REVIEWS,
+                payload: data
+            })
+        } catch (error) {
+            console.error('Error en getReviewsData ' + error);
+        }
+    }
+}
+
+
 export const getUserByEmail = (email) => {
     console.log(email)
     return async (dispatch) => {

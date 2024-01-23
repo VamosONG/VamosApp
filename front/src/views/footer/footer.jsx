@@ -9,7 +9,7 @@ import IconInstagram from '../../assets/icons/LOGOINSTA.png'
 function Footer() {
 
   return (
-    <Stack  style={{ position: 'absolute', bottom: 0, width: '100%', zIndex: -1 }} >
+    <Stack  bottom={0} mb={0} left={0} position={'relative'}>
       <Flex flexDirection={{ base: 'column', md: 'column' }} w='100%'  >
 
       <Flex bg='#009ED1' minWidth='max-content' alignItems='center' gap='4' pt='1rem' boxSize='sm' w='100%' h='auto' color='white' justify='space-evenly' px='2rem' flexDirection={{ base: 'column', md: 'row' }}>

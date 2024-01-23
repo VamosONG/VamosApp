@@ -1,12 +1,15 @@
-const updateDriver = require('../../controllers/driversControllers/updateDrivers');
+const setInactiveState = require("../../controllers/driversControllers/setInactiveState");
 
-module.exports = async(req, res)=>{
+
+ const deleteLogicDrivers = async (req, res) => {
+    const { id } = req.params
     try {
-        const { id, inactive } = req.body
-        const updDriver = await updateDriver(id, {inactive: inactive});
-
-        return res.status(200).json(updDriver);
+        // Realiza la actualización del campo "inactive" en la base de datos
+       const response = await setInactiveState(id)
+       return res.status(200).json(response)
     } catch (error) {
         return res.status(400).json(`Error al inactivar chofer. ${error.message}`);
     }
 }
+
+module.exports = deleteLogicDrivers;

@@ -31,6 +31,7 @@ import FormLogInWithGoogle from './views/logInWithGoogle/formLogInWithGoogle';
 import RegistroForm from './views/Forms/Registro/Registro';
 import UserProfile from './components/userProfile/userProfile'
 import AdminProfile from './components/userProfile/adminProfile';
+import ReviewAdmin from './views/adminProfile/reviewAdmin';
 
 function App() {
   const location = useLocation();
@@ -62,7 +63,7 @@ function App() {
         <Route path="/register" element={<RegistroForm/>}/>
         {/* <Route path="/profile" element={<UserProfile/>}/> */}
         <Route path="/profile" element={<AdminProfile/>}/>
-
+        <Route path="/reviewAdmin" element={<ReviewAdmin/>}/>  
 
       </Routes>
       {/* <Paginado/> */}
