@@ -15,15 +15,17 @@ console.log('pruduct',product)
   try {
       let preference = {
 
-        metadata:{userId:"762baea5-4422-44de-ae36-ddf9c6a9e43b"},
+        metadata:{userId:product.userId},
+
+
 
         items:[
           {
           title: product.viaje,
           unit_price: product.price,
           currency_id: "PEN",
-          quantity: product.quantityPassengers, 
-          // description: product.description, 
+          // quantity: 1, 
+           description: product.quantityPassengers, 
           // picture_url: "",
         }],
       back_urls: {
@@ -33,7 +35,9 @@ console.log('pruduct',product)
         failure: "http://localhost:5173/",
         pending: "http://localhost:3001/mepago/pending",
       },  
-      notification_url: "https://853c-200-30-254-123.ngrok-free.app/mepago/webhook",
+
+      notification_url: "https://4623-181-31-90-235.ngrok-free.app/mepago/webhook",
+
       
       auto_return: "all"
       }
