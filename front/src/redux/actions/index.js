@@ -1,7 +1,7 @@
 import axios from 'axios';
 import choferes from '../../utils/chofer'
 
-import { DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, ORDER_DATE, FILTER_RATING } from './action.types';
+import { DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, ORDER_DATE, FILTER_RATING, GET_DATA_USER } from './action.types';
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE = "PAGINATE"
@@ -173,6 +173,20 @@ export const postNewUser = (form) => {
         } catch (error) {
             console.error("Error en la creacion del usuario:", error);
             throw error;
+        }
+    }
+}
+
+export const getDataUser = () => {
+    return async (dispatch) => {
+        try {
+            const {data } = await axios('http://localhost:3001/user')
+            return dispatch({
+                type: GET_DATA_USER,
+                payload: data
+            })
+        } catch (error) {
+            
         }
     }
 }

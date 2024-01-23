@@ -32,6 +32,7 @@ import RegistroForm from './views/Forms/Registro/Registro';
 import UserProfile from './components/userProfile/userProfile'
 import AdminProfile from './components/userProfile/adminProfile';
 import ReviewAdmin from './views/adminProfile/reviewAdmin';
+import UserViewAdmin from './views/adminProfile/userViewAdmin';
 
 function App() {
   const location = useLocation();
@@ -64,6 +65,7 @@ function App() {
         {/* <Route path="/profile" element={<UserProfile/>}/> */}
         <Route path="/profile" element={<AdminProfile/>}/>
         <Route path="/reviewAdmin" element={<ReviewAdmin/>}/>  
+        <Route path="/user" element={<UserViewAdmin/>}/>
 
       </Routes>
       {/* <Paginado/> */}
