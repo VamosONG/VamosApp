@@ -103,7 +103,7 @@ router.delete('/price', deletePriceHandler);
 router.post('/offer/create', createOfferHandler);
 router.post('/drivers/filter', getFilteredDriversHandler);//
 router.get('/trips/reserves', getReservesHandler);
-router.put('/trips/reserves/create', doReserveHandler);
+router.post('/trips/reserves/create', doReserveHandler);
 router.put('/trips/reserves/update',setDriverHandler);
 router.get('/trips/completed', getTripsCompletedHandler);//
 router.get('/trips/pending', getTripsPendingHandler);
