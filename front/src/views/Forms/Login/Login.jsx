@@ -62,11 +62,10 @@ const LoginForm = ({ onSwitchForm }) => {
     event.preventDefault();
     try {
       await auth.login(input.email, input.password); // autenticacion de loginWithGoogle funcion de firebase signInWithPopUp
-      if (operationType === "signIn") {
         const getUser = await dispatch(getUserByEmail(input.email)); // busca al usuario por email y lo setea como currentUser
         console.log(getUser);
         // navigate('/')
-      }
+      
     } catch (error) {
       console.error("Error al iniciar sesión:", error.message);
     }
