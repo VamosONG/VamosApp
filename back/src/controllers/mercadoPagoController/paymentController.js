@@ -17,12 +17,19 @@ const createOrder = async (req, res) => {
   const {
     userId,
     
-    price,viaje,  } = req.body
+    price,viaje,driverId, destination,quantityPassengers,date,origin, hour} = req.body
  console.log(userId,price,viaje);
   try {
     let preference = {
 
-      metadata: { userId: userId },
+      metadata: { userId: userId,
+        origin: origin,
+        destination:  destination,
+        date: date,
+        hour:  hour,
+        quantityPassengers:quantityPassengers,
+        driverId: null,
+        price:  price },
 
 
 
@@ -74,7 +81,7 @@ const receiveWebhook = async (req, res) => {
       // await userPayment.reload();
       // console.log("2",newTrip);
       // await deleteTrip(newTrip.id);
-      
+      const resp = await axios.post("http://localhost:3001/trips/reserves/create",trip)
 
       // AGREGAR LO DE ENVIAR MAIL
 

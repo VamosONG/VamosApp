@@ -13,6 +13,7 @@ import {
 import Swal from 'sweetalert2'
 
 import { renderToString } from 'react-dom/server';
+import { useNavigate } from "react-router";
 
 
 
@@ -22,6 +23,7 @@ function SolicitudViajeForm() {
     const bgImg= "https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
     
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     //trae la info del viaje de redux, donde se calcula el precio
     const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
     console.log(infoConfirmacionViaje,"info");
@@ -47,6 +49,12 @@ function SolicitudViajeForm() {
             price: infoConfirmacionViaje?.price ,
             // quantityPassengers: "1",
             userId: currentUser.id,
+            origin: infoConfirmacionViaje?.origin,
+            destination: infoConfirmacionViaje?.destination,
+            date:infoConfirmacionViaje?.date,
+            hour: infoConfirmacionViaje?.hour,
+            quantityPassengers: Number(infoConfirmacionViaje.quantityPassengers),
+            driverId: null
           }
           const trip = {
             userId: currentUser.id,
@@ -65,8 +73,9 @@ function SolicitudViajeForm() {
             const response = await axios.post("http://localhost:3001/mepago/create-order", product)
             console.log(response)
            
-            const resp = await axios.post("http://localhost:3001/trips/reserves/create",trip)
-            window.location.href = response.data
+            /* const resp = await axios.post("http://localhost:3001/trips/reserves/create",trip)*/
+            window.open(response.data,'_blank' )
+            
             
         };
     
