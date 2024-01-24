@@ -1,10 +1,10 @@
 import { alphabeticalOrder, getDataUser } from "../../../redux/actions";
 import { useSelector, useDispatch } from 'react-redux'
-import { Select, Box, Text, Flex, Heading, FormControl, FormLabel, Button} from '@chakra-ui/react'
+import { Select, Box, Text, Flex, Heading, FormControl, FormLabel, Button, Input} from '@chakra-ui/react'
 import { BsAirplaneEngines, BsBootstrapReboot,BsArrowClockwise } from "react-icons/bs";
 
 
-const UserFilter = ()=> {
+const UserFilter = ({searcher})=> {
     const dispatch = useDispatch()
     const resetFilter = ()=> {
         dispatch(getDataUser())
@@ -18,6 +18,7 @@ const UserFilter = ()=> {
         <>
         <Flex gap='4' justify={'center'} align={'center'} mx='2rem' py='.5rem'>
             <Flex justify='center' align={'center'} gap='4'  >
+            <Input placeholder='Buscar por nombre / email / telefono' onChange={searcher} />
                 <Heading>Orden</Heading>
                 <Box>
                     <FormControl>

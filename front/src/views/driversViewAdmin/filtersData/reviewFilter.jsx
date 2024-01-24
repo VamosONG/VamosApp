@@ -1,11 +1,11 @@
-import { Select, Box, Text, Flex, Heading, FormControl, FormLabel, Button} from '@chakra-ui/react'
+import { Select, Box, Text, Flex, Heading, FormControl, FormLabel, Button, Input} from '@chakra-ui/react'
 import { useSelector, useDispatch } from 'react-redux'
 import { airportFilter, alphabeticalOrder, carFilter, dateOrder, getAllConductores, getReviewsData, passengerOrder, ratingFilter, ratingOrder, stateFilter, stateOrder } from '../../../redux/actions'
 import { BsAirplaneEngines, BsBootstrapReboot,BsArrowClockwise } from "react-icons/bs";
 import { useEffect } from 'react';
 
 
-const ReviewFilter = () => {
+const ReviewFilter = ({searcher}) => {
 
     const dispatch = useDispatch()
 
@@ -31,6 +31,7 @@ const ReviewFilter = () => {
         <>
             <Flex gap='4' justify={'center'} align={'center'} mx='2rem' py='.5rem'>
                 <Flex justify='center' align={'center'} gap='4'  >
+                <Input placeholder='Buscar por nombre / correo / chofer' onChange={searcher} />
                     <Heading>Orden</Heading>
                     {/* <Box>
                         <FormControl>

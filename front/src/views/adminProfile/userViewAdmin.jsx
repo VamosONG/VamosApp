@@ -19,8 +19,16 @@ import Paginado from '../../components/paginado/paginadoComponent';
 
 const UserViewAdmin = () => {
     const userData = useSelector((state) => state.dataUser)
-    console.log('data en current user ' + userData);
     const dispatch = useDispatch()
+
+    const [search , setSearch] = useState('')
+
+    const searcher = (e) => {
+        setSearch(e.target.value)
+    }
+
+    const results = !search ? userData : userData.filter((data) => data.name && data.name.toLowerCase().includes(search.toLowerCase()) || data.email && data.email.toLowerCase().includes(search.toLowerCase())
+)
 
     useEffect(() => {
         dispatch(getDataUser())
@@ -31,7 +39,7 @@ const UserViewAdmin = () => {
 
         <TableContainer  >
             <Flex bg='gray.200' color='#000' justify={'center'} >
-                <UserFilter/>
+                <UserFilter searcher={searcher}/>
             </Flex>
             <Flex px='1rem' >
                 <Table variant='striped' colorScheme='gray.100' >
@@ -46,7 +54,7 @@ const UserViewAdmin = () => {
                     </Thead>
 
                     <Tbody>
-                        {userData?.map((user, index) => (
+                        {results?.map((user, index) => (
                             <Tr key={user.id}  >
                                 <Td w='auto' >{user.name}</Td>
                                 <Td w='min-content' >

@@ -8,10 +8,7 @@ import { useState } from 'react';
 const OrderFilterAlphabetical = ({searcher}) => {
     const data = useSelector((state) => state.allData)
 
-   
-
-
-    const dispatch = useDispatch({searcher})
+    const dispatch = useDispatch()
 
     const handleOrderAlpha = (e) => {
         dispatch(alphabeticalOrder(e.target.value))
