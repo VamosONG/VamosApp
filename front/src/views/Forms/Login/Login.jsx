@@ -22,7 +22,7 @@ import {
 import { useAuth } from "../../../context/authContext";
 
 //ACTIONS
-import { getUserByEmail } from "../../../redux/actions";
+import { cleanCurrentUser, getUserByEmail } from "../../../redux/actions";
 // DEPENDENCIES
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -57,13 +57,13 @@ const LoginForm = ({ onSwitchForm }) => {
 
   const isError = input.email === "" || input.password === "";
 
-  // Cuando se envia el form :
+  // Cuando se envia el form . Esta funcion es para login cuando ya esta registrado
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       await auth.login(input.email, input.password); // autenticacion de loginWithGoogle funcion de firebase signInWithPopUp
       if (operationType === "signIn") {
-        const getUser = await dispatch(getUserByEmail(input.email));
+        const getUser = await dispatch(getUserByEmail(input.email)); // busca al usuario por email y lo setea como currentUser
         console.log(getUser);
         // navigate('/')
       }
@@ -72,25 +72,25 @@ const LoginForm = ({ onSwitchForm }) => {
     }
   };
 
-  const handleGoogleLogin = async () => {
+  //esta funcion es para hacer el login con google y almacenarlo en nuestra db
+    const handleGoogleLogin = async () => {
 
     const {displayName, email} = auth.user
     try {
       await auth.loginWithGoogle(); // Autenticacion de google
       if (auth.user) {
-        const user = {
+        const user = {   // creaacion de un objeto user con los datos que puedo extraer de firebase
           name: displayName,
-          surname: displayName,
           email: email,
         };
 
-        //Crea un usuario (findOrCreate) 
+        //Crea un usuario (findOrCreate) utilizando fetch con su metodo post 
         const response = await fetch('http://localhost:3001/user/create', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(user)
+          body: JSON.stringify(user) 
         });
   
         if (!response.ok) {
@@ -99,7 +99,7 @@ const LoginForm = ({ onSwitchForm }) => {
         const userCreated = await response.json();
   
         // Carga el estado global currentUser con la info del usuario registradi
-        const userActual = dispatch(getUserByEmail(userCreated.email))
+        const userActual = await dispatch(getUserByEmail(userCreated.email))
         console.log(userActual);
   
         return userActual
@@ -114,17 +114,21 @@ const LoginForm = ({ onSwitchForm }) => {
     }
   };
 
+
+  
+
   const handleRegister = () => {
     navigate("/register");
   };
-  // const handleLogOut = async() => {
-  //   try {
-  //     await auth.logOut()
-  //     navigate("/")
-  //   } catch (error) {
-  //     console.log("error");
-  //   }
-  // }
+  const handleLogOut = async() => {
+    try {
+      await auth.logOut()
+      dispatch(cleanCurrentUser({}))
+      navigate("/")
+    } catch (error) {
+      console.log("error");
+    }
+  }
 
   return (
     <Stack
@@ -171,11 +175,6 @@ const LoginForm = ({ onSwitchForm }) => {
             </InputGroup>
           </FormControl>
 
-          {/* /* 
-      <Button colorScheme="green" onClick={handleLogOut}>
-        Salir
-      </Button> */}
-
           <Container>
             <Text>
               ¿No tienes cuenta?{" "}
@@ -202,6 +201,11 @@ const LoginForm = ({ onSwitchForm }) => {
           <Text fontSize="xl">{currentUser.email}</Text>
         </Box>
       )}
+    <Box>
+       <Button colorScheme="green" onClick={handleLogOut}>
+        Salir
+      </Button>
+    </Box>
     </Stack>
   );
 };
