@@ -592,3 +592,18 @@ export const cleanCurrentUser = (userVacio) => {
     };
 
 }
+export const orderSearch = (input) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`http://localhost:3001/trips/filters`, input);
+            dispatch({
+                type: GET_RESERVED_TRIPS,
+                payload: data
+            })
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            console.log(error.message)
+        }
+    };
+
+}
