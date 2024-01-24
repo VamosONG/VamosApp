@@ -7,8 +7,9 @@ const getDriverById = require('../../controllers/driversControllers/getDriverByI
 module.exports=async({id, name, surname, email, phone, dni, driverId, tripId, option})=>{
 
     try {
-
+console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
         const userName=name;
+        email="ezequielantoine@gmail.com"
         let chofer=null;
         let trip=null;
 

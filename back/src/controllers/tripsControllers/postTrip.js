@@ -1,7 +1,7 @@
 const { Trip, User, Driver } = require('../../dataBase');
 
 const postTrip = async ({userId, driverId, date, hour, origin, destination, quantityPassengers, price} ) => {
-    console.log(userId, driverId, date, hour, origin, destination, quantityPassengers, price);
+
     try {
         const [newTrip, created] = await Trip.findOrCreate({
             where: {

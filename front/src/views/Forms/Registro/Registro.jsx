@@ -89,13 +89,7 @@ let dataUser = {};
         });  
 
         navigate("/")
-        // dataUser = {
-        //   userId: data,
-        //   option: "signIn",
-        // };
-        
-        // return axios.post(`http://localhost:3001/send-mail`, dataUser);
-
+       
       })
       .then((response) => {
         console.log("Mail enviado");// respuesta de send-mail aquí
