@@ -66,6 +66,8 @@ const LoginForm = ({ onSwitchForm }) => {
         console.log(getUser);
         // navigate('/')
       
+
+
     } catch (error) {
       console.error("Error al iniciar sesión:", error.message);
     }
