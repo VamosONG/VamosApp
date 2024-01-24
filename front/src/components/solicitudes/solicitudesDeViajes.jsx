@@ -27,9 +27,6 @@ import { getCanceledTrips, getPendingTrips, getReservedTrips, idDeSolicitud, ord
 import { useEffect, useState } from "react"
 
 
-import ReactPaginate from "react-paginate";
-
-
 
 
 function SolicitudesDeViajes() {
@@ -70,7 +67,14 @@ function SolicitudesDeViajes() {
   const totalPagesReserved = Math.ceil(viajesReservados.length / itemsPerPage);
   
   const handlePageChangeReserved = (newPage) => {
-    const firstTrip = newPage * itemsPerPage;
+    if(newPage===0)return
+    const totalReserved=tripsReservedToShow.length;
+    
+    const firstReserved=currentPageCompleted*10;
+    
+    if (firstReserved>totalReserved) return;
+
+    const firstTrip = newPage-1 * itemsPerPage;
     setCurrentPageReserved(newPage);
     setTripsReservedToShow([...viajesReservados].splice(firstTrip, itemsPerPage));
   };
