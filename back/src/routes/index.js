@@ -54,6 +54,8 @@ const {success, fail, pending} = require('../controllers/mercadoPagoController/b
 
 const getTripsByIdHandler = require('../handlers/tripHandlers/getTripsByIdHandler');
 const sendMailHandler = require('../utils/mailing/sendMailHandler');
+const deleteLogic = require('../handlers/driverHandlers/setInactiveDriverHandler');
+const deleteLogicDrivers = require('../handlers/driverHandlers/setInactiveDriverHandler');
 
 const router = Router();
 
@@ -74,6 +76,8 @@ router.patch('/user/update', updateUserHandler);
 //Add ID al final para recibirlo por params.
 router.get('/drivers', getDriversHandler);
 router.post('/drivers/create', postDriverHandler);
+//Borrado logico
+router.patch('/drivers/logic/:id', deleteLogicDrivers);
 router.patch('/drivers/update/:id', updateDriverHandler);
 router.delete('/drivers', deleteDriverHandler);
 

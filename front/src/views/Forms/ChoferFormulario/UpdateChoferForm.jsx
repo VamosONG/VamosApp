@@ -134,6 +134,29 @@ const UpdateDriverData = (props) => {
                                     </Select>
                                 </InputGroup>
                             </FormControl>
+
+                            <FormControl>
+                            <FormLabel>Eliminar</FormLabel>
+                                <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
+                                    <InputLeftAddon bg='yellow.200'>
+                                        {!props.inactive ? ('Activo') : ('Eliminado')}
+                                    </InputLeftAddon>
+                                    <Select
+                                        color="#000"
+                                        id='driverState'
+                                        name="driverState"
+                                        bg='lightgreen'
+                                        onChange={handleChange}
+                                        value={newData.driverState}
+                                    >
+                                        {state.map((bool, index) => (
+                                            <option key={index} value={bool}>
+                                                {bool}
+                                            </option>
+                                        ))}
+                                    </Select>
+                                </InputGroup>
+                            </FormControl>
                         </Flex>
                     </Flex>
                 </Box>

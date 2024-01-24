@@ -23,7 +23,7 @@ import DriverTableView from './views/driversViewAdmin/driverTable';
 import ReserveComfirmed from './views/Reserve/ReserveConfirmed';
 import ReserveReject from './views/Reserve/ReserveReject';
 import ReviewAndReseña from './components/ReviewAndReseña/reviewAndReseña';
-import PaymentStatus from './views/payments/PaymentStatus';
+import PaymentStatus from './views/payments/paymentStatus';
 
 import EditPrices from './components/editPrices/editPricesComponent';
 
@@ -31,6 +31,8 @@ import FormLogInWithGoogle from './views/logInWithGoogle/formLogInWithGoogle';
 import RegistroForm from './views/Forms/Registro/Registro';
 import UserProfile from './components/userProfile/userProfile'
 import AdminProfile from './components/userProfile/adminProfile';
+import ReviewAdmin from './views/adminProfile/reviewAdmin';
+import UserViewAdmin from './views/adminProfile/userViewAdmin';
 
 function App() {
   const location = useLocation();
@@ -48,8 +50,10 @@ function App() {
         <Route path= '/about' element={<About/>} />
         <Route path='/questions' element={<Questions/>}/>
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
-        <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
-        <Route path='/detail' element={<DriverTableView/>}/>
+        {/* No son necesario estas rutas, ya que todo estara dentro el componente del admin */}
+        {/* <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} /> */}
+        {/* <Route path='/detail' element={<DriverTableView/>}/> */}
+        
         <Route path='/solicitud' element={<Solicitud/>}/>
         <Route path='/product' element={<Product/>}/>
         <Route path='/reserve/confirmed' element={<ReserveComfirmed/>}/>
@@ -61,7 +65,9 @@ function App() {
         <Route path="/register" element={<RegistroForm/>}/>
         {/* <Route path="/profile" element={<UserProfile/>}/> */}
         <Route path="/profile" element={<AdminProfile/>}/>
-
+        {/* No son necesario estas rutas, ya que todo estara dentro el componente del admin */}
+        {/* <Route path="/reviewAdmin" element={<ReviewAdmin/>}/>  
+        <Route path="/user" element={<UserViewAdmin/>}/> */}
 
       </Routes>
       {/* <Paginado/> */}

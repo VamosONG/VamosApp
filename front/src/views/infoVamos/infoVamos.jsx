@@ -8,7 +8,7 @@ const InfoVamos = () => {
         <Flex
             alignItems="center"
             justifyContent="center"
-            h="100vh"
+            minH="100vh" // Cambiado de h a minH
             position="relative"
             textAlign="center"
             mt={0}
@@ -24,29 +24,29 @@ const InfoVamos = () => {
                 zIndex="-1"
             />
             <Flex
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-            p={10}
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                p={10}
             >
                 <Heading
-                fontFamily="'DIN Alternate Black', sans-serif"
-                letterSpacing='1px'
-                fontSize={['2xl', null, '6xl']}
-                textShadow='4px 4px 4px rgb(0, 0, 0, 0.4)'
+                    fontFamily="'DIN Alternate Black', sans-serif"
+                    letterSpacing='1px'
+                    fontSize={['2xl', null, '6xl']}
+                    textShadow='4px 4px 4px rgb(0, 0, 0, 0.4)'
                 >
-                ACERCA DE VAMOS
+                    ACERCA DE VAMOS
                 </Heading>
-                <Text 
-                color="Black" 
-                fontSize="3xl" 
-                fontFamily="'DIN Alternate Black', sans-serif"
-                mt='2px'
-                textShadow='4px 4px 4px rgb(0, 0, 0, 0.3)'
+                <Text
+                    color="Black"
+                    fontSize="3xl"
+                    fontFamily="'DIN Alternate Black', sans-serif"
+                    mt='2px'
+                    textShadow='4px 4px 4px rgb(0, 0, 0, 0.3)'
                 >
                     Vamos es una empresa social, comprometida con brindar servicios
-                    de taxi aeropuerto confiables y accesibles. Nuestra mision es crear 
-                    oportunidades laborales para adultos mayores y garantizar traslados seguros y comodos.
+                    de taxi aeropuerto confiables y accesibles. Nuestra misión es crear
+                    oportunidades laborales para adultos mayores y garantizar traslados seguros y cómodos.
                 </Text>
             </Flex>
         </Flex>
