@@ -22,10 +22,9 @@ import Swal from 'sweetalert2'
 import { Link } from "react-router-dom"
 import Solicitud from "./solicitud"
 
+
 import { getCanceledTrips, getPendingTrips, getReservedTrips, idDeSolicitud, orderSearch } from "../../redux/actions"
 import { useEffect, useState } from "react"
-
-/* import ReactPaginate from "react-paginate"; */
 
 
 
@@ -37,6 +36,7 @@ function SolicitudesDeViajes() {
   const viajesReservados = useSelector((state) => state.viajesReservados)
   const viajesPendientes = useSelector((state) => state.viajesPendientes)
   const viajesCompletados = useSelector((state) => state.viajesCompletados)
+
 
   const handlerClick=(id)=>{
     dispatch(idDeSolicitud(id))
@@ -171,13 +171,14 @@ const handleSubmitReserved = async (e) => {
                         {/* <Th>Usuario</Th> */}
                         <Th>Fecha</Th>
                         <Th /* isNumeric */>Hora</Th>
-                        <Th >Usuario</Th>
                         <Th >Buscar conductor</Th>
                         {/* <Th >Detalles</Th> */}
                     </Tr>
                 </Thead>
                 <Tbody >
+
                 {tripsReservedToShow.map((solicitud, index) => (
+
                         <Tr key={solicitud.id} >
                             <Td>{index + 1}</Td>
                             <Td>{solicitud.origin}</Td>
@@ -186,7 +187,6 @@ const handleSubmitReserved = async (e) => {
                             {/* <Td>José Bravo</Td> */}{/* Luego hay que cambiar por nombre de usuario */}
                             <Td>{solicitud.date}</Td>
                             <Td>{solicitud.hour}</Td>
-                            <Td><Link>usuarioPrueba@gmail.com</Link></Td>
 
                             <Td justifyContent='center'  >
                                 <Flex gap={2} justifyContent={'center'}  >
@@ -272,7 +272,6 @@ const handleSubmitReserved = async (e) => {
                         <Th>Fecha</Th>
                         <Th>Hora</Th>
                         <Th >Conductor</Th>
-                        <Th >Usuario</Th>
                         <Th >Cambiar conductor</Th>
                         {/* <Th >Detalles</Th> */}
                     </Tr>
@@ -290,7 +289,6 @@ const handleSubmitReserved = async (e) => {
                             <Td>{solicitud.date}</Td>
                             <Td>{solicitud.hour}</Td>
                             <Td>{solicitud.driverFullName}</Td>
-                            <Td><Link>{solicitud.userEmail}</Link></Td>
 
                             <Td justifyContent='center'  >
                                 <Flex gap={2} justifyContent={'center'}  >
@@ -352,8 +350,6 @@ const handleSubmitReserved = async (e) => {
                         <Th>Fecha</Th>
                         <Th>Hora</Th>
                         <Th>Conductor</Th>
-                        <Th>Usuario</Th>
-                        
                         <Th >Puntación del usuario</Th>
                         {/* <Th >Detalles</Th> */}
                     </Tr>
@@ -367,13 +363,10 @@ const handleSubmitReserved = async (e) => {
                             <Td>{solicitud.origin}</Td>
 
                             <Td>{solicitud.destination}</Td>
-                            {/* <Td>mail</Td> */}
-                           
+                            {/* <Td>Panchito</Td> */}{/* Luego hay que cambiar por nombre de usuario */}
                             <Td>{solicitud.date}</Td>
                             <Td>{solicitud.hour}</Td>
-                            {/* <Td>{solicitud.driverFullName}</Td> */}
-                            <Td>Vicente</Td>
-                            <Td><Link>{solicitud.userEmail}</Link></Td>
+                            <Td>{solicitud.driverFullName}</Td>
 
                             <Td justifyContent='center'  >
                             ★★★✰✰

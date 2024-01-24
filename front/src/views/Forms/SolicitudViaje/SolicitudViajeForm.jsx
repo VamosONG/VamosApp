@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { postNewViaje, viajeConfirmado } from "../../../redux/actions";
+import { postNewViaje } from "../../../redux/actions";
 import { useEffect, useState } from "react";
 
 import axios from 'axios';
@@ -24,6 +24,7 @@ function SolicitudViajeForm() {
     const dispatch = useDispatch();
     //trae la info del viaje de redux, donde se calcula el precio
     const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
+    console.log(infoConfirmacionViaje,"info");
     const currentUser = useSelector((state) => state.currentUser)
     console.log(infoConfirmacionViaje)
     console.log(currentUser)
@@ -45,7 +46,7 @@ function SolicitudViajeForm() {
             viaje:`${input?.origin}${input?.destination}`, 
             price: Number(infoConfirmacionViaje?.price) ,
             // quantityPassengers: "1",
-            userId: infoConfirmacionViaje?.userId
+            tripId: infoConfirmacionViaje?.id
           }
         
         const handlePayment = async (/*product*/) => {
@@ -73,6 +74,7 @@ function SolicitudViajeForm() {
    
  
     useEffect(() => {
+
         console.log(currentUser)
         if (infoConfirmacionViaje.id && !confirmed) {
             setConfirmed(true);
@@ -86,7 +88,7 @@ function SolicitudViajeForm() {
                     <p>Origen: {infoConfirmacionViaje.origin}</p>
                     <p>Destino: {infoConfirmacionViaje.destination}</p>
                     <p>Cantidad de pasajeros: {infoConfirmacionViaje.quantityPassengers}</p>
-                    <p style={{ fontWeight: 'bold', fontSize: 'larger', textDecoration: 'underline'  }}>PRECIO FINAL: {infoConfirmacionViaje.price} soles</p>
+                    <p>Precio final: {infoConfirmacionViaje.price}</p>
                 </div>
             );
         
@@ -113,7 +115,7 @@ function SolicitudViajeForm() {
             }).then(async(result) => {
               if (result.isConfirmed) {
 
-                  await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
+                
                   handlePayment()
                   /* setInput({
                     origin: "",
