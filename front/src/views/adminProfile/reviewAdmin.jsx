@@ -16,6 +16,7 @@ import axios from 'axios'
 import ReviewFilter from '../driversViewAdmin/filtersData/reviewFilter';
 import { useDispatch, useSelector } from "react-redux";
 import { getReviewsData } from '../../redux/actions';
+import Paginado from '../../components/paginado/paginadoComponent';
 
 const ReviewAdmin = () => {
 
@@ -96,7 +97,7 @@ const ReviewAdmin = () => {
                 </Table>
             </Flex>
             {/* COMPONENTE DE PAGINADO */}
-            {/* <Paginado/>  */}
+            <Paginado/> 
         </TableContainer>
         </Flex>
     )

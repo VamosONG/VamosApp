@@ -48,13 +48,15 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     const PAGE_DATA = 6;//DESDE ACA MANEJA LA CANT DE OBJETO POR PAGINA
+
+    const carTypeFound = ["auto", "camioneta", "van", 'van plus'];
     switch (action.type) {
         case GET_ALL_CONDUCTORES:
             const driverData = state.allData.filter((drivers) => drivers.inactive === false)
             return {
                 ...state,
-                conductores: driverData.slice(0, PAGE_DATA), //Se configura asi para poder manejar el paginado.
-                pageConductores: driverData,
+                conductores: [...driverData].splice(0, PAGE_DATA), //Se configura asi para poder manejar el paginado.
+                pageConductores: action.payload,
                 allData: action.payload
             };
         case GET_TRIP_ID:
@@ -82,16 +84,15 @@ const reducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                // pageConductores: /* [...state.pageConductores] */state.conductores.splice(firstIndex, state.cantConductoresPorPag),
                 conductores: [...state.pageConductores].splice(firstIndex, PAGE_DATA),
                 currentPage: action.payload === "next" ? nextPage : prevPage,
             };
 
         case LOGIN:
             const userData = action.payload;
-            const userLogin = state.newUsuario.find((user) => user.name ===  userData.name && user.email === userData.email)
+            const userLogin = state.newUsuario.find((user) => user.name === userData.name && user.email === userData.email)
 
-            if(userLogin) {
+            if (userLogin) {
                 return {
                     ...state,
                     access: true,
@@ -100,17 +101,17 @@ const reducer = (state = initialState, action) => {
                 console.error('Error en login');
             }
 
-            // if (action.payload.email === 'asd' && action.payload.password === '123') {
-            //     return {
-            //         ...state,
-            //         esAdmin: true
-            //     }
-            // } else {
-            //     return {
-            //         ...state,
-            //         esUsuario: true
-            //     }
-            // }
+        // if (action.payload.email === 'asd' && action.payload.password === '123') {
+        //     return {
+        //         ...state,
+        //         esAdmin: true
+        //     }
+        // } else {
+        //     return {
+        //         ...state,
+        //         esUsuario: true
+        //     }
+        // }
 
         //BTN de salida o cerrar sesion
         case LOGOUT:
@@ -234,9 +235,9 @@ const reducer = (state = initialState, action) => {
             }
 
         case FILTER_RATING:
-            let filteredRatingList =  [...state.allDataRevies]
+            let filteredRatingList = [...state.allDataRevies]
             if (action.payload === 'A') {
-                filteredRatingList = filteredRatingList.filter((rate) => rate.qualification  >= 4)
+                filteredRatingList = filteredRatingList.filter((rate) => rate.qualification >= 4)
             } else if (action.payload === 'B') {
                 // Filtra las revisiones con una puntuación regular, por ejemplo, 3 o menos
                 filteredRatingList = filteredRatingList.filter((rate) => rate.qualification <= 3);
@@ -246,8 +247,9 @@ const reducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                reviewsData: [...filteredRatingList],
+                reviewsData: [...filteredRatingList].slice(0, PAGE_DATA),
             }
+
 
         case FILTER_CAR:
             const filterCarList = state.allData.filter((car) => car.carType === action.payload)
@@ -261,7 +263,7 @@ const reducer = (state = initialState, action) => {
 
         case FILTER_AIRPORT:
             const filterAirportList = [...state.allData].filter((zone) => zone.airports === action.payload)
-           
+
             return {
                 ...state,
                 // conductores: filterAirportList,
@@ -298,7 +300,7 @@ const reducer = (state = initialState, action) => {
             }
             return {
                 ...state,
-                conductores: [...orderedListState],
+                conductores: [...orderedListState].slice(0, PAGE_DATA),
                 pageConductores: orderedListState
             }
 
@@ -317,12 +319,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 tripsById: action.payload
             } */
-            // setea la data del usuario conectado actualmente.
-        
+        // setea la data del usuario conectado actualmente.
+
         case GET_DATA_USER:
             return {
                 ...state,
-                dataUser: action.payload,
+                dataUser: action.payload.slice(0, PAGE_DATA),
             }
 
         case GET_DETAIL_USER:
@@ -343,18 +345,18 @@ const reducer = (state = initialState, action) => {
                 mePagoData: action.payload
             }
 
-            case CLEAN_USER_BY_EMAIL:
-                return{
-                    ...state,
-                    currentUser: action.payload
-                }
+        case CLEAN_USER_BY_EMAIL:
+            return {
+                ...state,
+                currentUser: action.payload
+            }
 
-                case GET_REVIEWS: 
-                return {
-                    ...state, 
-                    reviewsData: action.payload,
-                    allDataRevies: action.payload
-                }
+        case GET_REVIEWS:
+            return {
+                ...state,
+                reviewsData: action.payload.slice(0, PAGE_DATA),
+                allDataRevies: action.payload
+            }
 
         default:
             return { ...state };

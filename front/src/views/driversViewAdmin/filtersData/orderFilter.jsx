@@ -1,13 +1,17 @@
-import { Select, Box, Text, Flex, Heading, FormControl, FormLabel, Button} from '@chakra-ui/react'
+import { Select, Box, Text, Flex, Heading, FormControl, FormLabel, Button,Input} from '@chakra-ui/react'
 import { useSelector, useDispatch } from 'react-redux'
 import { airportFilter, alphabeticalOrder, carFilter, getAllConductores, passengerOrder, ratingOrder, stateFilter, stateOrder } from '../../../redux/actions'
 import { BsAirplaneEngines, BsBootstrapReboot,BsArrowClockwise } from "react-icons/bs";
+import { useState } from 'react';
 
 
-const OrderFilterAlphabetical = () => {
+const OrderFilterAlphabetical = ({searcher}) => {
     const data = useSelector((state) => state.allData)
 
-    const dispatch = useDispatch()
+   
+
+
+    const dispatch = useDispatch({searcher})
 
     const handleOrderAlpha = (e) => {
         dispatch(alphabeticalOrder(e.target.value))
@@ -41,6 +45,8 @@ const OrderFilterAlphabetical = () => {
         dispatch(getAllConductores())
     }
 
+   
+
     const airportsFound = ["Aeropuerto Tumbes", "Aeropuerto Talara"];
 
     const carTypeFound = ["auto", "camioneta", "van", 'van plus'];
@@ -49,6 +55,8 @@ const OrderFilterAlphabetical = () => {
         <>
             <Flex gap='4' justify={'center'} align={'center'} mx='2rem' py='.5rem'>
                 <Flex justify='center' align={'center'} gap='4'  >
+ 
+                    <Input placeholder='Buscar por nombre / auto / aeropuerto' onChange={searcher} />
                     <Heading>Orden</Heading>
                     <Box>
                         <FormControl>
@@ -116,7 +124,9 @@ const OrderFilterAlphabetical = () => {
                             <FormLabel > Zona </FormLabel>
                             <Select
                                 name='airpots'
-                                onChange={handleFilterAirport}>
+                                onChange={handleFilterAirport}
+                                // onChange={handleFilterCar}
+                                >
                                 {airportsFound.map((airports, index) => (
                                     <option key={index} value={airports} >{airports}</option>
                                 ))}
@@ -129,7 +139,9 @@ const OrderFilterAlphabetical = () => {
                             <FormLabel>Estado</FormLabel>
                             <Select
                                 name='driverState'
-                                onChange={handleFilterDriverState}>
+                                onChange={handleFilterDriverState}
+                                // onChange={handleFilterCar}
+                                >
                                 <option value={'all'}>Todos</option>
                                 <option value={true}>Activo</option>
                                 <option value={false}>Descanso</option>

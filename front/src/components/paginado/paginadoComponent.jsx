@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { paginateConductores } from "../../redux/actions";
+import { getAllConductores, paginateConductores } from "../../redux/actions";
 import { useEffect } from "react";
 
 import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
@@ -9,12 +9,13 @@ function Paginado() {
 
     const dispatch = useDispatch();
 
-    const currentPage = useSelector((state) => state.currentPage);
-
     const paginate = (e) => {
         console.log(e.target.name);
         dispatch(paginateConductores(e.target.name))
     }
+    // useEffect(()=> {
+    //     dispatch(getAllConductores())
+    // },[dispatch])
 
     return (
         <Box position={"relative"} w='100%' justifyContent={"center"} alignContent={"center"}>
@@ -26,7 +27,6 @@ function Paginado() {
                     </Button>
                 </Tooltip>
                 <Flex>
-                    <Button> {currentPage} </Button>
                 </Flex>
                 <Tooltip label='Siguiente' placement='right' bg='blue.300'>
                     <Button colorScheme='#000' variant='outline'
