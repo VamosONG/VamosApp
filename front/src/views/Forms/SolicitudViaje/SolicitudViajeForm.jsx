@@ -19,7 +19,7 @@ import { renderToString } from 'react-dom/server';
 
 function SolicitudViajeForm() {
 
-    const bgImg= "https://res.cloudinary.com/drgnsbah9/image/upload/v1705767636/Vamos/Aeropuerto3_gbaslo.jpg"
+    const bgImg= "https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
     
     const dispatch = useDispatch();
     //trae la info del viaje de redux, donde se calcula el precio
@@ -47,10 +47,10 @@ function SolicitudViajeForm() {
             price: Number(infoConfirmacionViaje?.price) ,
             // quantityPassengers: "1",
             tripId: infoConfirmacionViaje?.id
-          }
+            }
         
         const handlePayment = async (/*product*/) => {
-           console.log(product)
+            console.log(product)
             const response = await axios.post("http://localhost:3001/mepago/create-order", product)
     
             window.location.href = response.data
@@ -67,12 +67,6 @@ function SolicitudViajeForm() {
 
     
 
-   
-
-   
-
-   
- 
     useEffect(() => {
 
         console.log(currentUser)
@@ -81,9 +75,9 @@ function SolicitudViajeForm() {
             const infoAmandarAlBack = {
                 tripId: infoConfirmacionViaje.id,
                 userId: infoConfirmacionViaje.userId,
-       
-              }
-              const confirmationText = (
+                }
+
+            const confirmationText = (
                 <div>
                     <p>Origen: {infoConfirmacionViaje.origin}</p>
                     <p>Destino: {infoConfirmacionViaje.destination}</p>
@@ -92,7 +86,7 @@ function SolicitudViajeForm() {
                 </div>
             );
         
-              Swal.fire({
+                Swal.fire({
                 title: "Confirmación de traslado",
                 html: renderToString(confirmationText),
                 icon: "warning",
@@ -101,23 +95,23 @@ function SolicitudViajeForm() {
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Pagar con MercadoPago",
 
-                 showClass: {
+                showClass: {
                     popup: 'animate__animated animate__fadeInDown',
-                  },
-                  hideClass: {
+                },
+                hideClass: {
                     popup: 'animate__animated animate__fadeOutUp',
-                  },
-                  preConfirm: async () => {
+                },
+                preConfirm: async () => {
                     
 
 
                 htmlMode: true}
-            }).then(async(result) => {
-              if (result.isConfirmed) {
+                }).then(async(result) => {
+                if (result.isConfirmed) {
 
                 
-                  handlePayment()
-                  /* setInput({
+                    handlePayment()
+                    /* setInput({
                     origin: "",
                     destination: "",
                     date: "",
@@ -126,14 +120,14 @@ function SolicitudViajeForm() {
                 }); */
 
                 Swal.fire({
-                  title: "Redirigiendo a Mercado Pago",
-                  text: "Aguarde unos segundos",
-                  icon: "success"
-                }).then(() => {
+                    title: "Redirigiendo a Mercado Pago",
+                    text: "Aguarde unos segundos",
+                    icon: "success"
+                    }).then(() => {
                     
                     
                     window.history.back();
-                  });
+                    });
             }else {
                 // Restablecer valores al cancelar
                 setInput({
@@ -181,7 +175,7 @@ function SolicitudViajeForm() {
         setInput({
             ...input,
             [e.target.name]: e.target.value,
-             userId:currentUser.id 
+            userId:currentUser.id 
         })
 
         
@@ -199,30 +193,47 @@ function SolicitudViajeForm() {
             bgImage={bgImg}
             bgSize="cover"
             bgRepeat="no-repeat"
+            justify="center"
             >
             <Flex 
-            p="20"
-            justify="center"
+            p={{ base: 8, md: 16 }}
+            alignItems='center'
             alignContent="center"
-            direction="row"
+            direction="column"
+            maxW={{ base: "100%", md: "80%", lg: "60%" }}
+            mx="auto"
+            marginTop={{ base: 0, md: 20 }}
             >
             <Stack 
-            bg= "rgb(0, 158, 209, 0.8)"
-            spacing={4} 
-            p='5' 
-            h='80vh' 
-            w="60%"
-            borderRadius='1%' 
+            bg='#009ED1'
+            spacing={6} 
+            p={{ base: 4, md: 5 }}
+            h='auto' 
+            width={{ base: "100%", md: "80%", lg: "60%" }}
+            borderRadius='xl' 
             boxShadow='dark-lg'
             
             >
-                <Heading>DATOS DEL VIAJE</Heading>
+                <Heading
+                fontSize={{ base: "3xl", md: "4xl" }}
+                fontFamily="'DIN Alternate Black', sans-serif"
+                >DATOS DEL VIAJE</Heading>
                 <Box>
                     {/* <Center py={2} gap={4} > */}
                         
                         <FormControl isRequired>
-                            <FormLabel  fontSize="xl">Desde</FormLabel>
-                            <Select placeholder='Selecciona el origen' name='origin' onChange={handleChange}>
+                            <FormLabel  
+                            fontSize="2xl"
+                            fontFamily="'DIN Medium',"
+                            >Desde</FormLabel>
+                            <Select 
+                            bg="white" 
+                            placeholder='Selecciona el origen' 
+                            name='origin'
+                            onChange={handleChange}
+                            width={{ base: "100%", md: "auto" }}
+                            styles={{ menu: { width: "auto", maxWidth: "100%" } }}
+                            >
                                 <option>AEROPUERTO TALARA</option>
                                 <option>AEROPUERTO TUMBES</option>
                                 <option>DECAMERON PUNTA SAL</option>
@@ -234,9 +245,12 @@ function SolicitudViajeForm() {
                     </Box>
                     <Box>
                         <FormControl>
-                            <FormLabel fontSize="xl">Hasta</FormLabel>
+                            <FormLabel 
+                            fontSize="2xl"
+                            fontFamily="'DIN Medium',"
+                            >Hasta</FormLabel>
                             {input.origin==='AEROPUERTO TALARA'?(
-                                <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
+                                <Select bg="white" placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
                                 <option>MANCORA</option>
                                 <option>DECAMERON</option>
                                 </Select>
@@ -266,7 +280,6 @@ function SolicitudViajeForm() {
                                             <option>AEROPUERTO TALARA</option>
                                             </Select>
                                             ):(null))))))}
-                       
                         </FormControl>
                     {/* </Center> */}
 
@@ -275,8 +288,12 @@ function SolicitudViajeForm() {
                     <Box>
                     {/* <Center py={2} gap={4} > */}
                         <FormControl isRequired>
-                            <FormLabel fontSize="xl">Fecha</FormLabel>
+                            <FormLabel 
+                            fontSize="2xl"
+                            fontFamily="'DIN Medium',"
+                            >Fecha</FormLabel>
                             <Input
+                                bg="white"
                                 placeholder="Select Date and Time"
                                 size="md"
                                 type="date"
@@ -289,8 +306,12 @@ function SolicitudViajeForm() {
                         </Box>
                         <Box>
                         <FormControl isRequired>
-                            <FormLabel fontSize="xl">Hora</FormLabel>
+                            <FormLabel 
+                            fontSize="2xl"
+                            fontFamily="'DIN Medium',"
+                            >Hora</FormLabel>
                             <Input 
+                                bg="white"
                                 type='time' 
                                 placeholder='Hora' 
                                 name='hour'  
@@ -303,10 +324,13 @@ function SolicitudViajeForm() {
 
                     {/* <Center py={2} gap={4}> */}
                         <FormControl as='fieldset' isRequired>
-                            <FormLabel htmlFor='pasajeros' fontSize="xl">Cantidad de pasajeros</FormLabel>
-                            <Select color='#000' placeholder='Cantidad de pasajeros' id='pasajeros' name='quantityPassengers'  onChange={handleChange} >
+                            <FormLabel htmlFor='pasajeros' 
+                            fontSize="2xl"
+                            fontFamily="'DIN Medium',"
+                            >Cantidad de pasajeros</FormLabel>
+                            <Select bg="white" placeholder='Cantidad de pasajeros' id='pasajeros' name='quantityPassengers'  onChange={handleChange} >
                                 {((input.origin === "AEROPUERTO TALARA" && input.destination === "MANCORA") ||
-          (input.origin === "MANCORA" && input.destination === "AEROPUERTO TALARA"))?([...Array(15).keys()].map((number) => (
+                                (input.origin === "MANCORA" && input.destination === "AEROPUERTO TALARA"))?([...Array(15).keys()].map((number) => (
                                     <option key={number + 1} id={`number-${number + 1}`} value={number + 1}>
                                         {number + 1}
                                     </option>
@@ -322,7 +346,7 @@ function SolicitudViajeForm() {
                 </Box>
 
                 <Box mt={4}>
-                    <Button bg= "rgb(0, 160, 112, 0.8)" variant='outline' w='100%' type='submit' fontSize="xl">
+                    <Button bg='#E83D6F' fontFamily="'DIN Medium'," w='100%' type='submit' fontSize="1xl" >
                         RESERVAR
                         </Button>
                 </Box>
