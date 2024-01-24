@@ -47,7 +47,7 @@ export const getAllConductores = () => {
 export const getTripById = (id) => {
     return async (dispatch) => {
         try {
-            const {data} = await axios.get(`http://localhost:3001/trips/${id}`)
+            const {data} = await axios.get(`http://localhost:3001/trips/tripId/${id}`)
             return dispatch({
                 type:GET_TRIP_ID,
                 payload: data
