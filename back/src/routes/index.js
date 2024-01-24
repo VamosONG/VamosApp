@@ -48,6 +48,7 @@ const setDriverHandler = require('../handlers/utilsHandlers/setDriverHandler');
 const getTripsCompletedHandler = require('../handlers/filtersHandlers/getTripsCompletedHandler');
 const getTripsPendingHandler = require('../handlers/filtersHandlers/getTripsPendingHandler');
 const filterTripsHandler = require('../handlers/filtersHandlers/filterTripsHandler');
+const searchDriversHandler = require('../handlers/filtersHandlers/searchDriversHandler');
 
 const postPreference = require('../controllers/mercadoPagoController/postPreference');
 const {createOrder, receiveWebhook} = require('../controllers/mercadoPagoController/paymentController')
@@ -113,6 +114,7 @@ router.put('/trips/reserves/update',setDriverHandler);
 router.get('/trips/completed', getTripsCompletedHandler);//
 router.get('/trips/pending', getTripsPendingHandler);
 router.post('/trips/filters', filterTripsHandler);
+router.post('/drivers/search', searchDriversHandler);
 
 router.get('/trips/tripId/:id', getTripsByIdHandler)
 
