@@ -3,14 +3,16 @@ import { Center, Box, Collapse, Heading, Text, Stack, Button } from '@chakra-ui/
 import { useDispatch, useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
 import axios from 'axios';
-import { getDataMePago, getTripById } from '../../redux/actions/index'
+import { getDataMePago, getTripById } from '../../redux/actions/index';
 
 
 
-const PaymentStatus = () => {
+
+const PaymentStatus = async () => {
 
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
+ 
   // const [paymentData, setPaymentData] = useState(null);
 
   // console.log('paymentData', paymentData)
@@ -46,6 +48,24 @@ const PaymentStatus = () => {
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
+  
+
+  const trip = {
+    userId: currentUser.id,
+    origin: infoConfirmacionViaje?.origin,
+    destination: infoConfirmacionViaje?.destination,
+    date:infoConfirmacionViaje?.date,
+    hour: infoConfirmacionViaje?.hour,
+    quantityPassengers: Number(infoConfirmacionViaje.quantityPassengers),
+    driverId: null,
+    price: infoConfirmacionViaje?.price
+  }
+  console.log(trip);
+
+
+
+  /* mePagoData.status==='approved'?(await axios.post("http://localhost:3001/trips/reserves/create",trip) */
+           /*  window.location.href = response.data *//* ):(null) */
   return (
     
       <Box bg="green" borderWidth="100px" overflow="hidden" boxShadow="l0g">

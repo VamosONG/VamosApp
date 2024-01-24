@@ -3,10 +3,12 @@ const mercadopago = require("mercadopago");
 const dotenv = require("dotenv");
 const trip = require("../../models/trip");
 const { Trip } = require("../../dataBase");
-const postTrip = require('../../controllers/tripsControllers/postTrip');
+const postTrip = require("../tripsControllers/postTrip");
+// const {postTrip} = require('../../controllers/tripsControllers/postTrip');
 dotenv.config();
 
-let newTrip = {}
+
+
 const createOrder = async (req, res) => {
 
   mercadopago.configure({
@@ -15,17 +17,20 @@ const createOrder = async (req, res) => {
 
   const {
     userId,
-    date,
-    hour,
-    origin,
-    destination,
-    quantityPassengers,
-    price,viaje } = req.body
- 
+    
+    price,viaje,driverId, destination,quantityPassengers,date,origin, hour} = req.body
+ console.log(userId,price,viaje);
   try {
     let preference = {
 
-      metadata: { userId: userId },
+      metadata: { userId: userId,
+        origin: origin,
+        destination:  destination,
+        date: date,
+        hour:  hour,
+        quantityPassengers:quantityPassengers,
+        driverId: null,
+        price:  price },
 
 
 
@@ -49,14 +54,13 @@ const createOrder = async (req, res) => {
 
       auto_return: "all"
     }
-
-    newTrip = await postTrip(userId, date, hour, origin, destination, quantityPassengers, price);
-    console.log("1", newTrip);
+   
+   
     const respuesta = await mercadopago.preferences.create(preference);
 
     res.status(200).json(respuesta.response.init_point);
 
-
+    
   } catch (error) {
     return res.status(500).json({ message: "Something goes wrong" });
   }
@@ -71,14 +75,27 @@ const receiveWebhook = async (req, res) => {
     //  console.log(payment)
 
 
-    if (payment.type !== "payment" && newTrip.id) {
-      // const data = await mercadopago.payment.findById(payment["data.id"]);
+    if (payment.type === "payment" ) {
+       const data = await mercadopago.payment.findById(payment["data.id"]);
       // const userPayment = await Trip.findOne({ where: { id: data.body.metadata.trip_id } });//BUSCA EL TRIP
       //  await newTrip.update({ stateOfTrip: "reserved" }); //CAMBIA DE OFFER A RESERVED
+      console.log(data);
+      const trip ={
+        userId: data.body.metadata.user_id,
+        origin: data.body.metadata.origin,
+        destination:  data.body.metadata.destination,
+        date: data.body.metadata.date,
+        hour: data.body.metadata.hour,
+        quantityPassengers:data.body.metadata.quantity_passengers,
+        driverId: null,
+        price:  data.body.metadata.price
+      }
+      console.log(trip);
       // await userPayment.reload();
-      console.log("2",newTrip);
-      await deleteTrip(newTrip.id);
-      
+      // console.log("2",newTrip);
+      // await deleteTrip(newTrip.id);
+      const resp = await postTrip(trip)
+      console.log(resp);
 
       // AGREGAR LO DE ENVIAR MAIL
 
