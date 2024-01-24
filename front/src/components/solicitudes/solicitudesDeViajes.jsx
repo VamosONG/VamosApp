@@ -27,9 +27,6 @@ import { getCanceledTrips, getPendingTrips, getReservedTrips, idDeSolicitud, ord
 import { useEffect, useState } from "react"
 
 
-import ReactPaginate from "react-paginate";
-
-
 
 
 function SolicitudesDeViajes() {

@@ -33,6 +33,7 @@ import UserProfile from './components/userProfile/userProfile'
 import AdminProfile from './components/userProfile/adminProfile';
 import ReviewAdmin from './views/adminProfile/reviewAdmin';
 import UserViewAdmin from './views/adminProfile/userViewAdmin';
+import ViewProfile from './components/userProfile/viewProfile';
 
 function App() {
   const location = useLocation();
@@ -64,7 +65,7 @@ function App() {
         <Route path="/login" element={<LoginForm/>}/>
         <Route path="/register" element={<RegistroForm/>}/>
         {/* <Route path="/profile" element={<UserProfile/>}/> */}
-        <Route path="/profile" element={<AdminProfile/>}/>
+        <Route path="/profile" element={<ViewProfile/>}/>
         {/* No son necesario estas rutas, ya que todo estara dentro el componente del admin */}
         {/* <Route path="/reviewAdmin" element={<ReviewAdmin/>}/>  
         <Route path="/user" element={<UserViewAdmin/>}/> */}
