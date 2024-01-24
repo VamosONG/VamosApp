@@ -58,7 +58,7 @@ module.exports = (sequelize) => {
         stateOfTrip: {
             type: DataTypes.STRING, 
             allowNull: true,
-            defaultValue: 'offer'
+            defaultValue: 'reserved'
         }
     },
 
