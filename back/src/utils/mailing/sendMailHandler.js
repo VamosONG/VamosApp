@@ -4,17 +4,11 @@ const {getTripById} = require('../../controllers/tripsControllers/getTripById');
 const getDriverById = require('../../controllers/driversControllers/getDriverById');
 
 
-module.exports=async(req,res)=>{
-    const {userId, tripId, option}=req.body;
+module.exports=async({id, name, surname, email, phone, dni, driverId, tripId, option})=>{
 
     try {
-        const usuario = await getUserById(userId);
 
-        if(!usuario)
-            throw new Error(`El usuario con id ${userId} no existe en base de datos.`);
-
-        const userName=usuario.name;
-        let email=usuario.email;
+        const userName=name;
         let chofer=null;
         let trip=null;
 
@@ -1748,11 +1742,11 @@ module.exports=async(req,res)=>{
             }
         }
 
-        const resultMail=await mailing(userName, email, preSubject, message, res);
+        const resultMail=await mailing(userName, email, preSubject, message);
     
         if (resultMail)
-            res.status(200).send('Email enviado correctamente!')
+            return('Email enviado correctamente!')
     } catch (error) {
-        res.status(400).json(`Error al enviar correo: ${error.message}`)
+        throw new Error(`Error al enviar correo: ${error.message}`)
     }
 }

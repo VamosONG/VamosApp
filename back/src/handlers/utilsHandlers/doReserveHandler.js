@@ -9,7 +9,7 @@ module.exports=async(req,res)=>{
         
         const driverId=null;
     
-        const reserve=await postTrip(userId, driverId, date, hour, origin, destination, quantityPassengers, price);
+        const reserve=await postTrip({userId, driverId, date, hour, origin, destination, quantityPassengers, price});
 
         res.status(200).json(reserve);
     } catch (error) {
