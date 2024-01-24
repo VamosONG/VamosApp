@@ -13,7 +13,7 @@ const getReserves = async () => {
         return allReservations;
 
     } catch (error) {
-        throw error;
+        throw new Error(`Error al obtener reservas: ${error.message}`);
     }
 };
 
