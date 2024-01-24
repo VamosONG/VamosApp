@@ -54,6 +54,8 @@ const {success, fail, pending} = require('../controllers/mercadoPagoController/b
 
 const getTripsByIdHandler = require('../handlers/tripHandlers/getTripsByIdHandler');
 const sendMailHandler = require('../utils/mailing/sendMailHandler');
+const deleteLogic = require('../handlers/driverHandlers/setInactiveDriverHandler');
+const deleteLogicDrivers = require('../handlers/driverHandlers/setInactiveDriverHandler');
 
 const router = Router();
 
@@ -62,18 +64,20 @@ router.post('/trips/create', postTripHandler);
 router.put('/trips/update', updateTripHandler);
 router.delete('/trips', deleteTripHandler);
 
+router.get('/user/email', getUserByEmailHandler); //Busca un usuario por Email.
+router.get('/user/:id', getUserByIdHandler); //Busca un usuario por ID.
 router.get('/user', getUsersHandler);
+router.delete('/user', deleteUserHandler);
 router.post('/user/create', postUserHandler);
 router.patch('/user/update', updateUserHandler);
-router.delete('/user', deleteUserHandler);
-router.get('/user/:id', getUserByIdHandler); //Busca un usuario por ID.
-router.get('/user/email', getUserByEmailHandler); //Busca un usuario por Email.
 
 
 //Cambio a metodo PATCH: Mas versatil para actulizar campos individualmente.
 //Add ID al final para recibirlo por params.
 router.get('/drivers', getDriversHandler);
 router.post('/drivers/create', postDriverHandler);
+//Borrado logico
+router.patch('/drivers/logic/:id', deleteLogicDrivers);
 router.patch('/drivers/update/:id', updateDriverHandler);
 router.delete('/drivers', deleteDriverHandler);
 

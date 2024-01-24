@@ -1,7 +1,7 @@
 import axios from 'axios';
 import choferes from '../../utils/chofer'
 
-import { DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER } from './action.types';
+import { DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, ORDER_DATE, FILTER_RATING, GET_DATA_USER } from './action.types';
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE = "PAGINATE"
@@ -15,7 +15,6 @@ export const GET_COMPLETED_TRIPS = "GET_COMPLETED_TRIPS"
 export const NEW_USER = 'NEW_USER'
 export const LOGOUT = 'LOGOUT'
 export const CREATE_CHOFER = 'CREATE_CHOFER'
-export const VIAJE_CONFIRMADO = 'VIAJE_CONFIRMADO'
 export const GET_FILTERED = 'GET_FILTERED'
 export const GET_TRIPS_BY_ID = 'GET_TRIPS_BY_ID'
 export const POST_REVIEW = 'POST_REVIEW'
@@ -74,36 +73,24 @@ export const createNewChofer = (data) => {
     }
 }
 
+//Borrado logico
 export const deleteDriverAction = (id) => {
     return async (dispatch) => {
         try {
-            const {data} = await axios.delete(`http://localhost:3001/drivers/${id}`)
+            const {data} = await axios.patch(`http://localhost:3001/drivers/logic/${id}`)
             dispatch({
                 type: DELETE_DRIVER,
                 payload: data
             })
         } catch (error) {
-            console.error(error);
+            console.error('Error en deleteDriverAction ' + error);
         }
     }
 }
 
-// export const updateDriverData = (id, newData) => {
-//     return async (dispatch) => {
-//         try {
-//             dispatch({
-//                 type: UPDATE_DRIVER_DATA,
-//                 payload: data
-//             })
-//         } catch (error) {
-//             console.error({message: 'Error en action', error});
-//         }
-//     }
-// }
-
 export const postNewViaje = (infoViaje) => {
 
-    /* infoViaje.userId= "762baea5-4422-44de-ae36-ddf9c6a9e43b" */
+    //  infoViaje.userId= "762baea5-4422-44de-ae36-ddf9c6a9e43b"
     //infoViaje.userId= "74c99ae0-61f9-4d85-bcb6-fcf680183c48" //(con permisos de admin)
     console.log(infoViaje)
     return async (dispatch) => {
@@ -189,6 +176,20 @@ export const postNewUser = (form) => {
     }
 }
 
+export const getDataUser = () => {
+    return async (dispatch) => {
+        try {
+            const {data } = await axios('http://localhost:3001/user')
+            return dispatch({
+                type: GET_DATA_USER,
+                payload: data
+            })
+        } catch (error) {
+            
+        }
+    }
+}
+
 export const getDetailUserById = (id) => {
     return async (dispatch)=> {
         try {
@@ -247,32 +248,33 @@ export const logOutAction = (value) => {
     };
 }
 
-export const viajeConfirmado = (info) => {
-    console.log(info)
-    return async (dispatch) => {
-        try {
-            const {data}=await axios.put(`http://localhost:3001/trips/reserves/create`, info)
-            /* const mailReserve = {
-                userId: info.userId,
-                tripId: info.tripId,
-                option: "reserve"
-            }
-            const[reserveResp, mailResp] = await Promise.all([
-                axios.post(`http://localhost:3001/send-mail`,mailReserve)
-            ])
+//NO SE VA A USAR!!!
+// export const viajeConfirmado = (info) => {
+//     console.log(info)
+//     return async (dispatch) => {
+//         try {
+//             const {data}=await axios.put(`http://localhost:3001/trips/reserves/create`, info)
+//             /* const mailReserve = {
+//                 userId: info.userId,
+//                 tripId: info.tripId,
+//                 option: "reserve"
+//             }
+//             const[reserveResp, mailResp] = await Promise.all([
+//                 axios.post(`http://localhost:3001/send-mail`,mailReserve)
+//             ])
             
-            console.log(reserveResp.data)
-            console.log(`Estado de mail reserva: ${mailResp}`); */
-            dispatch({
-                type: VIAJE_CONFIRMADO,
-                payload: data
-            })
-        } catch (error) {
-            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-            console.log(error.message)
-        };
-    };
-};
+//             console.log(reserveResp.data)
+//             console.log(`Estado de mail reserva: ${mailResp}`); */
+//             dispatch({
+//                 type: VIAJE_CONFIRMADO,
+//                 payload: data
+//             })
+//         } catch (error) {
+//             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+//             console.log(error.message)
+//         };
+//     };
+// };
 
 export const filtrarConductores = (info) => {
     console.log(info)
@@ -290,6 +292,7 @@ export const filtrarConductores = (info) => {
         };
     };
 };
+
 export const conductorAsignado = (info) => {
     console.log(info)
     return async (dispatch) => {
@@ -356,6 +359,19 @@ export const ratingOrder = (data) => {
     }
 }
 
+export const dateOrder = (data) => {
+    return async (dispatch) => {
+        try {
+            return dispatch ({
+                type: ORDER_DATE,
+                payload: data
+            })
+        } catch (error) {
+            console.error('error en dateOrder ' + error);
+        }
+    }
+}
+
 export const stateOrder = (data) => {
     return async (dispatch) => {
         try {
@@ -365,6 +381,19 @@ export const stateOrder = (data) => {
             })
         } catch (error) {
             throw new Error(error);
+        }
+    }
+}
+
+export const ratingFilter = (data) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: FILTER_RATING,
+                payload: data
+            })
+        } catch (error) {
+            console.error('Error en ratingFilter ' + error);
         }
     }
 }
@@ -408,7 +437,6 @@ export const stateFilter = (data) => {
     }
 }
 
-
 export const getTripsById = (id) => {
     console.log(id)
     return async (dispatch) => {
@@ -424,7 +452,6 @@ export const getTripsById = (id) => {
         }
     }
 }
-
 
 export const postReview = (info) => {
     /* info.driverId='46d639a7-5468-495b-b9a7-f666517d3bfb' */
@@ -444,18 +471,22 @@ export const postReview = (info) => {
     }
 }
 
-// export const driverState = (data) => {
-//     return async (dispatch) => {
-//         try {
-//             return dispatch({
-//                 type: DRIVER_STATE,
-//                 payload: data
-//             })
-//         } catch (error) {
-//             throw new Error(error);
-//         }
-//     }
-// }
+export const getReviewsData = () => {
+    return async (dispatch) => {
+        try {
+            const {data} = await axios.get(`http://localhost:3001/reviews`)
+            console.log('review data ' + data );
+            return dispatch({
+                type: GET_REVIEWS,
+                payload: data
+            })
+        } catch (error) {
+            console.error('Error en getReviewsData ' + error);
+        }
+    }
+}
+
+
 export const getUserByEmail = (email) => {
     console.log(email)
     return async (dispatch) => {
@@ -490,9 +521,6 @@ export const getAllPrices = () => {
 
 }
 
-
-
-
 export const updatePrice = (info) => {
     console.log(info)
     return async (dispatch) => {
@@ -509,8 +537,6 @@ export const updatePrice = (info) => {
         };
     };
 };
-
-
 
 export const getDataMePago = () => {
     // return async (dispatch) => {

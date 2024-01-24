@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Box,
@@ -18,6 +18,7 @@ import Vamos from "../../../assets/logoblanco.png";
 
 const MobileNavbar = ({ currentUser }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const onToggleDrawer = () => {
     setIsOpen(!isOpen);
@@ -27,8 +28,27 @@ const MobileNavbar = ({ currentUser }) => {
     setIsOpen(false);
   };
 
+  const handleScroll = () => {
+    setIsScrolled(window.scrollY > 0);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <Box maxW="1400px" minW="375px" width="100%" marginX="auto" bg="#009ED1">
+    <Box 
+    maxW="1400px" 
+    minW="375px" 
+    width="100%" 
+    marginX="auto" 
+    bg="#009ED1"
+    position={isScrolled || isOpen ? "fixed" : "relative"}
+    zIndex="999"
+    >
       <Box p="4">
         <Image src={Vamos} alt="Vamos" w="80px" />
       </Box>

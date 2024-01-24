@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { postNewViaje, viajeConfirmado } from "../../../redux/actions";
+import { postNewViaje } from "../../../redux/actions";
 import { useEffect, useState } from "react";
 
 import axios from 'axios';
@@ -24,6 +24,7 @@ function SolicitudViajeForm() {
     const dispatch = useDispatch();
     //trae la info del viaje de redux, donde se calcula el precio
     const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
+    console.log(infoConfirmacionViaje,"info");
     const currentUser = useSelector((state) => state.currentUser)
     console.log(infoConfirmacionViaje)
     console.log(currentUser)
@@ -33,7 +34,7 @@ function SolicitudViajeForm() {
         destination: "",
         date: "",
         hour: "",
-        quantityPassengers: "",
+        quantityPassengers: ""
     });
     
     /////////*****************MERCADOPAGO*************************************************************** */
@@ -43,9 +44,9 @@ function SolicitudViajeForm() {
     
         const product = {
             viaje:`${input?.origin}${input?.destination}`, 
-            price: /* Number(infoConfirmacionViaje?.price) */100,
-            /* quantityPassengers: (input?.quantityPassengers).toString() */
-            quantityPassengers: Number(input?.quantityPassengers)
+            price: Number(infoConfirmacionViaje?.price) ,
+            // quantityPassengers: "1",
+            tripId: infoConfirmacionViaje?.id
           }
         
         const handlePayment = async (/*product*/) => {
@@ -73,13 +74,14 @@ function SolicitudViajeForm() {
    
  
     useEffect(() => {
+
         console.log(currentUser)
         if (infoConfirmacionViaje.id && !confirmed) {
             setConfirmed(true);
             const infoAmandarAlBack = {
                 tripId: infoConfirmacionViaje.id,
                 userId: infoConfirmacionViaje.userId,
-                /* idMP: mpid */
+       
               }
               const confirmationText = (
                 <div>
@@ -113,7 +115,7 @@ function SolicitudViajeForm() {
             }).then(async(result) => {
               if (result.isConfirmed) {
 
-                  await dispatch(viajeConfirmado(infoAmandarAlBack)) //Agregado para guardar viaje en DB
+                
                   handlePayment()
                   /* setInput({
                     origin: "",
@@ -139,7 +141,7 @@ function SolicitudViajeForm() {
                     destination: "",
                     date: "",
                     hour: "",
-                    quantityPassengers: "",
+                    quantityPassengers: ""
                 });
             }})}
           }, [infoConfirmacionViaje, dispatch, /* confirmationText */]);
@@ -179,7 +181,7 @@ function SolicitudViajeForm() {
         setInput({
             ...input,
             [e.target.name]: e.target.value,
-            userId:currentUser.id
+             userId:currentUser.id 
         })
 
         

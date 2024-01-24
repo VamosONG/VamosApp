@@ -15,19 +15,22 @@ import {
   InputRightElement,
   Stack,
   Text,
-  Flex
+  Flex,
+  Box,
+  Divider,
+  AbsoluteCenter,
+  Image,
 } from "@chakra-ui/react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 //HOOKS
 import { useState } from "react";
 import { useAuth } from "../../../context/authContext";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { getUserByEmail } from "../../../redux/actions";
+import googleLogo from "../../../assets/icons/google.png";
 
 const RegistroForm = ({ onSwitchForm }) => {
-
-
-  const bgImg= "https://res.cloudinary.com/drgnsbah9/image/upload/v1705767597/Vamos/Aeropuerto_loqc3q.jpg"
 
   const [input, setInput] = useState({
     name: "",
@@ -104,35 +107,46 @@ const RegistroForm = ({ onSwitchForm }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-
+      
       <Flex
+      bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
       justify="center"
-      alignContent="center"
-      p={20}
-      bgImage={bgImg}
       bgSize="cover"
       bgRepeat="no-repeat"
       >
+
+      <Flex
+      alignContent="center"
+      p={130}
+      marginTop="0px" 
+      >
       <Stack
         spacing={4}
-        bg="rgb(0, 158, 209, 0.6)"
+        bg='#009ED1'
         p="5"
         h="auto"
-        borderRadius="2%"
+        borderRadius="2xl"
         boxShadow="dark-lg"
         w={{ base: "20rem", md: "30rem" }}
-        color="white"
+        color="Black"
       >
 
-        <Heading fontSize="x-large">REGISTRATE!</Heading>
+        <Heading 
+        fontSize="3xl" 
+        fontFamily="'DIN Alternate Black', sans-serif"
+        >REGISTRATE!</Heading>
         <FormControl isInvalid={isError} isRequired>
-          <FormLabel fontSize="xl">Nombre</FormLabel>
+          <FormLabel 
+          fontSize="2xl"
+          fontFamily="'DIN Medium',"
+          >Nombre</FormLabel>
           <Input
             type="text"
             name="name"
             value={input.name}
             onChange={handleInputChange}
             placeholder="Nombre"
+            bg="white"
           />
           {!isError ? (
             <FormErrorMessage>Por favor ingrese su nombre.</FormErrorMessage>
@@ -140,13 +154,17 @@ const RegistroForm = ({ onSwitchForm }) => {
         </FormControl>
 
         <FormControl isInvalid={isError} isRequired>
-          <FormLabel fontSize="xl">Apellido</FormLabel>
+          <FormLabel 
+          fontSize="2xl"
+          fontFamily="'DIN Medium',"
+          >Apellido</FormLabel>
           <Input
             type="text"
             name="surname"
             value={input.surname}
             onChange={handleInputChange}
             placeholder="Apellido"
+            bg="white"
           />
           {!isError ? (
             <FormErrorMessage>Por favor ingrese su apellido.</FormErrorMessage>
@@ -154,13 +172,17 @@ const RegistroForm = ({ onSwitchForm }) => {
         </FormControl>
 
         <FormControl isRequired>
-          <FormLabel fontSize="xl">Telefono</FormLabel>
+          <FormLabel 
+          fontSize="2xl"
+          fontFamily="'DIN Medium',"
+          >Telefono</FormLabel>
           <Input
             type="number"
             name="phone"
             value={input.phone}
             placeholder="Teléfono."
             onChange={handleInputChange}
+            bg="white"
           />
           {isError ? (
             <FormErrorMessage>Por favor ingrese su número de teléfono.</FormErrorMessage>
@@ -169,13 +191,17 @@ const RegistroForm = ({ onSwitchForm }) => {
 
         <FormControl isRequired>
 
-          <FormLabel fontSize="xl">Correo electrónico</FormLabel>
+          <FormLabel 
+          fontSize="2xl"
+          fontFamily="'DIN Medium',"
+          >Correo electrónico</FormLabel>
           <Input
             type="mail"
             name="email"
             value={input.email}
             onChange={handleInputChange}
             placeholder="Email"
+            bg="white"
           />
           {isError ? (
             <FormErrorMessage>Por favor ingrese su email.</FormErrorMessage>
@@ -183,13 +209,17 @@ const RegistroForm = ({ onSwitchForm }) => {
         </FormControl>
 
         <FormControl isRequired>
-          <FormLabel fontSize="xl">DNI</FormLabel>
+          <FormLabel 
+          fontSize="2xl"
+          fontFamily="'DIN Medium',"
+          >DNI</FormLabel>
           <Input
             type="number"
             name="dni"
             value={input.dni}
             placeholder="DNI."
             onChange={handleInputChange}
+            bg="white"
           />
           {isError ? (
             <FormErrorMessage>Por favor ingrese su DNI.</FormErrorMessage>
@@ -197,28 +227,71 @@ const RegistroForm = ({ onSwitchForm }) => {
         </FormControl>
 
         <FormControl isRequired>
-          <FormLabel fontSize="xl">Password</FormLabel>
+          <FormLabel 
+          fontSize="2xl"
+          fontFamily="'DIN Medium',"
+          >Password</FormLabel>
           <InputGroup size="md">
             <Input
               pr="4.5rem"
               type={show ? "text" : "password"}
-              placeholder="ingresa una password"
+              placeholder="Ingrese una contraseña"
               onChange={handleInputChange}
               name="password"
               value={input.password}
+              bg="white"
             />
             <InputRightElement width="4.5rem">
-              <Button h="1.75rem" size="sm" onClick={handleClick}>
-                {show ? "Hide" : "Show"}
-              </Button>
+            <Button
+            h="1.75rem"
+            size="sm"
+            onClick={handleClick}
+            bg="transparent"
+            _hover={{ bg: "transparent" }}
+            _active={{ bg: "transparent" }}
+            >
+            {show ? <ViewOffIcon /> : <ViewIcon />}
+            </Button>
             </InputRightElement>
           </InputGroup>
         </FormControl>
 
-        <Button fontSize="xl" bg="rgb(0, 290, 209, 0.6)" type="submit">
+        <Button 
+        fontSize="2xl" 
+        bg='#E83D6F'
+        type="submit"
+        fontFamily="'DIN Medium',"
+        >
           ENVIAR
         </Button>
+        
+        <Box position='relative' padding='5'>
+        <Divider />
+        <AbsoluteCenter bg='#009ED1' px='5'>
+          O
+        </AbsoluteCenter>
+        </Box>
+        
+        <Button
+        fontSize="1xl"
+        bg="white"
+        type="submit"
+        fontFamily="'DIN Medium',"
+        olor="black"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        p={3}
+        borderRadius="md"
+        _hover={{ bg: "gray.100" }}
+        >
+        <Flex align="center" mr={1}>
+        <Image src={googleLogo} alt="Google Logo" boxSize="35px" mr={0} />
+        </Flex>
+        <Text>Continuar con Google</Text>
+        </Button>
       </Stack>
+      </Flex>
       </Flex>
 
     </form>
