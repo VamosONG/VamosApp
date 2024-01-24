@@ -29,6 +29,7 @@ const RegistroForm = ({ onSwitchForm }) => {
 
   const bgImg= "https://res.cloudinary.com/drgnsbah9/image/upload/v1705767597/Vamos/Aeropuerto_loqc3q.jpg"
 
+  //  estado loca Input para setear la info del form y enviarla por body al back y crear el usuario
   const [input, setInput] = useState({
     name: "",
     surname: "",
@@ -36,13 +37,13 @@ const RegistroForm = ({ onSwitchForm }) => {
     email: "",
     dni: "",
   });
-  //  surname, email, phone, dni
 
+
+// setea los inputs con los valores q se van escribiendo
   const handleInputChange = (e) => {
     e.preventDefault();
     const property = e.target.name;
     const value = e.target.value;
-    console.log(property + " " + value);
     setInput({
       ...input,
       [property]: value,
@@ -54,41 +55,43 @@ const RegistroForm = ({ onSwitchForm }) => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const dispatch=useDispatch()
+  const navigate = useNavigate();
+
   //Autenticacion
   const auth = useAuth();
   const { displayName } = auth.user;
 
-  const navigate = useNavigate();
-
+// funcion para que al registrarse se envien los datos del usuario
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let dataUser = {};
+let dataUser = {};
 
     Promise.all([
-      auth.register(input.email, input.password, { displayName }),
-      axios.post(`http://localhost:3001/user/create`, input),
-      
+      auth.register(input.email, input.password),  //registrarse con email y con password por firebase
+      axios.post(`http://localhost:3001/user/create`, input) // post con los inputs para crear el usuario
     ])
       .then(([authResponse, { data }]) => {
-        dispatch(getUserByEmail(input.email))
+        dispatch(getUserByEmail(input.email))  // get con el input para setear el current user 
         console.log("input data", input);
         console.log(data);
         Swal.fire({
           title: "Bien hecho!",
           text: "Datos registrados!",
           icon: "success",
-        });
-        
-        dataUser = {
-          userId: data.id,
-          option: "signIn",
-        };
+        });  
 
-        return axios.post(`http://localhost:3001/send-mail`, dataUser);
+        navigate("/")
+        // dataUser = {
+        //   userId: data,
+        //   option: "signIn",
+        // };
+        
+        // return axios.post(`http://localhost:3001/send-mail`, dataUser);
+
       })
       .then((response) => {
-        // Maneja la respuesta de send-mail aquí
+        console.log("Mail enviado");// respuesta de send-mail aquí
         console.log(response);
       })
       .catch((error) => {

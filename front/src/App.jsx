@@ -58,7 +58,6 @@ function App() {
         <Route path='/editPrices' element={<EditPrices/>}/>
         <Route path='/paymentStatus' element={<PaymentStatus/>}/>
         <Route path="/login" element={<LoginForm/>}/>
-        <Route path="/formLogInWithGoogle" element={<FormLogInWithGoogle/>}/>
         <Route path="/register" element={<RegistroForm/>}/>
         {/* <Route path="/profile" element={<UserProfile/>}/> */}
         <Route path="/profile" element={<AdminProfile/>}/>

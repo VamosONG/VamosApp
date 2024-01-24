@@ -9,8 +9,6 @@ const postUser = async ({ name, surname, email, phone, dni }) => {
             defaults: {
                 name,
                 surname,
-                phone,
-                dni,
             }
           });
         

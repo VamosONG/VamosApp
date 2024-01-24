@@ -1,6 +1,7 @@
 const {getTrips} = require('../../controllers/tripsControllers/getTrips');
 const updateTrip = require('../../controllers/tripsControllers/updateTrip');
 const getDriverById = require('../../controllers/driversControllers/getDriverById');
+const getUserById = require ('../../controllers/usersControllers/getUserById')
 
 module.exports = async (req, res) => {
     try {
