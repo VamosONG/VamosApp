@@ -3,7 +3,8 @@ import { Center, Box, Collapse, Heading, Text, Stack, Button } from '@chakra-ui/
 import { useDispatch, useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
 import axios from 'axios';
-import { getDataMePago, getTripById } from '../../redux/actions/index'
+import { getDataMePago, getTripById } from '../../redux/actions/index';
+
 
 
 
@@ -11,8 +12,7 @@ const PaymentStatus = async () => {
 
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
-  const currentUser = useSelector((state) => state.currentUser)
+ 
   // const [paymentData, setPaymentData] = useState(null);
 
   // console.log('paymentData', paymentData)

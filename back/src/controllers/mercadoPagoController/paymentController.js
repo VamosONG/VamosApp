@@ -8,6 +8,7 @@ const postTrip = require("../tripsControllers/postTrip");
 dotenv.config();
 
 
+
 const createOrder = async (req, res) => {
 
   mercadopago.configure({
@@ -75,13 +76,26 @@ const receiveWebhook = async (req, res) => {
 
 
     if (payment.type === "payment" ) {
-      // const data = await mercadopago.payment.findById(payment["data.id"]);
+       const data = await mercadopago.payment.findById(payment["data.id"]);
       // const userPayment = await Trip.findOne({ where: { id: data.body.metadata.trip_id } });//BUSCA EL TRIP
       //  await newTrip.update({ stateOfTrip: "reserved" }); //CAMBIA DE OFFER A RESERVED
+      console.log(data);
+      const trip ={
+        userId: data.body.metadata.user_id,
+        origin: data.body.metadata.origin,
+        destination:  data.body.metadata.destination,
+        date: data.body.metadata.date,
+        hour: data.body.metadata.hour,
+        quantityPassengers:data.body.metadata.quantity_passengers,
+        driverId: null,
+        price:  data.body.metadata.price
+      }
+      console.log(trip);
       // await userPayment.reload();
       // console.log("2",newTrip);
       // await deleteTrip(newTrip.id);
-      const resp = await axios.post("http://localhost:3001/trips/reserves/create",trip)
+      const resp = await postTrip(trip)
+      console.log(resp);
 
       // AGREGAR LO DE ENVIAR MAIL
 
