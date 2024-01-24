@@ -21,15 +21,15 @@ module.exports = (sequelize) => {
            
         },
         hour: {
-            type: DataTypes.TIME,
+            type: DataTypes.STRING,
             allowNull: true,
-            validate: {
-                isValidHourFormat(value) {
-                    if (!/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(value)) {
-                        throw new Error('El formato de la hora debe ser HH:mm');
-                    }
-                },
-            },
+            // validate: {
+            //     isValidHourFormat(value) {
+            //         if (!/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(value)) {
+            //             throw new Error('El formato de la hora debe ser HH:mm');
+            //         }
+            //     },
+            // },
         },
         origin: {
             type: DataTypes.STRING,
@@ -47,7 +47,7 @@ module.exports = (sequelize) => {
             },
         },
         price: {
-            type: DataTypes.STRING, 
+            type: DataTypes.INTEGER, 
             allowNull: false,
             
         },

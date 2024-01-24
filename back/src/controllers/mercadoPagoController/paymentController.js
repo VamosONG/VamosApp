@@ -3,10 +3,11 @@ const mercadopago = require("mercadopago");
 const dotenv = require("dotenv");
 const trip = require("../../models/trip");
 const { Trip } = require("../../dataBase");
-const postTrip = require('../../controllers/tripsControllers/postTrip');
+const postTrip = require("../tripsControllers/postTrip");
+// const {postTrip} = require('../../controllers/tripsControllers/postTrip');
 dotenv.config();
 
-let newTrip = {}
+
 const createOrder = async (req, res) => {
 
   mercadopago.configure({
@@ -15,13 +16,9 @@ const createOrder = async (req, res) => {
 
   const {
     userId,
-    date,
-    hour,
-    origin,
-    destination,
-    quantityPassengers,
-    price,viaje } = req.body
- 
+    
+    price,viaje,  } = req.body
+ console.log(userId,price,viaje);
   try {
     let preference = {
 
@@ -49,14 +46,13 @@ const createOrder = async (req, res) => {
 
       auto_return: "all"
     }
-
-    newTrip = await postTrip(userId, date, hour, origin, destination, quantityPassengers, price);
-    console.log("1", newTrip);
+   
+   
     const respuesta = await mercadopago.preferences.create(preference);
 
     res.status(200).json(respuesta.response.init_point);
 
-
+    
   } catch (error) {
     return res.status(500).json({ message: "Something goes wrong" });
   }
@@ -71,13 +67,13 @@ const receiveWebhook = async (req, res) => {
     //  console.log(payment)
 
 
-    if (payment.type !== "payment" && newTrip.id) {
+    if (payment.type === "payment" ) {
       // const data = await mercadopago.payment.findById(payment["data.id"]);
       // const userPayment = await Trip.findOne({ where: { id: data.body.metadata.trip_id } });//BUSCA EL TRIP
       //  await newTrip.update({ stateOfTrip: "reserved" }); //CAMBIA DE OFFER A RESERVED
       // await userPayment.reload();
-      console.log("2",newTrip);
-      await deleteTrip(newTrip.id);
+      // console.log("2",newTrip);
+      // await deleteTrip(newTrip.id);
       
 
       // AGREGAR LO DE ENVIAR MAIL

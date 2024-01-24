@@ -44,22 +44,30 @@ function SolicitudViajeForm() {
     
         const product = {
             viaje:`${input?.origin}${input?.destination}`, 
-            price: Number(infoConfirmacionViaje?.price) ,
+            price: infoConfirmacionViaje?.price ,
             // quantityPassengers: "1",
+            userId: currentUser.id,
+          }
+          const trip = {
             userId: currentUser.id,
             origin: infoConfirmacionViaje?.origin,
             destination: infoConfirmacionViaje?.destination,
             date:infoConfirmacionViaje?.date,
             hour: infoConfirmacionViaje?.hour,
-            quantityPassengers: infoConfirmacionViaje?.quantityPassengers
+            quantityPassengers: Number(infoConfirmacionViaje.quantityPassengers),
+            driverId: null,
+            price: infoConfirmacionViaje?.price
           }
+          console.log(trip);
         
         const handlePayment = async (/*product*/) => {
             console.log(product)
             const response = await axios.post("http://localhost:3001/mepago/create-order", product)
-    
+            console.log(response)
+           
+            const resp = await axios.post("http://localhost:3001/trips/reserves/create",trip)
             window.location.href = response.data
-            console.log(response.data)
+            
         };
     
     
