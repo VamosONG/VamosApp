@@ -25,7 +25,7 @@ import Solicitud from "./solicitud"
 import { getCanceledTrips, getPendingTrips, getReservedTrips, idDeSolicitud, orderSearch } from "../../redux/actions"
 import { useEffect, useState } from "react"
 
-import ReactPaginate from "react-paginate";
+/* import ReactPaginate from "react-paginate"; */
 
 
 
