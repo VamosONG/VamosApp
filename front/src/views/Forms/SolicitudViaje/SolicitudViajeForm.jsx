@@ -74,14 +74,16 @@ function SolicitudViajeForm() {
 
     useEffect(() => {
 
-        console.log(currentUser)
-        if (infoConfirmacionViaje.id && !confirmed) {
+        console.log(infoConfirmacionViaje)
+        console.log(confirmed)
+
+        if (infoConfirmacionViaje.price && !confirmed) {
             setConfirmed(true);
             const infoAmandarAlBack = {
                 tripId: infoConfirmacionViaje.id,
                 userId: infoConfirmacionViaje.userId,
-                }
-
+            }
+            console.log(infoAmandarAlBack)
             const confirmationText = (
                 <div>
                     <p>Origen: {infoConfirmacionViaje.origin}</p>
