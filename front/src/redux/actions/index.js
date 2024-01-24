@@ -47,7 +47,7 @@ export const getAllConductores = () => {
 export const getTripById = (id) => {
     return async (dispatch) => {
         try {
-            const {data} = await axios.get(`http://localhost:3001/trips/${id}`)
+            const {data} = await axios.get(`http://localhost:3001/trips/tripId/${id}`)
             return dispatch({
                 type:GET_TRIP_ID,
                 payload: data
@@ -584,6 +584,21 @@ export const cleanCurrentUser = (userVacio) => {
             dispatch({
                 type: CLEAN_USER_BY_EMAIL,
                 payload: userVacio
+            })
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            console.log(error.message)
+        }
+    };
+
+}
+export const orderSearch = (input) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`http://localhost:3001/trips/filters`, input);
+            dispatch({
+                type: GET_RESERVED_TRIPS,
+                payload: data
             })
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK

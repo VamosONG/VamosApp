@@ -1,11 +1,15 @@
-const doReserve=require('../../controllers/utilsControllers/doReserve');
+const postTrip = require('../../controllers/tripsControllers/postTrip');
 
 module.exports=async(req,res)=>{
-    const { userId, tripId } = req.body;
+    const { userId, date, hour, origin, destination, quantityPassengers, price } = req.body;
     
     try {
-        const reserve=await doReserve(userId, tripId);
-        //Actualiza el estado del viaje a RESERVADO.
+        if(!userId || !date || !hour || !origin || !destination || !quantityPassengers || !price)
+            throw new Error(`Error, no se recibieron los datos necesarios para crear la reserva.`)
+        
+        const driverId=null;
+    
+        const reserve=await postTrip(userId, driverId, date, hour, origin, destination, quantityPassengers, price);
 
         res.status(200).json(reserve);
     } catch (error) {

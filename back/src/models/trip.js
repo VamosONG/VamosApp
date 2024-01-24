@@ -16,11 +16,9 @@ module.exports = (sequelize) => {
             allowNull: true
         },
         date: {
-            type: DataTypes.DATEONLY,
+            type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                isDate: true, 
-            },
+           
         },
         hour: {
             type: DataTypes.TIME,
@@ -60,7 +58,7 @@ module.exports = (sequelize) => {
         stateOfTrip: {
             type: DataTypes.STRING, 
             allowNull: true,
-            defaultValue: 'offer'
+            defaultValue: 'reserved'
         }
     },
 

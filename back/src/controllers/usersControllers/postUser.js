@@ -9,14 +9,12 @@ const postUser = async ({ name, surname, email, phone, dni }) => {
             defaults: {
                 name,
                 surname,
-                phone,
-                dni,
             }
           });
         
         if(!created)
-          throw new Error(`Error al crear usuario, el email ya esta registrado.`)
-
+        //   throw new Error(`Error al crear usuario, el email ya esta registrado.`)
+    // return 
         return newUser;
 
     } catch (error) {

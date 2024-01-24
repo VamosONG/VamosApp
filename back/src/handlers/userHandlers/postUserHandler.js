@@ -4,6 +4,7 @@ module.exports = async (req, res) => {
 
     try {
         const { name, surname, email, phone, dni } = req.body;
+        console.log( name, surname, email, phone, dni);
 
         if( !name || !email){
             throw new Error(`Error, no se recibieron los datos para crear el usuario ${error.message}`) 

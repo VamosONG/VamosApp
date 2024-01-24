@@ -51,7 +51,7 @@ function App() {
         <Route path='/questions' element={<Questions/>}/>
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
         {/* No son necesario estas rutas, ya que todo estara dentro el componente del admin */}
-        {/* <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} /> */}
+        <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
         {/* <Route path='/detail' element={<DriverTableView/>}/> */}
         
         <Route path='/solicitud' element={<Solicitud/>}/>
@@ -62,7 +62,6 @@ function App() {
         <Route path='/editPrices' element={<EditPrices/>}/>
         <Route path='/paymentStatus' element={<PaymentStatus/>}/>
         <Route path="/login" element={<LoginForm/>}/>
-        <Route path="/formLogInWithGoogle" element={<FormLogInWithGoogle/>}/>
         <Route path="/register" element={<RegistroForm/>}/>
         {/* <Route path="/profile" element={<UserProfile/>}/> */}
         <Route path="/profile" element={<AdminProfile/>}/>
