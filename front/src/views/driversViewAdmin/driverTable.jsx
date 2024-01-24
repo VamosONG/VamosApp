@@ -6,28 +6,25 @@ import {
     Tr,
     Th,
     Td,
-    TableCaption, Avatar, Tooltip,
-    TableContainer, Button, Flex, useDisclosure, Link, Collapse, Box, Badge
+    TableCaption,Tooltip,
+    TableContainer, Button, Flex, Badge
 } from '@chakra-ui/react'
 
-import { DeleteIcon, EditIcon, WarningIcon, RepeatClockIcon } from '@chakra-ui/icons'
+import { DeleteIcon, RepeatClockIcon } from '@chakra-ui/icons'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteDriverAction, getAllConductores } from '../../redux/actions'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import Swal from 'sweetalert2'
-import UpdateDriverData from '../Forms/ChoferFormulario/UpdateChoferForm'
 import ViewBtnUpdateDriver from '../Forms/ViewForms/ViewUpdateDriverForm'
 import ViewBtnDetailDriver from './DetailDriver/ViewBtnDetailDriver'
 import OrderFilterAlphabetical from './filtersData/orderFilter'
 import Paginado from '../../components/paginado/paginadoComponent'
-import axios from 'axios'
 
 const DriverTableView = () => {
     const driverData = useSelector((state) => state.conductores)
     const dispatch = useDispatch();
-    const [isOpen, setIsOpen] = useState(false);
     const [search , setSearch] = useState('')
 
     const searcher = (e) => {

@@ -57,6 +57,7 @@ const getTripsByIdHandler = require('../handlers/tripHandlers/getTripsByIdHandle
 const sendMailHandler = require('../utils/mailing/sendMailHandler');
 const deleteLogic = require('../handlers/driverHandlers/setInactiveDriverHandler');
 const deleteLogicDrivers = require('../handlers/driverHandlers/setInactiveDriverHandler');
+const updateUserAdminHandler = require('../handlers/userHandlers/updateUserAdminHandler');
 
 const router = Router();
 
@@ -71,6 +72,7 @@ router.get('/user', getUsersHandler);
 router.delete('/user', deleteUserHandler);
 router.post('/user/create', postUserHandler);
 router.patch('/user/update', updateUserHandler);
+router.patch('/user/admin', updateUserAdminHandler); //Ruta para convertir admin y viceversa.
 
 
 //Cambio a metodo PATCH: Mas versatil para actulizar campos individualmente.

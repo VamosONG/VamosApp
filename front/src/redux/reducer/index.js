@@ -1,7 +1,7 @@
 
 
 
-import { DELETE_DRIVER, GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, ORDER_DATE, FILTER_RATING, GET_DATA_USER } from "../actions/action.types";
+import { DELETE_DRIVER, GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, ORDER_DATE, FILTER_RATING, GET_DATA_USER, HANDLE_ADMIN } from "../actions/action.types";
 
 
 import { GET_PAYMENT_DATA, CREATE_CHOFER, CLEAN_USER_BY_EMAIL, GET_ALL_CONDUCTORES, GET_TRIPS_BY_ID, GET_COMPLETED_TRIPS, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE, USER_BY_EMAIL, GET_ALL_PRICES } from "../actions/index";
@@ -49,7 +49,6 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     const PAGE_DATA = 6;//DESDE ACA MANEJA LA CANT DE OBJETO POR PAGINA
 
-    const carTypeFound = ["auto", "camioneta", "van", 'van plus'];
     switch (action.type) {
         case GET_ALL_CONDUCTORES:
             const driverData = state.allData.filter((drivers) => drivers.inactive === false)
@@ -140,6 +139,12 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 infoConfirmacionViaje: action.payload
+            }
+        
+        case HANDLE_ADMIN:
+            return {
+                ...state,
+                currentUser: action.payload
             }
 
         case GET_RESERVED_TRIPS:
@@ -252,12 +257,12 @@ const reducer = (state = initialState, action) => {
 
 
         case FILTER_CAR:
-            const filterCarList = state.allData.filter((car) => car.carType === action.payload)
+            const filterCarList = [...state.conductores].filter((car) => car.carType === action.payload)
             const filteredStateAfterCar = state.pageConductores.filter((driver) => filterCarList.includes(driver));
             return {
                 ...state,
                 // conductores: filterCarList,
-                conductores: filterCarList.slice(0, PAGE_DATA),
+                conductores: [...filterCarList].slice(0, PAGE_DATA),
                 pageConductores: filteredStateAfterCar
             }
 
@@ -267,7 +272,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 // conductores: filterAirportList,
-                conductores: filterAirportList.slice(0, PAGE_DATA),
+                conductores: [...filterAirportList].slice(0, PAGE_DATA),
                 pageConductores: filterAirportList
             }
 
