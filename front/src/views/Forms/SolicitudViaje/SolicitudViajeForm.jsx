@@ -46,7 +46,12 @@ function SolicitudViajeForm() {
             viaje:`${input?.origin}${input?.destination}`, 
             price: Number(infoConfirmacionViaje?.price) ,
             // quantityPassengers: "1",
-            tripId: infoConfirmacionViaje?.id
+            userId: currentUser.id,
+            origin: infoConfirmacionViaje?.origin,
+            destination: infoConfirmacionViaje?.destination,
+            date:infoConfirmacionViaje?.date,
+            hour: infoConfirmacionViaje?.hour,
+            quantityPassengers: infoConfirmacionViaje?.quantityPassengers
           }
         
         const handlePayment = async (/*product*/) => {

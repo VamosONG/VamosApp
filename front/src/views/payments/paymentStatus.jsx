@@ -3,7 +3,7 @@ import { Center, Box, Collapse, Heading, Text, Stack, Button } from '@chakra-ui/
 import { useDispatch, useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
 import axios from 'axios';
-import { getDataMePago, getTripsById } from '../../redux/actions/index'
+import { getDataMePago, getTripById } from '../../redux/actions/index'
 
 
 
@@ -14,7 +14,7 @@ const PaymentStatus = () => {
   // const [paymentData, setPaymentData] = useState(null);
 
   // console.log('paymentData', paymentData)
-  const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
+
   const mePagoData = useSelector((state) => state.mePagoData)
   useEffect(() => {
     // const datosCompra = async () => {
@@ -34,7 +34,8 @@ const PaymentStatus = () => {
     // datosCompra();
 
     dispatch(getDataMePago())
-    dispatch(getTripsById(infoConfirmacionViaje.id))
+    
+    // dispatch(getTripById(mePagoData.trip_id))
 
 
   }, [dispatch]);
