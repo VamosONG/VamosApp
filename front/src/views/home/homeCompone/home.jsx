@@ -128,8 +128,8 @@ const Home = () => {
             </Stack>
             </Flex>
         </Box>
-        <Testimonials/>
         <Services/>
+        <Testimonials/>
         <Publi/>
         <CompanySlider/>
         <InfoVamos/>

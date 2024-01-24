@@ -6,8 +6,16 @@ const Questions = () =>{
 
     return (
         <Flex
-        bg="blue.200"
+        bgImage='https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/eqdrrjmlkojpiiwlhwjo.jpg'
+        w='100%'
+        h='100%'
         >
+        <Box
+            bgSize='cover'
+            bgPosition='center'
+            filter='blur(2px) brightness(0.8)'
+            zIndex='-1'
+            />
 
         <Box 
         p={8} 
