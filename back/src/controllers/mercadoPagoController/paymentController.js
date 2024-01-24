@@ -2,29 +2,37 @@ const mercadopago = require("mercadopago");
 // import { MERCADOPAGO_API_KEY } from "../config.js";
 const dotenv = require("dotenv");
 const trip = require("../../models/trip");
-const { Trip } = require("../../dataBase")
+const { Trip } = require("../../dataBase");
+const postTrip = require('../../controllers/tripsControllers/postTrip');
 dotenv.config();
 
-
+let newTrip = {}
 const createOrder = async (req, res) => {
 
   mercadopago.configure({
     access_token: process.env.ACCESS_TOKEN
   });
 
-  const product = req.body
-  console.log('pruduct', product)
+  const {
+    userId,
+    date,
+    hour,
+    origin,
+    destination,
+    quantityPassengers,
+    price,viaje } = req.body
+ 
   try {
     let preference = {
 
-      metadata: { tripId: product.tripId },
+      metadata: { userId: userId },
 
 
 
       items: [
         {
-          title: product.viaje,
-          unit_price: product.price,
+          title: viaje,
+          unit_price: price,
           currency_id: "PEN",
           quantity: 1,
           //  description: product.quantityPassengers, 
@@ -32,10 +40,8 @@ const createOrder = async (req, res) => {
         }],
       back_urls: {
         success: "http://localhost:5173/paymentStatus",
-        // success: "http://localhost:3001/mepago/success",
-        /* failure: "http://localhost:3001/mepago/fail", */
-        failure: "http://localhost:5173/",
-        pending: "http://localhost:3001/mepago/pending",
+        // failure: "http://localhost:5173/fail",
+        // pending: "http://localhost:5173/pending",
       },
 
       notification_url: "https://c8cb-2800-2130-8a40-4f3-f10e-58e6-75e9-edde.ngrok-free.app/mepago/webhook",
@@ -44,6 +50,8 @@ const createOrder = async (req, res) => {
       auto_return: "all"
     }
 
+    newTrip = await postTrip(userId, date, hour, origin, destination, quantityPassengers, price);
+    console.log("1", newTrip);
     const respuesta = await mercadopago.preferences.create(preference);
 
     res.status(200).json(respuesta.response.init_point);
@@ -63,17 +71,18 @@ const receiveWebhook = async (req, res) => {
     //  console.log(payment)
 
 
-    if (payment.type === "payment") {
-      const data = await mercadopago.payment.findById(payment["data.id"]);
-      const userPayment = await Trip.findOne({ where: { id: data.body.metadata.trip_id } });//BUSCA EL TRIP
-      await userPayment.update({ stateOfTrip: "reserved" }); //CAMBIA DE OFFER A RESERVED
-      await userPayment.reload();
-
+    if (payment.type !== "payment" && newTrip.id) {
+      // const data = await mercadopago.payment.findById(payment["data.id"]);
+      // const userPayment = await Trip.findOne({ where: { id: data.body.metadata.trip_id } });//BUSCA EL TRIP
+      //  await newTrip.update({ stateOfTrip: "reserved" }); //CAMBIA DE OFFER A RESERVED
+      // await userPayment.reload();
+      console.log("2",newTrip);
+      await deleteTrip(newTrip.id);
       
+
       // AGREGAR LO DE ENVIAR MAIL
 
-    }
-
+    } 
     res.sendStatus(204);
   } catch (error) {
     console.error("Error:", error);

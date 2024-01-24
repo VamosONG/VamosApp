@@ -46,8 +46,13 @@ function SolicitudViajeForm() {
             viaje:`${input?.origin}${input?.destination}`, 
             price: Number(infoConfirmacionViaje?.price) ,
             // quantityPassengers: "1",
-            tripId: infoConfirmacionViaje?.id
-            }
+            userId: currentUser.id,
+            origin: infoConfirmacionViaje?.origin,
+            destination: infoConfirmacionViaje?.destination,
+            date:infoConfirmacionViaje?.date,
+            hour: infoConfirmacionViaje?.hour,
+            quantityPassengers: infoConfirmacionViaje?.quantityPassengers
+          }
         
         const handlePayment = async (/*product*/) => {
             console.log(product)
@@ -82,7 +87,7 @@ function SolicitudViajeForm() {
                     <p>Origen: {infoConfirmacionViaje.origin}</p>
                     <p>Destino: {infoConfirmacionViaje.destination}</p>
                     <p>Cantidad de pasajeros: {infoConfirmacionViaje.quantityPassengers}</p>
-                    <p style={{ fontWeight: 'bold', fontSize: 'larger', textDecoration: 'underline'  }}>PRECIO FINAL: {infoConfirmacionViaje.price} soles</p>
+                    <p>Precio final: {infoConfirmacionViaje.price}</p>
                 </div>
             );
         

@@ -10,6 +10,7 @@ import {
     signOut
 } from "firebase/auth"
 import { useNavigate } from "react-router";
+import { getUserByEmail } from "../redux/actions";
 
 
 
@@ -78,7 +79,12 @@ export function AuthProvider({ children }) {
 
     const loginWithGoogle = async () => {
         const responseGoogle = new GoogleAuthProvider()
-        return signInWithPopup(auth, responseGoogle)
+        try {
+        await signInWithPopup(auth, responseGoogle)
+      
+        } catch (error) {
+            console.log(`"Falló el login"${error.message}`);
+        }
     }
     const logOut = async () => {
         try {
