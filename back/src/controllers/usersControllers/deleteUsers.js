@@ -8,7 +8,7 @@ const deleteUser = async (id) => {
             throw new Error("Usuario inexistente")
           }
 
-          await userDelete.destroy();
+          await userDelete.destroy({ cascade: true });
 
           return userDelete
     } catch (error) {
