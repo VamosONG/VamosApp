@@ -40,7 +40,7 @@ const postPriceHandler = require('../handlers/pricesHandlers/postPriceHandler')
 const updatePriceHandler = require('../handlers/pricesHandlers/updatePriceHandler')
 const deletePriceHandler = require('../handlers/pricesHandlers/deletePriceHandler')
 
-const filtershandler = require('../handlers/filtersHandlers/filtersHandler');
+const createOfferHandler = require('../handlers/filtersHandlers/createOfferHandler');
 const getFilteredDriversHandler = require('../handlers/filtersHandlers/getFilteredDriversHandler');
 const getReservesHandler = require('../handlers/filtersHandlers/getReservesHandler');
 const doReserveHandler = require('../handlers/utilsHandlers/doReserveHandler');
@@ -104,10 +104,10 @@ router.post('/price/create', postPriceHandler);
 router.put('/price/update', updatePriceHandler);
 router.delete('/price', deletePriceHandler);
 
-router.post('/offer/create', filtershandler);
+router.post('/offer/create', createOfferHandler);
 router.post('/drivers/filter', getFilteredDriversHandler);//
 router.get('/trips/reserves', getReservesHandler);
-router.put('/trips/reserves/create', doReserveHandler);
+router.post('/trips/reserves/create', doReserveHandler);
 router.put('/trips/reserves/update',setDriverHandler);
 router.get('/trips/completed', getTripsCompletedHandler);//
 router.get('/trips/pending', getTripsPendingHandler);
