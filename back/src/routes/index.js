@@ -40,17 +40,19 @@ const postPriceHandler = require('../handlers/pricesHandlers/postPriceHandler')
 const updatePriceHandler = require('../handlers/pricesHandlers/updatePriceHandler')
 const deletePriceHandler = require('../handlers/pricesHandlers/deletePriceHandler')
 
-const filtershandler = require('../handlers/filtersHandlers/filtersHandler');
+const createOfferHandler = require('../handlers/filtersHandlers/createOfferHandler');
 const getFilteredDriversHandler = require('../handlers/filtersHandlers/getFilteredDriversHandler');
 const getReservesHandler = require('../handlers/filtersHandlers/getReservesHandler');
 const doReserveHandler = require('../handlers/utilsHandlers/doReserveHandler');
 const setDriverHandler = require('../handlers/utilsHandlers/setDriverHandler');
 const getTripsCompletedHandler = require('../handlers/filtersHandlers/getTripsCompletedHandler');
 const getTripsPendingHandler = require('../handlers/filtersHandlers/getTripsPendingHandler');
+const filterTripsHandler = require('../handlers/filtersHandlers/filterTripsHandler');
+const searchDriversHandler = require('../handlers/filtersHandlers/searchDriversHandler');
 
 const postPreference = require('../controllers/mercadoPagoController/postPreference');
 const {createOrder, receiveWebhook} = require('../controllers/mercadoPagoController/paymentController')
-const {success, fail, pending} = require('../controllers/mercadoPagoController/backUrlsController')
+const {success} = require('../controllers/mercadoPagoController/backUrlsController')
 
 const getTripsByIdHandler = require('../handlers/tripHandlers/getTripsByIdHandler');
 const sendMailHandler = require('../utils/mailing/sendMailHandler');
@@ -104,13 +106,15 @@ router.post('/price/create', postPriceHandler);
 router.put('/price/update', updatePriceHandler);
 router.delete('/price', deletePriceHandler);
 
-router.post('/offer/create', filtershandler);
+router.post('/offer/create', createOfferHandler);
 router.post('/drivers/filter', getFilteredDriversHandler);//
 router.get('/trips/reserves', getReservesHandler);
-router.put('/trips/reserves/create', doReserveHandler);
+router.post('/trips/reserves/create', doReserveHandler);
 router.put('/trips/reserves/update',setDriverHandler);
 router.get('/trips/completed', getTripsCompletedHandler);//
 router.get('/trips/pending', getTripsPendingHandler);
+router.post('/trips/filters', filterTripsHandler);
+router.post('/drivers/search', searchDriversHandler);
 
 router.get('/trips/tripId/:id', getTripsByIdHandler)
 
@@ -118,8 +122,8 @@ router.post('/send-mail', sendMailHandler)
 
 router.post('/mepago/create-order', createOrder);
 router.get('/mepago/success',success);
-router.get('/mepago/fail', fail);
-router.get('/mepago/pending', pending);
+// router.get('/mepago/fail', fail);
+// router.get('/mepago/pending', pending);
 router.post('/mepago/webhook', receiveWebhook);
 
 module.exports = router;

@@ -16,22 +16,20 @@ module.exports = (sequelize) => {
             allowNull: true
         },
         date: {
-            type: DataTypes.DATEONLY,
+            type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                isDate: true, 
-            },
+           
         },
         hour: {
-            type: DataTypes.TIME,
+            type: DataTypes.STRING,
             allowNull: true,
-            validate: {
-                isValidHourFormat(value) {
-                    if (!/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(value)) {
-                        throw new Error('El formato de la hora debe ser HH:mm');
-                    }
-                },
-            },
+            // validate: {
+            //     isValidHourFormat(value) {
+            //         if (!/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(value)) {
+            //             throw new Error('El formato de la hora debe ser HH:mm');
+            //         }
+            //     },
+            // },
         },
         origin: {
             type: DataTypes.STRING,
@@ -49,7 +47,7 @@ module.exports = (sequelize) => {
             },
         },
         price: {
-            type: DataTypes.STRING, 
+            type: DataTypes.INTEGER, 
             allowNull: false,
             
         },
@@ -60,7 +58,7 @@ module.exports = (sequelize) => {
         stateOfTrip: {
             type: DataTypes.STRING, 
             allowNull: true,
-            defaultValue: 'offer'
+            defaultValue: 'reserved'
         }
     },
 

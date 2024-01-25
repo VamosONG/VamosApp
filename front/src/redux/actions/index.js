@@ -47,7 +47,7 @@ export const getAllConductores = () => {
 export const getTripById = (id) => {
     return async (dispatch) => {
         try {
-            const {data} = await axios.get(`http://localhost:3001/trips/${id}`)
+            const {data} = await axios.get(`http://localhost:3001/trips/tripId/${id}`)
             return dispatch({
                 type:GET_TRIP_ID,
                 payload: data
@@ -556,8 +556,9 @@ export const getDataMePago = () => {
     return async (dispatch) => {
         try {
             const currentUrl = window.location.href;
+            console.log(currentUrl);
             const urlParams = new URLSearchParams(currentUrl);
-            
+            console.log(urlParams);
             const paymentData = {};
             urlParams.forEach((value, key) => {
                 paymentData[key] = value;
@@ -578,12 +579,22 @@ export const getDataMePago = () => {
     }
 }
 
-export const cleanCurrentUser = (userVacio) => {
+export const cleanCurrentUser = () => {
+    return {
+        type: 'CLEAN_USER_BY_EMAIL',
+        payload: {
+            currentUser: null,
+        },
+    };
+
+}
+export const orderSearch = (input) => {
     return async (dispatch) => {
         try {
+            const { data } = await axios.post(`http://localhost:3001/trips/filters`, input);
             dispatch({
-                type: CLEAN_USER_BY_EMAIL,
-                payload: userVacio
+                type: GET_RESERVED_TRIPS,
+                payload: data
             })
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK

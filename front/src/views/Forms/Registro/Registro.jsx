@@ -33,8 +33,6 @@ import googleLogo from "../../../assets/icons/google.png";
 const RegistroForm = ({ onSwitchForm }) => {
 
 
-  const bgImg= "https://res.cloudinary.com/drgnsbah9/image/upload/v1705767597/Vamos/Aeropuerto_loqc3q.jpg"
-
   //  estado loca Input para setear la info del form y enviarla por body al back y crear el usuario
 
   const [input, setInput] = useState({
@@ -89,13 +87,7 @@ let dataUser = {};
         });  
 
         navigate("/")
-        // dataUser = {
-        //   userId: data,
-        //   option: "signIn",
-        // };
-        
-        // return axios.post(`http://localhost:3001/send-mail`, dataUser);
-
+       
       })
       .then((response) => {
         console.log("Mail enviado");// respuesta de send-mail aquí

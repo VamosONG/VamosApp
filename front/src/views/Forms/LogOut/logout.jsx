@@ -1,51 +1,41 @@
-import { Button, Stack, Box } from "@chakra-ui/react";
-
+import { IconButton, Button, Stack,Icon } from "@chakra-ui/react";
+import { FaSignOutAlt } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { logOutAction } from "../../../redux/actions";
 import { useAuth } from "../../../context/authContext";
 import { useNavigate } from "react-router";
-import NavBar from '../../../components/navBar/NavBar'
-import { cleanCurrentUser } from '../../../redux/actions'
-
-//import { unstable_HistoryRouter } from 'react-router-dom'
-
+import { cleanCurrentUser } from '../../../redux/actions';
 
 const LogOut = () => {
-    // const esAdmin = useSelector((state) => state.esAdmin)
-    // const esUsuario = useSelector((state) => state.esUsuario)
-    //const dispatch = useDispatch();
-    const navigate = useNavigate()
-    const auth = useAuth()
-    const {currentUser} = useSelector(state=> state)
-    const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const auth = useAuth();
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state);
 
-    const handleLogOut =async () => {
-        try {
-            //dispatch(logOutAction(esAdmin ? 'admin' : 'user'));
-            await auth.logOut()
-            // currentUser === null || !currentUser
-            //  navigate("/")
-            // location.href = '/';
-            dispatch(cleanCurrentUser({}))
-            navigate("/")
-          
-          } catch (error) {
-            console.log(`funciona${error.message}`);
-          }
+  const handleLogOut = async () => {
+    try {
+      await auth.logOut();  // Asumo que tu función logOut está implementada correctamente en useAuth
+
+      // Limpiar el estado de Redux
+      dispatch(cleanCurrentUser());
+
+      // Redirigir al usuario a la página de inicio
+      navigate("/");
+    } catch (error) {
+      console.error(`Error al cerrar sesión: ${error.message}`);
     }
+  };
+  
 
-    return (
-        // import { MdBuild , MdCall } from "react-icons/md"
-
-        <Stack direction='row' spacing={4}>
-            {currentUser.admin ? (
-                <Button  colorScheme='#E83D6F' variant='solid' onClick={() => handleLogOut(true)}>
-                    Salir
-                </Button>)
-                : null
-            }
-        </Stack>
-    )
-}
+  return (
+    <Stack direction="row" spacing={4}>
+      <IconButton
+        variant="solid"
+        aria-label="Cerrar sesión"
+        icon={<Icon as={FaSignOutAlt} />}
+        onClick={handleLogOut}
+      />
+    </Stack>
+  );
+};
 
 export default LogOut;

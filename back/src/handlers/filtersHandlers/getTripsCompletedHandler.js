@@ -4,6 +4,7 @@ const getDriverById = require('../../controllers/driversControllers/getDriverByI
 const getUserById = require('../../controllers/usersControllers/getUserById');
 
 
+
 module.exports = async (req, res) => {
     try {
         
@@ -11,11 +12,12 @@ module.exports = async (req, res) => {
         const today = new Date();
 
         allTrips.forEach(viaje => {
-            if(viaje.date<today.toISOString().split('T')[0])
-                updateTrip(viaje.id, {stateOfTrip: 'completed'})
+            if(viaje.date<today.toISOString().split('T')[0]){
+                if(viaje.stateOfTrip==='pending')
+                    updateTrip(viaje.id, {stateOfTrip: 'completed'})
+            }
         });
         const completeTrips = allTrips?.filter(tr=>(tr.stateOfTrip==='completed') && (tr.driverId));
-
         const mapeo = await Promise.all(completeTrips?.map(async tr=>{
             const {dataValues, driverFullName, userEmail} = tr;
             const chofer=await getDriverById(tr.driverId);
