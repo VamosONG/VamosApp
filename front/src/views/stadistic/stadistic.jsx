@@ -1,36 +1,38 @@
 import { Box, ChakraProvider, Text } from '@chakra-ui/react';
 import { useEffect } from 'react';
-import { getDataUser } from '../../redux/actions';
+import { getDataUser, getTrips } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Chart from 'chart.js/auto';
 
 const Stadistic = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useEffect(async() => {
     
-    (async () => {
-      try {
-        
+    
+      
+        await dispatch(getTrips())
         await dispatch(getDataUser());
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    })();
+        
+      
+  
   }, [dispatch]);
 
   
   const users = useSelector((state) => state.dataUser);
-  console.log(users);
+  const trips = useSelector((state)=>state.getTrips)
+  console.log(trips);
 
   const totalUsers = users.length
+  const totalTrips = trips.length
   console.log('totalUsers', totalUsers);
 
   return (
     <ChakraProvider>
       <Box
-      mt={200}>
+      mt={150}>
         <Text>Total de usuarios: {totalUsers}</Text>
+        <Text>Total de Viajes: {totalTrips}</Text>
       </Box>
       {/* Ajusta el margin-top de la primera caja según la altura de tu nav */}
       <Box
@@ -39,7 +41,7 @@ const Stadistic = () => {
         borderRadius="md"
         p={4}
         m={2}
-        mt={200} // Ajusta el margen superior según la altura de tu nav
+        mt={100} // Ajusta el margen superior según la altura de tu nav
       >
         Caja 1
       </Box>
