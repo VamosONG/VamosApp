@@ -34,6 +34,7 @@ import AdminProfile from './components/userProfile/adminProfile';
 import ReviewAdmin from './views/adminProfile/reviewAdmin';
 import UserViewAdmin from './views/adminProfile/userViewAdmin';
 import PaymentFail from './views/payments/paymentFail';
+import Stadistic from './views/stadistic/stadistic';
 
 function App() {
   const location = useLocation();
@@ -67,6 +68,7 @@ function App() {
         <Route path="/paymentFailed" element={<PaymentFail/>}/>
         <Route path="/profileUser" element={<UserProfile/>}/>
         <Route path="/profileAdmin" element={<AdminProfile/>}/>
+        <Route path="/stadistics" element={<Stadistic/>}/>
         {/* No son necesario estas rutas, ya que todo estara dentro el componente del admin */}
         {/* <Route path="/reviewAdmin" element={<ReviewAdmin/>}/>  
         <Route path="/user" element={<UserViewAdmin/>}/> */}
