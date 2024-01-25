@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { getDataUser, getTrips } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Chart from 'chart.js/auto';
+import LinesChart from "./LinesChart"
 
 const Stadistic = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const Stadistic = () => {
 
   
   const users = useSelector((state) => state.dataUser);
-  const trips = useSelector((state)=>state.getTrips)
+ 
   console.log(trips);
 
   const totalUsers = users.length
