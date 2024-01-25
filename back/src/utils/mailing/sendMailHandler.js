@@ -11,6 +11,7 @@ module.exports=async({id, name, surname, email, phone, dni, driverId, tripId, op
 console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
         const userName=name;
         email="ezequielantoine@gmail.com"
+        
         let chofer=null;
         let trip=null;
         const adminsEmails = await getAdminEmails();
@@ -357,6 +358,7 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
                         `
                 break;
             case("assignDriver"):
+                bbc=[email, chofer.email],
                 preSubject=`VAMOS!! ${userName}, se ha asignado un chofer para su viaje.`,
                 message=`<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
                 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="es">
