@@ -1,7 +1,7 @@
 const updateUserAdminControllers = require("../../controllers/usersControllers/updateUserAdminControllers");
 
 
-const updateUserAdminHandler = async () =>{
+const updateUserAdminHandler = async (req, res) =>{
     const {id} = req.params;
 
     try {

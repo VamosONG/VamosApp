@@ -73,7 +73,7 @@ router.get('/user', getUsersHandler);
 router.delete('/user', deleteUserHandler);
 router.post('/user/create', postUserHandler);
 router.patch('/user/update', updateUserHandler);
-router.patch('/user/admin', updateUserAdminHandler); //Ruta para convertir admin y viceversa.
+router.patch('/user/admin/:id', updateUserAdminHandler); //Ruta para convertir admin y viceversa.
 
 
 //Cambio a metodo PATCH: Mas versatil para actulizar campos individualmente.

@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getReviewsData } from '../../redux/actions';
 import Paginado from '../../components/paginado/paginadoComponent';
 
+
 const ReviewAdmin = () => {
 
     const reviews = useSelector((state) => state.reviewsData)

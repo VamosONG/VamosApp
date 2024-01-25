@@ -7,7 +7,7 @@ export const ORDER_PASSENGER = 'ORDER_PASSENGER'
 export const ORDER_RATING = 'ORDER_RATING'
 export const ORDER_STATE = 'ORDER_STATE'
 export const ORDER_DATE = 'ORDER_DATE'
-
+export const ORDER_TRIPS = 'ORDER_TRIPS'
 
 //Metodos de filtrado
 export const FILTER_AIRPORT = 'FILTER_AIRPORT'

@@ -10,7 +10,7 @@ const updateUserAdminControllers = async (id) => {
 
     const changeValue = !userFind.admin;
 
-    await User.update({ admin: userFind}, { where: { id } });
+    await User.update({ admin: changeValue}, { where: { id } });
 
         return {
             success: true,

@@ -8,11 +8,11 @@ import {
     Th,
     Td,
     TableCaption, Tooltip,
-    TableContainer, Button, Flex, Link, 
+    TableContainer, Button, Flex, Link,
 } from '@chakra-ui/react'
 import { RepeatClockIcon, AddIcon } from '@chakra-ui/icons'
 import { useDispatch, useSelector } from "react-redux";
-import { getDataUser, handleAdminUser,} from '../../redux/actions';
+import { getDataUser, handleAdminUser, } from '../../redux/actions';
 import UserFilter from '../driversViewAdmin/filtersData/userFilter';
 import Paginado from '../../components/paginado/paginadoComponent';
 import Swal from 'sweetalert2'
@@ -29,6 +29,8 @@ const UserViewAdmin = () => {
     const results = !search ? userData : userData.filter((data) => data.name && data.name.toLowerCase().includes(search.toLowerCase()) || data.email && data.email.toLowerCase().includes(search.toLowerCase())
     )
 
+
+    console.log(results);
     const handleAdminAccess = (id) => {
         Swal.fire({
             title: "¿Convertir ADMIN?",
@@ -91,15 +93,15 @@ const UserViewAdmin = () => {
                         <Tbody>
                             {results?.map((user) => (
                                 <Tr key={user.id}  >
-                                    <Td w='auto' >{user.name}</Td>
+                                    <Td w='auto' >{user.name ? user.name : 'sin nombre'}</Td>
                                     <Td w='min-content' >
                                         <Tooltip hasArrow label={user.email ? 'Enviar Correo' : null} bg='#10447E' placement='top'>
                                             <Link href={`mailto:${user.email}`}>
-                                                {user.email}
+                                                {user.email ? user.email : 'Sin correo'}
                                             </Link>
                                         </Tooltip>
                                     </Td>
-                                    <Td w='auto' >{user.dni ? user.dni : 'Desconocido'}</Td>
+                                    <Td w='auto'>{user.dni ? user.dni : 'Desconocido'}</Td>
                                     <Td w='auto' display={'flex'} flexDirection={'column'}>
                                         <Tooltip hasArrow label={user.phone ? 'Contactar' : null} bg='#10447E' placement='top'>
                                             <Link href={`whatsapp://send?phone=+51${user.phone}`}>
@@ -107,11 +109,24 @@ const UserViewAdmin = () => {
                                             </Link>
                                         </Tooltip>
                                     </Td>
-                                    <Td w='auto'> {user.Trips.length} </Td>
+                                    <Td w='auto'> {user.Trips.length ? user.Trips.length : '0'}
+                                     </Td>
                                     <Td>
-                                        {!user.admin ? (
-
-                                            <Tooltip hasArrow label='Acceso Admin' bg='#009ED1' placement='left-start'>
+                                        {user.admin ? (
+                                            <>
+                                                <Tooltip label='Quitar Access Admin' placement='right' bg='#E83D6F'>
+                                                    
+                                                <Button onClick={() => handleAdminAccess(user.id)}
+                                                    bg='#E83D6F'
+                                                    fontSize='1.2rem'
+                                                    id={user.id} >
+                                                    <RepeatClockIcon />
+                                                </Button>
+                                                </Tooltip>
+                                            </>
+                                        ) : (
+                                            <>
+                                            <Tooltip label='Access Admin' placement='right' bg='#009ED1'>
 
                                                 <Button onClick={() => handleAdminAccess(user.id)}
                                                     bg='#009ED1'
@@ -120,16 +135,7 @@ const UserViewAdmin = () => {
                                                     <AddIcon />
                                                 </Button>
                                             </Tooltip>
-                                        ) : (
-                                            <Tooltip hasArrow label='Quitar Acceso' bg='purple.200' placement='#E83D6F'>
-
-                                                <Button onClick={() => handleAdminAccess(user.id)}
-                                                    bg='#E83D6F'
-                                                    fontSize='1.2rem'
-                                                    id={user.id} >
-                                                    <RepeatClockIcon />
-                                                </Button>
-                                            </Tooltip>
+                                            </>
                                         )}
                                     </Td>
                                 </Tr>
@@ -138,7 +144,7 @@ const UserViewAdmin = () => {
                         </Tbody>
                         <Tfoot>
                             <Tr>
-                            <Th >Usuario</Th>
+                                <Th >Usuario</Th>
                                 <Th >E-mail</Th>
                                 <Th>DNI</Th>
                                 <Th>telefono</Th>

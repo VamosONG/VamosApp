@@ -1,7 +1,7 @@
 
 
 
-import { DELETE_DRIVER, GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, ORDER_DATE, FILTER_RATING, GET_DATA_USER, HANDLE_ADMIN } from "../actions/action.types";
+import { DELETE_DRIVER, GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, ORDER_DATE, FILTER_RATING, GET_DATA_USER, HANDLE_ADMIN, ORDER_TRIPS } from "../actions/action.types";
 
 
 import { GET_PAYMENT_DATA, CREATE_CHOFER, CLEAN_USER_BY_EMAIL, GET_ALL_CONDUCTORES, GET_TRIPS_BY_ID, GET_COMPLETED_TRIPS, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE, USER_BY_EMAIL, GET_ALL_PRICES } from "../actions/index";
@@ -44,6 +44,7 @@ const initialState = {
     allDataRevies: [],
 
     dataUser: [],
+    allDataUser: [],
 }
 
 const reducer = (state = initialState, action) => {
@@ -144,7 +145,7 @@ const reducer = (state = initialState, action) => {
         case HANDLE_ADMIN:
             return {
                 ...state,
-                currentUser: action.payload
+                newUsuario: action.payload
             }
 
         case GET_RESERVED_TRIPS:
@@ -219,16 +220,30 @@ const reducer = (state = initialState, action) => {
             let orderedListRating = [...state.reviewsData]
             if (action.payload === 'A') {
                 orderedListRating.sort((a, b) => a.qualification < b.qualification ? 1 : -1)
+    
             } else if (action.payload === 'D') {
                 orderedListRating.sort((a, b) => a.qualification > b.qualification ? 1 : -1)
-            }
+            } 
             return {
                 ...state,
                 reviewsData: orderedListRating,
             }
-
+            //vjsD = viajes de usuarios
+            case ORDER_TRIPS:
+                let orderListTrips = [...state.allDataUser]
+            if (action.payload === 'vjsA') {
+                orderListTrips.sort((a, b) => a.Trips.length < b.Trips.length ? 1 : -1)
+            } else if (action.payload === 'vjsD'){
+            }
+            orderListTrips.sort((a, b) => a.Trips.length > b.Trips.length ? 1 : -1)
+            return {
+                ...state,
+                dataUser: orderListTrips,
+                allDataUser: orderListTrips
+            }
         case ORDER_DATE:
             let orderedListDate = [...state.reviewsData]
+            
             if (action.payload === 'A') {
                 orderedListDate.sort((a, b) => a.date < b.date ? 1 : -1)
             } else if (action.payload === 'D') {
@@ -278,26 +293,64 @@ const reducer = (state = initialState, action) => {
 
         case FILTER_STATE:
             let filterStateList = [...state.allData]
+            let filterAdminList = [...state.allDataUser]
+
             if (action.payload === true || action.payload === 'true') {
                 filterStateList = state.allData.filter((mood) => mood.driverState === true)
+                return {
+                    ...state,
+                    conductores: [...filterStateList].slice(0, PAGE_DATA),
+                    pageConductores: filterStateList
+                }
             } else if (action.payload === false || action.payload === 'false') {
                 filterStateList = state.allData.filter((mood) => mood.driverState === false)
+                return {
+                    ...state,
+                    conductores: [...filterStateList].slice(0, PAGE_DATA),
+                    pageConductores: filterStateList
+                }
             } else if (action.payload === 'D') {
                 filterStateList = state.allData.filter((deleteDriver) => deleteDriver.inactive === true)
-            } else {
-                filterStateList
+                return {
+                    ...state,
+                    conductores: [...filterStateList].slice(0, PAGE_DATA),
+                    pageConductores: filterStateList
+                }
+            } else if (action.payload === 'Admin') {
+                filterAdminList = state.allDataUser.filter((userAd) => userAd.admin === true)
+                return {
+                    ...state,
+                    dataUser: [...filterAdminList],
+                }
+            } else if (action.payload === 'all') {
+                return {
+                    ...state,
+                    conductores: [...filterStateList].slice(0, PAGE_DATA),
+                    pageConductores: filterStateList
+                }
+            } else if (action.payload === 'User') {
+                filterAdminList = state.allDataUser.filter((user) => user.admin === false)
+                return {
+                    ...state,
+                    dataUser: [...filterAdminList]
+                }
+            } else if (action.payload === 'allUser') {
+                return {
+                    ...state,
+                    dataUser: [...filterAdminList]
+                }
             }
-
-            // const filterStateList = state.allData.filter((mood) => mood.driverState === true)
-
             return {
                 ...state,
                 conductores: [...filterStateList].slice(0, PAGE_DATA),
                 pageConductores: filterStateList
             }
+            // const filterStateList = state.allData.filter((mood) => mood.driverState === true)
+
 
         case ORDER_STATE:
             let orderedListState = [...state.conductores]
+
             if (action.payload === 'A') {
                 orderedListState.sort((a, b) => a.driverState < b.driverState ? 1 : -1)
             } else if (action.payload === 'D') {
@@ -330,6 +383,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 dataUser: action.payload.slice(0, PAGE_DATA),
+                allDataUser: action.payload
             }
 
         case GET_DETAIL_USER:

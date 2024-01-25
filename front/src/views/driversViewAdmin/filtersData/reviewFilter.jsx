@@ -1,7 +1,7 @@
-import { Select, Box, Text, Flex, Heading, FormControl, FormLabel, Button, Input} from '@chakra-ui/react'
+import { Select, Box, Text, Flex, Heading, FormControl, FormLabel, Button, Input, Tooltip} from '@chakra-ui/react'
 import { useSelector, useDispatch } from 'react-redux'
 import { airportFilter, alphabeticalOrder, carFilter, dateOrder, getAllConductores, getReviewsData, passengerOrder, ratingFilter, ratingOrder, stateFilter, stateOrder } from '../../../redux/actions'
-import { BsAirplaneEngines, BsBootstrapReboot,BsArrowClockwise } from "react-icons/bs";
+import { BsAirplaneEngines, BsBootstrapReboot, BsArrowClockwise, BsFilterCircle, BsFunnel } from "react-icons/bs";
 import { useEffect } from 'react';
 
 
@@ -31,8 +31,14 @@ const ReviewFilter = ({searcher}) => {
         <>
             <Flex gap='4' justify={'center'} align={'center'} mx='2rem' py='.5rem'>
                 <Flex justify='center' align={'center'} gap='4'  >
-                <Input placeholder='Buscar por nombre / correo / chofer' onChange={searcher} />
-                    <Heading>Orden</Heading>
+                <Flex justify={'center'} align={'center'} fontSize={'1.5rem'}>
+                        <Input placeholder='Buscar por nombre / correo / chofer' onChange={searcher} border={'1px solid gray'} />
+                    </Flex >
+                    <Tooltip label='Ordenar datos' bg='#10447E' placement='top' >
+                        <Text fontSize={'2rem'}>
+                            <BsFilterCircle />
+                        </Text>
+                    </Tooltip>
                     {/* <Box>
                         <FormControl>
                             <FormLabel>Nombre</FormLabel>
@@ -71,7 +77,11 @@ const ReviewFilter = ({searcher}) => {
                 </Flex>
 
                 <Flex justify='center' align={'center'} gap='4'  >
-                    <Heading>Filtrar</Heading>
+                <Tooltip label='Filtrar datos' bg='#10447E' placement='top' >
+                        <Text fontSize={'2rem'}>
+                            <BsFunnel />
+                        </Text>
+                    </Tooltip>
                     <Box>
                         <FormControl>
                             <FormLabel>Puntuacion</FormLabel>
