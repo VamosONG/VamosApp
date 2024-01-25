@@ -1,4 +1,4 @@
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -81,5 +81,5 @@ export default function TripsPerDriver() {
   };
 
   
-    return <Line data={midata} options={misoptions} />;
+    return <Bar data={midata} options={misoptions} />;
   }
