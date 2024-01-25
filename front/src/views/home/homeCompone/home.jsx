@@ -14,10 +14,6 @@ import {
 } from '@chakra-ui/react';
 import bgImage from "../../../assets/Aeropuerto1.jpg";
 
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getAllConductores } from "../../../redux/actions";
 import Testimonials from "../../Testimonials/Testimonials";
 import Services from "../../ServicesSection/services";
 import WhatsAppButton from "../../whatsAppButton/whatsAppButton";
@@ -26,16 +22,7 @@ import InfoVamos from "../../infoVamos/infoVamos";
 import Publi from "../../publiVamos/publiVamos";
 
 const Home = () => {
-    const dispatch= useDispatch();
-
-    const conductoresPmostrar= useSelector((state)=>state.pageConductores);
-    console.log(conductoresPmostrar)
     
-    useEffect (()=>{
-        dispatch(getAllConductores());
-    },[dispatch])
-
-
     return (
         <>
         {/* <Link to='/review&reseña'>

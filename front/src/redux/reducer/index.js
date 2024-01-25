@@ -355,9 +355,14 @@ const reducer = (state = initialState, action) => {
                     reviewsData: action.payload,
                     allDataRevies: action.payload
                 }
+                case NEW_USER:
+                    return {
+                        ...state,
+                        newUsuario: action.payload
+                    }
+                default:
+                    return { ...state };
 
-        default:
-            return { ...state };
     }
 }
 export default reducer
