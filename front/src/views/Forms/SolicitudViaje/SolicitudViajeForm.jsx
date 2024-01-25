@@ -13,6 +13,7 @@ import {
 import Swal from 'sweetalert2'
 
 import { renderToString } from 'react-dom/server';
+import { useNavigate } from "react-router";
 
 
 
@@ -24,6 +25,7 @@ function SolicitudViajeForm() {
     const bgImg = "https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
 
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     //trae la info del viaje de redux, donde se calcula el precio
     const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
     console.log(infoConfirmacionViaje, "info");
@@ -40,38 +42,49 @@ function SolicitudViajeForm() {
         hour: parsedData.hour,
         quantityPassengers: parsedData.quantityPassengers
     });
-
-
-   
+    
     /////////*****************MERCADOPAGO*************************************************************** */
-
-
-
-
-    const product = {
-        viaje: `${input?.origin}${input?.destination}`,
-        price: Number(infoConfirmacionViaje?.price),
-        // quantityPassengers: "1",
-        userId: currentUser.id,
-        origin: infoConfirmacionViaje?.origin,
-        destination: infoConfirmacionViaje?.destination,
-        date: infoConfirmacionViaje?.date,
-        hour: infoConfirmacionViaje?.hour,
-        quantityPassengers: infoConfirmacionViaje?.quantityPassengers
-    }
-
-    const handlePayment = async (/*product*/) => {
-        console.log(product)
-        const response = await axios.post("http://localhost:3001/mepago/create-order", product)
-
-        window.location.href = response.data
-        console.log(response.data)
-    };
-
-
-
-
-
+    
+    
+    
+    
+        const product = {
+            viaje:`${input?.origin}${input?.destination}`, 
+            price: infoConfirmacionViaje?.price ,
+            // quantityPassengers: "1",
+            userId: currentUser.id,
+            origin: infoConfirmacionViaje?.origin,
+            destination: infoConfirmacionViaje?.destination,
+            date:infoConfirmacionViaje?.date,
+            hour: infoConfirmacionViaje?.hour,
+            quantityPassengers: Number(infoConfirmacionViaje.quantityPassengers),
+            driverId: null
+          }
+          const trip = {
+            userId: currentUser.id,
+            origin: infoConfirmacionViaje?.origin,
+            destination: infoConfirmacionViaje?.destination,
+            date:infoConfirmacionViaje?.date,
+            hour: infoConfirmacionViaje?.hour,
+            quantityPassengers: Number(infoConfirmacionViaje.quantityPassengers),
+            driverId: null,
+            price: infoConfirmacionViaje?.price
+          }
+          console.log(trip);
+        
+        const handlePayment = async () => {
+        
+            const response= await axios.post("http://localhost:3001/mepago/create-order", product)
+          
+            window.location.href = response.data
+            
+            
+        };
+    
+    
+    
+    
+    
     /////////*****************MERCADOPAGO*************************************************************** */
 
     const [confirmed, setConfirmed] = useState(false);
@@ -106,6 +119,7 @@ function SolicitudViajeForm() {
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Pagar con MercadoPago",
+
                 showClass: {
                     popup: 'animate__animated animate__fadeInDown',
                 },
@@ -141,6 +155,7 @@ function SolicitudViajeForm() {
                 }
             });
         }
+    
         const storedInput = localStorage.getItem('solicitudViajeInput');
         if (storedInput) {
             try {
