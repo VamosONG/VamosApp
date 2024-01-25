@@ -584,8 +584,9 @@ export const getDataMePago = () => {
     return async (dispatch) => {
         try {
             const currentUrl = window.location.href;
+            console.log(currentUrl);
             const urlParams = new URLSearchParams(currentUrl);
-            
+            console.log(urlParams);
             const paymentData = {};
             urlParams.forEach((value, key) => {
                 paymentData[key] = value;
@@ -606,17 +607,12 @@ export const getDataMePago = () => {
     }
 }
 
-export const cleanCurrentUser = (userVacio) => {
-    return async (dispatch) => {
-        try {
-            dispatch({
-                type: CLEAN_USER_BY_EMAIL,
-                payload: userVacio
-            })
-        } catch (error) {
-            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-            console.log(error.message)
-        }
+export const cleanCurrentUser = () => {
+    return {
+        type: 'CLEAN_USER_BY_EMAIL',
+        payload: {
+            currentUser: null,
+        },
     };
 
 }
