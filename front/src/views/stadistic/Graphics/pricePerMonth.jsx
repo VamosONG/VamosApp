@@ -23,7 +23,7 @@ ChartJS.register(
 );
 
 
-import {getTrips, getCanceledTrips} from '../../redux/actions/index'
+import {getTrips, getCanceledTrips} from '../../../redux/actions/index'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 

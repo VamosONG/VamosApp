@@ -34,7 +34,7 @@ import AdminProfile from './components/userProfile/adminProfile';
 import ReviewAdmin from './views/adminProfile/reviewAdmin';
 import UserViewAdmin from './views/adminProfile/userViewAdmin';
 import PaymentFail from './views/payments/paymentFail';
-import Stadistic from './views/stadistic/stadistic';
+import Stadistic from './views/stadistic/Stadistics/stadistic';
 
 
 function App() {

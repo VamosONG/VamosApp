@@ -1,4 +1,4 @@
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -23,47 +23,36 @@ ChartJS.register(
 );
 
 
-import {getTrips, getCanceledTrips} from '../../redux/actions/index'
+import {getAllConductores} from '../../../redux/actions/index'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 
-
-export default function TripsPerMonths() {
+export default function TripsPerDriver() {
     const dispatch = useDispatch();
   
     useEffect(async () => {
-      await dispatch(getTrips());
-    //   await dispatch(getCanceledTrips());
+      await dispatch(getAllConductores());
     }, [dispatch]);
-
-    const nombreMeses = [
-        "Ene", "Feb", "Mar", "Abr", "May", "Jun",
-        "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
-      ];
   
-    // const viajes = useSelector((state)=>state.viajesCompletados)
-    const viajes = useSelector((state) => state.getTrips);
-    const tripsPorMes = {};
-
-    viajes.forEach((trip) => {
-      const mes = new Date(trip.date).getMonth();
-      if (!tripsPorMes[mes]) {
-        tripsPorMes[mes] = 1; 
-      } else {
-        tripsPorMes[mes] += 1; 
-      }
+    const conductores = useSelector((state) => state.allData);
+    const conductoresConTrips = conductores.filter((conductor) => conductor.Trips && conductor.Trips.length > 0);
+  
+    const tripsPorConductor = {};
+  
+    conductoresConTrips.forEach((conductor) => {
+      tripsPorConductor[conductor.name] = conductor.Trips.length;
     });
   
-    const meses = Object.keys(tripsPorMes).map((mes) => nombreMeses[parseInt(mes, 10)]);
-    const trips = Object.values(tripsPorMes);
+    const conductoresNombres = Object.keys(tripsPorConductor);
+    const cantidadTrips = Object.values(tripsPorConductor);
   
     var midata = {
-      labels: meses,
+      labels: conductoresNombres,
       datasets: [
         {
-          label: 'Nro Viajes',
-          data: trips,
+          label: 'Nro de Viajes',
+          data: cantidadTrips,
           tension: 0.5,
           fill: true,
           borderColor: 'rgb(255, 99, 132)',
@@ -79,7 +68,7 @@ export default function TripsPerMonths() {
       scales: {
         y: {
           min: 0,
-          stepSize: 1, 
+          stepSize: 1,
         },
         x: {
           ticks: { color: 'rgb(255, 99, 132)' },
@@ -87,5 +76,5 @@ export default function TripsPerMonths() {
       },
     };
   
-    return <Line data={midata} options={misoptions} />;
+    return <Bar data={midata} options={misoptions} />;
   }

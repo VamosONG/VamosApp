@@ -22,7 +22,7 @@ ChartJS.register(
   Filler
 );
 
-import { getAllConductores } from '../../redux/actions/index';
+import { getAllConductores } from '../../../redux/actions/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 

@@ -1,7 +1,7 @@
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";  // Importa `useSelector` y `useDispatch` de react-redux
-import { getTrips } from "../../redux/actions/";
+import { getTrips } from "../../../redux/actions";
 
 const TripsForMonths = () => {
     const dispatch = useDispatch()
