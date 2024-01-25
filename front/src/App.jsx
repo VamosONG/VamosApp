@@ -43,9 +43,9 @@ function App() {
   return (
     <>
     <AuthProvider>
-        {/* {location.pathname !== '/profile' && (
+        {location.pathname !== '/profile' && (
           <NavBar />
-        )} */}
+        )}
       <Routes>
         <Route path='/' element={<HomeComponent/>}/> 
         {/* Renderizando HomeComponent en la ruta para evitar pisar cada ves que se abre una pestaña */}
@@ -80,7 +80,7 @@ function App() {
       {/* <Paginado/> */}
 
 
-      {/* <Footer/> */}
+      <Footer/>
     </AuthProvider>
 
     </>

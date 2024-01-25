@@ -4,8 +4,8 @@ import {
     Heading,
     SimpleGrid,
   } from "@chakra-ui/react";
-  import LinesChart from "./linesChart";
-//   import BarsChart from "./BarsChart";
+  import PricePerMonth from "./pricePerMonth";
+  import TripsPerMonth from "./tripsPerMonth";
 //   import PiesChart from "./PiesChart";
   
   function Graphics () {
@@ -19,25 +19,25 @@ import {
           <Center bg="light" p={2} borderWidth="2px" borderColor="primary" borderRadius="md" width="450px" height="230px">
             <Box>
               <Heading as="h2" fontSize="lg" mb={2}>
-                Ejemplo #1: Gráfico de líneas básico
+                Ganancias Viajes por Mes
               </Heading>
-              <LinesChart />
+              <PricePerMonth />
             </Box>
           </Center>
         </SimpleGrid>
   
         <hr mt={3} mb={2} />
   
-        {/* <SimpleGrid columns={{ sm: 1, md: 1, lg: 1 }} spacing={4}>
+        <SimpleGrid columns={{ sm: 1, md: 1, lg: 1 }} spacing={4}>
           <Center bg="light" p={2} borderWidth="2px" borderColor="primary" borderRadius="md" width="450px" height="225px">
             <Box>
               <Heading as="h2" fontSize="lg" mb={2}>
-                Ejemplo #2: Gráfico de barras
+                Viajes por Mes
               </Heading>
-              <BarsChart />
+              <TripsPerMonth />
             </Box>
           </Center>
-        </SimpleGrid> */}
+        </SimpleGrid>
   
         <hr mt={3} mb={2} />
   
