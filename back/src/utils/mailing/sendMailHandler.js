@@ -2,6 +2,7 @@ const mailing = require('./mailing');
 const getUserById = require('../../controllers/usersControllers/getUserById');
 const {getTripById} = require('../../controllers/tripsControllers/getTripById');
 const getDriverById = require('../../controllers/driversControllers/getDriverById');
+const getAdminEmails = require('../../controllers/adminControllers/getAdminEmails');
 
 
 module.exports=async({id, name, surname, email, phone, dni, driverId, tripId, option})=>{
@@ -12,6 +13,7 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
         email="ezequielantoine@gmail.com"
         let chofer=null;
         let trip=null;
+        const adminsEmails = await getAdminEmails();
 
         if( option==="reserve" || option==="assignDriver" || option==="update" || option==="infoDriver"){
             trip = await getTripById(tripId);
@@ -165,6 +167,7 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
                 </html>`; //Ver HTML
                 break;
             case("reserve"):
+                bbc=[...adminsEmails, email],
                 preSubject=`VAMOS!! ${userName} su reserva se ha registrado.`,
                 message=`<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
                 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="es">
