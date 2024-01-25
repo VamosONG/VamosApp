@@ -608,7 +608,7 @@ export const getTrips = () => {
     return async (dispatch)=> {
         try {
             const {data} =await  axios.get(`http://localhost:3001/trips`)
-            console.log(data);
+          
             return dispatch({
                 type: GET_TRIPS,
                 payload: data
