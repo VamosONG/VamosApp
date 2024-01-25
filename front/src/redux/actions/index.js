@@ -579,17 +579,12 @@ export const getDataMePago = () => {
     }
 }
 
-export const cleanCurrentUser = (userVacio) => {
-    return async (dispatch) => {
-        try {
-            dispatch({
-                type: CLEAN_USER_BY_EMAIL,
-                payload: userVacio
-            })
-        } catch (error) {
-            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-            console.log(error.message)
-        }
+export const cleanCurrentUser = () => {
+    return {
+        type: 'CLEAN_USER_BY_EMAIL',
+        payload: {
+            currentUser: null,
+        },
     };
 
 }

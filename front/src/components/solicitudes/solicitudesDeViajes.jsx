@@ -47,7 +47,8 @@ function SolicitudesDeViajes() {
     dispatch(getPendingTrips())
     dispatch(getCanceledTrips())
     
-  }, [/* dispatch */])
+  }, [dispatch])
+
   useEffect(() => {
     setTripsReservedToShow([...viajesReservados].splice(0, 6))
     
@@ -62,22 +63,31 @@ function SolicitudesDeViajes() {
  
   const itemsPerPage = 6;
 //***************PAGINADO VIAJES RESERVED **********************************/
-  const [currentPageReserved, setCurrentPageReserved] = useState(0);
+  const [currentPageReserved, setCurrentPageReserved] = useState(1);
   const [tripsReservedToShow, setTripsReservedToShow] = useState([]);
-  const totalPagesReserved = Math.ceil(viajesReservados.length / itemsPerPage);
   
-  const handlePageChangeReserved = (newPage) => {
-    if(newPage===0)return
-    const totalReserved=tripsReservedToShow.length;
+  const prevHandler=()=>{
+    const prevPage=currentPageReserved-1;
     
-    const firstReserved=currentPageCompleted*10;
+    if(prevPage<1) return;
+    
+    const firstReserved=(prevPage-1)*6;
+    
+    setCurrentPageReserved(prevPage);
+    setTripsReservedToShow([...viajesReservados].splice(firstReserved,6))
+  }
+  
+  const nextHandler=()=>{
+    const totalReserved=viajesReservados.length;
+    
+    const nextPage=currentPageReserved+1;
+    
+    const firstReserved=currentPageReserved*6;
     
     if (firstReserved>totalReserved) return;
-
-    const firstTrip = newPage-1 * itemsPerPage;
-    setCurrentPageReserved(newPage);
-    setTripsReservedToShow([...viajesReservados].splice(firstTrip, itemsPerPage));
-  };
+    setCurrentPageReserved(nextPage);
+    setTripsReservedToShow([...viajesReservados].splice(firstReserved,6))
+  }
 //*************************************************************************/
 
 //***************PAGINADO VIAJES PENDING **********************************/
@@ -106,7 +116,7 @@ const handleChange = async (e) => {
     setInput({
         ...input,
         [e.target.name]: e.target.value,
-        tripState: 'reserve'
+        tripState: 'reserved'
     })
 }
 const handleSubmitReserved = async (e) => {
@@ -212,21 +222,21 @@ const handleSubmitReserved = async (e) => {
   <Button
     variant="outline"
     colorScheme="teal"
-    disabled={currentPageReserved === 0}
-    onClick={() => handlePageChangeReserved(currentPageReserved - 1)}
+    /* disabled={currentPageReserved === 0} */
+    onClick={prevHandler}
   >
     Anterior
   </Button>
 
   <Box as="span" marginLeft="1rem" marginRight="1rem">
-    Página {currentPageReserved + 1} de {totalPagesReserved}
+    Página {currentPageReserved } 
   </Box>
 
   <Button
     variant="outline"
     colorScheme="teal"
-    disabled={currentPageReserved === totalPagesReserved - 1}
-    onClick={() => handlePageChangeReserved(currentPageReserved + 1)}
+    /* disabled={currentPageReserved === totalPagesReserved - 1} */
+    onClick={nextHandler}
   >
     Siguiente
   </Button>
