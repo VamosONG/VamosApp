@@ -125,7 +125,7 @@ export const getReservedTrips = () =>{
             })
         } catch (error) {
             console.log(error);
-            alert("error en getReservedTrips")
+            /* alert("error en getReservedTrips") */
         }
     }
 }
@@ -597,6 +597,8 @@ export const orderSearch = (input) => {
     return async (dispatch) => {
         try {
             const { data } = await axios.post(`http://localhost:3001/trips/filters`, input);
+
+            // hacer in if, para que dependiendo del tipo de viaje, sepa donde guardar
             dispatch({
                 type: GET_RESERVED_TRIPS,
                 payload: data
