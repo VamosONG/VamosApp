@@ -28,58 +28,53 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 
-
 export default function TripsPerDriver() {
     const dispatch = useDispatch();
   
     useEffect(async () => {
-
       await dispatch(getAllConductores());
-
     }, [dispatch]);
-
-  
   
     const conductores = useSelector((state) => state.allData);
+    const conductoresConTrips = conductores.filter((conductor) => conductor.Trips && conductor.Trips.length > 0);
+  
     const tripsPorConductor = {};
   
-   
-  conductores.forEach((conductor) => {
-    tripsPorConductor[conductor.name] = conductor.Trips ? conductor.Trips.length : 0;
-  });
-
-  const conductoresNombres = Object.keys(tripsPorConductor);
-  const cantidadTrips = Object.values(tripsPorConductor);
-
-  var midata = {
-    labels: conductoresNombres,
-    datasets: [
-      {
-        label: 'Nro de Viajes',
-        data: cantidadTrips,
-        tension: 0.5,
-        fill: true,
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        pointRadius: 5,
-        pointBorderColor: 'rgba(255, 99, 132)',
-        pointBackgroundColor: 'rgba(255, 99, 132)',
+    conductoresConTrips.forEach((conductor) => {
+      tripsPorConductor[conductor.name] = conductor.Trips.length;
+    });
+  
+    const conductoresNombres = Object.keys(tripsPorConductor);
+    const cantidadTrips = Object.values(tripsPorConductor);
+  
+    var midata = {
+      labels: conductoresNombres,
+      datasets: [
+        {
+          label: 'Nro de Viajes',
+          data: cantidadTrips,
+          tension: 0.5,
+          fill: true,
+          borderColor: 'rgb(255, 99, 132)',
+          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+          pointRadius: 5,
+          pointBorderColor: 'rgba(255, 99, 132)',
+          pointBackgroundColor: 'rgba(255, 99, 132)',
+        },
+      ],
+    };
+  
+    var misoptions = {
+      scales: {
+        y: {
+          min: 0,
+          stepSize: 1,
+        },
+        x: {
+          ticks: { color: 'rgb(255, 99, 132)' },
+        },
       },
-    ],
-  };
-
-  var misoptions = {
-    scales: {
-      y: {
-        min: 0,
-        stepSize: 1, 
-      },
-      x: {
-        ticks: { color: 'rgb(255, 99, 132)' },
-      },
-    },
-  };
-
+    };
   
     return <Bar data={midata} options={misoptions} />;
   }
