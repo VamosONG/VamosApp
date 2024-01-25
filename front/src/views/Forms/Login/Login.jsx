@@ -134,7 +134,7 @@ const LoginForm = ({ onSwitchForm }) => {
   return (
     <Stack
       spacing={4}
-      bg="rgb(0, 158, 209, 0.8)"
+      bg="rgb(0, 158, 209)"
       p="5"
       h="auto"
       borderRadius="2%"
@@ -202,11 +202,6 @@ const LoginForm = ({ onSwitchForm }) => {
           <Text fontSize="xl">{currentUser.email}</Text>
         </Box>
       )}
-    <Box>
-       <Button colorScheme="green" onClick={handleLogOut}>
-        Salir
-      </Button>
-    </Box>
     </Stack>
   );
 };

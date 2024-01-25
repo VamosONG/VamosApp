@@ -63,8 +63,8 @@ function App() {
         <Route path='/paymentStatus' element={<PaymentStatus/>}/>
         <Route path="/login" element={<LoginForm/>}/>
         <Route path="/register" element={<RegistroForm/>}/>
-        {/* <Route path="/profile" element={<UserProfile/>}/> */}
-        <Route path="/profile" element={<AdminProfile/>}/>
+        <Route path="/profileUser" element={<UserProfile/>}/>
+        <Route path="/profileAdmin" element={<AdminProfile/>}/>
         {/* No son necesario estas rutas, ya que todo estara dentro el componente del admin */}
         {/* <Route path="/reviewAdmin" element={<ReviewAdmin/>}/>  
         <Route path="/user" element={<UserViewAdmin/>}/> */}
