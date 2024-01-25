@@ -6,7 +6,8 @@ import {
   } from "@chakra-ui/react";
   import PricePerMonth from "./pricePerMonth";
   import TripsPerMonth from "./tripsPerMonth";
-//   import PiesChart from "./PiesChart";
+  import TripsPerDriver from "./tripsPerDriver";
+  import EarningsPerDriver from "./earningsPerDriver";
   
   function Graphics () {
     return (
@@ -41,18 +42,33 @@ import {
   
         <hr mt={3} mb={2} />
   
-        {/* <SimpleGrid columns={{ sm: 1, md: 1, lg: 1 }} spacing={4}>
+        <SimpleGrid columns={{ sm: 1, md: 1, lg: 1 }} spacing={4}>
           <Center bg="light" p={2} borderWidth="2px" borderColor="primary" borderRadius="md" width="450px" height="250px">
             <Box>
               <Heading as="h2" fontSize="lg" mb={2}>
-                Ejemplo #3: Gráfico circular
+                Viajes por Chofer
               </Heading>
               <Box width="100%" height="100%" padding="10px 0">
-                <PiesChart />
+                <TripsPerDriver />
               </Box>
             </Box>
           </Center>
-        </SimpleGrid> */}
+        </SimpleGrid>
+  
+        <hr mt={3} mb={2} />
+  
+        <SimpleGrid columns={{ sm: 1, md: 1, lg: 1 }} spacing={4}>
+          <Center bg="light" p={2} borderWidth="2px" borderColor="primary" borderRadius="md" width="450px" height="250px">
+            <Box>
+              <Heading as="h2" fontSize="lg" mb={2}>
+                Ganancias por Chofer
+              </Heading>
+              <Box width="100%" height="100%" padding="10px 0">
+                <EarningsPerDriver />
+              </Box>
+            </Box>
+          </Center>
+        </SimpleGrid>
       </Box>
     );
   }
