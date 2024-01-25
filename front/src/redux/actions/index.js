@@ -556,8 +556,9 @@ export const getDataMePago = () => {
     return async (dispatch) => {
         try {
             const currentUrl = window.location.href;
+            console.log(currentUrl);
             const urlParams = new URLSearchParams(currentUrl);
-            
+            console.log(urlParams);
             const paymentData = {};
             urlParams.forEach((value, key) => {
                 paymentData[key] = value;
