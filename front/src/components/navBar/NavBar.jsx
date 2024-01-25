@@ -72,6 +72,12 @@ const NavBar = () => {
             {currentUser.admin && currentUser.admin ? (
               <Box>
                 <Flex>
+                  <Link to="/">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      INICIO
+                    </Button>
+                  </Link>
+                  
                   <Link to="/solicitudesDeViajes">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       SOLICITUDES DE VIAJE
@@ -84,11 +90,6 @@ const NavBar = () => {
                     </Button>
                   </Link> */}
 
-                  <Link to="/">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      INICIO
-                    </Button>
-                  </Link>
 
                   <Link to="/profileAdmin">
                     <Button colorScheme="#009ED1" fontSize="1xl">
@@ -106,6 +107,12 @@ const NavBar = () => {
             ) : currentUser.admin === false ? (
               <Box>
                 <Flex>
+                <Link to="/">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      INICIO
+                    </Button>
+                  </Link>
+
                   <Link to="/solicitarViaje">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       SOLICITAR VIAJE
@@ -129,12 +136,7 @@ const NavBar = () => {
                       RESEÑA DE TU VIAJE
                     </Button>
                   </Link>
-
-                  <Link to="/">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      INICIO
-                    </Button>
-                  </Link>
+                
                 </Flex>
               </Box>
             ) : (
