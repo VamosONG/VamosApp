@@ -1,79 +1,74 @@
 
-import { Center, Box, Collapse, Heading, Text, Stack, Button, Flex, Image, Divider, ButtonGroup } from '@chakra-ui/react';
-import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
+import { useEffect } from 'react';
+import { Center, Box, Heading, Stack, Flex, Image, Text } from '@chakra-ui/react';
 
 
 
 
 const PaymentFail = () => {
+    // useEffect(() => {
+   
+    //     const redirectTimer = setTimeout(() => {
+          
+    //       window.location.href = 'http://localhost:5173/solicitarViaje';
+    //     }, 59999999000);
+    
+       
+    //     return () => clearTimeout(redirectTimer);
+    //   }, [])
     return (
-        <Center bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/eqdrrjmlkojpiiwlhwjo.jpg">
-            <Flex bgSize="cover" bgRepeat="no-repeat" >
-
-                {/* <Box bg='#009ED1' w={{ base: "20rem", md: "30rem" }} spacing={4}>
-
-                    <Flex justifyContent="center" p={250}>
-                        <Stack >
-                            <Heading
-                                color='white'
-                                textTransform='uppercase'
-                                fontFamily="'DIN Alternate Black', sans-serif"
-                                letterSpacing='2px'
-                                fontSize={['2xl', null, '5xl']}
-                                mb='2'
-                                textShadow='2px 2px 4px rgb(0, 0, 0, 0.9)'
-                            >
-                                Su pago ha sido rechazado!!!
-                            </Heading>
-
-
-
-                            <Box maxW="md" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="lg" bg='rgb(333 333 333)' p={4} mt={4}>
-
-                                Intente nuevamente!
-
-                            </Box>
-                        </Stack> */}
-                {/* </Flex>
-
-                </Box> */}
-
-                <Card maxW='sm'>
-                    <CardBody>
-                        <Image
-                            src='https://w7.pngwing.com/pngs/866/54/png-transparent-emoji-sadness-emoticon-smiley-sad-emoji-crying-imoji-face-sticker-desktop-wallpaper-thumbnail.png'
-                            alt='Green double couch with wooden legs'
-                            borderRadius='lg'
-                            w="50rem"
-                        />
-                        <Stack mt='6' spacing='3'>
-                            <Heading size='md'>Living room Sofa</Heading>
-                            <Text>
-                                This sofa is perfect for modern tropical spaces, baroque inspired
-                                spaces, earthy toned spaces and for people who love a chic design with a
-                                sprinkle of vintage design.
-                            </Text>
-                            <Text color='blue.600' fontSize='2xl'>
-                                $450
-                            </Text>
-                        </Stack>
-                    </CardBody>
-                    <Divider />
-                    <CardFooter>
-                        <ButtonGroup spacing='2'>
-                            <Button variant='solid' colorScheme='blue'>
-                                Buy now
-                            </Button>
-                            <Button variant='ghost' colorScheme='blue'>
-                                Add to cart
-                            </Button>
-                        </ButtonGroup>
-                    </CardFooter>
-                </Card>
-
-            </Flex>
+        <Center
+          bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/eqdrrjmlkojpiiwlhwjo.jpg"
+          bgSize="cover"
+          bgRepeat="no-repeat"
+          minH="100vh"
+          position="relative"  // Añade position relative al contenedor principal
+        >
+          <Flex
+            direction="column"
+            align="center"
+            justify="center"
+            h={{ base: '100%', md: 'auto' }}
+          >
+            <Box
+            top="100px"
+              bg='#009ED1'
+              w={{ base: '20rem', md: '30rem' }}
+              p={6} // Ajusta el valor de padding según tus necesidades
+              borderRadius="lg"
+              boxShadow="lg"
+              position="relative"  // Añade position relative al contenedor del mensaje
+            >
+              <Image
+                src="https://img.freepik.com/vector-premium/cara-emoji-triste-pensativa-o-emoticon-decepcionado-3d_248162-149.jpg"
+                alt="Emoji Triste"
+                position="relative"  // Posiciona la imagen absolutamente
+                top="-50px"  // Ajusta la posición vertical según tus necesidades
+                left="50%"  // Ajusta la posición horizontal según tus necesidades
+                transform="translateX(-50%)"
+                w="20rem"  // Centra horizontalmente la imagen
+              />
+              <Stack spacing={4} textAlign="center">
+                <Heading
+                  color='white'
+                  textTransform='uppercase'
+                  fontFamily="'DIN Alternate Black', sans-serif"
+                  letterSpacing='2px'
+                  fontSize={['2xl', null, '5xl']}
+                  textShadow='2px 2px 4px rgb(0, 0, 0, 0.9)'
+                >
+                  ¡Su pago ha sido rechazado!
+                </Heading>
+    
+                <Box>
+                  ¡Intente nuevamente!
+                  <Text> Sera redirigido en 5sg...</Text>
+                </Box>
+              </Stack>
+            </Box>
+          </Flex>
         </Center>
-    )
+      );
 }
 
 export default PaymentFail;
