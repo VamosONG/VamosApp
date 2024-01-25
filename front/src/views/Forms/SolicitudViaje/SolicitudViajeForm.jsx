@@ -132,7 +132,9 @@ function SolicitudViajeForm() {
                     Swal.fire({
                         title: "Redirigiendo a Mercado Pago",
                         text: "Aguarde unos segundos",
-                        icon: "success"
+                        /* icon: "success", */
+                        allowOutsideClick: false,
+                        didOpen:()=>Swal.showLoading()
                     }).then(() => {
 
                     
