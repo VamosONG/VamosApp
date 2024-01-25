@@ -2,15 +2,16 @@ import { Box, ChakraProvider, Text } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { getDataUser } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import Chart from 'chart.js/auto';
 
 const Stadistic = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Using an IIFE to use async/await in useEffect
+    
     (async () => {
       try {
-        // Fetch data asynchronously
+        
         await dispatch(getDataUser());
       } catch (error) {
         console.error('Error fetching data:', error);
