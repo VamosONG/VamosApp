@@ -88,17 +88,16 @@ function SolicitudViajeForm() {
     
 
     useEffect(() => {
-
-        console.log(infoConfirmacionViaje)
-        console.log(confirmed)
-
+        console.log(infoConfirmacionViaje);
+        console.log(confirmed);
+    
         if (infoConfirmacionViaje.price && !confirmed) {
             setConfirmed(true);
             const infoAmandarAlBack = {
                 tripId: infoConfirmacionViaje.id,
                 userId: infoConfirmacionViaje.userId,
-            }
-            console.log(infoAmandarAlBack)
+            };
+            console.log(infoAmandarAlBack);
             const confirmationText = (
                 <div>
                     <p>Origen: {infoConfirmacionViaje.origin}</p>
@@ -107,8 +106,8 @@ function SolicitudViajeForm() {
                     <p>Precio final: {infoConfirmacionViaje.price}</p>
                 </div>
             );
-        
-                Swal.fire({
+    
+            Swal.fire({
                 title: "Confirmación de traslado",
                 html: renderToString(confirmationText),
                 icon: "warning",
@@ -116,7 +115,6 @@ function SolicitudViajeForm() {
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Pagar con MercadoPago",
-
                 showClass: {
                     popup: 'animate__animated animate__fadeInDown',
                 },
@@ -124,88 +122,76 @@ function SolicitudViajeForm() {
                     popup: 'animate__animated animate__fadeOutUp',
                 },
                 preConfirm: async () => {
-                    
-
-
-                htmlMode: true}
-                }).then(async(result) => {
+                    // Lógica antes de la confirmación
+                },
+                htmlMode: true
+            }).then(async (result) => {
                 if (result.isConfirmed) {
-
-                
-                    handlePayment()
-                    /* setInput({
-                    origin: "",
-                    destination: "",
-                    date: "",
-                    hour: "",
-                    quantityPassengers: "",
-                }); */
-
-                Swal.fire({
-                    title: "Redirigiendo a Mercado Pago",
-                    text: "Aguarde unos segundos",
-                    icon: "success"
+                    handlePayment();
+    
+                    Swal.fire({
+                        title: "Redirigiendo a Mercado Pago",
+                        text: "Aguarde unos segundos",
+                        icon: "success"
                     }).then(() => {
+
                     
                     
                     // window.history.back();
+
                     });
-            }else {
-                // Restablecer valores al cancelar
-                setInput({
-                    origin: "",
-                    destination: "",
-                    date: "",
-                    hour: "",
-                    quantityPassengers: ""
-                });
-            }})}
-          }, [infoConfirmacionViaje, dispatch, /* confirmationText */]);
-        ;
-
-
-
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        await setInput({
-            ...input,
-        })
-
-
-        setConfirmed(false); // Restablecer a false al enviar el formulario
-
-        await dispatch(postNewViaje(input));
-        
-
-    }
-    const handleChange = async (e) => {
-        /* if (e.target.name==='origin'&&(e.target.value==='ZORRITOS'||e.target.value==='DECAMERON')){
-            let defaultDestination
-            if (e.target.value==='ZORRITOS'){
-            defaultDestination='AEROPUERTO TUMBES'
+                } else {
+                    // Restablecer valores al cancelar
+                    setInput({
+                        origin: "",
+                        destination: "",
+                        date: "",
+                        hour: "",
+                        quantityPassengers: ""
+                    });
+                }
+            });
+        }
+    
+        const storedInput = localStorage.getItem('solicitudViajeInput');
+        if (storedInput) {
+            try {
+                setInput(JSON.parse(storedInput));
+            } catch (error) {
+                console.error("Error al analizar los datos de localStorage:", error);
             }
-            if (e.target.value==='DECAMERON'){
-            defaultDestination='AEROPUERTO TALARA'
-            }
-            setInput({
+        }
+    }, [infoConfirmacionViaje, dispatch]);
+
+
+
+
+
+        const handleSubmit = async (event) => {
+            event.preventDefault();
+            await setInput({
                 ...input,
-                destination: defaultDestination
             })
-        } */
-        
-        setInput({
-            ...input,
-            [e.target.name]: e.target.value,
-            userId:currentUser.id 
-        })
+    
+            setConfirmed(false);
+            localStorage.setItem('solicitudViajeInput', JSON.stringify(input));
+            
+            await dispatch(postNewViaje(input));
+            
+        }
+    
+        const handleChange = async (e) => {
+            setInput((prevInput) => ({
+              ...prevInput,
+              [e.target.name]: e.target.value,
+              userId: currentUser.id,
+            }));
+          
+           await localStorage.setItem('solicitudViajeInput', JSON.stringify(input));
+          };
+        const currentDate = new Date().toISOString().split('T')[0];
 
-        
-    }
-
-    const currentDate = new Date().toISOString().split('T')[0];
-
-
+console.log(localStorage);
     return (
 
   
