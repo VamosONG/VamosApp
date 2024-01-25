@@ -110,31 +110,31 @@ const UserViewAdmin = () => {
                                         </Tooltip>
                                     </Td>
                                     <Td w='auto'> {user.Trips.length ? user.Trips.length : '0'}
-                                     </Td>
+                                    </Td>
                                     <Td>
                                         {user.admin ? (
                                             <>
                                                 <Tooltip label='Quitar Access Admin' placement='right' bg='#E83D6F'>
-                                                    
-                                                <Button onClick={() => handleAdminAccess(user.id)}
-                                                    bg='#E83D6F'
-                                                    fontSize='1.2rem'
-                                                    id={user.id} >
-                                                    <RepeatClockIcon />
-                                                </Button>
+
+                                                    <Button onClick={() => handleAdminAccess(user.id)}
+                                                        bg='#E83D6F'
+                                                        fontSize='1.2rem'
+                                                        id={user.id} >
+                                                        <RepeatClockIcon />
+                                                    </Button>
                                                 </Tooltip>
                                             </>
                                         ) : (
                                             <>
-                                            <Tooltip label='Access Admin' placement='right' bg='#009ED1'>
+                                                <Tooltip label='Access Admin' placement='right' bg='#009ED1'>
 
-                                                <Button onClick={() => handleAdminAccess(user.id)}
-                                                    bg='#009ED1'
-                                                    fontSize='1.2rem'
-                                                    id={user.id} >
-                                                    <AddIcon />
-                                                </Button>
-                                            </Tooltip>
+                                                    <Button onClick={() => handleAdminAccess(user.id)}
+                                                        bg='#009ED1'
+                                                        fontSize='1.2rem'
+                                                        id={user.id} >
+                                                        <AddIcon />
+                                                    </Button>
+                                                </Tooltip>
                                             </>
                                         )}
                                     </Td>
