@@ -1,13 +1,14 @@
-import { Select, Box, Text, Flex, Heading, FormControl, FormLabel, Button} from '@chakra-ui/react'
+import { Select, Box, Text, Flex, Heading, FormControl, FormLabel, Button,Input, Tooltip} from '@chakra-ui/react'
 import { useSelector, useDispatch } from 'react-redux'
 import { airportFilter, alphabeticalOrder, carFilter, getAllConductores, passengerOrder, ratingOrder, stateFilter, stateOrder } from '../../../redux/actions'
-import { BsAirplaneEngines, BsBootstrapReboot,BsArrowClockwise } from "react-icons/bs";
+import { BsAirplaneEngines, BsBootstrapReboot,BsArrowClockwise, BsFilterCircle, BsFunnel, BsSearch } from "react-icons/bs";
+import { useState } from 'react';
 
 
-const OrderFilterAlphabetical = () => {
+const OrderFilterAlphabetical = ({searcher}) => {
     const data = useSelector((state) => state.allData)
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch({searcher})
 
     const handleOrderAlpha = (e) => {
         dispatch(alphabeticalOrder(e.target.value))
@@ -41,6 +42,8 @@ const OrderFilterAlphabetical = () => {
         dispatch(getAllConductores())
     }
 
+   
+
     const airportsFound = ["Aeropuerto Tumbes", "Aeropuerto Talara"];
 
     const carTypeFound = ["auto", "camioneta", "van", 'van plus'];
@@ -49,7 +52,15 @@ const OrderFilterAlphabetical = () => {
         <>
             <Flex gap='4' justify={'center'} align={'center'} mx='2rem' py='.5rem'>
                 <Flex justify='center' align={'center'} gap='4'  >
-                    <Heading>Orden</Heading>
+                <Flex justify={'center'} align={'center'} fontSize={'1.5rem'}>
+                    <Input placeholder='Buscar por nombre / auto / aeropuerto' onChange={searcher} border={'1px solid gray'} />
+                </Flex >
+
+                    <Tooltip label='Ordenar datos' bg='#10447E' placement='top' >
+                        <Text fontSize={'2rem'}>
+                            <BsFilterCircle/>
+                        </Text>
+                        </Tooltip> 
                     <Box>
                         <FormControl>
                             <FormLabel>Nombre</FormLabel>
@@ -68,8 +79,8 @@ const OrderFilterAlphabetical = () => {
                             <Select
                                 name='passenfers'
                                 onChange={handleOrderPassenger}>
-                                <option value='A'>➕ - ➖</option>
-                                <option value='D'>➖ - ➕</option>
+                                <option value='A'>Mas</option>
+                                <option value='D'>Menos</option>
                             </Select>
                         </FormControl>
                     </Box>
@@ -97,7 +108,11 @@ const OrderFilterAlphabetical = () => {
                 </Flex>
 
                 <Flex justify='center' align={'center'} gap='4'  >
-                    <Heading>Filtrar</Heading>
+                        <Tooltip label='Filtrar datos' bg='#10447E' placement='top' >
+                        <Text fontSize={'2rem'}>
+                            <BsFunnel/>
+                        </Text>
+                        </Tooltip> 
                     <Box>
                         <FormControl>
                             <FormLabel>Vehiculo</FormLabel>
@@ -116,7 +131,9 @@ const OrderFilterAlphabetical = () => {
                             <FormLabel > Zona </FormLabel>
                             <Select
                                 name='airpots'
-                                onChange={handleFilterAirport}>
+                                onChange={handleFilterAirport}
+                                // onChange={handleFilterCar}
+                                >
                                 {airportsFound.map((airports, index) => (
                                     <option key={index} value={airports} >{airports}</option>
                                 ))}
@@ -129,7 +146,9 @@ const OrderFilterAlphabetical = () => {
                             <FormLabel>Estado</FormLabel>
                             <Select
                                 name='driverState'
-                                onChange={handleFilterDriverState}>
+                                onChange={handleFilterDriverState}
+                                // onChange={handleFilterCar}
+                                >
                                 <option value={'all'}>Todos</option>
                                 <option value={true}>Activo</option>
                                 <option value={false}>Descanso</option>

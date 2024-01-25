@@ -6,28 +6,35 @@ import {
     Tr,
     Th,
     Td,
-    TableCaption, Avatar, Tooltip,
-    TableContainer, Button, Flex, useDisclosure, Link, Collapse, Box, Badge
+    TableCaption,Tooltip,
+    TableContainer, Button, Flex, Badge
 } from '@chakra-ui/react'
 
-import { DeleteIcon, EditIcon, WarningIcon, RepeatClockIcon } from '@chakra-ui/icons'
+import { DeleteIcon, RepeatClockIcon } from '@chakra-ui/icons'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteDriverAction, getAllConductores } from '../../redux/actions'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import Swal from 'sweetalert2'
-import UpdateDriverData from '../Forms/ChoferFormulario/UpdateChoferForm'
 import ViewBtnUpdateDriver from '../Forms/ViewForms/ViewUpdateDriverForm'
 import ViewBtnDetailDriver from './DetailDriver/ViewBtnDetailDriver'
 import OrderFilterAlphabetical from './filtersData/orderFilter'
 import Paginado from '../../components/paginado/paginadoComponent'
-import axios from 'axios'
 
 const DriverTableView = () => {
     const driverData = useSelector((state) => state.conductores)
     const dispatch = useDispatch();
-    const [isOpen, setIsOpen] = useState(false);
+    const [search , setSearch] = useState('')
+
+    const searcher = (e) => {
+        setSearch(e.target.value)
+    }
+
+    const results = !search ? driverData : driverData.filter((data) => data.name.toLowerCase().includes(search.toLowerCase()) ||
+    data.airports.toLowerCase().includes(search.toLowerCase()) ||
+    data.carType.toLowerCase().includes(search.toLowerCase())
+);
 
     useEffect(() => {
         dispatch(getAllConductores())
@@ -70,7 +77,7 @@ const DriverTableView = () => {
     return (
         <Flex  /* align='center' direction={{base:'column',md:'row'}} */ alignItem='center' justifyContent='center'>
         <TableContainer >
-            <Flex bg='gray.200' color='#000' justify={'center'} ><OrderFilterAlphabetical/></Flex>
+            <Flex bg='gray.200' color='#000' justify={'center'} ><OrderFilterAlphabetical searcher={searcher}/></Flex>
             <Table variant='simple' >
                 <TableCaption>Conductores registrados</TableCaption>
                 <Thead>
@@ -88,7 +95,7 @@ const DriverTableView = () => {
                 </Thead>
                 
                 <Tbody>
-                    {driverData?.map((driver, index) => (
+                    {results?.map((driver, index) => (
                         <Tr key={driver.id} bg={driver.inactive  ? 'gray.300' : driver.driverState ? '#EEFFF5' : ' #FFEEEE'}>
                             <Td>{index + 1}</Td>
                             <Td>{driver.airports}</Td>
@@ -189,7 +196,7 @@ const DriverTableView = () => {
                 </Tfoot>
             </Table>
             {/* COMPONENTE DE PAGINADO */}
-            {/* <Paginado/>  */}
+            <Paginado/> 
         </TableContainer>
         </Flex>
     )
