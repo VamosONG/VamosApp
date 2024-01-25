@@ -357,7 +357,7 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
                         `
                 break;
             case("assignDriver"):
-                bbc=[email, chofer.email],
+                to=email,
                 preSubject=`VAMOS!! ${userName}, se ha asignado un chofer para su viaje.`,
                 message=`<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
                 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="es">
@@ -1161,6 +1161,7 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
                         `
                 break;
             case("infoDriver"):
+              to= `${chofer.email}`
               preSubject=`VAMOS!! Hola ${chofer.name}, se le ha asignado un viaje.`,
               message=`<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
               <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="es">
@@ -1737,7 +1738,6 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
               </body>      
               </html>              
               `
-            email= `${chofer.email}`
             break;            
             default:{
                 userName="";
