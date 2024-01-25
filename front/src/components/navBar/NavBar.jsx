@@ -81,7 +81,7 @@ const NavBar = () => {
                         <Link to="/">
                           <Button colorScheme="#009ED1" fontSize='1xl'>INICIO</Button>
                         </Link>
-                        <Link to="/profile">
+                        <Link to="/adminprofile">
                           <Button colorScheme="#009ED1" fontSize='1xl'>MI PERFIL</Button>
                         </Link>
                         <Link to='/editPrices'>
@@ -102,7 +102,7 @@ const NavBar = () => {
                           <Button colorScheme="#009ED1" fontSize='1xl'>SOLICITAR VIAJE</Button>
                         </Link>
 
-                        <Link to="/profile">
+                        <Link to="/userprofile">
                           <Button colorScheme="#009ED1" fontSize='1xl'>MI PERFIL</Button>
                         </Link>
                         <Link to="/questions">

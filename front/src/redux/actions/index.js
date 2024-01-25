@@ -493,7 +493,7 @@ export const getUserByEmail = (email) => {
         try {
             const { data } = await axios.get(`http://localhost:3001/user/email?email=${email}`);
             console.log(data)
-            dispatch({
+             dispatch({
                 type: USER_BY_EMAIL,
                 payload: data
             })
