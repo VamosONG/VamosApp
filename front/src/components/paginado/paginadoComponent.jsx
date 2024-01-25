@@ -86,5 +86,3 @@ function MyComponent() {
 }
 
 export default MyComponent; */
-
-export default Paginado

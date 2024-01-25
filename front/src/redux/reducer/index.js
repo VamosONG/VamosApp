@@ -410,15 +410,22 @@ const reducer = (state = initialState, action) => {
                 currentUser: action.payload
             }
 
-        case GET_REVIEWS:
-            return {
-                ...state,
-                reviewsData: action.payload.slice(0, PAGE_DATA),
-                allDataRevies: action.payload
-            }
 
-        default:
-            return { ...state };
+                case GET_REVIEWS: 
+                return {
+                    ...state, 
+                    reviewsData: action.payload,
+                    allDataRevies: action.payload
+                }
+                case NEW_USER:
+                    return {
+                        ...state,
+                        newUsuario: action.payload
+                    }
+                default:
+                    return { ...state };
+
+
     }
 }
 export default reducer

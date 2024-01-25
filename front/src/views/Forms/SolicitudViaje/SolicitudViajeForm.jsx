@@ -68,13 +68,11 @@ function SolicitudViajeForm() {
           }
           console.log(trip);
         
-        const handlePayment = async (/*product*/) => {
-            console.log(product)
-            const response = await axios.post("http://localhost:3001/mepago/create-order", product)
-            console.log(response)
-           
-            /* const resp = await axios.post("http://localhost:3001/trips/reserves/create",trip)*/
-            window.open(response.data,'_blank' )
+        const handlePayment = async () => {
+        
+            const response= await axios.post("http://localhost:3001/mepago/create-order", product)
+          
+            window.location.href = response.data
             
             
         };
@@ -134,9 +132,15 @@ function SolicitudViajeForm() {
                     Swal.fire({
                         title: "Redirigiendo a Mercado Pago",
                         text: "Aguarde unos segundos",
-                        icon: "success"
+                        /* icon: "success", */
+                        allowOutsideClick: false,
+                        didOpen:()=>Swal.showLoading()
                     }).then(() => {
-                        window.history.back();
+
+                    
+                    
+                    // window.history.back();
+
                     });
                 } else {
                     // Restablecer valores al cancelar
