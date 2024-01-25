@@ -181,16 +181,16 @@ function SolicitudViajeForm() {
 
 
 
-    const handleSubmit = async (event) => {
+    const handleSubmit =(event) => {
         event.preventDefault();
-        await setInput({
+        setInput({
             ...input,
         });
 
         setConfirmed(false);
         localStorage.setItem('solicitudViajeInput', JSON.stringify(input));
 
-        await dispatch(postNewViaje(input));
+        dispatch(postNewViaje(input));
     };
     console.log("este es el input que se envía al back para postear el trip: ", input);
     console.log(JSON.parse(localStorage.solicitudViajeInput));
@@ -259,13 +259,16 @@ function SolicitudViajeForm() {
                                         fontSize="2xl"
                                         fontFamily="'DIN Medium',"
                                     >Desde</FormLabel>
+                                    {parsedData.origin ?(
+                                       
+                                    
                                     <Select
-                                        bg="white"
-                                        placeholder={placeholderValue}
-                                        name='origin'
-                                        onChange={handleChange}
-                                        width={{ base: "100%", md: "auto" }}
-                                        styles={{ menu: { width: "auto", maxWidth: "100%" } }}
+                                    bg="white"
+                                    placeholder={parsedData.origin}
+                                    name='origin'
+                                    onChange={handleChange}
+                                    width={{ base: "100%", md: "auto" }}
+                                    styles={{ menu: { width: "auto", maxWidth: "100%" } }}
                                     >
                                         <option>AEROPUERTO TALARA</option>
                                         <option>AEROPUERTO TUMBES</option>
@@ -274,6 +277,23 @@ function SolicitudViajeForm() {
                                         <option>MANCORA</option>
                                         <option>DECAMERON</option>
                                     </Select>
+                                ):(
+                                    <Select
+                                    bg="white"
+                                    placeholder="Selecciona un origen"
+                                    name='origin'
+                                    onChange={handleChange}
+                                    width={{ base: "100%", md: "auto" }}
+                                    styles={{ menu: { width: "auto", maxWidth: "100%" } }}
+                                    >
+                                        <option>AEROPUERTO TALARA</option>
+                                        <option>AEROPUERTO TUMBES</option>
+                                        <option>DECAMERON PUNTA SAL</option>
+                                        <option>ZORRITOS</option>
+                                        <option>MANCORA</option>
+                                        <option>DECAMERON</option>
+                                    </Select>
+                                )}
                                 </FormControl>
                             </Box>
                             <Box>
@@ -282,8 +302,6 @@ function SolicitudViajeForm() {
                                         fontSize="2xl"
                                         fontFamily="'DIN Medium',"
                                     >Hasta</FormLabel>
-
-                                    {parsedData.destination ? (
                                         <Select
                                             bg="white"
                                             placeholder="Selecciona el destino"
@@ -329,41 +347,6 @@ function SolicitudViajeForm() {
                                                 </>
                                             )}
                                         </Select>
-
-                                    ) : (
-
-                                        parsedData.origin === 'AEROPUERTO TALARA' ? (
-
-                                            <Select bg="white" placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
-                                                <option>MANCORA</option>
-                                                <option>DECAMERON</option>
-                                            </Select>
-                                        ) : (
-                                            input.origin === 'AEROPUERTO TUMBES' ? (
-                                                <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
-                                                    <option>DECAMERON PUNTA SAL</option>
-                                                    <option>ZORRITOS</option>
-                                                    <option>MANCORA</option>
-                                                </Select>
-                                            ) : (
-                                                input.origin === 'MANCORA' ? (
-                                                    <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
-                                                        <option>AEROPUERTO TALARA</option>
-                                                        <option>AEROPUERTO TUMBES</option>
-                                                    </Select>
-                                                ) : (input.origin === 'DECAMERON PUNTA SAL' ? (
-                                                    <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
-                                                        <option>AEROPUERTO TUMBES</option>
-                                                    </Select>
-                                                ) : (input.origin === 'ZORRITOS' ? (
-                                                    <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
-                                                        <option>AEROPUERTO TUMBES</option>
-                                                    </Select>
-                                                ) : (input.origin === 'DECAMERON' ? (
-                                                    <Select placeholder='Selecciona el destino' name='destination' onChange={handleChange}>
-                                                        <option>AEROPUERTO TALARA</option>
-                                                    </Select>
-                                                ) : (null)))))))}
 
                                 </FormControl>
                                 {/* </Center> */}
