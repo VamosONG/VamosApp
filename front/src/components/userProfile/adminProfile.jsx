@@ -10,12 +10,15 @@ const AdminProfile = () => {
         <>
             <Tabs isFitted variant='enclosed'>
                 <TabList mb='1em'>
+                    <Tab>Reservas</Tab>
                     <Tab>Conductores</Tab>
                     <Tab>Usuario</Tab>
                     <Tab>Reviews</Tab>
-                    <Tab>Reservas</Tab>
                 </TabList>
                 <TabPanels>
+                    <TabPanel>
+                        <SolicitudesDeViajes/>
+                    </TabPanel>
                     <TabPanel>
                         <DriverTableView/>
                     </TabPanel>
@@ -24,9 +27,6 @@ const AdminProfile = () => {
                     </TabPanel>
                     <TabPanel>
                         <ReviewAdmin/>
-                    </TabPanel>
-                    <TabPanel>
-                        <SolicitudesDeViajes/>
                     </TabPanel>
 
                 </TabPanels>

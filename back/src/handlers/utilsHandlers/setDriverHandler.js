@@ -23,6 +23,17 @@ module.exports=async(req,res)=>{
             tripId,
             option: "assignDriver"
         });
+        const infoDriverEmail = await sendMailHandler({
+            id: usuario.id,
+            name: usuario.name,
+            surname: usuario.surname,
+            email: usuario.email,
+            phone: usuario.phone,
+            dni: usuario.dni, 
+            driverId,
+            tripId,
+            option: "infoDriver"
+        });
 
         res.status(200).json(tripUpdated);
     } catch (error) {

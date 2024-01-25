@@ -12,7 +12,6 @@ const setInactiveState = async (id) => {
 
         // Cambia el estado de 'inactive' al valor opuesto
         const updatedInactiveState = !driver.inactive;
-        console.log('driver.inactive ' + driver.inactive);
 
         const updateState = false;
 

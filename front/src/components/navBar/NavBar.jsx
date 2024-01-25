@@ -72,25 +72,26 @@ const NavBar = () => {
             {currentUser.admin && currentUser.admin ? (
               <Box>
                 <Flex>
+                  <Link to="/">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      INICIO
+                    </Button>
+                  </Link>
+                  
                   <Link to="/solicitudesDeViajes">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       SOLICITUDES DE VIAJE
                     </Button>
                   </Link>
 
-                  <Link to="/detail">
+                  {/* <Link to="/detail">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       CONDUCTORES
                     </Button>
-                  </Link>
+                  </Link> */}
 
-                  <Link to="/">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      INICIO
-                    </Button>
-                  </Link>
 
-                  <Link to="/profile">
+                  <Link to="/profileAdmin">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       MI PERFIL
                     </Button>
@@ -106,13 +107,19 @@ const NavBar = () => {
             ) : currentUser.admin === false ? (
               <Box>
                 <Flex>
+                <Link to="/">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      INICIO
+                    </Button>
+                  </Link>
+
                   <Link to="/solicitarViaje">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       SOLICITAR VIAJE
                     </Button>
                   </Link>
 
-                  <Link to="/profile">
+                  <Link to="/profileUser">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       MI PERFIL
                     </Button>
@@ -129,12 +136,7 @@ const NavBar = () => {
                       RESEÑA DE TU VIAJE
                     </Button>
                   </Link>
-
-                  <Link to="/">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      INICIO
-                    </Button>
-                  </Link>
+                
                 </Flex>
               </Box>
             ) : (
