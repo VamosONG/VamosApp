@@ -45,7 +45,7 @@ const createOrder = async (req, res) => {
         }],
       back_urls: {
         success: "http://localhost:5173/paymentStatus",
-        // failure: "http://localhost:5173/fail",
+         failure: "http://localhost:5173/paymentFailed",
         // pending: "http://localhost:5173/pending",
       },
 
