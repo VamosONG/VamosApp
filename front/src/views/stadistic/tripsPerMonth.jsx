@@ -34,10 +34,10 @@ export default function TripsPerMonths() {
   
     useEffect(async () => {
       await dispatch(getTrips());
-      await dispatch(getCanceledTrips());
+    //   await dispatch(getCanceledTrips());
     }, [dispatch]);
 
-    const monthNames = [
+    const nombreMeses = [
         "Ene", "Feb", "Mar", "Abr", "May", "Jun",
         "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
       ];
@@ -49,13 +49,13 @@ export default function TripsPerMonths() {
     viajes.forEach((trip) => {
       const mes = new Date(trip.date).getMonth();
       if (!tripsPorMes[mes]) {
-        tripsPorMes[mes] = 1; // Inicializar en 1 si no existe
+        tripsPorMes[mes] = 1; 
       } else {
-        tripsPorMes[mes] += 1; // Incrementar en 1 si ya existe
+        tripsPorMes[mes] += 1; 
       }
     });
   
-    const meses = Object.keys(tripsPorMes).map((mes) => monthNames[parseInt(mes, 10)]);
+    const meses = Object.keys(tripsPorMes).map((mes) => nombreMeses[parseInt(mes, 10)]);
     const trips = Object.values(tripsPorMes);
   
     var midata = {

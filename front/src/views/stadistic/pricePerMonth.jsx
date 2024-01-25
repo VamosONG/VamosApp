@@ -34,10 +34,10 @@ export default function PricePerMonth() {
   
     useEffect(async () => {
       await dispatch(getTrips());
-      await dispatch(getCanceledTrips());
+      // await dispatch(getCanceledTrips());
     }, [dispatch]);
 
-    const monthNames = [
+    const nombreMeses = [
         "Ene", "Feb", "Mar", "Abr", "May", "Jun",
         "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
       ];
@@ -56,7 +56,7 @@ export default function PricePerMonth() {
       }
     });
   
-    const meses = Object.keys(gananciasPorMes).map((mes) => monthNames[parseInt(mes, 10)]);
+    const meses = Object.keys(gananciasPorMes).map((mes) => nombreMeses[parseInt(mes, 10)]);
     const ganancias = Object.values(gananciasPorMes);
     var midata = {
       labels: meses,
