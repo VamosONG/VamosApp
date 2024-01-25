@@ -20,7 +20,7 @@ module.exports = async(name, email, preSubject, message)=>{
                 service: "gmail",
                 auth:{
                     type: "OAUTH2",
-                    user: "ong.vamos.2024@gmail.com",//"ezantoinedeveloper@gmail.com",
+                    user: "ong.vamos.2024@gmail.com",
                     clientId: CLIENT_ID,
                     clientSecret: CLIENT_SECRET,
                     refreshToken: REFRESH_TOKEN,

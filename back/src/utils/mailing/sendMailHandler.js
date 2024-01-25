@@ -1737,7 +1737,7 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
               </body>      
               </html>              
               `
-            email= `ezequielantoine@gmail.com`//${chofer.email}`
+            email= `${chofer.email}`
             break;            
             default:{
                 userName="";
