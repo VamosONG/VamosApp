@@ -15,7 +15,7 @@ const ViewBtnUserForm = () => {
         setIsLoginFormVisible(!isLoginFormVisible);
     };
     return (
-        <Box zIndex={99} >
+        <Box zIndex={99}>
                     <Avatar onClick={onToggle} bg= "rgb(0, 158, 209)" />
                     <Collapse initialScale={0.9} direction='bottom' in={isOpen} style={{ zIndex: 10 }}>
                         <Box

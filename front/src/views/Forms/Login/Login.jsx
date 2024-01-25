@@ -135,6 +135,7 @@ const LoginForm = ({ onSwitchForm }) => {
       console.log("error");
     }
   }
+  
 
   return (
     <Stack

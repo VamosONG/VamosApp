@@ -24,6 +24,7 @@ const LogOut = () => {
       console.error(`Error al cerrar sesión: ${error.message}`);
     }
   };
+  
 
   return (
     <Stack direction="row" spacing={4}>
