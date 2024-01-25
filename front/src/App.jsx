@@ -35,7 +35,7 @@ import ReviewAdmin from './views/adminProfile/reviewAdmin';
 import UserViewAdmin from './views/adminProfile/userViewAdmin';
 import PaymentFail from './views/payments/paymentFail';
 import Stadistic from './views/stadistic/stadistic';
-import Graphics from './views/stadistic/graphics';
+
 
 function App() {
   const location = useLocation();
@@ -43,9 +43,9 @@ function App() {
   return (
     <>
     <AuthProvider>
-        {/* {location.pathname !== '/profile' && (
+        {location.pathname !== '/profile' && (
           <NavBar />
-        )} */}
+        )}
       <Routes>
         <Route path='/' element={<HomeComponent/>}/> 
         {/* Renderizando HomeComponent en la ruta para evitar pisar cada ves que se abre una pestaña */}
@@ -70,7 +70,7 @@ function App() {
         <Route path="/profileUser" element={<UserProfile/>}/>
         <Route path="/profileAdmin" element={<AdminProfile/>}/>
         <Route path="/stadistics" element={<Stadistic/>}/>
-        <Route path="/graphics" element={<Graphics/>}/>
+        {/* <Route path="/graphics" element={<Graphics/>}/> */}
 
         {/* No son necesario estas rutas, ya que todo estara dentro el componente del admin */}
         {/* <Route path="/reviewAdmin" element={<ReviewAdmin/>}/>  
@@ -80,7 +80,7 @@ function App() {
       {/* <Paginado/> */}
 
 
-      {/* <Footer/> */}
+      <Footer/>
     </AuthProvider>
 
     </>

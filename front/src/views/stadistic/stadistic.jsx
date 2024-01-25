@@ -3,7 +3,8 @@ import { useEffect } from 'react';
 import { getDataUser, getTrips } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import Chart from 'chart.js/auto';
-import LinesChart from "./LinesChart"
+//  import TripsForMonths from "./tripsForMonths"
+import LinesChart from './LinesChart';
 
 const Stadistic = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const Stadistic = () => {
 
   
   const users = useSelector((state) => state.dataUser);
+  const trips = useSelector((state)=>state.getTrips)
  
   console.log(trips);
 
@@ -44,7 +46,7 @@ const Stadistic = () => {
         m={2}
         mt={100} // Ajusta el margen superior según la altura de tu nav
       >
-        Caja 1
+        <LinesChart/>
       </Box>
       <Box border="1px" borderColor="blue.500" borderRadius="md" p={4} m={2}>
         Caja 2
