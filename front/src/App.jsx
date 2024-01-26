@@ -85,6 +85,7 @@ function App() {
         <Route path="/profileAdmin" element={<AdminProfile/>}/>
 
         <Route path="/stadistics" element={<Stadistic/>}/>
+        </Route>
         {/* <Route path="/graphics" element={<Graphics/>}/> */}
 
 
@@ -92,9 +93,9 @@ function App() {
         {/* <Route path="/reviewAdmin" element={<ReviewAdmin/>}/>  
         <Route path="/user" element={<UserViewAdmin/>}/> */}
 
-      </Routes>
       {/* <Paginado/> */}
 
+        </Routes>
 
       <Footer/>
     </AuthProvider>
