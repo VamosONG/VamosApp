@@ -39,6 +39,8 @@ import ProtectedRoutes from './utils/ProtectedRoute';
 import { useSelector } from 'react-redux';
 
 import PaymentFail from './views/payments/paymentFail';
+import Stadistic from './views/stadistic/Stadistics/stadistic';
+
 
 function App() {
   const location = useLocation();
@@ -82,8 +84,9 @@ function App() {
 
         <Route path="/profileAdmin" element={<AdminProfile/>}/>
 
+        <Route path="/stadistics" element={<Stadistic/>}/>
+        {/* <Route path="/graphics" element={<Graphics/>}/> */}
 
-        </Route>
 
         {/* No son necesario estas rutas, ya que todo estara dentro el componente del admin */}
         {/* <Route path="/reviewAdmin" element={<ReviewAdmin/>}/>  
