@@ -1,88 +1,184 @@
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Flex,
-  AvatarGroup,
-  Avatar,
   Box,
   Image,
+  Avatar,
+  AvatarGroup,
+  useMediaQuery,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-import Vamos from "../../assets/Vamos.png"
-import SlideEx from "../../views/Forms/ViewForm";
+import { Link, useLocation } from "react-router-dom";
+import Vamos from "../../assets/logoblanco.png";
+import MobileNavbar from "../navBar/mobileNavbar/mobileNavbar";
 import { useSelector } from "react-redux";
-import { useMediaQuery } from '@chakra-ui/react';
-import MobileMenu from "./mobileMenu/mobileMenu";
-//import LoginForm from "../../views/Forms/Login/Login";
+import SlideEx from "../../views/Forms/ViewForm";
+import LogOut from "../../views/Forms/LogOut/logout";
 
 const NavBar = () => {
+  const { currentUser } = useSelector((state) => state);
+  const [navBackground, setNavBackground] = useState(false);
+  const [isMobile] = useMediaQuery("(max-width: 640px)");
+  const location = useLocation();
 
-  const esAdmin = useSelector((state) => state.esAdmin)
-  const esUsuario = useSelector((state) => state.esUsuario)
-  const [isMobile] = useMediaQuery('(max-width: 768px)');
-  return (
-    <Flex as="nav" bg="#009ED1" alignItems="center" justify="space-between" h="100px" w='100%' >
-      {!isMobile ? (
-        <>
-          <Box >
-            <Image src={Vamos} alt="Vamos" w="200px" />
-          </Box >
+  const handleScroll = () => {
+    const offset = window.scrollY;
+    setNavBackground(offset > 50);
+  };
 
-          <Box w="45%" alignContent='center' justifyContent='center'>
-            {/* <SlideEx/> */}
-            <Flex justify='space-evenly' alignItems="center">
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
-              {esAdmin ? (
-                <Box>
-                  <Link to="/solicitudesDeViajes">
-                    <Button colorScheme="#009ED1">Solicitudes de viaje</Button>
-                  </Link>
-                </Box>
-              ) : (esUsuario ? (
-                <Box>
-                  <Link to="/solicitarViaje">
-                    <Button colorScheme="#009ED1">Solicitar viaje</Button>
-                  </Link>
-                </Box>
-              ) : null
-              )}
+  const [role,setRole]=useState("notUser")
+ const handleClick=(role)=>{
+  if (role==='usuario'){setRole('user')}
+  if (role==='admin'){setRole('admin')}
+  
+ }
+ return (
+  <>
+    {isMobile ? (
+      <MobileNavbar />
+    ) : (
+      <Flex
+        as="nav"
+        bg={
+          location.pathname === "/"
+            ? navBackground
+              ? "#009ED1"
+              : "transparent"
+            : "#009ED1"
+        }
+        alignItems="center"
+        justify="space-between"
+        h="100px"
+        w="100%"
+        position="fixed"
+        top="0"
+        left="0"
+        zIndex="999"
+        px="4"
+        transition="background 0.5s ease"
+      >
+        <Box>
+          <Image src={Vamos} alt="Vamos" w="150px" />
+        </Box>
 
-              {
-                esAdmin ?
-                  (<Box>
-                    <Link to="/detail">
-                      <Button colorScheme="#009ED1">Conductores</Button>
-                    </Link>
-                  </Box>)
-                  : null
-              }
-
+        <Box w="100%" alignContent="center" justifyContent="center">
+          <Flex justify="center" alignItems="center">
+            {currentUser.admin && currentUser.admin ? (
               <Box>
                 <Flex>
-                  <Link to="/landing">
-                    <Button colorScheme="#009ED1">Inicio</Button>
+                  <Link to="/">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      INICIO
+                    </Button>
                   </Link>
-                  <Link to="/reservas">
-                    <Button colorScheme="#009ED1">Reservas</Button>
+                  
+                  <Link to="/solicitudesDeViajes">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      SOLICITUDES DE VIAJE
+                    </Button>
                   </Link>
-                  <Link to="/frecuentes">
-                    <Button colorScheme="#009ED1">Preguntas Frecuentes</Button>
+
+                  {/* <Link to="/detail">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      CONDUCTORES
+                    </Button>
+                  </Link> */}
+
+
+                  <Link to="/profileAdmin">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      MI PERFIL
+                    </Button>
                   </Link>
-                  <Link to="/about">
-                    <Button colorScheme="#009ED1">Nosotros</Button>
+
+                  <Link to='/editPrices'>
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      CAMBIAR PRECIOS DE VIAJES
+                    </Button>
                   </Link>
                 </Flex>
               </Box>
-            </Flex>
-          </Box>
+            ) : currentUser.admin === false ? (
+              <Box>
+                <Flex>
+                <Link to="/">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      INICIO
+                    </Button>
+                  </Link>
 
+                  <Link to="/solicitarViaje">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      SOLICITAR VIAJE
+                    </Button>
+                  </Link>
+
+                  <Link to="/profileUser">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      MI PERFIL
+                    </Button>
+                  </Link>
+
+                  <Link to="/questions">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      PREGUNTAS FRECUENTES
+                    </Button>
+                  </Link>
+
+                  <Link to='/review&reseña'>
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      RESEÑA DE TU VIAJE
+                    </Button>
+                  </Link>
+                
+                </Flex>
+              </Box>
+            ) : (
+              <Box>
+                <Flex>
+                  <Link to="/">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      INICIO
+                    </Button>
+                  </Link>
+
+                  <Link to="/about">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      NOSOTROS
+                    </Button>
+                  </Link>
+
+                  <Link to="/questions">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      PREGUNTAS FRECUENTES
+                    </Button>
+                  </Link>
+                  {currentUser && currentUser.admin ? <LogOut /> : null}
+                </Flex>
+              </Box>
+            )}
+          </Flex>
+        </Box>
+
+        <Box>
           <AvatarGroup spacing="1rem" mx="20px">
-            <Avatar bg="#009ED1" />
+            {currentUser.admin && currentUser.admin ? (
+              <Avatar size="md" name="Ryan Florence" bg="#009ED1" src={currentUser.photoURL} />
+            ) : null}
             <SlideEx />
-
           </AvatarGroup>
-        </>) :
-        <MobileMenu esAdmin={esAdmin} esUsuario={esUsuario} />}
-    </Flex>
-  );
+        </Box>
+      </Flex>
+    )}
+  </>
+);
 };
+
 export default NavBar;

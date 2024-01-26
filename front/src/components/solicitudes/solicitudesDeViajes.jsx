@@ -2,70 +2,78 @@ import { useDispatch, useSelector } from "react-redux"
 
 import { Box, Card, CardBody, CardHeader, Center, useDisclosure, Grid, GridItem } from '@chakra-ui/react'
 import {
+  Table,
+    Thead,
+    Tbody,
+    Tfoot,
+    Tr,
+    Th,
+    Td,
+    TableCaption, Avatar, Tooltip,
+    TableContainer, Flex,
   FormControl,
   FormLabel,
-  Input, Select, Button, Heading, Stack
+  Input, Select, Button, Heading, Stack,
+  Tabs, TabList, TabPanels, Tab, TabPanel 
 } from '@chakra-ui/react'
+import { AddIcon, EditIcon } from '@chakra-ui/icons'
+
 import Swal from 'sweetalert2'
 import { Link } from "react-router-dom"
 import Solicitud from "./solicitud"
-import DetailChofer from "../../views/detailChofer/DetailChofer"
-import { getSolicitudes, idDeSolicitud } from "../../redux/actions"
-import { useEffect } from "react"
+
+
+import { getCanceledTrips, getPendingTrips, getReservedTrips, idDeSolicitud, orderSearch } from "../../redux/actions"
+import { useEffect, useState } from "react"
+import SolicitudesDeViajesCompleted from "./solicitudesDeViajesCompleted"
+import SolicitudesDeViajesPending from "./solicitudesDeViajesPending"
+import SolicitudesDeViajesReserved from "./solicitudesDeViajesReserved"
 
 
 
 
 function SolicitudesDeViajes() {
 
-  const dispatch = useDispatch()
+  const dispatch= useDispatch()
 
-  const solicitudesDeViajes = useSelector((state) => state.solicitudesDeViajes)
-  console.log(solicitudesDeViajes)
-
-
-  const handlerClick=(id)=>{
-    dispatch(idDeSolicitud(id))
-  }
-
-  useEffect(() => {
-    dispatch(getSolicitudes())
-  }, [/* dispatch */])
-
-  const estiloParrafo = {
-    /* backgroundColor: '#81DAF5', */
-    backgroundColor: '#009ED1',
-    padding: '10px',
-    color: 'white',
+  const tabStyles = {
+    borderRight: "2px solid #009ED1",
+    borderTop: "2px solid #009ED1",
+    borderLeft: "2px solid #009ED1",
   };
 
-  const estiloTarjeta = {
-    marginBottom: "30px", 
-  };
-
+  /* useEffect(() => {
+    dispatch(getReservedTrips())
+  }, []) */
+ 
+  
 
   return (
-    <div >
-      <ul>
+    
 
-        {solicitudesDeViajes.map((solicitud) => (
+      <Tabs isFitted variant="enclosed" marginTop={'7rem'} bg="gray.200" borderRadius="md">
+        
+      <TabList mb="1em" /* borderBottom="2px solid #009ED1" */>
+        <Tab _selected={{ color: 'white', bg: 'purple.500' }}>Viajes sin conductor asignado</Tab>
+        <Tab _selected={{ color: 'white', bg: 'purple.500' }}>Viajes con conductor asignado</Tab>
+        <Tab _selected={{ color: 'white', bg: 'purple.500' }}>Viajes concretados</Tab>
+      </TabList>
+      
 
-          <Box mt={4} key={solicitud.id} style={estiloTarjeta}>
-              <Link to='/solicitud' onClick={handlerClick(solicitud.id)}>
-            <Button /* colorScheme='teal' variant='outline' */ /* w='100%' */ type='submit'>
-            | ASIGNAR CONDUCTOR | 
-            <p style={estiloParrafo}>
-            Solicitud de viaje desde {solicitud.origin} hacia {solicitud.destination} ||
-            Usuario: Carlitos || Fecha : {solicitud.date} || Hora: {solicitud.hour} || 
-            </p>
-            </Button>
-            
-              </Link>
-          </Box>
-        ))}
-      </ul>
-      {/* <DetailChofer></DetailChofer> */}
-    </div>
+      <TabPanels>
+        <TabPanel>
+          <SolicitudesDeViajesReserved/>
+        </TabPanel>
+        <TabPanel>
+          <SolicitudesDeViajesPending/>
+        </TabPanel>
+        <TabPanel>
+          <SolicitudesDeViajesCompleted/>
+        </TabPanel>
+      </TabPanels>
+    </Tabs>
+    
+    
 
   )
 }

@@ -21,14 +21,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 // DEPENDECIES
 import axios from "axios";
+import { createNewChofer, getAllConductores } from "../../../redux/actions";
 
-import choferes from "../../../utils/chofer";
-import { createNewChofer } from "../../../redux/actions";
-import { ValidateNewDriver } from "../../../components/Validate/validateNewDriver";
-
-const ChoferForm = () => {
+const ChoferForm = ({ closeForm }) => {
   const dispatch = useDispatch();
-  const choferData = useSelector((state) => state.conductores);
   const [image_Url, setImage_Url] = useState("");
 
   const [form, setForm] = useState({
@@ -73,33 +69,34 @@ const ChoferForm = () => {
     const property = e.target.name;
     const value = e.target.value;
     console.log(property + " " + value);
-    setForm({
-      ...form,
+    setForm((prevForm) => ({
+      ...prevForm,
       [property]: value,
-    });
+    }));
   };
 
-  const changeUploadImage = async (event) => {
+  const changeUploadImage = async (event, imageField) => {
     const fileChofer = event.target.files[0];
     const data = new FormData();
 
     data.append("file", fileChofer);
     data.append("upload_preset", "Presets_vamos");
-    const response = await axios.post(
-      "https://api.cloudinary.com/v1_1/drgnsbah9/image/upload",
-      data
-    );
 
-    console.log(response.data);
-    setImage_Url(response.data.secure_url);
-    console.log(image_Url);
+    try {
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/drgnsbah9/image/upload",
+        data
+      );
 
-    setForm({
-      ...form,
-      driverImg: response.data.secure_url,
-      carImg: response.data.secure_url,
-      circulationPermit: response.data.secure_url,
-    });
+      console.log(response.data);
+
+      setForm((prevForm) => ({
+        ...prevForm,
+        [imageField]: response.data.secure_url,
+      }));
+    } catch (error) {
+      console.error("Error al cargar la imagen:", error);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -134,6 +131,8 @@ const ChoferForm = () => {
           circulationPermit: "",
           capacityPassengers: "",
         });
+        await dispatch(getAllConductores())
+        closeForm();
       } else {
         throw new Error(
           Swal.fire({
@@ -154,26 +153,27 @@ const ChoferForm = () => {
     }
   };
 
-  const carTypeFount = ["auto", "camioneta", "van"];
-  const airportsFount = ["tumbes", "talara", "lima"];
+  const carTypeFount = ["auto", "camioneta", "van", 'van plus'];
+  const airportsFount = ["Aeropuerto Tumbes", "Aeropuerto Talara"];
   const carModelFount = ["toyota", "hiunday", "ford"];
 
   return (
     <form onSubmit={handleSubmit}>
       <Stack
-        spacing={4}
+        spacing={3}
         bg="#009ED1"
         p="5"
         h="auto"
-        borderRadius="20"
+        borderRadius="0"
         boxShadow="dark-lg"
-        color="white"
-        border="1px solid white"
-        mx="2rem"
-        w={{ base: "20rem", md: "50rem" }}
+        color="black"
+        border="2px solid black"
+        mx="1rem"
+        w={{ base: "20rem", md: "60rem" }}
         scrollMarginX="auto"
+
       >
-        <Heading>Datos del chofer</Heading>
+        <Heading fontSize="4xl" fontFamily="'DIN Medium',">Datos del chofer</Heading>
         <Box>
           <Flex flexDirection={{ base: "column" }}>
             <Center
@@ -182,8 +182,10 @@ const ChoferForm = () => {
               flexDirection={{ base: "column", md: "row" }}
             >
               <FormControl isRequired>
-                <FormLabel>Nombre</FormLabel>
+                <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Nombre</FormLabel>
                 <Input
+                  color="black"
+                  bgColor="white"
                   type="text"
                   placeholder="Ingrese su nombre"
                   name="name"
@@ -193,8 +195,10 @@ const ChoferForm = () => {
                 {error.name && <p>{error.name}</p>}
               </FormControl>
               <FormControl isRequired>
-                <FormLabel>Apellido</FormLabel>
+                <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Apellido</FormLabel>
                 <Input
+                  color="black"
+                  bgColor="white"
                   type="text"
                   placeholder="Ingrese su apellido"
                   name="surname"
@@ -204,8 +208,10 @@ const ChoferForm = () => {
                 {error.surname && <p>{error.surname}</p>}
               </FormControl>
               <FormControl isRequired>
-                <FormLabel>Correo electronico</FormLabel>
+                <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Correo electronico</FormLabel>
                 <Input
+                  color="black"
+                  bgColor="white"
                   type="mail"
                   placeholder="Correo electronico"
                   name="email"
@@ -222,8 +228,10 @@ const ChoferForm = () => {
               flexDirection={{ base: "column", md: "row" }}
             >
               <FormControl isRequired>
-                <FormLabel>Fecha de Nac.</FormLabel>
+                <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Fecha de Nac.</FormLabel>
                 <Input
+                  color="black"
+                  bgColor="white"
                   size="md"
                   type="date"
                   name="birthday"
@@ -234,8 +242,10 @@ const ChoferForm = () => {
               </FormControl>
 
               <FormControl isRequired>
-                <FormLabel>DNI</FormLabel>
+                <FormLabel fontSize="lg" fontFamily="'DIN Medium',">DNI</FormLabel>
                 <Input
+                  color="black"
+                  bgColor="white"
                   type="number"
                   placeholder="Numero de DNI"
                   name="dni"
@@ -246,8 +256,10 @@ const ChoferForm = () => {
               </FormControl>
 
               <FormControl isRequired>
-                <FormLabel>Numero de Celular</FormLabel>
+                <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Numero de Celular</FormLabel>
                 <Input
+                  color="black"
+                  bgColor="white"
                   type="number"
                   placeholder="Numero de celular"
                   name="phone"
@@ -264,20 +276,23 @@ const ChoferForm = () => {
               flexDirection={{ base: "column", md: "row" }}
             >
               <FormControl>
-                <FormLabel>Foto del Chofer</FormLabel>
+                <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Foto del Chofer</FormLabel>
                 <Input
+                  color="black"
+                  bgColor="white"
                   type="file"
                   name="driverImg"
                   accept="image/*"
-                  onChange={changeUploadImage}
+                  onChange={(e) => changeUploadImage(e, 'driverImg')}
                 />
                 {error.driverImg && <p>{error.driverImg}</p>}
               </FormControl>
 
               <FormControl isRequired>
-                <FormLabel>Aeropuerto Origen</FormLabel>
+                <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Aeropuerto Origen</FormLabel>
                 <Select
-                  color="#000"
+                  color="black"
+                  bgColor="white"
                   placeholder="Selecciona el Aeropuerto"
                   name="airports"
                   onChange={handleChange}
@@ -296,13 +311,14 @@ const ChoferForm = () => {
           </Flex>
         </Box>
 
-        <Box bg="#10447E" py={4} px={2} borderRadius={10} color="white">
-          <Heading>Datos del vehiculo</Heading>
+        <Box bg="#10447E" py={6} px={2} borderRadius={4} color="white" fontFamily="'DIN Medium',">
+          <Heading fontSize="4xl">Datos del vehiculo</Heading>
           <Center py={2} gap={4} flexDirection={{ base: "column", md: "row" }}>
             <FormControl as="fieldset" isRequired>
-              <FormLabel as="legend">Tipo de Vehiculo:</FormLabel>
+              <FormLabel as="legend" fontSize="lg" fontFamily="'DIN Medium',">Tipo de Vehiculo:</FormLabel>
               <Select
-                color="#000"
+                color="black"
+                bgColor="white"
                 placeholder="Selecciona un Vehiculo"
                 name="carType"
                 onChange={handleChange}
@@ -319,9 +335,10 @@ const ChoferForm = () => {
             </FormControl>
 
             <FormControl as="fieldset" isRequired>
-              <FormLabel as="legend">Modelo de Vehiculo:</FormLabel>
+              <FormLabel as="legend" fontSize="lg" fontFamily="'DIN Medium',">Modelo de Vehiculo:</FormLabel>
               <Select
-                color="#000"
+                color="black"
+                bgColor="white"
                 placeholder="Selecciona un Vehiculo"
                 name="carModel"
                 onChange={handleChange}
@@ -338,8 +355,10 @@ const ChoferForm = () => {
             </FormControl>
 
             <FormControl as="fieldset" isRequired>
-              <FormLabel>Numero de placa</FormLabel>
+              <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Numero de placa</FormLabel>
               <Input
+                color="black"
+                bgColor="white"
                 type="text"
                 placeholder="Numero de placa"
                 textTransform="uppercase"
@@ -351,8 +370,10 @@ const ChoferForm = () => {
             </FormControl>
 
             <FormControl as="fieldset" isRequired>
-              <FormLabel>Licencia de manejo</FormLabel>
+              <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Licencia de manejo</FormLabel>
               <Input
+                color="black"
+                bgColor="white"
                 type="text"
                 placeholder="Numero de licencia de manejo"
                 name="driverLicense"
@@ -365,19 +386,23 @@ const ChoferForm = () => {
 
           <Center py={2} gap={4} flexDirection={{ base: "column", md: "row" }}>
             <FormControl isRequired>
-              <FormLabel>Foto del vehiculo</FormLabel>
+              <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Foto del vehiculo</FormLabel>
               <Input
+                color="black"
+                bgColor="white"
                 type="file"
                 name="carImg"
                 accept="image/*"
-                onChange={changeUploadImage}
+                onChange={(e) => changeUploadImage(e, 'carImg')}
               />
               {error.carImg && <p>{error.carImg}</p>}
             </FormControl>
 
             <FormControl isRequired>
-              <FormLabel>Fecha de Nac. SOAT</FormLabel>
+              <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Fecha de Nac. SOAT</FormLabel>
               <Input
+                color="black"
+                bgColor="white"
                 placeholder="Select birthday and Time"
                 size="md"
                 type="date"
@@ -389,20 +414,23 @@ const ChoferForm = () => {
             </FormControl>
 
             <FormControl isRequired>
-              <FormLabel>Permiso de Circulacion</FormLabel>
+              <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Permiso de Circulacion</FormLabel>
               <Input
+                color="black"
+                bgColor="white"
                 type="file"
                 name="circulationPermit"
                 accept="image/*"
-                onChange={changeUploadImage}
+                onChange={(e) => changeUploadImage(e, 'circulationPermit')}
               />
               {error.circulationPermit && <p>{error.circulationPermit}</p>}
             </FormControl>
 
             <FormControl as="fieldset" isRequired>
-              <FormLabel htmlFor="pasajeros">Maximo de pasajeros</FormLabel>
+              <FormLabel htmlFor="pasajeros" fontSize="lg" fontFamily="'DIN Medium',">Maximo de pasajeros</FormLabel>
               <Select
-                color="#000"
+                color="black"
+                bgColor="white"
                 placeholder="Cantidad de pasajeros"
                 id="pasajeros"
                 name="capacityPassengers"
@@ -425,7 +453,7 @@ const ChoferForm = () => {
         </Box>
 
         <Box mt={4}>
-          <Button colorScheme="green" w="100%" type="submit">
+          <Button bg='#E83D6F' w="100%" type="submit">
             Registrar Chofer
           </Button>
         </Box>
