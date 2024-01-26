@@ -114,6 +114,7 @@ export const postNewViaje = (infoViaje) => {
 }
 
 export const getReservedTrips = () =>{
+    console.log('llega aqui');
     return async(dispatch)=> {
         const endpoint= 'http://localhost:3001/trips/reserves' //Se cambió a la ruta con viajes reservados
         try {

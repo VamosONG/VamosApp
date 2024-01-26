@@ -90,7 +90,7 @@ const handleChange = async (e) => {
     setInput({
         ...input,
         [e.target.name]: e.target.value,
-        tripState: 'reserved'
+        tripState: 'reserve'
     })
 }
 const handleSubmitReserved = async (e) => {
@@ -143,8 +143,9 @@ const handleSubmitReserved = async (e) => {
                         {/* <Th>Usuario</Th> */}
                         <Th>Fecha</Th>
                         <Th /* isNumeric */>Hora</Th>
+                        <Th >Usuario</Th>
                         <Th >Buscar conductor</Th>
-                        {/* <Th >Detalles</Th> */}
+                        
                     </Tr>
                 </Thead>
                 <Tbody >
@@ -157,7 +158,7 @@ const handleSubmitReserved = async (e) => {
                             {/* <Td>José Bravo</Td> */}{/* Luego hay que cambiar por nombre de usuario */}
                             <Td>{solicitud.date}</Td>
                             <Td>{solicitud.hour}</Td>
-                            {/* <Td>{solicitud.driverFullName}</Td> */}
+                            <Td><Link>{solicitud.userEmail}</Link></Td>
 
                             <Td justifyContent='center'  >
                                 <Flex gap={2} justifyContent={'center'}  >
@@ -165,7 +166,7 @@ const handleSubmitReserved = async (e) => {
                                     <Link to='/solicitud' onClick={()=>handlerClick(solicitud.id)}>
                                         <Button  bg='#009ED1'
                                             fontSize='1.2rem' /* id={driver.id} */ >
-                                            <EditIcon />
+                                            <AddIcon />
                                         </Button>
                                         </Link>
                                     </Tooltip>
