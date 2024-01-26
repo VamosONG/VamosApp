@@ -53,29 +53,36 @@ function App() {
         <Route path= '/about' element={<About/>} />
         <Route path='/questions' element={<Questions/>}/>
 
-        <Route element={<ProtectedRoutes isAllowed={currentUser.admin=== false} />} >
+        {/* <Route element={<ProtectedRoutes isAllowed={currentUser.admin=== false} />} > */}
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
         <Route path="/login" element={<LoginForm/>}/>
         <Route path='/reserve/confirmed' element={<ReserveComfirmed/>}/>
         <Route path='/reserve/rejected' element={<ReserveReject/>}/>
         <Route path='/solicitud' element={<Solicitud/>}/>
         <Route path="/profileUser" element={<UserProfile/>}/>
+        <Route path='/paymentStatus' element={<PaymentStatus/>}/>
+        <Route path="/paymentFailed" element={<PaymentFail/>}/>
         
-        </Route>
+        {/* </Route> */}
         {/* No son necesario estas rutas, ya que todo estara dentro el componente del admin */}
         {/* <Route path='/detail' element={<DriverTableView/>}/> */}
-        <Route element={<ProtectedRoutes isAllowed={currentUser.admin=== true} />}>
+        {/* <Route element={<ProtectedRoutes isAllowed={currentUser.admin=== true} />}> */}
         <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
         <Route path='/product' element={<Product/>}/>
         <Route path='/review&reseña' element={<ReviewAndReseña/>}/>
         <Route path='/editPrices' element={<EditPrices/>}/>
-        <Route path='/paymentStatus' element={<PaymentStatus/>}/>
         <Route path="/login" element={<LoginForm/>}/>
         <Route path="/register" element={<RegistroForm/>}/>
+
+        <Route path="/profileUser" element={<UserProfile/>}/>
+
         <Route path="/profileAdmin" element={<AdminProfile/>}/>
 
+        <Route path="/stadistics" element={<Stadistic/>}/>
+        {/* </Route> */}
+        {/* <Route path="/graphics" element={<Graphics/>}/> */}
 
-        </Route>
+
         {/* No son necesario estas rutas, ya que todo estara dentro el componente del admin */}
         {/* <Route path="/reviewAdmin" element={<ReviewAdmin/>}/>  
         <Route path="/user" element={<UserViewAdmin/>}/> */}
@@ -83,7 +90,7 @@ function App() {
       </Routes>
       {/* <Paginado/> */}
 
-
+        </Routes>
       <Footer/>
     </AuthProvider>
 
