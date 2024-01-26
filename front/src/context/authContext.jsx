@@ -82,6 +82,8 @@ export function AuthProvider({ children }) {
         try {
             const resp=await signInWithPopup(auth, responseGoogle)
         setUser(resp)
+            const resp=await signInWithPopup(auth, responseGoogle)
+        setUser(resp)
       
         return resp
         } catch (error) {
@@ -90,6 +92,7 @@ export function AuthProvider({ children }) {
     }
     const logOut = async () => {
         try {
+            setUser()
             setUser()
             await signOut(auth);
             console.log('Logout exitoso');
@@ -110,6 +113,3 @@ export function AuthProvider({ children }) {
         {children}
     </authContext.Provider>)
 }
-
-
-

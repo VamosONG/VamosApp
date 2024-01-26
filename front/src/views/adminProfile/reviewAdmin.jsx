@@ -16,24 +16,32 @@ import axios from 'axios'
 import ReviewFilter from '../driversViewAdmin/filtersData/reviewFilter';
 import { useDispatch, useSelector } from "react-redux";
 import { getReviewsData } from '../../redux/actions';
+import Paginado from '../../components/paginado/paginadoComponent';
+
 
 const ReviewAdmin = () => {
 
+    const reviews = useSelector((state) => state.reviewsData)
     const dispatch = useDispatch()
 
-    const reviews = useSelector((state) => state.reviewsData)
+    const [search , setSearch] = useState('')
 
-    console.log('review en tabla ' + reviews);
+    const searcher = (e) => {
+        setSearch(e.target.value)
+    }
+
+    const results = !search ? reviews : reviews.filter((data) => data.userName && data.userName.toLowerCase().includes(search.toLowerCase()) || data.userMail && data.userMail.toLowerCase().includes(search.toLowerCase()) || data.driverName && data.driverName.toLowerCase().includes(search.toLowerCase())
+)
 
     useEffect(() => {
         dispatch(getReviewsData())
-    }, [dispatch])
+    }, [])
 
     return (
         <Flex /* align='center' direction={{base:'column',md:'row'}} */ alignItem='center' justifyContent='center'>
 
         <TableContainer >
-            <Flex bg='gray.200' color='#000' justify={'center'} ><ReviewFilter /></Flex>
+            <Flex bg='gray.200' color='#000' justify={'center'} ><ReviewFilter searcher={searcher} /></Flex>
             <Flex px='1rem' >
                 <Table variant='striped' colorScheme='gray.100' >
                     <TableCaption>Reviews</TableCaption>
@@ -49,7 +57,7 @@ const ReviewAdmin = () => {
                     </Thead>
 
                     <Tbody>
-                        {reviews?.map((review, index) => (
+                        {results?.map((review, index) => (
                             <Tr key={review.id} bg={review.qualification <= 3 ? 'red.100' : null} >
                                 <Td w='auto' >{review.userName ? review.userName : 'User Test'}</Td>
                                 <Td w='min-content' >
@@ -96,7 +104,7 @@ const ReviewAdmin = () => {
                 </Table>
             </Flex>
             {/* COMPONENTE DE PAGINADO */}
-            {/* <Paginado/>  */}
+            <Paginado/> 
         </TableContainer>
         </Flex>
     )

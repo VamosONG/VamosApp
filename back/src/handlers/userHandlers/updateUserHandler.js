@@ -1,9 +1,10 @@
 const updateUser = require('../../controllers/usersControllers/updateUsers');
 
 module.exports = async (req, res) => {
-    const { id, name, surname, email, phone, dni, trips, activeReservations, reviews, admin } = req.body;
+    const { id,} = req.params;
+    const {newData} = req.body;
     try {
-        const updUser = await updateUser(id, { name, surname, email, phone, dni, trips, activeReservations, reviews, admin });
+        const updUser = await updateUser(id, newData);
 
         res.status(200).json(updUser);
     } catch (error) {

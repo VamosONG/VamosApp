@@ -1,5 +1,4 @@
 const mailing = require('./mailing');
-const getUserById = require('../../controllers/usersControllers/getUserById');
 const {getTripById} = require('../../controllers/tripsControllers/getTripById');
 const getDriverById = require('../../controllers/driversControllers/getDriverById');
 const getAdminEmails = require('../../controllers/adminControllers/getAdminEmails');
@@ -8,10 +7,7 @@ const getAdminEmails = require('../../controllers/adminControllers/getAdminEmail
 module.exports=async({id, name, surname, email, phone, dni, driverId, tripId, option})=>{
 
     try {
-console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
-        const userName=name;
-        email="ezequielantoine@gmail.com"
-        
+        const userName=name;        
         let chofer=null;
         let trip=null;
         const adminsEmails = await getAdminEmails();
@@ -358,7 +354,7 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
                         `
                 break;
             case("assignDriver"):
-                bbc=[email, chofer.email],
+                to=email,
                 preSubject=`VAMOS!! ${userName}, se ha asignado un chofer para su viaje.`,
                 message=`<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
                 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="es">
@@ -1162,6 +1158,7 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
                         `
                 break;
             case("infoDriver"):
+              to= `${chofer.email}`
               preSubject=`VAMOS!! Hola ${chofer.name}, se le ha asignado un viaje.`,
               message=`<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
               <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="es">
@@ -1603,8 +1600,8 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
                                                                                               <tr>
                                                                                                   <td align="left" style="padding:0;Margin:0" class="esd-text">
                                                                                                       <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><strong>Datos del usuario:</strong></p>
-                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><u>Nombre</u>: ${usuario.name}.&nbsp;</p>
-                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><u>Apellido</u>: ${usuario.surname}.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><u>Nombre</u>: ${name}.&nbsp;</p>
+                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><u>Apellido</u>: ${surname}.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
                                                                                                       <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
                                                                                                   </td>
                                                                                               </tr>
@@ -1624,8 +1621,8 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
                                                                                               <tr>
                                                                                                   <td align="left" style="padding:0;Margin:0" class="esd-text">
                                                                                                       <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><strong>Datos de contacto:</strong></p>
-                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><strong></strong>Tel.: ${usuario.phone}.<strong></strong></p>
-                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><u>email</u>: ${usuario.email}.</p>
+                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><strong></strong>Tel.: ${phone}.<strong></strong></p>
+                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><u>email</u>: ${email}.</p>
                                                                                                       <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><br></p>
                                                                                                   </td>
                                                                                               </tr>
@@ -1738,7 +1735,6 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
               </body>      
               </html>              
               `
-            email= `ezequielantoine@gmail.com`//${chofer.email}`
             break;            
             default:{
                 userName="";

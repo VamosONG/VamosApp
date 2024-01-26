@@ -135,7 +135,7 @@ const handleSubmitReserved = async (e) => {
 
   return (
     
-      <Tabs isFitted variant="enclosed" marginTop={'7rem'} bg="gray.100">
+      <Tabs isFitted variant="enclosed"  bg="gray.100">
         
       <TabList mb="1em" /* borderBottom="2px solid #009ED1" */>
         <Tab _focus={tabStyles} >Viajes sin conductor asignado</Tab>

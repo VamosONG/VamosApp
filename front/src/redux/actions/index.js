@@ -5,8 +5,9 @@ import Swal from 'sweetalert2';
 import {auth} from "../../firebase/firebase.config"
 
 
-import { DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, ORDER_DATE, FILTER_RATING, GET_DATA_USER } from './action.types';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+
+import {  ORDER_TRIPS, GET_TRIPS,DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, HANDLE_ADMIN, ORDER_DATE, FILTER_RATING, GET_DATA_USER } from './action.types';
+
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE = "PAGINATE"
@@ -209,6 +210,21 @@ export const getDetailUserById = (id) => {
     }
 }
 
+//Cambia admin
+export const handleAdminUser = (id) => {
+    return async (dispatch) => {
+        try {
+            const {data} = await axios.patch(`http://localhost:3001/user/admin/${id}`)
+            dispatch({
+                type: HANDLE_ADMIN,
+                payload: data
+            })
+        } catch (error) {
+            console.error("Error en el handleAdminUser:", error);
+        }
+    }
+}
+
 export const paginateConductores = (order) => {
     console.log(order);
     return async (dispatch) => {
@@ -324,6 +340,19 @@ export const conductorAsignado = (info) => {
         };
     };
 };
+
+export const orderListTrips = (data) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: ORDER_TRIPS,
+                payload: data
+            })
+        } catch (error) {
+            console.log('Error en orden list' , error)
+        }
+    }
+}
 
 export const alphabeticalOrder = (order) => {
     return async (dispatch) => {
@@ -607,4 +636,19 @@ export const orderSearch = (input) => {
         }
     };
 
+}
+
+export const getTrips = () => {
+    return async (dispatch)=> {
+        try {
+            const {data} =await  axios.get(`http://localhost:3001/trips`)
+          
+            return dispatch({
+                type: GET_TRIPS,
+                payload: data
+            })
+        } catch (error) {
+            console.error("Error en trips:", error);
+        }
+    }
 }

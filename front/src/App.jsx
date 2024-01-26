@@ -33,8 +33,14 @@ import UserProfile from './components/userProfile/userProfile'
 import AdminProfile from './components/userProfile/adminProfile';
 import ReviewAdmin from './views/adminProfile/reviewAdmin';
 import UserViewAdmin from './views/adminProfile/userViewAdmin';
+import ViewProfile from './components/userProfile/viewProfile';
+
 import ProtectedRoutes from './utils/ProtectedRoute';
 import { useSelector } from 'react-redux';
+
+import PaymentFail from './views/payments/paymentFail';
+import Stadistic from './views/stadistic/Stadistics/stadistic';
+
 
 function App() {
   const location = useLocation();
@@ -87,7 +93,6 @@ function App() {
         {/* <Route path="/reviewAdmin" element={<ReviewAdmin/>}/>  
         <Route path="/user" element={<UserViewAdmin/>}/> */}
 
-      </Routes>
       {/* <Paginado/> */}
 
         </Routes>

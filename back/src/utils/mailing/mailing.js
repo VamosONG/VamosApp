@@ -20,7 +20,7 @@ module.exports = async(name, email, preSubject, message)=>{
                 service: "gmail",
                 auth:{
                     type: "OAUTH2",
-                    user: "ezantoinedeveloper@gmail.com",
+                    user: "ong.vamos.2024@gmail.com",
                     clientId: CLIENT_ID,
                     clientSecret: CLIENT_SECRET,
                     refreshToken: REFRESH_TOKEN,
@@ -28,7 +28,7 @@ module.exports = async(name, email, preSubject, message)=>{
                 },
             })
             const mailOptions = {
-                from: '"VAMOS!!" <ezantoinedeveloper@gmail.com>', // sender address
+                from: '"VAMOS!!" <ong.vamos.2024@gmail.com>', // sender address
                 to: email, // list of receivers
                 subject: `${preSubject}`, 
                 //text: `${message}`, // plain text body
