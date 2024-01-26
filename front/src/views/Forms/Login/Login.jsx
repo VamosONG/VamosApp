@@ -234,7 +234,7 @@ const LoginForm = ({ onSwitchForm }) => {
             </InputGroup>
           </FormControl>
 
-          <Container>
+          {/* <Container>
             <Text>
               ¿No tienes cuenta?{" "}
               <Button color="teal.500" onClick={handleRegister}>
@@ -245,8 +245,9 @@ const LoginForm = ({ onSwitchForm }) => {
               </Button>
       
             </Text>
+          UserViewProfile
+          </Container> */}
           </Container>
-
           <Box>
             {!currentUser.id && (
               <Button bg="white" onClick={handleSubmit}>

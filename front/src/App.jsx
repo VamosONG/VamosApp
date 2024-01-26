@@ -32,7 +32,7 @@ import RegistroForm from './views/Forms/Registro/Registro';
 import UserProfile from './components/userProfile/userProfile'
 import AdminProfile from './components/userProfile/adminProfile';
 import ReviewAdmin from './views/adminProfile/reviewAdmin';
-
+import UserViewAdmin from './views/adminProfile/userViewAdmin';
 import ProtectedRoutes from './utils/ProtectedRoute';
 import { useSelector } from 'react-redux';
 
