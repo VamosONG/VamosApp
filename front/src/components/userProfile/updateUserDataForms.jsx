@@ -68,7 +68,7 @@ const UpdateUserDataForm = ({ userDetail }) => {
 
     return (
         <>
-            <Button onClick={onOpen}> <EditIcon /></Button>
+            <Button onClick={onOpen} bg='#10447E' color={'white'} > <EditIcon /></Button>
             {/* <Button ml={4} ref={finalRef}>
         I'll receive focus on close
       </Button> */}
