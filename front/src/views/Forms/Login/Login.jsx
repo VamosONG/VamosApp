@@ -77,23 +77,28 @@ const LoginForm = ({ onSwitchForm }) => {
   };
 
   //esta funcion es para hacer el login con google y almacenarlo en nuestra db
-    const handleGoogleLogin = async () => {
-
-    const {displayName, email} = auth.user
+    const handleGoogleLogin = async (e) => {
+      e.preventDefault();
+     
+    const googleLog = await auth.loginWithGoogle(); // Autenticacion de google
+    
+    
+    //const usuario = auth.user
+    console.log("googleLog",googleLog)
     try {
-      await auth.loginWithGoogle(); // Autenticacion de google
-      if (auth.user) {
-        const user = {   // creaacion de un objeto user con los datos que puedo extraer de firebase
-          name: displayName,
-          email: email,
-        };
+      if (googleLog) {
+         const usr={
+          name: googleLog.user.displayName,
+          email: googleLog.user.email
+         }
+         console.log(usr)
         //Crea un usuario (findOrCreate) utilizando fetch con su metodo post 
         const response = await fetch('http://localhost:3001/user/create', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(user) 
+          body: JSON.stringify(usr) 
         });
   
         if (!response.ok) {
@@ -103,9 +108,9 @@ const LoginForm = ({ onSwitchForm }) => {
   
         // Carga el estado global currentUser con la info del usuario registradi
         const userActual = await dispatch(getUserByEmail(userCreated.email))
-        console.log(userActual);
+        console.log(userActual); 
   
-        return userActual
+        return response
       }
     } catch (error) {
       console.error("Error al iniciar sesión con Google:", error.message);
@@ -229,6 +234,19 @@ const LoginForm = ({ onSwitchForm }) => {
             </InputGroup>
           </FormControl>
 
+          <Container>
+            <Text>
+              ¿No tienes cuenta?{" "}
+              <Button color="teal.500" onClick={handleRegister}>
+                Registrarme
+              </Button>
+              <Button colorScheme="red" onClick={(e)=>handleGoogleLogin(e)}>
+                Continuar con Google
+              </Button>
+      
+            </Text>
+          </Container>
+
           <Box>
             {!currentUser.id && (
               <Button bg="white" onClick={handleSubmit}>
@@ -254,7 +272,7 @@ const LoginForm = ({ onSwitchForm }) => {
               p={3}
               borderRadius="md"
               _hover={{ bg: "gray.100" }}
-              onClick={handleGoogleLogin}
+              onClick={(e)=>handleGoogleLogin(e)}
               >
               <Flex align="center" mr={1}>
               <Image src={googleLogo} alt="Google Logo" boxSize="35px" mr={0} />
