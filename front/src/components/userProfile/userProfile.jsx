@@ -89,14 +89,14 @@ const UserProfile = () => {
     const bgImg = 'https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg'
 
     return (
-        <Box h='90vh' marginTop={'100px'} display={'flex'} justifyContent={'center'} alignContent={'center'} bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
+        <Box h='90vh' marginTop={{base: '0', md: '100px'}} display={'flex'} justifyContent={'center'} alignContent={'center'} bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
             justify="center"
             bgSize="cover"
             bgRepeat="no-repeat">
-            {location.pathname !== '/profile' && <NavBar />}
+            {location.pathname !== '/profile'}
             <Flex h={'60%'} w='80%' m='auto' justify={'space-evenly'} align={'center'} overflow={'hidden'} borderLeftRadius={10} borderRightRadius={10}>
                 <Flex h='100%' w='50%' position={'relative'}>
-                    <Flex bg={'#009ED1'} flexDirection={'row'} align={'center'} justify={'start'} w={'100%'} p='1rem' gap={4} position={'relative'} borderRadius={8}>
+                    <Flex bg={'#009ED1'} flexDirection={{base: 'column', md: 'row'}} align={'center'} justify={'start'} w={'100%'} p='1rem' gap={4} position={'relative'} borderRadius={8}>
                         {userDetail && userDetail ? (
                             <>
                                 <Tooltip label='Editar datos' placement='left' bg='#10447E' borderRadius={4}>

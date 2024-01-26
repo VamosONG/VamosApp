@@ -247,7 +247,6 @@ const LoginForm = ({ onSwitchForm }) => {
             </Text>
           UserViewProfile
           </Container> */}
-          </Container>
           <Box>
             {!currentUser.id && (
               <Button bg="white" onClick={handleSubmit}>
