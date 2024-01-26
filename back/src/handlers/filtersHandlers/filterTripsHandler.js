@@ -48,12 +48,13 @@ console.log('entre reserved: ',filteredTrips);
             )
         }
 
-        if(order){
-            if(order.toLowerCase()==="menos recientes")
-                filteredTrips.sort((a,b)=> a.date - b.date)
-            else
-                filteredTrips.sort((a,b)=> b.date - a.date)
-        }
+        if (order) {
+            if (order.toLowerCase() === "mas reciente") {
+              filteredTrips.sort((a, b) => new Date(a.date) - new Date(b.date));
+            } if (order.toLowerCase() === "menos reciente") {
+              filteredTrips.sort((a, b) => new Date(b.date) - new Date(a.date));
+            }
+          }
         
         res.status(200).json(filteredTrips);
     } catch (error) {

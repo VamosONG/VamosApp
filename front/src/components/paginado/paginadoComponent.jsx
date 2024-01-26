@@ -1,43 +1,88 @@
-import { useDispatch, useSelector } from "react-redux"
-import { getAllConductores, paginateConductores } from "../../redux/actions";
-import { useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import { Button, Box } from '@chakra-ui/react';
 
-import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
-import {Flex, Tooltip, Button, Box} from '@chakra-ui/react'
+const Pagination = ({ data, itemsPerPage, initialPage = 1, onPageChange }) => {
+  const [currentPage, setCurrentPage] = useState(initialPage);
+  const [dataToShow, setDataToShow] = useState([]);
 
-function Paginado() {
+  useEffect(() => {
+    updateDataToShow();
+  }, [currentPage, data]);
 
-    const dispatch = useDispatch();
+  const updateDataToShow = () => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const newDataToShow = data.slice(startIndex, endIndex);
+    setDataToShow(newDataToShow);
 
-    const paginate = (e) => {
-        console.log(e.target.name);
-        dispatch(paginateConductores(e.target.name))
+    if (onPageChange) {
+      onPageChange(currentPage);
     }
-    // useEffect(()=> {
-    //     dispatch(getAllConductores())
-    // },[dispatch])
+  };
 
-    return (
-        <Box position={"relative"} w='100%' justifyContent={"center"} alignContent={"center"}>
-            <Flex justify={"center"} >
-                <Tooltip label='Atras' placement='left' bg='blue.400'>
-                    <Button colorScheme='#000' variant='outline' 
-                    name='prev'onClick={paginate}>
-                        <BsChevronLeft />
-                    </Button>
-                </Tooltip>
-                <Flex>
-                </Flex>
-                <Tooltip label='Siguiente' placement='right' bg='blue.300'>
-                    <Button colorScheme='#000' variant='outline'
-                    name="next" onClick={paginate}>
-                        <BsChevronRight />
-                    </Button>
-                </Tooltip>
-            </Flex>
-        </Box>
-    )
+  const prevHandler = () => {
+    const prevPage = currentPage - 1;
+
+    if (prevPage < 1) return;
+
+    setCurrentPage(prevPage);
+  };
+
+  const nextHandler = () => {
+    const totalPages = Math.ceil(data.length / itemsPerPage);
+    const nextPage = currentPage + 1;
+
+    if (nextPage > totalPages) return;
+
+    setCurrentPage(nextPage);
+  };
+
+  return (
+    <>
+      <Button variant="outline" colorScheme="teal" onClick={prevHandler}>
+        Anterior
+      </Button>
+
+      <Box as="span" marginLeft="1rem" marginRight="1rem">
+        Página {currentPage}
+      </Box>
+
+      <Button variant="outline" colorScheme="teal" onClick={nextHandler}>
+        Siguiente
+      </Button>
+    </>
+  );
+};
+
+export default Pagination;
+
+
+//Para usar esta vaina:
+
+/* import React from 'react';
+import { Button, Box } from '@chakra-ui/react';
+import Pagination from './Pagination';
+
+function MyComponent() {
+  const viajesReservados = 
+  const itemsPerPage = 6;
+
+  const handlePageChange = (page) => {
+    
+    console.log(`Página cambiada a: ${page}`);
+  };
+
+  return (
+    <div>
+      
+      <Pagination
+        data={viajesReservados}
+        itemsPerPage={itemsPerPage}
+        initialPage={1}
+        onPageChange={handlePageChange}
+      />
+    </div>
+  );
 }
 
-
-export default Paginado
+export default MyComponent; */

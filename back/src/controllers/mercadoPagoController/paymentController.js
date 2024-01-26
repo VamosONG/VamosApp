@@ -45,7 +45,7 @@ const createOrder = async (req, res) => {
         }],
       back_urls: {
         success: "http://localhost:5173/paymentStatus",
-        // failure: "http://localhost:5173/fail",
+         failure: "http://localhost:5173/paymentFailed",
         // pending: "http://localhost:5173/pending",
       },
 
@@ -57,7 +57,8 @@ const createOrder = async (req, res) => {
    
    
     const respuesta = await mercadopago.preferences.create(preference);
-
+ 
+ 
     res.status(200).json(respuesta.response.init_point);
 
     
@@ -98,9 +99,9 @@ const receiveWebhook = async (req, res) => {
       console.log(resp);
 
       // AGREGAR LO DE ENVIAR MAIL
-
+res.status(204).json(resp);
     } 
-    res.sendStatus(204);
+    
   } catch (error) {
     console.error("Error:", error);
     return res.status(500).json({ message: "Something goes wrong" });
