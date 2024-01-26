@@ -1,7 +1,12 @@
 import axios from 'axios';
-import choferes from '../../utils/chofer'
+
+import Swal from 'sweetalert2';
+
+import {auth} from "../../firebase/firebase.config"
+
 
 import { DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, ORDER_DATE, FILTER_RATING, GET_DATA_USER } from './action.types';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE = "PAGINATE"

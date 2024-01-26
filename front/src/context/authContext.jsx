@@ -80,14 +80,17 @@ export function AuthProvider({ children }) {
     const loginWithGoogle = async () => {
         const responseGoogle = new GoogleAuthProvider()
         try {
-        await signInWithPopup(auth, responseGoogle)
+            const resp=await signInWithPopup(auth, responseGoogle)
+        setUser(resp)
       
+        return resp
         } catch (error) {
             console.log(`"Falló el login"${error.message}`);
         }
     }
     const logOut = async () => {
         try {
+            setUser()
             await signOut(auth);
             console.log('Logout exitoso');
         } catch (error) {
@@ -107,3 +110,6 @@ export function AuthProvider({ children }) {
         {children}
     </authContext.Provider>)
 }
+
+
+
