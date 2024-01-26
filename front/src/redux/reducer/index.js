@@ -1,7 +1,9 @@
 
 
 
-import { DELETE_DRIVER, GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, ORDER_DATE, FILTER_RATING, GET_DATA_USER, HANDLE_ADMIN, ORDER_TRIPS } from "../actions/action.types";
+
+import { GET_TRIPS,DELETE_DRIVER, GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, ORDER_DATE, FILTER_RATING, GET_DATA_USER, HANDLE_ADMIN, ORDER_TRIPS } from "../actions/action.types";
+
 
 
 import { GET_PAYMENT_DATA, CREATE_CHOFER, CLEAN_USER_BY_EMAIL, GET_ALL_CONDUCTORES, GET_TRIPS_BY_ID, GET_COMPLETED_TRIPS, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE, USER_BY_EMAIL, GET_ALL_PRICES } from "../actions/index";
@@ -44,7 +46,11 @@ const initialState = {
     allDataRevies: [],
 
     dataUser: [],
+
+    getTrips: [],
+
     allDataUser: [],
+
 }
 
 const reducer = (state = initialState, action) => {
@@ -59,11 +65,7 @@ const reducer = (state = initialState, action) => {
                 pageConductores: action.payload,
                 allData: action.payload
             };
-        case GET_TRIP_ID:
-            return {
-                ...state,
-                trip: action.payload
-            }
+        
         case DELETE_DRIVER:
             const listDriverDelete = state.allData.filter((driver) => driver.inactive === false)
             return {
@@ -410,12 +412,20 @@ const reducer = (state = initialState, action) => {
                 currentUser: action.payload
             }
 
+
                 case GET_REVIEWS: 
                 return {
                     ...state, 
                     reviewsData: action.payload,
                     allDataRevies: action.payload
                 }
+
+                case GET_TRIPS:
+            return {
+                ...state,
+                getTrips: action.payload
+            }
+
                 case NEW_USER:
                     return {
                         ...state,
@@ -423,6 +433,7 @@ const reducer = (state = initialState, action) => {
                     }
                 default:
                     return { ...state };
+
 
     }
 }
