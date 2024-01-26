@@ -25,7 +25,7 @@ const UserFilter = ({ searcher }) => {
             <Flex gap='4' justify={'center'} align={'center'} mx='2rem' py='.5rem'>
                 <Flex justify='center' align={'center'} gap='4'  >
                     <Flex justify={'center'} align={'center'} fontSize={'1.5rem'}>
-                        <Input placeholder='Buscar por nombre / correo' onChange={searcher} border={'1px solid gray'} />
+                        <Input placeholder='Buscar por nombre / correo' onChange={searcher} border={'1px solid gray'} bgColor="white" color="black" />
                     </Flex >
                     <Tooltip label='Ordenar datos' bg='#10447E' placement='top' >
                         <Text fontSize={'2rem'}>
@@ -34,8 +34,9 @@ const UserFilter = ({ searcher }) => {
                     </Tooltip>
                     <Box>
                         <FormControl>
-                            <FormLabel>Nombre</FormLabel>
+                            <FormLabel color="white">Nombre</FormLabel>
                             <Select
+                                bgColor="white"
                                 name='alphabetical'
                                 onChange={handleAlpha}>
                                 <option value='UA'>A - Z</option>
@@ -45,8 +46,9 @@ const UserFilter = ({ searcher }) => {
                     </Box>
                     <Box>
                         <FormControl>
-                            <FormLabel>Viajes</FormLabel>
+                            <FormLabel color="white">Viajes</FormLabel>
                             <Select
+                                bgColor="white"
                                 name='trips'
                                 onChange={handleTrips}>
                                 <option value='vjsA'>Mas</option>
@@ -77,8 +79,9 @@ const UserFilter = ({ searcher }) => {
                     </Tooltip>
                     <Box>
                         <FormControl>
-                            <FormLabel>Admin</FormLabel>
+                            <FormLabel color="white">Admin</FormLabel>
                             <Select
+                                bgColor="white"
                                 name='state'
                                 onChange={handleFilterAdmin}
                             >
@@ -130,7 +133,7 @@ const UserFilter = ({ searcher }) => {
                 </Flex>
 
 
-                <Flex onClick={resetFilter} ><Button bg='blue.200' color='#000' fontSize='1.2rem' > <BsArrowClockwise /> </Button></Flex>
+                <Flex onClick={resetFilter} ><Button bg='green.300' color='#000' fontSize='1.2rem' > <BsArrowClockwise /> </Button></Flex>
             </Flex>
         </>
     )

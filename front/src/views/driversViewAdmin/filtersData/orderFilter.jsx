@@ -53,7 +53,7 @@ const OrderFilterAlphabetical = ({searcher}) => {
             <Flex gap='4' justify={'center'} align={'center'} mx='2rem' py='.5rem'>
                 <Flex justify='center' align={'center'} gap='4'  >
                 <Flex justify={'center'} align={'center'} fontSize={'1.5rem'}>
-                    <Input placeholder='Buscar por nombre / auto / aeropuerto' onChange={searcher} border={'1px solid gray'} />
+                    <Input placeholder='Buscar por nombre / auto / aeropuerto' onChange={searcher} border={'1px solid gray'} bgColor="white" color="black"/>
                 </Flex >
 
                     <Tooltip label='Ordenar datos' bg='#10447E' placement='top' >
@@ -63,8 +63,9 @@ const OrderFilterAlphabetical = ({searcher}) => {
                         </Tooltip> 
                     <Box>
                         <FormControl>
-                            <FormLabel>Nombre</FormLabel>
+                            <FormLabel color="white">Nombre</FormLabel>
                             <Select
+                                bgColor="white"
                                 name='alphabetical'
                                 onChange={handleOrderAlpha}>
                                 <option value='A'>A - Z</option>
@@ -75,8 +76,9 @@ const OrderFilterAlphabetical = ({searcher}) => {
 
                     <Box>
                         <FormControl>
-                            <FormLabel>Pasajeros</FormLabel>
+                            <FormLabel color="white">Pasajeros</FormLabel>
                             <Select
+                                bgColor="white"
                                 name='passenfers'
                                 onChange={handleOrderPassenger}>
                                 <option value='A'>Mas</option>
@@ -115,8 +117,9 @@ const OrderFilterAlphabetical = ({searcher}) => {
                         </Tooltip> 
                     <Box>
                         <FormControl>
-                            <FormLabel>Vehiculo</FormLabel>
+                            <FormLabel color="white">Vehiculo</FormLabel>
                             <Select
+                                bgColor="white"
                                 name='cartype'
                                 onChange={handleFilterCar}>
                                 {carTypeFound.map((car, index) => (
@@ -128,8 +131,9 @@ const OrderFilterAlphabetical = ({searcher}) => {
 
                     <Box>
                         <FormControl >
-                            <FormLabel > Zona </FormLabel>
+                            <FormLabel color="white"> Zona </FormLabel>
                             <Select
+                                bgColor="white"
                                 name='airpots'
                                 onChange={handleFilterAirport}
                                 // onChange={handleFilterCar}
@@ -143,8 +147,9 @@ const OrderFilterAlphabetical = ({searcher}) => {
 
                     <Box>
                         <FormControl>
-                            <FormLabel>Estado</FormLabel>
+                            <FormLabel color="white">Estado</FormLabel>
                             <Select
+                                bgColor="white"
                                 name='driverState'
                                 onChange={handleFilterDriverState}
                                 // onChange={handleFilterCar}
@@ -170,7 +175,7 @@ const OrderFilterAlphabetical = ({searcher}) => {
                 </Box> */}
                 </Flex>
 
-                <Flex onClick={resetFilter} ><Button bg='blue.200' color='#000' fontSize='1.2rem' > <BsArrowClockwise/> </Button></Flex>
+                <Flex onClick={resetFilter} ><Button bg='blue.300' color='#000' fontSize='1.2rem' > <BsArrowClockwise/> </Button></Flex>
             </Flex>
         </>
     )
