@@ -50,12 +50,12 @@ function SolicitudesDeViajes() {
 
   return (
     
-      <Tabs isFitted variant="enclosed" marginTop={'7rem'} bg="gray.100">
+      <Tabs isFitted variant="enclosed" marginTop={'7rem'} bg="gray.200" borderRadius="md">
         
       <TabList mb="1em" /* borderBottom="2px solid #009ED1" */>
-        <Tab _focus={tabStyles} >Viajes sin conductor asignado</Tab>
-        <Tab _focus={tabStyles}>Viajes con conductor asignado</Tab>
-        <Tab _focus={tabStyles}>Viajes concretados</Tab>
+        <Tab _selected={{ color: 'white', bg: 'purple.500' }}>Viajes sin conductor asignado</Tab>
+        <Tab _selected={{ color: 'white', bg: 'purple.500' }}>Viajes con conductor asignado</Tab>
+        <Tab _selected={{ color: 'white', bg: 'purple.500' }}>Viajes concretados</Tab>
       </TabList>
       
 

@@ -109,19 +109,21 @@ const handleSubmitReserved = async (e) => {
     return (
         <TableContainer >
             <TableContainer style={{ backgroundColor:'white' ,size:'xs'}}>
-    <Box style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-    <Heading size='xs' textTransform='uppercase' margin={'1rem'}>
+            <Box style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row', }}  bg="purple.500">
+    <Heading color="white" size='xs' textTransform='uppercase' margin={'1rem'}>
       Buscar:
     </Heading>
     <Box style={{ display: 'flex', alignItems: 'center' }}>
-      <Input 
+    <Input
+      bg="white"
+      color="black" 
       htmlSize={50} 
       width='auto' 
       placeholder='Buscar por coincidencia'
       onChange={handleChange}
       name='searchInput'/>
       <FormControl /* isRequired */ style={{ marginLeft: '1rem' }}>
-        <Select placeholder='Ordenar' width='xs' name='order' onChange={handleChange}>
+      <Select bg="white" placeholder='Ordenar' width='xs' name='order' onChange={handleChange}>
           <option>mas reciente</option>
           <option>menos reciente</option>
         </Select>
@@ -181,6 +183,8 @@ const handleSubmitReserved = async (e) => {
             </Table>
             <Box display="flex" justifyContent="center" alignItems="center" marginTop="1rem">
   <Button
+     color="white"
+     bg="purple.500"
     variant="outline"
     colorScheme="teal"
     /* disabled={currentPageReserved === 0} */
@@ -194,6 +198,8 @@ const handleSubmitReserved = async (e) => {
   </Box>
 
   <Button
+   color="white"
+   bg="purple.500"
     variant="outline"
     colorScheme="teal"
     /* disabled={currentPageReserved === totalPagesReserved - 1} */
