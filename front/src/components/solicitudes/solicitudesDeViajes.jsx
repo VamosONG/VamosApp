@@ -135,12 +135,12 @@ const handleSubmitReserved = async (e) => {
 
   return (
     
-      <Tabs isFitted variant="enclosed"  bg="gray.100">
+      <Tabs isFitted variant="enclosed"  bg="gray.200" borderRadius="md">
         
       <TabList mb="1em" /* borderBottom="2px solid #009ED1" */>
-        <Tab _focus={tabStyles} >Viajes sin conductor asignado</Tab>
-        <Tab _focus={tabStyles}>Viajes con conductor asignado</Tab>
-        <Tab _focus={tabStyles}>Viajes concretados</Tab>
+        <Tab _selected={{ color: 'white', bg: 'purple.500' }}>Viajes sin conductor asignado</Tab>
+        <Tab _selected={{ color: 'white', bg: 'purple.500' }}>Viajes con conductor asignado</Tab>
+        <Tab _selected={{ color: 'white', bg: 'purple.500' }}>Viajes concretados</Tab>
       </TabList>
       
 
@@ -148,25 +148,27 @@ const handleSubmitReserved = async (e) => {
         <TabPanel>
 <TableContainer >
 <TableContainer style={{ backgroundColor:'white' ,size:'xs'}}>
-  <Box style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-    <Heading size='xs' textTransform='uppercase' margin={'1rem'}>
+  <Box style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row', }}  bg="purple.500">
+    <Heading color="white" size='xs' textTransform='uppercase' margin={'1rem'}>
       Buscar:
     </Heading>
     <Box style={{ display: 'flex', alignItems: 'center' }}>
-      <Input 
+      <Input
+      bg="white"
+      color="black"
       htmlSize={50} 
       width='auto' 
       placeholder='Buscar por coincidencia'
       onChange={handleChange}
       name='searchInput'/>
       <FormControl /* isRequired */ style={{ marginLeft: '1rem' }}>
-        <Select placeholder='Ordenar' width='xs' name='order' onChange={handleChange}>
+        <Select bg="white" placeholder='Ordenar' width='xs' name='order' onChange={handleChange}>
           <option>mas reciente</option>
           <option>menos reciente</option>
         </Select>
       </FormControl>
     </Box>
-    <Button onClick={handleSubmitReserved}>
+    <Button bg="yellow.400" onClick={handleSubmitReserved}>
       APLICAR
     </Button>
   </Box>
@@ -220,6 +222,8 @@ const handleSubmitReserved = async (e) => {
             </Table>
             <Box display="flex" justifyContent="center" alignItems="center" marginTop="1rem">
   <Button
+    color="white"
+    bg="purple.500"
     variant="outline"
     colorScheme="teal"
     /* disabled={currentPageReserved === 0} */
@@ -233,6 +237,8 @@ const handleSubmitReserved = async (e) => {
   </Box>
 
   <Button
+    color="white"
+    bg="purple.500"
     variant="outline"
     colorScheme="teal"
     /* disabled={currentPageReserved === totalPagesReserved - 1} */
