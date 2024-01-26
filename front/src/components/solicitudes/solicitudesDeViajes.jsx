@@ -50,7 +50,9 @@ function SolicitudesDeViajes() {
 
   return (
     
+
       <Tabs isFitted variant="enclosed" marginTop={'7rem'} bg="gray.200" borderRadius="md">
+
         
       <TabList mb="1em" /* borderBottom="2px solid #009ED1" */>
         <Tab _selected={{ color: 'white', bg: 'purple.500' }}>Viajes sin conductor asignado</Tab>

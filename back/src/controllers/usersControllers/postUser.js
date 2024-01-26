@@ -1,7 +1,7 @@
 const { User } = require("../../dataBase")
+const sendMailHandler = require('../../utils/mailing/sendMailHandler');
 
-
-const postUser = async ({ name, surname, email, phone, dni }) => {
+const postUser = async ({ name, surname, email, phone, dni/* , driverId */ }) => {
     try {
      
         const [newUser, created] = await User.findOrCreate({
@@ -9,16 +9,30 @@ const postUser = async ({ name, surname, email, phone, dni }) => {
             defaults: {
                 name,
                 surname,
+                email,
+                phone,
+                dni/* , 
+                driverId */
             }
           });
         
-        if(!created)
-        //   throw new Error(`Error al crear usuario, el email ya esta registrado.`)
-    // return 
-        return newUser;
+          
+        if(created){      
+            const welcomeEmail = await sendMailHandler({
+                id: newUser.id,
+                name,
+                surname,
+                email,
+                phone,
+                dni, 
+                option: "signIn"
+            });
+        }
+                    
+        return newUser.dataValues;
 
     } catch (error) {
-        throw new Error(`Error al crear el usuario ${error.message}`)
+        throw new Error(`Error al crear el usuario (controller): ${error.message}`)
     }
 }
 

@@ -8,7 +8,7 @@ const CLIENT_SECRET=process.env.CLIENT_SECRET;
 const REDIRECT_URI="https://developers.google.com/oauthplayground";
 const REFRESH_TOKEN=process.env.REFRESH_TOKEN;
 
-module.exports = async(name, email, preSubject, message, res)=>{
+module.exports = async(name, email, preSubject, message)=>{
     
     const oAuth2Client=new google.auth.OAuth2(CLIENT_ID,CLIENT_SECRET,REDIRECT_URI);
     oAuth2Client.setCredentials({refresh_token: REFRESH_TOKEN})
@@ -20,7 +20,7 @@ module.exports = async(name, email, preSubject, message, res)=>{
                 service: "gmail",
                 auth:{
                     type: "OAUTH2",
-                    user: "ezantoinedeveloper@gmail.com",
+                    user: "ong.vamos.2024@gmail.com",
                     clientId: CLIENT_ID,
                     clientSecret: CLIENT_SECRET,
                     refreshToken: REFRESH_TOKEN,
@@ -28,7 +28,7 @@ module.exports = async(name, email, preSubject, message, res)=>{
                 },
             })
             const mailOptions = {
-                from: '"VAMOS!!" <ezantoinedeveloper@gmail.com>', // sender address
+                from: '"VAMOS!!" <ong.vamos.2024@gmail.com>', // sender address
                 to: email, // list of receivers
                 subject: `${preSubject}`, 
                 //text: `${message}`, // plain text body
@@ -43,6 +43,6 @@ module.exports = async(name, email, preSubject, message, res)=>{
         }
     }
     sendMail()
-        .then(result=>res.status(200).send('¡Envío exitoso!'))
+        .then(result=>('¡Envío exitoso!'))
         .catch(error=>console.log(error.message));
 }

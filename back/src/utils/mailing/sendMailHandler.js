@@ -1,22 +1,16 @@
 const mailing = require('./mailing');
-const getUserById = require('../../controllers/usersControllers/getUserById');
 const {getTripById} = require('../../controllers/tripsControllers/getTripById');
 const getDriverById = require('../../controllers/driversControllers/getDriverById');
+const getAdminEmails = require('../../controllers/adminControllers/getAdminEmails');
 
 
-module.exports=async(req,res)=>{
-    const {userId, tripId, option}=req.body;
+module.exports=async({id, name, surname, email, phone, dni, driverId, tripId, option})=>{
 
     try {
-        const usuario = await getUserById(userId);
-
-        if(!usuario)
-            throw new Error(`El usuario con id ${userId} no existe en base de datos.`);
-
-        const userName=usuario.name;
-        let email=usuario.email;
+        const userName=name;        
         let chofer=null;
         let trip=null;
+        const adminsEmails = await getAdminEmails();
 
         if( option==="reserve" || option==="assignDriver" || option==="update" || option==="infoDriver"){
             trip = await getTripById(tripId);
@@ -170,6 +164,7 @@ module.exports=async(req,res)=>{
                 </html>`; //Ver HTML
                 break;
             case("reserve"):
+                bbc=[...adminsEmails, email],
                 preSubject=`VAMOS!! ${userName} su reserva se ha registrado.`,
                 message=`<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
                 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="es">
@@ -359,6 +354,7 @@ module.exports=async(req,res)=>{
                         `
                 break;
             case("assignDriver"):
+                to=email,
                 preSubject=`VAMOS!! ${userName}, se ha asignado un chofer para su viaje.`,
                 message=`<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
                 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="es">
@@ -1162,6 +1158,7 @@ module.exports=async(req,res)=>{
                         `
                 break;
             case("infoDriver"):
+              to= `${chofer.email}`
               preSubject=`VAMOS!! Hola ${chofer.name}, se le ha asignado un viaje.`,
               message=`<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
               <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="es">
@@ -1603,8 +1600,8 @@ module.exports=async(req,res)=>{
                                                                                               <tr>
                                                                                                   <td align="left" style="padding:0;Margin:0" class="esd-text">
                                                                                                       <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><strong>Datos del usuario:</strong></p>
-                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><u>Nombre</u>: ${usuario.name}.&nbsp;</p>
-                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><u>Apellido</u>: ${usuario.surname}.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><u>Nombre</u>: ${name}.&nbsp;</p>
+                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><u>Apellido</u>: ${surname}.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
                                                                                                       <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
                                                                                                   </td>
                                                                                               </tr>
@@ -1624,8 +1621,8 @@ module.exports=async(req,res)=>{
                                                                                               <tr>
                                                                                                   <td align="left" style="padding:0;Margin:0" class="esd-text">
                                                                                                       <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><strong>Datos de contacto:</strong></p>
-                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><strong></strong>Tel.: ${usuario.phone}.<strong></strong></p>
-                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><u>email</u>: ${usuario.email}.</p>
+                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><strong></strong>Tel.: ${phone}.<strong></strong></p>
+                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><u>email</u>: ${email}.</p>
                                                                                                       <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><br></p>
                                                                                                   </td>
                                                                                               </tr>
@@ -1738,7 +1735,6 @@ module.exports=async(req,res)=>{
               </body>      
               </html>              
               `
-            email= `ezequielantoine@gmail.com`//${chofer.email}`
             break;            
             default:{
                 userName="";
@@ -1748,11 +1744,11 @@ module.exports=async(req,res)=>{
             }
         }
 
-        const resultMail=await mailing(userName, email, preSubject, message, res);
+        const resultMail=await mailing(userName, email, preSubject, message);
     
         if (resultMail)
-            res.status(200).send('Email enviado correctamente!')
+            return('Email enviado correctamente!')
     } catch (error) {
-        res.status(400).json(`Error al enviar correo: ${error.message}`)
+        throw new Error(`Error al enviar correo: ${error.message}`)
     }
 }
