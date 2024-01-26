@@ -32,7 +32,7 @@ const ReviewFilter = ({searcher}) => {
             <Flex gap='4' justify={'center'} align={'center'} mx='2rem' py='.5rem'>
                 <Flex justify='center' align={'center'} gap='4'  >
                 <Flex justify={'center'} align={'center'} fontSize={'1.5rem'}>
-                        <Input placeholder='Buscar por nombre / correo / chofer' onChange={searcher} border={'1px solid gray'} />
+                        <Input placeholder='Buscar por nombre / correo / chofer' onChange={searcher} border={'1px solid gray'} bgColor="white" color="black"/>
                     </Flex >
                     <Tooltip label='Ordenar datos' bg='#10447E' placement='top' >
                         <Text fontSize={'2rem'}>
@@ -52,8 +52,9 @@ const ReviewFilter = ({searcher}) => {
                     </Box> */}
                     <Box>
                         <FormControl>
-                            <FormLabel>Fecha</FormLabel>
+                            <FormLabel color="white">Fecha</FormLabel>
                             <Select
+                                bgColor="white"
                                 name='date'
                                 onChange={handleOrderDate}>
                                 <option value='A'>Reciente</option>
@@ -65,8 +66,9 @@ const ReviewFilter = ({searcher}) => {
                     {/* //Cuando se agregren review lo activo */}
                     <Box>
                     <FormControl>
-                            <FormLabel>Puntuacion</FormLabel>
+                            <FormLabel color="white">Puntuacion</FormLabel>
                     <Select 
+                        bgColor="white"
                         name='rating'
                         onChange={handleRating}>
                         <option value='A'>Alta</option>
@@ -84,8 +86,9 @@ const ReviewFilter = ({searcher}) => {
                     </Tooltip>
                     <Box>
                         <FormControl>
-                            <FormLabel>Puntuacion</FormLabel>
+                            <FormLabel color="white">Puntuacion</FormLabel>
                             <Select
+                                bgColor="white"
                                 name='rating'
                                 onChange={handleFilterRating}>
                                 <option value='all'>Todos</option>
@@ -135,7 +138,7 @@ const ReviewFilter = ({searcher}) => {
                 </Box> */}
                 </Flex>
 
-                <Flex onClick={resetFilter} ><Button bg='blue.200' color='#000' fontSize='1.2rem' > <BsArrowClockwise/> </Button></Flex>
+                <Flex onClick={resetFilter} ><Button bg='green.300' color='#000' fontSize='1.2rem' > <BsArrowClockwise/> </Button></Flex>
             </Flex>
         </>
     )
