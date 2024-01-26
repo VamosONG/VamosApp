@@ -25,117 +25,32 @@ import Solicitud from "./solicitud"
 
 import { getCanceledTrips, getPendingTrips, getReservedTrips, idDeSolicitud, orderSearch } from "../../redux/actions"
 import { useEffect, useState } from "react"
+import SolicitudesDeViajesCompleted from "./solicitudesDeViajesCompleted"
+import SolicitudesDeViajesPending from "./solicitudesDeViajesPending"
+import SolicitudesDeViajesReserved from "./solicitudesDeViajesReserved"
 
 
 
 
 function SolicitudesDeViajes() {
 
-  const dispatch = useDispatch()
-
-  const viajesReservados = useSelector((state) => state.viajesReservados)
-  const viajesPendientes = useSelector((state) => state.viajesPendientes)
-  const viajesCompletados = useSelector((state) => state.viajesCompletados)
-
-
-  const handlerClick=(id)=>{
-    dispatch(idDeSolicitud(id))
-  }
-
-  useEffect(() => {
-    dispatch(getReservedTrips())
-    dispatch(getPendingTrips())
-    dispatch(getCanceledTrips())
-    
-  }, [dispatch])
-
-  useEffect(() => {
-    setTripsReservedToShow([...viajesReservados].splice(0, 6))
-    
-  }, [viajesReservados])
-
+  const dispatch= useDispatch()
 
   const tabStyles = {
     borderRight: "2px solid #009ED1",
     borderTop: "2px solid #009ED1",
     borderLeft: "2px solid #009ED1",
   };
+
+  /* useEffect(() => {
+    dispatch(getReservedTrips())
+  }, []) */
  
-  const itemsPerPage = 6;
-//***************PAGINADO VIAJES RESERVED **********************************/
-  const [currentPageReserved, setCurrentPageReserved] = useState(1);
-  const [tripsReservedToShow, setTripsReservedToShow] = useState([]);
   
-  const prevHandler=()=>{
-    const prevPage=currentPageReserved-1;
-    
-    if(prevPage<1) return;
-    
-    const firstReserved=(prevPage-1)*6;
-    
-    setCurrentPageReserved(prevPage);
-    setTripsReservedToShow([...viajesReservados].splice(firstReserved,6))
-  }
-  
-  const nextHandler=()=>{
-    const totalReserved=viajesReservados.length;
-    
-    const nextPage=currentPageReserved+1;
-    
-    const firstReserved=currentPageReserved*6;
-    
-    if (firstReserved>totalReserved) return;
-    setCurrentPageReserved(nextPage);
-    setTripsReservedToShow([...viajesReservados].splice(firstReserved,6))
-  }
-//*************************************************************************/
-
-//***************PAGINADO VIAJES PENDING **********************************/
-const [currentPagePending, setCurrentPagePending] = useState(0);
-  const totalPagesPending = Math.ceil(viajesPendientes.length / itemsPerPage);
-  const handlePageChangePending = (newPage) => {
-    setCurrentPagePending(newPage);
-  };
-//*************************************************************************/
-
-//***************PAGINADO VIAJES COMPLETADOS **********************************/
-const [currentPageCompleted, setCurrentPageCompleted] = useState(0);
-const totalPagesCompleted = Math.ceil(viajesCompletados.length / itemsPerPage);
-const handlePageChangeCompleted = (newPage) => {
-  setCurrentPageCompleted(newPage);
-};
-//*************************************************************************/
-
-//***************BUSQUEDA Y ORDENAMIENTO**********************************/
-const [input, setInput] = useState({
-    searchInput: "",
-    order: "",
-    
-});
-const handleChange = async (e) => {
-    setInput({
-        ...input,
-        [e.target.name]: e.target.value,
-        tripState: 'reserved'
-    })
-}
-const handleSubmitReserved = async (e) => {
-    
-    console.log(input)
-    
-    dispatch(orderSearch(input))
-}
-
-
-//*************************************************************************/
-
-
-
-
 
   return (
     
-      <Tabs isFitted variant="enclosed"  bg="gray.200" borderRadius="md">
+      <Tabs isFitted variant="enclosed" marginTop={'7rem'} bg="gray.200" borderRadius="md">
         
       <TabList mb="1em" /* borderBottom="2px solid #009ED1" */>
         <Tab _selected={{ color: 'white', bg: 'purple.500' }}>Viajes sin conductor asignado</Tab>
@@ -146,258 +61,17 @@ const handleSubmitReserved = async (e) => {
 
       <TabPanels>
         <TabPanel>
-<TableContainer >
-<TableContainer style={{ backgroundColor:'white' ,size:'xs'}}>
-  <Box style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row', }}  bg="purple.500">
-    <Heading color="white" size='xs' textTransform='uppercase' margin={'1rem'}>
-      Buscar:
-    </Heading>
-    <Box style={{ display: 'flex', alignItems: 'center' }}>
-      <Input
-      bg="white"
-      color="black"
-      htmlSize={50} 
-      width='auto' 
-      placeholder='Buscar por coincidencia'
-      onChange={handleChange}
-      name='searchInput'/>
-      <FormControl /* isRequired */ style={{ marginLeft: '1rem' }}>
-        <Select bg="white" placeholder='Ordenar' width='xs' name='order' onChange={handleChange}>
-          <option>mas reciente</option>
-          <option>menos reciente</option>
-        </Select>
-      </FormControl>
-    </Box>
-    <Button bg="yellow.400" onClick={handleSubmitReserved}>
-      APLICAR
-    </Button>
-  </Box>
-</TableContainer>
-            <Table variant='simple' >
-                <TableCaption>Viajes sin conductor</TableCaption>
-                <Thead>
-                    <Tr>
-                        <Th>Nro</Th>
-                        <Th>Origen</Th>
-                        <Th>Destino</Th>
-                        {/* <Th>Usuario</Th> */}
-                        <Th>Fecha</Th>
-                        <Th /* isNumeric */>Hora</Th>
-                        <Th >Buscar conductor</Th>
-                        {/* <Th >Detalles</Th> */}
-                    </Tr>
-                </Thead>
-                <Tbody >
-
-                {tripsReservedToShow.map((solicitud, index) => (
-
-                        <Tr key={solicitud.id} >
-                            <Td>{index + 1}</Td>
-                            <Td>{solicitud.origin}</Td>
-
-                            <Td>{solicitud.destination}</Td>
-                            {/* <Td>José Bravo</Td> */}{/* Luego hay que cambiar por nombre de usuario */}
-                            <Td>{solicitud.date}</Td>
-                            <Td>{solicitud.hour}</Td>
-
-                            <Td justifyContent='center'  >
-                                <Flex gap={2} justifyContent={'center'}  >
-                                    <Tooltip hasArrow label='Buscar conductor' bg='#009ED1' placement='left-start'>
-                                    <Link to='/solicitud' onClick={()=>handlerClick(solicitud.id)}>
-                                        <Button  bg='#009ED1'
-                                            fontSize='1.2rem' /* id={driver.id} */ >
-                                            <AddIcon />
-                                        </Button>
-                                        </Link>
-                                    </Tooltip>
-                                    
-                                </Flex>
-                            </Td>
-                           
-                        </Tr>
-                    ))}
-
-                </Tbody>
-                
-            </Table>
-            <Box display="flex" justifyContent="center" alignItems="center" marginTop="1rem">
-  <Button
-    color="white"
-    bg="purple.500"
-    variant="outline"
-    colorScheme="teal"
-    /* disabled={currentPageReserved === 0} */
-    onClick={prevHandler}
-  >
-    Anterior
-  </Button>
-
-  <Box as="span" marginLeft="1rem" marginRight="1rem">
-    Página {currentPageReserved } 
-  </Box>
-
-  <Button
-    color="white"
-    bg="purple.500"
-    variant="outline"
-    colorScheme="teal"
-    /* disabled={currentPageReserved === totalPagesReserved - 1} */
-    onClick={nextHandler}
-  >
-    Siguiente
-  </Button>
-</Box>
-        </TableContainer>
-        </TabPanel>
-        
-        <TabPanel>
-          
-        <TableContainer >
-        {viajesPendientes.length > itemsPerPage && (
-              <Box display="flex" justifyContent="center" alignItems="center" marginTop="1rem">
-                <Button
-                  variant="outline"
-                  colorScheme="teal"
-                  disabled={currentPagePending === 0}
-                  onClick={() => handlePageChangePending(currentPagePending - 1)}
-                >
-                  Anterior
-                </Button>
-
-                <Box as="span" marginLeft="1rem" marginRight="1rem">
-                  Página {currentPagePending + 1} de {totalPagesPending}
-                </Box>
-
-                <Button
-                  variant="outline"
-                  colorScheme="teal"
-                  disabled={currentPagePending === totalPagesPending - 1}
-                  onClick={() => handlePageChangePending(currentPagePending + 1)}
-                >
-                  Siguiente
-                </Button>
-              </Box>
-            )}
-            <Table variant='simple' >
-                <TableCaption>Viajes con conductor ya asignado</TableCaption>
-                <Thead>
-                    <Tr>
-                        <Th>Nro</Th>
-                        <Th>Origen</Th>
-                        <Th>Destino</Th>
-                        <Th>Fecha</Th>
-                        <Th>Hora</Th>
-                        <Th >Conductor</Th>
-                        <Th >Cambiar conductor</Th>
-                        {/* <Th >Detalles</Th> */}
-                    </Tr>
-                </Thead>
-                <Tbody >
-                    {viajesPendientes
-                    .slice(currentPagePending * itemsPerPage, (currentPagePending + 1) * itemsPerPage)
-                    .map((solicitud, index) => (
-                        <Tr key={solicitud.id} >
-                            <Td>{index + 1}</Td>
-                            <Td>{solicitud.origin}</Td>
-
-                            <Td>{solicitud.destination}</Td>
-                            {/* <Td>José Bravo</Td> */}{/* Luego hay que cambiar por nombre de usuario */}
-                            <Td>{solicitud.date}</Td>
-                            <Td>{solicitud.hour}</Td>
-                            <Td>{solicitud.driverFullName}</Td>
-
-                            <Td justifyContent='center'  >
-                                <Flex gap={2} justifyContent={'center'}  >
-                                    <Tooltip hasArrow label='Buscar conductor' bg='#009ED1' placement='left-start'>
-                                    <Link to='/solicitud' onClick={()=>handlerClick(solicitud.id)}>
-                                        <Button  bg='#009ED1'
-                                            fontSize='1.2rem' /* id={driver.id} */ >
-                                            <EditIcon />
-                                        </Button>
-                                        </Link>
-                                    </Tooltip>
-                                    
-                                </Flex>
-                            </Td>
-                            
-                        </Tr>
-                    ))}
-
-                </Tbody>
-            </Table>
-        </TableContainer>
+          <SolicitudesDeViajesReserved/>
         </TabPanel>
         <TabPanel>
-          
-        <TableContainer >
-        {/* {viajesCompletados.length > itemsPerPage && ( */}
-          <Box display="flex" justifyContent="center" alignItems="center" marginTop="1rem">
-            <Button
-              variant="outline"
-              colorScheme="teal"
-              disabled={currentPageCompleted === 0}
-              onClick={() => handlePageChangeCompleted(currentPageCompleted - 1)}
-            >
-              Anterior
-            </Button>
-
-            <Box as="span" marginLeft="1rem" marginRight="1rem">
-              Página {currentPageCompleted + 1} de {totalPagesCompleted}
-            </Box>
-
-            <Button
-              variant="outline"
-              colorScheme="teal"
-              disabled={currentPageCompleted === totalPagesCompleted - 1}
-              onClick={() => handlePageChangeCompleted(currentPageCompleted + 1)}
-            >
-              Siguiente
-            </Button>
-          </Box>
-        {/* )} */}
-            <Table variant='simple' >
-                <TableCaption>Viajes concretados</TableCaption>
-                <Thead>
-                    <Tr>
-                        <Th>Nro</Th>
-                        <Th>Origen</Th>
-                        <Th>Destino</Th>
-                        {/* <Th>Usuario</Th> */}
-                        <Th>Fecha</Th>
-                        <Th>Hora</Th>
-                        <Th>Conductor</Th>
-                        <Th >Puntación del usuario</Th>
-                        {/* <Th >Detalles</Th> */}
-                    </Tr>
-                </Thead>
-                <Tbody >
-                    {viajesCompletados
-                    .slice(currentPageCompleted * itemsPerPage, (currentPageCompleted + 1) * itemsPerPage)
-                    .map((solicitud, index) => (
-                        <Tr key={solicitud.id} >
-                            <Td>{index + 1}</Td>
-                            <Td>{solicitud.origin}</Td>
-
-                            <Td>{solicitud.destination}</Td>
-                            {/* <Td>Panchito</Td> */}{/* Luego hay que cambiar por nombre de usuario */}
-                            <Td>{solicitud.date}</Td>
-                            <Td>{solicitud.hour}</Td>
-                            <Td>{solicitud.driverFullName}</Td>
-
-                            <Td justifyContent='center'  >
-                            ★★★✰✰
-                            </Td>
-                           
-                        </Tr>
-                    ))}
-
-                </Tbody>
-            </Table>
-        </TableContainer>
+          <SolicitudesDeViajesPending/>
+        </TabPanel>
+        <TabPanel>
+          <SolicitudesDeViajesCompleted/>
         </TabPanel>
       </TabPanels>
     </Tabs>
-    /* </Flex> */
+    
     
 
   )
