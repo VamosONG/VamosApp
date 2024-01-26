@@ -72,7 +72,7 @@ router.get('/user/:id', getUserByIdHandler); //Busca un usuario por ID.
 router.get('/user', getUsersHandler);
 router.delete('/user', deleteUserHandler);
 router.post('/user/create', postUserHandler);
-router.patch('/user/update', updateUserHandler);
+router.patch('/user/update/:id', updateUserHandler);
 router.patch('/user/admin/:id', updateUserAdminHandler); //Ruta para convertir admin y viceversa.
 
 

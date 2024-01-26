@@ -120,6 +120,7 @@ export const postNewViaje = (infoViaje) => {
 }
 
 export const getReservedTrips = () =>{
+    console.log('llega aqui');
     return async(dispatch)=> {
         const endpoint= 'http://localhost:3001/trips/reserves' //Se cambió a la ruta con viajes reservados
         try {
@@ -131,7 +132,7 @@ export const getReservedTrips = () =>{
             })
         } catch (error) {
             console.log(error);
-            alert("error en getReservedTrips")
+            /* alert("error en getReservedTrips") */
         }
     }
 }
@@ -626,10 +627,25 @@ export const orderSearch = (input) => {
     return async (dispatch) => {
         try {
             const { data } = await axios.post(`http://localhost:3001/trips/filters`, input);
+
+            // hacer in if, para que dependiendo del tipo de viaje, sepa donde guardar
+            
+            data[0].stateOfTrip==='reserved'?(
             dispatch({
                 type: GET_RESERVED_TRIPS,
                 payload: data
             })
+            ):(data[0].stateOfTrip==='pending'?(
+                dispatch({
+                    type: GET_PENDING_TRIPS,
+                    payload: data
+                })
+            ):(
+                dispatch({
+                    type: GET_COMPLETED_TRIPS,
+                    payload: data
+                })
+            ))
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
             console.log(error.message)
