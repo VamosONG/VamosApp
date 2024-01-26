@@ -16,7 +16,7 @@ import axios from 'axios'
 import ReviewFilter from '../driversViewAdmin/filtersData/reviewFilter';
 import { useDispatch, useSelector } from "react-redux";
 import { getReviewsData } from '../../redux/actions';
-import Paginado from '../../components/paginado/paginadoComponent';
+// import Paginado from '../../components/paginado/paginadoComponent';
 
 
 const ReviewAdmin = () => {
@@ -38,11 +38,13 @@ const ReviewAdmin = () => {
     }, [])
 
     return (
-        <Flex /* align='center' direction={{base:'column',md:'row'}} */ alignItem='center' justifyContent='center'>
+        <Flex alignItem='center' justifyContent='center'>
 
         <TableContainer >
-            <Flex bg='gray.200' color='#000' justify={'center'} ><ReviewFilter searcher={searcher} /></Flex>
-            <Flex px='1rem' >
+            <Flex bg="purple.500" color="#000" justify={'center'} p={4} borderTopLeftRadius="md" borderTopRightRadius="md">
+                <ReviewFilter searcher={searcher} />
+                </Flex>
+            <Flex px={4} bg='gray.300' overflowX="auto" borderBottomLeftRadius="md" borderBottomRightRadius="md">
                 <Table variant='striped' colorScheme='gray.100' >
                     <TableCaption>Reviews</TableCaption>
                     <Thead>
@@ -58,7 +60,7 @@ const ReviewAdmin = () => {
 
                     <Tbody>
                         {results?.map((review, index) => (
-                            <Tr key={review.id} bg={review.qualification <= 3 ? 'red.100' : null} >
+                            <Tr key={review.id} bg={review.qualification <= 3 ? 'yellow.400' : null} >
                                 <Td w='auto' >{review.userName ? review.userName : 'User Test'}</Td>
                                 <Td w='min-content' >
                                     <Tooltip hasArrow label={review.userMail !== 'Email bloqueado' ? 'Enviar Correo' : null} bg='#10447E' placement='top'>
@@ -104,7 +106,7 @@ const ReviewAdmin = () => {
                 </Table>
             </Flex>
             {/* COMPONENTE DE PAGINADO */}
-            <Paginado/> 
+            {/* <Paginado/>  */}
         </TableContainer>
         </Flex>
     )

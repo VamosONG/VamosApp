@@ -32,8 +32,6 @@ import RegistroForm from './views/Forms/Registro/Registro';
 import UserProfile from './components/userProfile/userProfile'
 import AdminProfile from './components/userProfile/adminProfile';
 import ReviewAdmin from './views/adminProfile/reviewAdmin';
-import UserViewAdmin from './views/adminProfile/userViewAdmin';
-import ViewProfile from './components/userProfile/viewProfile';
 
 import ProtectedRoutes from './utils/ProtectedRoute';
 import { useSelector } from 'react-redux';
@@ -80,6 +78,7 @@ function App() {
         <Route path="/login" element={<LoginForm/>}/>
         <Route path="/register" element={<RegistroForm/>}/>
         <Route path="/profileAdmin" element={<AdminProfile/>}/>
+        <Route path="/paymentFailed" element={<PaymentFail/>}/>
         <Route path="/stadistics" element={<Stadistic/>}/>
          </Route> 
         {/* <Route path="/graphics" element={<Graphics/>}/> */}

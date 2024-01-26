@@ -20,7 +20,7 @@ import Swal from 'sweetalert2'
 import ViewBtnUpdateDriver from '../Forms/ViewForms/ViewUpdateDriverForm'
 import ViewBtnDetailDriver from './DetailDriver/ViewBtnDetailDriver'
 import OrderFilterAlphabetical from './filtersData/orderFilter'
-import Paginado from '../../components/paginado/paginadoComponent'
+// import Paginado from '../../components/paginado/paginadoComponent'
 
 const DriverTableView = () => {
     const driverData = useSelector((state) => state.conductores)
@@ -75,13 +75,13 @@ const DriverTableView = () => {
     }
 
     return (
-        <Flex  /* align='center' direction={{base:'column',md:'row'}} */ alignItem='center' justifyContent='center'>
-        <TableContainer >
-            <Flex bg='gray.200' color='#000' justify={'center'} ><OrderFilterAlphabetical searcher={searcher}/></Flex>
+        <Flex alignItem='center' justifyContent='center'>
+        <TableContainer boxShadow="lg" borderRadius="md" bg="purple.500">
+            <Flex bg="purple.500" justify={'center'} ><OrderFilterAlphabetical searcher={searcher}/></Flex>
             <Table variant='simple' >
-                <TableCaption>Conductores registrados</TableCaption>
+                <TableCaption color="black" bgColor="gray.300">Conductores registrados</TableCaption>
                 <Thead>
-                    <Tr>
+                    <Tr bgColor='gray.300'>
                         <Th>#</Th>
                         <Th>Zona</Th>
                         <Th>Nombre</Th>
@@ -96,7 +96,7 @@ const DriverTableView = () => {
                 
                 <Tbody>
                     {results?.map((driver, index) => (
-                        <Tr key={driver.id} bg={driver.inactive  ? 'gray.300' : driver.driverState ? '#EEFFF5' : ' #FFEEEE'}>
+                        <Tr key={driver.id} bg={driver.inactive  ? 'gray.300' : driver.driverState ? 'white' : 'red.300'} color={driver.inactive ? 'black' : 'black'}>
                             <Td>{index + 1}</Td>
                             <Td>{driver.airports}</Td>
 
@@ -109,20 +109,22 @@ const DriverTableView = () => {
                                 <Flex gap={2} justifyContent={'center'}  >
                                     {!driver.inactive ? (
 
-                                    <Tooltip hasArrow label='ELiminar' bg='#E83D6F' placement='left-start'>
+                                    <Tooltip hasArrow label='ELiminar' bg='red' placement='left-start'>
 
-                                        <Button onClick={()=> deleteDriver(driver.id) }
-                                        bg='#E83D6F'
-                                            fontSize='1.2rem' 
-                                            id={driver.id} >
-                                            <DeleteIcon />
+                                        <Button
+                                        onClick={() => deleteDriver(driver.id)}
+                                        colorScheme={!driver.inactive ? 'red' : 'purple'}
+                                        fontSize='1.2rem'
+                                        id={driver.id}
+                                        >
+                                        {!driver.inactive ? <DeleteIcon /> : <RepeatClockIcon />}
                                         </Button>
                                     </Tooltip>
                                     ) : (
-                                        <Tooltip hasArrow label='Reactivar' bg='purple.200' placement='left-start'>
+                                        <Tooltip hasArrow label='Reactivar' bg='purple.400' placement='left-start'>
 
                                         <Button onClick={()=> deleteDriver(driver.id) }
-                                        bg='purple.200'
+                                            bg='purple.400'
                                             fontSize='1.2rem' 
                                             id={driver.id} >
                                             <RepeatClockIcon />
@@ -171,7 +173,7 @@ const DriverTableView = () => {
                                     />
                             </Td>
 
-                            <Td> {driver.driverState ? (<Badge colorScheme='green' borderRadius={5} px='2'>Trabajo</Badge>) : (<Badge colorScheme='red'  borderRadius={5} px='2'>Descanso</Badge>)} </Td>
+                            <Td> {driver.driverState ? (<Badge colorScheme='green' borderRadius={6} px='2'>Trabajo</Badge>) : (<Badge colorScheme='red'  borderRadius={6} px='2'>Descanso</Badge>)} </Td>
 
                             {/* SIRVE PARA MOSTRAR SI EL USUARIO ESTA ELIMINADO DE LA BASE DE DATOS. */}
                             {/* <Td>{!driver.inactive ? (<Badge colorScheme='green' borderRadius={5} px='2'>Activo</Badge>) : (<Badge colorScheme='red'  borderRadius={5} px='2'>Retirado</Badge>)}</Td> */}
@@ -181,7 +183,7 @@ const DriverTableView = () => {
 
                 </Tbody>
                 <Tfoot>
-                    <Tr>
+                    <Tr bgColor='gray.300'>
                     <Th>#</Th>
                         <Th>Zona</Th>
                         <Th>Nombre</Th>
@@ -196,7 +198,7 @@ const DriverTableView = () => {
                 </Tfoot>
             </Table>
             {/* COMPONENTE DE PAGINADO */}
-            <Paginado/> 
+            {/* <Paginado/>  */}
         </TableContainer>
         </Flex>
     )

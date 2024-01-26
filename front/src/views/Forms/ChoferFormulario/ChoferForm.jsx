@@ -160,19 +160,20 @@ const ChoferForm = ({ closeForm }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Stack
-        spacing={4}
+        spacing={3}
         bg="#009ED1"
         p="5"
         h="auto"
-        borderRadius="20"
+        borderRadius="0"
         boxShadow="dark-lg"
-        color="white"
-        border="1px solid white"
-        mx="2rem"
-        w={{ base: "20rem", md: "50rem" }}
+        color="black"
+        border="2px solid black"
+        mx="1rem"
+        w={{ base: "20rem", md: "60rem" }}
         scrollMarginX="auto"
+
       >
-        <Heading>Datos del chofer</Heading>
+        <Heading fontSize="4xl" fontFamily="'DIN Medium',">Datos del chofer</Heading>
         <Box>
           <Flex flexDirection={{ base: "column" }}>
             <Center
@@ -181,8 +182,10 @@ const ChoferForm = ({ closeForm }) => {
               flexDirection={{ base: "column", md: "row" }}
             >
               <FormControl isRequired>
-                <FormLabel>Nombre</FormLabel>
+                <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Nombre</FormLabel>
                 <Input
+                  color="black"
+                  bgColor="white"
                   type="text"
                   placeholder="Ingrese su nombre"
                   name="name"
@@ -192,8 +195,10 @@ const ChoferForm = ({ closeForm }) => {
                 {error.name && <p>{error.name}</p>}
               </FormControl>
               <FormControl isRequired>
-                <FormLabel>Apellido</FormLabel>
+                <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Apellido</FormLabel>
                 <Input
+                  color="black"
+                  bgColor="white"
                   type="text"
                   placeholder="Ingrese su apellido"
                   name="surname"
@@ -203,8 +208,10 @@ const ChoferForm = ({ closeForm }) => {
                 {error.surname && <p>{error.surname}</p>}
               </FormControl>
               <FormControl isRequired>
-                <FormLabel>Correo electronico</FormLabel>
+                <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Correo electronico</FormLabel>
                 <Input
+                  color="black"
+                  bgColor="white"
                   type="mail"
                   placeholder="Correo electronico"
                   name="email"
@@ -221,8 +228,10 @@ const ChoferForm = ({ closeForm }) => {
               flexDirection={{ base: "column", md: "row" }}
             >
               <FormControl isRequired>
-                <FormLabel>Fecha de Nac.</FormLabel>
+                <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Fecha de Nac.</FormLabel>
                 <Input
+                  color="black"
+                  bgColor="white"
                   size="md"
                   type="date"
                   name="birthday"
@@ -233,8 +242,10 @@ const ChoferForm = ({ closeForm }) => {
               </FormControl>
 
               <FormControl isRequired>
-                <FormLabel>DNI</FormLabel>
+                <FormLabel fontSize="lg" fontFamily="'DIN Medium',">DNI</FormLabel>
                 <Input
+                  color="black"
+                  bgColor="white"
                   type="number"
                   placeholder="Numero de DNI"
                   name="dni"
@@ -245,8 +256,10 @@ const ChoferForm = ({ closeForm }) => {
               </FormControl>
 
               <FormControl isRequired>
-                <FormLabel>Numero de Celular</FormLabel>
+                <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Numero de Celular</FormLabel>
                 <Input
+                  color="black"
+                  bgColor="white"
                   type="number"
                   placeholder="Numero de celular"
                   name="phone"
@@ -263,8 +276,10 @@ const ChoferForm = ({ closeForm }) => {
               flexDirection={{ base: "column", md: "row" }}
             >
               <FormControl>
-                <FormLabel>Foto del Chofer</FormLabel>
+                <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Foto del Chofer</FormLabel>
                 <Input
+                  color="black"
+                  bgColor="white"
                   type="file"
                   name="driverImg"
                   accept="image/*"
@@ -274,9 +289,10 @@ const ChoferForm = ({ closeForm }) => {
               </FormControl>
 
               <FormControl isRequired>
-                <FormLabel>Aeropuerto Origen</FormLabel>
+                <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Aeropuerto Origen</FormLabel>
                 <Select
-                  color="#000"
+                  color="black"
+                  bgColor="white"
                   placeholder="Selecciona el Aeropuerto"
                   name="airports"
                   onChange={handleChange}
@@ -295,13 +311,14 @@ const ChoferForm = ({ closeForm }) => {
           </Flex>
         </Box>
 
-        <Box bg="#10447E" py={4} px={2} borderRadius={10} color="white">
-          <Heading>Datos del vehiculo</Heading>
+        <Box bg="#10447E" py={6} px={2} borderRadius={4} color="white" fontFamily="'DIN Medium',">
+          <Heading fontSize="4xl">Datos del vehiculo</Heading>
           <Center py={2} gap={4} flexDirection={{ base: "column", md: "row" }}>
             <FormControl as="fieldset" isRequired>
-              <FormLabel as="legend">Tipo de Vehiculo:</FormLabel>
+              <FormLabel as="legend" fontSize="lg" fontFamily="'DIN Medium',">Tipo de Vehiculo:</FormLabel>
               <Select
-                color="#000"
+                color="black"
+                bgColor="white"
                 placeholder="Selecciona un Vehiculo"
                 name="carType"
                 onChange={handleChange}
@@ -318,9 +335,10 @@ const ChoferForm = ({ closeForm }) => {
             </FormControl>
 
             <FormControl as="fieldset" isRequired>
-              <FormLabel as="legend">Modelo de Vehiculo:</FormLabel>
+              <FormLabel as="legend" fontSize="lg" fontFamily="'DIN Medium',">Modelo de Vehiculo:</FormLabel>
               <Select
-                color="#000"
+                color="black"
+                bgColor="white"
                 placeholder="Selecciona un Vehiculo"
                 name="carModel"
                 onChange={handleChange}
@@ -337,8 +355,10 @@ const ChoferForm = ({ closeForm }) => {
             </FormControl>
 
             <FormControl as="fieldset" isRequired>
-              <FormLabel>Numero de placa</FormLabel>
+              <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Numero de placa</FormLabel>
               <Input
+                color="black"
+                bgColor="white"
                 type="text"
                 placeholder="Numero de placa"
                 textTransform="uppercase"
@@ -350,8 +370,10 @@ const ChoferForm = ({ closeForm }) => {
             </FormControl>
 
             <FormControl as="fieldset" isRequired>
-              <FormLabel>Licencia de manejo</FormLabel>
+              <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Licencia de manejo</FormLabel>
               <Input
+                color="black"
+                bgColor="white"
                 type="text"
                 placeholder="Numero de licencia de manejo"
                 name="driverLicense"
@@ -364,8 +386,10 @@ const ChoferForm = ({ closeForm }) => {
 
           <Center py={2} gap={4} flexDirection={{ base: "column", md: "row" }}>
             <FormControl isRequired>
-              <FormLabel>Foto del vehiculo</FormLabel>
+              <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Foto del vehiculo</FormLabel>
               <Input
+                color="black"
+                bgColor="white"
                 type="file"
                 name="carImg"
                 accept="image/*"
@@ -375,8 +399,10 @@ const ChoferForm = ({ closeForm }) => {
             </FormControl>
 
             <FormControl isRequired>
-              <FormLabel>Fecha de Nac. SOAT</FormLabel>
+              <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Fecha de Nac. SOAT</FormLabel>
               <Input
+                color="black"
+                bgColor="white"
                 placeholder="Select birthday and Time"
                 size="md"
                 type="date"
@@ -388,8 +414,10 @@ const ChoferForm = ({ closeForm }) => {
             </FormControl>
 
             <FormControl isRequired>
-              <FormLabel>Permiso de Circulacion</FormLabel>
+              <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Permiso de Circulacion</FormLabel>
               <Input
+                color="black"
+                bgColor="white"
                 type="file"
                 name="circulationPermit"
                 accept="image/*"
@@ -399,9 +427,10 @@ const ChoferForm = ({ closeForm }) => {
             </FormControl>
 
             <FormControl as="fieldset" isRequired>
-              <FormLabel htmlFor="pasajeros">Maximo de pasajeros</FormLabel>
+              <FormLabel htmlFor="pasajeros" fontSize="lg" fontFamily="'DIN Medium',">Maximo de pasajeros</FormLabel>
               <Select
-                color="#000"
+                color="black"
+                bgColor="white"
                 placeholder="Cantidad de pasajeros"
                 id="pasajeros"
                 name="capacityPassengers"
@@ -424,7 +453,7 @@ const ChoferForm = ({ closeForm }) => {
         </Box>
 
         <Box mt={4}>
-          <Button colorScheme="green" w="100%" type="submit">
+          <Button bg='#E83D6F' w="100%" type="submit">
             Registrar Chofer
           </Button>
         </Box>

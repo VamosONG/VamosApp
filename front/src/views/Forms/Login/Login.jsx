@@ -246,6 +246,7 @@ const LoginForm = ({ onSwitchForm }) => {
       
             </Text>
           </Container>
+
           <Box>
             {!currentUser.id && (
               <Button bg="white" onClick={handleSubmit}>
