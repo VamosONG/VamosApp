@@ -107,7 +107,7 @@ const LoginForm = ({ onSwitchForm }) => {
         const userCreated = await response.json();
   
         // Carga el estado global currentUser con la info del usuario registradi
-        const userActual = await dispatch(getUserByEmail(userCreated.email))
+        const userActual = await dispatch(getUserByEmail(googleLog.user.email))
         console.log(userActual); 
   
         return response
