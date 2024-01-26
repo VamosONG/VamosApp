@@ -13,6 +13,7 @@ import Vamos from "../../assets/logoblanco.png";
 import MobileNavbar from "../navBar/mobileNavbar/mobileNavbar";
 import { useSelector } from "react-redux";
 import SlideEx from "../../views/Forms/ViewForm";
+import LogOut from "../../views/Forms/LogOut/logout";
 
 const NavBar = () => {
   const { currentUser } = useSelector((state) => state);
