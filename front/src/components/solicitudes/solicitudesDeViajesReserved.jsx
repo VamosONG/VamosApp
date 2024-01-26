@@ -90,7 +90,7 @@ const handleChange = async (e) => {
     setInput({
         ...input,
         [e.target.name]: e.target.value,
-        tripState: 'reserve'
+        tripState: 'reserved'
     })
 }
 const handleSubmitReserved = async (e) => {
