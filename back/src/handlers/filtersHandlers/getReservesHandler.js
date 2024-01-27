@@ -6,14 +6,15 @@ module.exports = async (req, res) => {
         const allRes = await getReserves();
 
         const mapeo = await Promise.all(allRes.map(async tr=>{
-            const {dataValues, driverFullName, userEmail} = tr;
+            const {dataValues, userEmail} = tr;
             const usuario = await getUserById(tr.userId)
-            const newTrip={
-                ...dataValues,
-                userEmail: `${usuario.email}`
+            if(usuario){
+                const newTrip={
+                    ...dataValues,
+                    userEmail: `${usuario.email}`
+                }
+                return newTrip;
             }
-
-            return newTrip;
         }));
 
         res.status(200).json(mapeo);

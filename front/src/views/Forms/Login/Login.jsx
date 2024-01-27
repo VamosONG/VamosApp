@@ -220,6 +220,8 @@ const LoginForm = ({ onSwitchForm }) => {
               </InputRightElement>
             </InputGroup>
           </FormControl>
+
+
           <Box>
             {!currentUser.id && (
               <Button bg="white" onClick={handleSubmit}>

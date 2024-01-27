@@ -59,13 +59,6 @@ const Solicitud =()=> {
   }, [/* conductores */])
 
 
-  /* const [conductorSeleccionado,setConductorSeleccionado]=useState(false)
-  const [idConductorSeleccionado,setIdConductorSeleccionado]=useState('')
-
-  const handleCheckboxChange = (conductorId) => {
-    setConductorSeleccionado(!conductorSeleccionado)
-    setIdConductorSeleccionado(conductorId)
-  }; */
   const handleClick = (conductorId) => {
     dispatch(conductorAsignado({tripId:id,driverId:conductorId}))
     Swal.fire({
