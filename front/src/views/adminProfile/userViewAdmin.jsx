@@ -155,7 +155,7 @@ const UserViewAdmin = () => {
                     </Table>
                 </Flex>
                 {/* COMPONENTE DE PAGINADO */}
-                <Paginado />
+                {/* <Paginado /> */}
             </TableContainer>
 
         <Flex align="center" justifyContent="center">
