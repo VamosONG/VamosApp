@@ -41,15 +41,15 @@ const EditPrice = ({combo,handleUpdate,isEvenRow}) => {
 
   return (
     
-            <Tr style={{ backgroundColor: isEvenRow ? 'white' : '#009ED1' }}> {/* Modificar las etiquetas para que esto funcione */}
-              <Td>{combo.airport} - {combo.zone}</Td>
+            <Tr style={{ backgroundColor: !isEvenRow ? 'white' : '#009ED1' }}> {/* Modificar las etiquetas para que esto funcione */}
+              <Td style={{ fontWeight: 'bold' }}>{combo.airport} - {combo.zone}</Td>
               {combo.quantityPassengers === 4 ? (
-                <Td>AUTO</Td>
+                <Td style={{ fontWeight: 'bold' }}>AUTO</Td>
               ) : (combo.quantityPassengers === 6 ? (
-                <Td>CAMIONETA</Td>
+                <Td style={{ fontWeight: 'bold' }}>CAMIONETA</Td>
               ) : (combo.quantityPassengers === 10 ? (
-                <Td>VAN</Td>
-              ) : (<Td>VAN PLUS</Td>)))}
+                <Td style={{ fontWeight: 'bold' }}>VAN</Td>
+              ) : (<Td style={{ fontWeight: 'bold' }}>VAN PLUS</Td>)))}
 
               <Td><Input
                 htmlSize={4}

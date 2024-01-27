@@ -58,9 +58,9 @@ const EditPrices = () => {
 
 
   return (
-    <Flex>
+    <Flex justifyContent="center">
     <TableContainer marginTop={'7rem'}>
-      <Table variant='striped' colorScheme='teal'>
+      <Table variant='striped' colorScheme='#009ED1'>
         <TableCaption>Precios según ruta y vehículo</TableCaption>
         <Thead>
           <Tr>
