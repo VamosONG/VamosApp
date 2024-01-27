@@ -28,12 +28,17 @@ const LogOut = () => {
 
   return (
     <Stack direction="row" spacing={4}>
-      <IconButton
+      {/* <IconButton
         variant="solid"
         aria-label="Cerrar sesión"
         icon={<Icon as={FaSignOutAlt} />}
-        onClick={handleLogOut}
-      />
+        
+      /> */}
+      <Button onClick={handleLogOut}
+      aria-label="Cerrar sesión"
+      rightIcon={<FaSignOutAlt/>}>
+        Cerrar Sesión
+      </Button>
     </Stack>
   );
 };

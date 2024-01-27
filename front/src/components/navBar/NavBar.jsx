@@ -14,6 +14,7 @@ import MobileNavbar from "../navBar/mobileNavbar/mobileNavbar";
 import { useSelector } from "react-redux";
 import SlideEx from "../../views/Forms/ViewForm";
 import LogOut from "../../views/Forms/LogOut/logout";
+import ViewOptionPerfil from "./viewOption/viewOptionPerfil";
 
 const NavBar = () => {
   const { currentUser } = useSelector((state) => state);
@@ -92,17 +93,17 @@ const NavBar = () => {
                   </Link> */}
 
 
-                  <Link to="/profileAdmin">
+                  {/* <Link to="/profileAdmin">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       MI PERFIL
                     </Button>
-                  </Link>
+                  </Link> */}
 
-                  <Link to='/editPrices'>
+                  {/* <Link to='/editPrices'>
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       CAMBIAR PRECIOS DE VIAJES
                     </Button>
-                  </Link>
+                  </Link> */}
                 </Flex>
               </Box>
             ) : currentUser.admin === false ? (
@@ -120,11 +121,11 @@ const NavBar = () => {
                     </Button>
                   </Link>
 
-                  <Link to="/profileUser">
+                  {/* <Link to="/profileUser">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       MI PERFIL
                     </Button>
-                  </Link>
+                  </Link> */}
 
                   <Link to="/questions">
                     <Button colorScheme="#009ED1" fontSize="1xl">
@@ -132,11 +133,11 @@ const NavBar = () => {
                     </Button>
                   </Link>
 
-                  <Link to='/review&reseña'>
+                  {/* <Link to='/review&reseña'>
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       RESEÑA DE TU VIAJE
                     </Button>
-                  </Link>
+                  </Link> */}
                 
                 </Flex>
               </Box>
@@ -169,10 +170,11 @@ const NavBar = () => {
 
         <Box>
           <AvatarGroup spacing="1rem" mx="20px">
-            {currentUser.admin && currentUser.admin ? (
+            {/* {currentUser.admin && currentUser.admin ? (
               <Avatar size="md" name="Ryan Florence" bg="#009ED1" src={currentUser.photoURL} />
-            ) : null}
-            <SlideEx />
+              ) : null} */}
+              <ViewOptionPerfil/>
+            {/* <SlideEx /> */}
           </AvatarGroup>
         </Box>
       </Flex>
