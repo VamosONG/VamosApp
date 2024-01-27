@@ -29,6 +29,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { getUserByEmail } from "../../../redux/actions";
 import googleLogo from "../../../assets/icons/google.png";
+import validateNewUser from "../../../components/Validate/validateNewUser";
 
 const RegistroForm = ({ onSwitchForm }) => {
 
@@ -43,6 +44,8 @@ const RegistroForm = ({ onSwitchForm }) => {
     dni: "",
   });
 
+  const [error, setError] = useState({})
+
 
 // setea los inputs con los valores q se van escribiendo
   const handleInputChange = (e) => {
@@ -53,6 +56,7 @@ const RegistroForm = ({ onSwitchForm }) => {
       ...input,
       [property]: value,
     });
+    setError(validateNewUser(input))
   };
 
   const isError = input === "";
@@ -147,9 +151,9 @@ let dataUser = {};
             placeholder="Nombre"
             bg="white"
           />
-          {!isError ? (
-            <FormErrorMessage>Por favor ingrese su nombre.</FormErrorMessage>
-          ) : null}
+          {error.name &&
+            <FormErrorMessage>{error.name}</FormErrorMessage>
+          }
         </FormControl>
 
         <FormControl isInvalid={isError} isRequired>

@@ -1,7 +1,7 @@
-import {useSelector} from 'react-redux'
+//import {useSelector} from 'react-redux'
 
-export const ValidateNewUser = (input) => {
-    const emailDb = useSelector((state) => state.newUsuario.email)
+const validateNewUser = (input) => {
+    //const emailDb = useSelector((state) => state.newUsuario.email)
     let error = {}
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
@@ -26,10 +26,6 @@ export const ValidateNewUser = (input) => {
     : !passwordRegex.test(input.password) ? 'La contrase debe contener: Al menos 8 caracteres de longitud. Al menos una letra minúscula. Al menos una letra mayúscula. Al menos un número.'
     : null;
 
-    error.sexo = !input.sexo ? 'Seleccione un sexp'
-    : input.sexo !== 'f' || input.sexo !== 'm' || input.sexo !== 'o' ? 'El valor del sexo no existe, escoja uno por favor'
-    : null;
-
-
     return error;
 }
+export default validateNewUser;

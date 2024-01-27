@@ -33,8 +33,6 @@ import UserProfile from './components/userProfile/userProfile'
 import AdminProfile from './components/userProfile/adminProfile';
 import ReviewAdmin from './views/adminProfile/reviewAdmin';
 import UserViewAdmin from './views/adminProfile/userViewAdmin';
-import ViewProfile from './components/userProfile/viewProfile';
-
 import ProtectedRoutes from './utils/ProtectedRoute';
 import { useSelector } from 'react-redux';
 
@@ -43,14 +41,12 @@ import Stadistic from './views/stadistic/Stadistics/stadistic';
 
 
 function App() {
-  const location = useLocation();
+
   const {currentUser} = useSelector(state => state)
   return (
     <>
     <AuthProvider>
-        {location.pathname !== '/profile' && (
           <NavBar />
-        )}
       <Routes>
         <Route path='/' element={<HomeComponent/>}/> 
         {/* Renderizando HomeComponent en la ruta para evitar pisar cada ves que se abre una pestaña */}
@@ -80,6 +76,7 @@ function App() {
         <Route path="/login" element={<LoginForm/>}/>
         <Route path="/register" element={<RegistroForm/>}/>
         <Route path="/profileAdmin" element={<AdminProfile/>}/>
+        <Route path="/paymentFailed" element={<PaymentFail/>}/>
         <Route path="/stadistics" element={<Stadistic/>}/>
          </Route> 
         {/* <Route path="/graphics" element={<Graphics/>}/> */}

@@ -1,5 +1,6 @@
 import { useContext, createContext, useState, useEffect } from "react";
-import { auth } from "../firebase/firebase.config"
+import { auth } from "../firebase/firebase.config";
+import Swal from "sweetalert2";
 
 import {
     onAuthStateChanged,
@@ -87,9 +88,7 @@ export function AuthProvider({ children }) {
         try {
             const resp=await signInWithPopup(auth, responseGoogle)
         setUser(resp)
-
-      
-         return resp
+             return resp
         } catch (error) {
             console.log(`"Falló el login"${error.message}`);
         }
