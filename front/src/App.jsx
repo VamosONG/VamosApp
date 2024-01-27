@@ -37,7 +37,7 @@ import ProtectedRoutes from './utils/ProtectedRoute';
 import { useSelector } from 'react-redux';
 
 import PaymentFail from './views/payments/paymentFail';
-import Stadistic from './views/stadistic/Stadistics/stadistic';
+
 
 
 function App() {
@@ -79,7 +79,7 @@ function App() {
         <Route path="/register" element={<RegistroForm/>}/>
         <Route path="/profileAdmin" element={<AdminProfile/>}/>
         <Route path="/paymentFailed" element={<PaymentFail/>}/>
-        <Route path="/stadistics" element={<Stadistic/>}/>
+        
          </Route> 
         {/* <Route path="/graphics" element={<Graphics/>}/> */}
 

@@ -36,7 +36,7 @@ const Stadistic = () => {
   return (
     
     <ChakraProvider >
-      {/* <Flex bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/eqdrrjmlkojpiiwlhwjo.jpg"> */}
+      <Flex bg='#009ED1'>
       <Flex direction="column" align="center" mt={8} mb={12}>
         <Heading as="h1" size="xl" mb={4}>
           Estadísticas
@@ -124,7 +124,7 @@ const Stadistic = () => {
           <TripsPerDriver />
         </Flex>
       </Flex>
-      {/* </Flex> */}
+      </Flex>
     </ChakraProvider>
     
   );

@@ -4,6 +4,7 @@ import DriverTableView from '../../views/driversViewAdmin/driverTable';
 import UserViewAdmin from '../../views/adminProfile/userViewAdmin';
 import ReviewAdmin from '../../views/adminProfile/reviewAdmin';
 import SolicitudesDeViajes from '../solicitudes/solicitudesDeViajes';
+import Stadistic from '../../views/stadistic/Stadistics/stadistic';
 
 const AdminProfile = () => {
     return (
@@ -16,6 +17,7 @@ const AdminProfile = () => {
                     <Tab _selected={{ color: 'white', bg: 'purple.500' }}>Conductores</Tab>
                     <Tab _selected={{ color: 'white', bg: 'red.500' }}>Usuario</Tab>
                     <Tab _selected={{ color: 'white', bg: 'yellow.500' }}>Reviews</Tab>
+                    <Tab _selected={{ color: 'white', bg: 'yellow.500' }}>Estadisticas</Tab>
                 </TabList>
                 <TabPanels>
                     <TabPanel>
@@ -29,6 +31,9 @@ const AdminProfile = () => {
                     </TabPanel>
                     <TabPanel>
                         <ReviewAdmin/>
+                    </TabPanel>
+                    <TabPanel>
+                      <Stadistic/>
                     </TabPanel>
 
                 </TabPanels>
