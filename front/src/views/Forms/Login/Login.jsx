@@ -144,6 +144,42 @@ const LoginForm = ({ onSwitchForm }) => {
   };
 
 
+
+
+  // const handleGoogleLogin = async () => {
+  //   const {displayName, email} = auth.user;
+  //   try {
+  //     await auth.loginWithGoogle(); // Autenticacion de google
+  //     if (auth.user) {
+  //       const user = {   // creación de un objeto user con los datos que puedo extraer de firebase
+  //         name: displayName,
+  //         email: email,
+  //       };
+  
+  //       // Crea un usuario (findOrCreate) utilizando fetch con su metodo post 
+  //       const response = await dispatch(postNewUser(user));
+  //       if(response){
+  //         // Carga el estado global currentUser con la info del usuario registrado
+  //         const userActual = await dispatch(getUserByEmail(user.email));
+  //         console.log(userActual);
+  //         return userActual;
+  //       } else {
+  //         console.log("error al crear");
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error("Error al iniciar sesión con Google:", error.message);
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Oops...",
+  //       text: "Hubo un error en el registro",
+  //     });
+  //   }
+  // };
+
+
+  
+
   const handleRegister = () => {
     navigate("/register");
   };
@@ -221,6 +257,20 @@ const LoginForm = ({ onSwitchForm }) => {
             </InputGroup>
           </FormControl>
 
+          {/* <Container>
+            <Text>
+              ¿No tienes cuenta?{" "}
+              <Button color="teal.500" onClick={handleRegister}>
+                Registrarme
+              </Button>
+              <Button colorScheme="red" onClick={(e)=>handleGoogleLogin(e)}>
+                Continuar con Google
+              </Button>
+      
+            </Text>
+          UserViewProfile
+          </Container> */}
+          {/* </Container> */}
 
           <Box>
             {!currentUser.id && (

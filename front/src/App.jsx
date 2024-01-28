@@ -37,7 +37,7 @@ import ProtectedRoutes from './utils/ProtectedRoute';
 import { useSelector } from 'react-redux';
 
 import PaymentFail from './views/payments/paymentFail';
-import Stadistic from './views/stadistic/Stadistics/stadistic';
+
 
 
 function App() {
@@ -56,8 +56,9 @@ function App() {
         <Route path='/reserve/rejected' element={<ReserveReject/>}/>
         <Route path= '/about' element={<About/>} />
         <Route path='/questions' element={<Questions/>}/>
-        <Route path='/paymentStatus' element={<PaymentStatus/>}/>
         <Route path="/paymentFailed" element={<PaymentFail/>}/>
+        <Route path='/paymentStatus' element={<PaymentStatus/>}/>
+        
 
          <Route element={<ProtectedRoutes isAllowed={currentUser.admin=== false} />} > 
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
@@ -76,8 +77,8 @@ function App() {
         <Route path="/login" element={<LoginForm/>}/>
         <Route path="/register" element={<RegistroForm/>}/>
         <Route path="/profileAdmin" element={<AdminProfile/>}/>
-        <Route path="/paymentFailed" element={<PaymentFail/>}/>
-        <Route path="/stadistics" element={<Stadistic/>}/>
+        
+        
          </Route> 
         {/* <Route path="/graphics" element={<Graphics/>}/> */}
 
