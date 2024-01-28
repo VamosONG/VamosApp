@@ -7,6 +7,7 @@ import {
   Avatar,
   AvatarGroup,
   useMediaQuery,
+  Progress
 } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 import Vamos from "../../assets/logoblanco.png";
@@ -14,6 +15,7 @@ import MobileNavbar from "../navBar/mobileNavbar/mobileNavbar";
 import { useSelector } from "react-redux";
 import SlideEx from "../../views/Forms/ViewForm";
 import LogOut from "../../views/Forms/LogOut/logout";
+import {verificationComplete} from '../../context/authContext';
 
 const NavBar = () => {
   const { currentUser } = useSelector((state) => state);
@@ -33,12 +35,9 @@ const NavBar = () => {
     };
   }, []);
 
-  const [role,setRole]=useState("notUser")
- const handleClick=(role)=>{
-  if (role==='usuario'){setRole('user')}
-  if (role==='admin'){setRole('admin')}
-  
- }
+ if (!verificationComplete) {
+  return <div><Progress size='lg' isIndeterminate /></div>;
+}else{
  return (
   <>
     {isMobile ? (
@@ -166,6 +165,7 @@ const NavBar = () => {
     )}
   </>
 );
+}
 };
 
 export default NavBar;
