@@ -57,6 +57,7 @@ function SolicitudesDeViajes() {
         <Tab _selected={{ color: 'white', bg: 'purple.500' }}>Viajes sin conductor asignado</Tab>
         <Tab _selected={{ color: 'white', bg: 'purple.500' }}>Viajes con conductor asignado</Tab>
         <Tab _selected={{ color: 'white', bg: 'purple.500' }}>Viajes concretados</Tab>
+        
       </TabList>
       
 
