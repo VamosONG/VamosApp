@@ -70,155 +70,82 @@ const UserViewAdmin = () => {
     }, [])
 
     return (
-        <Flex /* align='center' direction={{base:'column',md:'row'}} */ alignItem='center' justifyContent='center'>
+        <Flex 
+        direction="column"
+        width="100%"
+        overflowX="auto" 
+        mt={4}
+        align="center"
+        justify="center"
+        >
 
-            <TableContainer  >
-                <Flex bg='gray.200' color='#000' justify={'center'} >
-                    <UserFilter searcher={searcher} />
-                </Flex>
-                <Flex px='1rem' >
-                    <Table variant='striped' colorScheme='gray.100' >
-                        <TableCaption>Usuarios</TableCaption>
-                        <Thead>
-                            <Tr>
-                                <Th >Usuario</Th>
-                                <Th >E-mail</Th>
-                                <Th>DNI</Th>
-                                <Th>telefono</Th>
-                                <Th>Viajes</Th>
-                                <Th>Acion</Th>
-                            </Tr>
-                        </Thead>
-
-                        <Tbody>
-                            {results?.map((user) => (
-                                <Tr key={user.id}  >
-                                    <Td w='auto' >{user.name ? user.name : 'sin nombre'}</Td>
-                                    <Td w='min-content' >
-                                        <Tooltip hasArrow label={user.email ? 'Enviar Correo' : null} bg='#10447E' placement='top'>
-                                            <Link href={`mailto:${user.email}`}>
-                                                {user.email ? user.email : 'Sin correo'}
-                                            </Link>
-                                        </Tooltip>
-                                    </Td>
-                                    <Td w='auto'>{user.dni ? user.dni : 'Desconocido'}</Td>
-                                    <Td w='auto' display={'flex'} flexDirection={'column'}>
-                                        <Tooltip hasArrow label={user.phone ? 'Contactar' : null} bg='#10447E' placement='top'>
-                                            <Link href={`whatsapp://send?phone=+51${user.phone}`}>
-                                                {user.phone ? user.phone : 'Numero desconocido'}
-                                            </Link>
-                                        </Tooltip>
-                                    </Td>
-                                    <Td w='auto'> {user.Trips.length ? user.Trips.length : '0'}
-                                    </Td>
-                                    <Td>
-                                        {user.admin ? (
-                                            <>
-                                                <Tooltip label='Quitar Access Admin' placement='right' bg='#E83D6F'>
-
-                                                    <Button onClick={() => handleAdminAccess(user.id)}
-                                                        bg='#E83D6F'
-                                                        fontSize='1.2rem'
-                                                        id={user.id} >
-                                                        <RepeatClockIcon />
-                                                    </Button>
-                                                </Tooltip>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <Tooltip label='Access Admin' placement='right' bg='#009ED1'>
-
-                                                    <Button onClick={() => handleAdminAccess(user.id)}
-                                                        bg='#009ED1'
-                                                        fontSize='1.2rem'
-                                                        id={user.id} >
-                                                        <AddIcon />
-                                                    </Button>
-                                                </Tooltip>
-                                            </>
-                                        )}
-                                    </Td>
-                                </Tr>
-                            ))}
-
-                        </Tbody>
-                        <Tfoot>
-                            <Tr>
-                                <Th >Usuario</Th>
-                                <Th >E-mail</Th>
-                                <Th>DNI</Th>
-                                <Th>telefono</Th>
-                                <Th>Viajes</Th>
-                                <Th>Acion</Th>
-                            </Tr>
-                        </Tfoot>
-                    </Table>
-                </Flex>
-                {/* COMPONENTE DE PAGINADO */}
-                <Paginado />
-            </TableContainer>
-
-        <Flex align="center" justifyContent="center">
-        <TableContainer>
-          <Flex bg="purple.500" color="#000" justify={'center'} p={4} borderTopLeftRadius="md" borderTopRightRadius="md">
-          <UserFilter searcher={searcher}/>
-          </Flex>
-          <Flex px={4} bg="gray.300" overflowX="auto" borderBottomLeftRadius="md" borderBottomRightRadius="md">
-            <Table variant="simple">
-              <TableCaption>Usuarios</TableCaption>
-              <Thead>
-                <Tr>
-                  <Th>Usuario</Th>
-                  <Th>E-mail</Th>
-                  <Th>DNI</Th>
-                  <Th>Teléfono</Th>
-                  <Th>Viajes</Th>
-                  <Th>Acción</Th>
-                </Tr>
-              </Thead>
+        <Flex>
+          <TableContainer>
+            <Flex 
+            bg='#009ED1' 
+            justify={'center'} 
+            p={2}
+            borderTopLeftRadius="md" 
+            borderTopRightRadius="md"
+            >
+            <UserFilter searcher={searcher}/>
+            </Flex>
+            <Flex px={0} bg="gray.300" overflowX="auto" borderBottomLeftRadius="md" borderBottomRightRadius="md">
+              <Table variant="simple">
+                <TableCaption TableCaption>Usuarios</TableCaption>
+                <Thead>
+                  <Tr>
+                    <Th border="2px solid black">Usuario</Th>
+                    <Th border="2px solid black">E-mail</Th>
+                    <Th border="2px solid black">DNI</Th>
+                    <Th border="2px solid black">Teléfono</Th>
+                    <Th border="2px solid black">Viajes</Th>
+                    <Th border="2px solid black">Acción</Th>
+                  </Tr>
+                </Thead>
   
-              <Tbody>
+                <Tbody>
                 {results?.map((user) => (
                   <Tr key={user.id}>
-                    <Td>{user.name ? user.name : 'sin nombre'}</Td>
-                    <Td>
+                    <Td border="2px solid black">{user.name ? user.name : 'sin nombre'}</Td>
+                    <Td border="2px solid black">
                       <Tooltip hasArrow label={user.email ? 'Enviar Correo' : null} bg="#10447E" placement="top">
                         <Link href={`mailto:${user.email}`}>{user.email ? user.email : 'Sin correo'}</Link>
                       </Tooltip>
                     </Td>
-                    <Td>{user.dni ? user.dni : 'Desconocido'}</Td>
-                    <Td>
+                    <Td border="2px solid black">{user.dni ? user.dni : 'Desconocido'}</Td>
+                    <Td border="2px solid black">
                       <Tooltip hasArrow label={user.phone ? 'Contactar' : null} bg="#10447E" placement="top">
                         <Link href={`whatsapp://send?phone=+51${user.phone}`}>
                           {user.phone ? user.phone : 'Numero desconocido'}
                         </Link>
                       </Tooltip>
                     </Td>
-                    <Td>{user.Trips.length ? user.Trips.length : '0'}</Td>
-                    <Td>
+                    <Td border="2px solid black">{user.Trips.length ? user.Trips.length : '0'}</Td>
+                    <Td border="2px solid black">
                       {user.admin ? (
-                        <Tooltip label="Quitar Acceso Admin" placement="right" bg="#E83D6F">
-                          <Button onClick={() => handleAdminAccess(user.id)} bg="red.300" fontSize="1.2rem" id={user.id}>
-                            <RepeatClockIcon />
-                          </Button>
-                        </Tooltip>
+                      <Tooltip label="Quitar Acceso Admin" placement="right" bg="#E83D6F">
+                        <Button onClick={() => handleAdminAccess(user.id)} bg="red.300" fontSize="1.2rem" id={user.id}>
+                          <RepeatClockIcon />
+                        </Button>
+                      </Tooltip>
                       ) : (
-                        <Tooltip label="Acceso Admin" placement="right" bg="#009ED1">
-                          <Button onClick={() => handleAdminAccess(user.id)} bg="blue.300" fontSize="1.2rem" id={user.id}>
-                            <AddIcon />
-                          </Button>
-                        </Tooltip>
+                      <Tooltip label="Acceso Admin" placement="right" bg="#009ED1">
+                        <Button onClick={() => handleAdminAccess(user.id)} bg="blue.300" fontSize="1.2rem" id={user.id}>
+                          <AddIcon />
+                        </Button>
+                      </Tooltip>
                     )}
-                  </Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-
+                    </Td>
+                    </Tr>
+                    ))}
+                </Tbody>
+              </Table>
         </Flex>
         {/* COMPONENTE DE PAGINADO */}
         {/* <Paginado /> */}
-      </TableContainer>
+        </TableContainer>
+      </Flex>
     </Flex>
   );
 };

@@ -1,4 +1,4 @@
-import { ChakraProvider, Box, Text, Heading, Flex } from '@chakra-ui/react';
+import { Box, Text, Heading, Flex, Stack } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { getDataUser, getTrips } from '../../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,16 +12,14 @@ import TripsPerDriver from '../Graphics/tripsPerDriver'
 const Stadistic = () => {
   const dispatch = useDispatch();
 
-  useEffect(async() => {
-    
-    
-      
-        await dispatch(getTrips())
+  useEffect(() => {
+    const fetchData = async () => {
+        await dispatch(getTrips());
         await dispatch(getDataUser());
-        
-      
-  
-  }, [dispatch]);
+    };
+
+    fetchData();
+}, [dispatch]);
 
   
   const users = useSelector((state) => state.dataUser);
@@ -35,9 +33,13 @@ const Stadistic = () => {
 
   return (
     
-    <ChakraProvider >
-      {/* <Flex bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/eqdrrjmlkojpiiwlhwjo.jpg"> */}
-      <Flex direction="column" align="center" mt={8} mb={12}>
+    <Flex 
+    bg="white"
+    alignItems="center"
+    justifyContent="center"
+    >
+      <Flex align="center" justify="center" mt={8} mb={12}>
+        <Box direction="column">
         <Heading as="h1" size="xl" mb={4}>
           Estadísticas
         </Heading>
@@ -49,7 +51,7 @@ const Stadistic = () => {
           borderColor="blue.500"
           borderRadius="md"
           p={4}
-          m={2}
+          m={10}
           maxW="800px"
         >
           <Text fontSize="lg" fontWeight="bold" mb={2}>
@@ -59,7 +61,9 @@ const Stadistic = () => {
             Total de Viajes: {totalTrips}
           </Text>
         </Flex>
-
+        </Box>
+        
+        <Box>
         <Flex
           direction="column"
           align="center"
@@ -91,7 +95,9 @@ const Stadistic = () => {
           </Text>
           <EarningsPerDriver />
         </Flex>
+        </Box>
 
+        <Box>
         <Flex
           direction="column"
           align="center"
@@ -123,9 +129,10 @@ const Stadistic = () => {
           </Text>
           <TripsPerDriver />
         </Flex>
+        </Box>
       </Flex>
       {/* </Flex> */}
-    </ChakraProvider>
+    </Flex>
     
   );
 };
