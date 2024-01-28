@@ -182,6 +182,7 @@ const LoginForm = ({ onSwitchForm }) => {
     border="none"
     boxShadow="none"
     color="white"
+    display={currentUser.id ? 'none' : 'block'}
     >
       {!currentUser.id && (
         <>
@@ -270,12 +271,6 @@ const LoginForm = ({ onSwitchForm }) => {
               </Stack>
           </Center>
         </>
-      )}{" "}
-      {currentUser.id && (
-        <Box>
-          <Heading fontSize="md">{currentUser.name}</Heading>
-          <Text fontSize="md">{currentUser.email}</Text>
-        </Box>
       )}
     </Stack>
   );

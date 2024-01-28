@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import SlideEx from "../../views/Forms/ViewForm";
 import LogOut from "../../views/Forms/LogOut/logout";
 import ViewOptionPerfil from "./viewOption/viewOptionPerfil";
+import ViewBtnUserForm from "../../views/Forms/ViewForms/ViewUserForm";
 
 const NavBar = () => {
   const { currentUser } = useSelector((state) => state);
@@ -170,10 +171,14 @@ const NavBar = () => {
 
         <Box>
           <AvatarGroup spacing="1rem" mx="20px">
-            {/* {currentUser.admin && currentUser.admin ? (
-              <Avatar size="md" name="Ryan Florence" bg="#009ED1" src={currentUser.photoURL} />
-              ) : null} */}
+            {currentUser === null || currentUser === undefined ? (
+
+              <ViewBtnUserForm/>
+            ) : (
               <ViewOptionPerfil/>
+            )
+            }
+              {/* <ViewOptionPerfil/> */}
             {/* <SlideEx /> */}
           </AvatarGroup>
         </Box>

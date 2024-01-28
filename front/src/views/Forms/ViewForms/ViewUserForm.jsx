@@ -26,6 +26,7 @@ const ViewBtnUserForm = () => {
                             position='absolute'
                             right='2rem'
                             borderRadius={0}
+                            
                         >
                             {/* Validacion para mostrar formularios */}
                             {isLoginFormVisible ? (
