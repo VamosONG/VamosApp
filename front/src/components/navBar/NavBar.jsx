@@ -55,7 +55,7 @@ const NavBar = () => {
         }
         alignItems="center"
         justify="space-between"
-        h="80px"
+        h="100px"
         w="100%"
         position="fixed"
         top="0"
@@ -78,6 +78,19 @@ const NavBar = () => {
                       INICIO
                     </Button>
                   </Link>
+                  
+                  <Link to="/solicitudesDeViajes">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      SOLICITUDES DE VIAJE
+                    </Button>
+                  </Link>
+
+                  {/* <Link to="/detail">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      CONDUCTORES
+                    </Button>
+                  </Link> */}
+
 
                   <Link to="/profileAdmin">
                     <Button colorScheme="#009ED1" fontSize="1xl">

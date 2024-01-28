@@ -31,12 +31,8 @@ import { useEffect } from 'react';
 export default function TripsPerDriver() {
     const dispatch = useDispatch();
   
-    useEffect(() => {
-      const fetchData = async () => {
-        await dispatch(getAllConductores());
-      };
-    
-      fetchData();
+    useEffect(async () => {
+      await dispatch(getAllConductores());
     }, [dispatch]);
   
     const conductores = useSelector((state) => state.allData);

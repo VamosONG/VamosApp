@@ -38,45 +38,40 @@ const ReviewAdmin = () => {
     }, [])
 
     return (
-        <Flex 
-        aalignItems='center'
-        justifyContent='center'
-        direction="column"
-        width="100%"
-        overflowX="auto"
-        >
+        <Flex alignItem='center' justifyContent='center'>
+
         <TableContainer >
-            <Flex bg='#009ED1' justify={'center'} p={2} borderTopLeftRadius="md" borderTopRightRadius="md" border="1px solid black">
+            <Flex bg="purple.500" color="#000" justify={'center'} p={4} borderTopLeftRadius="md" borderTopRightRadius="md">
                 <ReviewFilter searcher={searcher} />
                 </Flex>
-                <Flex px={0} bg='gray.300' overflowX="auto" borderBottomLeftRadius="md" borderBottomRightRadius="md" border="1px solid black">
+            <Flex px={4} bg='gray.300' overflowX="auto" borderBottomLeftRadius="md" borderBottomRightRadius="md">
                 <Table variant='striped' colorScheme='gray.100' >
-                    <TableCaption border="1px solid black">Reviews</TableCaption>
-                        <Thead>
-                            <Tr>
-                                <Th border="2px solid black">Usuario</Th>
-                                <Th border="2px solid black">E-mail</Th>
-                                <Th border="2px solid black">Fecha</Th>
-                                <Th border="2px solid black">comentario</Th>
-                                <Th border="2px solid black">chofer</Th>
-                                <Th border="2px solid black">Calificacion</Th>
-                            </Tr>
-                        </Thead>
+                    <TableCaption>Reviews</TableCaption>
+                    <Thead>
+                        <Tr>
+                            <Th >Usuario</Th>
+                            <Th >E-mail</Th>
+                            <Th>Fecha</Th>
+                            <Th>comentario</Th>
+                            <Th>chofer</Th>
+                            <Th>Calificacion</Th>
+                        </Tr>
+                    </Thead>
 
-                        <Tbody>
+                    <Tbody>
                         {results?.map((review, index) => (
-                            <Tr key={review.id} bg={review.qualification <= 3 ? 'blue.200' : null} >
-                                <Td border="2px solid black" w='auto' >{review.userName ? review.userName : 'User Test'}</Td>
-                                <Td border="2px solid black" w='min-content' >
+                            <Tr key={review.id} bg={review.qualification <= 3 ? 'yellow.400' : null} >
+                                <Td w='auto' >{review.userName ? review.userName : 'User Test'}</Td>
+                                <Td w='min-content' >
                                     <Tooltip hasArrow label={review.userMail !== 'Email bloqueado' ? 'Enviar Correo' : null} bg='#10447E' placement='top'>
                                         <Link href={`mailto:${review.userMail}`}>
                                             {review.userMail} <EmailIcon/>
                                         </Link>
                                     </Tooltip>
                                 </Td>
-                                <Td border="2px solid black" w='auto' >{review.date}</Td>
-                                <Td border="2px solid black" w='auto' >{review.comments}</Td>
-                                <Td border="1px solid black" w='auto' display={'flex'} flexDirection={'column'}>
+                                <Td w='auto' >{review.date}</Td>
+                                <Td w='auto' >{review.comments}</Td>
+                                <Td w='auto' display={'flex'} flexDirection={'column'}>
                                     <Badge variant='solid' colorScheme='green' w='max-content'>
                                         {review.driverName}
                                     </Badge>
@@ -88,30 +83,31 @@ const ReviewAdmin = () => {
                                     </Tooltip>
                                 </Td>
 
-                                <Td border="2px solid black" w='auto' >  {Array(5)
+                                <Td w='auto' >  {Array(5)
                                     .fill('')
                                     .map((_, i) => (
-                                        <StarIcon key={i} color={i < review.qualification ? '#E83D6F' : 'gray.300'} />
+                                        <StarIcon key={i} color={i < review.qualification ? 'yellow.500' : 'gray.300'} />
                                     ))} </Td>
+
                             </Tr>
                         ))}
 
-                        </Tbody>
-                        <Tfoot>
-                            <Tr>
-                                <Th border="2px solid black">Usuario</Th>
-                                <Th border="2px solid black">E-mail</Th>
-                                <Th border="2px solid black">Fecha</Th>
-                                <Th border="2px solid black">comentario</Th>
-                                <Th border="2px solid black">chofer</Th>
-                                <Th border="2px solid black">Calificacion</Th>
-                            </Tr>
-                        </Tfoot>
+                    </Tbody>
+                    <Tfoot>
+                        <Tr>
+                            <Th >Usuario</Th>
+                            <Th >E-mail</Th>
+                            <Th>Fecha</Th>
+                            <Th>comentario</Th>
+                            <Th>chofer</Th>
+                            <Th>Calificacion</Th>
+                        </Tr>
+                    </Tfoot>
                 </Table>
-                </Flex>
+            </Flex>
             {/* COMPONENTE DE PAGINADO */}
             {/* <Paginado/>  */}
-            </TableContainer>
+        </TableContainer>
         </Flex>
     )
 }

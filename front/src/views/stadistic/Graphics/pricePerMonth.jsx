@@ -32,13 +32,9 @@ import { useEffect } from 'react';
 export default function PricePerMonth() {
     const dispatch = useDispatch();
   
-    useEffect(() => {
-      const fetchData = async () => {
-        await dispatch(getTrips());
-        // await dispatch(getCanceledTrips());
-      };
-    
-      fetchData();
+    useEffect(async () => {
+      await dispatch(getTrips());
+      // await dispatch(getCanceledTrips());
     }, [dispatch]);
 
     const nombreMeses = [

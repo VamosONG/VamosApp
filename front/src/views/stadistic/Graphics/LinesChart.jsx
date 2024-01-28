@@ -48,11 +48,9 @@ function LinesChart() {
     };
     var misoptions = {
         scales: {
-            yAxes: [ // Cambiado de 'y' a 'yAxes'
-                {
-                    min: 0
-                }
-            ],
+            y: {
+                min: 0
+            },
             x: {
                 ticks: { color: 'rgb(255, 99, 132)' }
             }

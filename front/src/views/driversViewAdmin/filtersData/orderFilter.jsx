@@ -175,7 +175,7 @@ const OrderFilterAlphabetical = ({searcher}) => {
                 </Box> */}
                 </Flex>
 
-                <Flex onClick={resetFilter} ><Button bg='green.300' color='#000' fontSize='1.2rem' > <BsArrowClockwise/> </Button></Flex>
+                <Flex onClick={resetFilter} ><Button bg='blue.300' color='#000' fontSize='1.2rem' > <BsArrowClockwise/> </Button></Flex>
             </Flex>
         </>
     )

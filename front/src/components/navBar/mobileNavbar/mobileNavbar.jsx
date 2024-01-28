@@ -91,11 +91,6 @@ const MobileNavbar = ({ currentUser }) => {
                         RESERVAS
                       </Button>
                     </Link>
-                    <Link to="/perfil">
-                      <Button colorScheme="#009ED1" w="100%">
-                        MI PERFIL
-                      </Button>
-                    </Link>
                   </>
                 ) : currentUser && currentUser.admin === false ? (
                   <>
@@ -130,11 +125,11 @@ const MobileNavbar = ({ currentUser }) => {
                   </>
                 )}
 
-                {currentUser && (
-                    <Link to="/perfil">
-                      <Avatar name="Nombre Usuario" src={currentUser.photoURL} />
-                    </Link>
-                )}
+                <Link to="/perfil">
+                  <Button colorScheme="#009ED1" w="100%">
+                    MI PERFIL
+                  </Button>
+                </Link>
               </VStack>
             </DrawerBody>
           </DrawerContent>

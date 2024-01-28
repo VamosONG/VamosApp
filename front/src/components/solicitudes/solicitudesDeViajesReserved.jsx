@@ -108,109 +108,106 @@ const handleSubmitReserved = async (e) => {
     
     return (
         <TableContainer >
-            <TableContainer>
-            <Box 
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              flexDirection="row"
-              bgColor='#009ED1'
-              >
-            <Heading size='xs' textTransform='uppercase' margin={'1rem'}>
-            Buscar:
-            </Heading>
-            <Box style={{ display: 'flex', alignItems: 'center' }}>
-            <Input
-              marginRight='2rem'
-              bg="white"
-              color="black" 
-              htmlSize={50} 
-              width='auto' 
-              placeholder='Buscar por coincidencia'
-              onChange={handleChange}
-              name='searchInput'
-              />
-              <FormControl>
-              <Select 
-              bg="white" 
-              placeholder='Ordenar' 
-              width='xs' 
-              name='order' 
-              onChange={handleChange}
-              >
-              <option>mas reciente</option>
-              <option>menos reciente</option>
-              </Select>
-              </FormControl>
-              </Box>
-                <Button onClick={handleSubmitReserved}>
-                APLICAR
-                </Button>
-              </Box>
-              </TableContainer>
+            <TableContainer style={{ backgroundColor:'white' ,size:'xs'}}>
+            <Box style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row', }}  bg="purple.500">
+    <Heading color="white" size='xs' textTransform='uppercase' margin={'1rem'}>
+      Buscar:
+    </Heading>
+    <Box style={{ display: 'flex', alignItems: 'center' }}>
+    <Input
+      bg="white"
+      color="black" 
+      htmlSize={50} 
+      width='auto' 
+      placeholder='Buscar por coincidencia'
+      onChange={handleChange}
+      name='searchInput'/>
+      <FormControl /* isRequired */ style={{ marginLeft: '1rem' }}>
+      <Select bg="white" placeholder='Ordenar' width='xs' name='order' onChange={handleChange}>
+          <option>mas reciente</option>
+          <option>menos reciente</option>
+        </Select>
+      </FormControl>
+    </Box>
+    <Button onClick={handleSubmitReserved}>
+      APLICAR
+    </Button>
+    </Box>
+    </TableContainer>
         
-              <Table variant='simple' >
-                <TableCaption>Viajes sin conductor</TableCaption>
-                    <Thead>
-                      <Tr>
-                        <Th border="2px solid black">Nro</Th>
-                        <Th border="2px solid black">Origen</Th>
-                        <Th border="2px solid black">Destino</Th>
-                        <Th border="2px solid black">Fecha</Th>
-                        <Th border="2px solid black">Hora</Th>
-                        <Th border="2px solid black">Usuario</Th>
-                        <Th border="2px solid black">Buscar conductor</Th>
-                      </Tr>
-                    </Thead>
-                    <Tbody >
+            <Table variant='simple' >
+            <TableCaption>Viajes sin conductor</TableCaption>
+                <Thead>
+                    <Tr>
+                        <Th>Nro</Th>
+                        <Th>Origen</Th>
+                        <Th>Destino</Th>
+                        {/* <Th>Usuario</Th> */}
+                        <Th>Fecha</Th>
+                        <Th /* isNumeric */>Hora</Th>
+                        <Th >Usuario</Th>
+                        <Th >Buscar conductor</Th>
+                        
+                    </Tr>
+                </Thead>
+                <Tbody >
                     {tripsToShow.map((solicitud, index) => (
                         <Tr key={solicitud.id} >
-                          <Td border="2px solid black">{index + 1}</Td>
-                          <Td border="2px solid black">{solicitud.origin}</Td>
-                          <Td border="2px solid black">{solicitud.destination}</Td>
-                          <Td border="2px solid black">{solicitud.date}</Td>
-                          <Td border="2px solid black">{solicitud.hour}</Td>
-                          <Td border="2px solid black"><Link>{solicitud.userEmail}</Link></Td>
-                          <Td border="2px solid black" justifyContent='center'  >
-                              <Flex gap={2} justifyContent={'center'}  >
-                                <Tooltip hasArrow label='Buscar conductor' bg='#009ED1' placement='left-start'>
-                                <Link to='/solicitud' onClick={()=>handlerClick(solicitud.id)}>
-                                  <Button  bg='#009ED1' fontSize='1.2rem'>
-                                    <AddIcon />
-                                  </Button>
-                                </Link>
-                                </Tooltip>
-                              </Flex>
-                          </Td>
+                            <Td>{index + 1}</Td>
+                            <Td>{solicitud.origin}</Td>
+
+                            <Td>{solicitud.destination}</Td>
+                            {/* <Td>José Bravo</Td> */}{/* Luego hay que cambiar por nombre de usuario */}
+                            <Td>{solicitud.date}</Td>
+                            <Td>{solicitud.hour}</Td>
+                            <Td><Link>{solicitud.userEmail}</Link></Td>
+
+                            <Td justifyContent='center'  >
+                                <Flex gap={2} justifyContent={'center'}  >
+                                    <Tooltip hasArrow label='Buscar conductor' bg='#009ED1' placement='left-start'>
+                                    <Link to='/solicitud' onClick={()=>handlerClick(solicitud.id)}>
+                                        <Button  bg='#009ED1'
+                                            fontSize='1.2rem' /* id={driver.id} */ >
+                                            <AddIcon />
+                                        </Button>
+                                        </Link>
+                                    </Tooltip>
+                                    
+                                </Flex>
+                            </Td>
+                            
                         </Tr>
                     ))}
-                    </Tbody>
-                    </Table>
-                    <Box display="flex" justifyContent="center" alignItems="center" marginTop="1rem">
-                      <Button
-                      color='black'
-                      bgColor='#009ED1'
-                      variant="outline"
-                      colorScheme="teal"
-                      onClick={nextHandler}
-                      >
-                      Anterior
-                      </Button>
 
-                    <Box as="span" marginLeft="1rem" marginRight="1rem">
-                      Página {currentPage } 
-                    </Box>
+                </Tbody>
+            </Table>
+            <Box display="flex" justifyContent="center" alignItems="center" marginTop="1rem">
+  <Button
+     color="white"
+     bg="purple.500"
+    variant="outline"
+    colorScheme="teal"
+    /* disabled={currentPageReserved === 0} */
+    onClick={prevHandler}
+  >
+    Anterior
+  </Button>
 
-                      <Button
-                      color='black'
-                      bgColor='#009ED1'
-                      variant="outline"
-                      colorScheme="teal"
-                      onClick={nextHandler}
-                      >
-                      Siguiente
-                      </Button>
-                    </Box>
+  <Box as="span" marginLeft="1rem" marginRight="1rem">
+    Página {currentPage } 
+  </Box>
+
+  <Button
+   color="white"
+   bg="purple.500"
+    variant="outline"
+    colorScheme="teal"
+    /* disabled={currentPageReserved === totalPagesReserved - 1} */
+    onClick={nextHandler}
+  >
+    Siguiente
+        </Button>
+        </Box>
         </TableContainer>
     )
 }
