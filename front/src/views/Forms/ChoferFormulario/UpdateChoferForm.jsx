@@ -48,7 +48,7 @@ const UpdateDriverData = (props) => {
         if (newData) {
 
             //console.log('data antes de la ruta' + JSON.stringify(newData));
-            const response = await axios.patch(`http://localhost:3001/drivers/update/${id}`, newData);
+            const response = await axios.patch(`https://vamosappserver.onrender.com/drivers/update/${id}`, newData);
             console.log('data luego de la ruta' + newData);
             if (response.status === 200) {
 

@@ -28,7 +28,7 @@ const Testimonials = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios('http://localhost:3001/reviews');
+        const response = await axios('https://vamosappserver.onrender.com/reviews');
         setReviews(response.data);
       } catch (error) {
         console.error('Error en la solicitud de reviews', error);

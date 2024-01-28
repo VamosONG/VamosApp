@@ -44,9 +44,9 @@ const createOrder = async (req, res) => {
           // picture_url: "",
         }],
       back_urls: {
-        success: "http://localhost:5173/paymentStatus",
-         failure: "http://localhost:5173/paymentFailed",
-        // pending: "http://localhost:5173/pending",
+        success: "https://vamos-app.vercel.app//paymentStatus",
+         failure: "https://vamos-app.vercel.app//paymentFailed",
+        // pending: "https://vamos-app.vercel.app//pending",
       },
 
       notification_url: "https://c8cb-2800-2130-8a40-4f3-f10e-58e6-75e9-edde.ngrok-free.app/mepago/webhook",

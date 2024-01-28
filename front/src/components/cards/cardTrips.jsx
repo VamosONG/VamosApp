@@ -15,7 +15,7 @@ const CardTrips = () => {
         async function fetchData() {
             try {
                 // Puedes usar await dentro de esta función
-                const response = await axios('http://localhost:3001/prices');
+                const response = await axios('https://vamosappserver.onrender.com/prices');
                 // Hacer algo con la respuesta
                 if (response.data) {
                     setTrips(response.data);

@@ -30,14 +30,14 @@ export const GET_ALL_PRICES = 'GET_ALL_PRICES'
 export const USER_BY_EMAIL = 'USER_BY_EMAIL'
 export const GET_PAYMENT_DATA = 'GET_PAYMENT_DATA'
 
-const URL = 'http://localhost:3001'
+const URL = 'https://vamosappserver.onrender.com'
 
 
 
 export const getAllConductores = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios(`http://localhost:3001/drivers`);
+            const { data } = await axios(`https://vamosappserver.onrender.com/drivers`);
             dispatch({
                 type: GET_ALL_CONDUCTORES,
                 payload: data
@@ -53,7 +53,7 @@ export const getAllConductores = () => {
 export const getTripById = (id) => {
     return async (dispatch) => {
         try {
-            const {data} = await axios.get(`http://localhost:3001/trips/tripId/${id}`)
+            const {data} = await axios.get(`https://vamosappserver.onrender.com/trips/tripId/${id}`)
             return dispatch({
                 type:GET_TRIP_ID,
                 payload: data
@@ -83,7 +83,7 @@ export const createNewChofer = (data) => {
 export const deleteDriverAction = (id) => {
     return async (dispatch) => {
         try {
-            const {data} = await axios.patch(`http://localhost:3001/drivers/logic/${id}`)
+            const {data} = await axios.patch(`https://vamosappserver.onrender.com/drivers/logic/${id}`)
             dispatch({
                 type: DELETE_DRIVER,
                 payload: data
@@ -104,7 +104,7 @@ export const postNewViaje = (infoViaje) => {
 
             /* const { data } = await axios.post(`https://vamosappserver.onrender.com/offer/create`, infoViaje); */
 
-            const { data } = await axios.post(`http://localhost:3001/offer/create`, infoViaje);
+            const { data } = await axios.post(`https://vamosappserver.onrender.com/offer/create`, infoViaje);
             console.log(data)
             await dispatch({
                 type: POST_NEW_VIAJE,
@@ -122,7 +122,7 @@ export const postNewViaje = (infoViaje) => {
 export const getReservedTrips = () =>{
     console.log('llega aqui');
     return async(dispatch)=> {
-        const endpoint= 'http://localhost:3001/trips/reserves' //Se cambió a la ruta con viajes reservados
+        const endpoint= 'https://vamosappserver.onrender.com/trips/reserves' //Se cambió a la ruta con viajes reservados
         try {
             const { data } = await axios.get(endpoint)
             console.log(data);
@@ -138,7 +138,7 @@ export const getReservedTrips = () =>{
 }
 export const getPendingTrips = () =>{
     return async(dispatch)=> {
-        const endpoint= 'http://localhost:3001/trips/pending' //ruta con viajes pendientes
+        const endpoint= 'https://vamosappserver.onrender.com/trips/pending' //ruta con viajes pendientes
         try {
             const { data } = await axios.get(endpoint)
             console.log(data);
@@ -154,7 +154,7 @@ export const getPendingTrips = () =>{
 }
 export const getCanceledTrips = () =>{
     return async(dispatch)=> {
-        const endpoint= 'http://localhost:3001/trips/completed' //ruta con viajes completados
+        const endpoint= 'https://vamosappserver.onrender.com/trips/completed' //ruta con viajes completados
         try {
             const { data } = await axios.get(endpoint)
             console.log(data);
@@ -186,7 +186,7 @@ export const postNewUser = (form) => {
 export const getDataUser = () => {
     return async (dispatch) => {
         try {
-            const {data } = await axios('http://localhost:3001/user')
+            const {data } = await axios('https://vamosappserver.onrender.com/user')
             return dispatch({
                 type: GET_DATA_USER,
                 payload: data
@@ -200,7 +200,7 @@ export const getDataUser = () => {
 export const getDetailUserById = (id) => {
     return async (dispatch)=> {
         try {
-            const {data} = axios.get(`http://localhost:3001/user/${id}`)
+            const {data} = axios.get(`https://vamosappserver.onrender.com/user/${id}`)
             return dispatch({
                 type: GET_DETAIL_USER,
                 payload: data
@@ -215,7 +215,7 @@ export const getDetailUserById = (id) => {
 export const handleAdminUser = (id) => {
     return async (dispatch) => {
         try {
-            const {data} = await axios.patch(`http://localhost:3001/user/admin/${id}`)
+            const {data} = await axios.patch(`https://vamosappserver.onrender.com/user/admin/${id}`)
             dispatch({
                 type: HANDLE_ADMIN,
                 payload: data
@@ -275,14 +275,14 @@ export const logOutAction = (value) => {
 //     console.log(info)
 //     return async (dispatch) => {
 //         try {
-//             const {data}=await axios.put(`http://localhost:3001/trips/reserves/create`, info)
+//             const {data}=await axios.put(`https://vamosappserver.onrender.com/trips/reserves/create`, info)
 //             /* const mailReserve = {
 //                 userId: info.userId,
 //                 tripId: info.tripId,
 //                 option: "reserve"
 //             }
 //             const[reserveResp, mailResp] = await Promise.all([
-//                 axios.post(`http://localhost:3001/send-mail`,mailReserve)
+//                 axios.post(`https://vamosappserver.onrender.com/send-mail`,mailReserve)
 //             ])
             
 //             console.log(reserveResp.data)
@@ -302,7 +302,7 @@ export const filtrarConductores = (info) => {
     console.log(info)
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`http://localhost:3001/drivers/filter`, info);
+            const { data } = await axios.post(`https://vamosappserver.onrender.com/drivers/filter`, info);
             console.log(data)
             dispatch({
                 type: GET_FILTERED,
@@ -326,8 +326,8 @@ export const conductorAsignado = (info) => {
             }
 
             const[reserveResp, mailResp] = await Promise.all([
-                axios.put(`http://localhost:3001/trips/reserves/update`, info),
-                axios.post(`http://localhost:3001/send-mail`,mailReserve)
+                axios.put(`https://vamosappserver.onrender.com/trips/reserves/update`, info),
+                axios.post(`https://vamosappserver.onrender.com/send-mail`,mailReserve)
             ])
             console.log(reserveResp.data)
             console.log(`Estado de mail reserva: ${mailResp}`);
@@ -476,7 +476,7 @@ export const getTripsById = (id) => {
     console.log(id)
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`http://localhost:3001/trips/tripId/${id}`)
+            const { data } = await axios.get(`https://vamosappserver.onrender.com/trips/tripId/${id}`)
             console.log(data)
             return dispatch({
                 type: GET_TRIPS_BY_ID,
@@ -492,7 +492,7 @@ export const postReview = (info) => {
     /* info.driverId='46d639a7-5468-495b-b9a7-f666517d3bfb' */
     console.log(info)
     return async (dispatch) => {
-        const { data } = await axios.post(`http://localhost:3001/reviews/create`, info);
+        const { data } = await axios.post(`https://vamosappserver.onrender.com/reviews/create`, info);
         console.log(data)
         try {
             return dispatch({
@@ -509,7 +509,7 @@ export const postReview = (info) => {
 export const getReviewsData = () => {
     return async (dispatch) => {
         try {
-            const {data} = await axios.get(`http://localhost:3001/reviews`)
+            const {data} = await axios.get(`https://vamosappserver.onrender.com/reviews`)
             console.log('review data ' + data );
             return dispatch({
                 type: GET_REVIEWS,
@@ -526,7 +526,7 @@ export const getUserByEmail = (email) => {
     console.log(email)
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`http://localhost:3001/user/email?email=${email}`);
+            const { data } = await axios.get(`https://vamosappserver.onrender.com/user/email?email=${email}`);
             console.log(data)
              dispatch({
                 type: USER_BY_EMAIL,
@@ -542,7 +542,7 @@ export const getUserByEmail = (email) => {
 export const getAllPrices = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios(`http://localhost:3001/prices`);
+            const { data } = await axios(`https://vamosappserver.onrender.com/prices`);
             dispatch({
                 type: GET_ALL_PRICES,
                 payload: data
@@ -560,7 +560,7 @@ export const updatePrice = (info) => {
     console.log(info)
     return async (dispatch) => {
         try {
-            const { data } = await axios.put(`http://localhost:3001/price/update`, info);
+            const { data } = await axios.put(`https://vamosappserver.onrender.com/price/update`, info);
             console.log(data)
             /* dispatch({
                 type: GET_FILTERED,
@@ -576,7 +576,7 @@ export const updatePrice = (info) => {
 export const getDataMePago = () => {
     // return async (dispatch) => {
     //     try {
-    //         const { data } = await axios.get(`http://localhost:3001/mepago/success`);
+    //         const { data } = await axios.get(`https://vamosappserver.onrender.com/mepago/success`);
     //         console.log(data)
     //         dispatch({
     //             type: GET_PAYMENT_DATA,
@@ -626,7 +626,7 @@ export const cleanCurrentUser = () => {
 export const orderSearch = (input) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`http://localhost:3001/trips/filters`, input);
+            const { data } = await axios.post(`https://vamosappserver.onrender.com/trips/filters`, input);
 
             // hacer in if, para que dependiendo del tipo de viaje, sepa donde guardar
             
@@ -657,7 +657,7 @@ export const orderSearch = (input) => {
 export const getTrips = () => {
     return async (dispatch)=> {
         try {
-            const {data} =await  axios.get(`http://localhost:3001/trips`)
+            const {data} =await  axios.get(`https://vamosappserver.onrender.com/trips`)
           
             return dispatch({
                 type: GET_TRIPS,

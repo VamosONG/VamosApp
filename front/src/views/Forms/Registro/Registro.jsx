@@ -77,7 +77,7 @@ let dataUser = {};
 
     Promise.all([
       auth.register(input.email, input.password),  //registrarse con email y con password por firebase
-      axios.post(`http://localhost:3001/user/create`, input), // post con los inputs para crear el usuario
+      axios.post(`https://vamosappserver.onrender.com/user/create`, input), // post con los inputs para crear el usuario
     ])
       .then(([authResponse, { data }]) => {
 
