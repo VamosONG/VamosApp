@@ -43,8 +43,9 @@ const UpdateUserDataForm = ({ userDetail }) => {
                     text: "Datos actualizados",
                     icon: "success",
                 });
-                await dispatch(getDataUser())
-                await onClose()
+                // await dispatch(getDataUser())
+                // dispatch(getDetailUserById(id))
+                onClose()
             } else {
                 throw new Error(
                     Swal.fire({

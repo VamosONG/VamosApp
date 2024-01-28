@@ -7,6 +7,7 @@ import {
   Avatar,
   AvatarGroup,
   useMediaQuery,
+  Progress
 } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 import Vamos from "../../assets/logoblanco.png";
@@ -14,6 +15,7 @@ import MobileNavbar from "../navBar/mobileNavbar/mobileNavbar";
 import { useSelector } from "react-redux";
 import SlideEx from "../../views/Forms/ViewForm";
 import LogOut from "../../views/Forms/LogOut/logout";
+import {verificationComplete} from '../../context/authContext';
 
 const NavBar = () => {
   const { currentUser } = useSelector((state) => state);
@@ -33,12 +35,9 @@ const NavBar = () => {
     };
   }, []);
 
-  const [role,setRole]=useState("notUser")
- const handleClick=(role)=>{
-  if (role==='usuario'){setRole('user')}
-  if (role==='admin'){setRole('admin')}
-  
- }
+ if (!verificationComplete) {
+  return <div><Progress size='lg' isIndeterminate /></div>;
+}else{
  return (
   <>
     {isMobile ? (
@@ -55,7 +54,7 @@ const NavBar = () => {
         }
         alignItems="center"
         justify="space-between"
-        h="100px"
+        h="80px"
         w="100%"
         position="fixed"
         top="0"
@@ -78,19 +77,6 @@ const NavBar = () => {
                       INICIO
                     </Button>
                   </Link>
-                  
-                  <Link to="/solicitudesDeViajes">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      SOLICITUDES DE VIAJE
-                    </Button>
-                  </Link>
-
-                  {/* <Link to="/detail">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      CONDUCTORES
-                    </Button>
-                  </Link> */}
-
 
                   <Link to="/profileAdmin">
                     <Button colorScheme="#009ED1" fontSize="1xl">
@@ -98,11 +84,11 @@ const NavBar = () => {
                     </Button>
                   </Link>
 
-                  <Link to='/editPrices'>
+                  {/* <Link to='/editPrices'>
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       CAMBIAR PRECIOS DE VIAJES
                     </Button>
-                  </Link>
+                  </Link> */}
                 </Flex>
               </Box>
             ) : currentUser.admin === false ? (
@@ -179,6 +165,7 @@ const NavBar = () => {
     )}
   </>
 );
+}
 };
 
 export default NavBar;
