@@ -114,28 +114,39 @@ let dataUser = {};
       >
 
       <Flex
-      alignContent="center"
-      p={130}
-      marginTop="0px" 
+      direction={{ base: "column", md: "row" }}  // Cambiado a dirección de columna para dispositivos móviles
+      align="center"
+      p={{ base: 4, md: 120 }}  // Ajustado el relleno para dispositivos móviles
+      marginTop="30px"
+      
       >
+      <Flex align="center" justify="center" display={{ base: "none", md: "flex" }}>
+        <Image 
+        src="https://res.cloudinary.com/drgnsbah9/image/upload/v1706386608/Vamos/paroh1nlxjsyzeqdv6v5.png" 
+        alt="Descripción de la imagen" 
+        width="400px"
+        height="596px"
+        objectFit="cover"
+        />
+      </Flex>
+
       <Stack
-        spacing={4}
+        spacing={2}
         bg='#009ED1'
-        p="5"
-        h="auto"
-        borderRadius="2xl"
+        p={{ base: 4, md: 5 }}
+        borderRadius={{ base: "none", md: "none" }}
         boxShadow="dark-lg"
-        w={{ base: "20rem", md: "30rem" }}
+        w={{ base: "100%", md: "25rem" }}
         color="Black"
       >
 
         <Heading 
-        fontSize="3xl" 
+        fontSize="2xl" 
         fontFamily="'DIN Alternate Black', sans-serif"
         >REGISTRO</Heading>
         <FormControl isInvalid={isError.name} isRequired>
           <FormLabel 
-          fontSize="2xl"
+          fontSize="1xl"
           fontFamily="'DIN Medium',"
           >Nombre</FormLabel>
           <Input
@@ -153,7 +164,7 @@ let dataUser = {};
 
         <FormControl isInvalid={isError.surname} isRequired>
           <FormLabel 
-          fontSize="2xl"
+          fontSize="1xl"
           fontFamily="'DIN Medium',"
           >Apellido</FormLabel>
           <Input
@@ -171,7 +182,7 @@ let dataUser = {};
 
         <FormControl isInvalid={isError.phone} isRequired>
           <FormLabel 
-          fontSize="2xl"
+          fontSize="1xl"
           fontFamily="'DIN Medium',"
           >Telefono</FormLabel>
           <Input
@@ -190,7 +201,7 @@ let dataUser = {};
         <FormControl isInvalid={isError.email} isRequired>
 
           <FormLabel 
-          fontSize="2xl"
+          fontSize="1xl"
           fontFamily="'DIN Medium',"
           >Correo electrónico</FormLabel>
           <Input
@@ -208,7 +219,7 @@ let dataUser = {};
 
         <FormControl isInvalid={isError.dni} isRequired>
           <FormLabel 
-          fontSize="2xl"
+          fontSize="1xl"
           fontFamily="'DIN Medium',"
           >DNI</FormLabel>
           <Input
@@ -226,7 +237,7 @@ let dataUser = {};
 
         <FormControl isInvalid={isError.password} isRequired>
           <FormLabel 
-          fontSize="2xl"
+          fontSize="1xl"
           fontFamily="'DIN Medium',"
           >Password</FormLabel>
           <InputGroup size="md">
@@ -258,39 +269,13 @@ let dataUser = {};
         </FormControl>
 
         <Button 
-        fontSize="2xl" 
+        fontSize="1xl" 
         bg='#E83D6F'
         type="submit"
         fontFamily="'DIN Medium',"
         disable={isError}
         >
           Confirmar
-        </Button>
-        
-        <Box position='relative' padding='5'>
-        <Divider />
-        <AbsoluteCenter bg='#009ED1' px='5'>
-          O
-        </AbsoluteCenter>
-        </Box>
-        
-        <Button
-        fontSize="1xl"
-        bg="white"
-        type="submit"
-        fontFamily="'DIN Medium',"
-        olor="black"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        p={3}
-        borderRadius="md"
-        _hover={{ bg: "gray.100" }}
-        >
-        <Flex align="center" mr={1}>
-        <Image src={googleLogo} alt="Google Logo" boxSize="35px" mr={0} />
-        </Flex>
-        <Text>Continuar con Google</Text>
         </Button>
       </Stack>
       </Flex>
