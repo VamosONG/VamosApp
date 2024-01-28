@@ -58,8 +58,9 @@ function App() {
         <Route path='/reserve/rejected' element={<ReserveReject/>}/>
         <Route path= '/about' element={<About/>} />
         <Route path='/questions' element={<Questions/>}/>
-        <Route path='/paymentStatus' element={<PaymentStatus/>}/>
         <Route path="/paymentFailed" element={<PaymentFail/>}/>
+        <Route path='/paymentStatus' element={<PaymentStatus/>}/>
+        
 
          <Route element={<ProtectedRoutes isAllowed={currentUser.admin=== false} />} > 
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
@@ -78,7 +79,7 @@ function App() {
         <Route path="/login" element={<LoginForm/>}/>
         <Route path="/register" element={<RegistroForm/>}/>
         <Route path="/profileAdmin" element={<AdminProfile/>}/>
-        <Route path="/paymentFailed" element={<PaymentFail/>}/>
+        
         
          </Route> 
         {/* <Route path="/graphics" element={<Graphics/>}/> */}
