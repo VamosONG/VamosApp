@@ -9,7 +9,7 @@ import Stadistic from "../../views/stadistic/Stadistics/stadistic";
 import EditPrice from "../editPrices/editPricesComponent"
 import { Box, Flex, Text, VStack, Divider } from "@chakra-ui/react";
 
-import SolicitudesDeViajes from '../solicitudes/solicitudesDeViajes';
+
 
 
 const AdminProfile = () => {

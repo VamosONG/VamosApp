@@ -42,7 +42,7 @@ const UserViewAdmin = () => {
       reverseButtons: true
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const response = await dispatch(handleAdminUser(id))
+        const response = await dispatch(handleAdminUser(id));
         if (response) {
           Swal.fire({
             title: "¡Acceso ADMIN!",
@@ -50,19 +50,17 @@ const UserViewAdmin = () => {
             icon: "success"
           });
         }
-        await dispatch(getDataUser())
-
-      } else if (
-        /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
+        await dispatch(getDataUser());
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire({
           title: "Cancelado",
           text: "Registro sin modificar",
           icon: "error"
         });
-
-    }
+      }
+    }); 
+  }; 
+    
 
     useEffect(() => {
         dispatch(getDataUser())
@@ -148,6 +146,7 @@ const UserViewAdmin = () => {
       </Flex>
     </Flex>
   );
-};
+}
+  
 
 export default UserViewAdmin;
