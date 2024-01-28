@@ -30,8 +30,9 @@ import { useDispatch } from "react-redux";
 import { getUserByEmail } from "../../../redux/actions";
 import googleLogo from "../../../assets/icons/google.png";
 
-const RegistroForm = ({ onSwitchForm }) => {
+import {ValidateNewUser} from '../../../components/Validate/validateNewUser';
 
+const RegistroForm = ({ onSwitchForm }) => {
 
   //  estado loca Input para setear la info del form y enviarla por body al back y crear el usuario
 
@@ -42,7 +43,7 @@ const RegistroForm = ({ onSwitchForm }) => {
     email: "",
     dni: "",
   });
-
+  const [isError, setError] = useState({});
 
 // setea los inputs con los valores q se van escribiendo
   const handleInputChange = (e) => {
@@ -53,9 +54,11 @@ const RegistroForm = ({ onSwitchForm }) => {
       ...input,
       [property]: value,
     });
+
+    setError(ValidateNewUser(input));
+    console.log('Error objeto:',isError);
   };
 
-  const isError = input === "";
 
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
@@ -74,12 +77,12 @@ let dataUser = {};
 
     Promise.all([
       auth.register(input.email, input.password),  //registrarse con email y con password por firebase
-      axios.post(`http://localhost:3001/user/create`, input) // post con los inputs para crear el usuario
+      axios.post(`http://localhost:3001/user/create`, input), // post con los inputs para crear el usuario
     ])
       .then(([authResponse, { data }]) => {
-        dispatch(getUserByEmail(input.email))  // get con el input para setear el current user 
-        console.log("input data", input);
-        console.log(data);
+
+        //dispatch(getUserByEmail(data.email))  // get con el input para setear el current user 
+        
         Swal.fire({
           title: "Bien hecho!",
           text: "Datos registrados!",
@@ -87,14 +90,10 @@ let dataUser = {};
         });  
 
         navigate("/")
-       
-      })
-      .then((response) => {
-        console.log("Mail enviado");// respuesta de send-mail aquí
-        console.log(response);
+      
       })
       .catch((error) => {
-        console.log("error no se pudo cargar");
+        console.log("error no se pudo cargar",error.message);
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -133,8 +132,8 @@ let dataUser = {};
         <Heading 
         fontSize="3xl" 
         fontFamily="'DIN Alternate Black', sans-serif"
-        >REGISTRATE!</Heading>
-        <FormControl isInvalid={isError} isRequired>
+        >REGISTRO</Heading>
+        <FormControl isInvalid={isError.name} isRequired>
           <FormLabel 
           fontSize="2xl"
           fontFamily="'DIN Medium',"
@@ -147,12 +146,12 @@ let dataUser = {};
             placeholder="Nombre"
             bg="white"
           />
-          {!isError ? (
-            <FormErrorMessage>Por favor ingrese su nombre.</FormErrorMessage>
+          {isError ? (
+            <FormErrorMessage>{isError.name}</FormErrorMessage>
           ) : null}
         </FormControl>
 
-        <FormControl isInvalid={isError} isRequired>
+        <FormControl isInvalid={isError.surname} isRequired>
           <FormLabel 
           fontSize="2xl"
           fontFamily="'DIN Medium',"
@@ -165,12 +164,12 @@ let dataUser = {};
             placeholder="Apellido"
             bg="white"
           />
-          {!isError ? (
-            <FormErrorMessage>Por favor ingrese su apellido.</FormErrorMessage>
+          {isError ? (
+            <FormErrorMessage>{isError.surname}</FormErrorMessage>
           ) : null}
         </FormControl>
 
-        <FormControl isRequired>
+        <FormControl isInvalid={isError.phone} isRequired>
           <FormLabel 
           fontSize="2xl"
           fontFamily="'DIN Medium',"
@@ -179,16 +178,16 @@ let dataUser = {};
             type="number"
             name="phone"
             value={input.phone}
-            placeholder="Teléfono."
+            placeholder="Teléfono"
             onChange={handleInputChange}
             bg="white"
           />
           {isError ? (
-            <FormErrorMessage>Por favor ingrese su número de teléfono.</FormErrorMessage>
+            <FormErrorMessage>{isError.phone}</FormErrorMessage>
           ) : null}
         </FormControl>
 
-        <FormControl isRequired>
+        <FormControl isInvalid={isError.email} isRequired>
 
           <FormLabel 
           fontSize="2xl"
@@ -203,11 +202,11 @@ let dataUser = {};
             bg="white"
           />
           {isError ? (
-            <FormErrorMessage>Por favor ingrese su email.</FormErrorMessage>
+            <FormErrorMessage>{isError.email}</FormErrorMessage>
           ) : null}
         </FormControl>
 
-        <FormControl isRequired>
+        <FormControl isInvalid={isError.dni} isRequired>
           <FormLabel 
           fontSize="2xl"
           fontFamily="'DIN Medium',"
@@ -216,16 +215,16 @@ let dataUser = {};
             type="number"
             name="dni"
             value={input.dni}
-            placeholder="DNI."
+            placeholder="DNI"
             onChange={handleInputChange}
             bg="white"
           />
           {isError ? (
-            <FormErrorMessage>Por favor ingrese su DNI.</FormErrorMessage>
+            <FormErrorMessage>{isError.dni}</FormErrorMessage>
           ) : null}
         </FormControl>
 
-        <FormControl isRequired>
+        <FormControl isInvalid={isError.password} isRequired>
           <FormLabel 
           fontSize="2xl"
           fontFamily="'DIN Medium',"
@@ -253,6 +252,9 @@ let dataUser = {};
             </Button>
             </InputRightElement>
           </InputGroup>
+          {isError ? (
+            <FormErrorMessage>{isError.password}</FormErrorMessage>
+          ) : null}
         </FormControl>
 
         <Button 
@@ -260,8 +262,9 @@ let dataUser = {};
         bg='#E83D6F'
         type="submit"
         fontFamily="'DIN Medium',"
+        disable={isError}
         >
-          ENVIAR
+          Confirmar
         </Button>
         
         <Box position='relative' padding='5'>
