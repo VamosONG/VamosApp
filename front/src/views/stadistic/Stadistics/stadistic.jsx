@@ -33,6 +33,7 @@ const Stadistic = () => {
 
   return (
     
+
     <Flex 
     bg="white"
     alignItems="center"
@@ -40,6 +41,7 @@ const Stadistic = () => {
     >
       <Flex align="center" justify="center" mt={8} mb={12}>
         <Box direction="column">
+
         <Heading as="h1" size="xl" mb={4}>
           Estadísticas
         </Heading>
@@ -131,8 +133,10 @@ const Stadistic = () => {
         </Flex>
         </Box>
       </Flex>
+
       {/* </Flex> */}
     </Flex>
+
     
   );
 };

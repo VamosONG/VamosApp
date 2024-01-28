@@ -286,6 +286,7 @@ function SolicitudViajeForm() {
                                     <Select
                                     bg="white"
                                     placeholder={parsedData.origin}
+                                    value={parsedData.origin}
                                     name='origin'
                                     onChange={handleChange}
                                     width={{ base: "100%", md: "auto" }}
@@ -417,7 +418,7 @@ function SolicitudViajeForm() {
                                         fontSize="2xl"
                                         fontFamily="'DIN Medium',"
                                     >Cantidad de pasajeros</FormLabel>
-                                    <Select bg="white"  placeholder={parsedData.quantityPassengers} id='pasajeros' name='quantityPassengers' onChange={handleChange} >
+                                    <Select bg="white"  placeholder={parsedData.quantityPassengers} value ={parsedData.quantityPassengers} id='pasajeros' name='quantityPassengers' onChange={handleChange} >
                                         {((input.origin === "AEROPUERTO TALARA" && input.destination === "MANCORA") ||
                                             (input.origin === "MANCORA" && input.destination === "AEROPUERTO TALARA")) ? ([...Array(15).keys()].map((number) => (
                                                 <option key={number + 1} id={`number-${number + 1}`} value={number + 1}>

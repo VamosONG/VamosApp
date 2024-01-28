@@ -4,9 +4,13 @@ import SolicitudesDeViajes from '../solicitudes/solicitudesDeViajes';
 import DriverTableView from '../../views/driversViewAdmin/driverTable';
 import UserViewAdmin from '../../views/adminProfile/userViewAdmin';
 import ReviewAdmin from '../../views/adminProfile/reviewAdmin';
+
 import Stadistic from "../../views/stadistic/Stadistics/stadistic";
 import EditPrice from "../editPrices/editPricesComponent"
 import { Box, Flex, Text, VStack, Divider } from "@chakra-ui/react";
+
+import SolicitudesDeViajes from '../solicitudes/solicitudesDeViajes';
+
 
 const AdminProfile = () => {
     const [activeComponent, setActiveComponent] = useState("Reservas");
@@ -36,6 +40,7 @@ const AdminProfile = () => {
 
 
     return (
+
         <Flex bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg" marginTop={20}>
             <Flex flexDirection='column' pt={{ base: "100px", md: "0px" }}>
                 <VStack spacing={3} align="stretch" bg="gray.200" p={5} height="920px" width="250px">
@@ -121,6 +126,7 @@ const AdminProfile = () => {
                     </Text>
                     
                 </VStack>
+
             </Flex>
             <Box ml="250px" p={0} flex="1" margin={10}>
                 {renderComponent()}

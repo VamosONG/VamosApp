@@ -89,27 +89,30 @@ const UserProfile = () => {
     }
 
     return (
-        <Box h='90vh' marginTop={'100px'} display={'flex'} justifyContent={'center'} alignContent={'center'} bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
+        <Box h='90vh' w={{base:'100%', md: 'auto'}} marginTop={{base: '0', md: '100px'}} display={'flex'} justifyContent={'center'} alignContent={'center'} bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
             justify="center"
             bgSize="cover"
+
             bgRepeat="no-repeat"
             >
             {location.pathname !== '/profile'}
             <Flex h={'60%'} w='80%' m='auto' justify={'space-evenly'} align={'center'} overflow={'hidden'} borderLeftRadius={10} borderRightRadius={10}>
                 <Flex h='100%' w='50%' position={'relative'}>
                     <Flex bg={'#009ED1'} flexDirection={'row'} align={'center'} justify={'start'} w={'100%'} p='1rem' gap={4} position={'relative'} borderRadius={8}>
+
                         {userDetail && userDetail ? (
                             <>
+                            {/* //Boton para actualizar datos del usuario */}
                                 <Tooltip label='Editar datos' placement='left' bg='#10447E' borderRadius={4}>
                                     <Button w='1rem' h='1rem' position={'absolute'} bottom={'2rem'} right={'1rem'}>
                                         <UpdateUserDataForm userDetail={userDetail} />
                                     </Button>
                                 </Tooltip>
-                                <Flex w={'50%'} justify={'center'} position={'relative'}>
-                                    <Image w={'15rem'} h={'15rem'} name='Segun Adebayo' src={fotoPerfil ? fotoPerfil : 'https://bit.ly/sage-adebayo'} border={'2px solid #10447E'}
+                                <Flex w={{base: '100%', md: '50%'}} justify={'center'} position={'relative'}>
+                                    <Image w={{base: '300px', md: '15rem'}} h={{base: '300px', md: '15rem'}} name='Segun Adebayo' src={fotoPerfil ? fotoPerfil : 'https://bit.ly/sage-adebayo'} border={'2px solid #10447E'}
                                         alt={fotoPerfil.name}
                                         bg='white'
-                                        borderRadius={10}
+                                        borderRadius={{base: '50%', md: '10'}}
                                         objectFit={'cover'}
                                         loading='lazy'
                                     />{' '}
@@ -119,12 +122,12 @@ const UserProfile = () => {
                                         </Button>
                                     </Tooltip>
                                 </Flex>
-                                <Flex flexDirection={'column'} w={'50%'} gap={4} bg='#10447E' p='2' borderRadius={4} >
+                                <Flex flexDirection={'column'} w={{base: '100%', md: '50%'}} gap={4} bg='#10447E' p='2' borderRadius={4} >
                                     <Flex w={'100%'} justify={'space-evenly'} gap={4} flexDirection={'column'}  position={'relative'}>
 
                                     
                                         <Text fontSize={'1.7rem'} color={'white'}>
-                                            Bienvenido {userDetail.name}
+                                            Bienvenido {userDetail.name && userDetail.name}
                                         </Text>
                                         <Flex w={'100%'} bg='whitesmoke' justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4' >
                                             <Text textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}>
@@ -134,14 +137,14 @@ const UserProfile = () => {
                                         </Flex>
                                         <Flex w={'100%'} bg='whitesmoke' justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4' >
                                             <Text textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}>
-                                                {userDetail.surname}
+                                                {userDetail.surname && userDetail.surname}
                                             </Text>
                                         </Flex>
                                     </Flex>
                                     <Flex w={'100%'} justify={'space-evenly'} gap={4} flexDirection={'column'} >
                                         <Flex w={'100%'} bg='whitesmoke' justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4'>
                                             <Text textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}>
-                                                {userDetail.email}
+                                                {userDetail.email && userDetail.email}
                                             </Text>
                                         </Flex>
                                         <Flex w={'100%'} bg='whitesmoke' justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4'>

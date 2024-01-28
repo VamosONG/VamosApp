@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import {
-    Table,
-    Thead,
-    Tbody,
-    Tfoot,
-    Tr,
-    Th,
-    Td,
-    TableCaption, Tooltip,
-    TableContainer, Button, Flex, Link,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption, Tooltip,
+  TableContainer, Button, Flex, Link,
 } from '@chakra-ui/react'
 import { RepeatClockIcon, AddIcon } from '@chakra-ui/icons'
 import { useDispatch, useSelector } from "react-redux";
@@ -18,51 +18,50 @@ import UserFilter from '../driversViewAdmin/filtersData/userFilter';
 import Swal from 'sweetalert2'
 
 const UserViewAdmin = () => {
-    const userData = useSelector((state) => state.dataUser)
-    const dispatch = useDispatch()
-    const [search, setSearch] = useState('')
+  const userData = useSelector((state) => state.dataUser)
+  const dispatch = useDispatch()
+  const [search, setSearch] = useState('')
 
-    const searcher = (e) => {
-        setSearch(e.target.value)
-    }
+  const searcher = (e) => {
+    setSearch(e.target.value)
+  }
 
-    const results = !search ? userData : userData.filter((data) => data.name && data.name.toLowerCase().includes(search.toLowerCase()) || data.email && data.email.toLowerCase().includes(search.toLowerCase())
-    )
+  const results = !search ? userData : userData.filter((data) => data.name && data.name.toLowerCase().includes(search.toLowerCase()) || data.email && data.email.toLowerCase().includes(search.toLowerCase())
+  )
 
 
-    console.log(results);
-    const handleAdminAccess = (id) => {
+  console.log(results);
+  const handleAdminAccess = (id) => {
+    Swal.fire({
+      title: "¿Convertir ADMIN?",
+      text: "SE LE DARA PERMISO A TODOS LOS DATOS DEL SISTEMA",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Si, convertir!",
+      cancelButtonText: "No, cancelar!",
+      reverseButtons: true
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await dispatch(handleAdminUser(id))
+        if (response) {
+          Swal.fire({
+            title: "¡Acceso ADMIN!",
+            text: "El usuario ahora puede ingresar como ADMIN.",
+            icon: "success"
+          });
+        }
+        await dispatch(getDataUser())
+
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
         Swal.fire({
-            title: "¿Convertir ADMIN?",
-            text: "SE LE DARA PERMISO A TODOS LOS DATOS DEL SISTEMA",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Si, convertir!",
-            cancelButtonText: "No, cancelar!",
-            reverseButtons: true
-        }).then(async (result) => {
-            if (result.isConfirmed) {
-                const response = await dispatch(handleAdminUser(id))
-                if (response) {
-                    Swal.fire({
-                        title: "¡Acceso ADMIN!",
-                        text: "El usuario ahora puede ingresar como ADMIN.",
-                        icon: "success"
-                    });
-                }
-                await dispatch(getDataUser())
-
-            } else if (
-                /* Read more about handling dismissals below */
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                Swal.fire({
-                    title: "Cancelado",
-                    text: "Registro sin modificar",
-                    icon: "error"
-                });
-            }
+          title: "Cancelado",
+          text: "Registro sin modificar",
+          icon: "error"
         });
+
     }
 
     useEffect(() => {
@@ -135,6 +134,7 @@ const UserViewAdmin = () => {
                           <AddIcon />
                         </Button>
                       </Tooltip>
+
                     )}
                     </Td>
                     </Tr>
