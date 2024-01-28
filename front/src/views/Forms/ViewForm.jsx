@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react'
 import ViewBtnUserForm from './ViewForms/ViewUserForm';
-import ViewBtnChoferForm from './ViewForms/ViewChoferForm';
+// import ViewBtnChoferForm from './ViewForms/ViewChoferForm';
 import { useState } from 'react';
 import { useSelector } from 'react-redux'
 import LogOut from './LogOut/logout';
@@ -13,7 +13,7 @@ const SlideEx = () => {
             <Flex minWidth='max-content' gap='2'>
                 {/* Cada componente renderiza una vista para usuarios y admin */}
                 {currentUser.admin ? <>
-                    <ViewBtnChoferForm/>
+                    {/* <ViewBtnChoferForm/> */}
                     <LogOut/>
                 </>
                     : 

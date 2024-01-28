@@ -85,11 +85,11 @@ const NavBar = () => {
                     </Button>
                   </Link>
 
-                  <Link to='/editPrices'>
+                  {/* <Link to='/editPrices'>
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       CAMBIAR PRECIOS DE VIAJES
                     </Button>
-                  </Link>
+                  </Link> */}
                 </Flex>
               </Box>
             ) : currentUser.admin === false ? (

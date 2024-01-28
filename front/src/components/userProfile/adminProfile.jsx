@@ -4,10 +4,11 @@ import SolicitudesDeViajes from '../solicitudes/solicitudesDeViajes';
 import DriverTableView from '../../views/driversViewAdmin/driverTable';
 import UserViewAdmin from '../../views/adminProfile/userViewAdmin';
 import ReviewAdmin from '../../views/adminProfile/reviewAdmin';
-
+import ChoferForm from '../../views/Forms/ChoferFormulario/ChoferForm'
 import Stadistic from "../../views/stadistic/Stadistics/stadistic";
 import EditPrice from "../editPrices/editPricesComponent"
 import { Box, Flex, Text, VStack, Divider } from "@chakra-ui/react";
+
 
 
 
@@ -29,6 +30,8 @@ const AdminProfile = () => {
                     return <Stadistic />;
             case "EditPrice":
                     return <EditPrice />;
+            case "ChoferForm":
+                        return <ChoferForm />;
             default:
                 return null;
         }
@@ -124,6 +127,20 @@ const AdminProfile = () => {
                     >
                         EditPrice
                     </Text>
+                    <Divider />
+                    <Text 
+                        _hover={{ bg: '#E83D6F', color: 'white' }}
+                        bg={activeComponent === "ChoferForm" ? '#009ED1' : 'white'}
+                        color={activeComponent === "ChoferForm" ? 'white' : 'black'}
+                        p={2} 
+                        borderRadius="md" 
+                        textAlign="center" 
+                        cursor="pointer"
+                        onClick={() => handleMenuClick("ChoferForm")}
+                    >
+                       New Driver
+                    </Text>
+                    <Divider />
                     
                 </VStack>
 

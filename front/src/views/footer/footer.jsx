@@ -57,7 +57,7 @@ function Footer() {
           </Box>
 
           <Box w='auto' h='auto' p='1' textAlign='center' order={{ base: 3, md: 2 }} textShadow='2px 2px 4px rgb(0, 0, 0, 0.5)'>
-            <Heading>Nosotros</Heading>
+            <Heading fontSize="x-large">Nosotros</Heading>
             <Flex flexDirection='column' fontSize='1.4rem'>
                 <Link href='#' isExternal>
                 Sobre Nosotros <ExternalLinkIcon mx='2px' />
@@ -75,7 +75,7 @@ function Footer() {
           </Box>
 
           <Box w='auto' h='auto' p='1' textAlign='center'  order={{ base: 3, md: 2 }} textShadow='2px 2px 4px rgb(0, 0, 0, 0.5)' >
-            <Heading>Contacto</Heading>
+            
             <Flex flexDirection='column' fontSize='1.4rem' gap='4'>
               <Text>
                 <b>Aeropuertos:</b>
@@ -83,9 +83,9 @@ function Footer() {
                   <address>Talara, Lima, Peru.</address>
                   <address>Tumbes, Lima, Peru.</address>
                 </div>
-              </Text>
-
-              <Text >
+             
+              <b>Contacto</b>
+              
                 <Link href='mailto:kleibertmedina@gmail.com' isExternal >
                   <p>vamos.ong@gmail.com <ExternalLinkIcon mx='2px' /></p> 
                 </Link>
