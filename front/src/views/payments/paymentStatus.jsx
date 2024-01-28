@@ -29,9 +29,9 @@ const PaymentStatus = () => {
     <Center bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/eqdrrjmlkojpiiwlhwjo.jpg">
    <Flex bgSize="cover" bgRepeat="no-repeat" >
    
-    <Box bg='#009ED1' w={{base:"20rem",md:"30rem"}} spacing={4}>
+    <Box bg='#009ED1' w={{base:"1rem",md:"30rem"}} spacing={4} mt="6rem" borderRadius="3%" mb="4rem" >
     
-      <Flex justifyContent="center" p={250}>
+      <Flex justifyContent="center" p={20}>
        <Stack >
         <Heading
           color='white'
