@@ -100,11 +100,11 @@ const NavBar = () => {
                     </Button>
                   </Link>
 
-                  <Link to="/solicitarViaje">
+                  {/* <Link to="/solicitarViaje">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       SOLICITAR VIAJE
                     </Button>
-                  </Link>
+                  </Link> */}
 
                   <Link to="/profileUser">
                     <Button colorScheme="#009ED1" fontSize="1xl">

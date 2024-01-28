@@ -67,6 +67,7 @@ const UserViewAdmin = () => {
     }, [])
 
     return (
+
         <Flex 
         direction="column"
         width="100%"
@@ -100,6 +101,7 @@ const UserViewAdmin = () => {
                     <Th border="2px solid black">Acción</Th>
                   </Tr>
                 </Thead>
+
   
                 <Tbody>
                 {results?.map((user) => (
