@@ -64,7 +64,7 @@ const PaymentStatus = () => {
               <Text>ID de Pago: {mePagoData?.payment_id}</Text>
               <Text>Tipo de Pago: {mePagoData?.payment_type}</Text>
               <Text>Metodo de Pago: {mePagoData?.site_id === "MPE" ? "Mercadopago" : ""}</Text>
-              <Button boxShadow="0,5g">Descargar</Button>
+              
             </Stack>
           </Collapse>
         </Box>
