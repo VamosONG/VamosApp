@@ -13,7 +13,7 @@ import { renderToString } from 'react-dom/server';
 import {  useNavigate } from 'react-router-dom';
 
 import { Field, Form, Formik } from 'formik';
-import { postNewViaje } from '../../../redux/actions';
+import { handlePayment, postNewViaje } from '../../../redux/actions';
 
 
 
@@ -23,6 +23,7 @@ const SolicitudwViajeForm = () => {
   const dispatch = useDispatch()
 
   const [input,setInput]=useState({})
+  const [loading, setLoading] = useState(false);
 
   const currentUserId = useSelector((state) => state.currentUser.id)
   const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
@@ -81,7 +82,7 @@ const SolicitudwViajeForm = () => {
             htmlMode: true
         }).then(async (result) => {
             if (result.isConfirmed) {
-                /* handlePayment(); */
+                dispatch(handlePayment(infoConfirmacionViaje,currentUserId));
 
                 Swal.fire({
                     title: "Redirigiendo a Mercado Pago",
@@ -98,6 +99,7 @@ const SolicitudwViajeForm = () => {
                 });
             }
             else {
+              setLoading(false);
                 // Restablecer valores al cancelar
                 /* const parsedData = JSON.parse(storedInput);
                 setInput({
@@ -154,7 +156,7 @@ const SolicitudwViajeForm = () => {
         origin: origenSeleccionado,
         destination: destinoSeleccionado,
         userId: currentUserId,
-        /* quantityPassengers: cantidadPasajerosSeleccionada */
+        quantityPassengers: cantidadPasajerosSeleccionada
     });
 
     console.log(input)
@@ -162,10 +164,10 @@ const SolicitudwViajeForm = () => {
   };
 
   const handleSubmit =(event) => {
-
+    setLoading(true);
     setInput({
         ...input,
-        /* quantityPassengers: cantidadPasajerosSeleccionada */
+        quantityPassengers: cantidadPasajerosSeleccionada
     });
 
     console.log(input)
@@ -217,7 +219,9 @@ const SolicitudwViajeForm = () => {
                 <Select
                 placeholder="Selecciona un origen"
                 value={origenSeleccionado}
-                onChange={(e) => setOrigenSeleccionado(e.target.value)}/* Setea directamente para determinar los detinos */
+                onChange={(e) => {
+                  setOrigenSeleccionado(e.target.value); /* Setea directamente para determinar los detinos */
+                  setInput({...input,origin:e.target.value})}}
                 name="origin"
                 >
                     {origenes.map((origen) => (
@@ -235,7 +239,9 @@ const SolicitudwViajeForm = () => {
                 <Select
                 placeholder="Selecciona el destino"
                 value={destinoSeleccionado}
-                onChange={(e) => setDestinoSeleccionado(e.target.value)}
+                onChange={(e) => {
+                  setDestinoSeleccionado(e.target.value)
+                  setInput({...input,destination:e.target.value})}}
                 name="destino"
                 >
                     {destinosDelOrigen.map((destino) => (
@@ -327,7 +333,7 @@ const SolicitudwViajeForm = () => {
           <Button
             mt={4}
             colorScheme='teal'
-            isLoading={props.isSubmitting}
+            isLoading={loading}
             type='submit'
           >
             RESERVAR
