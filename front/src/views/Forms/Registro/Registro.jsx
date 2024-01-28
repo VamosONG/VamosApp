@@ -80,20 +80,19 @@ let dataUser = {};
       axios.post(`http://localhost:3001/user/create`, input), // post con los inputs para crear el usuario
     ])
       .then(([authResponse, { data }]) => {
+        console.log(data);
 
-        //dispatch(getUserByEmail(data.email))  // get con el input para setear el current user 
+       // dispatch(getUserByEmail(data.email))  // get con el input para setear el current user 
         
         Swal.fire({
           title: "Bien hecho!",
           text: "Datos registrados!",
           icon: "success",
         });  
-
         navigate("/")
       
       })
       .catch((error) => {
-        console.log("error no se pudo cargar",error.message);
         Swal.fire({
           icon: "error",
           title: "Oops...",

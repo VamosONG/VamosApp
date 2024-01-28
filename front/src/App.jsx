@@ -60,7 +60,7 @@ function App() {
         <Route path='/paymentStatus' element={<PaymentStatus/>}/>
         
 
-         <Route element={<ProtectedRoutes isAllowed={currentUser.admin=== false} />} > 
+         <Route element={<ProtectedRoutes isAllowed={currentUser?.admin=== false} />} > 
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
         <Route path="/login" element={<LoginForm/>}/>
         <Route path='/solicitud' element={<Solicitud/>}/>
@@ -69,7 +69,7 @@ function App() {
          </Route> 
         {/* No son necesario estas rutas, ya que todo estara dentro el componente del admin */}
         {/* <Route path='/detail' element={<DriverTableView/>}/> */}
-        <Route element={<ProtectedRoutes isAllowed={currentUser.admin=== true} />}> 
+        <Route element={<ProtectedRoutes isAllowed={currentUser?.admin=== true} />}> 
         <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
         <Route path='/product' element={<Product/>}/>
         <Route path='/review&reseña' element={<ReviewAndReseña/>}/>

@@ -206,7 +206,7 @@ const LoginForm = ({ onSwitchForm }) => {
     boxShadow="none"
     color="white"
     >
-      {!currentUser.id && (
+      {!currentUser?.id && (
         <>
           <FormControl isInvalid={isError}>
             <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Correo Electrónico</FormLabel>
@@ -273,7 +273,7 @@ const LoginForm = ({ onSwitchForm }) => {
           {/* </Container> */}
 
           <Box>
-            {!currentUser.id && (
+            {!currentUser?.id && (
               <Button bg="white" onClick={handleSubmit}>
                 Entrar
               </Button>
@@ -308,10 +308,10 @@ const LoginForm = ({ onSwitchForm }) => {
           </Center>
         </>
       )}{" "}
-      {currentUser.id && (
+      {currentUser?.id && (
         <Box>
-          <Heading fontSize="md">{currentUser.name}</Heading>
-          <Text fontSize="md">{currentUser.email}</Text>
+          <Heading fontSize="md">{currentUser?.name}</Heading>
+          <Text fontSize="md">{currentUser?.email}</Text>
         </Box>
       )}
     </Stack>

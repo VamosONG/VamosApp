@@ -1,12 +1,7 @@
-//import {useSelector} from 'react-redux'
 
-<<<<<<< HEAD
-const validateNewUser = (input) => {
-    //const emailDb = useSelector((state) => state.newUsuario.email)
-=======
+
 export const ValidateNewUser = (input) => {
   
->>>>>>> 91409bffe2bfb88ca928a2e72d8e5ea1e7ce52ff
     let error = {}
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
@@ -30,13 +25,10 @@ export const ValidateNewUser = (input) => {
     : !emailRegex.test(input.email) ? 'Ingrese email válido.'
     : null;
 
-<<<<<<< HEAD
-=======
     error.password = !input.password ? 'Ingrese una contraseña.'
     : !passwordRegex.test(input.password) ? 'La contraseña debe contener al menos 8 caracteres, una minúscula, una mayúscula y un número.'
     : null;
 
->>>>>>> 91409bffe2bfb88ca928a2e72d8e5ea1e7ce52ff
     return error;
 }
-export default validateNewUser;
+
