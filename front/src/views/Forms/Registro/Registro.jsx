@@ -147,7 +147,7 @@ let dataUser = {};
             bg="white"
           />
           {isError ? (
-            <FormErrorMessage>{isError.name}</FormErrorMessage>
+            <FormErrorMessage color='black' fontWeight='bold'>{isError.name}</FormErrorMessage>
           ) : null}
         </FormControl>
 
@@ -165,7 +165,7 @@ let dataUser = {};
             bg="white"
           />
           {isError ? (
-            <FormErrorMessage>{isError.surname}</FormErrorMessage>
+            <FormErrorMessage color='black' fontWeight='bold'>{isError.surname}</FormErrorMessage>
           ) : null}
         </FormControl>
 
@@ -183,7 +183,7 @@ let dataUser = {};
             bg="white"
           />
           {isError ? (
-            <FormErrorMessage>{isError.phone}</FormErrorMessage>
+            <FormErrorMessage color='black' fontWeight='bold'>{isError.phone}</FormErrorMessage>
           ) : null}
         </FormControl>
 
@@ -202,7 +202,7 @@ let dataUser = {};
             bg="white"
           />
           {isError ? (
-            <FormErrorMessage>{isError.email}</FormErrorMessage>
+            <FormErrorMessage color='black' fontWeight='bold'>{isError.email}</FormErrorMessage>
           ) : null}
         </FormControl>
 
@@ -220,7 +220,7 @@ let dataUser = {};
             bg="white"
           />
           {isError ? (
-            <FormErrorMessage>{isError.dni}</FormErrorMessage>
+            <FormErrorMessage color='black' fontWeight='bold'>{isError.dni}</FormErrorMessage>
           ) : null}
         </FormControl>
 
@@ -253,7 +253,7 @@ let dataUser = {};
             </InputRightElement>
           </InputGroup>
           {isError ? (
-            <FormErrorMessage>{isError.password}</FormErrorMessage>
+            <FormErrorMessage color='black' fontWeight='bold'>{isError.password}</FormErrorMessage>
           ) : null}
         </FormControl>
 
