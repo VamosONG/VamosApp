@@ -3,7 +3,14 @@ import {
   Button,
   TableContainer,
   Table,
-  TableCaption, Thead, Tr, Th, Tbody, Td, Input
+  TableCaption, 
+  Thead, 
+  Tr, 
+  Th, 
+  Tbody, 
+  Td, 
+  Input,
+  Flex,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPrices, updatePrice } from '../../redux/actions';
@@ -28,13 +35,14 @@ const EditPrices = () => {
     dispatch(getAllPrices())
   }, [/* dispatch */]);
 
-  const handleChange = (airport, zone, quantityPassengers, inputValue) => {
-    setInput({
+  const handleChange = (airport, zone, quantityPassengers) => (e) => {
+    setInput(prevInput => ({
+      ...prevInput,
       airport: airport,
       zone: zone,
       quantityPassengers,
-      value: Number(inputValue)
-    })
+      value: Number(e.target.value)
+    }));
 
     setConfirmationText(
       <div>
@@ -73,38 +81,51 @@ const EditPrices = () => {
 
 
   return (
-    <TableContainer marginTop={'10rem'}>
-      <Table variant='striped' colorScheme='teal'>
-        <TableCaption>Precios según ruta y vehículo</TableCaption>
-        <Thead>
+    <Flex
+    aalignItems='center'
+    justifyContent='center'
+    direction="column"
+    width="100%"
+    overflowX="auto"
+    borderRadius="md"
+    >
+    <TableContainer>
+    <Flex px={0} bg='gray.300' overflowX="auto" borderBottomLeftRadius="md" borderBottomRightRadius="md" border="1px solid black">
+      <Table colorScheme='#009ED1'>
+        <TableCaption border="1px solid black" bg='#009ED1'>Precios según ruta y vehículo</TableCaption>
+        <Thead bg='#009ED1'>
           <Tr>
-            <Th>RUTA</Th>
-            <Th>TIPO DE CARRO</Th>
-            <Th>PRECIO EN SOLES</Th>
+            <Th border="2px solid black" color='white'>RUTA</Th>
+            <Th border="2px solid black" color='white'>TIPO DE CARRO</Th>
+            <Th border="2px solid black" color='white'>PRECIO EN SOLES</Th>
+            <Th border="2px solid black" color='white'>ACTUALIZAR</Th>
           </Tr>
         </Thead>
         <Tbody>
           {allPrices?.map((combo, index) => (
-            <Tr>
-              <Td>{combo.airport} - {combo.zone}</Td>
+            <Tr key={index}> 
+              <Td border="2px solid black">{combo.airport} - {combo.zone}</Td>
               {combo.quantityPassengers === 4 ? (
-                <Td>AUTO</Td>
+                <Td border="2px solid black">AUTO</Td>
               ) : (combo.quantityPassengers === 6 ? (
-                <Td>CAMIONETA</Td>
+                <Td border="2px solid black">CAMIONETA</Td>
               ) : (combo.quantityPassengers === 10 ? (
-                <Td>VAN</Td>
-              ) : (<Td>VAN PLUS</Td>)))}
+                <Td border="2px solid black">VAN</Td>
+              ) : (<Td border="2px solid black">VAN PLUS</Td>)))}
 
-              <Td><Input
+              <Td border="2px solid black" textAlign="center">
+                <Input
+                color='black'
+                bg='white'
                 htmlSize={4}
                 width='auto'
                 border='2px solid black'
                 placeholder={combo.value}
                 name='date'
                 /* value={input.value} */
-                onChange={(e) => handleChange(combo.airport, combo.zone, combo.quantityPassengers, e.target.value)} /></Td>
-              <Td><Button
-                backgroundColor="black"
+                onChange={handleChange(combo.airport, combo.zone, combo.quantityPassengers)} /></Td>
+              <Td border="2px solid black" textAlign="center"><Button
+                backgroundColor='#E83D6F'
                 variant="solid"
                 color="white"
                 onClick={() => handleUpdate()}>Actualizar</Button></Td>
@@ -112,7 +133,9 @@ const EditPrices = () => {
           ))}
         </Tbody>
       </Table>
+      </Flex>
     </TableContainer>
+    </Flex>
   );
 };
 export default EditPrices

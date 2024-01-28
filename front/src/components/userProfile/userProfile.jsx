@@ -31,6 +31,7 @@ import {
     ModalCloseButton,
   } from '@chakra-ui/react'
 import NavBar from '../navBar/NavBar';
+import MobileNavbar from '../navBar/mobileNavbar/mobileNavbar';
 import { useSelector } from 'react-redux'
 
 import Swal from "sweetalert2";
@@ -91,11 +92,14 @@ const UserProfile = () => {
         <Box h='90vh' w={{base:'100%', md: 'auto'}} marginTop={{base: '0', md: '100px'}} display={'flex'} justifyContent={'center'} alignContent={'center'} bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
             justify="center"
             bgSize="cover"
-            bgRepeat="no-repeat">
+
+            bgRepeat="no-repeat"
+            >
             {location.pathname !== '/profile'}
-            <Flex h={{base: '650px', md: '60%'}} w={{base: '90%', md: '80%'}} m='auto' justify={'space-evenly'} align={'center'} overflow={'hidden'} borderLeftRadius={10} borderRightRadius={10}>
-                <Flex h='100%' w={{base: '100%', md: '50%'}} position={'relative'}>
-                    <Flex bg={'#009ED1'} flexDirection={{base: 'column', md: 'row'}} align={'center'} justify={'start'} w={'100%'} p='1rem' gap={4} position={'relative'} borderRadius={8}>
+            <Flex h={'60%'} w='80%' m='auto' justify={'space-evenly'} align={'center'} overflow={'hidden'} borderLeftRadius={10} borderRightRadius={10}>
+                <Flex h='100%' w='50%' position={'relative'}>
+                    <Flex bg={'#009ED1'} flexDirection={'row'} align={'center'} justify={'start'} w={'100%'} p='1rem' gap={4} position={'relative'} borderRadius={8}>
+
                         {userDetail && userDetail ? (
                             <>
                             {/* //Boton para actualizar datos del usuario */}
