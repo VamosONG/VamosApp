@@ -35,7 +35,8 @@ const Stadistic = () => {
     
 
     <Flex 
-    bg="white"
+    bg="gray.200"
+    borderRadius="md"
     alignItems="center"
     justifyContent="center"
     >
@@ -55,6 +56,7 @@ const Stadistic = () => {
           p={4}
           m={10}
           maxW="800px"
+          bg="white"
         >
           <Text fontSize="lg" fontWeight="bold" mb={2}>
             Total de usuarios: {totalUsers}
