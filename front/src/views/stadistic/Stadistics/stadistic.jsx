@@ -50,8 +50,8 @@ const Stadistic = () => {
         <Flex
           direction="column"
           align="center"
-          border="1px"
-          borderColor="blue.500"
+          border="4px"
+          borderColor='#10447E'
           borderRadius="md"
           p={4}
           m={10}
@@ -71,12 +71,13 @@ const Stadistic = () => {
         <Flex
           direction="column"
           align="center"
-          border="1px"
-          borderColor="blue.500"
+          border="4px"
+          borderColor='#10447E'
           borderRadius="md"
           p={4}
           m={2}
           maxW="800px"
+          bg="white"
         >
           <Text fontSize="lg" fontWeight="bold" mb={2}>
             Total de viajes por mes 2024
@@ -87,12 +88,13 @@ const Stadistic = () => {
         <Flex
           direction="column"
           align="center"
-          border="1px"
-          borderColor="blue.500"
+          border="4px"
+          borderColor='#10447E'
           borderRadius="md"
           p={4}
           m={2}
           maxW="800px"
+          bg="white"
         >
           <Text fontSize="lg" fontWeight="bold" mb={2}>
             Ganancias de cada chofer
@@ -105,12 +107,13 @@ const Stadistic = () => {
         <Flex
           direction="column"
           align="center"
-          border="1px"
-          borderColor="blue.500"
+          border="4px"
+          borderColor='#10447E'
           borderRadius="md"
           p={4}
           m={2}
           maxW="800px"
+          bg="white"
         >
           <Text fontSize="lg" fontWeight="bold" mb={2}>
             Ganancias por mes
@@ -121,12 +124,13 @@ const Stadistic = () => {
         <Flex
           direction="column"
           align="center"
-          border="1px"
-          borderColor="blue.500"
+          border="4px"
+          borderColor='#10447E'
           borderRadius="md"
           p={4}
           m={2}
           maxW="800px"
+          bg="white"
         >
           <Text fontSize="lg" fontWeight="bold" mb={2}>
             Viajes por chofer
