@@ -39,6 +39,7 @@ const getPriceHandler = require('../handlers/pricesHandlers/getPriceHandler')
 const postPriceHandler = require('../handlers/pricesHandlers/postPriceHandler')
 const updatePriceHandler = require('../handlers/pricesHandlers/updatePriceHandler')
 const deletePriceHandler = require('../handlers/pricesHandlers/deletePriceHandler')
+const filterPricesHandler = require('../handlers/filtersHandlers/filterPricesHandler');
 
 const createOfferHandler = require('../handlers/filtersHandlers/createOfferHandler');
 const getFilteredDriversHandler = require('../handlers/filtersHandlers/getFilteredDriversHandler');
@@ -107,6 +108,7 @@ router.get('/prices', getPriceHandler);
 router.post('/price/create', postPriceHandler);
 router.put('/price/update', updatePriceHandler);
 router.delete('/price', deletePriceHandler);
+router.get('/price/filter', filterPricesHandler);
 
 router.post('/offer/create', createOfferHandler);
 router.post('/drivers/filter', getFilteredDriversHandler);//
