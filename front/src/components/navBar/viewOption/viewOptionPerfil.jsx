@@ -20,15 +20,18 @@ import { BsFillPersonLinesFill } from "react-icons/bs";
 import ViewBtnUserForm from '../../../views/Forms/ViewForms/ViewUserForm';
 import ImgIcon from '../../../assets/icons/emojis/emojiHappy.webp'
 
-const ViewOptionPerfil = () => {
+const ViewOptionPerfil = ({ fotoPerfil }) => {
     const { currentUser } = useSelector((state) => state);
     const { isOpen, onToggle } = useDisclosure()
     return (
         <>
-            <Button onClick={onToggle} zIndex={11} w={'50px'} h='50px' borderRadius={50}>
+            <Button onClick={onToggle} zIndex={11} w={'50px'} h='50px' borderRadius={50} >
                 {currentUser.admin && currentUser.admin ? (
-                    <Avatar size="md" name="Ryan Florence" bg="#009ED1" src={currentUser.photoURL ? currentUser.photoURL : ImgIcon} />
-                ) : <ViewBtnUserForm currentUser={currentUser}/>}
+                    <Avatar onClick={onToggle} bg= "rgb(0, 158, 209)" src={fotoPerfil} />
+                ) : <>
+                    <ViewBtnUserForm currentUser={currentUser} />
+                </>}
+
             </Button>
             <Slide direction='right' in={isOpen} style={{ zIndex: 10 }}>
                 <Box
@@ -40,7 +43,7 @@ const ViewOptionPerfil = () => {
                     shadow='md'
                     maxWidth={'200px'}
                     w={'auto'}
-                    h={'200px'}
+                    h={'max-content'}
                     position="fixed"
                     top="0"
                     right="0"
@@ -58,37 +61,36 @@ const ViewOptionPerfil = () => {
                                         <ViewIcon />
                                     </Button>
                                 </Link>
-                                <SlideEx />
                                 <LogOut />
-                            </> 
-                        ) : currentUser.admin === false?
-                        <>
-                            <Link to='/profileUser'>
-                                <Button w={'100%'} display={'flex'} justifyContent={'space-between'}>
-                                    <Text >Mi perfil</Text>
-                                    <ViewIcon />
-                                </Button>
-                            </Link>
+                            </>
+                        ) : currentUser.admin === false ?
+                            <>
+                                <Link to='/profileUser'>
+                                    <Button w={'100%'} display={'flex'} justifyContent={'space-between'}>
+                                        <Text >Mi perfil</Text>
+                                        <ViewIcon />
+                                    </Button>
+                                </Link>
 
-                            <Link to='/review&reseña'>
-                                <Button w={'100%'} display={'flex'} justifyContent={'space-between'} >
-                                    <Text>Reseñar viaje
-                                    </Text>
-                                    <EditIcon />
-                                </Button>
-                            </Link>
+                                <Link to='/review&reseña'>
+                                    <Button w={'100%'} display={'flex'} justifyContent={'space-between'} >
+                                        <Text>Reseñar viaje
+                                        </Text>
+                                        <EditIcon />
+                                    </Button>
+                                </Link>
 
-                            <Link to="/questions">
-                                <Button w={'100%'} display={'flex'} justifyContent={'space-between'}>
-                                    <Text>Q&A
-                                    </Text>
-                                    <QuestionIcon/>
-                                </Button>
-                            </Link>
-                            <LogOut />
-                        </>
-                        
-                    : null }
+                                <Link to="/questions">
+                                    <Button w={'100%'} display={'flex'} justifyContent={'space-between'}>
+                                        <Text>Q&A
+                                        </Text>
+                                        <QuestionIcon />
+                                    </Button>
+                                </Link>
+                                <LogOut />
+                            </>
+
+                            : null}
                     </Flex>
                 </Box>
             </Slide>

@@ -37,6 +37,8 @@ import Swal from "sweetalert2";
 import CardUserTrips from '../cardUserTrips/cardUserTrips';
 import UpdateUserDataForm from './updateUserDataForms';
 import CardTrips from '../cards/cardTrips';
+import ViewBtnUserForm from '../../views/Forms/ViewForms/ViewUserForm';
+import ViewOptionPerfil from '../navBar/viewOption/viewOptionPerfil';
 
 const UserProfile = () => {
     const location = useLocation();
@@ -88,7 +90,7 @@ const UserProfile = () => {
     }
 
     return (
-        <Box h='90vh' w={{base:'100%', md: 'auto'}} marginTop={{base: '0', md: '100px'}} display={'flex'} justifyContent={'center'} alignContent={'center'} bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
+        <Box h='90vh' w={{base:'100%', md: 'auto'}} marginTop={{base: '0', md: '80px'}} display={'flex'} justifyContent={'center'} alignContent={'center'} bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
             justify="center"
             bgSize="cover"
             bgRepeat="no-repeat">
@@ -139,7 +141,7 @@ const UserProfile = () => {
                                     </Flex>
                                     <Flex w={'100%'} justify={'space-evenly'} gap={4} flexDirection={'column'} >
                                         <Flex w={'100%'} bg='whitesmoke' justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4'>
-                                            <Text textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}>
+                                            <Text textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}overflow={'hidden'}>
                                                 {userDetail.email && userDetail.email}
                                             </Text>
                                         </Flex>
@@ -199,6 +201,11 @@ const UserProfile = () => {
                     </Flex>
                     </Flex>
                 </Flex>
+            </Flex>
+            <Flex display={'none'}>
+
+            <ViewOptionPerfil fotoPerfil={fotoPerfil} />
+            <ViewBtnUserForm fotoPerfil={fotoPerfil} />
             </Flex>
         </Box>
     );

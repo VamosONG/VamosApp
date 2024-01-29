@@ -5,7 +5,7 @@ import {Box, Button, Collapse, useDisclosure } from '@chakra-ui/react'
 import LogOut from "../LogOut/logout";
 import { Avatar } from "@chakra-ui/react";
 
-const ViewBtnUserForm = () => {
+const ViewBtnUserForm = ({fotoPerfil}) => {
     const { isOpen, onToggle } = useDisclosure();
 
     const [isLoginFormVisible, setIsLoginFormVisible] = useState(true);
@@ -16,7 +16,7 @@ const ViewBtnUserForm = () => {
     };
     return (
         <Box zIndex={99}>
-                    <Avatar onClick={onToggle} bg= "rgb(0, 158, 209)" />
+                    <Avatar onClick={onToggle} bg= "rgb(0, 158, 209)" src={fotoPerfil} />
                     <Collapse initialScale={0.9} direction='bottom' in={isOpen} style={{ zIndex: 10 }}>
                         <Box
                             h='auto'

@@ -7,6 +7,7 @@ import {
   Avatar,
   AvatarGroup,
   useMediaQuery,
+  Progress
 } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 import Vamos from "../../assets/logoblanco.png";
@@ -16,6 +17,7 @@ import SlideEx from "../../views/Forms/ViewForm";
 import LogOut from "../../views/Forms/LogOut/logout";
 import ViewOptionPerfil from "./viewOption/viewOptionPerfil";
 import ViewBtnUserForm from "../../views/Forms/ViewForms/ViewUserForm";
+import {verificationComplete} from '../../context/authContext';
 
 const NavBar = () => {
   const { currentUser } = useSelector((state) => state);
@@ -35,12 +37,9 @@ const NavBar = () => {
     };
   }, []);
 
-  const [role,setRole]=useState("notUser")
- const handleClick=(role)=>{
-  if (role==='usuario'){setRole('user')}
-  if (role==='admin'){setRole('admin')}
-  
- }
+ if (!verificationComplete) {
+  return <div><Progress size='lg' isIndeterminate /></div>;
+}else{
  return (
   <>
     {isMobile ? (
@@ -57,7 +56,7 @@ const NavBar = () => {
         }
         alignItems="center"
         justify="space-between"
-        h="100px"
+        h="80px"
         w="100%"
         position="fixed"
         top="0"
@@ -100,7 +99,7 @@ const NavBar = () => {
                     </Button>
                   </Link> */}
 
-                  {/* <Link to='/editPrices'>
+                  {/* {/* <Link to='/editPrices'>
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       CAMBIAR PRECIOS DE VIAJES
                     </Button>
@@ -116,11 +115,11 @@ const NavBar = () => {
                     </Button>
                   </Link>
 
-                  <Link to="/solicitarViaje">
+                  {/* <Link to="/solicitarViaje">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       SOLICITAR VIAJE
                     </Button>
-                  </Link>
+                  </Link> */}
 
                   {/* <Link to="/profileUser">
                     <Button colorScheme="#009ED1" fontSize="1xl">
@@ -186,6 +185,7 @@ const NavBar = () => {
     )}
   </>
 );
+}
 };
 
 export default NavBar;

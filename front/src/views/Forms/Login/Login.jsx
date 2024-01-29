@@ -155,7 +155,7 @@ const LoginForm = ({ onSwitchForm }) => {
   //   }
   // };
 
- 
+
   
 
   const handleRegister = () => {
@@ -235,6 +235,20 @@ const LoginForm = ({ onSwitchForm }) => {
             </InputGroup>
           </FormControl>
 
+          {/* <Container>
+            <Text>
+              ¿No tienes cuenta?{" "}
+              <Button color="teal.500" onClick={handleRegister}>
+                Registrarme
+              </Button>
+              <Button colorScheme="red" onClick={(e)=>handleGoogleLogin(e)}>
+                Continuar con Google
+              </Button>
+      
+            </Text>
+          UserViewProfile
+          </Container> */}
+          {/* </Container> */}
 
           <Box>
             {!currentUser.id && (
