@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2'
 import { renderToString } from 'react-dom/server';
 
-import {  useNavigate } from 'react-router-dom';
+import {  Navigate, useNavigate } from 'react-router-dom';
 
 import { Field, Form, Formik } from 'formik';
 import { handlePayment, postNewViaje } from '../../../redux/actions';
@@ -21,12 +21,14 @@ import { handlePayment, postNewViaje } from '../../../redux/actions';
 const SolicitudwViajeForm = () => {
 
   const dispatch = useDispatch()
+  const navigate =useNavigate()
 
   const [input,setInput]=useState({})
   const [loading, setLoading] = useState(false);
 
   const currentUserId = useSelector((state) => state.currentUser.id)
   const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
+  console.log(currentUserId)
 
   useEffect(() => {
      const storedInput = localStorage.getItem('solicitudViajeInput');
@@ -56,7 +58,8 @@ const SolicitudwViajeForm = () => {
                 <p>Origen: {infoConfirmacionViaje.origin}</p>
                 <p>Destino: {infoConfirmacionViaje.destination}</p>
                 <p>Cantidad de pasajeros: {infoConfirmacionViaje.quantityPassengers}</p>
-                <p>Precio final: {infoConfirmacionViaje.price}</p>
+                <p style={{ fontWeight: 'bold', fontSize: 'larger' }}
+                >Precio final: {infoConfirmacionViaje.price}</p>
             </div>
         );
 
@@ -82,8 +85,11 @@ const SolicitudwViajeForm = () => {
             htmlMode: true
         }).then(async (result) => {
             if (result.isConfirmed) {
-                dispatch(handlePayment(infoConfirmacionViaje,currentUserId));
-
+              if(currentUserId===undefined) {
+                console.log('entra Qui')
+                navigate('/login')
+              }else{
+                await dispatch(handlePayment(infoConfirmacionViaje,currentUserId));
                 Swal.fire({
                     title: "Redirigiendo a Mercado Pago",
                     text: "Aguarde unos segundos",
@@ -91,12 +97,13 @@ const SolicitudwViajeForm = () => {
                     allowOutsideClick: false,
                     didOpen:()=>Swal.showLoading()
                 }).then(() => {
-
+              
                 
                 
                 // window.history.back();
 
                 });
+              }
             }
             else {
               setLoading(false);
@@ -177,7 +184,6 @@ const SolicitudwViajeForm = () => {
     };
 
 
-    /* console.log((JSON.parse(localStorage.getItem('solicitudViajeInput'))).destination) */
     const [horaSeleccionada, setHoraSeleccionada] = useState(0);
     const [fechaSeleccionada, setFechaSeleccionada] = useState(0);
     const [cantidadPasajerosSeleccionada, setCantidadPasajerosSeleccionada] = useState(0);
@@ -205,12 +211,6 @@ const SolicitudwViajeForm = () => {
         quantityPassengers: parsedInput.quantityPassengers || '', */
         }}
         onSubmit={handleSubmit}
-        /* {(values, actions) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2))
-          actions.setSubmitting(false)
-        }, 1000)
-        }} */
         >
         {(props) => (
         <Form>

@@ -681,16 +681,19 @@ export const handlePayment = (infoConfirmacionViaje,currentUserId) => {
         quantityPassengers: Number(infoConfirmacionViaje.quantityPassengers),
         driverId: null
       }
+      console.log(product)
     return async (dispatch)=> {
         try {
             const {data} =await axios.post("http://localhost:3001/mepago/create-order", product)
-            window.location.href = /* response. */data
+            console.log(data)
+            window.location.href = data
             /* return dispatch({
                 type: MERCADO_PAGO,
                 payload: data
             }) */
         } catch (error) {
             console.error("Error en al redirigir", error);
+            console.log(error.message)
         }
     }
 }
