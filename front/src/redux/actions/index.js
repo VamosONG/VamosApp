@@ -683,7 +683,7 @@ export const handlePayment = (infoConfirmacionViaje,currentUserId) => {
       }
     return async (dispatch)=> {
         try {
-            const {data} =await axios.post("http://localhost:3001/mepago/create-order", product)
+            const {data} =await axios.post("https://vamosappserver.onrender.com/mepago/create-order", product)
             window.location.href = /* response. */data
             /* return dispatch({
                 type: MERCADO_PAGO,
