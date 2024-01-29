@@ -31,13 +31,14 @@ import {
     ModalCloseButton,
   } from '@chakra-ui/react'
 import NavBar from '../navBar/NavBar';
-import MobileNavbar from '../navBar/mobileNavbar/mobileNavbar';
 import { useSelector } from 'react-redux'
 
 import Swal from "sweetalert2";
 import CardUserTrips from '../cardUserTrips/cardUserTrips';
 import UpdateUserDataForm from './updateUserDataForms';
 import CardTrips from '../cards/cardTrips';
+import ViewBtnUserForm from '../../views/Forms/ViewForms/ViewUserForm';
+import ViewOptionPerfil from '../navBar/viewOption/viewOptionPerfil';
 
 const UserProfile = () => {
     const location = useLocation();
@@ -89,17 +90,14 @@ const UserProfile = () => {
     }
 
     return (
-        <Box h='90vh' w={{base:'100%', md: 'auto'}} marginTop={{base: '0', md: '100px'}} display={'flex'} justifyContent={'center'} alignContent={'center'} bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
+        <Box h='90vh' w={{base:'100%', md: 'auto'}} marginTop={{base: '0', md: '80px'}} display={'flex'} justifyContent={'center'} alignContent={'center'} bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
             justify="center"
             bgSize="cover"
-
-            bgRepeat="no-repeat"
-            >
+            bgRepeat="no-repeat">
             {location.pathname !== '/profile'}
-            <Flex h={'60%'} w='80%' m='auto' justify={'space-evenly'} align={'center'} overflow={'hidden'} borderLeftRadius={10} borderRightRadius={10}>
-                <Flex h='100%' w='50%' position={'relative'}>
-                    <Flex bg={'#009ED1'} flexDirection={'row'} align={'center'} justify={'start'} w={'100%'} p='1rem' gap={4} position={'relative'} borderRadius={8}>
-
+            <Flex h={{base: '650px', md: '60%'}} w={{base: '90%', md: '80%'}} m='auto' justify={'space-evenly'} align={'center'} overflow={'hidden'} borderLeftRadius={10} borderRightRadius={10}>
+                <Flex h='100%' w={{base: '100%', md: '50%'}} position={'relative'}>
+                    <Flex bg={'#009ED1'} flexDirection={{base: 'column', md: 'row'}} align={'center'} justify={'start'} w={'100%'} p='1rem' gap={4} position={'relative'} borderRadius={8}>
                         {userDetail && userDetail ? (
                             <>
                             {/* //Boton para actualizar datos del usuario */}
@@ -143,7 +141,7 @@ const UserProfile = () => {
                                     </Flex>
                                     <Flex w={'100%'} justify={'space-evenly'} gap={4} flexDirection={'column'} >
                                         <Flex w={'100%'} bg='whitesmoke' justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4'>
-                                            <Text textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}>
+                                            <Text textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}overflow={'hidden'}>
                                                 {userDetail.email && userDetail.email}
                                             </Text>
                                         </Flex>
@@ -203,6 +201,11 @@ const UserProfile = () => {
                     </Flex>
                     </Flex>
                 </Flex>
+            </Flex>
+            <Flex display={'none'}>
+
+            <ViewOptionPerfil fotoPerfil={fotoPerfil} />
+            <ViewBtnUserForm fotoPerfil={fotoPerfil} />
             </Flex>
         </Box>
     );
