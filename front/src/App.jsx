@@ -20,8 +20,6 @@ import Solicitud from './components/solicitudes/solicitud';
 import { AuthProvider } from './context/authContext';
 
 import DriverTableView from './views/driversViewAdmin/driverTable';
-import ReserveComfirmed from './views/Reserve/ReserveConfirmed';
-import ReserveReject from './views/Reserve/ReserveReject';
 import ReviewAndReseña from './components/ReviewAndReseña/reviewAndReseña';
 import PaymentStatus from './views/payments/paymentStatus';
 
@@ -52,8 +50,6 @@ function App() {
         {/* Renderizando HomeComponent en la ruta para evitar pisar cada ves que se abre una pestaña */}
         <Route path='/home' element={<LoginForm/>}/>
         <Route path="/register" element={<RegistroForm/>}/>
-        <Route path='/reserve/confirmed' element={<ReserveComfirmed/>}/>
-        <Route path='/reserve/rejected' element={<ReserveReject/>}/>
         <Route path= '/about' element={<About/>} />
         <Route path='/questions' element={<Questions/>}/>
         <Route path="/paymentFailed" element={<PaymentFail/>}/>

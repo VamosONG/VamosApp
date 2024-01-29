@@ -85,8 +85,8 @@ let dataUser = {};
        // dispatch(getUserByEmail(data.email))  // get con el input para setear el current user 
         
         Swal.fire({
-          title: "Bien hecho!",
-          text: "Datos registrados!",
+          title: "¡Bien hecho!",
+          text: "¡Datos registrados correctamente!",
           icon: "success",
         });  
         navigate("/")
@@ -272,7 +272,7 @@ let dataUser = {};
         bg='#E83D6F'
         type="submit"
         fontFamily="'DIN Medium',"
-        disable={isError}
+        disabled={isError}
         >
           Confirmar
         </Button>

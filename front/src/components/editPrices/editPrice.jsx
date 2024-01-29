@@ -19,6 +19,8 @@ const EditPrice = ({combo,handleUpdate,isEvenRow}) => {
   const [input, setInput] = useState({})
   const [confirmationText, setConfirmationText] = useState("")
 
+  const [editar,setEditar] = useState(false)
+
 
   const handleChange = (airport, zone, quantityPassengers, inputValue) => {
     setInput({
@@ -37,11 +39,14 @@ const EditPrice = ({combo,handleUpdate,isEvenRow}) => {
       </div>
     );
   }
+  const handleClick = () => {
+    setEditar(!editar)
+  }
 
 
   return (
     
-            <Tr style={{ backgroundColor: !isEvenRow ? 'white' : '#009ED1' }}> {/* Modificar las etiquetas para que esto funcione */}
+            <Tr style={{ backgroundColor: !isEvenRow ? 'white' : /* '#009ED1' */'blue.100' }}> 
               <Td style={{ fontWeight: 'bold' }}>{combo.airport} - {combo.zone}</Td>
               {combo.quantityPassengers === 4 ? (
                 <Td style={{ fontWeight: 'bold' }}>AUTO</Td>
@@ -51,23 +56,44 @@ const EditPrice = ({combo,handleUpdate,isEvenRow}) => {
                 <Td style={{ fontWeight: 'bold' }}>VAN</Td>
               ) : (<Td style={{ fontWeight: 'bold' }}>VAN PLUS</Td>)))}
 
+            {!editar?(
+              /* <Tr> */
               <Td><Input
                 htmlSize={4}
                 width='auto'
                 border='2px solid black'
                 placeholder={combo.value}
                 name='date'
+                value={combo.value}
+                /* onChange={(e) => handleChange(combo.airport, combo.zone, combo.quantityPassengers, e.target.value)} */ /> {/* </Td> */}
+              {/* <Td> */}<Button
+                backgroundColor="black"
+                variant="solid"
+                color="white"
+                onClick={() => handleClick(input,confirmationText)}
+                /* isDisabled={(input.value === Number(combo.value))||(input.value === undefined || input.value === ''|| input.value === null)} */
+                >Editar</Button></Td>
+                /* </Tr> */
+            ):(
+              
+              <Td><Input
+                htmlSize={4}
+                width='auto'
+                border='2px solid black'
+                /* placeholder={combo.value} */
+                name='date'
                 /* value={input.value} */
-                onChange={(e) => handleChange(combo.airport, combo.zone, combo.quantityPassengers, e.target.value)} /></Td>
-              <Td><Button
+                onChange={(e) => handleChange(combo.airport, combo.zone, combo.quantityPassengers, e.target.value)} />{/* </Td> */}
+              {/* <Td> */}<Button
                 backgroundColor="black"
                 variant="solid"
                 color="white"
                 onClick={() => handleUpdate(input,confirmationText)}
                 isDisabled={(input.value === Number(combo.value))||(input.value === undefined || input.value === ''|| input.value === null)}
                 >Actualizar</Button></Td>
-            </Tr>
-         
+                
+                )}
+                </Tr>
   );
 };
 export default EditPrice
