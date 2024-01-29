@@ -26,7 +26,7 @@ const SolicitudwViajeForm = () => {
   const [input,setInput]=useState({})
   const [loading, setLoading] = useState(false);
 
-  const currentUserId = useSelector((state) => state.currentUser.id)
+  const currentUserId = useSelector((state) => state.currentUser?.id)
   const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
   console.log(currentUserId)
 
