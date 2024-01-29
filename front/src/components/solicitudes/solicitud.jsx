@@ -62,8 +62,8 @@ const Solicitud =()=> {
   const handleClick = (conductorId) => {
     dispatch(conductorAsignado({tripId:id,driverId:conductorId}))
     Swal.fire({
-      title: "Conductor confirmado para el viaje",
-      text: "Para cambiar de conductor ir a Solicitudes de viaje --> Viajes con conductor asignado",
+      title: "¡Conductor asignado con éxito!",
+      text: "Para volver a cambiar de conductor ir a Solicitudes de viaje --> Viajes con conductor asignado",
       icon: "success"
     }).then(() => {
       // Redirigir a la página anterior

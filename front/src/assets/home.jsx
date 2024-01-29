@@ -43,7 +43,7 @@ return (
           color="white"
           fontSize="3xl"
           >
-          Nos enorgullece ofrecer traslados desde Tumbes e Talar hacia domicilios y hoteles, con tarifas asequibles a partir de 20 soles (aprox. US$5). 
+          Nos enorgullece ofrecer traslados desde Tumbes y Talar hacia domicilios y hoteles, con tarifas asequibles a partir de 20 soles (aprox. US$5). 
           Nuestra misión va más allá de brindar un servicio de transporte; también creamos 
           oportunidades laborales para adultos mayores que desean seguir emprendiendo. 
           Con 'Vamos', tienes la garantía de vehículos nuevos y cómodos, disponible las 24 horas.

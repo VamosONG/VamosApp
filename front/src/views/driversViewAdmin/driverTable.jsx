@@ -42,8 +42,8 @@ const DriverTableView = () => {
 
     const deleteDriver = (id) => {
         Swal.fire({
-            title: "¿Seguro quieres eliminar?",
-            text: "Se eliminaran los del conductor",
+            title: "¿Seguro quieres eliminar este conductor?",
+            text: "¡Esta acción no se puede revertir!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Si, eliminalo!",
@@ -54,8 +54,8 @@ const DriverTableView = () => {
                 const response = await dispatch(deleteDriverAction(id))
                 if (response) {
                     Swal.fire({
-                        title: "¡Eliminado!",
-                        text: "Ha sido eliminado el registro.",
+                        title: "¡Eliminado con éxito!",
+                        text: "Ha sido eliminado el conductor.",
                         icon: "success"
                     });
                 }
@@ -67,7 +67,7 @@ const DriverTableView = () => {
             ) {
                 Swal.fire({
                     title: "Cancelado",
-                    text: "Registro sano y salvo :D",
+                    text: "No se ha eliminado nada",
                     icon: "error"
                 });
             }

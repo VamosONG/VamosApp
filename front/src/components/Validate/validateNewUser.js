@@ -18,7 +18,7 @@ export const ValidateNewUser = (input) => {
     : null;
 
     error.phone = !input.phone ? 'Ingrese número de teléfono.' 
-    : !phoneRegex.test(input.phone) ? 'Ingrese teléfono con formato "(cod.pais)(número) sin paréntesis ni espacios".'
+    : !phoneRegex.test(input.phone) ? 'Ingrese su telefono con el codigo de area. Ejemplo: (976) 963829.'
     : null;
 
     error.email = !input.email ? 'Ingrese un email.'

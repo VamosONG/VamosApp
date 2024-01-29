@@ -42,7 +42,7 @@ const EditPrices = () => {
     
     
     Swal.fire({
-      title: "Está por el cambiar el precio",
+      title: "Está por el cambiar el precio del viaje",
       html: renderToString(confirmationText),
       icon: "warning",
       showCancelButton: true,
@@ -54,7 +54,7 @@ const EditPrices = () => {
       if (result.isConfirmed) {
         await dispatch(updatePrice(input)) //Para actualizar en BD
         Swal.fire({
-          title: "Precio modificado",
+          title: "¡Precio modificado con éxito!",
           icon: "success"
         }).then(() => {
           window.location.reload();
