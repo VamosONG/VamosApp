@@ -205,7 +205,7 @@ const LoginForm = ({ onSwitchForm }) => {
     border="none"
     boxShadow="none"
     color="white"
-    display={currentUser.id ? 'none' : 'block'}
+    display={currentUser?.id ? 'none' : 'block'}
     >
       {!currentUser?.id && (
         <>

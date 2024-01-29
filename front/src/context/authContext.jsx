@@ -70,6 +70,7 @@ export function AuthProvider({ children }) {
 
 
     const register = async (email, password) => {
+        console.log(auth, email, password);
         const response = await createUserWithEmailAndPassword(auth, email, password)
         console.log(response);
     }
