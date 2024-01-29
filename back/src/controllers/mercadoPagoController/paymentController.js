@@ -44,9 +44,9 @@ const createOrder = async (req, res) => {
           // picture_url: "",
         }],
       back_urls: {
-        success: "http://localhost:5173/paymentStatus",
-        pending: "http://localhost:5173/pending",
-         failure: "http://localhost:5173/paymentFailed"
+        success: "https://vamos-app.vercel.app/paymentStatus",
+        pending: "https://vamos-app.vercel.app/pending",
+         failure: "https://vamos-app.vercel.app/paymentFailed"
          
       },
 
