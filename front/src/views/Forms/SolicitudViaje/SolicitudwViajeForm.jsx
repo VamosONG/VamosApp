@@ -89,13 +89,13 @@ const SolicitudwViajeForm = () => {
                 console.log('entra Qui')
                 navigate('/login')
               }else{
-                await dispatch(handlePayment(infoConfirmacionViaje,currentUserId));
+await dispatch(handlePayment(infoConfirmacionViaje,currentUserId));
                 Swal.fire({
-                    title: "Redirigiendo a Mercado Pago",
-                    text: "Aguarde unos segundos",
-                    /* icon: "success", */
-                    allowOutsideClick: false,
-                    didOpen:()=>Swal.showLoading()
+                  title: "Redirigiendo a Mercado Pago",
+                  text: "Aguarde unos segundos",
+                  /* icon: "success", */
+                  allowOutsideClick: false,
+                  didOpen:()=>Swal.showLoading()
                 }).then(() => {
               
                 

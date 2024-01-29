@@ -671,7 +671,7 @@ export const getTrips = () => {
 export const handlePayment = (infoConfirmacionViaje,currentUserId) => {
     const product = {
         viaje:`${infoConfirmacionViaje.origin}${infoConfirmacionViaje.destination}`, 
-        price: infoConfirmacionViaje?.price ,
+        price: Number(infoConfirmacionViaje?.price) ,//Ojo, que esto puede cambiar
         // quantityPassengers: "1",
         userId: currentUserId,
         origin: infoConfirmacionViaje?.origin,
