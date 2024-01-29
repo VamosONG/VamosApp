@@ -13,10 +13,10 @@ const SlideEx = () => {
             <Flex w={'100%'} gap='2'>
                 {/* Cada componente renderiza una vista para usuarios y admin */}
 
-                {currentUser?.admin ? <>
-                    {/* <ViewBtnChoferForm/> */}
-                    {/* <LogOut/> */}
+                {currentUser.admin ? <>
+                    <ViewBtnChoferForm/>
 
+                    {/* <LogOut/> */}
                 </>
                     : null
                     // <>
