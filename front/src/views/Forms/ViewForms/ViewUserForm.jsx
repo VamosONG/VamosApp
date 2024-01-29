@@ -4,8 +4,9 @@ import RegistroForm from "../Registro/Registro";
 import {Box, Button, Collapse, useDisclosure } from '@chakra-ui/react'
 import LogOut from "../LogOut/logout";
 import { Avatar } from "@chakra-ui/react";
+import { BsFillEmojiNeutralFill } from "react-icons/bs";
 
-const ViewBtnUserForm = ({fotoPerfil}) => {
+const ViewBtnUserForm = (currentUser) => {
     const { isOpen, onToggle } = useDisclosure();
 
     const [isLoginFormVisible, setIsLoginFormVisible] = useState(true);
@@ -16,7 +17,7 @@ const ViewBtnUserForm = ({fotoPerfil}) => {
     };
     return (
         <Box zIndex={99}>
-                    <Avatar onClick={onToggle} bg= "rgb(0, 158, 209)" src={fotoPerfil} />
+                    <Avatar onClick={onToggle} bg= "rgb(0, 158, 209)"  name={currentUser.name} />
                     <Collapse initialScale={0.9} direction='bottom' in={isOpen} style={{ zIndex: 10 }}>
                         <Box
                             h='auto'

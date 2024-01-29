@@ -202,11 +202,6 @@ const UserProfile = () => {
                     </Flex>
                 </Flex>
             </Flex>
-            <Flex display={'none'}>
-
-            <ViewOptionPerfil fotoPerfil={fotoPerfil} />
-            <ViewBtnUserForm fotoPerfil={fotoPerfil} />
-            </Flex>
         </Box>
     );
 };
