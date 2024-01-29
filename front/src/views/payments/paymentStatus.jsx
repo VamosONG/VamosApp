@@ -14,7 +14,7 @@ const PaymentStatus = () => {
   useEffect(() => {
     dispatch(getDataMePago());
     Swal.fire({
-      title: "Viaje reservado",
+      title: "¡Viaje reservado!",
       text: "Los detalles de su reserva se enviaron a su correo electrónico",
       icon: "success"
     });

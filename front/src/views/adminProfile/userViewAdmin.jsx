@@ -33,7 +33,7 @@ const UserViewAdmin = () => {
   console.log(results);
   const handleAdminAccess = (id) => {
     Swal.fire({
-      title: "¿Convertir ADMIN?",
+      title: "¿Dar permisos de ADMIN?",
       text: "SE LE DARA PERMISO A TODOS LOS DATOS DEL SISTEMA",
       icon: "warning",
       showCancelButton: true,
@@ -45,7 +45,7 @@ const UserViewAdmin = () => {
         const response = await dispatch(handleAdminUser(id));
         if (response) {
           Swal.fire({
-            title: "¡Acceso ADMIN!",
+            title: "¡Ha añadido un nuevo ADMINISTRADOR!",
             text: "El usuario ahora puede ingresar como ADMIN.",
             icon: "success"
           });

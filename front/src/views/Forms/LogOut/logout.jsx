@@ -18,7 +18,7 @@ const LogOut = () => {
       localStorage.clear();
       window.location.reload();
           Swal.fire({
-            title: "Log out exitoso!",
+            title: "¡Sesión cerrada con éxito!",
             icon: "success"
           });
 

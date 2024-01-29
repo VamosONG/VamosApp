@@ -73,7 +73,7 @@ const LoginForm = ({ onSwitchForm }) => {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Login exitoso",
+          title: "¡Inicio de sesión éxitoso!",
           showConfirmButton: false,
           timer: 2500
         })
@@ -83,7 +83,7 @@ const LoginForm = ({ onSwitchForm }) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Email o contraseña incorrecto",
+        text: "Email o contraseña incorrecto,intentelo nuevamente.",
       });
     }
   };
@@ -108,7 +108,7 @@ const LoginForm = ({ onSwitchForm }) => {
          Swal.fire({
           position: "center",
           icon: "success",
-          title: "Login exitoso",
+          title: "Inicio de sesión éxitoso",
           showConfirmButton: false,
           timer: 2500
         });
