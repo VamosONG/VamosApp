@@ -1,22 +1,29 @@
 import { IconButton, Button, Stack,Icon } from "@chakra-ui/react";
 import { FaSignOutAlt } from "react-icons/fa";
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { useAuth } from "../../../context/authContext";
 import { useNavigate } from "react-router";
 import { cleanCurrentUser } from '../../../redux/actions';
+import Swal from "sweetalert2";
 
 const LogOut = () => {
   const navigate = useNavigate();
   const auth = useAuth();
   const dispatch = useDispatch();
-  const { currentUser } = useSelector((state) => state);
+
 
   const handleLogOut = async () => {
     try {
       await auth.logOut();  // Asumo que tu función logOut está implementada correctamente en useAuth
 
+          Swal.fire({
+            title: "Log out exitoso!",
+            icon: "success"
+          });
+
       // Limpiar el estado de Redux
-      dispatch(cleanCurrentUser());
+    dispatch(cleanCurrentUser());
+
 
       // Redirigir al usuario a la página de inicio
       navigate("/");

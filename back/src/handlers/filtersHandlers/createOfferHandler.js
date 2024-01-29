@@ -10,7 +10,7 @@ module.exports=async(req,res)=>{
         
         const fecha =new Date(date);
         const price=await calculatePrices(origin, destination, quantityPassengers, fecha);
-        if(price===0)
+        if(price===0 || !price)
             throw new Error(`No se encontraron viajes disponibles desde ${origin} a ${destination} para ${quantityPassengers} pasajeros.`)
 
          //Crea una oferta de trip con ese filtro.
@@ -49,9 +49,14 @@ try{
     );
 
     let prices = await getPrices(airport, zone);
-
+    let cost = 0;
+    if (!prices){
+        throw new Error('No se encontraron precios para el aeropuerto y zona indicados.');
+    }
     const ordenados= await prices?.sort((a,b)=>a.quantityPassengers - b.quantityPassengers);
-    let cost = parseFloat(await ordenados.find(opcion => opcion.quantityPassengers>=quantityPassengers).value);
+    cost = await ordenados?.find(opcion => opcion.quantityPassengers>=quantityPassengers);
+    if(cost)
+        cost=cost?.value;
 
     if (esFeriado)
         cost*=1.5;
