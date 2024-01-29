@@ -12,7 +12,7 @@ const SlideEx = () => {
         <>
             <Flex minWidth='max-content' gap='2'>
                 {/* Cada componente renderiza una vista para usuarios y admin */}
-                {currentUser.admin ? <>
+                {currentUser?.admin ? <>
                     {/* <ViewBtnChoferForm/> */}
                     <LogOut/>
                 </>

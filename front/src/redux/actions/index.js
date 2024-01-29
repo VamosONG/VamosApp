@@ -668,3 +668,29 @@ export const getTrips = () => {
         }
     }
 }
+export const handlePayment = (infoConfirmacionViaje,currentUserId) => {
+    const product = {
+        viaje:`${infoConfirmacionViaje.origin}${infoConfirmacionViaje.destination}`, 
+        price: infoConfirmacionViaje?.price ,
+        // quantityPassengers: "1",
+        userId: currentUserId,
+        origin: infoConfirmacionViaje?.origin,
+        destination: infoConfirmacionViaje?.destination,
+        date:infoConfirmacionViaje?.date,
+        hour: infoConfirmacionViaje?.hour,
+        quantityPassengers: Number(infoConfirmacionViaje.quantityPassengers),
+        driverId: null
+      }
+    return async (dispatch)=> {
+        try {
+            const {data} =await axios.post("http://localhost:3001/mepago/create-order", product)
+            window.location.href = /* response. */data
+            /* return dispatch({
+                type: MERCADO_PAGO,
+                payload: data
+            }) */
+        } catch (error) {
+            console.error("Error en al redirigir", error);
+        }
+    }
+}

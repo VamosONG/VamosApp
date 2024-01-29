@@ -69,7 +69,7 @@ const NavBar = () => {
 
         <Box w="100%" alignContent="center" justifyContent="center">
           <Flex justify="center" alignItems="center">
-            {currentUser.admin && currentUser.admin ? (
+            {currentUser?.admin && currentUser?.admin ? (
               <Box>
                 <Flex>
                   <Link to="/">
@@ -91,7 +91,7 @@ const NavBar = () => {
                   </Link> */}
                 </Flex>
               </Box>
-            ) : currentUser.admin === false ? (
+            ) : currentUser?.admin === false ? (
               <Box>
                 <Flex>
                 <Link to="/">
@@ -100,11 +100,11 @@ const NavBar = () => {
                     </Button>
                   </Link>
 
-                  <Link to="/solicitarViaje">
+                  {/* <Link to="/solicitarViaje">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       SOLICITAR VIAJE
                     </Button>
-                  </Link>
+                  </Link> */}
 
                   <Link to="/profileUser">
                     <Button colorScheme="#009ED1" fontSize="1xl">
@@ -146,7 +146,7 @@ const NavBar = () => {
                       PREGUNTAS FRECUENTES
                     </Button>
                   </Link>
-                  {currentUser && currentUser.admin ? <LogOut /> : null}
+                  {currentUser && currentUser?.admin ? <LogOut /> : null}
                 </Flex>
               </Box>
             )}
@@ -155,7 +155,7 @@ const NavBar = () => {
 
         <Box>
           <AvatarGroup spacing="1rem" mx="20px">
-            {currentUser.admin && currentUser.admin ? (
+            {currentUser?.admin && currentUser?.admin ? (
               <Avatar size="md" name="Ryan Florence" bg="#009ED1" src={currentUser.photoURL} />
             ) : null}
             <SlideEx />

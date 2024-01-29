@@ -20,23 +20,13 @@ import WhatsAppButton from "../../whatsAppButton/whatsAppButton";
 import CompanySlider from "../../carouselVamos/carouselVamos";
 import InfoVamos from "../../infoVamos/infoVamos";
 import Publi from "../../publiVamos/publiVamos";
+import SolicitudwViajeForm from "../../Forms/SolicitudViaje/SolicitudwViajeForm";
 
 const Home = () => {
     
     return (
         <>
-        {/* <Link to='/review&reseña'>
-        <Button>
-            
-            ReviewAndReseña
-        </Button>
-        </Link> */} {/* No me borren esta vaina, después le encontraré un lugar */}
-        {/* <Link to='/editPrices'>
-        <Button>
-            
-            Cambiar precios de viajes
-        </Button>
-        </Link> */} {/* Esta tampoco */}
+        <SolicitudwViajeForm/>
         <Box
         h='100vh'
         position= 'relative'
