@@ -59,6 +59,7 @@ const sendMailHandler = require('../utils/mailing/sendMailHandler');
 const deleteLogic = require('../handlers/driverHandlers/setInactiveDriverHandler');
 const deleteLogicDrivers = require('../handlers/driverHandlers/setInactiveDriverHandler');
 const updateUserAdminHandler = require('../handlers/userHandlers/updateUserAdminHandler');
+const deleteLogicUserHandler = require('../handlers/userHandlers/deleteLogicUserHandler');
 
 const router = Router();
 
@@ -74,7 +75,7 @@ router.delete('/user', deleteUserHandler);
 router.post('/user/create', postUserHandler);
 router.patch('/user/update/:id', updateUserHandler);
 router.patch('/user/admin/:id', updateUserAdminHandler); //Ruta para convertir admin y viceversa.
-
+router.patch('/user/logic/:id', deleteLogicUserHandler);
 
 //Cambio a metodo PATCH: Mas versatil para actulizar campos individualmente.
 //Add ID al final para recibirlo por params.

@@ -64,7 +64,7 @@ const createOrder = async (req, res) => {
 
     
   } catch (error) {
-    return res.status(500).json({ message: "Something goes wrong" });
+    return res.status(500).json(`Error en payment controller Create Order: ${error.message}`);
   }
 
 };
@@ -105,7 +105,7 @@ res.status(204).json(resp);
     
   } catch (error) {
     console.error("Error:", error);
-    return res.status(500).json({ message: "Something goes wrong" });
+    return res.status(500).json(`Error en payment controller Receive Webhook: ${error.message}`);
   }
 };
 

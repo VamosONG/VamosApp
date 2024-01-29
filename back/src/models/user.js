@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
             // allowNull: false,
         },
         phone: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             // allowNull: true,
             validate: {
                 isNumeric: true, 
@@ -35,15 +35,20 @@ module.exports = (sequelize) => {
             },
         },
         dni: {
-            type: DataTypes.INTEGER, 
+            type: DataTypes.STRING, 
             // allowNull: false,
-            validate: {
-                isNumeric: true, 
-            },
         },
         admin: {
             type: DataTypes.BOOLEAN,
             defaultValue: false, 
+        },
+        image:{
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        banned: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
    },
 

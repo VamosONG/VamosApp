@@ -69,7 +69,7 @@ const LoginForm = ({ onSwitchForm }) => {
       await auth.login(input.email, input.password); // autenticacion de loginWithGoogle funcion de firebase signInWithPopUp
         const getUser =  await dispatch(getUserByEmail(input.email)); // busca al usuario por email y lo setea como currentUser
         console.log(getUser);
-        // navigate('/')
+         navigate('/')////
         Swal.fire({
           position: "center",
           icon: "success",
@@ -129,9 +129,9 @@ const LoginForm = ({ onSwitchForm }) => {
         // Carga el estado global currentUser con la info del usuario registradi
         const userActual = await dispatch(getUserByEmail(googleLog.user.email))
 
+        navigate('/')////
         return response
       }
-
     } catch (error) {
       console.error("Error al iniciar sesión con Google:", error.message);
       Swal.fire({
@@ -307,6 +307,7 @@ const LoginForm = ({ onSwitchForm }) => {
               </Stack>
           </Center>
         </>
+
       )}
     </Stack>
   );

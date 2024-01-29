@@ -58,21 +58,21 @@ function App() {
         <Route path='/questions' element={<Questions/>}/>
         <Route path="/paymentFailed" element={<PaymentFail/>}/>
         <Route path='/paymentStatus' element={<PaymentStatus/>}/>
+        <Route path="/login" element={<LoginForm/>}/>
+        <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
         
 
          <Route element={<ProtectedRoutes isAllowed={currentUser?.admin=== false} />} > 
-        <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
-        <Route path="/login" element={<LoginForm/>}/>
-        <Route path='/solicitud' element={<Solicitud/>}/>
         <Route path="/profileUser" element={<UserProfile/>}/>
+        <Route path='/review&reseña' element={<ReviewAndReseña/>}/>
         
          </Route> 
         {/* No son necesario estas rutas, ya que todo estara dentro el componente del admin */}
         {/* <Route path='/detail' element={<DriverTableView/>}/> */}
         <Route element={<ProtectedRoutes isAllowed={currentUser?.admin=== true} />}> 
+        <Route path='/solicitud' element={<Solicitud/>}/>
         <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
         <Route path='/product' element={<Product/>}/>
-        <Route path='/review&reseña' element={<ReviewAndReseña/>}/>
         <Route path='/editPrices' element={<EditPrices/>}/>
         <Route path="/login" element={<LoginForm/>}/>
         <Route path="/register" element={<RegistroForm/>}/>

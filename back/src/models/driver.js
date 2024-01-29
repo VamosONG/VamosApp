@@ -24,11 +24,11 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         dni: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false
         },
         phone: {
-            type: DataTypes.INTEGER, 
+            type: DataTypes.STRING, 
             allowNull: false,
             validate: {
                 isNumeric: true, 
@@ -73,7 +73,6 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-
         capacityPassengers: {
             type: DataTypes.INTEGER, 
             allowNull: false,
