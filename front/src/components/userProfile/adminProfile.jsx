@@ -99,7 +99,7 @@ const AdminProfile = () => {
                         cursor="pointer"
                         onClick={() => handleMenuClick("Reviews")}
                     >
-                        Reviews
+                        Reseñas
                     </Text>
                     <Divider />
                     <Text 
@@ -112,7 +112,7 @@ const AdminProfile = () => {
                         cursor="pointer"
                         onClick={() => handleMenuClick("Stadistic")}
                     >
-                        Stadistic
+                        Estadisticas
                     </Text>
                     <Divider />
                     <Text 
@@ -125,7 +125,7 @@ const AdminProfile = () => {
                         cursor="pointer"
                         onClick={() => handleMenuClick("EditPrice")}
                     >
-                        EditPrice
+                        Editar Precio
                     </Text>
                     <Divider />
                     <Text 
@@ -138,7 +138,7 @@ const AdminProfile = () => {
                         cursor="pointer"
                         onClick={() => handleMenuClick("ChoferForm")}
                     >
-                       New Driver
+                        Nuevo Conductor
                     </Text>
                     <Divider />
                     

@@ -1,4 +1,4 @@
-//import {useSelector} from 'react-redux'
+
 
 export const ValidateNewUser = (input) => {
   
@@ -31,3 +31,4 @@ export const ValidateNewUser = (input) => {
 
     return error;
 }
+
