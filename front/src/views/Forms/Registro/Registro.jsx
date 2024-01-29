@@ -67,7 +67,7 @@ const RegistroForm = ({ onSwitchForm }) => {
 
   //Autenticacion
   const auth = useAuth();
-  const { displayName } = auth.user;
+  //const { displayName } = auth.user;
 
 // funcion para que al registrarse se envien los datos del usuario
   const handleSubmit = async (e) => {
