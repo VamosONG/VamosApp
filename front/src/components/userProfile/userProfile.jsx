@@ -115,8 +115,8 @@ const UserProfile = () => {
                                         src={fotoPerfil ? fotoPerfil : 'https://bit.ly/sage-adebayo'}
                                         border={'2px solid #10447E'}
 
-                                */<Flex w={{base: '100%', md: '50%'}} justify={'center'} position={'relative'}> */
-                                    */<Image w={{base: '300px', md: '15rem'}} h={{base: '300px', md: '15rem'}} name='Segun Adebayo' src={userDetail.image ? userDetail.image : fotoPerfil} border={'2px solid #10447E'}*/
+                                // <Flex w={{base: '100%', md: '50%'}} justify={'center'} position={'relative'}> 
+                                //     <Image w={{base: '300px', md: '15rem'}} h={{base: '300px', md: '15rem'}} name='Segun Adebayo' src={userDetail.image ? userDetail.image : fotoPerfil} border={'2px solid #10447E'}
 
                                         alt={fotoPerfil.name}
                                         bg='white'
