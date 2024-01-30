@@ -319,7 +319,14 @@ await dispatch(handlePayment(infoConfirmacionViaje,currentUserId));
                   id='pasajeros' 
                   name='quantityPassengers' 
                   onChange={(e)=>{
-                    console.log(e.target.value)
+                    const selectedValue = parseInt(e.target.value, 10);
+
+                  // validación para el valor seleccionado 0
+                  if (selectedValue === 0) {
+                  
+                    alert("La cantidad de pasajeros no puede ser 0");
+                    return;
+                    }
                     setInput({...input,quantityPassengers:e.target.value});
                     setCantidadPasajerosSeleccionada(e.target.value)
                     handleChange
@@ -329,12 +336,12 @@ await dispatch(handlePayment(infoConfirmacionViaje,currentUserId));
                     setMaxPasajeros((origenSeleccionado === "AEROPUERTO TALARA" && destinoSeleccionado === "MANCORA") ||
                     (origenSeleccionado === "MANCORA" && destinoSeleccionado === "AEROPUERTO TALARA") ? 15 : 10);
 
-                    return [...Array(maxPasajeros).keys()].map((number) => (
-                        <option key={number + 1} id={`number-${number + 1}`} value={number + 1}>
-                            {number + 1}
-                        </option>
-                    ));
-                    })()}
+                    return [...Array(maxPasajeros + 1).keys()].map((number) => (
+                      <option key={number} value={number}>
+                          {number}
+                      </option>
+                  ))
+              })()}
                   </Select>
 
 
@@ -359,3 +366,10 @@ await dispatch(handlePayment(infoConfirmacionViaje,currentUserId));
   );
 };
 export default SolicitudwViajeForm
+
+/* [...Array(maxPasajeros).keys()].map((number) => (
+                        <option key={number + 1} id={`number-${number + 1}`} value={number + 1}>
+                            {number + 1}
+                        </option>
+                    ));
+                    } */
