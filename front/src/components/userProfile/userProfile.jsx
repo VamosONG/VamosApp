@@ -37,6 +37,7 @@ import Swal from "sweetalert2";
 import CardUserTrips from '../cardUserTrips/cardUserTrips';
 import UpdateUserDataForm from './updateUserDataForms';
 import CardTrips from '../cards/cardTrips';
+import CeroViaje from '../errorViews/ceroViaje/ceroviajes';
 
 const UserProfile = () => {
     const location = useLocation();
@@ -178,10 +179,18 @@ const UserProfile = () => {
                                     </TabList>
                                     <TabPanels >
                                         <TabPanel p='0'>
+                                            {userDetail.Trips.length  ? (
                                             <CardUserTrips userDetail={userDetail} stateFilter='reserved' />
+                                            ):(
+                                                <CeroViaje/>
+                                            )}
                                         </TabPanel>
                                         <TabPanel p='0'>
-                                            <CardUserTrips userDetail={userDetail} stateFilter='completed' />
+                                            {userDetail.Trips.length  ? (
+                                                <CardUserTrips userDetail={userDetail} stateFilter='completed' />
+                                            ) : (
+                                                <CeroViaje/>
+                                            )}
                                         </TabPanel>
                                     </TabPanels>
                                 </Tabs>
