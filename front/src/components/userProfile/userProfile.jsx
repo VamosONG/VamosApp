@@ -107,7 +107,7 @@ const UserProfile = () => {
                                     </Button>
                                 </Tooltip>
                                 <Flex w={{base: '100%', md: '50%'}} justify={'center'} position={'relative'}>
-                                    <Image w={{base: '300px', md: '15rem'}} h={{base: '300px', md: '15rem'}} name='Segun Adebayo' src={fotoPerfil ? fotoPerfil : 'https://bit.ly/sage-adebayo'} border={'2px solid #10447E'}
+                                    <Image w={{base: '300px', md: '15rem'}} h={{base: '300px', md: '15rem'}} name='Segun Adebayo' src={userDetail.image ? userDetail.image : fotoPerfil} border={'2px solid #10447E'}
                                         alt={fotoPerfil.name}
                                         bg='white'
                                         borderRadius={{base: '50%', md: '10'}}
@@ -201,11 +201,6 @@ const UserProfile = () => {
                     </Flex>
                     </Flex>
                 </Flex>
-            </Flex>
-            <Flex display={'none'}>
-
-            <ViewOptionPerfil fotoPerfil={fotoPerfil} />
-            <ViewBtnUserForm fotoPerfil={fotoPerfil} />
             </Flex>
         </Box>
     );

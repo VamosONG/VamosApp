@@ -37,6 +37,7 @@ export function AuthProvider({ children }) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [user, setUser] = useState("")
+    
     //const [verificationComplete, setVerificationComplete] = useState(false);  // Estado para controlar la finalización de la verificación
 
     useEffect(() => {
