@@ -80,11 +80,11 @@ const NavBar = () => {
                     </Button>
                   </Link>
                   
-                  <Link to="/solicitudesDeViajes">
+                  {/* <Link to="/solicitudesDeViajes">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       SOLICITUDES DE VIAJE
                     </Button>
-                  </Link>
+                  </Link> */}
 
                   {/* <Link to="/detail">
                     <Button colorScheme="#009ED1" fontSize="1xl">
@@ -170,7 +170,6 @@ const NavBar = () => {
 
         <Box>
           <AvatarGroup spacing="1rem" mx="20px">
-
             {currentUser === null || currentUser === undefined ? (
 
               <ViewBtnUserForm/>
@@ -180,12 +179,6 @@ const NavBar = () => {
             }
               {/* <ViewOptionPerfil/> */}
             {/* <SlideEx /> */}
-///// Lo que estaba
-           /* {currentUser?.admin && currentUser?.admin ? (
-              <Avatar size="md" name="Ryan Florence" bg="#009ED1" src={currentUser.photoURL} />
-            ) : null}
-            <SlideEx /> */
-/////
           </AvatarGroup>
         </Box>
       </Flex>

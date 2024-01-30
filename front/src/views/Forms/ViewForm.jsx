@@ -14,9 +14,9 @@ const SlideEx = () => {
                 {/* Cada componente renderiza una vista para usuarios y admin */}
 
                 {currentUser.admin ? <>
-                    {/* <ViewBtnChoferForm/> */}
-                    {/* <LogOut/> */}
+                    <ViewBtnChoferForm/>
 
+                    {/* <LogOut/> */}
                 </>
                     : null
                     // <>
