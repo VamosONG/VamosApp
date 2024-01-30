@@ -31,7 +31,6 @@ import { cleanCurrentUser, getUserByEmail } from "../../../redux/actions";
 // DEPENDENCIES
 import axios from "axios";
 import Swal from "sweetalert2";
-import ViewBtnUserForm from "../ViewForms/ViewUserForm";
 
 const LoginForm = ({ onSwitchForm }) => {
   // Auth de Firebase

@@ -22,13 +22,9 @@ import {
     ChevronDownIcon,
     ViewIcon,
 } from "@chakra-ui/icons";
-import SlideEx from "../../../views/Forms/ViewForm";
 import LogOut from "../../../views/Forms/LogOut/logout";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { BsFillPersonLinesFill } from "react-icons/bs";
-import ViewBtnUserForm from "../../../views/Forms/ViewForms/ViewUserForm";
-import ImgIcon from "../../../assets/icons/emojis/emojiHappy.webp";
 
 import {
     Drawer,

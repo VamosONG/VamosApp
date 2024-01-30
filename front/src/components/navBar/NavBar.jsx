@@ -13,10 +13,8 @@ import { Link, useLocation } from "react-router-dom";
 import Vamos from "../../assets/logoblanco.png";
 import MobileNavbar from "../navBar/mobileNavbar/mobileNavbar";
 import { useSelector } from "react-redux";
-import SlideEx from "../../views/Forms/ViewForm";
 import LogOut from "../../views/Forms/LogOut/logout";
 import ViewOptionPerfil from "./viewOption/viewOptionPerfil";
-import ViewBtnUserForm from "../../views/Forms/ViewForms/ViewUserForm";
 import {verificationComplete} from '../../context/authContext';
 
 const NavBar = () => {
@@ -172,15 +170,6 @@ const NavBar = () => {
 
         <Box>
           <AvatarGroup spacing="1rem" mx="20px">
-            {/* {!currentUser ? (
-
-              <ViewBtnUserForm/>
-            ) : (
-              <ViewOptionPerfil/>
-            )
-            } */}
-              {/* <ViewOptionPerfil/> */}
-            {/* <SlideEx /> */}
             <ViewOptionPerfil/>
           </AvatarGroup>
         </Box>
