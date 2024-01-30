@@ -43,7 +43,6 @@ const DriverTableView = () => {
     const deleteDriver = (id) => {
         Swal.fire({
             title: "¿Seguro quieres eliminar este conductor?",
-            text: "¡Esta acción no se puede revertir!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Si, eliminalo!",
@@ -62,12 +61,40 @@ const DriverTableView = () => {
                 await dispatch(getAllConductores())
 
             } else if (
-                /* Read more about handling dismissals below */
                 result.dismiss === Swal.DismissReason.cancel
             ) {
                 Swal.fire({
                     title: "Cancelado",
                     text: "No se ha eliminado al conductor",
+                    icon: "error"
+                });
+            }
+        });
+    }
+
+    const reactivateDriver = (id) => {
+        Swal.fire({
+            title: "¿Seguro quieres reactivar este conductor?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Si, reactivarlo!",
+            cancelButtonText: "No, cancelar!",
+            reverseButtons: true
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const response = await dispatch(deleteDriverAction(id))
+                Swal.fire({
+                    title: "¡Reactivado con éxito!",
+                    text: "Ha sido reactivado el conductor.",
+                    icon: "success"
+                });
+                await dispatch(getAllConductores());
+            } else if (
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                Swal.fire({
+                    title: "Cancelado",
+                    text: "No se ha reactivado al conductor",
                     icon: "error"
                 });
             }
@@ -136,7 +163,7 @@ const DriverTableView = () => {
                                     ) : (
                                         <Tooltip hasArrow label='Reactivar' bg='purple.400' placement='left-start'>
 
-                                        <Button onClick={()=> deleteDriver(driver.id) }
+                                        <Button onClick={()=> reactivateDriver(driver.id) }
                                             bg='purple.400'
                                             fontSize='1.2rem' 
                                             id={driver.id} >
