@@ -115,17 +115,19 @@ const UserProfile = () => {
                                         src={fotoPerfil ? fotoPerfil : 'https://bit.ly/sage-adebayo'}
                                         border={'2px solid #10447E'}
 
-                                // <Flex w={{base: '100%', md: '50%'}} justify={'center'} position={'relative'}> 
-                                //     <Image w={{base: '300px', md: '15rem'}} h={{base: '300px', md: '15rem'}} name='Segun Adebayo' src={userDetail.image ? userDetail.image : fotoPerfil} border={'2px solid #10447E'}
-
-                                        alt={fotoPerfil.name}
-                                        bg='white'
-                                        borderRadius={{ base: '50%', md: '10' }}
-                                        objectFit={'cover'}
-                                        loading='lazy'
                                         mb="6rem"
+/>
+                                {/*  <Flex w={{base: '100%', md: '50%'}} justify={'center'} position={'relative'}> 
+                                //     <Image w={{base: '300px', md: '15rem'}} h={{base: '300px', md: '15rem'}} name='Segun Adebayo' src={userDetail.image ? userDetail.image : fotoPerfil} border={'2px solid #10447E'} */}
+
+                                {/*          alt={fotoPerfil.name}
+                                //         bg='white'
+                                //         borderRadius={{ base: '50%', md: '10' }}
+                                //         objectFit={'cover'}
+                                //         loading='lazy'
+                                //         mb="6rem"
                                         
-                                    />
+                                //     /> */}
                                     <Tooltip label='Cambiar Foto' placement='left' bg='#10447E' borderRadius={4} >
                                         <Button position={'absolute'} mb="6rem" mr="-1rem" right={'1rem'} w='2.3rem' h='2.3rem' onClick={changeImgPerfil} bg='#10447E' color={'white'}>
                                             <EditIcon />
