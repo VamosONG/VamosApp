@@ -71,6 +71,7 @@ const createOrder = async (req, res) => {
 
 const receiveWebhook = async (req, res) => {
   try {
+    console.log(req.query);
     const payment = req.query;
     // const {date_created, user_id} = req.body
 
