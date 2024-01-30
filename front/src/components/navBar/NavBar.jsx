@@ -170,15 +170,16 @@ const NavBar = () => {
 
         <Box>
           <AvatarGroup spacing="1rem" mx="20px">
-            {currentUser === null || currentUser === undefined ? (
+            {/* {!currentUser ? (
 
               <ViewBtnUserForm/>
             ) : (
               <ViewOptionPerfil/>
             )
-            }
+            } */}
               {/* <ViewOptionPerfil/> */}
             {/* <SlideEx /> */}
+            <ViewOptionPerfil/>
           </AvatarGroup>
         </Box>
       </Flex>
