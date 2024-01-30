@@ -28,7 +28,7 @@ const SolicitudwViajeForm = () => {
 
   const currentUserId = useSelector((state) => state.currentUser?.id)
   const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
-  console.log(currentUserId)
+  
 
   useEffect(() => {
      const storedInput = localStorage.getItem('solicitudViajeInput');
@@ -87,7 +87,7 @@ const SolicitudwViajeForm = () => {
             if (result.isConfirmed) {
               if(currentUserId===undefined) {
                 console.log('entra Qui')
-                navigate('/login')
+                navigate('/loginviajes')
               }else{
 await dispatch(handlePayment(infoConfirmacionViaje,currentUserId));
                 Swal.fire({

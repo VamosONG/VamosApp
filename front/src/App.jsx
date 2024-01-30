@@ -35,6 +35,7 @@ import ProtectedRoutes from './utils/ProtectedRoute';
 import { useSelector } from 'react-redux';
 
 import PaymentFail from './views/payments/paymentFail';
+import LoginViajes from './views/Forms/Login/LoginViajes';
 
 
 
@@ -56,6 +57,7 @@ function App() {
         <Route path='/paymentStatus' element={<PaymentStatus/>}/>
         <Route path="/login" element={<LoginForm/>}/>
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
+        <Route path='/loginviajes' element={<LoginViajes/>}/>
         
 
          <Route element={<ProtectedRoutes isAllowed={currentUser?.admin=== false} />} > 
