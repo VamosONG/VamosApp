@@ -42,14 +42,15 @@ import Error from './components/Error';
 function App() {
 
   const {currentUser} = useSelector(state => state)
+
   return (
     <>
     <AuthProvider>
-          <NavBar />
+        <NavBar />
 
         <Routes>
         <Route path='/' element={<HomeComponent/>}/> 
-        <Route path="*" element={<Error />}/>
+        <Route path="*" element={<Error/>}/>
         {/* Renderizando HomeComponent en la ruta para evitar pisar cada ves que se abre una pestaña */}
         <Route path='/home' element={<LoginForm/>}/>
         <Route path="/register" element={<RegistroForm/>}/>
@@ -62,7 +63,7 @@ function App() {
    
         {
           
-          currentUser.id &&
+          currentUser?.id &&
           <>
       
           <Route element={<ProtectedRoutes isAllowed={currentUser?.admin=== false} />} > 
@@ -78,7 +79,7 @@ function App() {
           <Route path="/login" element={<LoginForm/>}/>
           <Route path="/register" element={<RegistroForm/>}/>
           <Route path="/profileAdmin" element={<AdminProfile/>}/>
-           </Route> 
+          </Route> 
           
            </>
         }
