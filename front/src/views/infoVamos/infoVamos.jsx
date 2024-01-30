@@ -1,14 +1,18 @@
 import React from "react";
-import { Box, Flex, Text, Heading } from "@chakra-ui/react";
+import { Box, Flex, Text, Heading, useBreakpointValue } from "@chakra-ui/react";
 
-import Wave from '../../assets/wavesvamos.jpg';
+import Gallery from "../gallery/gallery";
 
 const InfoVamos = () => {
+
+    const fontSizeHeading = useBreakpointValue({ base: "3xl", md: "2xl", lg: "6xl" });
+    const fontSizeText = useBreakpointValue({ base: "xl", md: "xl", lg: "3xl" });
+
     return (
         <Flex
             alignItems="center"
             justifyContent="center"
-            minH="100vh" // Cambiado de h a minH
+            minH="100vh"
             position="relative"
             textAlign="center"
             mt={0}
@@ -19,7 +23,7 @@ const InfoVamos = () => {
                 left="0"
                 w="100%"
                 h="100%"
-                backgroundImage={`url(${Wave})`}
+                backgroundImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1706565530/Vamos/d7q4rpqehk0nkjpmwypf.jpg"
                 backgroundSize="cover"
                 zIndex="-1"
             />
@@ -32,22 +36,25 @@ const InfoVamos = () => {
                 <Heading
                     fontFamily="'DIN Alternate Black', sans-serif"
                     letterSpacing='1px'
-                    fontSize={['2xl', null, '6xl']}
-                    textShadow='4px 4px 4px rgb(0, 0, 0, 0.4)'
+                    fontSize={fontSizeHeading}
+                    textShadow='2px 2px 2px rgb(0, 0, 0, 0.4)'
+                    color="white"
                 >
                     ACERCA DE VAMOS
                 </Heading>
                 <Text
-                    color="Black"
-                    fontSize="3xl"
-                    fontFamily="'DIN Alternate Black', sans-serif"
+                    fontSize={fontSizeText}
+                    fontFamily='DIN Medium, sans-serif'
                     mt='2px'
-                    textShadow='4px 4px 4px rgb(0, 0, 0, 0.3)'
+                    textShadow='3px 3px 3px rgb(0, 0, 0, 0.3)'
+                    color="white"
+                    mb={5}
                 >
                     Vamos es una empresa social, comprometida con brindar servicios
                     de taxi aeropuerto confiables y accesibles. Nuestra misión es crear
                     oportunidades laborales para adultos mayores y garantizar traslados seguros y cómodos.
                 </Text>
+                <Gallery/>
             </Flex>
         </Flex>
     );
