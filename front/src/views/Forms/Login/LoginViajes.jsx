@@ -31,7 +31,7 @@ import { cleanCurrentUser, getUserByEmail } from "../../../redux/actions";
 // DEPENDENCIES
 import axios from "axios";
 import Swal from "sweetalert2";
-import ViewBtnUserForm from "../ViewForms/ViewUserForm";
+
 
 const LoginViajes = ({ onSwitchForm }) => {
   // Auth de Firebase
@@ -195,9 +195,10 @@ const LoginViajes = ({ onSwitchForm }) => {
   
 
   return (
+    <Stack bgImage={"https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/re3tjn4g8e4hbdkl7jtc.jpg"}>
     <Stack
     spacing={4}
-    bg="rgb(0, 158, 209)"
+    bg="#10447E"
     p="4"
     h="auto"
     rounded="0"
@@ -205,6 +206,11 @@ const LoginViajes = ({ onSwitchForm }) => {
     boxShadow="none"
     color="white"
     display={currentUser?.id ? 'none' : 'block'}
+    w="21rem"
+    mt="6rem"
+    ml="37%"
+    mb="2rem"
+    borderRadius="20px"
     >
       {!currentUser?.id && (
         <>
@@ -220,10 +226,10 @@ const LoginViajes = ({ onSwitchForm }) => {
               fontSize="md"
               color="black"
             />
-            {isError ? (
+            {isError.email ? (
               <FormErrorMessage 
               fontSize="md" 
-              color="black"
+              color="white"
               >
                 El correo es requerido.
               </FormErrorMessage>
@@ -309,6 +315,7 @@ const LoginViajes = ({ onSwitchForm }) => {
         </>
 
       )}
+    </Stack>
     </Stack>
   );
 };
