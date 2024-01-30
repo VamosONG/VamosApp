@@ -80,11 +80,11 @@ const NavBar = () => {
                     </Button>
                   </Link>
                   
-                  <Link to="/solicitudesDeViajes">
+                  {/* <Link to="/solicitudesDeViajes">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       SOLICITUDES DE VIAJE
                     </Button>
-                  </Link>
+                  </Link> */}
 
                   {/* <Link to="/detail">
                     <Button colorScheme="#009ED1" fontSize="1xl">
