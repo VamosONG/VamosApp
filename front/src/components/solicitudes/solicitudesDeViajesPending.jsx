@@ -193,7 +193,7 @@ const handleSubmit = async (e) => {
                 bgColor='#009ED1'
                 variant="outline"
                 colorScheme="teal"
-                onClick={nextHandler}
+                onClick={prevHandler}
                 >
                 Anterior
                 </Button>
