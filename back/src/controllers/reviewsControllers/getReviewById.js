@@ -1,10 +1,10 @@
 const { Review } = require('../../dataBase'); 
 
 
-const getReviewById = async (id) => {
+const getReviewsByUserId = async (userId) => {
     
     try {
-        const review = await Review.findByPk(id);
+        const review = await Review.findAll({ where: { userId: userId } });;
 
 
         if (!review) {
