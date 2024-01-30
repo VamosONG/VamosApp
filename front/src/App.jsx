@@ -88,15 +88,10 @@ function App() {
            </>
         }
         </Routes>
-
-        
         {/* <Route path="/graphics" element={<Graphics/>}/> */}
-
-
         {/* No son necesario estas rutas, ya que todo estara dentro el componente del admin */}
         {/* <Route path="/reviewAdmin" element={<ReviewAdmin/>}/>  
         <Route path="/user" element={<UserViewAdmin/>}/> */}
-
       {/* <Paginado/> */}
 
       <Footer/>
@@ -105,6 +100,4 @@ function App() {
     </>
   )
 }
-
-
 export default App
