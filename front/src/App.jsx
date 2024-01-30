@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { Navigate, redirect, useLocation } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ import {Routes, Route} from 'react-router-dom'
 import SolicitudViajeForm from './views/Forms/SolicitudViaje/SolicitudViajeForm';
 import SolicitudesDeViajes from './components/solicitudes/solicitudesDeViajes';
 import Solicitud from './components/solicitudes/solicitud';
-import { AuthProvider } from './context/authContext';
+import { AuthProvider, useAuth} from './context/authContext';
 
 import DriverTableView from './views/driversViewAdmin/driverTable';
 import ReviewAndReseña from './components/ReviewAndReseña/reviewAndReseña';
@@ -32,16 +32,21 @@ import AdminProfile from './components/userProfile/adminProfile';
 import ReviewAdmin from './views/adminProfile/reviewAdmin';
 import UserViewAdmin from './views/adminProfile/userViewAdmin';
 import ProtectedRoutes from './utils/ProtectedRoute';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import PaymentFail from './views/payments/paymentFail';
 import Error from './components/Error';
+import {verificationComplete} from "./context/authContext"
+import Loader from './components/loader/Loader';
+import { useIds } from '@chakra-ui/react';
+import { getUserByEmail } from './redux/actions';
+
+
 
 
 
 function App() {
-
-  const {currentUser} = useSelector(state => state)
+  const {currentUser} = useSelector(state=> state)
   return (
     <>
     <AuthProvider>
@@ -49,7 +54,6 @@ function App() {
 
         <Routes>
         <Route path='/' element={<HomeComponent/>}/> 
-        <Route path="*" element={<Error />}/>
         {/* Renderizando HomeComponent en la ruta para evitar pisar cada ves que se abre una pestaña */}
         <Route path='/home' element={<LoginForm/>}/>
         <Route path="/register" element={<RegistroForm/>}/>
@@ -59,10 +63,11 @@ function App() {
         <Route path='/paymentStatus' element={<PaymentStatus/>}/>
         <Route path="/login" element={<LoginForm/>}/>
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
+        <Route path="*" element={<Error/>}/>
    
         {
           
-          currentUser.id &&
+          currentUser?.id &&
           <>
       
           <Route element={<ProtectedRoutes isAllowed={currentUser?.admin=== false} />} > 
@@ -100,5 +105,6 @@ function App() {
     </>
   )
 }
+
 
 export default App
