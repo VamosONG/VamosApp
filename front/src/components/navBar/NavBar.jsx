@@ -86,11 +86,11 @@ const NavBar = () => {
                     </Button>
                   </Link> */}
 
-                  <Link to="/detail">
+{/*                   <Link to="/detail">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       CONDUCTORES
                     </Button>
-                  </Link>
+                  </Link> */}
 
                   <Link to="/">
                     <Button colorScheme="#009ED1" fontSize="1xl">
@@ -132,11 +132,11 @@ const NavBar = () => {
                     </Button>
                   </Link> */}
 
-                  <Link to="/questions">
+{/*                   <Link to="/questions">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       PREGUNTAS FRECUENTES
                     </Button>
-                  </Link>
+                  </Link> */}
 
                   {/* <Link to='/review&reseña'>
                     <Button colorScheme="#009ED1" fontSize="1xl">
