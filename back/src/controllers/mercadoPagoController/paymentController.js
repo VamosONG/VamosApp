@@ -50,7 +50,7 @@ const createOrder = async (req, res) => {
          
       },
 
-      notification_url: "https://c8cb-2800-2130-8a40-4f3-f10e-58e6-75e9-edde.ngrok-free.app/mepago/webhook",
+      notification_url: "https://ceb1-186-11-77-210.ngrok-free.app/mepago/webhook",
 
 
       auto_return: "all"
@@ -81,7 +81,7 @@ const receiveWebhook = async (req, res) => {
        const data = await mercadopago.payment.findById(payment["data.id"]);
       // const userPayment = await Trip.findOne({ where: { id: data.body.metadata.trip_id } });//BUSCA EL TRIP
       //  await newTrip.update({ stateOfTrip: "reserved" }); //CAMBIA DE OFFER A RESERVED
-      console.log(data);
+     
       const trip ={
         userId: data.body.metadata.user_id,
         origin: data.body.metadata.origin,
@@ -92,12 +92,12 @@ const receiveWebhook = async (req, res) => {
         driverId: null,
         price:  data.body.metadata.price
       }
-      console.log(trip);
+    
       // await userPayment.reload();
       // console.log("2",newTrip);
       // await deleteTrip(newTrip.id);
       const resp = await postTrip(trip)
-      console.log(resp);
+    
       localStorage.clear();
       // AGREGAR LO DE ENVIAR MAIL
 res.status(204).json(resp);

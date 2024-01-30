@@ -19,13 +19,25 @@ import { useSelector } from "react-redux";
 import { BsFillPersonLinesFill } from "react-icons/bs";
 import ViewBtnUserForm from '../../../views/Forms/ViewForms/ViewUserForm';
 import ImgIcon from '../../../assets/icons/emojis/emojiHappy.webp'
+import useOutsideClick from './useOutsideClick';
+import React, { useRef } from 'react';
 
 const ViewOptionPerfil = ({ fotoPerfil }) => {
     const { currentUser } = useSelector((state) => state);
-    const { isOpen, onToggle } = useDisclosure()
+    const { isOpen, onToggle, onClose  } = useDisclosure()
+
+    const ref = useRef();
+
+    
+    useOutsideClick(ref, (event) => {
+        if (isOpen && !event?.target.closest('[data-inside-menu]')) {
+          onClose();
+        }
+      });
+
     return (
         <>
-            <Button onClick={onToggle} zIndex={11} w={'50px'} h='50px' borderRadius={50} >
+            <Button onClick={onToggle} zIndex={11} w={'50px'} h='50px' borderRadius={50} ref={ref}>
                 {currentUser.admin && currentUser.admin ? (
                     <Avatar onClick={onToggle} bg= "rgb(0, 158, 209)" src={fotoPerfil} />
                 ) : <>
@@ -33,7 +45,7 @@ const ViewOptionPerfil = ({ fotoPerfil }) => {
                 </>}
 
             </Button>
-            <Slide direction='right' in={isOpen} style={{ zIndex: 10 }}>
+            <Slide direction='right' in={isOpen} style={{ zIndex: 10 }} onClose={onClose}>
                 <Box
                     p='4px'
                     color='white'
@@ -56,24 +68,24 @@ const ViewOptionPerfil = ({ fotoPerfil }) => {
                         {currentUser.admin && currentUser.admin === true ? (
                             <>
                                 <Link to='/profileAdmin'>
-                                    <Button w={'100%'} display={'flex'} justifyContent={'space-between'}>
+                                    <Button w={'100%'} display={'flex'} justifyContent={'space-between'} data-inside-menu>
                                         <Text >Tablero</Text>
                                         <ViewIcon />
                                     </Button>
-                                </Link>
-                                <LogOut />
+                                </Link >
+                                <LogOut insideMenu={true} />
                             </>
                         ) : currentUser.admin === false ?
                             <>
                                 <Link to='/profileUser'>
-                                    <Button w={'100%'} display={'flex'} justifyContent={'space-between'}>
+                                    <Button w={'100%'} display={'flex'} justifyContent={'space-between'} data-inside-menu>
                                         <Text >Mi perfil</Text>
                                         <ViewIcon />
                                     </Button>
                                 </Link>
 
                                 <Link to='/review&reseña'>
-                                    <Button w={'100%'} display={'flex'} justifyContent={'space-between'} >
+                                    <Button w={'100%'} display={'flex'} justifyContent={'space-between'} data-inside-menu>
                                         <Text>Reseñar viaje
                                         </Text>
                                         <EditIcon />
@@ -81,13 +93,13 @@ const ViewOptionPerfil = ({ fotoPerfil }) => {
                                 </Link>
 
                                 <Link to="/questions">
-                                    <Button w={'100%'} display={'flex'} justifyContent={'space-between'}>
+                                    <Button w={'100%'} display={'flex'} justifyContent={'space-between'} data-inside-menu>
                                         <Text>Q&A
                                         </Text>
                                         <QuestionIcon />
                                     </Button>
                                 </Link>
-                                <LogOut />
+                                <LogOut insideMenu={true} />
                             </>
 
                             : null}

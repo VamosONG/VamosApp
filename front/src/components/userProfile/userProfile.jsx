@@ -114,6 +114,7 @@ const UserProfile = () => {
                                         name='Segun Adebayo'
                                         src={fotoPerfil ? fotoPerfil : 'https://bit.ly/sage-adebayo'}
                                         border={'2px solid #10447E'}
+
                                         mb="6rem"
 />
                                 {/*  <Flex w={{base: '100%', md: '50%'}} justify={'center'} position={'relative'}> 
