@@ -26,7 +26,7 @@ export const GET_TRIPS_BY_ID = 'GET_TRIPS_BY_ID'
 export const POST_REVIEW = 'POST_REVIEW'
 export const CLEAN_USER_BY_EMAIL = "CLEAN_USER_BY_EMAIL"
 export const GET_ALL_PRICES = 'GET_ALL_PRICES'
-
+export const GET_CONDUCTORES_FILTRADOS = "GET_CONDUCTORES_FILTRADOS"
 export const USER_BY_EMAIL = 'USER_BY_EMAIL'
 export const GET_PAYMENT_DATA = 'GET_PAYMENT_DATA'
 
@@ -652,7 +652,27 @@ export const orderSearch = (input) => {
         }
     };
 
+    
+
 }
+//********************************************************************************************************* */
+export const orderSearchDrivers = (input) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`http://localhost:3001/drivers/filter`, input);
+
+            // Asegúrate de tener un tipo de acción que actualice el estado conductores
+            dispatch({
+                type: GET_CONDUCTORES_FILTRADOS,  // Reemplaza con tu tipo de acción específico
+                payload: data
+            });
+        } catch (error) {
+            // Manejo de errores
+            console.log(error.message);
+        }
+    };
+}
+//*************************************************************************************************************** */
 
 export const getTrips = () => {
     return async (dispatch)=> {
