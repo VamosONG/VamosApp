@@ -45,6 +45,7 @@ function App() {
     <>
     <AuthProvider>
           <NavBar />
+      
       <Routes>
         <Route path='/' element={<HomeComponent/>}/> 
         {/* Renderizando HomeComponent en la ruta para evitar pisar cada ves que se abre una pestaña */}
@@ -56,26 +57,30 @@ function App() {
         <Route path='/paymentStatus' element={<PaymentStatus/>}/>
         <Route path="/login" element={<LoginForm/>}/>
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
-        
 
-         <Route element={<ProtectedRoutes isAllowed={currentUser?.admin=== false} />} > 
-        <Route path="/profileUser" element={<UserProfile/>}/>
-        <Route path='/review&reseña' element={<ReviewAndReseña/>}/>
+        {
+          currentUser.id &&
+          <>
+          <Route element={<ProtectedRoutes isAllowed={currentUser?.admin=== false} />} > 
+          <Route path="/profileUser" element={<UserProfile/>}/>
+          <Route path='/review&reseña' element={<ReviewAndReseña/>}/>
+           </Route> 
+
+          <Route element={<ProtectedRoutes isAllowed={currentUser?.admin=== true} />}> 
+          <Route path='/solicitud' element={<Solicitud/>}/>
+          <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
+          <Route path='/product' element={<Product/>}/>
+          <Route path='/editPrices' element={<EditPrices/>}/>
+          <Route path="/login" element={<LoginForm/>}/>
+          <Route path="/register" element={<RegistroForm/>}/>
+          <Route path="/profileAdmin" element={<AdminProfile/>}/>
+           </Route> 
+          
+           </>
+        }
+        </Routes>
+
         
-         </Route> 
-        {/* No son necesario estas rutas, ya que todo estara dentro el componente del admin */}
-        {/* <Route path='/detail' element={<DriverTableView/>}/> */}
-        <Route element={<ProtectedRoutes isAllowed={currentUser?.admin=== true} />}> 
-        <Route path='/solicitud' element={<Solicitud/>}/>
-        <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
-        <Route path='/product' element={<Product/>}/>
-        <Route path='/editPrices' element={<EditPrices/>}/>
-        <Route path="/login" element={<LoginForm/>}/>
-        <Route path="/register" element={<RegistroForm/>}/>
-        <Route path="/profileAdmin" element={<AdminProfile/>}/>
-        
-        
-         </Route> 
         {/* <Route path="/graphics" element={<Graphics/>}/> */}
 
 
@@ -85,7 +90,6 @@ function App() {
 
       {/* <Paginado/> */}
 
-        </Routes>
       <Footer/>
     </AuthProvider>
 
