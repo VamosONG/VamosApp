@@ -100,8 +100,10 @@ const LoginForm = ({ onSwitchForm }) => {
       if (googleLog) {
          const usr={
           name: googleLog.user.displayName,
-          email: googleLog.user.email
+          email: googleLog.user.email,
+          image: googleLog.user.photoURL
          }
+         console.log("google" ,usr);
 
          Swal.fire({
           position: "center",
