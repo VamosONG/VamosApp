@@ -31,6 +31,7 @@ import { cleanCurrentUser, getUserByEmail } from "../../../redux/actions";
 // DEPENDENCIES
 import axios from "axios";
 import Swal from "sweetalert2";
+import ViewBtnUserForm from "../ViewForms/ViewUserForm";
 
 const LoginForm = ({ onSwitchForm }) => {
   // Auth de Firebase
@@ -39,7 +40,6 @@ const LoginForm = ({ onSwitchForm }) => {
   // Estados Locales para form de Login
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
-
   //hooks
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -69,11 +69,11 @@ const LoginForm = ({ onSwitchForm }) => {
       await auth.login(input.email, input.password); // autenticacion de loginWithGoogle funcion de firebase signInWithPopUp
         const getUser =  await dispatch(getUserByEmail(input.email)); // busca al usuario por email y lo setea como currentUser
         console.log(getUser);
-        // navigate('/')
+         navigate('/')////
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Login exitoso",
+          title: "¡Inicio de sesión éxitoso!",
           showConfirmButton: false,
           timer: 2500
         })
@@ -83,7 +83,7 @@ const LoginForm = ({ onSwitchForm }) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Email o contraseña incorrecto",
+        text: "Email o contraseña incorrecto,intentelo nuevamente.",
       });
     }
   };
@@ -103,12 +103,11 @@ const LoginForm = ({ onSwitchForm }) => {
           name: googleLog.user.displayName,
           email: googleLog.user.email
          }
-         console.log(usr)
 
          Swal.fire({
           position: "center",
           icon: "success",
-          title: "Login exitoso",
+          title: "Inicio de sesión éxitoso",
           showConfirmButton: false,
           timer: 2500
         });
@@ -130,9 +129,9 @@ const LoginForm = ({ onSwitchForm }) => {
         // Carga el estado global currentUser con la info del usuario registradi
         const userActual = await dispatch(getUserByEmail(googleLog.user.email))
 
+        navigate('/')////
         return response
       }
-
     } catch (error) {
       console.error("Error al iniciar sesión con Google:", error.message);
       Swal.fire({
@@ -205,6 +204,7 @@ const LoginForm = ({ onSwitchForm }) => {
     border="none"
     boxShadow="none"
     color="white"
+    display={currentUser?.id ? 'none' : 'block'}
     >
       {!currentUser?.id && (
         <>
@@ -307,12 +307,7 @@ const LoginForm = ({ onSwitchForm }) => {
               </Stack>
           </Center>
         </>
-      )}{" "}
-      {currentUser?.id && (
-        <Box>
-          <Heading fontSize="md">{currentUser?.name}</Heading>
-          <Text fontSize="md">{currentUser?.email}</Text>
-        </Box>
+
       )}
     </Stack>
   );

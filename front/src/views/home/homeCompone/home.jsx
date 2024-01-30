@@ -1,18 +1,11 @@
 import React from "react";
 import { 
     Box, 
-    Button, 
     Flex, 
-    Text, 
     Heading, 
-    Stack, 
-    Skeleton, 
     UnorderedList, 
-    ListItem, 
-    Grid,
-    Image 
+    ListItem,
 } from '@chakra-ui/react';
-import bgImage from "../../../assets/Aeropuerto1.jpg";
 
 import Testimonials from "../../Testimonials/Testimonials";
 import Services from "../../ServicesSection/services";
@@ -21,6 +14,7 @@ import CompanySlider from "../../carouselVamos/carouselVamos";
 import InfoVamos from "../../infoVamos/infoVamos";
 import Publi from "../../publiVamos/publiVamos";
 import SolicitudwViajeForm from "../../Forms/SolicitudViaje/SolicitudwViajeForm";
+import MiniBanner from "../../miniBanner/miniBanner";
 
 const Home = () => {
     
@@ -38,7 +32,7 @@ const Home = () => {
             left='0'
             w='100%'
             h='100%'
-            bgImage={`url(${bgImage})`}
+            bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705767603/Vamos/Aeropuerto1_ypg3br.jpg"
             bgSize='cover'
             bgPosition='center'
             filter='blur(2px) brightness(0.5)'
@@ -96,6 +90,7 @@ const Home = () => {
         <Services/>
         <Testimonials/>
         <Publi/>
+        <MiniBanner/>
         <CompanySlider/>
         <InfoVamos/>
         <WhatsAppButton/>

@@ -51,7 +51,6 @@ function SolicitudViajeForm() {
         const product = {
             viaje:`${input?.origin}${input?.destination}`, 
             price: infoConfirmacionViaje?.price ,
-            // quantityPassengers: "1",
             userId: currentUser.id,
             origin: infoConfirmacionViaje?.origin,
             destination: infoConfirmacionViaje?.destination,
@@ -60,17 +59,7 @@ function SolicitudViajeForm() {
             quantityPassengers: Number(infoConfirmacionViaje.quantityPassengers),
             driverId: null
           }
-          const trip = {
-            userId: currentUser.id,
-            origin: infoConfirmacionViaje?.origin,
-            destination: infoConfirmacionViaje?.destination,
-            date:infoConfirmacionViaje?.date,
-            hour: infoConfirmacionViaje?.hour,
-            quantityPassengers: Number(infoConfirmacionViaje.quantityPassengers),
-            driverId: null,
-            price: infoConfirmacionViaje?.price
-          }
-          console.log(trip);
+         
         
         const handlePayment = async () => {
         
@@ -137,7 +126,6 @@ function SolicitudViajeForm() {
                     Swal.fire({
                         title: "Redirigiendo a Mercado Pago",
                         text: "Aguarde unos segundos",
-                        /* icon: "success", */
                         allowOutsideClick: false,
                         didOpen:()=>Swal.showLoading()
                     }).then(() => {

@@ -76,15 +76,6 @@ const VanVamos = () => {
             mt='30px'
             w={['100%', null, 'auto']}
             >
-                <Button
-                colorScheme='blue'
-                size='lg'
-                bg='#009ED1'
-                _hover={{ bg: 'green.400' }}
-                boxShadow='lg'
-                >
-                RESERVA
-                </Button>
             </Stack>
             </Flex>
         </Flex>

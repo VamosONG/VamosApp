@@ -29,7 +29,7 @@ try {
      Swal.fire({
       position: "center",
       icon: "success",
-      title: "Login exitoso",
+      title: "Inicio de sesión éxitoso",
       showConfirmButton: false,
       timer: 2500
     });

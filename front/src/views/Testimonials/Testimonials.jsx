@@ -16,7 +16,7 @@ const Testimonials = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: isMobile ? 2 : 3,
+    slidesToShow: isMobile ? 1 : 3,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
@@ -44,13 +44,13 @@ const Testimonials = () => {
           width={{ base: "100%", md: "100%" }}
           height={{ base: "200px", md: "100%" }}
           position="relative" 
-          bg={'gray.100'}
+          bg={'#009ED1'}
           >
 
           <Slider {...settings}>
             {reviews?.map((review) => (
-              <Flex key={review.userId} w={{base:'300px', md: '350px'}}  borderWidth='1px' borderRadius='lg'  overflow='hidden'>
-                <Box w={{base: '200px', md: 'auto'}}  p='1rem' bg={'white'} >
+              <Flex key={review.userId} w={{base:'300px', md: '350px'}}  borderWidth='1px' borderRadius='lg'  overflow='hidden' mx={4} >
+                <Box w={{base: '100%', md: 'auto'}}  p='1rem' bg={'white'} >
                   <Flex flexDirection={'row'} >
                     <Flex>
                       <Avatar src={review.qualification <= 3 ? (IconHappy) :review.qualification === 4 ? (IconFunny) : (IconLove)} />

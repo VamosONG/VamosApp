@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import { cleanCurrentUser } from '../../../redux/actions';
 import Swal from "sweetalert2";
 
-const LogOut = () => {
+const LogOut = ({ insideMenu }) => {
   const navigate = useNavigate();
   const auth = useAuth();
   const dispatch = useDispatch();
@@ -15,9 +15,10 @@ const LogOut = () => {
   const handleLogOut = async () => {
     try {
       await auth.logOut();  // Asumo que tu función logOut está implementada correctamente en useAuth
-
+      localStorage.clear();
+      window.location.reload();
           Swal.fire({
-            title: "Log out exitoso!",
+            title: "¡Sesión cerrada con éxito!",
             icon: "success"
           });
 
@@ -34,13 +35,18 @@ const LogOut = () => {
   
 
   return (
-    <Stack direction="row" spacing={4}>
-      <IconButton
+    <Stack direction="row" spacing={4} data-inside-menu={insideMenu ? true : undefined}>
+      {/* <IconButton
         variant="solid"
         aria-label="Cerrar sesión"
         icon={<Icon as={FaSignOutAlt} />}
-        onClick={handleLogOut}
-      />
+        
+      /> */}
+      <Button onClick={handleLogOut}
+      aria-label="Cerrar sesión"
+      rightIcon={<FaSignOutAlt/>}>
+        Cerrar Sesión
+      </Button>
     </Stack>
   );
 };

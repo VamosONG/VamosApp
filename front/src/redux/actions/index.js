@@ -98,7 +98,7 @@ export const postNewViaje = (infoViaje) => {
 
     //  infoViaje.userId= "762baea5-4422-44de-ae36-ddf9c6a9e43b"
     //infoViaje.userId= "74c99ae0-61f9-4d85-bcb6-fcf680183c48" //(con permisos de admin)
-    console.log(infoViaje)
+   
     return async (dispatch) => {
         try {
 
@@ -671,7 +671,7 @@ export const getTrips = () => {
 export const handlePayment = (infoConfirmacionViaje,currentUserId) => {
     const product = {
         viaje:`${infoConfirmacionViaje.origin}${infoConfirmacionViaje.destination}`, 
-        price: infoConfirmacionViaje?.price ,
+        price: Number(infoConfirmacionViaje?.price) ,//Ojo, que esto puede cambiar
         // quantityPassengers: "1",
         userId: currentUserId,
         origin: infoConfirmacionViaje?.origin,
@@ -681,6 +681,7 @@ export const handlePayment = (infoConfirmacionViaje,currentUserId) => {
         quantityPassengers: Number(infoConfirmacionViaje.quantityPassengers),
         driverId: null
       }
+      console.log(product)
     return async (dispatch)=> {
         try {
             const {data} =await axios.post("https://vamosappserver.onrender.com/mepago/create-order", product)
@@ -691,6 +692,7 @@ export const handlePayment = (infoConfirmacionViaje,currentUserId) => {
             }) */
         } catch (error) {
             console.error("Error en al redirigir", error);
+            console.log(error.message)
         }
     }
 }

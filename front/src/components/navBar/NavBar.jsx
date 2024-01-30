@@ -15,6 +15,8 @@ import MobileNavbar from "../navBar/mobileNavbar/mobileNavbar";
 import { useSelector } from "react-redux";
 import SlideEx from "../../views/Forms/ViewForm";
 import LogOut from "../../views/Forms/LogOut/logout";
+import ViewOptionPerfil from "./viewOption/viewOptionPerfil";
+import ViewBtnUserForm from "../../views/Forms/ViewForms/ViewUserForm";
 import {verificationComplete} from '../../context/authContext';
 
 const NavBar = () => {
@@ -64,7 +66,9 @@ const NavBar = () => {
         transition="background 0.5s ease"
       >
         <Box>
-          <Image src={Vamos} alt="Vamos" w="150px" />
+         <Link to="/">
+                <Image src={Vamos} alt="Vamos" w="150px" />
+         </Link>
         </Box>
 
         <Box w="100%" alignContent="center" justifyContent="center">
@@ -77,14 +81,27 @@ const NavBar = () => {
                       INICIO
                     </Button>
                   </Link>
+                  
+                  {/* <Link to="/solicitudesDeViajes">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      SOLICITUDES DE VIAJE
+                    </Button>
+                  </Link> */}
 
-                  <Link to="/profileAdmin">
+                  {/* <Link to="/detail">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      CONDUCTORES
+                    </Button>
+                  </Link> */}
+
+
+                  {/* <Link to="/profileAdmin">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       MI PERFIL
                     </Button>
-                  </Link>
+                  </Link> */}
 
-                  {/* <Link to='/editPrices'>
+                  {/* {/* <Link to='/editPrices'>
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       CAMBIAR PRECIOS DE VIAJES
                     </Button>
@@ -106,11 +123,11 @@ const NavBar = () => {
                     </Button>
                   </Link> */}
 
-                  <Link to="/profileUser">
+                  {/* <Link to="/profileUser">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       MI PERFIL
                     </Button>
-                  </Link>
+                  </Link> */}
 
                   <Link to="/questions">
                     <Button colorScheme="#009ED1" fontSize="1xl">
@@ -118,11 +135,11 @@ const NavBar = () => {
                     </Button>
                   </Link>
 
-                  <Link to='/review&reseña'>
+                  {/* <Link to='/review&reseña'>
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       RESEÑA DE TU VIAJE
                     </Button>
-                  </Link>
+                  </Link> */}
                 
                 </Flex>
               </Box>
@@ -155,10 +172,15 @@ const NavBar = () => {
 
         <Box>
           <AvatarGroup spacing="1rem" mx="20px">
-            {currentUser?.admin && currentUser?.admin ? (
-              <Avatar size="md" name="Ryan Florence" bg="#009ED1" src={currentUser.photoURL} />
-            ) : null}
-            <SlideEx />
+            {currentUser === null || currentUser === undefined ? (
+
+              <ViewBtnUserForm/>
+            ) : (
+              <ViewOptionPerfil/>
+            )
+            }
+              {/* <ViewOptionPerfil/> */}
+            {/* <SlideEx /> */}
           </AvatarGroup>
         </Box>
       </Flex>
