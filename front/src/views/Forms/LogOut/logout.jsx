@@ -15,9 +15,10 @@ const LogOut = () => {
   const handleLogOut = async () => {
     try {
       await auth.logOut();  // Asumo que tu función logOut está implementada correctamente en useAuth
-
+      localStorage.clear();
+      window.location.reload();
           Swal.fire({
-            title: "Log out exitoso!",
+            title: "¡Sesión cerrada con éxito!",
             icon: "success"
           });
 

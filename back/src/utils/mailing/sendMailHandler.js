@@ -7,7 +7,7 @@ const getAdminEmails = require('../../controllers/adminControllers/getAdminEmail
 module.exports=async({id, name, surname, email, phone, dni, driverId, tripId, option})=>{
 
     try {
-        const userName=name;        
+        let userName=name;        
         let chofer=null;
         let trip=null;
         const adminsEmails = await getAdminEmails();
@@ -164,7 +164,7 @@ module.exports=async({id, name, surname, email, phone, dni, driverId, tripId, op
                 </html>`; //Ver HTML
                 break;
             case("reserve"):
-                bbc=[...adminsEmails, email],
+                email=[...adminsEmails, email],
                 preSubject=`VAMOS!! ${userName} su reserva se ha registrado.`,
                 message=`<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
                 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="es">
@@ -354,7 +354,7 @@ module.exports=async({id, name, surname, email, phone, dni, driverId, tripId, op
                         `
                 break;
             case("assignDriver"):
-                to=email,
+                email=email,
                 preSubject=`VAMOS!! ${userName}, se ha asignado un chofer para su viaje.`,
                 message=`<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
                 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="es">
@@ -1158,7 +1158,7 @@ module.exports=async({id, name, surname, email, phone, dni, driverId, tripId, op
                         `
                 break;
             case("infoDriver"):
-              to= `${chofer.email}`
+              email= `${chofer.email}`
               preSubject=`VAMOS!! Hola ${chofer.name}, se le ha asignado un viaje.`,
               message=`<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
               <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="es">

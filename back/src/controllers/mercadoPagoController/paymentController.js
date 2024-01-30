@@ -98,7 +98,7 @@ const receiveWebhook = async (req, res) => {
       // await deleteTrip(newTrip.id);
       const resp = await postTrip(trip)
       console.log(resp);
-
+      localStorage.clear();
       // AGREGAR LO DE ENVIAR MAIL
 res.status(204).json(resp);
     } 

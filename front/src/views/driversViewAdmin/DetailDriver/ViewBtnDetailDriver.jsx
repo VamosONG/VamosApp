@@ -17,9 +17,9 @@ const ViewBtnDetailDriver = (props) => {
 
     return (
         <Box  >
-            <Tooltip hasArrow label='Ver mas' bg='yellow.300' placement='right-start' color='#000'>
+            <Tooltip hasArrow label='Ver mas' bg='yellow.200' placement='right-start' color='#000'>
 
-                <Button onClick={onOpen} bg='yellow.300'><ViewIcon /></Button>
+                <Button onClick={onOpen} bg='#10447E' color="white"><ViewIcon /></Button>
             </Tooltip>
             <Modal isOpen={isOpen} onClose={onClose} size={{base: 'xl', md: 'auto'}} > 
                 <ModalOverlay />

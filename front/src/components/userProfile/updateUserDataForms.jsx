@@ -39,8 +39,8 @@ const UpdateUserDataForm = ({ userDetail }) => {
             if (response) {
                 console.log("des1 de la actualización:", newData);
                 Swal.fire({
-                    title: "Bien hecho!",
-                    text: "Datos actualizados",
+                    title: "¡Bien hecho!",
+                    text: "Datos actualizados con éxito",
                     icon: "success",
                 });
                 // await dispatch(getDataUser())
@@ -51,7 +51,7 @@ const UpdateUserDataForm = ({ userDetail }) => {
                     Swal.fire({
                         icon: "error",
                         title: "Oops...",
-                        text: "Hubo un error en la actualizacion",
+                        text: "Hubo un error en la actualizacion, intente nuevamente",
                     })
 
                 );
