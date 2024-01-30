@@ -16,7 +16,7 @@ import {
   Input, Select, Button, Heading, Stack,
   Tabs, TabList, TabPanels, Tab, TabPanel 
 } from '@chakra-ui/react'
-import { AddIcon, EditIcon } from '@chakra-ui/icons'
+import { AddIcon, EditIcon, RepeatClockIcon } from '@chakra-ui/icons'
 
 import Swal from 'sweetalert2'
 import { Link } from "react-router-dom"
@@ -91,6 +91,22 @@ const handleChange = async (e) => {
         tripState: 'pending'
     })
 }
+
+const handleClean = async (e) => {
+  setInput({
+      ...input,
+      searchInput: "",
+      order: "",
+      tripState: 'pending'
+  })
+  dispatch(orderSearch({
+    ...input,
+    searchInput: "",
+    order: "",
+    tripState: 'pending'
+}));
+}
+
 const handleSubmit = async (e) => {
     
     console.log(input)
@@ -143,20 +159,26 @@ const handleSubmit = async (e) => {
               </Select>
               </FormControl>
               </Box>
-                <Button onClick={handleSubmit}>
+                <Button onClick={handleSubmit} style={{marginRight:'1rem'}}>
                 APLICAR
                 </Button>
+                <Tooltip hasArrow label='Reiniciar filtro y búsqueda' bg='#009ED1' placement='left-start'>
+                <Button onClick={handleClean} >
+                <RepeatClockIcon/>
+                </Button>
+                </Tooltip>
               </Box>
               </TableContainer>
                 <Table variant='simple' >
                   <TableCaption>Viajes con conductor ya asignado</TableCaption>
                     <Thead>
                       <Tr>
-                        <Th border="2px solid black">Nro</Th>
+                        {/* <Th border="2px solid black">Nro</Th> */}
                         <Th border="2px solid black">Origen</Th>
                         <Th border="2px solid black">Destino</Th>
                         <Th border="2px solid black">Fecha</Th>
                         <Th border="2px solid black">Hora</Th>
+                        <Th border="2px solid black">Usuario</Th>
                         <Th border="2px solid black">Conductor</Th>
                         <Th border="2px solid black">Cambiar conductor</Th>
                       </Tr>
@@ -164,11 +186,12 @@ const handleSubmit = async (e) => {
                     <Tbody >
                     {tripsToShow.map((solicitud, index) => (
                         <Tr key={solicitud.id} >
-                          <Td border="2px solid black">{index + 1}</Td>
+                          {/* <Td border="2px solid black">{index + 1}</Td> */}
                           <Td border="2px solid black">{solicitud.origin}</Td>
                           <Td border="2px solid black">{solicitud.destination}</Td>
                           <Td border="2px solid black">{solicitud.date}</Td>
                           <Td border="2px solid black">{solicitud.hour}</Td>
+                          <Td border="2px solid black">{solicitud.userEmail}</Td>
                           <Td border="2px solid black">{solicitud.driverFullName}</Td>
                           <Td border="2px solid black" justifyContent='center'>
                           <Flex gap={2} justifyContent={'center'}  >
@@ -193,7 +216,7 @@ const handleSubmit = async (e) => {
                 bgColor='#009ED1'
                 variant="outline"
                 colorScheme="teal"
-                onClick={nextHandler}
+                onClick={prevHandler}
                 >
                 Anterior
                 </Button>

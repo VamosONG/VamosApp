@@ -66,7 +66,9 @@ const NavBar = () => {
         transition="background 0.5s ease"
       >
         <Box>
-          <Image src={Vamos} alt="Vamos" w="150px" />
+         <Link to="/">
+                <Image src={Vamos} alt="Vamos" w="150px" />
+         </Link>
         </Box>
 
         <Box w="100%" alignContent="center" justifyContent="center">
@@ -80,11 +82,11 @@ const NavBar = () => {
                     </Button>
                   </Link>
                   
-                  <Link to="/solicitudesDeViajes">
+                  {/* <Link to="/solicitudesDeViajes">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       SOLICITUDES DE VIAJE
                     </Button>
-                  </Link>
+                  </Link> */}
 
                   {/* <Link to="/detail">
                     <Button colorScheme="#009ED1" fontSize="1xl">

@@ -16,7 +16,7 @@ import {
   Input, Select, Button, Heading, Stack,
   Tabs, TabList, TabPanels, Tab, TabPanel 
 } from '@chakra-ui/react'
-import { AddIcon, EditIcon } from '@chakra-ui/icons'
+import { AddIcon, EditIcon, RepeatClockIcon } from '@chakra-ui/icons'
 
 import Swal from 'sweetalert2'
 import { Link } from "react-router-dom"
@@ -93,6 +93,20 @@ const handleChange = async (e) => {
         tripState: 'reserved'
     })
 }
+const handleClean = async (e) => {
+    setInput({
+        ...input,
+        searchInput: "",
+        order: "",
+        tripState: 'reserved'
+    })
+    dispatch(orderSearch({
+      ...input,
+      searchInput: "",
+      order: "",
+      tripState: 'reserved'
+  }));
+}
 const handleSubmitReserved = async (e) => {
     
     console.log(input)
@@ -129,6 +143,7 @@ const handleSubmitReserved = async (e) => {
               placeholder='Buscar por coincidencia'
               onChange={handleChange}
               name='searchInput'
+              value={input.searchInput}
               />
               <FormControl>
               <Select 
@@ -137,15 +152,21 @@ const handleSubmitReserved = async (e) => {
               width='xs' 
               name='order' 
               onChange={handleChange}
+              value={input.order}
               >
               <option>mas reciente</option>
               <option>menos reciente</option>
               </Select>
               </FormControl>
               </Box>
-                <Button onClick={handleSubmitReserved}>
+                <Button onClick={handleSubmitReserved} style={{marginRight:'1rem'}}>
                 APLICAR
                 </Button>
+                <Tooltip hasArrow label='Reiniciar filtro y búsqueda' bg='#009ED1' placement='left-start'>
+                <Button onClick={handleClean} >
+                <RepeatClockIcon/>
+                </Button>
+                </Tooltip>
               </Box>
               </TableContainer>
         
@@ -153,7 +174,7 @@ const handleSubmitReserved = async (e) => {
                 <TableCaption>Viajes sin conductor</TableCaption>
                     <Thead>
                       <Tr>
-                        <Th border="2px solid black">Nro</Th>
+                        {/* <Th border="2px solid black">Nro</Th> */}
                         <Th border="2px solid black">Origen</Th>
                         <Th border="2px solid black">Destino</Th>
                         <Th border="2px solid black">Fecha</Th>
@@ -165,7 +186,7 @@ const handleSubmitReserved = async (e) => {
                     <Tbody >
                     {tripsToShow.map((solicitud, index) => (
                         <Tr key={solicitud.id} >
-                          <Td border="2px solid black">{index + 1}</Td>
+                          {/* <Td border="2px solid black">{index + 1}</Td> */}
                           <Td border="2px solid black">{solicitud.origin}</Td>
                           <Td border="2px solid black">{solicitud.destination}</Td>
                           <Td border="2px solid black">{solicitud.date}</Td>
@@ -192,7 +213,7 @@ const handleSubmitReserved = async (e) => {
                       bgColor='#009ED1'
                       variant="outline"
                       colorScheme="teal"
-                      onClick={nextHandler}
+                      onClick={prevHandler}
                       >
                       Anterior
                       </Button>

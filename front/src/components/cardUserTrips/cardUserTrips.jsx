@@ -28,6 +28,11 @@ import ImgDecameron from '../../assets/imgPlaces/decameron.jpg'
 
 const CardUserTrips = ({ userDetail, stateFilter }) => {
     const filteredTrips = userDetail.Trips.filter((trip) => trip.stateOfTrip === stateFilter);
+
+    // Verifica si filteredTrips tiene una longitud mayor a 0 antes de renderizar el componente
+    if (filteredTrips.length === 0) {
+        return null; // No renderiza nada si no hay viajes
+    }
     return (
         <Flex bg='white' w={'100%'} h='100%' borderRadius={6} px={1} pt='0' flexDirection={'column'}  >
             {filteredTrips.length && filteredTrips.map((trips) => (

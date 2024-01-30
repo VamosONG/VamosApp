@@ -98,14 +98,14 @@ export const postNewViaje = (infoViaje) => {
 
     //  infoViaje.userId= "762baea5-4422-44de-ae36-ddf9c6a9e43b"
     //infoViaje.userId= "74c99ae0-61f9-4d85-bcb6-fcf680183c48" //(con permisos de admin)
-    console.log(infoViaje)
+   
     return async (dispatch) => {
         try {
 
             /* const { data } = await axios.post(`https://vamosappserver.onrender.com/offer/create`, infoViaje); */
 
             const { data } = await axios.post(`http://localhost:3001/offer/create`, infoViaje);
-            console.log(data)
+            
             await dispatch({
                 type: POST_NEW_VIAJE,
                 payload: data

@@ -74,7 +74,7 @@ const UpdateDriverData = (props) => {
             Swal.fire({
                 icon: "error",
                 title: "Error en Formulario",
-                text: "Hay un error en la fecha, ingrese una diferente",
+                text: "Debe realizar algún cambio para avanzar",
             });
         }
     }
