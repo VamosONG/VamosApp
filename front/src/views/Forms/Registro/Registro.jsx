@@ -30,8 +30,9 @@ import { useDispatch } from "react-redux";
 import { getUserByEmail } from "../../../redux/actions";
 import googleLogo from "../../../assets/icons/google.png";
 
-const RegistroForm = ({ onSwitchForm }) => {
+import {ValidateNewUser} from '../../../components/Validate/validateNewUser';
 
+const RegistroForm = ({ onSwitchForm }) => {
 
   //  estado loca Input para setear la info del form y enviarla por body al back y crear el usuario
 
@@ -42,7 +43,7 @@ const RegistroForm = ({ onSwitchForm }) => {
     email: "",
     dni: "",
   });
-
+  const [isError, setError] = useState({});
 
 // setea los inputs con los valores q se van escribiendo
   const handleInputChange = (e) => {
@@ -53,9 +54,11 @@ const RegistroForm = ({ onSwitchForm }) => {
       ...input,
       [property]: value,
     });
+
+    setError(ValidateNewUser(input));
+    console.log('Error objeto:',isError);
   };
 
-  const isError = input === "";
 
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
@@ -64,7 +67,7 @@ const RegistroForm = ({ onSwitchForm }) => {
 
   //Autenticacion
   const auth = useAuth();
-  const { displayName } = auth.user;
+  //const { displayName } = auth.user;
 
 // funcion para que al registrarse se envien los datos del usuario
   const handleSubmit = async (e) => {
@@ -74,27 +77,22 @@ let dataUser = {};
 
     Promise.all([
       auth.register(input.email, input.password),  //registrarse con email y con password por firebase
-      axios.post(`http://localhost:3001/user/create`, input) // post con los inputs para crear el usuario
+      axios.post(`http://localhost:3001/user/create`, input), // post con los inputs para crear el usuario
     ])
       .then(([authResponse, { data }]) => {
-        dispatch(getUserByEmail(input.email))  // get con el input para setear el current user 
-        console.log("input data", input);
         console.log(data);
+
+       // dispatch(getUserByEmail(data.email))  // get con el input para setear el current user 
+        
         Swal.fire({
-          title: "Bien hecho!",
-          text: "Datos registrados!",
+          title: "¡Bien hecho!",
+          text: "¡Datos registrados correctamente!",
           icon: "success",
         });  
-
         navigate("/")
-       
-      })
-      .then((response) => {
-        console.log("Mail enviado");// respuesta de send-mail aquí
-        console.log(response);
+      
       })
       .catch((error) => {
-        console.log("error no se pudo cargar");
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -115,28 +113,39 @@ let dataUser = {};
       >
 
       <Flex
-      alignContent="center"
-      p={130}
-      marginTop="0px" 
+      direction={{ base: "column", md: "row" }}  // Cambiado a dirección de columna para dispositivos móviles
+      align="center"
+      p={{ base: 4, md: 120 }}  // Ajustado el relleno para dispositivos móviles
+      marginTop="30px"
+      
       >
+      <Flex align="center" justify="center" display={{ base: "none", md: "flex" }}>
+        <Image 
+        src="https://res.cloudinary.com/drgnsbah9/image/upload/v1706386608/Vamos/paroh1nlxjsyzeqdv6v5.png" 
+        alt="Descripción de la imagen" 
+        width="400px"
+        height="596px"
+        objectFit="cover"
+        />
+      </Flex>
+
       <Stack
-        spacing={4}
+        spacing={2}
         bg='#009ED1'
-        p="5"
-        h="auto"
-        borderRadius="2xl"
+        p={{ base: 4, md: 5 }}
+        borderRadius={{ base: "none", md: "none" }}
         boxShadow="dark-lg"
-        w={{ base: "20rem", md: "30rem" }}
+        w={{ base: "100%", md: "25rem" }}
         color="Black"
       >
 
         <Heading 
-        fontSize="3xl" 
+        fontSize="2xl" 
         fontFamily="'DIN Alternate Black', sans-serif"
-        >REGISTRATE!</Heading>
-        <FormControl isInvalid={isError} isRequired>
+        >REGISTRO</Heading>
+        <FormControl isInvalid={isError.name} isRequired>
           <FormLabel 
-          fontSize="2xl"
+          fontSize="1xl"
           fontFamily="'DIN Medium',"
           >Nombre</FormLabel>
           <Input
@@ -147,14 +156,14 @@ let dataUser = {};
             placeholder="Nombre"
             bg="white"
           />
-          {!isError ? (
-            <FormErrorMessage>Por favor ingrese su nombre.</FormErrorMessage>
+          {isError ? (
+            <FormErrorMessage color='black' fontWeight='bold'>{isError.name}</FormErrorMessage>
           ) : null}
         </FormControl>
 
-        <FormControl isInvalid={isError} isRequired>
+        <FormControl isInvalid={isError.surname} isRequired>
           <FormLabel 
-          fontSize="2xl"
+          fontSize="1xl"
           fontFamily="'DIN Medium',"
           >Apellido</FormLabel>
           <Input
@@ -165,33 +174,33 @@ let dataUser = {};
             placeholder="Apellido"
             bg="white"
           />
-          {!isError ? (
-            <FormErrorMessage>Por favor ingrese su apellido.</FormErrorMessage>
+          {isError ? (
+            <FormErrorMessage color='black' fontWeight='bold'>{isError.surname}</FormErrorMessage>
           ) : null}
         </FormControl>
 
-        <FormControl isRequired>
+        <FormControl isInvalid={isError.phone} isRequired>
           <FormLabel 
-          fontSize="2xl"
+          fontSize="1xl"
           fontFamily="'DIN Medium',"
           >Telefono</FormLabel>
           <Input
             type="number"
             name="phone"
             value={input.phone}
-            placeholder="Teléfono."
+            placeholder="Teléfono"
             onChange={handleInputChange}
             bg="white"
           />
           {isError ? (
-            <FormErrorMessage>Por favor ingrese su número de teléfono.</FormErrorMessage>
+            <FormErrorMessage color='black' fontWeight='bold'>{isError.phone}</FormErrorMessage>
           ) : null}
         </FormControl>
 
-        <FormControl isRequired>
+        <FormControl isInvalid={isError.email} isRequired>
 
           <FormLabel 
-          fontSize="2xl"
+          fontSize="1xl"
           fontFamily="'DIN Medium',"
           >Correo electrónico</FormLabel>
           <Input
@@ -203,31 +212,31 @@ let dataUser = {};
             bg="white"
           />
           {isError ? (
-            <FormErrorMessage>Por favor ingrese su email.</FormErrorMessage>
+            <FormErrorMessage color='black' fontWeight='bold'>{isError.email}</FormErrorMessage>
           ) : null}
         </FormControl>
 
-        <FormControl isRequired>
+        <FormControl isInvalid={isError.dni} isRequired>
           <FormLabel 
-          fontSize="2xl"
+          fontSize="1xl"
           fontFamily="'DIN Medium',"
           >DNI</FormLabel>
           <Input
             type="number"
             name="dni"
             value={input.dni}
-            placeholder="DNI."
+            placeholder="DNI"
             onChange={handleInputChange}
             bg="white"
           />
           {isError ? (
-            <FormErrorMessage>Por favor ingrese su DNI.</FormErrorMessage>
+            <FormErrorMessage color='black' fontWeight='bold'>{isError.dni}</FormErrorMessage>
           ) : null}
         </FormControl>
 
-        <FormControl isRequired>
+        <FormControl isInvalid={isError.password} isRequired>
           <FormLabel 
-          fontSize="2xl"
+          fontSize="1xl"
           fontFamily="'DIN Medium',"
           >Password</FormLabel>
           <InputGroup size="md">
@@ -253,41 +262,19 @@ let dataUser = {};
             </Button>
             </InputRightElement>
           </InputGroup>
+          {isError ? (
+            <FormErrorMessage color='black' fontWeight='bold'>{isError.password}</FormErrorMessage>
+          ) : null}
         </FormControl>
 
         <Button 
-        fontSize="2xl" 
+        fontSize="1xl" 
         bg='#E83D6F'
         type="submit"
         fontFamily="'DIN Medium',"
+        disabled={isError}
         >
-          ENVIAR
-        </Button>
-        
-        <Box position='relative' padding='5'>
-        <Divider />
-        <AbsoluteCenter bg='#009ED1' px='5'>
-          O
-        </AbsoluteCenter>
-        </Box>
-        
-        <Button
-        fontSize="1xl"
-        bg="white"
-        type="submit"
-        fontFamily="'DIN Medium',"
-        olor="black"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        p={3}
-        borderRadius="md"
-        _hover={{ bg: "gray.100" }}
-        >
-        <Flex align="center" mr={1}>
-        <Image src={googleLogo} alt="Google Logo" boxSize="35px" mr={0} />
-        </Flex>
-        <Text>Continuar con Google</Text>
+          Confirmar
         </Button>
       </Stack>
       </Flex>

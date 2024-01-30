@@ -12,9 +12,10 @@ const PaymentStatus = () => {
   const mePagoData = useSelector((state) => state.mePagoData);
 
   useEffect(() => {
+    localStorage.clear(); //Para que se resetee el local storage
     dispatch(getDataMePago());
     Swal.fire({
-      title: "Viaje reservado",
+      title: "¡Viaje reservado!",
       text: "Los detalles de su reserva se enviaron a su correo electrónico",
       icon: "success"
     });
@@ -27,11 +28,9 @@ const PaymentStatus = () => {
 
   return (
    
-   <Flex bgSize="cover" bgRepeat="no-repeat" bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/eqdrrjmlkojpiiwlhwjo.jpg">
-   <Center>
-    <Box bg='#009ED1' w={{base:"20rem",md:"30rem"}} spacing={4}>
+    <Box bg='#009ED1' w={{base:"1rem",md:"30rem"}} spacing={4} mt="6rem" borderRadius="3%" mb="4rem" >
     
-      <Flex justifyContent="center" p={250}>
+      <Flex justifyContent="center" p={20}>
        <Stack >
         <Heading
           color='white'
@@ -65,7 +64,7 @@ const PaymentStatus = () => {
               <Text>ID de Pago: {mePagoData?.payment_id}</Text>
               <Text>Tipo de Pago: {mePagoData?.payment_type}</Text>
               <Text>Metodo de Pago: {mePagoData?.site_id === "MPE" ? "Mercadopago" : ""}</Text>
-              <Button boxShadow="0,5g">Descargar</Button>
+              
             </Stack>
           </Collapse>
         </Box>
@@ -73,9 +72,6 @@ const PaymentStatus = () => {
       </Flex>
       
       </Box>
-      </Center>
-      </Flex>
-
   );
 };
 

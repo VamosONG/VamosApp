@@ -1,7 +1,13 @@
 import axios from 'axios';
-import choferes from '../../utils/chofer'
 
-import { DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, ORDER_DATE, FILTER_RATING, GET_DATA_USER, HANDLE_ADMIN, ORDER_TRIPS } from './action.types';
+import Swal from 'sweetalert2';
+
+import {auth} from "../../firebase/firebase.config"
+
+
+
+import {  ORDER_TRIPS, GET_TRIPS,DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, HANDLE_ADMIN, ORDER_DATE, FILTER_RATING, GET_DATA_USER } from './action.types';
+
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
 export const PAGINATE = "PAGINATE"
@@ -92,14 +98,14 @@ export const postNewViaje = (infoViaje) => {
 
     //  infoViaje.userId= "762baea5-4422-44de-ae36-ddf9c6a9e43b"
     //infoViaje.userId= "74c99ae0-61f9-4d85-bcb6-fcf680183c48" //(con permisos de admin)
-    console.log(infoViaje)
+   
     return async (dispatch) => {
         try {
 
             /* const { data } = await axios.post(`https://vamosappserver.onrender.com/offer/create`, infoViaje); */
 
             const { data } = await axios.post(`http://localhost:3001/offer/create`, infoViaje);
-            console.log(data)
+            
             await dispatch({
                 type: POST_NEW_VIAJE,
                 payload: data
@@ -114,6 +120,7 @@ export const postNewViaje = (infoViaje) => {
 }
 
 export const getReservedTrips = () =>{
+    console.log('llega aqui');
     return async(dispatch)=> {
         const endpoint= 'http://localhost:3001/trips/reserves' //Se cambió a la ruta con viajes reservados
         try {
@@ -125,7 +132,7 @@ export const getReservedTrips = () =>{
             })
         } catch (error) {
             console.log(error);
-            alert("error en getReservedTrips")
+            /* alert("error en getReservedTrips") */
         }
     }
 }
@@ -620,14 +627,73 @@ export const orderSearch = (input) => {
     return async (dispatch) => {
         try {
             const { data } = await axios.post(`http://localhost:3001/trips/filters`, input);
+
+            // hacer in if, para que dependiendo del tipo de viaje, sepa donde guardar
+            
+            data[0].stateOfTrip==='reserved'?(
             dispatch({
                 type: GET_RESERVED_TRIPS,
                 payload: data
             })
+            ):(data[0].stateOfTrip==='pending'?(
+                dispatch({
+                    type: GET_PENDING_TRIPS,
+                    payload: data
+                })
+            ):(
+                dispatch({
+                    type: GET_COMPLETED_TRIPS,
+                    payload: data
+                })
+            ))
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
             console.log(error.message)
         }
     };
 
+}
+
+export const getTrips = () => {
+    return async (dispatch)=> {
+        try {
+            const {data} =await  axios.get(`http://localhost:3001/trips`)
+          
+            return dispatch({
+                type: GET_TRIPS,
+                payload: data
+            })
+        } catch (error) {
+            console.error("Error en trips:", error);
+        }
+    }
+}
+export const handlePayment = (infoConfirmacionViaje,currentUserId) => {
+    const product = {
+        viaje:`${infoConfirmacionViaje.origin}${infoConfirmacionViaje.destination}`, 
+        price: Number(infoConfirmacionViaje?.price) ,//Ojo, que esto puede cambiar
+        // quantityPassengers: "1",
+        userId: currentUserId,
+        origin: infoConfirmacionViaje?.origin,
+        destination: infoConfirmacionViaje?.destination,
+        date:infoConfirmacionViaje?.date,
+        hour: infoConfirmacionViaje?.hour,
+        quantityPassengers: Number(infoConfirmacionViaje.quantityPassengers),
+        driverId: null
+      }
+      console.log(product)
+    return async (dispatch)=> {
+        try {
+            const {data} =await axios.post("http://localhost:3001/mepago/create-order", product)
+            console.log(data)
+            window.location.href = data
+            /* return dispatch({
+                type: MERCADO_PAGO,
+                payload: data
+            }) */
+        } catch (error) {
+            console.error("Error en al redirigir", error);
+            console.log(error.message)
+        }
+    }
 }

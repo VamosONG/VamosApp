@@ -1,8 +1,9 @@
 const updateUser = require('../../controllers/usersControllers/updateUsers');
 
 module.exports = async (req, res) => {
-    const { id,} = req.params;
-    const {newData} = req.body;
+    const { id} = req.params;
+    const { newData } = req.body;
+    console.log('1 han ' , newData);
     try {
         const updUser = await updateUser(id, newData);
 

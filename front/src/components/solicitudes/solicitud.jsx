@@ -59,17 +59,10 @@ const Solicitud =()=> {
   }, [/* conductores */])
 
 
-  /* const [conductorSeleccionado,setConductorSeleccionado]=useState(false)
-  const [idConductorSeleccionado,setIdConductorSeleccionado]=useState('')
-
-  const handleCheckboxChange = (conductorId) => {
-    setConductorSeleccionado(!conductorSeleccionado)
-    setIdConductorSeleccionado(conductorId)
-  }; */
   const handleClick = (conductorId) => {
     dispatch(conductorAsignado({tripId:id,driverId:conductorId}))
     Swal.fire({
-      title: "Conductor confirmado para el viaje",
+      title: "¡Conductor asignado con éxito!",
       text: "Para cambiar de conductor ir a Solicitudes de viaje --> Viajes con conductor asignado",
       icon: "success"
     }).then(() => {

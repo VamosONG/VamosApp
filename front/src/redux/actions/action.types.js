@@ -27,4 +27,8 @@ export const GET_REVIEWS = 'GET_REVIEWS'
 //User Methods
 export const GET_DETAIL_USER = 'GET_DETAIL_USER'
 export const GET_DATA_USER ='GET_DATA_USER'
+
+export const GET_TRIPS = "GET_TRIPS"
+
 export const HANDLE_ADMIN = 'HANDLE_ADMIN'
+

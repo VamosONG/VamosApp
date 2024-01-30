@@ -1,5 +1,4 @@
 const mailing = require('./mailing');
-const getUserById = require('../../controllers/usersControllers/getUserById');
 const {getTripById} = require('../../controllers/tripsControllers/getTripById');
 const getDriverById = require('../../controllers/driversControllers/getDriverById');
 const getAdminEmails = require('../../controllers/adminControllers/getAdminEmails');
@@ -8,10 +7,7 @@ const getAdminEmails = require('../../controllers/adminControllers/getAdminEmail
 module.exports=async({id, name, surname, email, phone, dni, driverId, tripId, option})=>{
 
     try {
-console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
-        const userName=name;
-        email="ezequielantoine@gmail.com"
-        
+        let userName=name;        
         let chofer=null;
         let trip=null;
         const adminsEmails = await getAdminEmails();
@@ -144,7 +140,7 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
                                        </table></td>
                                      </tr>
                                      <tr>
-                                      <td align="center" style="padding:0;Margin:0"><span class="es-button-border" style="border-style:solid;border-color:#2cb543;background:#31cb4b;border-width:0px;display:inline-block;border-radius:5px;width:auto"><a href="" class="es-button es-button-1705694623085" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;display:inline-block;background:#31CB4B;border-radius:5px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;padding:5px 10px;mso-padding-alt:0;mso-border-alt:10px solid #31CB4B"><!--[if !mso]><!-- --><img src="https://ecssifo.stripocdn.email/content/guids/CABINET_e504a23cc291e8e474688bd9bafbf7c1747dff40975be814891c6dd27f4bb032/images/pngwa.png" alt="icon" width="20" style="display:inline-block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;vertical-align:middle;margin-right:8px" align="absmiddle"><!--<![endif]-->Consultas</a></span></td>
+                                      <td align="center" style="padding:0;Margin:0"><span class="es-button-border" style="border-style:solid;border-color:#2cb543;background:#31cb4b;border-width:0px;display:inline-block;border-radius:5px;width:auto"><a href="https://wa.me/+" class="es-button es-button-1705694623085" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;display:inline-block;background:#31CB4B;border-radius:5px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;padding:5px 10px;mso-padding-alt:0;mso-border-alt:10px solid #31CB4B"><!--[if !mso]><!-- --><img src="https://ecssifo.stripocdn.email/content/guids/CABINET_e504a23cc291e8e474688bd9bafbf7c1747dff40975be814891c6dd27f4bb032/images/pngwa.png" alt="icon" width="20" style="display:inline-block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;vertical-align:middle;margin-right:8px" align="absmiddle"><!--<![endif]-->Consultas</a></span></td>
                                      </tr>
                                      <tr>
                                       <td align="center" style="padding:20px;Margin:0;font-size:0">
@@ -168,7 +164,7 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
                 </html>`; //Ver HTML
                 break;
             case("reserve"):
-                bbc=[...adminsEmails, email],
+                email=[...adminsEmails, email],
                 preSubject=`VAMOS!! ${userName} su reserva se ha registrado.`,
                 message=`<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
                 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="es">
@@ -341,7 +337,7 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
                     <w:anchorlock></w:anchorlock>
                     <center style='color:#ffffff; font-family:arial, "helvetica neue", helvetica, sans-serif; font-size:11px; font-weight:400; line-height:11px;  mso-text-raise:1px'>Consultas</center>
                   </v:roundrect></a>
-                <![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#2cb543;background:#31cb4b;border-width:0px;display:inline-block;border-radius:5px;width:auto;mso-hide:all"><a href="" class="es-button es-button-1705710837716" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;display:inline-block;background:#31CB4B;border-radius:5px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;padding:5px 10px;mso-padding-alt:0;mso-border-alt:10px solid #31cb4b"><img src="https://ecssifo.stripocdn.email/content/guids/CABINET_4a838473f1651a7dbd3ac2bb1b173132bdf1003982adeb8a70797279f860d813/images/pngwa.png" alt="icon" width="20" style="display:inline-block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;vertical-align:middle;margin-right:8px" align="absmiddle">Consultas</a></span><!--<![endif]--></td>
+                <![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#2cb543;background:#31cb4b;border-width:0px;display:inline-block;border-radius:5px;width:auto;mso-hide:all"><a href="https://wa.me/+" class="es-button es-button-1705710837716" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;display:inline-block;background:#31CB4B;border-radius:5px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;padding:5px 10px;mso-padding-alt:0;mso-border-alt:10px solid #31cb4b"><img src="https://ecssifo.stripocdn.email/content/guids/CABINET_4a838473f1651a7dbd3ac2bb1b173132bdf1003982adeb8a70797279f860d813/images/pngwa.png" alt="icon" width="20" style="display:inline-block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;vertical-align:middle;margin-right:8px" align="absmiddle">Consultas</a></span><!--<![endif]--></td>
                                      </tr>
                                    </table></td>
                                  </tr>
@@ -358,7 +354,7 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
                         `
                 break;
             case("assignDriver"):
-                bbc=[email, chofer.email],
+                email=email,
                 preSubject=`VAMOS!! ${userName}, se ha asignado un chofer para su viaje.`,
                 message=`<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
                 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="es">
@@ -566,7 +562,7 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
                     <w:anchorlock></w:anchorlock>
                     <center style='color:#ffffff; font-family:arial, "helvetica neue", helvetica, sans-serif; font-size:11px; font-weight:400; line-height:11px;  mso-text-raise:1px'>Consultas</center>
                   </v:roundrect></a>
-                <![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#2cb543;background:#31cb4b;border-width:0px;display:inline-block;border-radius:5px;width:auto;mso-hide:all"><a href="" class="es-button es-button-1705710837716" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;display:inline-block;background:#31CB4B;border-radius:5px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;padding:5px 10px;mso-padding-alt:0;mso-border-alt:10px solid #31cb4b"><img src="https://ecssifo.stripocdn.email/content/guids/CABINET_4a838473f1651a7dbd3ac2bb1b173132bdf1003982adeb8a70797279f860d813/images/pngwa.png" alt="icon" width="20" style="display:inline-block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;vertical-align:middle;margin-right:8px" align="absmiddle">Consultas</a></span><!--<![endif]--></td>
+                <![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#2cb543;background:#31cb4b;border-width:0px;display:inline-block;border-radius:5px;width:auto;mso-hide:all"><a href="https://wa.me/+" class="es-button es-button-1705710837716" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;display:inline-block;background:#31CB4B;border-radius:5px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;padding:5px 10px;mso-padding-alt:0;mso-border-alt:10px solid #31cb4b"><img src="https://ecssifo.stripocdn.email/content/guids/CABINET_4a838473f1651a7dbd3ac2bb1b173132bdf1003982adeb8a70797279f860d813/images/pngwa.png" alt="icon" width="20" style="display:inline-block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;vertical-align:middle;margin-right:8px" align="absmiddle">Consultas</a></span><!--<![endif]--></td>
                                      </tr>
                                    </table></td>
                                  </tr>
@@ -1132,7 +1128,7 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
                     <center style='color:#ffffff; font-family:arial, "helvetica neue", helvetica, sans-serif; font-size:11px; font-weight:400; line-height:11px;  mso-text-raise:1px'>Consultas</center>
                   </v:roundrect></a>
                 <![endif]-->
-                                                                                                        <!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#2cb543;background:#31cb4b;border-width:0px;display:inline-block;border-radius:5px;width:auto;mso-hide:all"><a href class="es-button es-button-1705710837716" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;display:inline-block;background:#31CB4B;border-radius:5px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;padding:5px 10px;mso-padding-alt:0;mso-border-alt:10px solid #31cb4b"><img src="https://ecssifo.stripocdn.email/content/guids/CABINET_4a838473f1651a7dbd3ac2bb1b173132bdf1003982adeb8a70797279f860d813/images/pngwa.png" alt="icon" width="20" style="display:inline-block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;vertical-align:middle;margin-right:8px" align="absmiddle">Consultas</a></span>
+                                                                                                        <!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#2cb543;background:#31cb4b;border-width:0px;display:inline-block;border-radius:5px;width:auto;mso-hide:all"><a href="https://wa.me/+" class="es-button es-button-1705710837716" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;display:inline-block;background:#31CB4B;border-radius:5px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;padding:5px 10px;mso-padding-alt:0;mso-border-alt:10px solid #31cb4b"><img src="https://ecssifo.stripocdn.email/content/guids/CABINET_4a838473f1651a7dbd3ac2bb1b173132bdf1003982adeb8a70797279f860d813/images/pngwa.png" alt="icon" width="20" style="display:inline-block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;vertical-align:middle;margin-right:8px" align="absmiddle">Consultas</a></span>
                                                                                                         <!--<![endif]-->
                                                                                                     </td>
                                                                                                 </tr>
@@ -1162,6 +1158,7 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
                         `
                 break;
             case("infoDriver"):
+              email= `${chofer.email}`
               preSubject=`VAMOS!! Hola ${chofer.name}, se le ha asignado un viaje.`,
               message=`<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
               <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="es">
@@ -1603,8 +1600,8 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
                                                                                               <tr>
                                                                                                   <td align="left" style="padding:0;Margin:0" class="esd-text">
                                                                                                       <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><strong>Datos del usuario:</strong></p>
-                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><u>Nombre</u>: ${usuario.name}.&nbsp;</p>
-                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><u>Apellido</u>: ${usuario.surname}.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><u>Nombre</u>: ${name}.&nbsp;</p>
+                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><u>Apellido</u>: ${surname}.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
                                                                                                       <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
                                                                                                   </td>
                                                                                               </tr>
@@ -1624,8 +1621,8 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
                                                                                               <tr>
                                                                                                   <td align="left" style="padding:0;Margin:0" class="esd-text">
                                                                                                       <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><strong>Datos de contacto:</strong></p>
-                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><strong></strong>Tel.: ${usuario.phone}.<strong></strong></p>
-                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><u>email</u>: ${usuario.email}.</p>
+                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><strong></strong>Tel.: ${phone}.<strong></strong></p>
+                                                                                                      <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><u>email</u>: ${email}.</p>
                                                                                                       <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:28px;color:#333333;font-size:14px"><br></p>
                                                                                                   </td>
                                                                                               </tr>
@@ -1711,7 +1708,7 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
                   <center style='color:#ffffff; font-family:arial, "helvetica neue", helvetica, sans-serif; font-size:11px; font-weight:400; line-height:11px;  mso-text-raise:1px'>Consultas</center>
                 </v:roundrect></a>
               <![endif]-->
-                                                                                                      <!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#2cb543;background:#31cb4b;border-width:0px;display:inline-block;border-radius:5px;width:auto;mso-hide:all"><a href class="es-button es-button-1705710837716" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;display:inline-block;background:#31CB4B;border-radius:5px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;padding:5px 10px;mso-padding-alt:0;mso-border-alt:10px solid #31cb4b"><img src="https://ecssifo.stripocdn.email/content/guids/CABINET_4a838473f1651a7dbd3ac2bb1b173132bdf1003982adeb8a70797279f860d813/images/pngwa.png" alt="icon" width="20" style="display:inline-block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;vertical-align:middle;margin-right:8px" align="absmiddle">Consultas</a></span>
+                                                                                                      <!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#2cb543;background:#31cb4b;border-width:0px;display:inline-block;border-radius:5px;width:auto;mso-hide:all"><a href="https://wa.me/+" class="es-button es-button-1705710837716" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;display:inline-block;background:#31CB4B;border-radius:5px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;padding:5px 10px;mso-padding-alt:0;mso-border-alt:10px solid #31cb4b"><img src="https://ecssifo.stripocdn.email/content/guids/CABINET_4a838473f1651a7dbd3ac2bb1b173132bdf1003982adeb8a70797279f860d813/images/pngwa.png" alt="icon" width="20" style="display:inline-block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;vertical-align:middle;margin-right:8px" align="absmiddle">Consultas</a></span>
                                                                                                       <!--<![endif]-->
                                                                                                   </td>
                                                                                               </tr>
@@ -1738,7 +1735,6 @@ console.log(id, name, surname, email, phone, dni, driverId, tripId, option);
               </body>      
               </html>              
               `
-            email= `ezequielantoine@gmail.com`//${chofer.email}`
             break;            
             default:{
                 userName="";

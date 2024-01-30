@@ -1,5 +1,6 @@
 import { useContext, createContext, useState, useEffect } from "react";
-import { auth } from "../firebase/firebase.config"
+import { auth } from "../firebase/firebase.config";
+import Swal from "sweetalert2";
 
 import {
     onAuthStateChanged,
@@ -11,11 +12,12 @@ import {
 } from "firebase/auth"
 import { useNavigate } from "react-router";
 import { getUserByEmail } from "../redux/actions";
+import { useDispatch } from "react-redux";
 
-
-
+// Creo un contexto para pasar datos a todos los componentes sin tener que pasar props manualmente
 export const authContext = createContext();
 
+// Creo un hook para que los componentes puedan acceder al contexto de autenticacion 
 export const useAuth = () => {
     const context = useContext(authContext)
     if (!context) {
@@ -26,11 +28,18 @@ export const useAuth = () => {
 
 }
 
+let verificationComplete= false;
 
+// este es el proveedor del contexto de autenticacion. Envuelve en app a todos los componentes para que puedan acceder a las funciones 
+// de autenticacion a traves del contexto
 export function AuthProvider({ children }) {
 
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const [user, setUser] = useState("")
+    
+    //const [verificationComplete, setVerificationComplete] = useState(false);  // Estado para controlar la finalización de la verificación
+
     useEffect(() => {
         const suscribed = onAuthStateChanged(auth, (currentUser) => {
             if (!currentUser) {
@@ -41,11 +50,12 @@ export function AuthProvider({ children }) {
                 setUser(currentUser)
                 console.log(currentUser);
                 currentUser
-
+                dispatch(getUserByEmail(currentUser.email))
             }
+            verificationComplete=true;
         })
         return () => suscribed()
-    }, [])
+    }, [/* auth, dispatch */])
 
     // const render = () => {
     //     if (!user) {
@@ -61,6 +71,7 @@ export function AuthProvider({ children }) {
 
 
     const register = async (email, password) => {
+        console.log(auth, email, password);
         const response = await createUserWithEmailAndPassword(auth, email, password)
         console.log(response);
     }
@@ -80,14 +91,16 @@ export function AuthProvider({ children }) {
     const loginWithGoogle = async () => {
         const responseGoogle = new GoogleAuthProvider()
         try {
-        await signInWithPopup(auth, responseGoogle)
-      
+            const resp=await signInWithPopup(auth, responseGoogle)
+        setUser(resp)
+             return resp
         } catch (error) {
             console.log(`"Falló el login"${error.message}`);
         }
     }
     const logOut = async () => {
         try {
+            setUser()
             await signOut(auth);
             console.log('Logout exitoso');
         } catch (error) {
@@ -107,3 +120,6 @@ export function AuthProvider({ children }) {
         {children}
     </authContext.Provider>)
 }
+
+export {verificationComplete};
+
