@@ -22,10 +22,13 @@ module.exports = async (req, res) => {
             const {dataValues, driverFullName, userEmail} = tr;
             const chofer=await getDriverById(tr.driverId);
             const usuario = await getUserById(tr.userId)
+            /* const reviews = await getReviewsByUserId(tr.userId) */
+            /* const puntaje=reviews.find((revi)=>{revi.driverId===tr.driverId && revi.date===tr.date}) */
             const newTrip={
                 ...dataValues,
                 driverFullName: `${chofer.name} ${chofer.surname}`,
-                userEmail: `${usuario.email}`
+                userEmail: `${usuario.email}`,
+                /* puntaje: `${puntaje.qualification}` */
             }
 
             return newTrip;
