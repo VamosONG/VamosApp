@@ -1,7 +1,7 @@
 
 import { useState } from 'react'
 import './App.css'
-import { useLocation } from 'react-router-dom';
+import { Navigate, redirect, useLocation } from 'react-router-dom';
 
 import Footer from './views/footer/footer';
 import Paginado from './components/paginado/paginadoComponent';
@@ -35,6 +35,7 @@ import ProtectedRoutes from './utils/ProtectedRoute';
 import { useSelector } from 'react-redux';
 
 import PaymentFail from './views/payments/paymentFail';
+import Error from './components/Error';
 import LoginViajes from './views/Forms/Login/LoginViajes';
 
 
@@ -46,8 +47,10 @@ function App() {
     <>
     <AuthProvider>
           <NavBar />
-      <Routes>
+
+        <Routes>
         <Route path='/' element={<HomeComponent/>}/> 
+        <Route path="*" element={<Error />}/>
         {/* Renderizando HomeComponent en la ruta para evitar pisar cada ves que se abre una pestaña */}
         <Route path='/home' element={<LoginForm/>}/>
         <Route path="/register" element={<RegistroForm/>}/>
@@ -58,26 +61,32 @@ function App() {
         <Route path="/login" element={<LoginForm/>}/>
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
         <Route path='/loginviajes' element={<LoginViajes/>}/>
-        
+   
+        {
+          
+          currentUser.id &&
+          <>
+      
+          <Route element={<ProtectedRoutes isAllowed={currentUser?.admin=== false} />} > 
+          <Route path="/profileUser" element={<UserProfile/>}/>
+          <Route path='/review&reseña' element={<ReviewAndReseña/>}/>
+           </Route> 
 
-         <Route element={<ProtectedRoutes isAllowed={currentUser?.admin=== false} />} > 
-        <Route path="/profileUser" element={<UserProfile/>}/>
-        <Route path='/review&reseña' element={<ReviewAndReseña/>}/>
+          <Route element={<ProtectedRoutes isAllowed={currentUser?.admin=== true} />}> 
+          <Route path='/solicitud' element={<Solicitud/>}/>
+          <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
+          <Route path='/product' element={<Product/>}/>
+          <Route path='/editPrices' element={<EditPrices/>}/>
+          <Route path="/login" element={<LoginForm/>}/>
+          <Route path="/register" element={<RegistroForm/>}/>
+          <Route path="/profileAdmin" element={<AdminProfile/>}/>
+           </Route> 
+          
+           </>
+        }
+        </Routes>
+
         
-         </Route> 
-        {/* No son necesario estas rutas, ya que todo estara dentro el componente del admin */}
-        {/* <Route path='/detail' element={<DriverTableView/>}/> */}
-        <Route element={<ProtectedRoutes isAllowed={currentUser?.admin=== true} />}> 
-        <Route path='/solicitud' element={<Solicitud/>}/>
-        <Route path= '/solicitudesDeViajes' element={<SolicitudesDeViajes/>} />
-        <Route path='/product' element={<Product/>}/>
-        <Route path='/editPrices' element={<EditPrices/>}/>
-        <Route path="/login" element={<LoginForm/>}/>
-        <Route path="/register" element={<RegistroForm/>}/>
-        <Route path="/profileAdmin" element={<AdminProfile/>}/>
-        
-        
-         </Route> 
         {/* <Route path="/graphics" element={<Graphics/>}/> */}
 
 
@@ -87,7 +96,6 @@ function App() {
 
       {/* <Paginado/> */}
 
-        </Routes>
       <Footer/>
     </AuthProvider>
 

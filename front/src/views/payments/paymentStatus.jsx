@@ -12,6 +12,7 @@ const PaymentStatus = () => {
   const mePagoData = useSelector((state) => state.mePagoData);
 
   useEffect(() => {
+    localStorage.clear(); //Para que se resetee el local storage
     dispatch(getDataMePago());
     Swal.fire({
       title: "¡Viaje reservado!",

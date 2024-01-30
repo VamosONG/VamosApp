@@ -31,7 +31,6 @@ import { cleanCurrentUser, getUserByEmail } from "../../../redux/actions";
 // DEPENDENCIES
 import axios from "axios";
 import Swal from "sweetalert2";
-import ViewBtnUserForm from "../ViewForms/ViewUserForm";
 
 const LoginForm = ({ onSwitchForm }) => {
   // Auth de Firebase
@@ -101,8 +100,10 @@ const LoginForm = ({ onSwitchForm }) => {
       if (googleLog) {
          const usr={
           name: googleLog.user.displayName,
-          email: googleLog.user.email
+          email: googleLog.user.email,
+          image: googleLog.user.photoURL
          }
+         console.log("google" ,usr);
 
          Swal.fire({
           position: "center",
@@ -257,24 +258,9 @@ const LoginForm = ({ onSwitchForm }) => {
             </InputGroup>
           </FormControl>
 
-          {/* <Container>
-            <Text>
-              ¿No tienes cuenta?{" "}
-              <Button color="teal.500" onClick={handleRegister}>
-                Registrarme
-              </Button>
-              <Button colorScheme="red" onClick={(e)=>handleGoogleLogin(e)}>
-                Continuar con Google
-              </Button>
-      
-            </Text>
-          UserViewProfile
-          </Container> */}
-          {/* </Container> */}
-
           <Box>
             {!currentUser?.id && (
-              <Button bg="white" onClick={handleSubmit}>
+              <Button bg="white" onClick={handleSubmit} >
                 Entrar
               </Button>
             )}
