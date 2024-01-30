@@ -37,8 +37,6 @@ import Swal from "sweetalert2";
 import CardUserTrips from '../cardUserTrips/cardUserTrips';
 import UpdateUserDataForm from './updateUserDataForms';
 import CardTrips from '../cards/cardTrips';
-import ViewBtnUserForm from '../../views/Forms/ViewForms/ViewUserForm';
-import ViewOptionPerfil from '../navBar/viewOption/viewOptionPerfil';
 
 const UserProfile = () => {
     const location = useLocation();
@@ -216,12 +214,6 @@ const UserProfile = () => {
                         </Flex>
                     </Flex>
                 </Flex>
-            </Flex>
-
-            <Flex display={'none'}>
-
-                <ViewOptionPerfil fotoPerfil={fotoPerfil} />
-                <ViewBtnUserForm fotoPerfil={fotoPerfil} />
             </Flex>
         </Box>
     );
