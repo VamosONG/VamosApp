@@ -64,7 +64,7 @@ const createOrder = async (req, res) => {
 
     
   } catch (error) {
-    return res.status(500).json({ message: "Something goes wrong" });
+    return res.status(500).json(`Error en payment controller Create Order: ${error.message}`);
   }
 
 };
@@ -98,14 +98,14 @@ const receiveWebhook = async (req, res) => {
       // await deleteTrip(newTrip.id);
       const resp = await postTrip(trip)
       console.log(resp);
-
+      localStorage.clear();
       // AGREGAR LO DE ENVIAR MAIL
 res.status(204).json(resp);
     } 
     
   } catch (error) {
     console.error("Error:", error);
-    return res.status(500).json({ message: "Something goes wrong" });
+    return res.status(500).json(`Error en payment controller Receive Webhook: ${error.message}`);
   }
 };
 

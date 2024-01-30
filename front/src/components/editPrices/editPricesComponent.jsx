@@ -11,7 +11,9 @@ import {
   Td, 
   Input,
   Flex,
-
+  Box,
+  Heading,
+  Select
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPrices, updatePrice } from '../../redux/actions';
@@ -65,14 +67,98 @@ const EditPrices = () => {
     })
   }
 
+  //***************PAGINADO**********************************/
+  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pricesToShow, setPricesToShow] = useState([]);
+
+  const prevHandler = () => {
+    const prevPage = currentPage - 1;
+
+    if (prevPage < 1) return;
+
+    const firstPrice = (prevPage - 1) * 6;
+
+    setCurrentPage(prevPage);
+    setPricesToShow([...allPrices].splice(firstPrice, 6));
+  };
+
+  const nextHandler = () => {
+    const totalPrices = allPrices.length;
+
+    const nextPage = currentPage + 1;
+
+    const firstPrice = currentPage * 6;
+
+    if (firstPrice > totalPrices) return;
+    setCurrentPage(nextPage);
+    setPricesToShow([...allPrices].splice(firstPrice, 6));
+  };
+
+
+  useEffect(() => {
+    setPricesToShow([...allPrices].splice(0, 6));
+  }, [allPrices]);
+
+  //***************BUSQUEDA Y ORDENAMIENTO**********************************/
+  const [input, setInput] = useState({
+    searchInput: "",
+    order: "",
+  });
+
+  const handleChange = async (e) => {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    dispatch(orderSearch(input));
+  };
+
+
+
 
   return (
+    <Box>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        flexDirection="row"
+        bgColor='#009ED1'
+      >
+        <Heading size="xs" textTransform="uppercase" margin="1rem">
+          Buscar:
+        </Heading>
+        <Box style={{ display: 'flex', alignItems: 'center' }}>
+          <Input
+            marginRight='2rem'
+            color="black"
+            bgColor="white"
+            htmlSize={50}
+            width="auto"
+            placeholder="Buscar por coincidencia"
+            onChange={handleChange}
+            name="searchInput"
+          />
+          <Select
+            marginRight='2rem'
+            color="black"
+            bgColor="white"
+            placeholder="Ordenar"
+            width="xs"
+            name="order"
+            onChange={handleChange}
+          >
+            <option>mayor precio</option>
+            <option>menor precio</option>
+          </Select>
+        </Box>
+        <Button onClick={handleSubmit}>APLICAR</Button>
+      </Box>
 
-    /*<Flex justifyContent="center">
-    <TableContainer marginTop={'7rem'}>
-      <Table variant='striped' colorScheme='#009ED1'>
-        <TableCaption>Precios según ruta y vehículo</TableCaption>
-        <Thead>*/
 
     <Flex
     alignItems='center'
@@ -92,11 +178,11 @@ const EditPrices = () => {
             <Th border="2px solid black" color='white'>RUTA</Th>
             <Th border="2px solid black" color='white'>TIPO DE CARRO</Th>
             <Th border="2px solid black" color='white'>PRECIO EN SOLES</Th>
-            <Th border="2px solid black" color='white'>ACTUALIZAR</Th>
+            {/* <Th border="2px solid black" color='white'>ACTUALIZAR</Th> */}
           </Tr>
         </Thead>
-        <Tbody>
-          {allPrices?.map((combo, index) => (
+        <Tbody justifyContent="center">
+          {pricesToShow?.map((combo, index) => (
 
             <EditPrice
             key={index}
@@ -136,10 +222,36 @@ const EditPrices = () => {
 ////////
           ))}
         </Tbody>
+          <Box display="flex" justifyContent="center" alignItems="center" marginTop="1rem">
+        <Button
+          color='black'
+          bgColor='#009ED1'
+          variant="outline"
+          colorScheme="teal"
+          onClick={prevHandler}
+        >
+          Anterior
+        </Button>
+
+        <Box as="span" marginLeft="1rem" marginRight="1rem">
+          Página {currentPage}
+        </Box>
+
+        <Button
+          color='black'
+          bgColor='#009ED1'
+          variant="outline"
+          colorScheme="teal"
+          onClick={nextHandler}
+        >
+          Siguiente
+        </Button>
+      </Box>
       </Table>
       </Flex>
     </TableContainer>
     </Flex>
+    </Box>
   );
 };
 export default EditPrices

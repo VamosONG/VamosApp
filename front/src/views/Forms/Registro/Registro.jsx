@@ -272,7 +272,7 @@ let dataUser = {};
         bg='#E83D6F'
         type="submit"
         fontFamily="'DIN Medium',"
-        disable={isError}
+        disabled={isError}
         >
           Confirmar
         </Button>

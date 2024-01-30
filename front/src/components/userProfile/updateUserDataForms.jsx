@@ -4,8 +4,8 @@ import {
     ModalContent,
     ModalHeader,
     ModalFooter,
-    ModalBody,
-    ModalCloseButton, useDisclosure, Button, Input, FormControl, FormLabel
+    ModalBody, Image, Tooltip, 
+    ModalCloseButton, useDisclosure, Button, Input, FormControl, FormLabel, Flex
 } from '@chakra-ui/react'
 import { useRef } from 'react'
 import { PhoneIcon, AddIcon, WarningIcon, EditIcon } from '@chakra-ui/icons'
@@ -88,6 +88,20 @@ const UpdateUserDataForm = ({ userDetail }) => {
                     <ModalHeader>Modifica un dato  {userDetail.name}</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
+                    {/* <Flex w={{base: '100%', md: '50%'}} justify={'center'} position={'relative'}>
+                                    <Image w={{base: '300px', md: '15rem'}} h={{base: '300px', md: '15rem'}} name='Segun Adebayo' src={userDetail.image ? userDetail.image : fotoPerfil} border={'2px solid #10447E'}
+                                        alt={fotoPerfil.name}
+                                        bg='white'
+                                        borderRadius={{base: '50%', md: '10'}}
+                                        objectFit={'cover'}
+                                        loading='lazy'
+                                    />{' '}
+                                    <Tooltip label='Cambiar Foto' placement='left' bg='#10447E' borderRadius={4} >
+                                        <Button position={'absolute'} bottom={0} right={'1rem'} w='2.3rem' h='2.3rem' onClick={changeImgPerfil} bg='#10447E' color={'white'}>
+                                            <EditIcon />
+                                        </Button>
+                                    </Tooltip>
+                                </Flex> */}
                         <FormControl>
                             <FormLabel>Nombre</FormLabel>
                             <Input ref={initialRef} type='text' name='name' onChange={handleChange} value={newData.name} placeholder='Ingresa un nuevo nombre' />

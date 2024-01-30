@@ -37,6 +37,7 @@ export function AuthProvider({ children }) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [user, setUser] = useState("")
+    
     //const [verificationComplete, setVerificationComplete] = useState(false);  // Estado para controlar la finalización de la verificación
 
     useEffect(() => {
@@ -70,6 +71,7 @@ export function AuthProvider({ children }) {
 
 
     const register = async (email, password) => {
+        console.log(auth, email, password);
         const response = await createUserWithEmailAndPassword(auth, email, password)
         console.log(response);
     }

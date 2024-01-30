@@ -31,6 +31,7 @@ import { cleanCurrentUser, getUserByEmail } from "../../../redux/actions";
 // DEPENDENCIES
 import axios from "axios";
 import Swal from "sweetalert2";
+import ViewBtnUserForm from "../ViewForms/ViewUserForm";
 
 const LoginForm = ({ onSwitchForm }) => {
   // Auth de Firebase
@@ -39,7 +40,6 @@ const LoginForm = ({ onSwitchForm }) => {
   // Estados Locales para form de Login
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
-
   //hooks
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -103,7 +103,6 @@ const LoginForm = ({ onSwitchForm }) => {
           name: googleLog.user.displayName,
           email: googleLog.user.email
          }
-         console.log(usr)
 
          Swal.fire({
           position: "center",
@@ -205,7 +204,7 @@ const LoginForm = ({ onSwitchForm }) => {
     border="none"
     boxShadow="none"
     color="white"
-    display={currentUser.id ? 'none' : 'block'}
+    display={currentUser?.id ? 'none' : 'block'}
     >
       {!currentUser?.id && (
         <>

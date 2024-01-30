@@ -13,8 +13,9 @@ import {
   Select,
   Button,
   Heading,
+  Tooltip,
 } from '@chakra-ui/react';
-import { AddIcon, EditIcon } from '@chakra-ui/icons';
+import { AddIcon, EditIcon, RepeatClockIcon } from '@chakra-ui/icons';
 import Swal from 'sweetalert2';
 import { useEffect, useState } from "react";
 import Pagination from "../paginado/paginadoComponent";
@@ -81,6 +82,21 @@ const SolicitudesDeViajesCompleted = () => {
     });
   };
 
+  const handleClean = async (e) => {
+    setInput({
+        ...input,
+        searchInput: "",
+        order: "",
+        tripState: 'completed'
+    })
+    dispatch(orderSearch({
+      ...input,
+      searchInput: "",
+      order: "",
+      tripState: 'completed'
+  }));
+  }
+
   const handleSubmit = async (e) => {
     dispatch(orderSearch(input));
   };
@@ -121,17 +137,23 @@ const SolicitudesDeViajesCompleted = () => {
             <option>menos reciente</option>
           </Select>
         </Box>
-        <Button onClick={handleSubmit}>APLICAR</Button>
+        <Button onClick={handleSubmit} style={{marginRight:'1rem'}}>APLICAR</Button>
+        <Tooltip hasArrow label='Reiniciar filtro y búsqueda' bg='#009ED1' placement='left-start'>
+                <Button onClick={handleClean} >
+                <RepeatClockIcon/>
+                </Button>
+                </Tooltip>
       </Box>
       <Table variant="simple">
         <TableCaption>Viajes concretados</TableCaption>
         <Thead>
           <Tr>
-          <Th border="2px solid black">Nro</Th>
+          {/* <Th border="2px solid black">Nro</Th> */}
           <Th border="2px solid black">Origen</Th>
           <Th border="2px solid black">Destino</Th>
           <Th border="2px solid black">Fecha</Th>
           <Th border="2px solid black">Hora</Th>
+          <Th border="2px solid black">Usuario</Th>
           <Th border="2px solid black">Conductor</Th>
           <Th border="2px solid black">Puntuación del usuario</Th>
           </Tr>
@@ -139,11 +161,12 @@ const SolicitudesDeViajesCompleted = () => {
         <Tbody>
           {tripsToShow.map((solicitud, index) => (
             <Tr key={solicitud.id}>
-              <Td border="2px solid black">{index + 1}</Td>
+              {/* <Td border="2px solid black">{index + 1}</Td> */}
               <Td border="2px solid black">{solicitud.origin}</Td>
               <Td border="2px solid black">{solicitud.destination}</Td>
               <Td border="2px solid black">{solicitud.date}</Td>
               <Td border="2px solid black">{solicitud.hour}</Td>
+              <Td border="2px solid black">{solicitud.userEmail}</Td>
               <Td border="2px solid black">{solicitud.driverFullName}</Td>
               <Td border="2px solid black" justifyContent="center">
               ★★★✰✰
