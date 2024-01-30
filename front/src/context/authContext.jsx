@@ -55,7 +55,7 @@ export function AuthProvider({ children }) {
             verificationComplete=true;
         })
         return () => suscribed()
-    }, [/* auth, dispatch */])
+    }, [verificationComplete])
 
     // const render = () => {
     //     if (!user) {
