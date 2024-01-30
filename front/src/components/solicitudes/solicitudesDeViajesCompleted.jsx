@@ -26,6 +26,7 @@ import {
   orderSearch
 } from "../../redux/actions";
 import Solicitud from "./solicitud";
+import * as XLSX from 'xlsx';
 
 const SolicitudesDeViajesCompleted = () => {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const SolicitudesDeViajesCompleted = () => {
     const firstCompleted = (prevPage - 1) * 6;
 
     setCurrentPage(prevPage);
-    setTripsToShow([...viajesPendientes].splice(firstCompleted, 6));
+    setTripsToShow([...viajesCompletados].splice(firstCompleted, 6));
   };
 
   const nextHandler = () => {
@@ -56,7 +57,7 @@ const SolicitudesDeViajesCompleted = () => {
 
     if (firstCompleted > totalCompleted) return;
     setCurrentPage(nextPage);
-    setTripsToShow([...viajesPendientes].splice(firstCompleted, 6));
+    setTripsToShow([...viajesCompletados].splice(firstCompleted, 6));
   };
 
   useEffect(() => {
@@ -85,8 +86,56 @@ const SolicitudesDeViajesCompleted = () => {
     dispatch(orderSearch(input));
   };
 
+
+  const handleOnExport = ()=>{
+
+    const parametros = viajesCompletados.map(({ date, hour, origin, destination, driverFullName, userEmail, price, quantityPassengers
+    }) => ({
+      date,
+      hour,
+      origin,
+      destination,
+      driverFullName,
+      userEmail,
+      quantityPassengers,
+      price
+    }));
+
+    // const cellStyles = {
+    //   header: { fill: { fgColor: { rgb: 'FF000000' } }, font: { color: { rgb: 'FFFFFFFF' }, bold: true } },
+    //   cell: { fill: { fgColor: { rgb: 'FFFFFFFF' } } },
+    // };
+   
+    var wb = XLSX.utils.book_new()
+    var ws = XLSX.utils.json_to_sheet(parametros);
+
+    // ws['!cols'] = [{ wch: 12 }, { wch: 10 }, { wch: 20 }, { wch: 20 }, { wch: 20 }, { wch: 30 }];
+    // ws['!merges'] = [{ s: { c: 0, r: 0 }, e: { c: 5, r: 0 } }]; // Fusiona la fila de encabezado
+  
+    // // Aplica estilos a las celdas
+    // Object.keys(ws).forEach((key) => {
+    //   if (key.includes('!')) return;
+    //   ws[key].s = cellStyles.cell;
+    // });
+  
+    // // Agrega el encabezado
+    // ws['A1'].s = cellStyles.header;
+    // ws['B1'].s = cellStyles.header;
+    // ws['C1'].s = cellStyles.header;
+    // ws['D1'].s = cellStyles.header;
+    // ws['E1'].s = cellStyles.header;
+    // ws['F1'].s = cellStyles.header;
+    // ws['G1'].s = cellStyles.header;
+    // ws['H1'].s = cellStyles.header;
+
+    XLSX.utils.book_append_sheet(wb, ws, "Viajes Completados");
+
+    XLSX.writeFile(wb, "viajesCompletados.xlsx");
+  }
+
   return (
     <Box>
+      
       <Box
         display="flex"
         justifyContent="center"
@@ -122,6 +171,8 @@ const SolicitudesDeViajesCompleted = () => {
           </Select>
         </Box>
         <Button onClick={handleSubmit}>APLICAR</Button>
+        
+        <Button onClick={handleOnExport}>DESCARGAR</Button>
       </Box>
       <Table variant="simple">
         <TableCaption>Viajes concretados</TableCaption>

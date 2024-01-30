@@ -66,7 +66,9 @@ const NavBar = () => {
         transition="background 0.5s ease"
       >
         <Box>
-          <Image src={Vamos} alt="Vamos" w="150px" />
+         <Link to="/">
+                <Image src={Vamos} alt="Vamos" w="150px" />
+         </Link>
         </Box>
 
         <Box w="100%" alignContent="center" justifyContent="center">
