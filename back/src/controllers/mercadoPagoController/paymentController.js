@@ -50,7 +50,7 @@ const createOrder = async (req, res) => {
          
       },
 
-      notification_url: "https://ceb1-186-11-77-210.ngrok-free.app/mepago/webhook",
+      notification_url: "https://vamos-app.vercel.app/mepago/webhook",
 
 
       auto_return: "all"
