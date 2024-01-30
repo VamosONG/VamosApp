@@ -67,7 +67,7 @@ const DriverTableView = () => {
             ) {
                 Swal.fire({
                     title: "Cancelado",
-                    text: "No se ha eliminado nada",
+                    text: "No se ha eliminado al conductor",
                     icon: "error"
                 });
             }
@@ -122,7 +122,7 @@ const DriverTableView = () => {
                                 <Flex gap={2} justifyContent={'center'}  >
                                     {!driver.inactive ? (
 
-                                    <Tooltip hasArrow label='ELiminar' bg='red' placement='left-start'>
+                                    <Tooltip hasArrow label='Eliminar' bg='red' placement='left-start'>
 
                                         <Button
                                         onClick={() => deleteDriver(driver.id)}

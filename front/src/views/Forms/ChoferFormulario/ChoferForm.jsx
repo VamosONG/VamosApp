@@ -110,7 +110,7 @@ const ChoferForm = ({ closeForm }) => {
       if (response) {
         Swal.fire({
           title: "¡Bien hecho!",
-          text: "¡Se ha registrado éxitosamente!",
+          text: "¡Chofer creado éxitosamente!",
           icon: "success",
         });
         setForm({
