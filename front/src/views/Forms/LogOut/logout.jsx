@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import { cleanCurrentUser } from '../../../redux/actions';
 import Swal from "sweetalert2";
 
-const LogOut = () => {
+const LogOut = ({ insideMenu }) => {
   const navigate = useNavigate();
   const auth = useAuth();
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ const LogOut = () => {
   
 
   return (
-    <Stack direction="row" spacing={4}>
+    <Stack direction="row" spacing={4} data-inside-menu={insideMenu ? true : undefined}>
       {/* <IconButton
         variant="solid"
         aria-label="Cerrar sesión"
