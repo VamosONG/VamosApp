@@ -109,8 +109,8 @@ const ChoferForm = ({ closeForm }) => {
       );
       if (response) {
         Swal.fire({
-          title: "Bien hecho!",
-          text: "Datos registrados!",
+          title: "¡Bien hecho!",
+          text: "¡Chofer creado éxitosamente!",
           icon: "success",
         });
         setForm({
@@ -147,8 +147,8 @@ const ChoferForm = ({ closeForm }) => {
       console.log("form " + form);
       Swal.fire({
         icon: "error",
-        title: "Error en validate",
-        text: "Hay un input con errores",
+        title: "Error al validar los datos",
+        text: "Hay un campo con errores, revise e intentelo nuevamente.",
       });
     }
   };

@@ -13,10 +13,9 @@ const setInactiveState = async (id) => {
         // Cambia el estado de 'inactive' al valor opuesto
         const updatedInactiveState = !driver.inactive;
 
-        const updateState = false;
 
         // Actualiza el estado 'inactive' en la base de datos
-        await Driver.update({ inactive: updatedInactiveState, driverState: updateState }, { where: { id } });
+        await Driver.update({ inactive: updatedInactiveState }, { where: { id } });
 
         return {
             success: true,

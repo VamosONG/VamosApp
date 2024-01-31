@@ -98,14 +98,14 @@ export const postNewViaje = (infoViaje) => {
 
     //  infoViaje.userId= "762baea5-4422-44de-ae36-ddf9c6a9e43b"
     //infoViaje.userId= "74c99ae0-61f9-4d85-bcb6-fcf680183c48" //(con permisos de admin)
-    console.log(infoViaje)
+   
     return async (dispatch) => {
         try {
 
             /* const { data } = await axios.post(`https://vamosappserver.onrender.com/offer/create`, infoViaje); */
 
             const { data } = await axios.post(`http://localhost:3001/offer/create`, infoViaje);
-            console.log(data)
+            
             await dispatch({
                 type: POST_NEW_VIAJE,
                 payload: data
@@ -665,6 +665,35 @@ export const getTrips = () => {
             })
         } catch (error) {
             console.error("Error en trips:", error);
+        }
+    }
+}
+export const handlePayment = (infoConfirmacionViaje,currentUserId) => {
+    const product = {
+        viaje:`${infoConfirmacionViaje.origin}${infoConfirmacionViaje.destination}`, 
+        price: Number(infoConfirmacionViaje?.price) ,//Ojo, que esto puede cambiar
+        // quantityPassengers: "1",
+        userId: currentUserId,
+        origin: infoConfirmacionViaje?.origin,
+        destination: infoConfirmacionViaje?.destination,
+        date:infoConfirmacionViaje?.date,
+        hour: infoConfirmacionViaje?.hour,
+        quantityPassengers: Number(infoConfirmacionViaje.quantityPassengers),
+        driverId: null
+      }
+      console.log(product)
+    return async (dispatch)=> {
+        try {
+            const {data} =await axios.post("http://localhost:3001/mepago/create-order", product)
+            console.log(data)
+            window.location.href = data
+            /* return dispatch({
+                type: MERCADO_PAGO,
+                payload: data
+            }) */
+        } catch (error) {
+            console.error("Error en al redirigir", error);
+            console.log(error.message)
         }
     }
 }

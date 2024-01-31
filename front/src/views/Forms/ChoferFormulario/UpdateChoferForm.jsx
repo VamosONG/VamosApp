@@ -54,8 +54,8 @@ const UpdateDriverData = (props) => {
 
                 console.log("des1 de la actualización:", newData);
                 Swal.fire({
-                    title: "Bien hecho!",
-                    text: "Datos actualizados",
+                    title: "¡Bien hecho!",
+                    text: "Datos actualizados correctamente",
                     icon: "success",
                 });
                 await dispatch(getAllConductores())
@@ -74,7 +74,7 @@ const UpdateDriverData = (props) => {
             Swal.fire({
                 icon: "error",
                 title: "Error en Formulario",
-                text: "Hay un error en el newData",
+                text: "Debe realizar algún cambio para avanzar",
             });
         }
     }
@@ -86,7 +86,7 @@ const UpdateDriverData = (props) => {
         <form onSubmit={handleSubmit}>
             <Stack
                 spacing={4}
-                bg="gray.400"
+                bg="gray.200"
                 p="5"
                 h="auto"
                 borderRadius="10"
@@ -111,18 +111,18 @@ const UpdateDriverData = (props) => {
                         />{' '}
                         </Flex>
 
-                        <Flex>
+                        <Flex gap={4}>
                             <FormControl>
-                            <FormLabel fontSize='xl'>Estado</FormLabel>
-                                <InputGroup color='black' fontWeight='bold' boxShadow='0 3px 4px black'>
-                                    <InputLeftAddon bg='purple.300' color="black">
+                            <FormLabel fontSize='xl' >Estado</FormLabel >
+                                <InputGroup color='black' fontWeight='bold' boxShadow='0 3px 4px black' >
+                                    <InputLeftAddon bg='#10447E' color="white" borderRadius="0%">
                                         {driverState ? ('Activo') : ('Descanso')}
                                     </InputLeftAddon>
                                     <Select
                                         color="black"
                                         id='driverState'
                                         name="driverState"
-                                        bg='lightgreen'
+                                        bg='white'
                                         onChange={handleChange}
                                         value={newData.driverState}
                                     >
@@ -138,14 +138,14 @@ const UpdateDriverData = (props) => {
                             <FormControl>
                             <FormLabel fontSize='xl'>Eliminar</FormLabel>
                                 <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
-                                    <InputLeftAddon bg='purple.300' color="black">
+                                <InputLeftAddon bg='#10447E' color="white" borderRadius="0%">
                                         {!props.inactive ? ('Activo') : ('Eliminado')}
                                     </InputLeftAddon>
                                     <Select
                                         color="#000"
                                         id='driverState'
                                         name="driverState"
-                                        bg='lightgreen'
+                                        bg='white'
                                         onChange={handleChange}
                                         value={newData.driverState}
                                     >
@@ -166,28 +166,28 @@ const UpdateDriverData = (props) => {
                         <FormControl>
                             <FormLabel fontSize='xl'>Nombre</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
-                                <InputLeftAddon bg='purple.300' color="black" >
+                            <InputLeftAddon bg='#10447E' color="white" borderRadius="0%">
                                     {props.name}
                                 </InputLeftAddon>
-                                <Input type='text' placeholder='Nuevo' bg='lightgreen' name='name' onChange={handleChange} value={newData.name} />
+                                <Input type='text' placeholder='Nuevo' bg='white' name='name' onChange={handleChange} value={newData.name} />
                             </InputGroup>
                         </FormControl>
                         <FormControl>
                             <FormLabel fontSize='xl'>Apellido</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
-                                <InputLeftAddon bg='purple.300' color="black">
+                            <InputLeftAddon bg='#10447E' color="white" borderRadius="0%">
                                     {props.surname}
                                 </InputLeftAddon>
-                                <Input type='text' placeholder='Nuevo' bg='lightgreen' name='surname' onChange={handleChange} value={newData.surname} />
+                                <Input type='text' placeholder='Nuevo' bg='white' name='surname' onChange={handleChange} value={newData.surname} />
                             </InputGroup>
                         </FormControl>
                         <FormControl>
                             <FormLabel fontSize='xl'>DNI</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
-                                <InputLeftAddon bg='purple.300' color="black">
+                            <InputLeftAddon bg='#10447E' color="white" borderRadius="0%">
                                     {props.dni}
                                 </InputLeftAddon>
-                                <Input type='number' placeholder='Nuevo' bg='lightgreen' name='dni' onChange={handleChange} value={newData.dni} />
+                                <Input type='number' placeholder='Nuevo' bg='white' name='dni' onChange={handleChange} value={newData.dni} />
                             </InputGroup>
                         </FormControl>
                     </Flex>
@@ -196,19 +196,19 @@ const UpdateDriverData = (props) => {
                         <FormControl>
                             <FormLabel fontSize='xl'>Correo electronico</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black' justifyContent='space-evenly'>
-                                <InputLeftAddon bg='purple.300' color="black" w='50%' overflow='hidden' scrollSnapType='revert'>
+                                <InputLeftAddon bg='#10447E' color="white" borderRadius="0%" w='50%' overflow='hidden' scrollSnapType='revert'>
                                     {props.email}
                                 </InputLeftAddon>
-                                <Input type='mail' placeholder='Nuevo' bg='lightgreen' name='email' onChange={handleChange} value={newData.email} />
+                                <Input type='mail' placeholder='Nuevo' bg='white' name='email' onChange={handleChange} value={newData.email} />
                             </InputGroup>
                         </FormControl>
                         <FormControl>
                             <FormLabel fontSize='xl'>Telefono</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
-                                <InputLeftAddon bg='purple.300' color="black">
+                            <InputLeftAddon bg='#10447E' color="white" borderRadius="0%">
                                     {props.phone}
                                 </InputLeftAddon>
-                                <Input type='number' placeholder='Nuevo' bg='lightgreen' name='phone' onChange={handleChange} value={newData.phone} />
+                                <Input type='number' placeholder='Nuevo' bg='white' name='phone' onChange={handleChange} value={newData.phone} />
                             </InputGroup>
                         </FormControl>
 
@@ -218,23 +218,23 @@ const UpdateDriverData = (props) => {
                         <FormControl>
                             <FormLabel fontSize='xl'>Fec. Nac.</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
-                                <InputLeftAddon bg='purple.300' color="black">
+                            <InputLeftAddon bg='#10447E' color="white" borderRadius="0%">
                                     {props.birthday.split('T')[0]}
                                 </InputLeftAddon>
-                                <Input type='date' placeholder='Nuevo' bg='lightgreen' onChange={handleChange} value={newData.birthday} name='birthday' />
+                                <Input type='date' placeholder='Nuevo' bg='white' onChange={handleChange} value={newData.birthday} name='birthday' />
                             </InputGroup>
                         </FormControl>
                         <FormControl>
                             <FormLabel fontSize='xl'>Zona</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
-                                <InputLeftAddon bg='purple.300' color="black">
+                            <InputLeftAddon bg='#10447E' color="white" borderRadius="0%">
                                     {props.airports}
                                 </InputLeftAddon>
                                 <Select
                                     color="#000"
                                     placeholder="Selecciona el Aeropuerto"
                                     name="airports"
-                                    bg='lightgreen'
+                                    bg='white'
                                     onChange={handleChange}
                                     value={newData.airports}
                                 >
@@ -256,14 +256,14 @@ const UpdateDriverData = (props) => {
                         <FormControl>
                             <FormLabel>Tipo / Vehiculo</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
-                                <InputLeftAddon bg='purple.300' color="black" >
+                            <InputLeftAddon bg='#10447E' color="white" borderRadius="0%">
                                     {props.carType}
                                 </InputLeftAddon>
                                 <Select
                                     color="#000"
                                     placeholder="Selecciona un Tipo"
                                     name="carType"
-                                    bg='lightgreen'
+                                    bg='white'
                                     onChange={handleChange}
                                     value={newData.carType}
                                 >
@@ -279,14 +279,14 @@ const UpdateDriverData = (props) => {
                         <FormControl>
                             <FormLabel>Modelo de Vehiculo</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
-                                <InputLeftAddon bg='purple.300' color="black">
+                            <InputLeftAddon bg='#10447E' color="white" borderRadius="0%">
                                     {props.carModel}
                                 </InputLeftAddon>
                                 <Select
                                     color="#000"
                                     placeholder="Selecciona un Vehiculo"
                                     name="carModel"
-                                    bg='lightgreen'
+                                    bg='white'
                                     onChange={handleChange}
                                     value={newData.carModel}
                                 >
@@ -303,10 +303,10 @@ const UpdateDriverData = (props) => {
                         <FormControl>
                             <FormLabel>Placa</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
-                                <InputLeftAddon bg='purple.300' color="black">
+                            <InputLeftAddon bg='#10447E' color="white" borderRadius="0%">
                                     {props.carPatent}
                                 </InputLeftAddon>
-                                <Input type='text' textTransform="uppercase" placeholder='Nuevo' bg='lightgreen' name='carPatent' value={newData.carPatent} onChange={handleChange} />
+                                <Input type='text' textTransform="uppercase" placeholder='Nuevo' bg='white' name='carPatent' value={newData.carPatent} onChange={handleChange} />
                             </InputGroup>
                         </FormControl>
                     </Flex>
@@ -315,27 +315,27 @@ const UpdateDriverData = (props) => {
                         <FormControl>
                             <FormLabel>Licencia</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
-                                <InputLeftAddon bg='purple.300' color="black" >
+                            <InputLeftAddon bg='#10447E' color="white" borderRadius="0%">
                                     {props.driverLicense}
                                 </InputLeftAddon>
-                                <Input type='text' placeholder='Nuevo' bg='lightgreen' name='driverLicense' onChange={handleChange} value={newData.driverLicense} />
+                                <Input type='text' placeholder='Nuevo' bg='white' name='driverLicense' onChange={handleChange} value={newData.driverLicense} />
                             </InputGroup>
                         </FormControl>
 
                         <FormControl>
                             <FormLabel>Vencimiento del Soat</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
-                                <InputLeftAddon bg='purple.300' color="black">
+                            <InputLeftAddon bg='#10447E' color="white" borderRadius="0%">
                                     {props.carSoat}
                                 </InputLeftAddon>
-                                <Input type='date' placeholder='Nuevo' bg='lightgreen'  name="carSoat" onChange={handleChange} value={newData.carSoat} />
+                                <Input type='date' placeholder='Nuevo' bg='white'  name="carSoat" onChange={handleChange} value={newData.carSoat} />
                             </InputGroup>
                         </FormControl>
 
                         <FormControl>
                             <FormLabel>Max. Pasajeros</FormLabel>
                             <InputGroup color='black' fontWeight='bold' boxShadow='0 0px 4px black'>
-                                <InputLeftAddon bg='purple.300' color="black">
+                            <InputLeftAddon bg='#10447E' color="white" borderRadius="0%">
                                     {props.capacityPassengers}
                                 </InputLeftAddon>
                                 <Select
@@ -343,7 +343,7 @@ const UpdateDriverData = (props) => {
                                     placeholder="Cantidad de pasajeros"
                                     id="capacityPassengers"
                                     name="capacityPassengers"
-                                    bg='lightgreen'
+                                    bg='white'
                                     onChange={handleChange}
                                     value={newData.capacityPassengers}
                                 >

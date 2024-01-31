@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Box, Text, Image, Flex } from "@chakra-ui/react";
+import { Box, Text, Image, Flex, useBreakpointValue } from "@chakra-ui/react";
 
 const CarouselVamos = () => {
   const settings = {
@@ -23,19 +23,22 @@ const CarouselVamos = () => {
     "https://res.cloudinary.com/drgnsbah9/image/upload/v1705691983/Vamos/kzcet8fc06pg0uh5jki3.jpg",
   ];
 
+  const fontSizeHeading = useBreakpointValue({ base: "2xl", md: "lg", lg: "5xl" });
+  const fontSizeText = useBreakpointValue({ base: "lg", md: "md", lg: "2xl" });
 
   return (
     <Flex 
-    justifyContent="center" 
-    alignItems="center" 
-    flexDirection={{ base: "column", md: "row" }}
-    mt={8} 
-    mx={10} // Agrega margen a los lados
-    mb={30} // Agrega margen inferior
+      justifyContent="center" 
+      alignItems="center" 
+      flexDirection={{ base: "column", md: "row" }}
+      mt={8} 
+      mx={10}
+      mb={30} 
     >
       <Box
         mr={{ md: 8 }}
-        width={{ base: "100%", md: "300%" }}
+        mb={{ base: 5, md: -50 }} 
+        width={{ base: "100%", md: "50%" }} 
         height={{ base: "200px", md: "600" }}
         position="relative"
         overflow="hidden"
@@ -56,29 +59,30 @@ const CarouselVamos = () => {
           ))}
         </Slider>
       </Box>
-      <Box>
+      <Box
+        flex="1" 
+        mt={{ base: 4, md: -20 }} // Añadido margen superior para la vista móvil
+      >
         <Text 
-        fontSize="lg" 
-        fontWeight="bold" 
-        mb={4} 
-        color="black"
-        fontFamily="'DIN Alternate Black', sans-serif"
-        // fontSize={['2xl', null, '5xl']} //Error por que est adeclarada dos veces. 
-        textShadow='2px 2px 4px rgb(0, 0, 0, 0.4)'
+          fontSize={fontSizeHeading} 
+          fontWeight="bold" 
+          mb={4} 
+          color="black"
+          fontFamily="'DIN Alternate Black', sans-serif"
+          textShadow='2px 2px 4px rgb(0, 0, 0, 0.4)'
         >
           EMPLEADOS VAMOS!!
         </Text>
         <Text 
-        fontSize="md"  //Aca ya lo has declarado. tira error 
-        color="black"
-        fontFamily="'DIN Alternate Black', sans-serif"
-        // fontSize={['lg', null, '1xl']} //Error por que est adeclarada dos veces. 
-        textShadow='2px 2px 4px rgb(0, 0, 0, 0.3)'
+          fontSize={fontSizeText}
+          color="black"
+          fontFamily="'DIN Alternate Black', sans-serif"
+          textShadow='2px 2px 4px rgb(0, 0, 0, 0.3)'
         >
-        Compuesto en un 75 % por adultos mayores, nuestro equipo refleja dedicación y diversidad. 
-        Cada miembro contribuye con su experiencia y calidez, haciendo de Vamos ONG un entorno laboral inclusivo y positivo. 
-        En Vamos! creemos en brindar oportunidades significativas, donde la experiencia 
-        y la dedicación de los adultos mayores son verdaderamente apreciadas. 
+          Compuesto en un 75 % por adultos mayores, nuestro equipo refleja dedicación y diversidad. 
+          Cada miembro contribuye con su experiencia y calidez, haciendo de Vamos ONG un entorno laboral inclusivo y positivo. 
+          En Vamos! creemos en brindar oportunidades significativas, donde la experiencia 
+          y la dedicación de los adultos mayores son verdaderamente apreciadas. 
         </Text>
       </Box>
     </Flex>

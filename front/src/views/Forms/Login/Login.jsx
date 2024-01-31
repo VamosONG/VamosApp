@@ -27,7 +27,7 @@ import { useAuth } from "../../../context/authContext";
 import googleLogo from "../../../assets/icons/google.png";
 
 //ACTIONS
-import { cleanCurrentUser, getUserByEmail, postNewUser } from "../../../redux/actions";
+import { cleanCurrentUser, getUserByEmail } from "../../../redux/actions";
 // DEPENDENCIES
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -39,7 +39,6 @@ const LoginForm = ({ onSwitchForm }) => {
   // Estados Locales para form de Login
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
-
   //hooks
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -67,12 +66,24 @@ const LoginForm = ({ onSwitchForm }) => {
     event.preventDefault();
     try {
       await auth.login(input.email, input.password); // autenticacion de loginWithGoogle funcion de firebase signInWithPopUp
-        const getUser = await dispatch(getUserByEmail(input.email)); // busca al usuario por email y lo setea como currentUser
+        const getUser =  await dispatch(getUserByEmail(input.email)); // busca al usuario por email y lo setea como currentUser
         console.log(getUser);
-        // navigate('/')
+         navigate('/')////
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "¡Inicio de sesión éxitoso!",
+          showConfirmButton: false,
+          timer: 2500
+        })
 
     } catch (error) {
       console.error("Error al iniciar sesión:", error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Email o contraseña incorrecto,intentelo nuevamente.",
+      });
     }
   };
 
@@ -89,9 +100,18 @@ const LoginForm = ({ onSwitchForm }) => {
       if (googleLog) {
          const usr={
           name: googleLog.user.displayName,
-          email: googleLog.user.email
+          email: googleLog.user.email,
+          image: googleLog.user.photoURL
          }
-         console.log(usr)
+         console.log("google" ,usr);
+
+         Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Inicio de sesión éxitoso",
+          showConfirmButton: false,
+          timer: 2500
+        });
         //Crea un usuario (findOrCreate) utilizando fetch con su metodo post 
         const response = await fetch('http://localhost:3001/user/create', {
           method: 'POST',
@@ -104,12 +124,13 @@ const LoginForm = ({ onSwitchForm }) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
+        
         const userCreated = await response.json();
   
         // Carga el estado global currentUser con la info del usuario registradi
         const userActual = await dispatch(getUserByEmail(googleLog.user.email))
-        console.log(userActual); 
-  
+
+        navigate('/')////
         return response
       }
     } catch (error) {
@@ -121,6 +142,7 @@ const LoginForm = ({ onSwitchForm }) => {
       });
     }
   };
+
 
 
 
@@ -155,12 +177,13 @@ const LoginForm = ({ onSwitchForm }) => {
   //   }
   // };
 
- 
+
   
 
   const handleRegister = () => {
     navigate("/register");
   };
+
   const handleLogOut = async() => {
     try {
       await auth.logOut()
@@ -182,8 +205,9 @@ const LoginForm = ({ onSwitchForm }) => {
     border="none"
     boxShadow="none"
     color="white"
+    display={currentUser?.id ? 'none' : 'block'}
     >
-      {!currentUser.id && (
+      {!currentUser?.id && (
         <>
           <FormControl isInvalid={isError}>
             <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Correo Electrónico</FormLabel>
@@ -234,10 +258,9 @@ const LoginForm = ({ onSwitchForm }) => {
             </InputGroup>
           </FormControl>
 
-
           <Box>
-            {!currentUser.id && (
-              <Button bg="white" onClick={handleSubmit}>
+            {!currentUser?.id && (
+              <Button bg="white" onClick={handleSubmit} >
                 Entrar
               </Button>
             )}
@@ -270,12 +293,7 @@ const LoginForm = ({ onSwitchForm }) => {
               </Stack>
           </Center>
         </>
-      )}{" "}
-      {currentUser.id && (
-        <Box>
-          <Heading fontSize="md">{currentUser.name}</Heading>
-          <Text fontSize="md">{currentUser.email}</Text>
-        </Box>
+
       )}
     </Stack>
   );

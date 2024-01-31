@@ -1,191 +1,258 @@
-import { useDispatch, useSelector } from "react-redux"
-
-import { Box, Card, CardBody, CardHeader, Center, useDisclosure, Grid, GridItem } from '@chakra-ui/react'
+import { useDispatch, useSelector } from "react-redux";
 import {
+  Box,
   Table,
-    Thead,
-    Tbody,
-    Tfoot,
-    Tr,
-    Th,
-    Td,
-    TableCaption, Avatar, Tooltip,
-    TableContainer, Flex,
-  FormControl,
-  FormLabel,
-  Input, Select, Button, Heading, Stack,
-  Tabs, TabList, TabPanels, Tab, TabPanel 
-} from '@chakra-ui/react'
-import { AddIcon, EditIcon } from '@chakra-ui/icons'
-
-import Swal from 'sweetalert2'
-import { Link } from "react-router-dom"
-import Solicitud from "./solicitud"
-
-
-import { getCanceledTrips, getPendingTrips, getReservedTrips, idDeSolicitud, orderSearch } from "../../redux/actions"
-import { useEffect, useState } from "react"
-import Pagination from "../paginado/paginadoComponent"
-
-
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  Input,
+  Select,
+  Button,
+  Heading,
+  Tooltip,
+} from '@chakra-ui/react';
+import { AddIcon, EditIcon, RepeatClockIcon } from '@chakra-ui/icons';
+import Swal from 'sweetalert2';
+import { useEffect, useState } from "react";
+import Pagination from "../paginado/paginadoComponent";
+import {
+  getCanceledTrips,
+  getPendingTrips,
+  getReservedTrips,
+  idDeSolicitud,
+  orderSearch
+} from "../../redux/actions";
+import Solicitud from "./solicitud";
+import * as XLSX from 'xlsx';
 
 const SolicitudesDeViajesCompleted = () => {
+  const dispatch = useDispatch();
+  const viajesCompletados = useSelector((state) => state.viajesCompletados);
 
-    const dispatch = useDispatch()
-    const viajesCompletados = useSelector((state) => state.viajesCompletados)
+  //***************PAGINADO**********************************/
+  const itemsPerPage = 6;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [tripsToShow, setTripsToShow] = useState([]);
 
-    //***************PAGINADO**********************************/
-    
-    const itemsPerPage = 6;
+  const prevHandler = () => {
+    const prevPage = currentPage - 1;
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const [tripsToShow, setTripsToShow] = useState([]);
+    if (prevPage < 1) return;
 
-    const prevHandler=()=>{
-        const prevPage=currentPage-1;
-        
-        if(prevPage<1) return;
-        
-        const firstCompleted=(prevPage-1)*6;
-        
-        setCurrentPage(prevPage);
-        setTripsToShow([...viajesPendientes].splice(firstCompleted,6))
-      }
-      
-      const nextHandler=()=>{
-        const totalCompleted=viajesPendientes.length;
-        
-        const nextPage=currentPage+1;
-        
-        const firstCompleted=currentPage*6;
-        
-        if (firstCompleted>totalCompleted) return;
-        setCurrentPage(nextPage);
-        setTripsToShow([...viajesPendientes].splice(firstCompleted,6))
-      }
+    const firstCompleted = (prevPage - 1) * 6;
 
+    setCurrentPage(prevPage);
+    setTripsToShow([...viajesCompletados].splice(firstCompleted, 6));
+  };
 
-    useEffect(() => {
-        dispatch(getCanceledTrips())        
-    }, [dispatch])
+  const nextHandler = () => {
+    const totalCompleted = viajesPendientes.length;
 
-    useEffect(() => {
-        setTripsToShow([...viajesCompletados].splice(0, 6))
-    }, [viajesCompletados])
+    const nextPage = currentPage + 1;
 
+    const firstCompleted = currentPage * 6;
 
-     //***************BUSQUEDA Y ORDENAMIENTO**********************************/
-const [input, setInput] = useState({
+    if (firstCompleted > totalCompleted) return;
+    setCurrentPage(nextPage);
+    setTripsToShow([...viajesCompletados].splice(firstCompleted, 6));
+  };
+
+  useEffect(() => {
+    dispatch(getCanceledTrips());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setTripsToShow([...viajesCompletados].splice(0, 6));
+  }, [viajesCompletados]);
+
+  //***************BUSQUEDA Y ORDENAMIENTO**********************************/
+  const [input, setInput] = useState({
     searchInput: "",
     order: "",
-    
-});
-const handleChange = async (e) => {
+    tripState: "completed",
+  });
+
+  const handleChange = async (e) => {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleClean = async (e) => {
     setInput({
         ...input,
-        [e.target.name]: e.target.value,
+        searchInput: "",
+        order: "",
         tripState: 'completed'
     })
-}
-const handleSubmit = async (e) => {
-    
-    console.log(input)
-    
-    dispatch(orderSearch(input))
-}
+    dispatch(orderSearch({
+      ...input,
+      searchInput: "",
+      order: "",
+      tripState: 'completed'
+  }));
+  }
+
+  const handleSubmit = async (e) => {
+    dispatch(orderSearch(input));
+  };
 
 
-//*************************************************************************/
+  const handleOnExport = ()=>{
 
-    
-    return (
-        <TableContainer >
-            <TableContainer style={{ backgroundColor:'white' ,size:'xs'}}>
-    <Box style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-    <Heading size='xs' textTransform='uppercase' margin={'1rem'}>
-      Buscar:
-    </Heading>
-    <Box style={{ display: 'flex', alignItems: 'center' }}>
-      <Input 
-      htmlSize={50} 
-      width='auto' 
-      placeholder='Buscar por coincidencia'
-      onChange={handleChange}
-      name='searchInput'/>
-      <FormControl /* isRequired */ style={{ marginLeft: '1rem' }}>
-        <Select placeholder='Ordenar' width='xs' name='order' onChange={handleChange}>
-          <option>mas reciente</option>
-          <option>menos reciente</option>
-        </Select>
-      </FormControl>
-    </Box>
-    <Button onClick={handleSubmit}>
-      APLICAR
-    </Button>
-    </Box>
-    </TableContainer>
-         
-            <Table variant='simple' >
-                <TableCaption>Viajes concretados</TableCaption>
-                <Thead>
-                    <Tr>
-                        <Th>Nro</Th>
-                        <Th>Origen</Th>
-                        <Th>Destino</Th>
-                       
-                        <Th>Fecha</Th>
-                        <Th>Hora</Th>
-                        <Th>Conductor</Th>
-                        <Th >Puntación del usuario</Th>
-                        
-                    </Tr>
-                </Thead>
-                <Tbody >
-                    {tripsToShow.map((solicitud, index) => (
-                        <Tr key={solicitud.id} >
-                            <Td>{index + 1}</Td>
-                            <Td>{solicitud.origin}</Td>
+    const parametros = viajesCompletados.map(({ date, hour, origin, destination, driverFullName, userEmail, price, quantityPassengers
+    }) => ({
+      date,
+      hour,
+      origin,
+      destination,
+      driverFullName,
+      userEmail,
+      quantityPassengers,
+      price
+    }));
 
-                            <Td>{solicitud.destination}</Td>
-                            
-                            <Td>{solicitud.date}</Td>
-                            <Td>{solicitud.hour}</Td>
-                            <Td>{solicitud.driverFullName}</Td>
+    // const cellStyles = {
+    //   header: { fill: { fgColor: { rgb: 'FF000000' } }, font: { color: { rgb: 'FFFFFFFF' }, bold: true } },
+    //   cell: { fill: { fgColor: { rgb: 'FFFFFFFF' } } },
+    // };
+   
+    var wb = XLSX.utils.book_new()
+    var ws = XLSX.utils.json_to_sheet(parametros);
 
-                            <Td justifyContent='center'  >
-                            ★★★✰✰
-                            </Td>
-                           
-                        </Tr>
-                    ))}
+    // ws['!cols'] = [{ wch: 12 }, { wch: 10 }, { wch: 20 }, { wch: 20 }, { wch: 20 }, { wch: 30 }];
+    // ws['!merges'] = [{ s: { c: 0, r: 0 }, e: { c: 5, r: 0 } }]; // Fusiona la fila de encabezado
+  
+    // // Aplica estilos a las celdas
+    // Object.keys(ws).forEach((key) => {
+    //   if (key.includes('!')) return;
+    //   ws[key].s = cellStyles.cell;
+    // });
+  
+    // // Agrega el encabezado
+    // ws['A1'].s = cellStyles.header;
+    // ws['B1'].s = cellStyles.header;
+    // ws['C1'].s = cellStyles.header;
+    // ws['D1'].s = cellStyles.header;
+    // ws['E1'].s = cellStyles.header;
+    // ws['F1'].s = cellStyles.header;
+    // ws['G1'].s = cellStyles.header;
+    // ws['H1'].s = cellStyles.header;
 
-                </Tbody>
-            </Table>
-            <Box display="flex" justifyContent="center" alignItems="center" marginTop="1rem">
-  <Button
-    variant="outline"
-    colorScheme="teal"
-    /* disabled={currentPageReserved === 0} */
-    onClick={prevHandler}
-  >
-    Anterior
-  </Button>
+    XLSX.utils.book_append_sheet(wb, ws, "Viajes Completados");
 
-  <Box as="span" marginLeft="1rem" marginRight="1rem">
-    Página {currentPage } 
-  </Box>
+    XLSX.writeFile(wb, "viajesCompletados.xlsx");
+  }
 
-  <Button
-    variant="outline"
-    colorScheme="teal"
-    /* disabled={currentPageReserved === totalPagesReserved - 1} */
-    onClick={nextHandler}
-  >
-    Siguiente
-        </Button>
+  return (
+    <Box>
+      
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        flexDirection="row"
+        bgColor='#009ED1'
+      >
+        <Heading size="xs" textTransform="uppercase" margin="1rem">
+          Buscar:
+        </Heading>
+        <Box style={{ display: 'flex', alignItems: 'center' }}>
+          <Input
+            marginRight='2rem'
+            color="black"
+            bgColor="white"
+            htmlSize={50}
+            width="auto"
+            placeholder="Buscar por coincidencia"
+            onChange={handleChange}
+            name="searchInput"
+          />
+          <Select
+            marginRight='2rem'
+            color="black"
+            bgColor="white"
+            placeholder="Ordenar"
+            width="xs"
+            name="order"
+            onChange={handleChange}
+          >
+            <option>mas reciente</option>
+            <option>menos reciente</option>
+          </Select>
         </Box>
-    </TableContainer> 
-    )
-}
+            
+        <Button onClick={handleSubmit} style={{marginRight:'1rem'}}>APLICAR</Button>
+        <Tooltip hasArrow label='Reiniciar filtro y búsqueda' bg='#009ED1' placement='left-start'>
+                <Button onClick={handleClean} >
+                <RepeatClockIcon/>
+                </Button>
+                </Tooltip>
+       <Button onClick={handleOnExport}>DESCARGAR</Button>
+      </Box>
+      <Table variant="simple">
+        <TableCaption>Viajes concretados</TableCaption>
+        <Thead>
+          <Tr>
+          {/* <Th border="2px solid black">Nro</Th> */}
+          <Th border="2px solid black">Origen</Th>
+          <Th border="2px solid black">Destino</Th>
+          <Th border="2px solid black">Fecha</Th>
+          <Th border="2px solid black">Hora</Th>
+          <Th border="2px solid black">Usuario</Th>
+          <Th border="2px solid black">Conductor</Th>
+          <Th border="2px solid black">Puntuación del usuario</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {tripsToShow.map((solicitud, index) => (
+            <Tr key={solicitud.id}>
+              {/* <Td border="2px solid black">{index + 1}</Td> */}
+              <Td border="2px solid black">{solicitud.origin}</Td>
+              <Td border="2px solid black">{solicitud.destination}</Td>
+              <Td border="2px solid black">{solicitud.date}</Td>
+              <Td border="2px solid black">{solicitud.hour}</Td>
+              <Td border="2px solid black">{solicitud.userEmail}</Td>
+              <Td border="2px solid black">{solicitud.driverFullName}</Td>
+              <Td border="2px solid black" justifyContent="center">
+              ★★★✰✰
+            </Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+      <Box display="flex" justifyContent="center" alignItems="center" marginTop="1rem">
+        <Button
+          color='black'
+          bgColor='#009ED1'
+          variant="outline"
+          colorScheme="teal"
+          onClick={prevHandler}
+        >
+          Anterior
+        </Button>
+
+        <Box as="span" marginLeft="1rem" marginRight="1rem">
+          Página {currentPage}
+        </Box>
+
+        <Button
+          color='black'
+          bgColor='#009ED1'
+          variant="outline"
+          colorScheme="teal"
+          onClick={nextHandler}
+        >
+          Siguiente
+        </Button>
+      </Box>
+    </Box>
+  );
+};
 
 export default SolicitudesDeViajesCompleted;

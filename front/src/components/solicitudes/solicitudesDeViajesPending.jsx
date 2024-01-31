@@ -16,7 +16,7 @@ import {
   Input, Select, Button, Heading, Stack,
   Tabs, TabList, TabPanels, Tab, TabPanel 
 } from '@chakra-ui/react'
-import { AddIcon, EditIcon } from '@chakra-ui/icons'
+import { AddIcon, EditIcon, RepeatClockIcon } from '@chakra-ui/icons'
 
 import Swal from 'sweetalert2'
 import { Link } from "react-router-dom"
@@ -91,6 +91,22 @@ const handleChange = async (e) => {
         tripState: 'pending'
     })
 }
+
+const handleClean = async (e) => {
+  setInput({
+      ...input,
+      searchInput: "",
+      order: "",
+      tripState: 'pending'
+  })
+  dispatch(orderSearch({
+    ...input,
+    searchInput: "",
+    order: "",
+    tripState: 'pending'
+}));
+}
+
 const handleSubmit = async (e) => {
     
     console.log(input)
@@ -106,98 +122,120 @@ const handleSubmit = async (e) => {
     
     return (
         <TableContainer >
-            <TableContainer style={{ backgroundColor:'white' ,size:'xs'}}>
-    <Box style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-    <Heading size='xs' textTransform='uppercase' margin={'1rem'}>
-      Buscar:
-    </Heading>
-    <Box style={{ display: 'flex', alignItems: 'center' }}>
-      <Input 
-      htmlSize={50} 
-      width='auto' 
-      placeholder='Buscar por coincidencia'
-      onChange={handleChange}
-      name='searchInput'/>
-      <FormControl /* isRequired */ style={{ marginLeft: '1rem' }}>
-        <Select placeholder='Ordenar' width='xs' name='order' onChange={handleChange}>
-          <option>mas reciente</option>
-          <option>menos reciente</option>
-        </Select>
-      </FormControl>
-    </Box>
-    <Button onClick={handleSubmit}>
-      APLICAR
-    </Button>
-    </Box>
-    </TableContainer>
-            <Table variant='simple' >
-                <TableCaption>Viajes con conductor ya asignado</TableCaption>
-                <Thead>
-                    <Tr>
-                        <Th>Nro</Th>
-                        <Th>Origen</Th>
-                        <Th>Destino</Th>
-                        <Th>Fecha</Th>
-                        <Th>Hora</Th>
-                        <Th >Conductor</Th>
-                        <Th >Cambiar conductor</Th>
-                        {/* <Th >Detalles</Th> */}
-                    </Tr>
-                </Thead>
-                <Tbody >
+          <TableContainer style={{ backgroundColor:'white' ,size:'xs'}}>
+            <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="row"
+            bgColor='#009ED1'
+            >
+            <Heading size="xs" textTransform="uppercase" margin="1rem">
+              Buscar:
+            </Heading>
+            <Box style={{ display: 'flex', alignItems: 'center' }}>
+              <Input 
+              marginRight='2rem'
+              color="black"
+              bgColor="white"
+              htmlSize={50}
+              width="auto"
+              placeholder="Buscar por coincidencia"
+              onChange={handleChange}
+              name="searchInput"
+              />
+              <FormControl>
+              <Select 
+              marginRight='2rem'
+              color="black"
+              bgColor="white"
+              placeholder="Ordenar"
+              width="xs"
+              name="order"
+              onChange={handleChange}
+              >
+              <option>mas reciente</option>
+              <option>menos reciente</option>
+              </Select>
+              </FormControl>
+              </Box>
+                <Button onClick={handleSubmit} style={{marginRight:'1rem'}}>
+                APLICAR
+                </Button>
+                <Tooltip hasArrow label='Reiniciar filtro y búsqueda' bg='#009ED1' placement='left-start'>
+                <Button onClick={handleClean} >
+                <RepeatClockIcon/>
+                </Button>
+                </Tooltip>
+              </Box>
+              </TableContainer>
+                <Table variant='simple' >
+                  <TableCaption>Viajes con conductor ya asignado</TableCaption>
+                    <Thead>
+                      <Tr>
+                        {/* <Th border="2px solid black">Nro</Th> */}
+                        <Th border="2px solid black">Origen</Th>
+                        <Th border="2px solid black">Destino</Th>
+                        <Th border="2px solid black">Fecha</Th>
+                        <Th border="2px solid black">Hora</Th>
+                        <Th border="2px solid black">Usuario</Th>
+                        <Th border="2px solid black">Conductor</Th>
+                        <Th border="2px solid black">Cambiar conductor</Th>
+                      </Tr>
+                    </Thead>
+                    <Tbody >
                     {tripsToShow.map((solicitud, index) => (
                         <Tr key={solicitud.id} >
-                            <Td>{index + 1}</Td>
-                            <Td>{solicitud.origin}</Td>
-
-                            <Td>{solicitud.destination}</Td>
-                            {/* <Td>José Bravo</Td> */}{/* Luego hay que cambiar por nombre de usuario */}
-                            <Td>{solicitud.date}</Td>
-                            <Td>{solicitud.hour}</Td>
-                            <Td>{solicitud.driverFullName}</Td>
-
-                            <Td justifyContent='center'  >
-                                <Flex gap={2} justifyContent={'center'}  >
-                                    <Tooltip hasArrow label='Buscar conductor' bg='#009ED1' placement='left-start'>
-                                    <Link to='/solicitud' onClick={()=>handlerClick(solicitud.id)}>
-                                        <Button  bg='#009ED1'
-                                            fontSize='1.2rem' /* id={driver.id} */ >
-                                            <EditIcon />
-                                        </Button>
-                                        </Link>
-                                    </Tooltip>
-                                    
-                                </Flex>
-                            </Td>
-                            
+                          {/* <Td border="2px solid black">{index + 1}</Td> */}
+                          <Td border="2px solid black">{solicitud.origin}</Td>
+                          <Td border="2px solid black">{solicitud.destination}</Td>
+                          <Td border="2px solid black">{solicitud.date}</Td>
+                          <Td border="2px solid black">{solicitud.hour}</Td>
+                          <Td border="2px solid black">{solicitud.userEmail}</Td>
+                          <Td border="2px solid black">{solicitud.driverFullName}</Td>
+                          <Td border="2px solid black" justifyContent='center'>
+                          <Flex gap={2} justifyContent={'center'}  >
+                          <Tooltip hasArrow label='Buscar conductor' bg='#009ED1' placement='left-start'>
+                            <Link to='/solicitud' onClick={()=>handlerClick(solicitud.id)}>
+                              <Button  
+                              bg='#009ED1'
+                              fontSize='1.2rem'>
+                              <EditIcon />
+                              </Button>
+                            </Link>
+                          </Tooltip>
+                          </Flex>
+                          </Td>
                         </Tr>
                     ))}
-
                 </Tbody>
-            </Table>
-            <Box display="flex" justifyContent="center" alignItems="center" marginTop="1rem">
-  <Button
-    variant="outline"
-    colorScheme="teal"
-    /* disabled={currentPageReserved === 0} */
-    onClick={prevHandler}
-  >
-    Anterior
-  </Button>
+                </Table>
+                <Box display="flex" justifyContent="center" alignItems="center" marginTop="1rem">
+                <Button
+                color='black'
+                bgColor='#009ED1'
+                variant="outline"
+                colorScheme="teal"
+                onClick={prevHandler}
+                >
+                Anterior
+                </Button>
 
-  <Box as="span" marginLeft="1rem" marginRight="1rem">
-    Página {currentPage } 
-  </Box>
+                <Box 
+                as="span" marginLeft="1rem" marginRight="1rem">
+                Página {currentPage } 
+                </Box>
 
-  <Button
-    variant="outline"
-    colorScheme="teal"
-    /* disabled={currentPageReserved === totalPagesReserved - 1} */
-    onClick={nextHandler}
-  >
-    Siguiente
-        </Button>
-        </Box>
+                <Button
+                color='black'
+                bgColor='#009ED1'
+                variant="outline"
+                colorScheme="teal"
+                onClick={nextHandler}
+                >
+                Siguiente
+                </Button>
+                </Box>
         </TableContainer>
     )
 }

@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
         
         if(tripState==="reserved"){
             filteredTrips = allTrips?.filter(res=>res.stateOfTrip==='reserved');
-console.log('entre reserved: ',filteredTrips);
+
             filteredTrips = await Promise.all(filteredTrips?.map(async tr=>{
                 const {dataValues, userEmail} = tr;
                 const usuario = await getUserById(tr.userId)

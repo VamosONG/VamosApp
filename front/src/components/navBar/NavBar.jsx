@@ -7,13 +7,15 @@ import {
   Avatar,
   AvatarGroup,
   useMediaQuery,
+  Progress
 } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 import Vamos from "../../assets/logoblanco.png";
 import MobileNavbar from "../navBar/mobileNavbar/mobileNavbar";
 import { useSelector } from "react-redux";
-import SlideEx from "../../views/Forms/ViewForm";
 import LogOut from "../../views/Forms/LogOut/logout";
+import ViewOptionPerfil from "./viewOption/viewOptionPerfil";
+import {verificationComplete} from '../../context/authContext';
 
 const NavBar = () => {
   const { currentUser } = useSelector((state) => state);
@@ -33,12 +35,9 @@ const NavBar = () => {
     };
   }, []);
 
-  const [role,setRole]=useState("notUser")
- const handleClick=(role)=>{
-  if (role==='usuario'){setRole('user')}
-  if (role==='admin'){setRole('admin')}
-  
- }
+ if (!verificationComplete) {
+  return <div><Progress size='lg' isIndeterminate /></div>;
+}else{
  return (
   <>
     {isMobile ? (
@@ -55,7 +54,7 @@ const NavBar = () => {
         }
         alignItems="center"
         justify="space-between"
-        h="100px"
+        h="80px"
         w="100%"
         position="fixed"
         top="0"
@@ -65,12 +64,14 @@ const NavBar = () => {
         transition="background 0.5s ease"
       >
         <Box>
-          <Image src={Vamos} alt="Vamos" w="150px" />
+         <Link to="/">
+                <Image src={Vamos} alt="Vamos" w="150px" />
+         </Link>
         </Box>
 
         <Box w="100%" alignContent="center" justifyContent="center">
           <Flex justify="center" alignItems="center">
-            {currentUser.admin && currentUser.admin ? (
+            {currentUser?.admin && currentUser?.admin ? (
               <Box>
                 <Flex>
                   <Link to="/">
@@ -79,11 +80,11 @@ const NavBar = () => {
                     </Button>
                   </Link>
                   
-                  <Link to="/solicitudesDeViajes">
+                  {/* <Link to="/solicitudesDeViajes">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       SOLICITUDES DE VIAJE
                     </Button>
-                  </Link>
+                  </Link> */}
 
                   {/* <Link to="/detail">
                     <Button colorScheme="#009ED1" fontSize="1xl">
@@ -92,20 +93,20 @@ const NavBar = () => {
                   </Link> */}
 
 
-                  <Link to="/profileAdmin">
+                  {/* <Link to="/profileAdmin">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       MI PERFIL
                     </Button>
-                  </Link>
+                  </Link> */}
 
-                  <Link to='/editPrices'>
+                  {/* {/* <Link to='/editPrices'>
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       CAMBIAR PRECIOS DE VIAJES
                     </Button>
-                  </Link>
+                  </Link> */}
                 </Flex>
               </Box>
-            ) : currentUser.admin === false ? (
+            ) : currentUser?.admin === false ? (
               <Box>
                 <Flex>
                 <Link to="/">
@@ -114,17 +115,17 @@ const NavBar = () => {
                     </Button>
                   </Link>
 
-                  <Link to="/solicitarViaje">
+                  {/* <Link to="/solicitarViaje">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       SOLICITAR VIAJE
                     </Button>
-                  </Link>
+                  </Link> */}
 
-                  <Link to="/profileUser">
+                  {/* <Link to="/profileUser">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       MI PERFIL
                     </Button>
-                  </Link>
+                  </Link> */}
 
                   <Link to="/questions">
                     <Button colorScheme="#009ED1" fontSize="1xl">
@@ -132,11 +133,11 @@ const NavBar = () => {
                     </Button>
                   </Link>
 
-                  <Link to='/review&reseña'>
+                  {/* <Link to='/review&reseña'>
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       RESEÑA DE TU VIAJE
                     </Button>
-                  </Link>
+                  </Link> */}
                 
                 </Flex>
               </Box>
@@ -160,7 +161,7 @@ const NavBar = () => {
                       PREGUNTAS FRECUENTES
                     </Button>
                   </Link>
-                  {currentUser && currentUser.admin ? <LogOut /> : null}
+                  {currentUser && currentUser?.admin ? <LogOut /> : null}
                 </Flex>
               </Box>
             )}
@@ -169,16 +170,14 @@ const NavBar = () => {
 
         <Box>
           <AvatarGroup spacing="1rem" mx="20px">
-            {currentUser.admin && currentUser.admin ? (
-              <Avatar size="md" name="Ryan Florence" bg="#009ED1" src={currentUser.photoURL} />
-            ) : null}
-            <SlideEx />
+            <ViewOptionPerfil/>
           </AvatarGroup>
         </Box>
       </Flex>
     )}
   </>
 );
+}
 };
 
 export default NavBar;
