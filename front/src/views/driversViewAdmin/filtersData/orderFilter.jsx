@@ -1,4 +1,4 @@
-import { Select, Box, Text, Flex, FormControl, FormLabel, Button, Input, Tooltip } from '@chakra-ui/react';
+import { Select, Box, Text, Flex, FormControl, FormLabel, Button, Input, Tooltip, Heading } from '@chakra-ui/react';
 import { useState } from 'react';
 import { BsFilterCircle, BsArrowClockwise } from 'react-icons/bs';
 import { orderSearchDrivers } from '../../../redux/actions';
@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { getAllConductores } from '../../../redux/actions'
 
-const OrderFilterAlphabetical = () => {
+const OrderFilterAlphabetical = ({searcher,volerAuno}) => {
   const dispatch = useDispatch();
   const [input, setInput] = useState({
     airports: "",
@@ -25,6 +25,7 @@ const OrderFilterAlphabetical = () => {
   const handleSubmit = async (e) => {
     console.log("Esto es lo que trae el input ", input);
     dispatch(orderSearchDrivers(input));
+    volerAuno()
   };
 
   const resetFilter = () => {
@@ -42,6 +43,8 @@ const OrderFilterAlphabetical = () => {
       <Flex gap='4' justify={'center'} align={'center'} mx='2rem' py='.5rem'>
         <Flex justify='center' align={'center'} gap='4'>
           <Flex justify={'center'} align={'center'} fontSize={'1.5rem'}>
+          <FormControl>
+          <FormLabel color="white">Buscar</FormLabel>
             <Input
               placeholder='Buscar por nombre / auto / aeropuerto'
               name="searchInput"
@@ -51,13 +54,13 @@ const OrderFilterAlphabetical = () => {
               bgColor="white"
               color="black"
             />
+          </FormControl>
           </Flex>
-
-          <Tooltip label='Ordenar datos' bg='#10447E' placement='top'>
+          {/* <Tooltip label='Ordenar datos' bg='#10447E' placement='top'>
             <Text fontSize={'2rem'}>
               <BsFilterCircle />
             </Text>
-          </Tooltip>
+          </Tooltip> */}{/* Esto no ordena ni una wea */}
           {/* <Box>
             <FormControl>
               <FormLabel color="white">Nombre</FormLabel>
@@ -71,7 +74,7 @@ const OrderFilterAlphabetical = () => {
           <Box>
             <FormControl>
               <FormLabel color="white">Pasajeros</FormLabel>
-              <Select bgColor="white" name='quantityPassengers' onChange={handleChange}>
+              <Select bgColor="white" name='quantityPassengers' onChange={handleChange} value={input.quantityPassengers}>
                 <option value=''>Seleccionar</option>
                 {[...Array(15).keys()].map((value) => (
                   <option key={value + 1} value={value + 1}>
@@ -85,7 +88,7 @@ const OrderFilterAlphabetical = () => {
           <Box>
             <FormControl>
               <FormLabel color="white">Aeropuerto</FormLabel>
-              <Select bgColor="white" name='airports' onChange={handleChange}>
+              <Select bgColor="white" name='airports' onChange={handleChange} value={input.airports}>
                 <option value="">Seleccionar</option>
                 <option value='Aeropuerto Talara'>Aeropuerto Talara</option>
                 <option value='Aeropuerto Tumbes'>Aeropuerto Tumbes</option>
@@ -93,7 +96,7 @@ const OrderFilterAlphabetical = () => {
             </FormControl>
           </Box>
 
-          <Box>
+          {/* <Box>
             <FormControl>
               <FormLabel color="white">Fecha de viaje</FormLabel>
               <Input
@@ -105,7 +108,7 @@ const OrderFilterAlphabetical = () => {
                 color="black"
               />
             </FormControl>
-          </Box>
+          </Box> */}
         </Flex>
 
         <Button bg='green.300' color='#000' fontSize='1.2rem' onClick={handleSubmit}>
@@ -113,8 +116,8 @@ const OrderFilterAlphabetical = () => {
         </Button>
 
 
-        <Flex onClick={resetFilter}>
-          <Button bg='green.300' color='#000' fontSize='1.2rem' onClick={handleSubmit}>
+        <Flex>
+          <Button bg='green.300' color='#000' fontSize='1.2rem'  onClick={resetFilter}>
             <BsArrowClockwise />
           </Button>
         </Flex>

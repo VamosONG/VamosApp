@@ -4,7 +4,7 @@ export const ValidateNewUser = (input) => {
   
     let error = {}
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{7,}$/;
     const phoneRegex = /^[0-9]{6,14}$/;
 
     error.name = !input.name ? 'Ingrese un nombre.' 
