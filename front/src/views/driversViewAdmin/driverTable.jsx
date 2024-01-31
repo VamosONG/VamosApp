@@ -43,7 +43,7 @@ const DriverTableView = () => {
 
     useEffect(() => {
         dispatch(getAllConductores())
-    },[])
+    },[dispatch])
 
     const deleteDriver = (id) => {
         Swal.fire({

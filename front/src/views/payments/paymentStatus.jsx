@@ -27,8 +27,6 @@ const PaymentStatus = () => {
   };
 
   return (
-    <Center bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/eqdrrjmlkojpiiwlhwjo.jpg">
-   <Flex bgSize="cover" bgRepeat="no-repeat" >
    
     <Box bg='#009ED1' w={{base:"1rem",md:"30rem"}} spacing={4} mt="6rem" borderRadius="3%" mb="4rem" >
     
@@ -46,8 +44,9 @@ const PaymentStatus = () => {
           Gracias por elegirnos!!!
         </Heading>
         
-        <Text>Proximamente se le asignara un chofer</Text>
-              
+        <Text>Estado de la Compra: Aprobado</Text>
+              <Text>ID de Pago: {mePagoData?.payment_id}</Text>
+              <Text>Tipo de Pago: {mePagoData?.payment_type}</Text>
        
         <Box maxW="md"  borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="lg" bg='rgb(0 158 209)' p={4} mt={4}>
           
@@ -73,9 +72,6 @@ const PaymentStatus = () => {
       </Flex>
       
       </Box>
-      
-      </Flex>
-      </Center>
   );
 };
 

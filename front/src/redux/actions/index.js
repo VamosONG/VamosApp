@@ -528,9 +528,11 @@ export const getUserByEmail = (email) => {
         try {
             const { data } = await axios.get(`http://localhost:3001/user/email?email=${email}`);
             console.log(data)
+
             if(data.banned)
                 throw new Error(`El usuario con email ${data.email} se encuentra bloqueado.`)
              dispatch({
+
                 type: USER_BY_EMAIL,
                 payload: data
             })
