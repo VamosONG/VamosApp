@@ -106,6 +106,7 @@ const handleClean = async (e) => {
       order: "",
       tripState: 'reserved'
   }));
+  setCurrentPage(1);
 }
 const handleSubmitReserved = async (e) => {
     dispatch(orderSearch(input))

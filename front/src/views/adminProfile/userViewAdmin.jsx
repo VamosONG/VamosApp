@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import {
+
   Table,Box,
+
   Thead,
   Tbody,
   Tfoot,
@@ -194,7 +196,7 @@ const UserViewAdmin = () => {
             </Flex>
             <Flex px={0} bg="gray.300" overflowX="auto" borderBottomLeftRadius="md" borderBottomRightRadius="md">
               <Table variant="simple">
-                <TableCaption TableCaption>Usuarios</TableCaption>
+                
                 <Thead>
                   <Tr>
                     <Th border="2px solid black" minWidth="300px">Usuario</Th>
@@ -279,7 +281,7 @@ const UserViewAdmin = () => {
               </Table>
               
         </Flex>
-        
+
         </TableContainer>
         <Flex
     display="flex"
