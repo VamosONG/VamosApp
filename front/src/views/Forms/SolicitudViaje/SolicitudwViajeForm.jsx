@@ -233,7 +233,7 @@ const SolicitudwViajeForm = () => {
     >
 
       <Heading size='lg' mb={2}>
-        Reservá tu viaje
+        Reserva tu viaje
       </Heading>
 
       <Formik

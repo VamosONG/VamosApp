@@ -19,28 +19,27 @@ import SolicitudesDeViajes from './components/solicitudes/solicitudesDeViajes';
 import Solicitud from './components/solicitudes/solicitud';
 import { AuthProvider, useAuth} from './context/authContext';
 
-import DriverTableView from './views/driversViewAdmin/driverTable';
+// import DriverTableView from './views/driversViewAdmin/driverTable';
 import ReviewAndReseña from './components/ReviewAndReseña/reviewAndReseña';
 import PaymentStatus from './views/payments/paymentStatus';
 
 import EditPrices from './components/editPrices/editPricesComponent';
 
-import FormLogInWithGoogle from './views/logInWithGoogle/formLogInWithGoogle';
+// import FormLogInWithGoogle from './views/logInWithGoogle/formLogInWithGoogle';
 import RegistroForm from './views/Forms/Registro/Registro';
 import UserProfile from './components/userProfile/userProfile'
 import AdminProfile from './components/userProfile/adminProfile';
-import ReviewAdmin from './views/adminProfile/reviewAdmin';
-import UserViewAdmin from './views/adminProfile/userViewAdmin';
+// import ReviewAdmin from './views/adminProfile/reviewAdmin';
+// import UserViewAdmin from './views/adminProfile/userViewAdmin';
 import ProtectedRoutes from './utils/ProtectedRoute';
 import { useDispatch, useSelector } from 'react-redux';
 
 import PaymentFail from './views/payments/paymentFail';
 import Error from './components/Error';
 import LoginViajes from './views/Forms/Login/LoginViajes';
-import {verificationComplete} from "./context/authContext"
-import Loader from './components/loader/Loader';
-import { useIds } from '@chakra-ui/react';
-import { getUserByEmail } from './redux/actions';
+// import {verificationComplete} from "./context/authContext"
+// import { useIds } from '@chakra-ui/react';
+// import { getUserByEmail } from './redux/actions';
 
 
 
