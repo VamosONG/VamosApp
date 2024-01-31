@@ -271,7 +271,7 @@ const UserViewAdmin = () => {
 
 
               <Tbody>
-                {tripsToShow?.map((user) => (
+                {tripsToShow.length>0 ? tripsToShow?.map((user) => (
                   <Tr key={user.id}>
                     <Td border="2px solid black">{user.name ? user.name : 'sin nombre'}</Td>
                     <Td border="2px solid black">
@@ -336,7 +336,19 @@ const UserViewAdmin = () => {
                       </Flex>
                     </Td>
                   </Tr>
-                ))}
+                ))
+                : (<Tr>
+                  <Td colSpan={6} textAlign="center" align="center">
+                      <span style={{
+                      fontWeight: "bold",
+                      color: "gray.800",
+                      fontSize: "18px",
+                      }}>
+                        No se encontraron coincidencias con la búsqueda.
+                      </span>
+                  </Td>
+              </Tr>  )
+              }
               </Tbody>
 
             </Table>
