@@ -3,18 +3,16 @@ import {
   Button,
   TableContainer,
   Table,
-  TableCaption, 
-  Thead, 
-  Tr, 
-  Th, 
-  Tbody, 
-  Td, 
+  Thead,
+  Tr,
+  Th,
+  Tbody,
   Input,
   Flex,
   Box,
   Heading,
   Select,
-  Tooltip
+  Tooltip,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPrices, orderSearchPrices, updatePrice } from '../../redux/actions';
@@ -55,11 +53,12 @@ const EditPrices = () => {
       htmlMode: true
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await dispatch(updatePrice(input)) //Para actualizar en BD
+        await dispatch(updatePrice(input))
         Swal.fire({
           title: "¡Precio modificado con éxito!",
           icon: "success"
         }).then(() => {
+
           /* window.location.reload(); */
           /* history.push('/editPrices'); */
           /* navigate('/editPrices'); */
@@ -139,11 +138,13 @@ const EditPrices = () => {
   setCurrentPage(1);
   }
 
-
-
   return (
-    <Box>
+    <Box width={{ base: "25%", lg: "100%" }}
+    marginTop={{ base: "10%", lg: "0%" }}
+    marginBottom={{ base: "25%", lg: "0%" }}
+    >
       <Flex
+        width={{ base: "185%", lg: "100%" }}
         display="flex"
         justifyContent="center"
         alignItems="center"
@@ -153,27 +154,28 @@ const EditPrices = () => {
         borderTopRightRadius="md"
         border="1px solid black"
       >
-        <Heading size="xs" textTransform="uppercase" margin="1rem">
+        <Heading fontSize={{ base: "xs", md: "2xl", lg: "100%" }} textTransform="uppercase" margin="1rem">
           Buscar:
         </Heading>
         <Box style={{ display: 'flex', alignItems: 'center' }}>
           <Input
-            marginRight='2rem'
+            width={{ base: "40%", md: "2xl", lg: "40%" }}
+            marginRight='1rem'
             color="black"
             bgColor="white"
             htmlSize={50}
-            width="auto"
             placeholder="Buscar por coincidencia"
             onChange={handleChange}
             name="searchInput"
             value={input.searchInput}
           />
           <Select
+            width={{ base: "30%", md: "2xl", lg: "40%" }}
             marginRight='2rem'
             color="black"
             bgColor="white"
             placeholder="Ordenar"
-            width="xs"
+            
             name="order"
             onChange={handleChange}
             value={input.order}
@@ -182,7 +184,13 @@ const EditPrices = () => {
             <option>menor precio</option>
           </Select>
         </Box>
-        <Button onClick={handleSubmit} style={{marginRight:'1rem'}}>APLICAR</Button>
+        <Button onClick={handleSubmit} 
+        width={{ base: "xs", md: "2xl", lg: "8%" }}
+        style={{marginRight:'1rem'}} 
+        size={{ base: "md", md: "2xl", lg: "10%" }}
+        >
+          APLICAR
+        </Button>
         <Tooltip hasArrow label='Reiniciar filtro y búsqueda' bg='#009ED1' placement='left-start'>
                 <Button onClick={handleClean} >
                 <RepeatClockIcon/>
@@ -195,7 +203,7 @@ const EditPrices = () => {
     alignItems='center'
     justifyContent='center'
     direction="column"
-    width="100%"
+    width={{ base: "185%", md: "2xl", lg: "100%" }}
     overflowX="auto"
     borderRadius="md"
     >
@@ -205,13 +213,12 @@ const EditPrices = () => {
     overflowX="auto" 
     >
       <Table colorScheme='#009ED1' width="100%">
-        {/* <TableCaption border="1px solid black" bg='#009ED1'>Precios según ruta y vehículo</TableCaption> */}
         <Thead bg='#009ED1'>
 
           <Tr>
-          <Th border="2px solid black" color='white' minWidth="700px">RUTA</Th>
-          <Th border="2px solid black" color='white' minWidth="400px">TIPO DE CARRO</Th>
-          <Th border="2px solid black" color='white' minWidth="300px">PRECIO EN SOLES / ACTUALIZAR</Th>
+          <Th border="2px solid black" color='white' width={{ base: "100px", md: "2xl", lg: "700px" }}>RUTA</Th>
+          <Th border="2px solid black" color='white' width={{ base: "100px", md: "2xl", lg: "400px" }}>TIPO DE CARRO</Th>
+          <Th border="2px solid black" color='white' width={{ base: "100px", md: "2xl", lg: "300px" }}>PRECIO EN SOLES / ACTUALIZAR</Th>
           </Tr>
         </Thead>
         <Tbody border="2px solid black" justifyContent="center">
@@ -235,7 +242,7 @@ const EditPrices = () => {
     alignItems="center"
     flexDirection="row"
     bgColor="gray.300"
-    w="100%"
+    width={{ base: "100%", md: "2xl", lg: "100%" }}
     h="100%"
     borderBottomLeftRadius="md" 
     borderBottomRightRadius="md"

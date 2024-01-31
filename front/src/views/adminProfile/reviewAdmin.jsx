@@ -71,12 +71,14 @@ const ReviewAdmin = () => {
     }, [reviews])
 
     return (
-        <Flex
-            alignItems='center'
-            justifyContent='center'
-            direction="column"
-            width="100%"
-            overflowX="auto"
+
+        <Flex 
+        aalignItems='center'
+        justifyContent='center'
+        direction="column"
+        width={{ base: "28%", lg: "100%" }}
+        overflowX="auto"
+        marginTop={{ base: "4%", lg: "0%" }}
         >
             <TableContainer >
                 <Flex bg='#009ED1' justify={'center'} p={2} borderTopLeftRadius="md" borderTopRightRadius="md" border="1px solid black">

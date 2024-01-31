@@ -1,16 +1,12 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 
 import {
-  Tabs, TabList, TabPanels, Tab, TabPanel 
+  Tabs, 
+  TabList, 
+  TabPanels, 
+  Tab, 
+  TabPanel,
 } from '@chakra-ui/react'
-
-import Swal from 'sweetalert2'
-import { Link } from "react-router-dom"
-import Solicitud from "./solicitud"
-
-
-import { getCanceledTrips, getPendingTrips, getReservedTrips, idDeSolicitud, orderSearch } from "../../redux/actions"
-import { useEffect, useState } from "react"
 import SolicitudesDeViajesReserved from "./solicitudesDeViajesReserved"
 import SolicitudesDeViajesPending from "./solicitudesDeViajesPending"
 import SolicitudesDeViajesCompleted from "./solicitudesDeViajesCompleted"
@@ -28,12 +24,6 @@ function SolicitudesDeViajes() {
     borderLeft: "2px solid #009ED1",
   };
 
-  /* useEffect(() => {
-    dispatch(getReservedTrips())
-  }, []) */
-
-  
-
   return (
     
 
@@ -42,10 +32,8 @@ function SolicitudesDeViajes() {
         <Tab _selected={{ color: 'white', bg: '#E83D6F' }}>Viajes sin conductor asignado</Tab>
         <Tab _selected={{ color: 'white', bg: '#E83D6F' }}>Viajes con conductor asignado</Tab>
         <Tab _selected={{ color: 'white', bg: '#E83D6F' }}>Viajes concretados</Tab>
-
       </TabList>
       
-
       <TabPanels>
         <TabPanel>
           <SolicitudesDeViajesReserved/>
@@ -59,8 +47,6 @@ function SolicitudesDeViajes() {
       </TabPanels>
     </Tabs>
     
-    
-
   )
 }
 
