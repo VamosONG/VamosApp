@@ -185,7 +185,7 @@ const UserViewAdmin = () => {
 
     const firstCompleted = currentPage * 6;
 
-    if (firstCompleted > totalCompleted) return;
+    if (firstCompleted >= totalCompleted) return;
     setCurrentPage(nextPage);
     setTripsToShow([...userData].splice(firstCompleted, 6));
   };
