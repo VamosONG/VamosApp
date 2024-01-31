@@ -2,7 +2,7 @@
 
 
 
-import { GET_TRIPS,DELETE_DRIVER, GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, ORDER_DATE, FILTER_RATING, GET_DATA_USER, HANDLE_ADMIN, ORDER_TRIPS } from "../actions/action.types";
+import { GET_USUARIOS_FILTRADOS, GET_TRIPS,DELETE_DRIVER, GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, ORDER_DATE, FILTER_RATING, GET_DATA_USER, HANDLE_ADMIN, ORDER_TRIPS, FILTER_NAME } from "../actions/action.types";
 
 
 
@@ -46,6 +46,7 @@ const initialState = {
     allDataRevies: [],
 
     dataUser: [],
+    
 
     getTrips: [],
 
@@ -232,17 +233,20 @@ const reducer = (state = initialState, action) => {
             }
             //vjsD = viajes de usuarios
             case ORDER_TRIPS:
-                let orderListTrips = [...state.allDataUser]
-            if (action.payload === 'vjsA') {
-                orderListTrips.sort((a, b) => a.Trips.length < b.Trips.length ? 1 : -1)
-            } else if (action.payload === 'vjsD'){
-            }
-            orderListTrips.sort((a, b) => a.Trips.length > b.Trips.length ? 1 : -1)
-            return {
-                ...state,
-                dataUser: orderListTrips,
-                allDataUser: orderListTrips
-            }
+                let orderListTrips = [...state.allDataUser];
+                
+                if (action.payload === 'vjsA') {
+                    orderListTrips.sort((a, b) => a.Trips.length <= b.Trips.length ? 1 : -1);
+                } 
+                if (action.payload === 'vjsD') {
+                    orderListTrips.sort((a, b) => a.Trips.length >= b.Trips.length ? 1 : -1);
+                }
+                
+                return {
+                    ...state,
+                    dataUser: orderListTrips,
+                    allDataUser: orderListTrips
+                };
         case ORDER_DATE:
             let orderedListDate = [...state.reviewsData]
             
@@ -432,6 +436,12 @@ const reducer = (state = initialState, action) => {
                     ...state,
                     conductores: action.payload
                 };
+
+                case GET_USUARIOS_FILTRADOS:
+                return {
+                    ...state,
+                    dataUser: action.payload
+                };
 //********************************************************************************** */
                 case NEW_USER:
                     return {
@@ -440,7 +450,7 @@ const reducer = (state = initialState, action) => {
                     }
                 default:
                     return { ...state };
-
+            
 
     }
 }

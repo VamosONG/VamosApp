@@ -1,38 +1,67 @@
-import { alphabeticalOrder, getDataUser, orderListTrips, ratingOrder, stateFilter } from "../../../redux/actions";
+import { alphabeticalOrder, getDataUser, orderListTrips, orderSearchUsers, ratingOrder, stateFilter } from "../../../redux/actions";
 import { useSelector, useDispatch } from 'react-redux'
+import { useState } from "react";
 import { Select, Box, Text, Flex, Heading, FormControl, FormLabel, Button, Tooltip, Input } from '@chakra-ui/react'
 import { BsAirplaneEngines, BsBootstrapReboot, BsArrowClockwise, BsFilterCircle, BsFunnel } from "react-icons/bs";
 
 
-const UserFilter = ({ searcher }) => {
+const UserFilter = () => {
     const dispatch = useDispatch()
     const resetFilter = () => {
         dispatch(getDataUser())
     }
 
-    const handleAlpha = (e) => {
-        dispatch(alphabeticalOrder(e.target.value))
-    }
-    const handleFilterAdmin = (e) => {
-        dispatch(stateFilter(e.target.value))
-    }
+    // const handleAlpha = (e) => {
+    //     dispatch(alphabeticalOrder(e.target.value))
+    // }
+    // const handleFilterAdmin = (e) => {
+    //     dispatch(stateFilter(e.target.value))
+    // }
 
-    const handleTrips = (e) => {
-        dispatch(orderListTrips(e.target.value))
-    }
+    // const handleTrips = (e) => {
+    //     dispatch(orderListTrips(e.target.value))
+    // }
+   
+    const [search, setSearch] = useState({searchInput :''})
+    // const searcher = (e) => {
+    //     setSearch(e.target.value)
+    // }
+    // const handleSubmit = () => {
+    //     dispatch(orderSearchUsers(search.searchInput))
+    // }
+    const handleSubmit = async (e) => {
+        console.log("Esto es lo que trae el input ", search);
+        dispatch(orderSearchUsers(search));
+      };
+      const handleChange = (e) => {
+        setSearch({
+          ...search,
+          [e.target.name]: e.target.value
+        });
+      };
     return (
         <>
             <Flex gap='4' justify={'center'} align={'center'} mx='2rem' py='.5rem'>
                 <Flex justify='center' align={'center'} gap='4'  >
                     <Flex justify={'center'} align={'center'} fontSize={'1.5rem'}>
-                        <Input placeholder='Buscar por nombre / correo' onChange={searcher} border={'1px solid gray'} bgColor="white" color="black" />
+                    <Input
+              placeholder='Buscar por nombre / correo'
+              name="searchInput"
+              onChange={handleChange}
+              value={search.searchInput}
+              border={'1px solid gray'}
+              bgColor="white"
+              color="black"
+            />
+                        {/* <Input placeholder='Buscar por nombre / correo' value={search.searchInput} onChange={(e) => { setSearch({...search,searchInput:e.target.value})}} border={'1px solid gray'} bgColor="white" color="black" /> */}
+                        <Button onClick={handleSubmit}>Buscar</Button>
                     </Flex >
-                    <Tooltip label='Ordenar datos' bg='#10447E' placement='top' >
+                    {/* <Tooltip label='Ordenar datos' bg='#10447E' placement='top' >
                         <Text fontSize={'2rem'}>
                             <BsFilterCircle />
                         </Text>
-                    </Tooltip>
-                    <Box>
+                    </Tooltip> */}
+                    {/* <Box>
                         <FormControl>
                             <FormLabel color="white">Nombre</FormLabel>
                             <Select
@@ -43,8 +72,8 @@ const UserFilter = ({ searcher }) => {
                                 <option value='UD'>Z - A</option>
                             </Select>
                         </FormControl>
-                    </Box>
-                    <Box>
+                    </Box> */}
+                    {/* <Box>
                         <FormControl>
                             <FormLabel color="white">Viajes</FormLabel>
                             <Select
@@ -55,7 +84,7 @@ const UserFilter = ({ searcher }) => {
                                 <option value='vjsD'>Menos</option>
                             </Select>
                         </FormControl>
-                    </Box>
+                    </Box> */}
 
                     {/* //Cuando se agregren review lo activo */}
                     {/* <Box>
@@ -71,8 +100,8 @@ const UserFilter = ({ searcher }) => {
             </Box> */}
                 </Flex>
 
-                <Flex justify='center' align={'center'} gap='4'  >
-                    <Tooltip label='Filtrar datos' bg='#10447E' placement='top' >
+                {/* <Flex justify='center' align={'center'} gap='4'  > */}
+                {/* <Tooltip label='Filtrar datos' bg='#10447E' placement='top' >
                         <Text fontSize={'2rem'}>
                             <BsFunnel />
                         </Text>
@@ -90,9 +119,9 @@ const UserFilter = ({ searcher }) => {
                                 <option value='User'>Usuarios</option>
                             </Select>
                         </FormControl>
-                    </Box>
+                    </Box> */}
 
-                    {/* <Box>
+                {/* <Box>
                     <FormControl >
                         <FormLabel > Zona </FormLabel>
                         <Select
@@ -105,7 +134,7 @@ const UserFilter = ({ searcher }) => {
                     </FormControl>
                 </Box> */}
 
-                    {/* <Box>
+                {/* <Box>
                     <FormControl>
                         <FormLabel>Estado</FormLabel>
                         <Select
@@ -121,8 +150,8 @@ const UserFilter = ({ searcher }) => {
 
 
 
-                    {/* //Cuando se agregren review lo activo */}
-                    {/* <Box>
+                {/* //Cuando se agregren review lo activo */}
+                {/* <Box>
                 <Select placeholder='Puntuacion'
                     name='rating'
                     onChange={handleOrderRating}>
@@ -130,7 +159,7 @@ const UserFilter = ({ searcher }) => {
                     <option value='D'>➖ - ➕</option>
                 </Select>
             </Box>  */}
-                </Flex>
+                {/* </Flex> */}
 
 
                 <Flex onClick={resetFilter} ><Button bg='green.300' color='#000' fontSize='1.2rem' > <BsArrowClockwise /> </Button></Flex>
