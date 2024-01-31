@@ -42,6 +42,7 @@ const PaymentStatus = () => {
   // };
   const whatsappLink = "https://wa.me/51935455227";
   return (
+
     <Center bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/re3tjn4g8e4hbdkl7jtc.jpg">
       <Flex bgSize="cover" bgRepeat="no-repeat">
         <Box
@@ -68,6 +69,7 @@ const PaymentStatus = () => {
                 textShadow="2px 2px 4px rgb(0, 0, 0, 0.9)"
               >
                 Gracias por elegirnos!!!
+
               </Heading>
               <Box bg={'#10447E'} borderRadius={'20px'}>
                 <Text color={'white'}>Proximamente se le asignara un chofer</Text>
@@ -110,8 +112,10 @@ const PaymentStatus = () => {
             </Stack>
           </Flex>
         </Box>
+
       </Flex>
     </Center>
+
   );
 };
 
