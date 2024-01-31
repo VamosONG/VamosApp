@@ -44,10 +44,10 @@ const ReviewAdmin = () => {
 
         if (prevPage < 1) return;
 
-        const firstReserved = (prevPage - 1) * itemsPerPage;
+        const firstReserved = (prevPage - 1) * 6;
 
         setCurrentPage(prevPage);
-        setReview([...reviews].splice(firstReserved, itemsPerPage))
+        setReview([...reviews].splice(firstReserved, 6))
     }
 
     const nextHandler = () => {
@@ -55,24 +55,30 @@ const ReviewAdmin = () => {
 
         const nextPage = currentPage + 1;
 
-        const firstReserved = currentPage * itemsPerPage;
+        const firstReserved = currentPage * 6;
 
-        if (firstReserved > totalReviews) return;
+        if (firstReserved >= totalReviews) return;
         setCurrentPage(nextPage);
-        setReview([...reviews].splice(firstReserved, itemsPerPage))
+        setReview([...reviews].splice(firstReserved, 6))
     }
 
     useEffect(() => {
         dispatch(getReviewsData())
     }, [])
 
+    useEffect(() => {
+        setReview([...reviews].splice(0, 6));
+    }, [reviews])
+
     return (
-        <Flex
-            aalignItems='center'
-            justifyContent='center'
-            direction="column"
-            width="100%"
-            overflowX="auto"
+
+        <Flex 
+        aalignItems='center'
+        justifyContent='center'
+        direction="column"
+        width={{ base: "28%", lg: "100%" }}
+        overflowX="auto"
+        marginTop={{ base: "4%", lg: "0%" }}
         >
             <TableContainer >
                 <Flex bg='#009ED1' justify={'center'} p={2} borderTopLeftRadius="md" borderTopRightRadius="md" border="1px solid black">
@@ -93,7 +99,7 @@ const ReviewAdmin = () => {
                         </Thead>
 
                         <Tbody>
-                            {results?.map((review, index) => (
+                            {review?.map((review) => (
                                 <Tr key={review.id} bg={review.qualification <= 3 ? 'blue.200' : null} >
                                     <Td border="2px solid black" w='auto' >{review.userName ? review.userName : 'User Test'}</Td>
                                     <Td border="2px solid black" w='min-content' >
@@ -138,7 +144,7 @@ const ReviewAdmin = () => {
                         </Tfoot>
                     </Table>
                 </Flex> 
-                {reviews.length > 6 ? (
+                 {/* {reviews.length > 1 ? ( */}
                     <Box display="flex" justifyContent="center" alignItems="center" marginTop="1rem">
                         <Button
                             color='black'
@@ -164,10 +170,10 @@ const ReviewAdmin = () => {
                             Siguiente
                         </Button>
                     </Box>
-                ) : (
-                    null
-                )}
-                {/* COMPONENTE DE PAGINADO */}
+                {/* // ) : (
+                //     null
+                // )}
+                // COMPONENTE DE PAGINADO  */}
             </TableContainer>
         </Flex>
     )

@@ -11,7 +11,7 @@ const ReviewAndReseña=()=> {
     const viajesPendientes = useSelector((state) => state.viajesPendientes)
     const tripPending=viajesPendientes.find((trip)=>trip.userId===currentUserId)
     
-
+    const bgImg="https://res.cloudinary.com/drgnsbah9/image/upload/v1705767640/Vamos/wavesvamos_rt0ovd.jpg"
     const [input,setInput]=useState({
         qualification:0,
         comments:"",
@@ -69,9 +69,10 @@ const ReviewAndReseña=()=> {
         /* height="100vh" */
         direction="column"
         marginTop={'10rem'}
+        bgImage={bgImg}
       >
         
-            <Card width="md">
+            <Card width="md" >
             <CardHeader>
               <Heading size='md'>Reseña de tu viaje</Heading>
             </CardHeader>
@@ -140,9 +141,9 @@ const ReviewAndReseña=()=> {
             </CardBody>
           </Card>
       </Flex>
-      ):(<Center bg='tomato' /* h='100px' */h='40rem' color='white' fontSize='3xl'>
+      ):(<Center bgImage={bgImg} bgSize="cover" bgRepeat="no-repeat"/* h='100px' */h='40rem' color='white' fontSize='3xl'>
           <Card>
-            <CardBody>
+            <CardBody bgGradient='linear(to-r, blue.200, pink.300)'>
               <Text>Aún no tienes viajes para calificar</Text>
             </CardBody>
           </Card>

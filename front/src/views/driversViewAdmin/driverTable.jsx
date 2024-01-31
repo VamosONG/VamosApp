@@ -129,7 +129,7 @@ const DriverTableView = () => {
 
         const firstCompleted = currentPage * 6;
 
-        if (firstCompleted > totalCompleted) return;
+        if (firstCompleted >= totalCompleted) return;
         setCurrentPage(nextPage);
         setTripsToShow([...driverData].splice(firstCompleted, 6));
     };

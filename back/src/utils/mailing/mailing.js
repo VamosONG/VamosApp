@@ -44,5 +44,5 @@ module.exports = async(name, email, preSubject, message)=>{
     }
     sendMail()
         .then(result=>('¡Envío exitoso!'))
-        .catch(error=>console.log(error.message));
+        .catch(error=> (error.message));
 }

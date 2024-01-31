@@ -19,7 +19,7 @@ const createOrder = async (req, res) => {
     userId,
     
     price,viaje,driverId, destination,quantityPassengers,date,origin, hour} = req.body
- console.log(userId,price,viaje);
+ 
   try {
     let preference = {
 
@@ -74,8 +74,7 @@ const receiveWebhook = async (req, res) => {
     const payment = req.query;
     // const {date_created, user_id} = req.body
 
-    //  console.log(payment)
-
+    
 
     if (payment.type === "payment" ) {
        const data = await mercadopago.payment.findById(payment["data.id"]);
@@ -94,7 +93,7 @@ const receiveWebhook = async (req, res) => {
       }
     
       // await userPayment.reload();
-      // console.log("2",newTrip);
+      
       // await deleteTrip(newTrip.id);
       const resp = await postTrip(trip)
     
