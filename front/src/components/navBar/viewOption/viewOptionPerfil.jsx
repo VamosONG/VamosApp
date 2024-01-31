@@ -63,7 +63,7 @@ const ViewOptionPerfil = () => {
 
             </Button>
 
-            {currentUser.id ?
+            {currentUser?.id ?
                 <>
                     <Drawer
                         isOpen={isOpen}
@@ -127,17 +127,6 @@ const ViewOptionPerfil = () => {
                                                     >
                                                         <Text>Reseñar viaje</Text>
                                                         <EditIcon />
-                                                    </Button>
-                                                </Link>
-
-                                                <Link to="/questions">
-                                                    <Button
-                                                        w={"100%"}
-                                                        display={"flex"}
-                                                        justifyContent={"space-between"}
-                                                    >
-                                                        <Text>Q&A</Text>
-                                                        <QuestionIcon />
                                                     </Button>
                                                 </Link>
                                                 <LogOut />

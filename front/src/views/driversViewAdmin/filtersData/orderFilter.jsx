@@ -1,17 +1,18 @@
 import { Select, Box, Text, Flex, FormControl, FormLabel, Button, Input, Tooltip } from '@chakra-ui/react';
 import { useState } from 'react';
 import { BsFilterCircle, BsArrowClockwise } from 'react-icons/bs';
-import {orderSearchDrivers} from '../../../redux/actions'
+import { orderSearchDrivers } from '../../../redux/actions';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-
+import { getAllConductores } from '../../../redux/actions'
 
 const OrderFilterAlphabetical = () => {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [input, setInput] = useState({
     airports: "",
     quantityPassengers: 0,
-    date: ""
+    date: "",
+    searchInput: ""
   });
 
   const handleChange = (e) => {
@@ -22,19 +23,18 @@ const OrderFilterAlphabetical = () => {
   };
 
   const handleSubmit = async (e) => {
-    
-    console.log("esto es lo que trae el input ",input)
-    
-    dispatch(orderSearchDrivers(input))
-}
+    console.log("Esto es lo que trae el input ", input);
+    dispatch(orderSearchDrivers(input));
+  };
 
   const resetFilter = () => {
-    // Restaurar los valores predeterminados o realizar alguna acción de reinicio
     setInput({
       airports: "",
       quantityPassengers: 0,
-      date: ""
+      date: "",
+      searchInput: ""
     });
+    dispatch(getAllConductores())
   };
 
   return (
@@ -72,6 +72,7 @@ const OrderFilterAlphabetical = () => {
             <FormControl>
               <FormLabel color="white">Pasajeros</FormLabel>
               <Select bgColor="white" name='quantityPassengers' onChange={handleChange}>
+                <option value=''>Seleccionar</option>
                 {[...Array(15).keys()].map((value) => (
                   <option key={value + 1} value={value + 1}>
                     {value + 1}
@@ -108,8 +109,8 @@ const OrderFilterAlphabetical = () => {
         </Flex>
 
         <Button bg='green.300' color='#000' fontSize='1.2rem' onClick={handleSubmit}>
-  Submit
-</Button>
+          Aplicar
+        </Button>
 
 
         <Flex onClick={resetFilter}>

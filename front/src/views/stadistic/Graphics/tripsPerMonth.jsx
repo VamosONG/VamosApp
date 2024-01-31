@@ -33,8 +33,8 @@ export default function TripsPerMonths() {
     const dispatch = useDispatch();
   
     useEffect(async () => {
-      await dispatch(getTrips());
-    //   await dispatch(getCanceledTrips());
+      // await dispatch(getTrips());
+      await dispatch(getCanceledTrips());
     }, [dispatch]);
 
     const nombreMeses = [
@@ -42,8 +42,8 @@ export default function TripsPerMonths() {
         "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
       ];
   
-    // const viajes = useSelector((state)=>state.viajesCompletados)
-    const viajes = useSelector((state) => state.getTrips);
+    const viajes = useSelector((state)=>state.viajesCompletados)
+    // const viajes = useSelector((state) => state.getTrips);
     const tripsPorMes = {};
 
     viajes.forEach((trip) => {

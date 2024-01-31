@@ -80,7 +80,7 @@ const Stadistic = () => {
           bg="white"
         >
           <Text fontSize="lg" fontWeight="bold" mb={2}>
-            Total de viajes por mes 2024
+            Viajes por mes
           </Text>
           <LinesChart />
         </Flex>

@@ -528,9 +528,11 @@ export const getUserByEmail = (email) => {
         try {
             const { data } = await axios.get(`http://localhost:3001/user/email?email=${email}`);
             console.log(data)
+
             if(data.banned)
                 throw new Error(`El usuario con email ${data.email} se encuentra bloqueado.`)
              dispatch({
+
                 type: USER_BY_EMAIL,
                 payload: data
             })
@@ -719,4 +721,25 @@ export const handlePayment = (infoConfirmacionViaje,currentUserId) => {
             console.log(error.message)
         }
     }
+}
+
+
+
+
+export const orderSearchPrices = (input) => {
+    console.log(input)
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`http://localhost:3001/price/filter`, input);
+            console.log(data)
+            dispatch({
+                type: GET_ALL_PRICES,
+                payload: data
+            })
+            
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            console.log(error.message)
+        }
+    };
 }

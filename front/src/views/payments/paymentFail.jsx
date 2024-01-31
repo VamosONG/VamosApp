@@ -10,15 +10,15 @@ const PaymentFail = () => {
    
     //     const redirectTimer = setTimeout(() => {
           
-    //       window.location.href = 'http://localhost:5173/solicitarViaje';
-    //     }, 59999999000);
+    //       window.location.href = 'http://localhost:5173/';
+    //     }, 5000);
     
        
     //     return () => clearTimeout(redirectTimer);
     //   }, [])
     return (
         <Center
-          bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/eqdrrjmlkojpiiwlhwjo.jpg"
+        bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/re3tjn4g8e4hbdkl7jtc.jpg"
           bgSize="cover"
           bgRepeat="no-repeat"
           minH="100vh"
@@ -32,12 +32,13 @@ const PaymentFail = () => {
           >
             <Box
             top="100px"
-              bg='#009ED1'
+              bg='#10447E'
               w={{ base: '20rem', md: '30rem' }}
               p={6} // Ajusta el valor de padding según tus necesidades
               borderRadius="lg"
               boxShadow="lg"
               position="relative"  // Añade position relative al contenedor del mensaje
+              mb={"10rem"}
             >
               <Image
                 src="https://img.freepik.com/vector-premium/cara-emoji-triste-pensativa-o-emoticon-decepcionado-3d_248162-149.jpg"
@@ -46,9 +47,12 @@ const PaymentFail = () => {
                 top="-50px"  // Ajusta la posición vertical según tus necesidades
                 left="50%"  // Ajusta la posición horizontal según tus necesidades
                 transform="translateX(-50%)"
-                w="20rem"  // Centra horizontalmente la imagen
+                w="17rem"  // Centra horizontalmente la imagen
+                borderRadius={"100%"}
+                mt={"5rem"}
               />
               <Stack spacing={4} textAlign="center">
+               
                 <Heading
                   color='white'
                   textTransform='uppercase'
@@ -59,9 +63,9 @@ const PaymentFail = () => {
                 >
                   ¡Su pago ha sido rechazado!
                 </Heading>
-    
-                <Box>
-                  ¡Intente nuevamente!
+                
+                <Box bg={"white"} borderRadius={"20px"}>
+                  <Text fontSize={"20px"}>¡Intente nuevamente!</Text>
                   <Text> Sera redirigido en 5sg...</Text>
                 </Box>
               </Stack>

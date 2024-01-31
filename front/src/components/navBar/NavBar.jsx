@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import LogOut from "../../views/Forms/LogOut/logout";
 import ViewOptionPerfil from "./viewOption/viewOptionPerfil";
 import {verificationComplete} from '../../context/authContext';
+import LoginForm from "../../views/Forms/Login/Login";
 
 const NavBar = () => {
   const { currentUser } = useSelector((state) => state);
@@ -79,31 +80,20 @@ const NavBar = () => {
                       INICIO
                     </Button>
                   </Link>
+
+
+                  <Link to="/about">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      NOSOTROS
+                    </Button>
+                  </Link>
                   
-                  {/* <Link to="/solicitudesDeViajes">
+                  <Link to="/questions">
                     <Button colorScheme="#009ED1" fontSize="1xl">
-                      SOLICITUDES DE VIAJE
+                      PREGUNTAS FRECUENTES
                     </Button>
-                  </Link> */}
+                  </Link>
 
-                  {/* <Link to="/detail">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      CONDUCTORES
-                    </Button>
-                  </Link> */}
-
-
-                  {/* <Link to="/profileAdmin">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      MI PERFIL
-                    </Button>
-                  </Link> */}
-
-                  {/* {/* <Link to='/editPrices'>
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      CAMBIAR PRECIOS DE VIAJES
-                    </Button>
-                  </Link> */}
                 </Flex>
               </Box>
             ) : currentUser?.admin === false ? (
@@ -115,30 +105,17 @@ const NavBar = () => {
                     </Button>
                   </Link>
 
-                  {/* <Link to="/solicitarViaje">
+                  <Link to="/about">
                     <Button colorScheme="#009ED1" fontSize="1xl">
-                      SOLICITAR VIAJE
+                      NOSOTROS
                     </Button>
-                  </Link> */}
-
-                  {/* <Link to="/profileUser">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      MI PERFIL
-                    </Button>
-                  </Link> */}
+                  </Link>
 
                   <Link to="/questions">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       PREGUNTAS FRECUENTES
                     </Button>
                   </Link>
-
-                  {/* <Link to='/review&reseña'>
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      RESEÑA DE TU VIAJE
-                    </Button>
-                  </Link> */}
-                
                 </Flex>
               </Box>
             ) : (
@@ -170,7 +147,7 @@ const NavBar = () => {
 
         <Box>
           <AvatarGroup spacing="1rem" mx="20px">
-            <ViewOptionPerfil/>
+             <ViewOptionPerfil/> 
           </AvatarGroup>
         </Box>
       </Flex>
