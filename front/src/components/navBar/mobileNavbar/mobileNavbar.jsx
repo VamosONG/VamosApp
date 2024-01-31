@@ -125,7 +125,7 @@ const MobileNavbar = ({ currentUser }) => {
                         PREGUNTAS FRECUENTES
                       </Button>
                     </Link>
-                    <Box>
+                    <Box>        
              <ViewOptionPerfil/> 
         </Box>
                   </>
