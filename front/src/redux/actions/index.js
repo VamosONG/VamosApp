@@ -720,3 +720,24 @@ export const handlePayment = (infoConfirmacionViaje,currentUserId) => {
         }
     }
 }
+
+
+
+
+export const orderSearchPrices = (input) => {
+    console.log(input)
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`http://localhost:3001/price/filter`, input);
+            console.log(data)
+            dispatch({
+                type: GET_ALL_PRICES,
+                payload: data
+            })
+            
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            console.log(error.message)
+        }
+    };
+}

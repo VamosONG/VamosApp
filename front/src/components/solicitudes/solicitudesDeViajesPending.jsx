@@ -105,6 +105,7 @@ const handleClean = async (e) => {
     order: "",
     tripState: 'pending'
 }));
+setCurrentPage(1);
 }
 
 const handleSubmit = async (e) => {
@@ -144,6 +145,7 @@ const handleSubmit = async (e) => {
               placeholder="Buscar por coincidencia"
               onChange={handleChange}
               name="searchInput"
+              value={input.searchInput}
               />
               <FormControl>
               <Select 
@@ -154,6 +156,7 @@ const handleSubmit = async (e) => {
               width="xs"
               name="order"
               onChange={handleChange}
+              value={input.order}
               >
               <option>mas reciente</option>
               <option>menos reciente</option>

@@ -96,6 +96,7 @@ const SolicitudesDeViajesCompleted = () => {
       order: "",
       tripState: 'completed'
   }));
+  setCurrentPage(1);
   }
 
   const handleSubmit = async (e) => {
@@ -176,6 +177,7 @@ const SolicitudesDeViajesCompleted = () => {
             placeholder="Buscar por coincidencia"
             onChange={handleChange}
             name="searchInput"
+            value={input.searchInput}
           />
           <Select
             marginRight='2rem'
@@ -185,6 +187,7 @@ const SolicitudesDeViajesCompleted = () => {
             width="xs"
             name="order"
             onChange={handleChange}
+            value={input.order}
           >
             <option>mas reciente</option>
             <option>menos reciente</option>
