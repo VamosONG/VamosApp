@@ -36,6 +36,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import PaymentFail from './views/payments/paymentFail';
 import Error from './components/Error';
+import LoginViajes from './views/Forms/Login/LoginViajes';
 import {verificationComplete} from "./context/authContext"
 import Loader from './components/loader/Loader';
 import { useIds } from '@chakra-ui/react';
@@ -67,6 +68,7 @@ function App() {
         <Route path='/paymentStatus' element={<PaymentStatus/>}/>
         <Route path="/login" element={<LoginForm/>}/>
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
+        <Route path='/loginviajes' element={<LoginViajes/>}/>
         <Route path="*" element={<Error/>}/>
    
         {
