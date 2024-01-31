@@ -67,26 +67,28 @@ export default function PricePerMonth() {
       {
         label: 'Ganancias',
         data: ganancias,
-        tension: 0.5,
-        fill: true,
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        pointRadius: 5,
-        pointBorderColor: 'rgba(255, 99, 132)',
-        pointBackgroundColor: 'rgba(255, 99, 132)',
+                tension: 0.5,
+                fill: true,
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                pointRadius: 5,
+                pointBorderColor: 'rgba(255, 99, 132)',
+                pointBackgroundColor: 'rgba(255, 99, 132)',
       },
     ],
   };
 
   var misoptions = {
     scales: {
-      y: {
-        min: 0,
-      },
+      yAxes: [ // Cambiado de 'y' a 'yAxes'
+          {
+              min: 0
+          }
+      ],
       x: {
-        ticks: { color: 'rgb(255, 99, 132)' },
-      },
-    },
+          ticks: { color: 'rgb(255, 99, 132)' }
+      }
+  }
   };
 
   return <Line data={midata} options={misoptions} />;
