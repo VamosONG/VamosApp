@@ -157,15 +157,15 @@ const LoginForm = ({ onSwitchForm }) => {
     navigate("/register");
   };
 
-  const handleLogOut = async() => {
-    try {
-      await auth.logOut()
-      dispatch(cleanCurrentUser({}))
-      navigate("/")
-    } catch (error) {
-      console.log("error");
-    }
-  }
+  // const handleLogOut = async() => {
+  //   try {
+  //     await auth.logOut()
+  //     dispatch(cleanCurrentUser({}))
+  //     navigate("/")
+  //   } catch (error) {
+  //     console.log("error");
+  //   }
+  // }
   
 
   return (
@@ -225,7 +225,7 @@ const LoginForm = ({ onSwitchForm }) => {
                 _hover={{ bg: "transparent" }}
                 _active={{ bg: "transparent" }}
                 >
-                {show ? <ViewOffIcon /> : <ViewIcon />}
+                {/* {show ? <ViewOffIcon /> : <ViewIcon />} */}
                 </Button>
               </InputRightElement>
             </InputGroup>

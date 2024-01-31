@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import LogOut from "../../views/Forms/LogOut/logout";
 import ViewOptionPerfil from "./viewOption/viewOptionPerfil";
 import {verificationComplete} from '../../context/authContext';
+import LoginForm from "../../views/Forms/Login/Login";
 
 const NavBar = () => {
   const { currentUser } = useSelector((state) => state);
@@ -80,6 +81,7 @@ const NavBar = () => {
                     </Button>
                   </Link>
 
+
                   <Link to="/about">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       NOSOTROS
@@ -91,7 +93,7 @@ const NavBar = () => {
                       PREGUNTAS FRECUENTES
                     </Button>
                   </Link>
-                  
+
                 </Flex>
               </Box>
             ) : currentUser?.admin === false ? (
@@ -114,7 +116,6 @@ const NavBar = () => {
                       PREGUNTAS FRECUENTES
                     </Button>
                   </Link>
-
                 </Flex>
               </Box>
             ) : (
@@ -146,7 +147,7 @@ const NavBar = () => {
 
         <Box>
           <AvatarGroup spacing="1rem" mx="20px">
-            <ViewOptionPerfil/>
+             <ViewOptionPerfil/> 
           </AvatarGroup>
         </Box>
       </Flex>

@@ -63,7 +63,7 @@ const ViewOptionPerfil = () => {
 
             </Button>
 
-            {currentUser.id ?
+            {currentUser?.id ?
                 <>
                     <Drawer
                         isOpen={isOpen}

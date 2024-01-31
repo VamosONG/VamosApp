@@ -38,7 +38,6 @@ import PaymentFail from './views/payments/paymentFail';
 import Error from './components/Error';
 import LoginViajes from './views/Forms/Login/LoginViajes';
 import {verificationComplete} from "./context/authContext"
-import Loader from './components/loader/Loader';
 import { useIds } from '@chakra-ui/react';
 import { getUserByEmail } from './redux/actions';
 
