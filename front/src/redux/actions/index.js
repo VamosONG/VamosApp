@@ -6,7 +6,7 @@ import {auth} from "../../firebase/firebase.config"
 
 
 
-import {  ORDER_TRIPS, GET_TRIPS,DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, HANDLE_ADMIN, ORDER_DATE, FILTER_RATING, GET_DATA_USER } from './action.types';
+import {  GET_USUARIOS_FILTRADOS, ORDER_TRIPS, GET_TRIPS,DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, HANDLE_ADMIN, ORDER_DATE, FILTER_RATING, GET_DATA_USER } from './action.types';
 
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
@@ -269,6 +269,8 @@ export const logOutAction = (value) => {
         payload: value
     };
 }
+
+
 
 //NO SE VA A USAR!!!
 // export const viajeConfirmado = (info) => {
@@ -678,7 +680,22 @@ export const orderSearchDrivers = (input) => {
     };
 }
 //*************************************************************************************************************** */
+export const orderSearchUsers = (input) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`http://localhost:3001/user/filter`, input);
 
+            
+            dispatch({
+                type: GET_USUARIOS_FILTRADOS, 
+                payload: data
+            });
+        } catch (error) {
+            
+            console.log(error.message);
+        }
+    };
+}
 export const getTrips = () => {
     return async (dispatch)=> {
         try {
