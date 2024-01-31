@@ -330,50 +330,6 @@ const DriverTableView = () => {
                     </Button>
                 </Box>
             </Flex>
-            {/* <Flex
-    display="flex"
-    justifyContent="center"
-    alignItems="center"
-    flexDirection="row"
-    bgColor="gray.300"
-    w="100%"
-    h="100%"
-    borderBottomLeftRadius="md" 
-    borderBottomRightRadius="md"
-    border="1px solid black"
-    >
-    <Box 
-    display="flex" 
-    justifyContent="center" 
-    alignItems="center" 
-    marginTop="1rem"
-    marginBottom="1rem"
-    >
-      <Button
-        color='black'
-        bgColor='#009ED1'
-        variant="outline"
-        colorScheme="teal"
-        onClick={prevHandler}
-      >
-        Anterior
-      </Button>
-
-      <Box as="span" marginLeft="1rem" marginRight="1rem">
-        Página {currentPage}
-      </Box>
-
-      <Button
-        color='black'
-        bgColor='#009ED1'
-        variant="outline"
-        colorScheme="teal"
-        onClick={nextHandler}
-      >
-        Siguiente
-      </Button>
-    </Box>
-    </Flex> */}
         </Flex>
     )
 }
