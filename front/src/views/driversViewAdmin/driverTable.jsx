@@ -6,8 +6,13 @@ import {
     Tr,
     Th,
     Td,
-    TableCaption,Tooltip,
-    TableContainer, Button, Flex, Badge
+    TableCaption,
+    Tooltip,
+    TableContainer, 
+    Button, 
+    Flex, 
+    Badge,
+    Box,
 } from '@chakra-ui/react'
 
 import { DeleteIcon, RepeatClockIcon } from '@chakra-ui/icons'
@@ -25,20 +30,20 @@ import OrderFilterAlphabetical from './filtersData/orderFilter'
 const DriverTableView = () => {
     const driverData = useSelector((state) => state.conductores)
     const dispatch = useDispatch();
-    const [search , setSearch] = useState('')
+    // const [search , setSearch] = useState('')
 
     const searcher = (e) => {
         setSearch(e.target.value)
     }
 
-    const results = !search ? driverData : driverData.filter((data) => data.name.toLowerCase().includes(search.toLowerCase()) ||
-    data.airports.toLowerCase().includes(search.toLowerCase()) ||
-    data.carType.toLowerCase().includes(search.toLowerCase())
-);
+    // const results = !search ? driverData : driverData.filter((data) => data.name.toLowerCase().includes(search.toLowerCase()) ||
+    // data.airports.toLowerCase().includes(search.toLowerCase()) ||
+    // data.carType.toLowerCase().includes(search.toLowerCase())
+// );
 
     useEffect(() => {
         dispatch(getAllConductores())
-    },[])
+    },[dispatch])
 
     const deleteDriver = (id) => {
         Swal.fire({
@@ -71,6 +76,7 @@ const DriverTableView = () => {
             }
         });
     }
+    
 
     const reactivateDriver = (id) => {
         Swal.fire({
@@ -135,7 +141,7 @@ const DriverTableView = () => {
                     </Thead>
                 
                     <Tbody>
-                    {results?.map((driver, index) => (
+                    {driverData?.map((driver, index) => (
                         <Tr key={driver.id} bg={driver.inactive  ? 'gray.300' : driver.driverState ? 'white' : 'red.300'} color={driver.inactive ? 'black' : 'black'}>
                             <Td border="2px solid black">{index + 1}</Td>
                             <Td border="2px solid black">{driver.airports}</Td>
@@ -242,9 +248,51 @@ const DriverTableView = () => {
                     </Tr>
                     </Tfoot>
                 </Table>
-            {/* COMPONENTE DE PAGINADO */}
-            {/* <Paginado/>  */}
             </TableContainer>
+            {/* <Flex
+    display="flex"
+    justifyContent="center"
+    alignItems="center"
+    flexDirection="row"
+    bgColor="gray.300"
+    w="100%"
+    h="100%"
+    borderBottomLeftRadius="md" 
+    borderBottomRightRadius="md"
+    border="1px solid black"
+    >
+    <Box 
+    display="flex" 
+    justifyContent="center" 
+    alignItems="center" 
+    marginTop="1rem"
+    marginBottom="1rem"
+    >
+      <Button
+        color='black'
+        bgColor='#009ED1'
+        variant="outline"
+        colorScheme="teal"
+        onClick={prevHandler}
+      >
+        Anterior
+      </Button>
+
+      <Box as="span" marginLeft="1rem" marginRight="1rem">
+        Página {currentPage}
+      </Box>
+
+      <Button
+        color='black'
+        bgColor='#009ED1'
+        variant="outline"
+        colorScheme="teal"
+        onClick={nextHandler}
+      >
+        Siguiente
+      </Button>
+    </Box>
+    </Flex> */}
         </Flex>
     )
 }

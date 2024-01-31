@@ -80,6 +80,20 @@ const NavBar = () => {
                       INICIO
                     </Button>
                   </Link>
+
+
+                  <Link to="/about">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      NOSOTROS
+                    </Button>
+                  </Link>
+                  
+                  <Link to="/questions">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      PREGUNTAS FRECUENTES
+                    </Button>
+                  </Link>
+
                 </Flex>
               </Box>
             ) : currentUser?.admin === false ? (
@@ -90,11 +104,18 @@ const NavBar = () => {
                       INICIO
                     </Button>
                   </Link>
+
+                  <Link to="/about">
+                    <Button colorScheme="#009ED1" fontSize="1xl">
+                      NOSOTROS
+                    </Button>
+                  </Link>
+
                   <Link to="/questions">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       PREGUNTAS FRECUENTES
                     </Button>
-                  </Link>                
+                  </Link>
                 </Flex>
               </Box>
             ) : (

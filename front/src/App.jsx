@@ -25,7 +25,7 @@ import PaymentStatus from './views/payments/paymentStatus';
 
 import EditPrices from './components/editPrices/editPricesComponent';
 
-
+import FormLogInWithGoogle from './views/logInWithGoogle/formLogInWithGoogle';
 import RegistroForm from './views/Forms/Registro/Registro';
 import UserProfile from './components/userProfile/userProfile'
 import AdminProfile from './components/userProfile/adminProfile';
@@ -36,6 +36,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import PaymentFail from './views/payments/paymentFail';
 import Error from './components/Error';
+import LoginViajes from './views/Forms/Login/LoginViajes';
 import {verificationComplete} from "./context/authContext"
 import { useIds } from '@chakra-ui/react';
 import { getUserByEmail } from './redux/actions';
@@ -44,35 +45,38 @@ import { getUserByEmail } from './redux/actions';
 
 
 
+  //const {currentUser} = useSelector(state => state)
+
 function App() {
   const {currentUser} = useSelector(state=> state)
+
   return (
     <>
     <AuthProvider>
-          <NavBar />
+        <NavBar />
 
         <Routes>
         <Route path='/' element={<HomeComponent/>}/> 
+
         {/* Renderizando HomeComponent en la ruta para evitar pisar cada ves que se abre una pestaña */}
         <Route path='/home' element={<LoginForm/>}/>
-        <Route path="/register" element={<RegistroForm/>}/>
         <Route path= '/about' element={<About/>} />
         <Route path='/questions' element={<Questions/>}/>
         <Route path="/paymentFailed" element={<PaymentFail/>}/>
         <Route path='/paymentStatus' element={<PaymentStatus/>}/>
         <Route path="/login" element={<LoginForm/>}/>
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
+        <Route path='/loginviajes' element={<LoginViajes/>}/>
         <Route path="*" element={<Error/>}/>
-   
+
         {
-          
           currentUser?.id &&
           <>
       
           <Route element={<ProtectedRoutes isAllowed={currentUser?.admin=== false} />} > 
           <Route path="/profileUser" element={<UserProfile/>}/>
           <Route path='/review&reseña' element={<ReviewAndReseña/>}/>
-           </Route> 
+          </Route> 
 
           <Route element={<ProtectedRoutes isAllowed={currentUser?.admin=== true} />}> 
           <Route path='/solicitud' element={<Solicitud/>}/>
@@ -82,9 +86,9 @@ function App() {
           <Route path="/login" element={<LoginForm/>}/>
           <Route path="/register" element={<RegistroForm/>}/>
           <Route path="/profileAdmin" element={<AdminProfile/>}/>
-           </Route> 
+          </Route> 
           
-           </>
+          </>
         }
         </Routes>
         {/* <Route path="/graphics" element={<Graphics/>}/> */}

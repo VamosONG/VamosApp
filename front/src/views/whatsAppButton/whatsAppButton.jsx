@@ -4,7 +4,7 @@ import WSP from '../../assets/icons/wspicon.png'
 
 const WhatsAppButton = () => {
 
-    const whatsappLink = "https://wa.me/5493856971908";
+    const whatsappLink = "https://wa.me/51935455227";
 
     return (
         <VStack

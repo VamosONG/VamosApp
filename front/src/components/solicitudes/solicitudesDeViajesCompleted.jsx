@@ -96,10 +96,12 @@ const SolicitudesDeViajesCompleted = () => {
       order: "",
       tripState: 'completed'
   }));
+  setCurrentPage(1);
   }
 
   const handleSubmit = async (e) => {
     dispatch(orderSearch(input));
+    setCurrentPage(1);
   };
 
 
@@ -158,6 +160,9 @@ const SolicitudesDeViajesCompleted = () => {
         alignItems="center"
         flexDirection="row"
         bgColor='#009ED1'
+        borderTopLeftRadius="md"
+        borderTopRightRadius="md"
+        border="1px solid black"
       >
         <Heading size="xs" textTransform="uppercase" margin="1rem">
           Buscar:
@@ -172,6 +177,7 @@ const SolicitudesDeViajesCompleted = () => {
             placeholder="Buscar por coincidencia"
             onChange={handleChange}
             name="searchInput"
+            value={input.searchInput}
           />
           <Select
             marginRight='2rem'
@@ -181,6 +187,7 @@ const SolicitudesDeViajesCompleted = () => {
             width="xs"
             name="order"
             onChange={handleChange}
+            value={input.order}
           >
             <option>mas reciente</option>
             <option>menos reciente</option>
@@ -193,7 +200,7 @@ const SolicitudesDeViajesCompleted = () => {
                 <RepeatClockIcon/>
                 </Button>
                 </Tooltip>
-       <Button onClick={handleOnExport}>DESCARGAR</Button>
+        <Button onClick={handleOnExport} marginLeft="1rem">DESCARGAR</Button>
       </Box>
       <Table variant="simple">
         <TableCaption>Viajes concretados</TableCaption>

@@ -32,7 +32,8 @@ import { cleanCurrentUser, getUserByEmail } from "../../../redux/actions";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const LoginForm = ({ onSwitchForm }) => {
+
+const LoginViajes = ({ onSwitchForm }) => {
   // Auth de Firebase
   const auth = useAuth();
 
@@ -67,23 +68,22 @@ const LoginForm = ({ onSwitchForm }) => {
     try {
       await auth.login(input.email, input.password); // autenticacion de loginWithGoogle funcion de firebase signInWithPopUp
         const getUser =  await dispatch(getUserByEmail(input.email)); // busca al usuario por email y lo setea como currentUser
-        console.log(currentUser);
-        navigate('/')
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "¡Inicio de sesión éxitoso!",
-            showConfirmButton: false,
-            timer: 2500
-          })
-      
+        console.log(getUser);
+         navigate('/')////
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "¡Inicio de sesión éxitoso!",
+          showConfirmButton: false,
+          timer: 2500
+        })
 
     } catch (error) {
       console.error("Error al iniciar sesión:", error.message);
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: ("Error al iniciar sesión:", error.message),
+        text: "Email o contraseña incorrecto,intentelo nuevamente.",
       });
     }
   };
@@ -101,11 +101,8 @@ const LoginForm = ({ onSwitchForm }) => {
       if (googleLog) {
          const usr={
           name: googleLog.user.displayName,
-          email: googleLog.user.email,
-          image: googleLog.user.photoURL
+          email: googleLog.user.email
          }
-         
-         console.log("google" ,usr);
 
          Swal.fire({
           position: "center",
@@ -131,15 +128,8 @@ const LoginForm = ({ onSwitchForm }) => {
   
         // Carga el estado global currentUser con la info del usuario registradi
         const userActual = await dispatch(getUserByEmail(googleLog.user.email))
-        if(response.banned){
-          handleLogOut()
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Este usuario se encuentra bloqueado.",
-          });
-        }
-        navigate('/')
+
+        navigate('/')////
         return response
       }
     } catch (error) {
@@ -147,31 +137,68 @@ const LoginForm = ({ onSwitchForm }) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: ("Error al iniciar sesión con Google:", error.message),
+        text: "Hubo un error en el registro",
       });
     }
   };
 
 
+
+
+  // const handleGoogleLogin = async () => {
+  //   const {displayName, email} = auth.user;
+  //   try {
+  //     await auth.loginWithGoogle(); // Autenticacion de google
+  //     if (auth.user) {
+  //       const user = {   // creación de un objeto user con los datos que puedo extraer de firebase
+  //         name: displayName,
+  //         email: email,
+  //       };
+  
+  //       // Crea un usuario (findOrCreate) utilizando fetch con su metodo post 
+  //       const response = await dispatch(postNewUser(user));
+  //       if(response){
+  //         // Carga el estado global currentUser con la info del usuario registrado
+  //         const userActual = await dispatch(getUserByEmail(user.email));
+  //         console.log(userActual);
+  //         return userActual;
+  //       } else {
+  //         console.log("error al crear");
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error("Error al iniciar sesión con Google:", error.message);
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Oops...",
+  //       text: "Hubo un error en el registro",
+  //     });
+  //   }
+  // };
+
+
+  
+
   const handleRegister = () => {
     navigate("/register");
   };
 
-  // const handleLogOut = async() => {
-  //   try {
-  //     await auth.logOut()
-  //     dispatch(cleanCurrentUser({}))
-  //     navigate("/")
-  //   } catch (error) {
-  //     console.log("error");
-  //   }
-  // }
+  const handleLogOut = async() => {
+    try {
+      await auth.logOut()
+      dispatch(cleanCurrentUser({}))
+      navigate("/")
+    } catch (error) {
+      console.log("error");
+    }
+  }
   
 
   return (
+    <Stack bgImage={"https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/re3tjn4g8e4hbdkl7jtc.jpg"}>
     <Stack
     spacing={4}
-    bg="rgb(0, 158, 209)"
+    bg="#10447E"
     p="4"
     h="auto"
     rounded="0"
@@ -179,6 +206,11 @@ const LoginForm = ({ onSwitchForm }) => {
     boxShadow="none"
     color="white"
     display={currentUser?.id ? 'none' : 'block'}
+    w="21rem"
+    mt="6rem"
+    ml="37%"
+    mb="2rem"
+    borderRadius="20px"
     >
       {!currentUser?.id && (
         <>
@@ -194,10 +226,10 @@ const LoginForm = ({ onSwitchForm }) => {
               fontSize="md"
               color="black"
             />
-            {isError ? (
+            {isError.email ? (
               <FormErrorMessage 
               fontSize="md" 
-              color="black"
+              color="white"
               >
                 El correo es requerido.
               </FormErrorMessage>
@@ -225,15 +257,30 @@ const LoginForm = ({ onSwitchForm }) => {
                 _hover={{ bg: "transparent" }}
                 _active={{ bg: "transparent" }}
                 >
-                {/* {show ? <ViewOffIcon /> : <ViewIcon />} */}
+                {show ? <ViewOffIcon /> : <ViewIcon />}
                 </Button>
               </InputRightElement>
             </InputGroup>
           </FormControl>
 
+          {/* <Container>
+            <Text>
+              ¿No tienes cuenta?{" "}
+              <Button color="teal.500" onClick={handleRegister}>
+                Registrarme
+              </Button>
+              <Button colorScheme="red" onClick={(e)=>handleGoogleLogin(e)}>
+                Continuar con Google
+              </Button>
+      
+            </Text>
+          UserViewProfile
+          </Container> */}
+          {/* </Container> */}
+
           <Box>
             {!currentUser?.id && (
-              <Button bg="white" onClick={handleSubmit} >
+              <Button bg="white" onClick={handleSubmit}>
                 Entrar
               </Button>
             )}
@@ -269,7 +316,8 @@ const LoginForm = ({ onSwitchForm }) => {
 
       )}
     </Stack>
+    </Stack>
   );
 };
 
-export default LoginForm;
+export default LoginViajes;

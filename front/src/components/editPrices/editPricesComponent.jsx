@@ -13,14 +13,15 @@ import {
   Flex,
   Box,
   Heading,
-  Select
+  Select,
+  Tooltip
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllPrices, updatePrice } from '../../redux/actions';
+import { getAllPrices, orderSearchPrices, updatePrice } from '../../redux/actions';
 import Swal from 'sweetalert2'
 import { renderToString } from 'react-dom/server';
 import EditPrice from './editPrice';
-import {  useNavigate } from 'react-router-dom';
+import { RepeatClockIcon } from '@chakra-ui/icons';
 
 
 
@@ -36,7 +37,7 @@ const EditPrices = () => {
 
   useEffect(() => {
     dispatch(getAllPrices())
-  }, []);
+  }, [dispatch]);
 
 
   
@@ -114,20 +115,40 @@ const EditPrices = () => {
   };
 
   const handleSubmit = async (e) => {
-    dispatch(orderSearch(input));
+    dispatch(orderSearchPrices(input));
+    setCurrentPage(1);
   };
 
+
+  const handleClean = async (e) => {
+    setInput({
+        ...input,
+        searchInput: "",
+        order: "",
+        tripState: 'completed'
+    })
+    dispatch(orderSearchPrices({
+      ...input,
+      searchInput: "",
+      order: "",
+      tripState: 'completed'
+  }));
+  setCurrentPage(1);
+  }
 
 
 
   return (
     <Box>
-      <Box
+      <Flex
         display="flex"
         justifyContent="center"
         alignItems="center"
         flexDirection="row"
         bgColor='#009ED1'
+        borderTopLeftRadius="md"
+        borderTopRightRadius="md"
+        border="1px solid black"
       >
         <Heading size="xs" textTransform="uppercase" margin="1rem">
           Buscar:
@@ -142,6 +163,7 @@ const EditPrices = () => {
             placeholder="Buscar por coincidencia"
             onChange={handleChange}
             name="searchInput"
+            value={input.searchInput}
           />
           <Select
             marginRight='2rem'
@@ -151,13 +173,19 @@ const EditPrices = () => {
             width="xs"
             name="order"
             onChange={handleChange}
+            value={input.order}
           >
             <option>mayor precio</option>
             <option>menor precio</option>
           </Select>
         </Box>
-        <Button onClick={handleSubmit}>APLICAR</Button>
-      </Box>
+        <Button onClick={handleSubmit} style={{marginRight:'1rem'}}>APLICAR</Button>
+        <Tooltip hasArrow label='Reiniciar filtro y búsqueda' bg='#009ED1' placement='left-start'>
+                <Button onClick={handleClean} >
+                <RepeatClockIcon/>
+                </Button>
+                </Tooltip>
+      </Flex>
 
 
     <Flex
@@ -169,19 +197,21 @@ const EditPrices = () => {
     borderRadius="md"
     >
     <TableContainer>
-    <Flex px={0} bg='gray.300' overflowX="auto" borderBottomLeftRadius="md" borderBottomRightRadius="md" border="1px solid black">
-      <Table colorScheme='#009ED1'>
-        <TableCaption border="1px solid black" bg='#009ED1'>Precios según ruta y vehículo</TableCaption>
+    <Flex px={0} 
+    bg='gray.300' 
+    overflowX="auto" 
+    >
+      <Table colorScheme='#009ED1' width="100%">
+        {/* <TableCaption border="1px solid black" bg='#009ED1'>Precios según ruta y vehículo</TableCaption> */}
         <Thead bg='#009ED1'>
 
           <Tr>
-            <Th border="2px solid black" color='white'>RUTA</Th>
-            <Th border="2px solid black" color='white'>TIPO DE CARRO</Th>
-            <Th border="2px solid black" color='white'>PRECIO EN SOLES</Th>
-            {/* <Th border="2px solid black" color='white'>ACTUALIZAR</Th> */}
+          <Th border="2px solid black" color='white' minWidth="700px">RUTA</Th>
+          <Th border="2px solid black" color='white' minWidth="400px">TIPO DE CARRO</Th>
+          <Th border="2px solid black" color='white' minWidth="300px">PRECIO EN SOLES / ACTUALIZAR</Th>
           </Tr>
         </Thead>
-        <Tbody justifyContent="center">
+        <Tbody border="2px solid black" justifyContent="center">
           {pricesToShow?.map((combo, index) => (
 
             <EditPrice
@@ -191,65 +221,55 @@ const EditPrices = () => {
             handleUpdate={handleUpdate}
             isEvenRow={index % 2 === 0}
           />
-///////// Esto va a EditPrice
-            /*<Tr key={index}> 
-              <Td border="2px solid black">{combo.airport} - {combo.zone}</Td>
-              {combo.quantityPassengers === 4 ? (
-                <Td border="2px solid black">AUTO</Td>
-              ) : (combo.quantityPassengers === 6 ? (
-                <Td border="2px solid black">CAMIONETA</Td>
-              ) : (combo.quantityPassengers === 10 ? (
-                <Td border="2px solid black">VAN</Td>
-              ) : (<Td border="2px solid black">VAN PLUS</Td>)))}
-
-              <Td border="2px solid black" textAlign="center">
-                <Input
-                color='black'
-                bg='white'
-                htmlSize={4}
-                width='auto'
-                border='2px solid black'
-                placeholder={combo.value}
-                name='date'
-                /* value={input.value} */
-               /* onChange={handleChange(combo.airport, combo.zone, combo.quantityPassengers)} /></Td>
-              <Td border="2px solid black" textAlign="center"><Button
-                backgroundColor='#E83D6F'
-                variant="solid"
-                color="white"
-                onClick={() => handleUpdate()}>Actualizar</Button></Td>
-            </Tr>*/
-////////
           ))}
         </Tbody>
-          <Box display="flex" justifyContent="center" alignItems="center" marginTop="1rem">
-        <Button
-          color='black'
-          bgColor='#009ED1'
-          variant="outline"
-          colorScheme="teal"
-          onClick={prevHandler}
-        >
-          Anterior
-        </Button>
-
-        <Box as="span" marginLeft="1rem" marginRight="1rem">
-          Página {currentPage}
-        </Box>
-
-        <Button
-          color='black'
-          bgColor='#009ED1'
-          variant="outline"
-          colorScheme="teal"
-          onClick={nextHandler}
-        >
-          Siguiente
-        </Button>
-      </Box>
       </Table>
       </Flex>
     </TableContainer>
+    <Flex
+    display="flex"
+    justifyContent="center"
+    alignItems="center"
+    flexDirection="row"
+    bgColor="gray.300"
+    w="100%"
+    h="100%"
+    borderBottomLeftRadius="md" 
+    borderBottomRightRadius="md"
+    border="1px solid black"
+    >
+    <Box 
+    display="flex" 
+    justifyContent="center" 
+    alignItems="center" 
+    marginTop="1rem"
+    marginBottom="1rem"
+    >
+      <Button
+        color='black'
+        bgColor='#009ED1'
+        variant="outline"
+        colorScheme="teal"
+        onClick={prevHandler}
+      >
+        Anterior
+      </Button>
+
+      <Box as="span" marginLeft="1rem" marginRight="1rem">
+        Página {currentPage}
+      </Box>
+
+      <Button
+        color='black'
+        bgColor='#009ED1'
+        variant="outline"
+        colorScheme="teal"
+        onClick={nextHandler}
+      >
+        Siguiente
+      </Button>
+    </Box>
+    </Flex>
     </Flex>
     </Box>
   );
