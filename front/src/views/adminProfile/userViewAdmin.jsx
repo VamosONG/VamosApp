@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
-  Table,
+  Table,Box,
   Thead,
   Tbody,
   Tfoot,
@@ -101,17 +101,87 @@ const UserViewAdmin = () => {
         dispatch(getDataUser())
     }, [])
 
-    return (
-        <Flex 
-        direction="column"
-        width="100%"
-        overflowX="auto" 
-        mt={4}
-        align="center"
-        justify="center"
-        >
+    //***************PAGINADO**********************************/
+  const itemsPerPage = 6;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [tripsToShow, setTripsToShow] = useState([]);
 
-        <Flex>
+  const prevHandler = () => {
+    const prevPage = currentPage - 1;
+
+    if (prevPage < 1) return;
+
+    const firstCompleted = (prevPage - 1) * 6;
+
+    setCurrentPage(prevPage);
+    setTripsToShow([...userData].splice(firstCompleted, 6));
+  };
+
+  const nextHandler = () => {
+    const totalCompleted = userData.length;
+
+    const nextPage = currentPage + 1;
+
+    const firstCompleted = currentPage * 6;
+
+    if (firstCompleted > totalCompleted) return;
+    setCurrentPage(nextPage);
+    setTripsToShow([...userData].splice(firstCompleted, 6));
+  };
+
+  // useEffect(() => {
+  //   dispatch(getCanceledTrips());
+  // }, [dispatch]);
+
+  useEffect(() => {
+    setTripsToShow([...userData].splice(0, 6));
+  }, [userData]);
+
+  //***************BUSQUEDA Y ORDENAMIENTO**********************************/
+  // const [input, setInput] = useState({
+  //   searchInput: "",
+  //   order: ""
+  // });
+
+  // const handleChange = async (e) => {
+  //   setInput({
+  //     ...input,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
+
+  // const handleClean = async (e) => {
+  //   setInput({
+  //       ...input,
+  //       searchInput: "",
+  //       order: "",
+  //   })
+  //   dispatch(orderSearch({
+  //     ...input,
+  //     searchInput: "",
+  //     order: "",
+ 
+  // }));
+  // }
+
+  // const handleSubmit = async (e) => {
+  //   dispatch(orderSearch(input));
+  //   setCurrentPage(1);
+  // };
+    return (
+      <Box>
+      <Flex
+        display="block"
+        justifyContent="center"
+        alignItems="center"
+        flexDirection="row"
+        bgColor='#009ED1'
+        borderTopLeftRadius="md"
+        borderTopRightRadius="md"
+        border="1px solid black"
+      >
+
+        
           <TableContainer>
             <Flex 
             bg='#009ED1' 
@@ -138,82 +208,126 @@ const UserViewAdmin = () => {
 
   
                 <Tbody>
-                {results?.map((user) => (
-                  <Tr key={user.id}>
-                    <Td border="2px solid black">{user.name ? user.name : 'sin nombre'}</Td>
-                    <Td border="2px solid black">
-                      <Tooltip hasArrow label={user.email ? 'Enviar Correo' : null} bg="#10447E" placement="top">
-                        <Link href={`mailto:${user.email}`}>{user.email ? user.email : 'Sin correo'}</Link>
-                      </Tooltip>
-                    </Td>
-                    <Td border="2px solid black">{user.dni ? user.dni : 'Desconocido'}</Td>
-                    <Td border="2px solid black">
-                      <Tooltip hasArrow label={user.phone ? 'Contactar' : null} bg="#10447E" placement="top">
-                        <Link href={`whatsapp://send?phone=+51${user.phone}`}>
-                          {user.phone ? user.phone : 'Numero desconocido'}
-                        </Link>
-                      </Tooltip>
-                    </Td>
-                    <Td border="2px solid black">{user.Trips.length ? user.Trips.length : '0'}</Td>
-                    <Td border="2px solid black" >
-                      <Flex gap={2} justifyContent={'center'} >
-
-                      {user.admin ? (
-                        <>
-                        
-                        <Tooltip label="Quitar Acceso Admin" placement="right" bg="#E83D6F">
-                          <Button onClick={() => handleAdminAccess(user.id)} bg="red.300" fontSize="1.2rem" id={user.id}>
-                            <RepeatClockIcon />
-                          </Button>
-                        </Tooltip>
-                        {user.banned !== true ? (
-                          <Tooltip label="Bannear / Bloquear" placement="right" bg="#E83D6F">
-                            <Button onClick={() => handleBanned(user.id)} bg="#E83D6F" fontSize="1.2rem" id={user.id}>
-                              <WarningTwoIcon />
-                            </Button>
-                          </Tooltip>
-                          ) : (
-                            <Tooltip label="Desbloquear" placement="right" bg="#10447E">
-                            <Button onClick={() => handleBanned(user.id)} bg={'#10447E'} fontSize="1.2rem" id={user.id}>
-                              <UnlockIcon />
-                            </Button>
-                          </Tooltip>
-                          )}
-                        </>
-                      ) : (
-                        <>
-                      <Tooltip label="Acceso Admin" placement="right" bg="#009ED1">
-                        <Button onClick={() => handleAdminAccess(user.id)} bg="blue.300" fontSize="1.2rem" id={user.id}>
-                          <AddIcon />
-                        </Button>
-                      </Tooltip>
-                      {user.banned !== true ? (
-                          <Tooltip label="Bannear / Bloquear" placement="right" bg="#E83D6F">
-                            <Button onClick={() => handleBanned(user.id)} bg="#E83D6F" fontSize="1.2rem" id={user.id}>
-                              <WarningTwoIcon />
-                            </Button>
-                          </Tooltip>
-                          ) : (
-                            <Tooltip label="Desbloquear" placement="right" bg="#10447E">
-                            <Button onClick={() => handleBanned(user.id)} bg={'#10447E'} fontSize="1.2rem" id={user.id} color={'white'}>
-                              <UnlockIcon />
-                            </Button>
-                          </Tooltip>
-                          )}
-                        </>
-                    )}
-                      </Flex>
-                    </Td>
-                    </Tr>
-                    ))}
-                </Tbody>
-              </Table>
+  {tripsToShow?.map((user) => (
+    <Tr key={user.id}>
+      <Td border="2px solid black">{user.name ? user.name : 'sin nombre'}</Td>
+      <Td border="2px solid black">
+        <Tooltip hasArrow label={user.email ? 'Enviar Correo' : null} bg="#10447E" placement="top">
+          <Link href={`mailto:${user.email}`}>{user.email ? user.email : 'Sin correo'}</Link>
+        </Tooltip>
+      </Td>
+      <Td border="2px solid black">{user.dni ? user.dni : 'Desconocido'}</Td>
+      <Td border="2px solid black">
+        <Tooltip hasArrow label={user.phone ? 'Contactar' : null} bg="#10447E" placement="top">
+          <Link href={`whatsapp://send?phone=+51${user.phone}`}>
+            {user.phone ? user.phone : 'Numero desconocido'}
+          </Link>
+        </Tooltip>
+      </Td>
+      <Td border="2px solid black">{user.Trips.length ? user.Trips.length : '0'}</Td>
+      <Td border="2px solid black" >
+        <Flex gap={2} justifyContent={'center'} >
+          {user.admin ? (
+            <>
+              <Tooltip label="Quitar Acceso Admin" placement="right" bg="#E83D6F">
+                <Button onClick={() => handleAdminAccess(user.id)} bg="red.300" fontSize="1.2rem" id={user.id}>
+                  <RepeatClockIcon />
+                </Button>
+              </Tooltip>
+              {user.banned !== true ? (
+                <Tooltip label="Bannear / Bloquear" placement="right" bg="#E83D6F">
+                  <Button onClick={() => handleBanned(user.id)} bg="#E83D6F" fontSize="1.2rem" id={user.id}>
+                    <WarningTwoIcon />
+                  </Button>
+                </Tooltip>
+              ) : (
+                <Tooltip label="Desbloquear" placement="right" bg="#10447E">
+                  <Button onClick={() => handleBanned(user.id)} bg={'#10447E'} fontSize="1.2rem" id={user.id}>
+                    <UnlockIcon />
+                  </Button>
+                </Tooltip>
+              )}
+            </>
+          ) : (
+            <>
+              <Tooltip label="Acceso Admin" placement="right" bg="#009ED1">
+                <Button onClick={() => handleAdminAccess(user.id)} bg="blue.300" fontSize="1.2rem" id={user.id}>
+                  <AddIcon />
+                </Button>
+              </Tooltip>
+              {user.banned !== true ? (
+                <Tooltip label="Bannear / Bloquear" placement="right" bg="#E83D6F">
+                  <Button onClick={() => handleBanned(user.id)} bg="#E83D6F" fontSize="1.2rem" id={user.id}>
+                    <WarningTwoIcon />
+                  </Button>
+                </Tooltip>
+              ) : (
+                <Tooltip label="Desbloquear" placement="right" bg="#10447E">
+                  <Button onClick={() => handleBanned(user.id)} bg={'#10447E'} fontSize="1.2rem" id={user.id} color={'white'}>
+                    <UnlockIcon />
+                  </Button>
+                </Tooltip>
+              )}
+            </>
+          )}
         </Flex>
-        {/* COMPONENTE DE PAGINADO */}
-        {/* <Paginado /> */}
+      </Td>
+    </Tr>
+  ))}
+</Tbody>
+                
+              </Table>
+              
+        </Flex>
+        
         </TableContainer>
-      </Flex>
+        <Flex
+    display="flex"
+    justifyContent="center"
+    alignItems="center"
+    flexDirection="row"
+    bgColor="gray.300"
+    w="100%"
+    h="100%"
+    borderBottomLeftRadius="md" 
+    borderBottomRightRadius="md"
+    border="1px solid black"
+    >
+    <Box 
+    display="flex" 
+    justifyContent="center" 
+    alignItems="center" 
+    marginTop="1rem"
+    marginBottom="1rem"
+    >
+      <Button
+        color='black'
+        bgColor='#009ED1'
+        variant="outline"
+        colorScheme="teal"
+        onClick={prevHandler}
+      >
+        Anterior
+      </Button>
+
+      <Box as="span" marginLeft="1rem" marginRight="1rem">
+        Página {currentPage}
+      </Box>
+
+      <Button
+        color='black'
+        bgColor='#009ED1'
+        variant="outline"
+        colorScheme="teal"
+        onClick={nextHandler}
+      >
+        Siguiente
+      </Button>
+    </Box>
     </Flex>
+      </Flex>
+    
+    </Box>
   );
 }
   
