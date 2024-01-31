@@ -16,11 +16,16 @@ import {
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import Vamos from "../../../assets/logoblanco.png";
-import ViewOptionPerfil from "../viewOption/viewOptionPerfil";
+import { useSelector } from "react-redux";
+import LogOut from "../../../views/Forms/LogOut/logout";
+import LoginViajes from "../../../views/Forms/Login/LoginViajes"
 
-const MobileNavbar = ({ currentUser }) => {
+
+
+const MobileNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const {currentUser} = useSelector(state=> state)
 
   const onToggleDrawer = () => {
     setIsOpen(!isOpen);
@@ -48,7 +53,7 @@ const MobileNavbar = ({ currentUser }) => {
     width="100%" 
     marginX="auto" 
     bg="#009ED1"
-    position={isScrolled || isOpen ? "fixed" : "relative"}
+    position="fixed"
     zIndex="999"
     >
       <Box p="4">
@@ -84,27 +89,17 @@ const MobileNavbar = ({ currentUser }) => {
                         PERFIL ADMINISTRADOR
                       </Button>
                     </Link>
-                    {/* <Link to="/detail">
-                      <Button colorScheme="#009ED1" w="100%">
-                        CONDUCTORES
-                      </Button>
-                    </Link>
-                    <Link to="/reservas">
-                      <Button colorScheme="#009ED1" w="100%">
-                        RESERVAS
-                      </Button>
-                    </Link>
-                    <Link to="/perfil">
-                      <Button colorScheme="#009ED1" w="100%">
-                        MI PERFIL
-                      </Button>
-                    </Link> */}
                   </>
                 ) : currentUser?.admin === false ? (
                   <>
                     <Link to="/profileUser">
                       <Button colorScheme="#009ED1" w="100%">
                        MI PERFIL
+                      </Button>
+                    </Link>
+                    <Link to='/review&reseña'>
+                      <Button colorScheme="#009ED1" w="100%">
+                       RESEÑAS
                       </Button>
                     </Link>
                   </>
@@ -124,12 +119,23 @@ const MobileNavbar = ({ currentUser }) => {
                       <Button colorScheme="#009ED1" w="100%">
                         PREGUNTAS FRECUENTES
                       </Button>
-                    </Link>
-                    <Box>        
-             <ViewOptionPerfil/> 
-        </Box>
+                    </Link>        
                   </>
-                )}
+                )}  
+                   {     !currentUser?.id?
+                     ( 
+                      <Link to= '/loginviajes'>
+                        <Button colorScheme="#009ED1" w="100%">
+                         INICIAR SESION
+                        </Button>
+                      </Link>
+                      )
+                      : currentUser?.id &&
+                      <Button colorScheme="#009ED1" w="100%">
+                        <LogOut/>          
+               </Button>
+
+                }
               </VStack>
             </DrawerBody>
           </DrawerContent>
