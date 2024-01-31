@@ -3,11 +3,11 @@
       
 //       if (result.status === 'rejected') {
         
-//         console.log('El pago fue rechazado. Realizando acciones adicionales...');
+//        
 //       }
 //       if (result.status === 'approved') {
         
-//         console.log('El pago fue aceptado. Realizando acciones adicionales.. .');
+//        
 //       }
       
 //       res.json({

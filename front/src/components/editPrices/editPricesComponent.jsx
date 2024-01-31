@@ -33,7 +33,7 @@ const EditPrices = () => {
 
   const allPrices = useSelector((state) => state.allPrices)
 
-  console.log(allPrices)
+  
 
   useEffect(() => {
     dispatch(getAllPrices())
@@ -94,7 +94,7 @@ const EditPrices = () => {
 
     const firstPrice = currentPage * 6;
 
-    if (firstPrice > totalPrices) return;
+    if (firstPrice >= totalPrices) return;
     setCurrentPage(nextPage);
     setPricesToShow([...allPrices].splice(firstPrice, 6));
   };

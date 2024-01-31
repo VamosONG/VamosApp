@@ -56,7 +56,7 @@ const SolicitudesDeViajesCompleted = () => {
 
     const firstCompleted = currentPage * 6;
 
-    if (firstCompleted > totalCompleted) return;
+    if (firstCompleted >= totalCompleted) return;
     setCurrentPage(nextPage);
     setTripsToShow([...viajesCompletados].splice(firstCompleted, 6));
   };

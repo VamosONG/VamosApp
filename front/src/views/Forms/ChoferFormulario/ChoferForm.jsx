@@ -68,7 +68,7 @@ const ChoferForm = ({ closeForm }) => {
   const handleChange = (e) => {
     const property = e.target.name;
     const value = e.target.value;
-    console.log(property + " " + value);
+    
     setForm((prevForm) => ({
       ...prevForm,
       [property]: value,
@@ -88,7 +88,7 @@ const ChoferForm = ({ closeForm }) => {
         data
       );
 
-      console.log(response.data);
+      
 
       setForm((prevForm) => ({
         ...prevForm,
@@ -143,8 +143,8 @@ const ChoferForm = ({ closeForm }) => {
         );
       }
     } else {
-      console.log(validationForm.error);
-      console.log("form " + form);
+     
+     
       Swal.fire({
         icon: "error",
         title: "Error al validar los datos",
@@ -161,7 +161,7 @@ const ChoferForm = ({ closeForm }) => {
     <form onSubmit={handleSubmit}>
       <Stack
         spacing={2}
-        bg="#009ED1"
+        bg="gray.200"
         p="5"
         borderRadius="md"
         boxShadow="dark-lg"
@@ -171,7 +171,7 @@ const ChoferForm = ({ closeForm }) => {
         w="100%"  // Ajusta el ancho para ocupar el 100% del contenedor
         align="center"
       >
-        <Box bg="#10447E" py={2} px={10} borderRadius="md" color="white" fontFamily="'DIN Medium',">
+        <Box bg='#009ED1' py={2} px={10} borderRadius="md" color="white" fontFamily="'DIN Medium',">
         <Heading fontSize="4xl" fontFamily="'DIN Medium',">Datos del chofer</Heading>
           <Flex flexDirection={{ base: "column" }}>
             <Center
@@ -309,7 +309,7 @@ const ChoferForm = ({ closeForm }) => {
           </Flex>
         </Box>
 
-        <Box bg="#10447E" py={4} px={5} borderRadius="md" color="white" fontFamily="'DIN Medium',">
+        <Box bg='#009ED1' py={4} px={5} borderRadius="md" color="white" fontFamily="'DIN Medium',">
           <Heading fontSize="4xl">Datos del vehiculo</Heading>
           <Center py={2} gap={10} flexDirection={{ base: "column", md: "row" }}>
             <FormControl as="fieldset" isRequired>

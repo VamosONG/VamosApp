@@ -23,7 +23,7 @@ const ReviewFilter = ({searcher}) => {
     }
 
     const handleFilterRating = (e) => {
-        console.log(e.target.value);
+       
         dispatch(ratingFilter(e.target.value))
     }
 

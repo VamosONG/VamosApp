@@ -69,7 +69,7 @@ function MyComponent() {
 
   const handlePageChange = (page) => {
     
-    console.log(`Página cambiada a: ${page}`);
+ 
   };
 
   return (

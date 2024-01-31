@@ -2,7 +2,7 @@
 
 
 
-import { GET_TRIPS,DELETE_DRIVER, GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, ORDER_DATE, FILTER_RATING, GET_DATA_USER, HANDLE_ADMIN, ORDER_TRIPS } from "../actions/action.types";
+import { GET_USUARIOS_FILTRADOS, GET_TRIPS,DELETE_DRIVER, GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, ORDER_DATE, FILTER_RATING, GET_DATA_USER, HANDLE_ADMIN, ORDER_TRIPS, FILTER_NAME } from "../actions/action.types";
 
 
 
@@ -46,6 +46,7 @@ const initialState = {
     allDataRevies: [],
 
     dataUser: [],
+    
 
     getTrips: [],
 
@@ -138,7 +139,7 @@ const reducer = (state = initialState, action) => {
             }
 
         case POST_NEW_VIAJE:
-            console.log(action.payload)
+            
             return {
                 ...state,
                 infoConfirmacionViaje: action.payload
@@ -232,6 +233,7 @@ const reducer = (state = initialState, action) => {
             }
             //vjsD = viajes de usuarios
             case ORDER_TRIPS:
+
              let orderListTrips = [...state.dataUser]
             const ordenPorPax= (action.payload === 'vjsA')
            ? (orderListTrips.sort((a, b) => b.Trips.length - a.Trips.length))
@@ -241,6 +243,8 @@ const reducer = (state = initialState, action) => {
                 dataUser: ordenPorPax,
               //  allDataUser: orderListTrips
             }
+
+
         case ORDER_DATE:
             let orderedListDate = [...state.reviewsData]
             
@@ -430,6 +434,12 @@ const reducer = (state = initialState, action) => {
                     ...state,
                     conductores: action.payload
                 };
+
+                case GET_USUARIOS_FILTRADOS:
+                return {
+                    ...state,
+                    dataUser: action.payload
+                };
 //********************************************************************************** */
                 case NEW_USER:
                     return {
@@ -438,7 +448,7 @@ const reducer = (state = initialState, action) => {
                     }
                 default:
                     return { ...state };
-
+            
 
     }
 }

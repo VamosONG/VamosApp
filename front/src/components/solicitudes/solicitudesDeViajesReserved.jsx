@@ -33,7 +33,7 @@ const SolicitudesDeViajesReserved = () => {
     const dispatch = useDispatch()
     
     const viajesReservados = useSelector((state) => state.viajesReservados)
-    console.log(viajesReservados)
+    
 
     useEffect(() => {
         dispatch(getReservedTrips())
@@ -64,7 +64,7 @@ const SolicitudesDeViajesReserved = () => {
     
     const firstReserved=currentPage*6;
     
-    if (firstReserved>totalReserved) return;
+    if (firstReserved >= totalReserved) return;
     setCurrentPage(nextPage);
     setTripsToShow([...viajesReservados].splice(firstReserved,6))
   }
