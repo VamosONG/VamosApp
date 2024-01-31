@@ -225,7 +225,7 @@ const LoginForm = ({ onSwitchForm }) => {
                 _hover={{ bg: "transparent" }}
                 _active={{ bg: "transparent" }}
                 >
-                {/* {show ? <ViewOffIcon /> : <ViewIcon />} */}
+                 {show ? <ViewOffIcon /> : <ViewIcon />}
                 </Button>
               </InputRightElement>
             </InputGroup>
@@ -233,7 +233,12 @@ const LoginForm = ({ onSwitchForm }) => {
 
           <Box>
             {!currentUser?.id && (
-              <Button bg="white" onClick={handleSubmit} >
+              <Button 
+              m={2}
+              p={5}
+              bg="white"
+              ml="30%"
+              onClick={handleSubmit} >
                 Entrar
               </Button>
             )}

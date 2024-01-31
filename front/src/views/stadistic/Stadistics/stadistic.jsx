@@ -39,9 +39,10 @@ const Stadistic = () => {
     borderRadius="md"
     alignItems="center"
     justifyContent="center"
+    
     >
-      <Flex align="center" justify="center" mt={8} mb={12}>
-        <Box direction="column">
+      <Flex align="center" justify="center" mt={{ base: "20%", lg: "4%" }} mb={{ base: "20%", lg: "4%" }}>
+        <Box direction={{ base: "column", lg: "row" }}>
 
         <Heading as="h1" size="xl" mb={4}>
           Estadísticas

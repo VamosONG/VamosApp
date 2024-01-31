@@ -64,7 +64,7 @@ const SolicitudesDeViajesReserved = () => {
     
     const firstReserved=currentPage*6;
     
-    if (firstReserved>totalReserved) return;
+    if (firstReserved >= totalReserved) return;
     setCurrentPage(nextPage);
     setTripsToShow([...viajesReservados].splice(firstReserved,6))
   }
@@ -120,7 +120,7 @@ const handleSubmitReserved = async (e) => {
 
     
     return (
-        <TableContainer >
+        <TableContainer>
             <TableContainer>
             <Box 
               display="flex"

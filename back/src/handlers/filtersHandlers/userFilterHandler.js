@@ -3,15 +3,18 @@ const getUsers = require('../../controllers/usersControllers/getUsers');
 module.exports = async (req, res) => {
     try {
 
-        const { searchInput } = req.body;
-       
+
+        const { searchInput, admin } = req.body;
+
+
         let filteredUsers = await getUsers();
 
         //Filtra por busqueda: nombre, apellido, email, telefono, dni.
         if(searchInput){
-            if("admin".includes(searchInput.toLowerCase())){
+
+        /*    if("admin".includes(searchInput.toLowerCase())){
                 filteredUsers = filteredUsers?.filter((user) => user.admin === true);
-            }
+            } */
           
 
            filteredUsers = filteredUsers.filter(usr =>
@@ -24,10 +27,18 @@ module.exports = async (req, res) => {
             )
           );
          }
-        
-      
-            res.status(200).json(filteredUsers);       
 
+        if(admin==='admin'){
+            filteredUsers=filteredUsers?.filter(user=>user.admin===true)
+        }else{
+            if(admin==='users'){
+                filteredUsers=filteredUsers?.filter(user=>user.admin===false)
+            }
+        }
+
+
+
+        res.status(200).json(filteredUsers);       
     } catch (error) {
         res.status(400).json(`Error al obtener usuarios filtrados: ${error.message}`);
     }

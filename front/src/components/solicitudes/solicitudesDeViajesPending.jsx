@@ -59,7 +59,7 @@ const SolicitudesDeViajesPending = () => {
     
     const firstPending=currentPage*6;
     
-    if (firstPending>totalPending) return;
+    if (firstPending>=totalPending) return;
     setCurrentPage(nextPage);
     setTripsToShow([...viajesPendientes].splice(firstPending,6))
   }

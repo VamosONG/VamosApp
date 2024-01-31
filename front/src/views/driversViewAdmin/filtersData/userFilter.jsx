@@ -8,21 +8,27 @@ import { BsAirplaneEngines, BsBootstrapReboot, BsArrowClockwise, BsFilterCircle,
 const UserFilter = () => {
     const dispatch = useDispatch()
     const resetFilter = () => {
+        setSearch({
+            admin: '',
+            searchInput: ''
+          });
         dispatch(getDataUser())
     }
 
     // const handleAlpha = (e) => {
     //     dispatch(alphabeticalOrder(e.target.value))
     // }
-    // const handleFilterAdmin = (e) => {
-    //     dispatch(stateFilter(e.target.value))
-    // }
+    const handleFilterAdmin = (e) => {
+        dispatch(stateFilter(e.target.value))
+    }
 
     // const handleTrips = (e) => {
     //     dispatch(orderListTrips(e.target.value))
     // }
    
-    const [search, setSearch] = useState({searchInput :''})
+    const [search, setSearch] = useState({
+        searchInput :'',
+        admin:''})
     // const searcher = (e) => {
     //     setSearch(e.target.value)
     // }
@@ -54,7 +60,7 @@ const UserFilter = () => {
               color="black"
             />
                         {/* <Input placeholder='Buscar por nombre / correo' value={search.searchInput} onChange={(e) => { setSearch({...search,searchInput:e.target.value})}} border={'1px solid gray'} bgColor="white" color="black" /> */}
-                        <Button onClick={handleSubmit}>Buscar</Button>
+                        
                     </Flex >
                     {/* <Tooltip label='Ordenar datos' bg='#10447E' placement='top' >
                         <Text fontSize={'2rem'}>
@@ -105,22 +111,23 @@ const UserFilter = () => {
                         <Text fontSize={'2rem'}>
                             <BsFunnel />
                         </Text>
-                    </Tooltip>
+                    </Tooltip> */}
                     <Box>
                         <FormControl>
-                            <FormLabel color="white">Admin</FormLabel>
+                            
                             <Select
                                 bgColor="white"
                                 name='state'
-                                onChange={handleFilterAdmin}
+                                onChange={(e)=>setSearch({...search,admin:e.target.value})}
+                                value={search.admin}
                             >
-                                <option value='allUser'>Todos</option>
-                                <option value='Admin'>Admin</option>
-                                <option value='User'>Usuarios</option>
+                                <option value=''>Todos</option>
+                                <option value='admin'>Admin</option>
+                                <option value='users'>Usuarios</option>
                             </Select>
                         </FormControl>
-                    </Box> */}
-
+                    </Box>
+                    <Button onClick={handleSubmit}>Buscar</Button>
                 {/* <Box>
                     <FormControl >
                         <FormLabel > Zona </FormLabel>
