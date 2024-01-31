@@ -108,10 +108,8 @@ const handleClean = async (e) => {
   }));
 }
 const handleSubmitReserved = async (e) => {
-    
-    console.log(input)
-    
     dispatch(orderSearch(input))
+    setCurrentPage(1);
 }
 
 
@@ -129,6 +127,9 @@ const handleSubmitReserved = async (e) => {
               alignItems="center"
               flexDirection="row"
               bgColor='#009ED1'
+              borderTopLeftRadius="md"
+              borderTopRightRadius="md"
+              border="1px solid black"
               >
             <Heading size='xs' textTransform='uppercase' margin={'1rem'}>
             Buscar:
@@ -172,66 +173,66 @@ const handleSubmitReserved = async (e) => {
         
               <Table variant='simple' >
                 <TableCaption>Viajes sin conductor</TableCaption>
-                    <Thead>
-                      <Tr>
-                        {/* <Th border="2px solid black">Nro</Th> */}
-                        <Th border="2px solid black">Origen</Th>
-                        <Th border="2px solid black">Destino</Th>
-                        <Th border="2px solid black">Fecha</Th>
-                        <Th border="2px solid black">Hora</Th>
-                        <Th border="2px solid black">Usuario</Th>
-                        <Th border="2px solid black">Buscar conductor</Th>
-                      </Tr>
-                    </Thead>
-                    <Tbody >
-                    {tripsToShow.map((solicitud, index) => (
-                        <Tr key={solicitud.id} >
-                          {/* <Td border="2px solid black">{index + 1}</Td> */}
-                          <Td border="2px solid black">{solicitud.origin}</Td>
-                          <Td border="2px solid black">{solicitud.destination}</Td>
-                          <Td border="2px solid black">{solicitud.date}</Td>
-                          <Td border="2px solid black">{solicitud.hour}</Td>
-                          <Td border="2px solid black"><Link>{solicitud.userEmail}</Link></Td>
-                          <Td border="2px solid black" justifyContent='center'  >
-                              <Flex gap={2} justifyContent={'center'}  >
-                                <Tooltip hasArrow label='Buscar conductor' bg='#009ED1' placement='left-start'>
-                                <Link to='/solicitud' onClick={()=>handlerClick(solicitud.id)}>
-                                  <Button  bg='#009ED1' fontSize='1.2rem'>
-                                    <AddIcon />
-                                  </Button>
-                                </Link>
-                                </Tooltip>
-                              </Flex>
-                          </Td>
-                        </Tr>
+                <Thead>
+                  <Tr>
+                  {/* <Th border="2px solid black">Nro</Th> */}
+                  <Th border="2px solid black">Origen</Th>
+                  <Th border="2px solid black">Destino</Th>
+                  <Th border="2px solid black">Fecha</Th>
+                  <Th border="2px solid black">Hora</Th>
+                  <Th border="2px solid black">Usuario</Th>
+                  <Th border="2px solid black">Buscar conductor</Th>
+                  </Tr>
+                </Thead>
+                <Tbody >
+                {tripsToShow.map((solicitud, index) => (
+                  <Tr key={solicitud.id} >
+                  {/* <Td border="2px solid black">{index + 1}</Td> */}
+                  <Td border="2px solid black">{solicitud.origin}</Td>
+                  <Td border="2px solid black">{solicitud.destination}</Td>
+                  <Td border="2px solid black">{solicitud.date}</Td>
+                  <Td border="2px solid black">{solicitud.hour}</Td>
+                  <Td border="2px solid black"><Link>{solicitud.userEmail}</Link></Td>
+                  <Td border="2px solid black" justifyContent='center'  >
+                <Flex gap={2} justifyContent={'center'}  >
+                  <Tooltip hasArrow label='Buscar conductor' bg='#009ED1' placement='left-start'>
+                    <Link to='/solicitud' onClick={()=>handlerClick(solicitud.id)}>
+                      <Button  bg='#009ED1' fontSize='1.2rem'>
+                        <AddIcon />
+                      </Button>
+                    </Link>
+                  </Tooltip>
+                </Flex>
+                  </Td>
+                  </Tr>
                     ))}
-                    </Tbody>
-                    </Table>
-                    <Box display="flex" justifyContent="center" alignItems="center" marginTop="1rem">
-                      <Button
-                      color='black'
-                      bgColor='#009ED1'
-                      variant="outline"
-                      colorScheme="teal"
-                      onClick={prevHandler}
-                      >
-                      Anterior
-                      </Button>
+                </Tbody>
+                </Table>
+                <Box display="flex" justifyContent="center" alignItems="center" marginTop="1rem">
+                  <Button
+                  color='black'
+                  bgColor='#009ED1'
+                  variant="outline"
+                  colorScheme="teal"
+                  onClick={prevHandler}
+                  >
+                  Anterior
+                  </Button>
 
-                    <Box as="span" marginLeft="1rem" marginRight="1rem">
-                      Página {currentPage } 
-                    </Box>
+                  <Box as="span" marginLeft="1rem" marginRight="1rem">
+                    Página {currentPage } 
+                  </Box>
 
-                      <Button
-                      color='black'
-                      bgColor='#009ED1'
-                      variant="outline"
-                      colorScheme="teal"
-                      onClick={nextHandler}
-                      >
-                      Siguiente
-                      </Button>
-                    </Box>
+                  <Button
+                  color='black'
+                  bgColor='#009ED1'
+                  variant="outline"
+                  colorScheme="teal"
+                  onClick={nextHandler}
+                  >
+                  Siguiente
+                  </Button>
+                </Box>
         </TableContainer>
     )
 }

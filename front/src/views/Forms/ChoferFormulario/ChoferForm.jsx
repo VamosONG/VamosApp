@@ -160,25 +160,23 @@ const ChoferForm = ({ closeForm }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Stack
-        spacing={3}
+        spacing={2}
         bg="#009ED1"
         p="5"
-        h="auto"
-        borderRadius="0"
+        borderRadius="md"
         boxShadow="dark-lg"
         color="black"
-        border="2px solid black"
+        border="1px solid black"
         mx="1rem"
-        w={{ base: "20rem", md: "60rem" }}
-        scrollMarginX="auto"
-
+        w="100%"  // Ajusta el ancho para ocupar el 100% del contenedor
+        align="center"
       >
+        <Box bg="#10447E" py={2} px={10} borderRadius="md" color="white" fontFamily="'DIN Medium',">
         <Heading fontSize="4xl" fontFamily="'DIN Medium',">Datos del chofer</Heading>
-        <Box>
           <Flex flexDirection={{ base: "column" }}>
             <Center
               py={2}
-              gap={4}
+              gap={120}
               flexDirection={{ base: "column", md: "row" }}
             >
               <FormControl isRequired>
@@ -224,7 +222,7 @@ const ChoferForm = ({ closeForm }) => {
 
             <Center
               py={2}
-              gap={4}
+              gap={10}
               flexDirection={{ base: "column", md: "row" }}
             >
               <FormControl isRequired>
@@ -311,9 +309,9 @@ const ChoferForm = ({ closeForm }) => {
           </Flex>
         </Box>
 
-        <Box bg="#10447E" py={6} px={2} borderRadius={4} color="white" fontFamily="'DIN Medium',">
+        <Box bg="#10447E" py={4} px={5} borderRadius="md" color="white" fontFamily="'DIN Medium',">
           <Heading fontSize="4xl">Datos del vehiculo</Heading>
-          <Center py={2} gap={4} flexDirection={{ base: "column", md: "row" }}>
+          <Center py={2} gap={10} flexDirection={{ base: "column", md: "row" }}>
             <FormControl as="fieldset" isRequired>
               <FormLabel as="legend" fontSize="lg" fontFamily="'DIN Medium',">Tipo de Vehiculo:</FormLabel>
               <Select
@@ -384,7 +382,7 @@ const ChoferForm = ({ closeForm }) => {
             </FormControl>
           </Center>
 
-          <Center py={2} gap={4} flexDirection={{ base: "column", md: "row" }}>
+          <Center py={4} gap={10} flexDirection={{ base: "column", md: "row" }}>
             <FormControl isRequired>
               <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Foto del vehiculo</FormLabel>
               <Input
