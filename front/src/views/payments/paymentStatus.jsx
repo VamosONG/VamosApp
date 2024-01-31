@@ -43,8 +43,16 @@ const PaymentStatus = () => {
   const whatsappLink = "https://wa.me/51935455227";
   return (
 
-    <Center bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/re3tjn4g8e4hbdkl7jtc.jpg">
-      <Flex bgSize="cover" bgRepeat="no-repeat">
+    <Flex 
+      direction="column"
+      minHeight="100vh"
+      bgImage="url('https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/re3tjn4g8e4hbdkl7jtc.jpg')"
+      bgPosition="center"
+      bgRepeat="no-repeat"
+      bgSize="cover"
+      alignItems="center"
+      justifyContent="center"
+      >
         <Box
           border="solid"
           paddingLeft={'16rem'}
@@ -54,11 +62,11 @@ const PaymentStatus = () => {
           w={{ base: '1rem', md: '30rem' }}
           spacing={4}
           mt="6rem"
-          borderRadius="3%"
-          mb="4rem"
+          borderRadius="md"
+          mb="2rem"
         >
           <Flex justifyContent="center" p={20}>
-            <Stack mt={'-2rem'} bg="#009ED1" borderRadius={'20px'} border={'solid'} borderColor={'black'} padding={'7rem'} paddingBottom={'1rem'}>
+            <Stack mt={'-2rem'} bg="#009ED1" borderRadius="md" border={'solid'} borderColor={'black'} padding={'7rem'} paddingBottom={'1rem'}>
               <Heading
                 color="white"
                 textTransform="uppercase"
@@ -71,7 +79,7 @@ const PaymentStatus = () => {
                 Gracias por elegirnos!!!
 
               </Heading>
-              <Box bg={'#10447E'} borderRadius={'20px'}>
+              <Box bg={'#10447E'} borderRadius={'md'}>
                 <Text color={'white'}>Proximamente se le asignara un chofer</Text>
               </Box>
 
@@ -81,8 +89,8 @@ const PaymentStatus = () => {
                 </Button>
               )}
               <Collapse in={isOpen}>
-                <Stack spacing={2} bg={'white'} borderRadius={'20px'}>
-                  <Heading as="h2" size="md" bg={'#10447E'} borderRadius={'20px'} color={'white'}>
+                <Stack spacing={2} bg={'white'} borderRadius="md">
+                  <Heading as="h2" size="md" bg={'#10447E'} borderRadius="md" color={'white'}>
                     Comprobante de Pago
                   </Heading>
                   <Text>Estado de la Compra: Aprobado</Text>
@@ -91,7 +99,7 @@ const PaymentStatus = () => {
                   <Text>Metodo de Pago: {mePagoData?.site_id === 'MPE' ? 'Mercadopago' : ''}</Text>
                 </Stack>
               </Collapse>
-              <Box bg={'#E83D6F'} borderRadius={'20px'} mt={'4rem'}>
+              <Box bg={'#E83D6F'} borderRadius="md" mt={'4rem'}>
                 <Button bg={'#E83D6F'} onClick={handleToggle2}  _hover={{ bg: 'transparent' }} >
                 <Text color={'white'}>¿Llevas equipaje sobredimensionado?</Text>
                 </Button>
@@ -114,7 +122,7 @@ const PaymentStatus = () => {
         </Box>
 
       </Flex>
-    </Center>
+    
 
   );
 };
