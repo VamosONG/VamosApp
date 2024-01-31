@@ -30,16 +30,16 @@ import OrderFilterAlphabetical from './filtersData/orderFilter'
 const DriverTableView = () => {
     const driverData = useSelector((state) => state.conductores)
     const dispatch = useDispatch();
-    const [search , setSearch] = useState('')
+    // const [search , setSearch] = useState('')
 
     const searcher = (e) => {
         setSearch(e.target.value)
     }
 
-    const results = !search ? driverData : driverData.filter((data) => data.name.toLowerCase().includes(search.toLowerCase()) ||
-    data.airports.toLowerCase().includes(search.toLowerCase()) ||
-    data.carType.toLowerCase().includes(search.toLowerCase())
-);
+    // const results = !search ? driverData : driverData.filter((data) => data.name.toLowerCase().includes(search.toLowerCase()) ||
+    // data.airports.toLowerCase().includes(search.toLowerCase()) ||
+    // data.carType.toLowerCase().includes(search.toLowerCase())
+// );
 
     useEffect(() => {
         dispatch(getAllConductores())
@@ -141,7 +141,7 @@ const DriverTableView = () => {
                     </Thead>
                 
                     <Tbody>
-                    {results?.map((driver, index) => (
+                    {driverData?.map((driver, index) => (
                         <Tr key={driver.id} bg={driver.inactive  ? 'gray.300' : driver.driverState ? 'white' : 'red.300'} color={driver.inactive ? 'black' : 'black'}>
                             <Td border="2px solid black">{index + 1}</Td>
                             <Td border="2px solid black">{driver.airports}</Td>
