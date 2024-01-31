@@ -28,8 +28,8 @@ import OrderFilterAlphabetical from './filtersData/orderFilter'
 // import Paginado from '../../components/paginado/paginadoComponent'
 
 const DriverTableView = () => {
-    const driverData = useSelector((state) => state.conductores)
     const dispatch = useDispatch();
+    const driverData = useSelector((state) => state.conductores)
     // const [search , setSearch] = useState('')
 
     const searcher = (e) => {
@@ -43,7 +43,7 @@ const DriverTableView = () => {
 
     useEffect(() => {
         dispatch(getAllConductores())
-    }, [dispatch])
+    }, [/* dispatch */])
 
     const deleteDriver = (id) => {
         Swal.fire({
@@ -142,6 +142,10 @@ const DriverTableView = () => {
         setTripsToShow([...driverData].splice(0, 6));
     }, [driverData]);
 
+    const volerAuno=()=>{
+        setCurrentPage(1);
+    }
+
     //***************BUSQUEDA Y ORDENAMIENTO**********************************/
 
     return (
@@ -159,7 +163,7 @@ const DriverTableView = () => {
                     bg='#009ED1'
                     justify={'center'}
                 >
-                    <OrderFilterAlphabetical searcher={searcher} />
+                    <OrderFilterAlphabetical searcher={searcher} volerAuno={volerAuno}/>
                 </Flex>
                 <Table variant='simple' >
                     <TableCaption color="black" bgColor="gray.300" border="1px solid black">Conductores registrados</TableCaption>

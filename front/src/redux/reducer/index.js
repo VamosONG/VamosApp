@@ -59,11 +59,11 @@ const reducer = (state = initialState, action) => {
 
     switch (action.type) {
         case GET_ALL_CONDUCTORES:
-            const driverData = state.allData.filter((drivers) => drivers.inactive === false)
+            /* const driverData = state.allData.filter((drivers) => drivers.inactive === false) */
             return {
                 ...state,
-                conductores: [...driverData]/* .splice(0, PAGE_DATA) */, //Se configura asi para poder manejar el paginado.
-                pageConductores: action.payload,
+                conductores: action.payload,/* [...driverData] *//* .splice(0, PAGE_DATA) */ //Se configura asi para poder manejar el paginado.
+                /* pageConductores: action.payload, */
                 allData: action.payload
             };
         
