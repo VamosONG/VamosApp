@@ -28,10 +28,10 @@ function SolicitudViajeForm() {
     const navigate = useNavigate()
     //trae la info del viaje de redux, donde se calcula el precio
     const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
-    console.log(infoConfirmacionViaje, "info");
+   
     const currentUser = useSelector((state) => state.currentUser)
-    console.log(infoConfirmacionViaje)
-    console.log(currentUser)
+    
+    
 
     const storedInput = localStorage.getItem('solicitudViajeInput');
     const parsedData = JSON.parse(storedInput);
@@ -81,8 +81,7 @@ function SolicitudViajeForm() {
     const [localStorageDataLoaded, setLocalStorageDataLoaded] = useState(false);
 
     useEffect(() => {
-        console.log(infoConfirmacionViaje);
-        console.log(confirmed);
+       
 
         if (infoConfirmacionViaje.price && !confirmed) {
             setConfirmed(true);
@@ -90,7 +89,7 @@ function SolicitudViajeForm() {
                 tripId: infoConfirmacionViaje.id,
                 userId: infoConfirmacionViaje.userId,
             };
-            console.log(infoAmandarAlBack);
+           
             const confirmationText = (
                 <div>
                     <p>Origen: {infoConfirmacionViaje.origin}</p>
@@ -186,8 +185,7 @@ function SolicitudViajeForm() {
             })
         }
     }, [infoConfirmacionViaje, dispatch]);
-    console.log('placeholderValue:', placeholderValue);
-
+  
 
 
     const handleSubmit =(event) => {
@@ -201,8 +199,7 @@ function SolicitudViajeForm() {
 
         dispatch(postNewViaje(input));
     };
-    console.log("este es el input que se envía al back para postear el trip: ", input);
-    console.log(JSON.parse(localStorage.solicitudViajeInput));
+  
 
     const handleChange = async (e) => {
         // Almacenar el nuevo valor en una variable
@@ -211,7 +208,7 @@ function SolicitudViajeForm() {
             [e.target.name]: e.target.value,
             userId: currentUser.id,
         };
-        console.log("este es el input ", input);
+        
 
         // Actualizar el estado
         setInput(updatedInput);
@@ -220,8 +217,7 @@ function SolicitudViajeForm() {
         localStorage.setItem('solicitudViajeInput', JSON.stringify(updatedInput));
     };
     const currentDate = new Date().toISOString().split('T')[0];
-    console.log('handleChange:', input);
-
+    
     
 
     

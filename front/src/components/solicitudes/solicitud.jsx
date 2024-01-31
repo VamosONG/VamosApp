@@ -33,7 +33,7 @@ const Solicitud =()=> {
   const dispatch=useDispatch() 
 
   const id = useSelector((state) => state.idSolicitud)
-  console.log(id)
+  
   const viajesReservados = useSelector((state) => state.viajesReservados)
   const viajesPendientes = useSelector((state) => state.viajesPendientes)
   const conductores = useSelector((state) => state.conductoresFiltrados)
@@ -41,7 +41,7 @@ const Solicitud =()=> {
 
   let solicitudFound = viajesReservados.find((solicitud) => solicitud.id === id)
   if (!solicitudFound){solicitudFound = viajesPendientes.find((solicitud) => solicitud.id === id)}
-  console.log(solicitudFound)
+  
 
   const { origin, destination, date, hour, quantityPassengers } = solicitudFound
 
@@ -51,8 +51,8 @@ const Solicitud =()=> {
   else { aeropuertoSolicitud = destination }
   
   const info={airports:aeropuertoSolicitud,quantityPassengers:quantityPassengers}
-  console.log(info)
-  console.log(conductores)
+ 
+  
   
   useEffect(() => {
     dispatch(filtrarConductores(info))
@@ -80,6 +80,7 @@ const Solicitud =()=> {
         key={id}
         direction='row'
         marginTop={'10rem'}
+        /* marginBottom={'10rem'} */
       >
         <CardHeader size="md">ASIGNACION DE CONDUCTOR PARA SOLICITUD DE VIAJE</CardHeader>
         
@@ -92,7 +93,7 @@ const Solicitud =()=> {
 
         </CardFooter>
       </Card>
-      <TableContainer >
+      <TableContainer marginBottom={'10rem'}>
             <Table variant='simple' >
                 <TableCaption>Conductores filtrados para esta solicitud según aeropuerto y cantidad de pasajeros</TableCaption>
                 <Thead>

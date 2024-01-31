@@ -25,11 +25,11 @@ const Stadistic = () => {
   const users = useSelector((state) => state.dataUser);
   const trips = useSelector((state)=>state.getTrips)
  
-  console.log(trips);
+  
 
   const totalUsers = users.length
   const totalTrips = trips.length
-  console.log('totalUsers', totalUsers);
+  
 
   return (
     

@@ -35,7 +35,7 @@ const SolicitudwViajeForm = () => {
 
     if (storedInput) {
       const parsedInput = JSON.parse(storedInput);
-      console.log(parsedInput)
+     
       // Utilizamos un efecto secundario para garantizar que setInput se haya completado antes de imprimir
       const updateInput = () => {
         setInput(parsedInput);
@@ -88,7 +88,7 @@ const SolicitudwViajeForm = () => {
         }).then(async (result) => {
           if (result.isConfirmed) {
             if (currentUserId === undefined) {
-              console.log('entra Qui')
+            
               navigate('/loginviajes')
             } 
           }
@@ -120,7 +120,7 @@ const SolicitudwViajeForm = () => {
       }).then(async (result) => {
         if (result.isConfirmed) {
           if (currentUserId === undefined) {
-            console.log('entra Qui')
+           
             navigate('/loginviajes')
           } else {
             await dispatch(handlePayment(infoConfirmacionViaje, currentUserId));
@@ -200,7 +200,7 @@ const SolicitudwViajeForm = () => {
       quantityPassengers: cantidadPasajerosSeleccionada
     });
 
-    console.log(input)
+   
 
   };
 
@@ -211,7 +211,7 @@ const SolicitudwViajeForm = () => {
       quantityPassengers: cantidadPasajerosSeleccionada
     });
 
-    console.log(input)
+  
     localStorage.setItem('solicitudViajeInput', JSON.stringify(input));
 
     dispatch(postNewViaje(input));
