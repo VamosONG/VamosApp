@@ -27,7 +27,7 @@ import TripsForMonths from "./tripsForMonths"
 
 function LinesChart() {
     const viajes = TripsForMonths()
-    console.log(viajes);
+    
     var meses = [
         "Ene", "Feb", "Mar", "Abr", "May", "Jun",
         "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"

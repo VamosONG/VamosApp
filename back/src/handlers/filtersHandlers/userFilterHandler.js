@@ -4,15 +4,15 @@ module.exports = async (req, res) => {
     try {
 
         const { searchInput } = req.body;
-        console.log("esto es lo que me trae el bdy", searchInput);
+       
         let filteredUsers = await getUsers();
-console.log(filteredUsers,"filtered")
+
         //Filtra por busqueda: nombre, apellido, email, telefono, dni.
         if(searchInput){
             if("admin".includes(searchInput.toLowerCase())){
                 filteredUsers = filteredUsers?.filter((user) => user.admin === true);
             }
-           console.log("llega aqui")
+          
 
            filteredUsers = filteredUsers.filter(usr =>
             (
@@ -25,7 +25,7 @@ console.log(filteredUsers,"filtered")
           );
          }
         
-        console.log(filteredUsers)
+      
             res.status(200).json(filteredUsers);       
 
     } catch (error) {

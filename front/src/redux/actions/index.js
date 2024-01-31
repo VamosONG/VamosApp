@@ -65,7 +65,7 @@ export const getTripById = (id) => {
 }
 
 export const createNewChofer = (data) => {
-    console.log('data en actiopn' + data);
+    
     return async (dispatch) => {
         try {
             return dispatch({
@@ -113,25 +113,25 @@ export const postNewViaje = (infoViaje) => {
 
         } catch (error) {
             window.alert('¡Error en la solicitud!');
-            /* throw new Error(error); */
-            console.log(error.message)
+            
+            throw new Error(error.message)
         }
     }
 }
 
 export const getReservedTrips = () =>{
-    console.log('llega aqui');
+   
     return async(dispatch)=> {
         const endpoint= 'https://vamosappserver.onrender.com/trips/reserves' //Se cambió a la ruta con viajes reservados
         try {
             const { data } = await axios.get(endpoint)
-            console.log(data);
+            
             return dispatch({
                 type: GET_RESERVED_TRIPS,
                 payload: data
             })
         } catch (error) {
-            console.log(error);
+            throw new Error(error.message);
             /* alert("error en getReservedTrips") */
         }
     }
@@ -141,14 +141,14 @@ export const getPendingTrips = () =>{
         const endpoint= 'https://vamosappserver.onrender.com/trips/pending' //ruta con viajes pendientes
         try {
             const { data } = await axios.get(endpoint)
-            console.log(data);
+            
             return dispatch({
                 type: GET_PENDING_TRIPS,
                 payload: data
             })
         } catch (error) {
-            console.log(error);
-            alert("error en getPendingTrips ")
+            throw new Error(error.message);
+            // alert("error en getPendingTrips ")
         }
     }
 }
@@ -157,19 +157,19 @@ export const getCanceledTrips = () =>{
         const endpoint= 'https://vamosappserver.onrender.com/trips/completed' //ruta con viajes completados
         try {
             const { data } = await axios.get(endpoint)
-            console.log(data);
+            
             return dispatch({
                 type: GET_COMPLETED_TRIPS,
                 payload: data
             })
         } catch (error) {
-            console.log(error);
+            throw new Error(error.message);
         }
     }
 }
 
 export const postNewUser = (form) => {
-    console.log(form);
+    
     return async (dispatch) => {
         try {
             return dispatch({
@@ -227,7 +227,7 @@ export const handleAdminUser = (id) => {
 }
 
 export const paginateConductores = (order) => {
-    console.log(order);
+   
     return async (dispatch) => {
         try {
             dispatch({
@@ -274,7 +274,7 @@ export const logOutAction = (value) => {
 
 //NO SE VA A USAR!!!
 // export const viajeConfirmado = (info) => {
-//     console.log(info)
+//    
 //     return async (dispatch) => {
 //         try {
 //             const {data}=await axios.put(`https://vamosappserver.onrender.com/trips/reserves/create`, info)
@@ -287,38 +287,38 @@ export const logOutAction = (value) => {
 //                 axios.post(`https://vamosappserver.onrender.com/send-mail`,mailReserve)
 //             ])
             
-//             console.log(reserveResp.data)
-//             console.log(`Estado de mail reserva: ${mailResp}`); */
+//            
+//              */
 //             dispatch({
 //                 type: VIAJE_CONFIRMADO,
 //                 payload: data
 //             })
 //         } catch (error) {
 //             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-//             console.log(error.message)
+//             throw new Error(error.message)
 //         };
 //     };
 // };
 
 export const filtrarConductores = (info) => {
-    console.log(info)
+    
     return async (dispatch) => {
         try {
             const { data } = await axios.post(`https://vamosappserver.onrender.com/drivers/filter`, info);
-            console.log(data)
+            
             dispatch({
                 type: GET_FILTERED,
                 payload: data
             })
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-            console.log(error.message)
+            throw new Error(error.message)
         };
     };
 };
 
 export const conductorAsignado = (info) => {
-    console.log(info)
+   
     return async (dispatch) => {
         try {
             const mailReserve = {
@@ -331,15 +331,14 @@ export const conductorAsignado = (info) => {
                 axios.put(`https://vamosappserver.onrender.com/trips/reserves/update`, info),
                 axios.post(`https://vamosappserver.onrender.com/send-mail`,mailReserve)
             ])
-            console.log(reserveResp.data)
-            console.log(`Estado de mail reserva: ${mailResp}`);
+            
             /* dispatch({
                 type: GET_FILTERED,
                 payload: data
             }) */
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-            console.log(error.message)
+            throw new Error(error.message)
         };
     };
 };
@@ -352,7 +351,7 @@ export const orderListTrips = (data) => {
                 payload: data
             })
         } catch (error) {
-            console.log('Error en orden list' , error)
+            throw new Error('Error en orden list' , error)
         }
     }
 }
@@ -475,11 +474,11 @@ export const stateFilter = (data) => {
 }
 
 export const getTripsById = (id) => {
-    console.log(id)
+    
     return async (dispatch) => {
         try {
             const { data } = await axios.get(`https://vamosappserver.onrender.com/trips/tripId/${id}`)
-            console.log(data)
+            
             return dispatch({
                 type: GET_TRIPS_BY_ID,
                 payload: data
@@ -492,10 +491,10 @@ export const getTripsById = (id) => {
 
 export const postReview = (info) => {
     /* info.driverId='46d639a7-5468-495b-b9a7-f666517d3bfb' */
-    console.log(info)
+    
     return async (dispatch) => {
         const { data } = await axios.post(`https://vamosappserver.onrender.com/reviews/create`, info);
-        console.log(data)
+       
         try {
             return dispatch({
                 type: POST_REVIEW,
@@ -503,7 +502,7 @@ export const postReview = (info) => {
             })
         } catch (error) {
            /*  throw new Error(error); */
-           console.log(error.message)
+           throw new Error(error.message)
         }
     }
 }
@@ -512,7 +511,7 @@ export const getReviewsData = () => {
     return async (dispatch) => {
         try {
             const {data} = await axios.get(`https://vamosappserver.onrender.com/reviews`)
-            console.log('review data ' + data );
+            
             return dispatch({
                 type: GET_REVIEWS,
                 payload: data
@@ -525,11 +524,11 @@ export const getReviewsData = () => {
 
 
 export const getUserByEmail = (email) => {
-    console.log(email)
+   
     return async (dispatch) => {
         try {
             const { data } = await axios.get(`https://vamosappserver.onrender.com/user/email?email=${email}`);
-            console.log(data)
+           
 
             if(data.banned)
                 throw new Error(`El usuario con email ${data.email} se encuentra bloqueado.`)
@@ -540,7 +539,7 @@ export const getUserByEmail = (email) => {
             })
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-            console.log(error.message)
+            
             throw new Error(`Error de sesion: ${error.message}`)
         }
     };
@@ -564,18 +563,18 @@ export const getAllPrices = () => {
 }
 
 export const updatePrice = (info) => {
-    console.log(info)
+    
     return async (dispatch) => {
         try {
             const { data } = await axios.put(`https://vamosappserver.onrender.com/price/update`, info);
-            console.log(data)
+            
             /* dispatch({
                 type: GET_FILTERED,
                 payload: data
             }) */
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-            console.log(error.message)
+            throw new Error(error.message)
         };
     };
 };
@@ -584,7 +583,7 @@ export const getDataMePago = () => {
     // return async (dispatch) => {
     //     try {
     //         const { data } = await axios.get(`https://vamosappserver.onrender.com/mepago/success`);
-    //         console.log(data)
+    //        
     //         dispatch({
     //             type: GET_PAYMENT_DATA,
     //             payload: data
@@ -598,15 +597,15 @@ export const getDataMePago = () => {
     return async (dispatch) => {
         try {
             const currentUrl = window.location.href;
-            console.log(currentUrl);
+            
             const urlParams = new URLSearchParams(currentUrl);
-            console.log(urlParams);
+           
             const paymentData = {};
             urlParams.forEach((value, key) => {
                 paymentData[key] = value;
             });
 
-            console.log(paymentData);
+           
 
             dispatch({
                 type: GET_PAYMENT_DATA,
@@ -655,7 +654,7 @@ export const orderSearch = (input) => {
             ))
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-            console.log(error.message)
+            throw new Error(error.message)
         }
     };
 
@@ -675,7 +674,7 @@ export const orderSearchDrivers = (input) => {
             });
         } catch (error) {
             // Manejo de errores
-            console.log(error.message);
+            throw new Error(error.message);
         }
     };
 }
@@ -692,7 +691,7 @@ export const orderSearchUsers = (input) => {
             });
         } catch (error) {
             
-            console.log(error.message);
+            throw new Error(error.message);
         }
     };
 }
@@ -706,7 +705,8 @@ export const getTrips = () => {
                 payload: data
             })
         } catch (error) {
-            console.error("Error en trips:", error);
+            // console.error("Error en trips:", error); //throw new Error?
+            throw new Error("Error en trips:", error); 
         }
     }
 }
@@ -723,18 +723,18 @@ export const handlePayment = (infoConfirmacionViaje,currentUserId) => {
         quantityPassengers: Number(infoConfirmacionViaje.quantityPassengers),
         driverId: null
       }
-      console.log(product)
+      
     return async (dispatch)=> {
         try {
             const {data} =await axios.post("https://vamosappserver.onrender.com/mepago/create-order", product)
-            window.location.href = /* response. */data
+            window.location.href = data
             /* return dispatch({
                 type: MERCADO_PAGO,
                 payload: data
             }) */
         } catch (error) {
             console.error("Error en al redirigir", error);
-            console.log(error.message)
+            throw new Error(error.message)
         }
     }
 }
@@ -743,11 +743,11 @@ export const handlePayment = (infoConfirmacionViaje,currentUserId) => {
 
 
 export const orderSearchPrices = (input) => {
-    console.log(input)
+   
     return async (dispatch) => {
         try {
             const { data } = await axios.post(`http://localhost:3001/price/filter`, input);
-            console.log(data)
+            
             dispatch({
                 type: GET_ALL_PRICES,
                 payload: data
@@ -755,7 +755,7 @@ export const orderSearchPrices = (input) => {
             
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-            console.log(error.message)
+            throw new Error(error.message)
         }
     };
 }

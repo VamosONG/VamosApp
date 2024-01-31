@@ -9,7 +9,7 @@ import { BsAlarm, BsCalendar3, BsCursorFill, BsFillGeoFill, BsPersonFill, BsCurr
 
 const CardTrips = () => {
     const [trips, setTrips] = useState('')
-    console.log('trips ', trips);
+    
     useEffect(() => {
         // Definir una función asíncrona dentro del useEffect
         async function fetchData() {

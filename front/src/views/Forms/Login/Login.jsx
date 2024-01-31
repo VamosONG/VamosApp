@@ -67,7 +67,7 @@ const LoginForm = ({ onSwitchForm }) => {
     try {
       await auth.login(input.email, input.password); // autenticacion de loginWithGoogle funcion de firebase signInWithPopUp
         const getUser =  await dispatch(getUserByEmail(input.email)); // busca al usuario por email y lo setea como currentUser
-        console.log(currentUser);
+        
         navigate('/')
           Swal.fire({
             position: "center",
@@ -96,7 +96,7 @@ const LoginForm = ({ onSwitchForm }) => {
     
     
     //const usuario = auth.user
-    console.log("googleLog",googleLog)
+    
     try {
       if (googleLog) {
          const usr={
@@ -105,7 +105,7 @@ const LoginForm = ({ onSwitchForm }) => {
           image: googleLog.user.photoURL
          }
          
-         console.log("google" ,usr);
+        
 
          Swal.fire({
           position: "center",
@@ -163,7 +163,7 @@ const LoginForm = ({ onSwitchForm }) => {
   //     dispatch(cleanCurrentUser({}))
   //     navigate("/")
   //   } catch (error) {
-  //     console.log("error");
+  //     throw new Error("error");
   //   }
   // }
   

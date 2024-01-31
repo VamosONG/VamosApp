@@ -68,7 +68,7 @@ const ChoferForm = ({ closeForm }) => {
   const handleChange = (e) => {
     const property = e.target.name;
     const value = e.target.value;
-    console.log(property + " " + value);
+    
     setForm((prevForm) => ({
       ...prevForm,
       [property]: value,
@@ -88,7 +88,7 @@ const ChoferForm = ({ closeForm }) => {
         data
       );
 
-      console.log(response.data);
+      
 
       setForm((prevForm) => ({
         ...prevForm,
@@ -143,8 +143,8 @@ const ChoferForm = ({ closeForm }) => {
         );
       }
     } else {
-      console.log(validationForm.error);
-      console.log("form " + form);
+     
+     
       Swal.fire({
         icon: "error",
         title: "Error al validar los datos",

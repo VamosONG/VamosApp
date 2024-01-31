@@ -139,7 +139,7 @@ const reducer = (state = initialState, action) => {
             }
 
         case POST_NEW_VIAJE:
-            console.log(action.payload)
+            
             return {
                 ...state,
                 infoConfirmacionViaje: action.payload
