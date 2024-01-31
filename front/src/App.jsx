@@ -69,16 +69,15 @@ function App() {
         <Route path= '/solicitarViaje' element={<SolicitudViajeForm/>} />
         <Route path='/loginviajes' element={<LoginViajes/>}/>
         <Route path="*" element={<Error/>}/>
-   
+
         {
-          
           currentUser?.id &&
           <>
       
           <Route element={<ProtectedRoutes isAllowed={currentUser?.admin=== false} />} > 
           <Route path="/profileUser" element={<UserProfile/>}/>
           <Route path='/review&reseña' element={<ReviewAndReseña/>}/>
-           </Route> 
+          </Route> 
 
           <Route element={<ProtectedRoutes isAllowed={currentUser?.admin=== true} />}> 
           <Route path='/solicitud' element={<Solicitud/>}/>
@@ -90,7 +89,7 @@ function App() {
           <Route path="/profileAdmin" element={<AdminProfile/>}/>
           </Route> 
           
-           </>
+          </>
         }
         </Routes>
         {/* <Route path="/graphics" element={<Graphics/>}/> */}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+  Box,
   Table,
   Thead,
   Tbody,
@@ -124,7 +125,7 @@ const UserViewAdmin = () => {
             </Flex>
             <Flex px={0} bg="gray.300" overflowX="auto" borderBottomLeftRadius="md" borderBottomRightRadius="md">
               <Table variant="simple">
-                <TableCaption TableCaption>Usuarios</TableCaption>
+                
                 <Thead>
                   <Tr>
                     <Th border="2px solid black" minWidth="300px">Usuario</Th>
@@ -211,6 +212,50 @@ const UserViewAdmin = () => {
         </Flex>
         {/* COMPONENTE DE PAGINADO */}
         {/* <Paginado /> */}
+        <Flex
+    display="flex"
+    justifyContent="center"
+    alignItems="center"
+    flexDirection="row"
+    bgColor="gray.300"
+    w="100%"
+    h="100%"
+    borderBottomLeftRadius="md" 
+    borderBottomRightRadius="md"
+    border="1px solid black"
+    >
+    <Box 
+    display="flex" 
+    justifyContent="center" 
+    alignItems="center" 
+    marginTop="1rem"
+    marginBottom="1rem"
+    >
+      <Button
+        color='black'
+        bgColor='#009ED1'
+        variant="outline"
+        colorScheme="teal"
+        // onClick={prevHandler}
+      >
+        Anterior
+      </Button>
+
+      <Box as="span" marginLeft="1rem" marginRight="1rem">
+        {/* Página {currentPage} */}
+      </Box>
+
+      <Button
+        color='black'
+        bgColor='#009ED1'
+        variant="outline"
+        colorScheme="teal"
+        // onClick={nextHandler}
+      >
+        Siguiente
+      </Button>
+    </Box>
+    </Flex>
         </TableContainer>
       </Flex>
     </Flex>
