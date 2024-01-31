@@ -80,6 +80,7 @@ const Solicitud =()=> {
         key={id}
         direction='row'
         marginTop={'10rem'}
+        /* marginBottom={'10rem'} */
       >
         <CardHeader size="md">ASIGNACION DE CONDUCTOR PARA SOLICITUD DE VIAJE</CardHeader>
         
@@ -92,7 +93,7 @@ const Solicitud =()=> {
 
         </CardFooter>
       </Card>
-      <TableContainer >
+      <TableContainer marginBottom={'10rem'}>
             <Table variant='simple' >
                 <TableCaption>Conductores filtrados para esta solicitud según aeropuerto y cantidad de pasajeros</TableCaption>
                 <Thead>
