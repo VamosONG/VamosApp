@@ -195,22 +195,25 @@ const LoginViajes = ({ onSwitchForm }) => {
   
 
   return (
-    <Stack bgImage={"https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/re3tjn4g8e4hbdkl7jtc.jpg"}>
+    <Flex 
+    direction="column"
+    minHeight="100vh"
+    bgImage="url('https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/re3tjn4g8e4hbdkl7jtc.jpg')"
+    bgPosition="center"
+    bgRepeat="no-repeat"
+    bgSize="cover"
+    alignItems="center"
+    justifyContent="center"
+    >
     <Stack
     spacing={4}
     bg="#10447E"
     p="4"
     h="auto"
-    rounded="0"
-    border="none"
-    boxShadow="none"
     color="white"
     display={currentUser?.id ? 'none' : 'block'}
-    w="21rem"
-    mt="6rem"
-    ml="37%"
-    mb="2rem"
-    borderRadius="20px"
+    w="20rem"
+    borderRadius="md"
     >
       {!currentUser?.id && (
         <>
@@ -263,24 +266,9 @@ const LoginViajes = ({ onSwitchForm }) => {
             </InputGroup>
           </FormControl>
 
-          {/* <Container>
-            <Text>
-              ¿No tienes cuenta?{" "}
-              <Button color="teal.500" onClick={handleRegister}>
-                Registrarme
-              </Button>
-              <Button colorScheme="red" onClick={(e)=>handleGoogleLogin(e)}>
-                Continuar con Google
-              </Button>
-      
-            </Text>
-          UserViewProfile
-          </Container> */}
-          {/* </Container> */}
-
           <Box>
             {!currentUser?.id && (
-              <Button bg="white" onClick={handleSubmit}>
+              <Button marginTop="1rem" bg="white" onClick={handleSubmit}>
                 Entrar
               </Button>
             )}
@@ -288,10 +276,11 @@ const LoginViajes = ({ onSwitchForm }) => {
 
           <Center>
               <Stack>
-              <Button bg='#E83D6F' onClick={handleRegister}>
+              <Button marginTop="1rem" bg='#E83D6F' onClick={handleRegister}>
                 Registrarme
               </Button>
               <Button
+              marginTop="1rem"
               fontSize="1xl"
               bg="white"
               type="submit"
@@ -313,10 +302,9 @@ const LoginViajes = ({ onSwitchForm }) => {
               </Stack>
           </Center>
         </>
-
       )}
     </Stack>
-    </Stack>
+    </Flex>
   );
 };
 
