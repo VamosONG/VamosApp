@@ -18,9 +18,9 @@ const UserFilter = () => {
     // const handleAlpha = (e) => {
     //     dispatch(alphabeticalOrder(e.target.value))
     // }
-    // const handleFilterAdmin = (e) => {
-    //     dispatch(stateFilter(e.target.value))
-    // }
+    const handleFilterAdmin = (e) => {
+        dispatch(stateFilter(e.target.value))
+    }
 
     // const handleTrips = (e) => {
     //     dispatch(orderListTrips(e.target.value))
@@ -114,7 +114,7 @@ const UserFilter = () => {
                     </Tooltip> */}
                     <Box>
                         <FormControl>
-                            {/* <FormLabel color="white">Admin</FormLabel> */}
+                            
                             <Select
                                 bgColor="white"
                                 name='state'
