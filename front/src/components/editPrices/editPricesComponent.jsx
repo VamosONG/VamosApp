@@ -41,7 +41,7 @@ const EditPrices = () => {
 
 
   
-  const handleUpdate = (input,confirmationText) => {
+  const handleUpdate = (input,confirmationText,editar) => {
     
     
     Swal.fire({
@@ -60,9 +60,12 @@ const EditPrices = () => {
           title: "¡Precio modificado con éxito!",
           icon: "success"
         }).then(() => {
-          window.location.reload();
+          /* window.location.reload(); */
           /* history.push('/editPrices'); */
           /* navigate('/editPrices'); */
+          dispatch(getAllPrices())
+          setCurrentPage(1);
+          setEditar(!editar)
         });
       }
     })
