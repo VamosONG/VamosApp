@@ -233,20 +233,18 @@ const reducer = (state = initialState, action) => {
             }
             //vjsD = viajes de usuarios
             case ORDER_TRIPS:
-                let orderListTrips = [...state.allDataUser];
-                
-                if (action.payload === 'vjsA') {
-                    orderListTrips.sort((a, b) => a.Trips.length <= b.Trips.length ? 1 : -1);
-                } 
-                if (action.payload === 'vjsD') {
-                    orderListTrips.sort((a, b) => a.Trips.length >= b.Trips.length ? 1 : -1);
-                }
-                
-                return {
-                    ...state,
-                    dataUser: orderListTrips,
-                    allDataUser: orderListTrips
-                };
+
+             let orderListTrips = [...state.dataUser]
+            const ordenPorPax= (action.payload === 'vjsA')
+           ? (orderListTrips.sort((a, b) => b.Trips.length - a.Trips.length))
+           : (orderListTrips.sort((a, b) => a.Trips.length - b.Trips.length))
+            return {
+                ...state,
+                dataUser: ordenPorPax,
+              //  allDataUser: orderListTrips
+            }
+
+
         case ORDER_DATE:
             let orderedListDate = [...state.reviewsData]
             

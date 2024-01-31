@@ -233,7 +233,7 @@ const LoginForm = ({ onSwitchForm }) => {
 
           <Box>
             {!currentUser?.id && (
-              <Button bg="white" onClick={handleSubmit} >
+              <Button m={2} p={5} bg="white" onClick={handleSubmit} >
                 Entrar
               </Button>
             )}

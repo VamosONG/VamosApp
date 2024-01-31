@@ -27,6 +27,7 @@ import LoginViajes from './views/Forms/Login/LoginViajes';
 
 import { AuthProvider, useAuth} from './context/authContext';
 import { useSelector } from 'react-redux';
+import LogOut from './views/Forms/LogOut/logout';
 
 
 function App() {
@@ -54,6 +55,8 @@ function App() {
         <Route path='/loginviajes' element={<LoginViajes/>}/>
         <Route path="/register" element={<RegistroForm/>}/>
         <Route path="*" element={<Error/>}/>
+        <Route path="/logout" element={<LogOut/>}/>
+
         {
         currentUser?.id &&
         <>
