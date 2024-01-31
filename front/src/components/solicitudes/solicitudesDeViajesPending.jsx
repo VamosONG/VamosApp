@@ -108,10 +108,8 @@ const handleClean = async (e) => {
 }
 
 const handleSubmit = async (e) => {
-    
-    console.log(input)
-    
     dispatch(orderSearch(input))
+    setCurrentPage(1);
 }
 
 
@@ -129,6 +127,9 @@ const handleSubmit = async (e) => {
             alignItems="center"
             flexDirection="row"
             bgColor='#009ED1'
+            borderTopLeftRadius="md"
+            borderTopRightRadius="md"
+            border="1px solid black"
             >
             <Heading size="xs" textTransform="uppercase" margin="1rem">
               Buscar:

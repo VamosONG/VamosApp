@@ -16,7 +16,8 @@ const LogOut = ({ insideMenu }) => {
     try {
       await auth.logOut();  // Asumo que tu función logOut está implementada correctamente en useAuth
       localStorage.clear();
-      window.location.reload();
+      navigate("/");
+      // window.location.reload();
           Swal.fire({
             title: "¡Sesión cerrada con éxito!",
             icon: "success"
@@ -27,7 +28,7 @@ const LogOut = ({ insideMenu }) => {
 
 
       // Redirigir al usuario a la página de inicio
-      navigate("/");
+     
     } catch (error) {
       console.error(`Error al cerrar sesión: ${error.message}`);
     }
