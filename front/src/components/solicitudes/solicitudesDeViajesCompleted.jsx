@@ -100,6 +100,7 @@ const SolicitudesDeViajesCompleted = () => {
 
   const handleSubmit = async (e) => {
     dispatch(orderSearch(input));
+    setCurrentPage(1);
   };
 
 

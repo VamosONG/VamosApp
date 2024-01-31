@@ -108,10 +108,8 @@ const handleClean = async (e) => {
 }
 
 const handleSubmit = async (e) => {
-    
-    console.log(input)
-    
     dispatch(orderSearch(input))
+    setCurrentPage(1);
 }
 
 
