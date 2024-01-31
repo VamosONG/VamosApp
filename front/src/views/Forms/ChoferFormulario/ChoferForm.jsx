@@ -155,7 +155,7 @@ const ChoferForm = ({ closeForm }) => {
 
   const carTypeFount = ["auto", "camioneta", "van", 'van plus'];
   const airportsFount = ["Aeropuerto Tumbes", "Aeropuerto Talara"];
-  const carModelFount = ["toyota", "hiunday", "ford"];
+  //const carModelFount = ["toyota", "hiunday", "ford"];
 
   return (
     <form onSubmit={handleSubmit}>
@@ -332,7 +332,7 @@ const ChoferForm = ({ closeForm }) => {
               {error.carType && <p>{error.carType}</p>}
             </FormControl>
 
-            <FormControl as="fieldset" isRequired>
+            {/* <FormControl as="fieldset" isRequired>
               <FormLabel as="legend" fontSize="lg" fontFamily="'DIN Medium',">Modelo de Vehiculo:</FormLabel>
               <Select
                 color="black"
@@ -350,8 +350,20 @@ const ChoferForm = ({ closeForm }) => {
                 ))}
               </Select>
               {error.carModel && <p>{error.carModel}</p>}
-            </FormControl>
-
+            </FormControl> */}
+              <FormControl isRequired>
+                <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Modelo del vehículo</FormLabel>
+                <Input
+                  color="black"
+                  bgColor="white"
+                  type="text"
+                  placeholder="Modelo del vehículo"
+                  name="carModel"
+                  onChange={handleChange}
+                  value={form.carModel}
+                />
+                {error.carModel && <p>{error.carModel}</p>}
+              </FormControl>
             <FormControl as="fieldset" isRequired>
               <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Numero de placa</FormLabel>
               <Input
