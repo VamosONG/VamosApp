@@ -30,7 +30,7 @@ const UserFilter = () => {
     //     dispatch(orderSearchUsers(search.searchInput))
     // }
     const handleSubmit = async (e) => {
-        console.log("Esto es lo que trae el input ", search);
+        
         dispatch(orderSearchUsers(search));
       };
       const handleChange = (e) => {

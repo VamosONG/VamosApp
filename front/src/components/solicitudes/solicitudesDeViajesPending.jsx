@@ -33,7 +33,7 @@ const SolicitudesDeViajesPending = () => {
     const dispatch = useDispatch()
     
     const viajesPendientes = useSelector((state) => state.viajesPendientes)
-    console.log(viajesPendientes)
+    
 
     //***************PAGINADO**********************************/
     const itemsPerPage = 6;

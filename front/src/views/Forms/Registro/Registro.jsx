@@ -56,7 +56,7 @@ const RegistroForm = ({ onSwitchForm }) => {
     });
 
     setError(ValidateNewUser(input));
-    console.log('Error objeto:',isError);
+    
   };
 
 
