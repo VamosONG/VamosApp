@@ -105,7 +105,7 @@ export const postNewViaje = (infoViaje) => {
             /* const { data } = await axios.post(`https://vamosappserver.onrender.com/offer/create`, infoViaje); */
 
             const { data } = await axios.post(`https://vamosappserver.onrender.com/offer/create`, infoViaje);
-            console.log(data)
+            
             await dispatch({
                 type: POST_NEW_VIAJE,
                 payload: data
@@ -665,7 +665,7 @@ export const orderSearch = (input) => {
 export const orderSearchDrivers = (input) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`http://localhost:3001/drivers/filter`, input);
+            const { data } = await axios.post(`https://vamosappserver.onrender.com/drivers/filter`, input);
 
             // Asegúrate de tener un tipo de acción que actualice el estado conductores
             dispatch({
@@ -682,7 +682,7 @@ export const orderSearchDrivers = (input) => {
 export const orderSearchUsers = (input) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`http://localhost:3001/user/filter`, input);
+            const { data } = await axios.post(`https://vamosappserver.onrender.com/user/filter`, input);
 
             
             dispatch({
@@ -746,7 +746,7 @@ export const orderSearchPrices = (input) => {
    
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`http://localhost:3001/price/filter`, input);
+            const { data } = await axios.post(`https://vamosappserver.onrender.com/price/filter`, input);
             
             dispatch({
                 type: GET_ALL_PRICES,

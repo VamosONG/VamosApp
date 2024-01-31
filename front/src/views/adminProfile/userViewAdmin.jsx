@@ -102,7 +102,7 @@ const UserViewAdmin = () => {
       reverseButtons: true
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const response = await axios.patch(`http://localhost:3001/user/logic/${id}`)
+        const response = await axios.patch(`https://vamosappserver.onrender.com/user/logic/${id}`)
         if (response) {
           Swal.fire({
             title: "¡Usuario baneado!",
@@ -135,7 +135,7 @@ const UserViewAdmin = () => {
       reverseButtons: true
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const response = await axios.patch(`http://localhost:3001/user/logic/${id}`)
+        const response = await axios.patch(`https://vamosappserver.onrender.com/user/logic/${id}`)
         if (response) {
           Swal.fire({
             title: "¡Usuario desbaneado!",

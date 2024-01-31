@@ -80,7 +80,7 @@ let dataUser = {};
       axios.post(`https://vamosappserver.onrender.com/user/create`, input), // post con los inputs para crear el usuario
     ])
       .then(([authResponse, { data }]) => {
-        console.log(data);
+        
 
        // dispatch(getUserByEmail(data.email))  // get con el input para setear el current user 
         

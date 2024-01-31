@@ -35,7 +35,7 @@ const UpdateUserDataForm = ({ userDetail }) => {
         e.preventDefault()
         if (newData) {
             
-            const response = await axios.patch(`http://localhost:3001/user/update/${id}`, {newData})
+            const response = await axios.patch(`https://vamosappserver.onrender.com/user/update/${id}`, {newData})
             if (response) {
                 
                 Swal.fire({

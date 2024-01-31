@@ -55,7 +55,7 @@ const FormLogInWithGoogle = () => {
 
     try {
       const userCreated = await axios.post(
-        `http://localhost:3001/user/create`,
+        `https://vamosappserver.onrender.com/user/create`,
         input
       );
       await dispatch(getUserByEmail(input.email));
