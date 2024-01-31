@@ -71,7 +71,7 @@ const createOrder = async (req, res) => {
 
 const receiveWebhook = async (req, res) => {
   try {
-    console.log(req.query);
+    
     const payment = req.query;
     // const {date_created, user_id} = req.body
 
@@ -82,7 +82,7 @@ const receiveWebhook = async (req, res) => {
        const data = await mercadopago.payment.findById(payment["data.id"]);
       // const userPayment = await Trip.findOne({ where: { id: data.body.metadata.trip_id } });//BUSCA EL TRIP
       //  await newTrip.update({ stateOfTrip: "reserved" }); //CAMBIA DE OFFER A RESERVED
-     console.log("data webhook", data);
+     
       const trip ={
         userId: data.body.metadata.user_id,
         origin: data.body.metadata.origin,
