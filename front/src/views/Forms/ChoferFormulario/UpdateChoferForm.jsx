@@ -38,9 +38,9 @@ const UpdateDriverData = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Antes de la actualización:", newData);
+       
         if (newData) {
-            //console.log('data antes de la ruta' + JSON.stringify(newData));
+            
             const response = await axios.patch(`http://localhost:3001/drivers/update/${id}`, newData);
             await dispatch(getAllConductores())
             if (response.status === 200) {
@@ -63,7 +63,7 @@ const UpdateDriverData = (props) => {
                 );
             }
         } else {
-            console.log("form " + newData);
+            
             dispatch(getAllConductores())
             onClose()
             Swal.fire({

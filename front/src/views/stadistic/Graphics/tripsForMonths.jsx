@@ -18,7 +18,7 @@ const TripsForMonths = () => {
     // const trips = useSelector((state) => state.getTrips);
     const trips = useSelector((state)=>state.viajesCompletados)
     
-console.log(trips);
+
 
 
     const ENERO = (trips.filter((trip) => trip.date.includes("2024-01"))).length;

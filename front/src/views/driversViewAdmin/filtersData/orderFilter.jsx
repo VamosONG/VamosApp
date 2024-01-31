@@ -23,7 +23,7 @@ const OrderFilterAlphabetical = ({searcher,volerAuno}) => {
   };
 
   const handleSubmit = async (e) => {
-    console.log("Esto es lo que trae el input ", input);
+    
     dispatch(orderSearchDrivers(input));
     volerAuno()
   };

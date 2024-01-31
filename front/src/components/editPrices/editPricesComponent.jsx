@@ -33,7 +33,7 @@ const EditPrices = () => {
 
   const allPrices = useSelector((state) => state.allPrices)
 
-  console.log(allPrices)
+  
 
   useEffect(() => {
     dispatch(getAllPrices())

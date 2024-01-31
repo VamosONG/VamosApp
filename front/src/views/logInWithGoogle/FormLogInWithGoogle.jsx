@@ -59,8 +59,8 @@ const FormLogInWithGoogle = () => {
         input
       );
       await dispatch(getUserByEmail(input.email));
-      console.log(userCreated);
-      console.log("usuario:", { displayName });
+      
+      
       if (userCreated) {
         Swal.fire({
           title: "Bien hecho!",
@@ -85,7 +85,7 @@ const FormLogInWithGoogle = () => {
         });
       }
     } catch (error) {
-      console.log(input);
+     
       console.error(error);
       Swal.fire({
         icon: "error",

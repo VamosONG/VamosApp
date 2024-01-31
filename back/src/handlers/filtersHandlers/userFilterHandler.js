@@ -3,12 +3,20 @@ const getUsers = require('../../controllers/usersControllers/getUsers');
 module.exports = async (req, res) => {
     try {
 
+
         const { searchInput, admin } = req.body;
+
 
         let filteredUsers = await getUsers();
 
         //Filtra por busqueda: nombre, apellido, email, telefono, dni.
         if(searchInput){
+
+        /*    if("admin".includes(searchInput.toLowerCase())){
+                filteredUsers = filteredUsers?.filter((user) => user.admin === true);
+            } */
+          
+
            filteredUsers = filteredUsers.filter(usr =>
             (
               (usr.name && usr.name.toLowerCase().includes(searchInput.toLowerCase())) ||
@@ -19,7 +27,7 @@ module.exports = async (req, res) => {
             )
           );
          }
-        
+
         if(admin==='admin'){
             filteredUsers=filteredUsers?.filter(user=>user.admin===true)
         }else{
@@ -27,6 +35,7 @@ module.exports = async (req, res) => {
                 filteredUsers=filteredUsers?.filter(user=>user.admin===false)
             }
         }
+
 
 
         res.status(200).json(filteredUsers);       
