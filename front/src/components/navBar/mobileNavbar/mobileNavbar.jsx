@@ -11,10 +11,12 @@ import {
   VStack,
   IconButton,
   Image,
+  AvatarGroup
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import Vamos from "../../../assets/logoblanco.png";
+import ViewOptionPerfil from "../viewOption/viewOptionPerfil";
 
 const MobileNavbar = ({ currentUser }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,14 +76,15 @@ const MobileNavbar = ({ currentUser }) => {
                 <Box>
                   <Image src={Vamos} alt="Vamos" w="100px" />
                 </Box>
-                {currentUser && currentUser.admin ? (
+                {
+                 currentUser?.admin ? (
                   <>
-                    <Link to="/solicitudesDeViajes">
+                    <Link to="/profileAdmin">
                       <Button colorScheme="#009ED1" w="100%">
-                        SOLICITUDES DE VIAJE
+                        PERFIL ADMINISTRADOR
                       </Button>
                     </Link>
-                    <Link to="/detail">
+                    {/* <Link to="/detail">
                       <Button colorScheme="#009ED1" w="100%">
                         CONDUCTORES
                       </Button>
@@ -95,18 +98,13 @@ const MobileNavbar = ({ currentUser }) => {
                       <Button colorScheme="#009ED1" w="100%">
                         MI PERFIL
                       </Button>
-                    </Link>
+                    </Link> */}
                   </>
-                ) : currentUser && currentUser.admin === false ? (
+                ) : currentUser?.admin === false ? (
                   <>
-                    <Link to="/solicitarViaje">
+                    <Link to="/profileUser">
                       <Button colorScheme="#009ED1" w="100%">
-                        SOLICITAR VIAJE
-                      </Button>
-                    </Link>
-                    <Link to="/perfil">
-                      <Button colorScheme="#009ED1" w="100%">
-                        MI PERFIL
+                       MI PERFIL
                       </Button>
                     </Link>
                   </>
@@ -127,13 +125,10 @@ const MobileNavbar = ({ currentUser }) => {
                         PREGUNTAS FRECUENTES
                       </Button>
                     </Link>
+                    <Box>
+             <ViewOptionPerfil/> 
+        </Box>
                   </>
-                )}
-
-                {currentUser && (
-                    <Link to="/perfil">
-                      <Avatar name="Nombre Usuario" src={currentUser.photoURL} />
-                    </Link>
                 )}
               </VStack>
             </DrawerBody>
