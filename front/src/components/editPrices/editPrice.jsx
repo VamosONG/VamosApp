@@ -88,7 +88,10 @@ const EditPrice = ({combo,handleUpdate,isEvenRow}) => {
                 backgroundColor="black"
                 variant="solid"
                 color="white"
-                onClick={() => handleUpdate(input,confirmationText)}
+                onClick={() => {
+                  handleUpdate(input,confirmationText,editar)
+                  setEditar(!editar)
+                }}
                 isDisabled={(input.value === Number(combo.value))||(input.value === undefined || input.value === ''|| input.value === null)}
                 >Actualizar</Button></Td>
                 </Tr>
