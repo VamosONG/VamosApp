@@ -79,36 +79,19 @@ const NavBar = () => {
                       INICIO
                     </Button>
                   </Link>
-                  
-                  {/* <Link to="/solicitudesDeViajes">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      SOLICITUDES DE VIAJE
-                    </Button>
-                  </Link> */}
 
-{/*                   <Link to="/detail">
+                  <Link to="/about">
                     <Button colorScheme="#009ED1" fontSize="1xl">
-                      CONDUCTORES
-                    </Button>
-                  </Link> */}
-
-                  <Link to="/">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      INICIO
+                      NOSOTROS
                     </Button>
                   </Link>
-
-                  {/* <Link to="/profileAdmin">
+                  
+                  <Link to="/questions">
                     <Button colorScheme="#009ED1" fontSize="1xl">
-                      MI PERFIL
+                      PREGUNTAS FRECUENTES
                     </Button>
-                  </Link> */}
-
-                  {/* {/* <Link to='/editPrices'>
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      CAMBIAR PRECIOS DE VIAJES
-                    </Button>
-                  </Link> */}
+                  </Link>
+                  
                 </Flex>
               </Box>
             ) : currentUser?.admin === false ? (
@@ -120,30 +103,18 @@ const NavBar = () => {
                     </Button>
                   </Link>
 
-                  {/* <Link to="/solicitarViaje">
+                  <Link to="/about">
                     <Button colorScheme="#009ED1" fontSize="1xl">
-                      SOLICITAR VIAJE
+                      NOSOTROS
                     </Button>
-                  </Link> */}
+                  </Link>
 
-                  {/* <Link to="/profileUser">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      MI PERFIL
-                    </Button>
-                  </Link> */}
-
-{/*                   <Link to="/questions">
+                  <Link to="/questions">
                     <Button colorScheme="#009ED1" fontSize="1xl">
                       PREGUNTAS FRECUENTES
                     </Button>
-                  </Link> */}
+                  </Link>
 
-                  {/* <Link to='/review&reseña'>
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      RESEÑA DE TU VIAJE
-                    </Button>
-                  </Link> */}
-                
                 </Flex>
               </Box>
             ) : (

@@ -33,6 +33,7 @@ const OrderFilterAlphabetical = () => {
       date: "",
       searchInput: ""
     });
+    dispatch(orderSearchDrivers(input));
   };
 
   return (
