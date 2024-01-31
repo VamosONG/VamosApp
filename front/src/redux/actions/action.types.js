@@ -32,3 +32,6 @@ export const GET_TRIPS = "GET_TRIPS"
 
 export const HANDLE_ADMIN = 'HANDLE_ADMIN'
 
+export const FILTER_NAME = "FILTER_NAME"
+export const GET_USUARIOS_FILTRADOS = "GET_USUARIOS_FILTRADOS"
+

@@ -11,6 +11,7 @@ const updateUserHandler = require('../handlers/userHandlers/updateUserHandler')
 const deleteUserHandler = require('../handlers/userHandlers/deleteUserHandler')
 const getUserByIdHandler = require('../handlers/userHandlers/getUserByIdHandler')
 const getUserByEmailHandler = require('../handlers/userHandlers/getUserByEmailHandler')
+ const userFilterHandler = require('../handlers/filtersHandlers/userFilterHandler')
 
 const getDriversHandler = require('../handlers/driverHandlers/getDriversHandler')
 const postDriverHandler = require('../handlers/driverHandlers/postDriverHandler')
@@ -69,6 +70,7 @@ router.post('/trips/create', postTripHandler);
 router.put('/trips/update', updateTripHandler);
 router.delete('/trips', deleteTripHandler);
 
+router.post('/user/filter',userFilterHandler)
 router.get('/user/email', getUserByEmailHandler); //Busca un usuario por Email.
 router.get('/user/:id', getUserByIdHandler); //Busca un usuario por ID.
 router.get('/user', getUsersHandler);

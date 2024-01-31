@@ -30,6 +30,7 @@
     "react-router": "^6.21.1",
     "react-router-dom": "^6.3.0",
     "react-slick": "^0.29.0",
+    "react-transition-group": "^4.4.5",
     "redux": "^5.0.1",
     "redux-thunk": "^3.1.0",
     "slick-carousel": "^1.8.1",
