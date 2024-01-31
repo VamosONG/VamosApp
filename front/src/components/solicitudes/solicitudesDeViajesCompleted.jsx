@@ -100,6 +100,7 @@ const SolicitudesDeViajesCompleted = () => {
 
   const handleSubmit = async (e) => {
     dispatch(orderSearch(input));
+    setCurrentPage(1);
   };
 
 
@@ -158,6 +159,9 @@ const SolicitudesDeViajesCompleted = () => {
         alignItems="center"
         flexDirection="row"
         bgColor='#009ED1'
+        borderTopLeftRadius="md"
+        borderTopRightRadius="md"
+        border="1px solid black"
       >
         <Heading size="xs" textTransform="uppercase" margin="1rem">
           Buscar:
@@ -193,7 +197,7 @@ const SolicitudesDeViajesCompleted = () => {
                 <RepeatClockIcon/>
                 </Button>
                 </Tooltip>
-       <Button onClick={handleOnExport}>DESCARGAR</Button>
+        <Button onClick={handleOnExport} marginLeft="1rem">DESCARGAR</Button>
       </Box>
       <Table variant="simple">
         <TableCaption>Viajes concretados</TableCaption>
@@ -219,9 +223,22 @@ const SolicitudesDeViajesCompleted = () => {
               <Td border="2px solid black">{solicitud.hour}</Td>
               <Td border="2px solid black">{solicitud.userEmail}</Td>
               <Td border="2px solid black">{solicitud.driverFullName}</Td>
-              <Td border="2px solid black" justifyContent="center">
+              {solicitud.puntaje===-1?(
+                <Td border="2px solid black">Viaje no calificado</Td>
+              ):(
+                <Td border="2px solid black">
+                  {Array.from({ length: solicitud.puntaje }, (_, index) => (
+                    <span key={index} style={{ color: 'yellow' }}>★</span>
+                  ))}
+                  {Array.from({ length: 5 - solicitud.puntaje }, (_, index) => (
+                    <span key={index} style={{ color: 'gray' }}>★</span>
+                  ))}
+                </Td>
+              )}
+              
+              {/*<Td border="2px solid black" justifyContent="center">
               ★★★✰✰
-            </Td>
+          </Td>*/}
             </Tr>
           ))}
         </Tbody>

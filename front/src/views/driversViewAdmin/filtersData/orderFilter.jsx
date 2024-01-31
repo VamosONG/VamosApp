@@ -1,184 +1,125 @@
-import { Select, Box, Text, Flex, Heading, FormControl, FormLabel, Button,Input, Tooltip} from '@chakra-ui/react'
-import { useSelector, useDispatch } from 'react-redux'
-import { airportFilter, alphabeticalOrder, carFilter, getAllConductores, passengerOrder, ratingOrder, stateFilter, stateOrder } from '../../../redux/actions'
-import { BsAirplaneEngines, BsBootstrapReboot,BsArrowClockwise, BsFilterCircle, BsFunnel, BsSearch } from "react-icons/bs";
+import { Select, Box, Text, Flex, FormControl, FormLabel, Button, Input, Tooltip } from '@chakra-ui/react';
 import { useState } from 'react';
+import { BsFilterCircle, BsArrowClockwise } from 'react-icons/bs';
+import {orderSearchDrivers} from '../../../redux/actions'
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 
-const OrderFilterAlphabetical = ({searcher}) => {
-    const data = useSelector((state) => state.allData)
+const OrderFilterAlphabetical = () => {
+    const dispatch = useDispatch()
+  const [input, setInput] = useState({
+    airports: "",
+    quantityPassengers: 0,
+    date: ""
+  });
 
-    const dispatch = useDispatch({searcher})
+  const handleChange = (e) => {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value
+    });
+  };
 
-    const handleOrderAlpha = (e) => {
-        dispatch(alphabeticalOrder(e.target.value))
-    }
-    const handleOrderPassenger = (e) => {
-        dispatch(passengerOrder(e.target.value))
-    }
-
-    //Cuando se agregren review lo activo
-    // const handleOrderRating = (e) => {
-    //     dispatch(ratingOrder(e.target.value))
-    // }
-
-    const handleFilterCar = (e) => {
-        dispatch(carFilter(e.target.value))
-    }
-
-    const handleFilterAirport = (e) => {
-        dispatch(airportFilter(e.target.value))
-    }
-
-    const handleFilterDriverState = (e) => {
-        dispatch(stateFilter(e.target.value))
-    }
-
-    const handleOrderDriverState = (e) => {
-        dispatch(stateOrder(e.target.value))
-    }
-
-    const resetFilter = ()=> {
-        dispatch(getAllConductores())
-    }
-
-   
-
-    const airportsFound = ["Aeropuerto Tumbes", "Aeropuerto Talara"];
-
-    const carTypeFound = ["auto", "camioneta", "van", 'van plus'];
-
-    return (
-        <>
-            <Flex gap='4' justify={'center'} align={'center'} mx='2rem' py='.5rem'>
-                <Flex justify='center' align={'center'} gap='4'  >
-                <Flex justify={'center'} align={'center'} fontSize={'1.5rem'}>
-                    <Input placeholder='Buscar por nombre / auto / aeropuerto' onChange={searcher} border={'1px solid gray'} bgColor="white" color="black"/>
-                </Flex >
-
-                    <Tooltip label='Ordenar datos' bg='#10447E' placement='top' >
-                        <Text fontSize={'2rem'}>
-                            <BsFilterCircle/>
-                        </Text>
-                        </Tooltip> 
-                    <Box>
-                        <FormControl>
-                            <FormLabel color="white">Nombre</FormLabel>
-                            <Select
-                                bgColor="white"
-                                name='alphabetical'
-                                onChange={handleOrderAlpha}>
-                                <option value='A'>A - Z</option>
-                                <option value='D'>Z - A</option>
-                            </Select>
-                        </FormControl>
-                    </Box>
-
-                    <Box>
-                        <FormControl>
-                            <FormLabel color="white">Pasajeros</FormLabel>
-                            <Select
-                                bgColor="white"
-                                name='passenfers'
-                                onChange={handleOrderPassenger}>
-                                <option value='A'>Mas</option>
-                                <option value='D'>Menos</option>
-                            </Select>
-                        </FormControl>
-                    </Box>
-                    {/* <Box>
-                        <FormControl>
-                            <FormLabel>Estado</FormLabel>
-                            <Select
-                                name='driverState'
-                                onChange={handleOrderDriverState}>
-                                <option value='A'>Activo</option>
-                                <option value='D'>Descanso</option>
-                            </Select>
-                        </FormControl>
-                    </Box> */}
-
-                    {/* //Cuando se agregren review lo activo */}
-                    {/* <Box>
-                    <Select placeholder='Puntuacion'
-                        name='rating'
-                        onChange={handleOrderRating}>
-                        <option value='A'>➕ - ➖</option>
-                        <option value='D'>➖ - ➕</option>
-                    </Select>
-                </Box> */}
-                </Flex>
-
-                <Flex justify='center' align={'center'} gap='4'  >
-                        <Tooltip label='Filtrar datos' bg='#10447E' placement='top' >
-                        <Text fontSize={'2rem'}>
-                            <BsFunnel/>
-                        </Text>
-                        </Tooltip> 
-                    <Box>
-                        <FormControl>
-                            <FormLabel color="white">Vehiculo</FormLabel>
-                            <Select
-                                bgColor="white"
-                                name='cartype'
-                                onChange={handleFilterCar}>
-                                {carTypeFound.map((car, index) => (
-                                    <option key={index} value={car}>{car}</option>
-                                ))}
-                            </Select>
-                        </FormControl>
-                    </Box>
-
-                    <Box>
-                        <FormControl >
-                            <FormLabel color="white"> Zona </FormLabel>
-                            <Select
-                                bgColor="white"
-                                name='airpots'
-                                onChange={handleFilterAirport}
-                                // onChange={handleFilterCar}
-                                >
-                                {airportsFound.map((airports, index) => (
-                                    <option key={index} value={airports} >{airports}</option>
-                                ))}
-                            </Select>
-                        </FormControl>
-                    </Box>
-
-                    <Box>
-                        <FormControl>
-                            <FormLabel color="white">Estado</FormLabel>
-                            <Select
-                                bgColor="white"
-                                name='driverState'
-                                onChange={handleFilterDriverState}
-                                // onChange={handleFilterCar}
-                                >
-                                <option value={'all'}>Todos</option>
-                                <option value={true}>Activo</option>
-                                <option value={false}>Descanso</option>
-                                <option value={'D'}>Eliminados</option>
-                            </Select>
-                        </FormControl>
-                    </Box>
-
-
-
-                    {/* //Cuando se agregren review lo activo */}
-                    {/* <Box>
-                    <Select placeholder='Puntuacion'
-                        name='rating'
-                        onChange={handleOrderRating}>
-                        <option value='A'>➕ - ➖</option>
-                        <option value='D'>➖ - ➕</option>
-                    </Select>
-                </Box> */}
-                </Flex>
-
-                <Flex onClick={resetFilter} ><Button bg='green.300' color='#000' fontSize='1.2rem' > <BsArrowClockwise/> </Button></Flex>
-            </Flex>
-        </>
-    )
+  const handleSubmit = async (e) => {
+    
+    console.log("esto es lo que trae el input ",input)
+    
+    dispatch(orderSearchDrivers(input))
 }
 
-export default OrderFilterAlphabetical
+  const resetFilter = () => {
+    // Restaurar los valores predeterminados o realizar alguna acción de reinicio
+    setInput({
+      airports: "",
+      quantityPassengers: 0,
+      date: ""
+    });
+  };
+
+  return (
+    <>
+      <Flex gap='4' justify={'center'} align={'center'} mx='2rem' py='.5rem'>
+        <Flex justify='center' align={'center'} gap='4'>
+          <Flex justify={'center'} align={'center'} fontSize={'1.5rem'}>
+            <Input
+              placeholder='Buscar por nombre / auto / aeropuerto'
+              name="searchInput"
+              onChange={handleChange}
+              value={input.searchInput}
+              border={'1px solid gray'}
+              bgColor="white"
+              color="black"
+            />
+          </Flex>
+
+          <Tooltip label='Ordenar datos' bg='#10447E' placement='top'>
+            <Text fontSize={'2rem'}>
+              <BsFilterCircle />
+            </Text>
+          </Tooltip>
+          {/* <Box>
+            <FormControl>
+              <FormLabel color="white">Nombre</FormLabel>
+              <Select bgColor="white" name='alphabetical' onChange={handleChange}>
+                <option value='A'>A - Z</option>
+                <option value='D'>Z - A</option>
+              </Select>
+            </FormControl>
+          </Box> */}
+
+          <Box>
+            <FormControl>
+              <FormLabel color="white">Pasajeros</FormLabel>
+              <Select bgColor="white" name='quantityPassengers' onChange={handleChange}>
+                {[...Array(15).keys()].map((value) => (
+                  <option key={value + 1} value={value + 1}>
+                    {value + 1}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+
+          <Box>
+            <FormControl>
+              <FormLabel color="white">Aeropuerto</FormLabel>
+              <Select bgColor="white" name='airports' onChange={handleChange}>
+                <option value="">Seleccionar</option>
+                <option value='Aeropuerto Talara'>Aeropuerto Talara</option>
+                <option value='Aeropuerto Tumbes'>Aeropuerto Tumbes</option>
+              </Select>
+            </FormControl>
+          </Box>
+
+          <Box>
+            <FormControl>
+              <FormLabel color="white">Fecha de viaje</FormLabel>
+              <Input
+                type="date"
+                name='date'
+                onChange={handleChange}
+                value={input.date}
+                bgColor="white"
+                color="black"
+              />
+            </FormControl>
+          </Box>
+        </Flex>
+
+        <Button bg='green.300' color='#000' fontSize='1.2rem' onClick={handleSubmit}>
+  Submit
+</Button>
+
+
+        <Flex onClick={resetFilter}>
+          <Button bg='green.300' color='#000' fontSize='1.2rem' onClick={handleSubmit}>
+            <BsArrowClockwise />
+          </Button>
+        </Flex>
+      </Flex>
+    </>
+  );
+};
+
+export default OrderFilterAlphabetical;
