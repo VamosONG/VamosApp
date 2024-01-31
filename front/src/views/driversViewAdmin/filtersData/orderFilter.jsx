@@ -4,6 +4,7 @@ import { BsFilterCircle, BsArrowClockwise } from 'react-icons/bs';
 import { orderSearchDrivers } from '../../../redux/actions';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
+import { getAllConductores } from '../../../redux/actions'
 
 const OrderFilterAlphabetical = () => {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const OrderFilterAlphabetical = () => {
       date: "",
       searchInput: ""
     });
-    dispatch(orderSearchDrivers(input));
+    dispatch(getAllConductores())
   };
 
   return (
