@@ -9,9 +9,9 @@ module.exports = async (req, res) => {
 console.log(filteredUsers,"filtered")
         //Filtra por busqueda: nombre, apellido, email, telefono, dni.
         if(searchInput){
-            if("admin".includes(searchInput.toLowerCase())){
-                filteredUsers = filteredUsers?.filter((user) => user.admin === true);
-            }
+            // if("admin".includes(searchInput.toLowerCase())){
+            //     filteredUsers = filteredUsers?.filter((user) => user.admin === true);
+            // }
            console.log("llega aqui")
 
            filteredUsers = filteredUsers.filter(usr =>
