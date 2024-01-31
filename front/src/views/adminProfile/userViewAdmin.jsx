@@ -127,10 +127,10 @@ const UserViewAdmin = () => {
                 <TableCaption TableCaption>Usuarios</TableCaption>
                 <Thead>
                   <Tr>
-                    <Th border="2px solid black">Usuario</Th>
-                    <Th border="2px solid black">E-mail</Th>
-                    <Th border="2px solid black">DNI</Th>
-                    <Th border="2px solid black">Teléfono</Th>
+                    <Th border="2px solid black" minWidth="300px">Usuario</Th>
+                    <Th border="2px solid black" minWidth="300px">E-mail</Th>
+                    <Th border="2px solid black" minWidth="260px">DNI</Th>
+                    <Th border="2px solid black" minWidth="260px">Teléfono</Th>
                     <Th border="2px solid black">Viajes</Th>
                     <Th border="2px solid black">Acción</Th>
                   </Tr>
