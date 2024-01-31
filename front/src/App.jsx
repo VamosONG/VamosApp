@@ -25,7 +25,7 @@ import PaymentStatus from './views/payments/paymentStatus';
 
 import EditPrices from './components/editPrices/editPricesComponent';
 
-
+import FormLogInWithGoogle from './views/logInWithGoogle/formLogInWithGoogle';
 import RegistroForm from './views/Forms/Registro/Registro';
 import UserProfile from './components/userProfile/userProfile'
 import AdminProfile from './components/userProfile/adminProfile';
@@ -61,7 +61,6 @@ function App() {
 
         {/* Renderizando HomeComponent en la ruta para evitar pisar cada ves que se abre una pestaña */}
         <Route path='/home' element={<LoginForm/>}/>
-        <Route path="/register" element={<RegistroForm/>}/>
         <Route path= '/about' element={<About/>} />
         <Route path='/questions' element={<Questions/>}/>
         <Route path="/paymentFailed" element={<PaymentFail/>}/>

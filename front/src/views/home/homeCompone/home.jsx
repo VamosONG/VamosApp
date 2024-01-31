@@ -7,6 +7,10 @@ import {
     ListItem,
 } from '@chakra-ui/react';
 
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllConductores } from "../../../redux/actions";
 import Testimonials from "../../Testimonials/Testimonials";
 import Services from "../../ServicesSection/services";
 import WhatsAppButton from "../../whatsAppButton/whatsAppButton";
@@ -17,7 +21,16 @@ import SolicitudwViajeForm from "../../Forms/SolicitudViaje/SolicitudwViajeForm"
 import MiniBanner from "../../miniBanner/miniBanner";
 
 const Home = () => {
+    const dispatch= useDispatch();
+
+    const conductoresPmostrar= useSelector((state)=>state.pageConductores);
+    console.log(conductoresPmostrar)
     
+    useEffect (()=>{
+        dispatch(getAllConductores());
+    },[dispatch])
+
+
     return (
         <>
         
