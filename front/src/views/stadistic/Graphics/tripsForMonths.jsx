@@ -6,11 +6,18 @@ import { getTrips } from "../../../redux/actions";
 const TripsForMonths = () => {
     const dispatch = useDispatch()
 
-    useEffect( () => {
-         dispatch(getTrips());
-    }, [dispatch]);
+    useEffect(() => {
+        const fetchData = async () => {
+          // await dispatch(getTrips());
+          await dispatch(getCanceledTrips());
+        };
+      
+        fetchData();
+      }, [dispatch]);
 
-    const trips = useSelector((state) => state.getTrips);
+    // const trips = useSelector((state) => state.getTrips);
+    const trips = useSelector((state)=>state.viajesCompletados)
+    
 console.log(trips);
 
 
