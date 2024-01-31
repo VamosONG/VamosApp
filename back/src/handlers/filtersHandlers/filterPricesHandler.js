@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
 
         if (order) {
             if (order.toLowerCase() === "menor precio") {
-                filteredPrices.sort((a, b) => a.value - b.value);
+                filteredPrices.sort((a, b) => Number(a.value) - Number(b.value));
             } if (order.toLowerCase() === "mayor precio") {
                 filteredPrices.sort((a, b) => b.value - a.value);
             }

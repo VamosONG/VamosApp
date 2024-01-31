@@ -13,13 +13,15 @@ import {
   Flex,
   Box,
   Heading,
-  Select
+  Select,
+  Tooltip
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllPrices, updatePrice } from '../../redux/actions';
+import { getAllPrices, orderSearchPrices, updatePrice } from '../../redux/actions';
 import Swal from 'sweetalert2'
 import { renderToString } from 'react-dom/server';
 import EditPrice from './editPrice';
+import { RepeatClockIcon } from '@chakra-ui/icons';
 
 
 
@@ -35,7 +37,7 @@ const EditPrices = () => {
 
   useEffect(() => {
     dispatch(getAllPrices())
-  }, []);
+  }, [dispatch]);
 
 
   
@@ -113,9 +115,26 @@ const EditPrices = () => {
   };
 
   const handleSubmit = async (e) => {
-    dispatch(orderSearch(input));
+    dispatch(orderSearchPrices(input));
+    setCurrentPage(1);
   };
 
+
+  const handleClean = async (e) => {
+    setInput({
+        ...input,
+        searchInput: "",
+        order: "",
+        tripState: 'completed'
+    })
+    dispatch(orderSearchPrices({
+      ...input,
+      searchInput: "",
+      order: "",
+      tripState: 'completed'
+  }));
+  setCurrentPage(1);
+  }
 
 
 
@@ -144,6 +163,7 @@ const EditPrices = () => {
             placeholder="Buscar por coincidencia"
             onChange={handleChange}
             name="searchInput"
+            value={input.searchInput}
           />
           <Select
             marginRight='2rem'
@@ -153,12 +173,18 @@ const EditPrices = () => {
             width="xs"
             name="order"
             onChange={handleChange}
+            value={input.order}
           >
             <option>mayor precio</option>
             <option>menor precio</option>
           </Select>
         </Box>
-        <Button onClick={handleSubmit}>APLICAR</Button>
+        <Button onClick={handleSubmit} style={{marginRight:'1rem'}}>APLICAR</Button>
+        <Tooltip hasArrow label='Reiniciar filtro y búsqueda' bg='#009ED1' placement='left-start'>
+                <Button onClick={handleClean} >
+                <RepeatClockIcon/>
+                </Button>
+                </Tooltip>
       </Flex>
 
 
