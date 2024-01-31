@@ -67,22 +67,23 @@ const LoginForm = ({ onSwitchForm }) => {
     try {
       await auth.login(input.email, input.password); // autenticacion de loginWithGoogle funcion de firebase signInWithPopUp
         const getUser =  await dispatch(getUserByEmail(input.email)); // busca al usuario por email y lo setea como currentUser
-        console.log(getUser);
-         navigate('/')////
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "¡Inicio de sesión éxitoso!",
-          showConfirmButton: false,
-          timer: 2500
-        })
+        console.log(currentUser);
+        navigate('/')
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "¡Inicio de sesión éxitoso!",
+            showConfirmButton: false,
+            timer: 2500
+          })
+      
 
     } catch (error) {
       console.error("Error al iniciar sesión:", error.message);
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Email o contraseña incorrecto,intentelo nuevamente.",
+        text: ("Error al iniciar sesión:", error.message),
       });
     }
   };
@@ -103,6 +104,7 @@ const LoginForm = ({ onSwitchForm }) => {
           email: googleLog.user.email,
           image: googleLog.user.photoURL
          }
+         
          console.log("google" ,usr);
 
          Swal.fire({
@@ -129,8 +131,15 @@ const LoginForm = ({ onSwitchForm }) => {
   
         // Carga el estado global currentUser con la info del usuario registradi
         const userActual = await dispatch(getUserByEmail(googleLog.user.email))
-
-        navigate('/')////
+        if(response.banned){
+          handleLogOut()
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Este usuario se encuentra bloqueado.",
+          });
+        }
+        navigate('/')
         return response
       }
     } catch (error) {
@@ -138,7 +147,7 @@ const LoginForm = ({ onSwitchForm }) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Hubo un error en el registro",
+        text: ("Error al iniciar sesión con Google:", error.message),
       });
     }
   };

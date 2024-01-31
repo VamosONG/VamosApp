@@ -45,15 +45,19 @@ import { getUserByEmail } from './redux/actions';
 
 
 
+  //const {currentUser} = useSelector(state => state)
+
 function App() {
   const {currentUser} = useSelector(state=> state)
+
   return (
     <>
     <AuthProvider>
-          <NavBar />
+        <NavBar />
 
         <Routes>
         <Route path='/' element={<HomeComponent/>}/> 
+
         {/* Renderizando HomeComponent en la ruta para evitar pisar cada ves que se abre una pestaña */}
         <Route path='/home' element={<LoginForm/>}/>
         <Route path="/register" element={<RegistroForm/>}/>
@@ -83,7 +87,7 @@ function App() {
           <Route path="/login" element={<LoginForm/>}/>
           <Route path="/register" element={<RegistroForm/>}/>
           <Route path="/profileAdmin" element={<AdminProfile/>}/>
-           </Route> 
+          </Route> 
           
            </>
         }
