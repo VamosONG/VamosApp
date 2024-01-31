@@ -332,25 +332,6 @@ const ChoferForm = ({ closeForm }) => {
               {error.carType && <p>{error.carType}</p>}
             </FormControl>
 
-            {/* <FormControl as="fieldset" isRequired>
-              <FormLabel as="legend" fontSize="lg" fontFamily="'DIN Medium',">Modelo de Vehiculo:</FormLabel>
-              <Select
-                color="black"
-                bgColor="white"
-                placeholder="Selecciona un Vehiculo"
-                name="carModel"
-                onChange={handleChange}
-                value={form.carModel}
-              >
-                {carModelFount.map((carM, index) => (
-                  <option key={index} value={carM}>
-                    {" "}
-                    {carM}{" "}
-                  </option>
-                ))}
-              </Select>
-              {error.carModel && <p>{error.carModel}</p>}
-            </FormControl> */}
               <FormControl isRequired>
                 <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Modelo del vehículo</FormLabel>
                 <Input
@@ -364,6 +345,7 @@ const ChoferForm = ({ closeForm }) => {
                 />
                 {error.carModel && <p>{error.carModel}</p>}
               </FormControl>
+            
             <FormControl as="fieldset" isRequired>
               <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Numero de placa</FormLabel>
               <Input
