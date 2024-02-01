@@ -59,7 +59,7 @@ const ViewOptionPerfil = () => {
                 h="50px"
                 borderRadius={50}
             >
-                <Avatar bg="rgb(0, 158, 209)" name={currentUser.name} src={currentUser.image ? currentUser.image : null} />
+                <Avatar bg="rgb(0, 158, 209)" name={currentUser.name ? currentUser.name : null} src={currentUser.image ? currentUser.image : null} />
 
             </Button>
 

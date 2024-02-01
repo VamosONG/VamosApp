@@ -38,7 +38,6 @@ import CardUserTrips from '../cardUserTrips/cardUserTrips';
 import UpdateUserDataForm from './updateUserDataForms';
 import CardTrips from '../cards/cardTrips';
 import CeroViaje from '../errorViews/ceroViaje/ceroviajes';
-import { getDataUser } from '../../redux/actions';
 
 const UserProfile = () => {
     const dispatch = useDispatch()
@@ -54,8 +53,7 @@ const UserProfile = () => {
     useEffect(() => {
         // Guardar la foto de perfil en localStorage cada vez que cambie
         localStorage.setItem('fotoPerfil', fotoPerfil);
-        dispatch(getDataUser())
-    }, [fotoPerfil, userDetail]);
+    }, [fotoPerfil]);
 
     const scrollbarStyles = {
         '&::-webkit-scrollbar': {
@@ -92,14 +90,14 @@ const UserProfile = () => {
     }
 
     return (
-        <Box h='90vh'  display={'flex'} justifyContent={'center'} alignContent={'center'} bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
-            justify="center"
-            bgSize="cover"
-            bgRepeat="no-repeat">
+        <Box h='90vh' w={{base:'100%', md: 'auto'}} marginTop={{base: '0', md: '100px'}} display={'flex'} justifyContent={'center'} alignContent={'center'} bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
+        justify="center"
+        bgSize="cover"
+        bgRepeat="no-repeat" >
          
-            <Flex h={'60%'} w='80%' m='auto' justify={'space-evenly'} align={'center'} overflow={'hidden'} borderLeftRadius={10} borderRightRadius={10}>
-                <Flex   position={'relative'}>
-                    <Flex bg={'#009ED1'} flexDirection={'row'} align={'center'} justify={'start'} w={'100%'} p='2.2rem' gap={4} position={'relative'} borderRadius={8}>
+            <Flex h={{base: '600px', md: '60%'}} w={{base: '90%', md: '80%'}} m='auto' justify={'space-evenly'} align={'center'} overflow={'hidden'} borderLeftRadius={10} borderRightRadius={10} marginTop='5rem' position={'relative'}>
+                <Flex h='100%' w={{base: '100%', md: '50%'}} position={'relative'}>
+                    <Flex bg={'gray.200'} flexDirection={{base: 'column', md: 'row'}} align={'center'} justify={'start'} w={'100%'} p='1rem' gap={4} position={'relative'} borderRadius={8}>
                         {userDetail && userDetail ? (
                             <>
                                 <Tooltip label='Editar datos' placement='left' bg='#10447E' borderRadius={4}>
@@ -107,8 +105,8 @@ const UserProfile = () => {
                                         <UpdateUserDataForm userDetail={userDetail} />
                                     </Button>
                                 </Tooltip>
-                                <Flex w={'50%'} justify={'center'} position={'relative'}>
-                                    <Image w={'15rem'} h={'15rem'} name='Segun Adebayo' src={fotoPerfil ? fotoPerfil : 'https://bit.ly/sage-adebayo'} border={'2px solid #10447E'}
+                                <Flex w={{base: '100%', md: '50%'}} justify={'center'} position={'relative'}>
+                                    <Image w={{base: '100%', md: '15rem'}} h={{base: '300px', md: '15rem'}}name='Segun Adebayo' src={fotoPerfil ? fotoPerfil : 'https://bit.ly/sage-adebayo'} border={'2px solid #10447E'}
                                         alt={fotoPerfil.name}
                                         bg='white'
                                         borderRadius={10}
@@ -121,7 +119,7 @@ const UserProfile = () => {
                                         </Button>
                                     </Tooltip>
                                 </Flex>
-                                <Flex flexDirection={'column'} w={'50%'} gap={4} bg='#10447E' p='2' borderRadius={4} >
+                                <Flex flexDirection={'column'} w={{base: '100%', md: '50%'}} gap={4} bg='#10447E' p='2' borderRadius={4}  >
                                     <Flex w={'100%'} justify={'space-evenly'} gap={4} flexDirection={'column'}  position={'relative'}>
 
                                     
