@@ -28,10 +28,10 @@ function SolicitudViajeForm() {
     const navigate = useNavigate()
     //trae la info del viaje de redux, donde se calcula el precio
     const infoConfirmacionViaje = useSelector((state) => state.infoConfirmacionViaje)
-    console.log(infoConfirmacionViaje, "info");
+   
     const currentUser = useSelector((state) => state.currentUser)
-    console.log(infoConfirmacionViaje)
-    console.log(currentUser)
+    
+    
 
     const storedInput = localStorage.getItem('solicitudViajeInput');
     const parsedData = JSON.parse(storedInput);
@@ -51,7 +51,6 @@ function SolicitudViajeForm() {
         const product = {
             viaje:`${input?.origin}${input?.destination}`, 
             price: infoConfirmacionViaje?.price ,
-            // quantityPassengers: "1",
             userId: currentUser.id,
             origin: infoConfirmacionViaje?.origin,
             destination: infoConfirmacionViaje?.destination,
@@ -60,21 +59,11 @@ function SolicitudViajeForm() {
             quantityPassengers: Number(infoConfirmacionViaje.quantityPassengers),
             driverId: null
           }
-          const trip = {
-            userId: currentUser.id,
-            origin: infoConfirmacionViaje?.origin,
-            destination: infoConfirmacionViaje?.destination,
-            date:infoConfirmacionViaje?.date,
-            hour: infoConfirmacionViaje?.hour,
-            quantityPassengers: Number(infoConfirmacionViaje.quantityPassengers),
-            driverId: null,
-            price: infoConfirmacionViaje?.price
-          }
-          console.log(trip);
+         
         
         const handlePayment = async () => {
         
-            const response= await axios.post("http://localhost:3001/mepago/create-order", product)
+            const response= await axios.post("https://vamosappserver.onrender.com/mepago/create-order", product)
           
             window.location.href = response.data
             
@@ -92,8 +81,7 @@ function SolicitudViajeForm() {
     const [localStorageDataLoaded, setLocalStorageDataLoaded] = useState(false);
 
     useEffect(() => {
-        console.log(infoConfirmacionViaje);
-        console.log(confirmed);
+       
 
         if (infoConfirmacionViaje.price && !confirmed) {
             setConfirmed(true);
@@ -101,7 +89,7 @@ function SolicitudViajeForm() {
                 tripId: infoConfirmacionViaje.id,
                 userId: infoConfirmacionViaje.userId,
             };
-            console.log(infoAmandarAlBack);
+           
             const confirmationText = (
                 <div>
                     <p>Origen: {infoConfirmacionViaje.origin}</p>
@@ -137,7 +125,6 @@ function SolicitudViajeForm() {
                     Swal.fire({
                         title: "Redirigiendo a Mercado Pago",
                         text: "Aguarde unos segundos",
-                        /* icon: "success", */
                         allowOutsideClick: false,
                         didOpen:()=>Swal.showLoading()
                     }).then(() => {
@@ -198,8 +185,7 @@ function SolicitudViajeForm() {
             })
         }
     }, [infoConfirmacionViaje, dispatch]);
-    console.log('placeholderValue:', placeholderValue);
-
+  
 
 
     const handleSubmit =(event) => {
@@ -213,8 +199,7 @@ function SolicitudViajeForm() {
 
         dispatch(postNewViaje(input));
     };
-    console.log("este es el input que se envía al back para postear el trip: ", input);
-    console.log(JSON.parse(localStorage.solicitudViajeInput));
+  
 
     const handleChange = async (e) => {
         // Almacenar el nuevo valor en una variable
@@ -223,7 +208,7 @@ function SolicitudViajeForm() {
             [e.target.name]: e.target.value,
             userId: currentUser.id,
         };
-        console.log("este es el input ", input);
+        
 
         // Actualizar el estado
         setInput(updatedInput);
@@ -232,8 +217,7 @@ function SolicitudViajeForm() {
         localStorage.setItem('solicitudViajeInput', JSON.stringify(updatedInput));
     };
     const currentDate = new Date().toISOString().split('T')[0];
-    console.log('handleChange:', input);
-
+    
     
 
     

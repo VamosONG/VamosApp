@@ -68,7 +68,7 @@ const ChoferForm = ({ closeForm }) => {
   const handleChange = (e) => {
     const property = e.target.name;
     const value = e.target.value;
-    console.log(property + " " + value);
+    
     setForm((prevForm) => ({
       ...prevForm,
       [property]: value,
@@ -88,7 +88,7 @@ const ChoferForm = ({ closeForm }) => {
         data
       );
 
-      console.log(response.data);
+      
 
       setForm((prevForm) => ({
         ...prevForm,
@@ -104,13 +104,13 @@ const ChoferForm = ({ closeForm }) => {
 
     if (form) {
       const response = await axios.post(
-        "http://localhost:3001/drivers/create",
+        "https://vamosappserver.onrender.com/drivers/create",
         form
       );
       if (response) {
         Swal.fire({
-          title: "Bien hecho!",
-          text: "Datos registrados!",
+          title: "¡Bien hecho!",
+          text: "¡Chofer creado éxitosamente!",
           icon: "success",
         });
         setForm({
@@ -143,42 +143,42 @@ const ChoferForm = ({ closeForm }) => {
         );
       }
     } else {
-      console.log(validationForm.error);
-      console.log("form " + form);
+     
+     
       Swal.fire({
         icon: "error",
-        title: "Error en validate",
-        text: "Hay un input con errores",
+        title: "Error al validar los datos",
+        text: "Hay un campo con errores, revise e intentelo nuevamente.",
       });
     }
   };
 
   const carTypeFount = ["auto", "camioneta", "van", 'van plus'];
   const airportsFount = ["Aeropuerto Tumbes", "Aeropuerto Talara"];
-  const carModelFount = ["toyota", "hiunday", "ford"];
+  //const carModelFount = ["toyota", "hiunday", "ford"];
 
   return (
     <form onSubmit={handleSubmit}>
       <Stack
-        spacing={3}
-        bg="#009ED1"
+      marginTop={{ base: "10%", lg: "0%" }}
+        spacing={2}
+        bg="gray.200"
         p="5"
-        h="auto"
-        borderRadius="0"
+        borderRadius="md"
         boxShadow="dark-lg"
         color="black"
-        border="2px solid black"
-        mx="1rem"
-        w={{ base: "20rem", md: "60rem" }}
-        scrollMarginX="auto"
-
+        border="1px solid black"
+        mx={{ base: "0rem", lg: "1rem" }}
+        w="100%" 
+        align="center"
       >
+
+        <Box bg="#10447E" py={{ base: "2%", lg: "1%" }} px={10} borderRadius="md" color="white" fontFamily="'DIN Medium',">
         <Heading fontSize="4xl" fontFamily="'DIN Medium',">Datos del chofer</Heading>
-        <Box>
           <Flex flexDirection={{ base: "column" }}>
             <Center
-              py={2}
-              gap={4}
+              py={{ base: "1%", lg: "1%" }}
+              gap={{ base: "0%", lg: "5%" }}
               flexDirection={{ base: "column", md: "row" }}
             >
               <FormControl isRequired>
@@ -224,7 +224,7 @@ const ChoferForm = ({ closeForm }) => {
 
             <Center
               py={2}
-              gap={4}
+              gap={{ base: ".3rem", lg: "5%" }}
               flexDirection={{ base: "column", md: "row" }}
             >
               <FormControl isRequired>
@@ -311,9 +311,9 @@ const ChoferForm = ({ closeForm }) => {
           </Flex>
         </Box>
 
-        <Box bg="#10447E" py={6} px={2} borderRadius={4} color="white" fontFamily="'DIN Medium',">
+        <Box bg="#10447E" py={{ base: "2%", lg: "1%" }} px={10} borderRadius="md" color="white" fontFamily="'DIN Medium',">
           <Heading fontSize="4xl">Datos del vehiculo</Heading>
-          <Center py={2} gap={4} flexDirection={{ base: "column", md: "row" }}>
+          <Center py={{ base: "1%", lg: "1%" }} gap={{ base: "0%", lg: "5%" }} flexDirection={{ base: "column", md: "row" }}>
             <FormControl as="fieldset" isRequired>
               <FormLabel as="legend" fontSize="lg" fontFamily="'DIN Medium',">Tipo de Vehiculo:</FormLabel>
               <Select
@@ -334,26 +334,20 @@ const ChoferForm = ({ closeForm }) => {
               {error.carType && <p>{error.carType}</p>}
             </FormControl>
 
-            <FormControl as="fieldset" isRequired>
-              <FormLabel as="legend" fontSize="lg" fontFamily="'DIN Medium',">Modelo de Vehiculo:</FormLabel>
-              <Select
-                color="black"
-                bgColor="white"
-                placeholder="Selecciona un Vehiculo"
-                name="carModel"
-                onChange={handleChange}
-                value={form.carModel}
-              >
-                {carModelFount.map((carM, index) => (
-                  <option key={index} value={carM}>
-                    {" "}
-                    {carM}{" "}
-                  </option>
-                ))}
-              </Select>
-              {error.carModel && <p>{error.carModel}</p>}
-            </FormControl>
-
+              <FormControl isRequired>
+                <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Modelo del vehículo</FormLabel>
+                <Input
+                  color="black"
+                  bgColor="white"
+                  type="text"
+                  placeholder="Modelo del vehículo"
+                  name="carModel"
+                  onChange={handleChange}
+                  value={form.carModel}
+                />
+                {error.carModel && <p>{error.carModel}</p>}
+              </FormControl>
+            
             <FormControl as="fieldset" isRequired>
               <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Numero de placa</FormLabel>
               <Input
@@ -384,7 +378,7 @@ const ChoferForm = ({ closeForm }) => {
             </FormControl>
           </Center>
 
-          <Center py={2} gap={4} flexDirection={{ base: "column", md: "row" }}>
+          <Center py={{ base: "1%", lg: "1%" }} gap={{ base: "0%", lg: "5%" }} flexDirection={{ base: "column", md: "row" }}>
             <FormControl isRequired>
               <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Foto del vehiculo</FormLabel>
               <Input

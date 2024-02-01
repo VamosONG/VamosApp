@@ -6,8 +6,13 @@ import {
     Tr,
     Th,
     Td,
-    TableCaption,Tooltip,
-    TableContainer, Button, Flex, Badge
+    TableCaption,
+    Tooltip,
+    TableContainer,
+    Button,
+    Flex,
+    Badge,
+    Box,
 } from '@chakra-ui/react'
 
 import { DeleteIcon, RepeatClockIcon } from '@chakra-ui/icons'
@@ -23,27 +28,26 @@ import OrderFilterAlphabetical from './filtersData/orderFilter'
 // import Paginado from '../../components/paginado/paginadoComponent'
 
 const DriverTableView = () => {
-    const driverData = useSelector((state) => state.conductores)
     const dispatch = useDispatch();
-    const [search , setSearch] = useState('')
+    const driverData = useSelector((state) => state.conductores)
+    // const [search , setSearch] = useState('')
 
     const searcher = (e) => {
         setSearch(e.target.value)
     }
 
-    const results = !search ? driverData : driverData.filter((data) => data.name.toLowerCase().includes(search.toLowerCase()) ||
-    data.airports.toLowerCase().includes(search.toLowerCase()) ||
-    data.carType.toLowerCase().includes(search.toLowerCase())
-);
+    // const results = !search ? driverData : driverData.filter((data) => data.name.toLowerCase().includes(search.toLowerCase()) ||
+    // data.airports.toLowerCase().includes(search.toLowerCase()) ||
+    // data.carType.toLowerCase().includes(search.toLowerCase())
+    // );
 
     useEffect(() => {
         dispatch(getAllConductores())
-    },[])
+    }, [/* dispatch */])
 
     const deleteDriver = (id) => {
         Swal.fire({
-            title: "¿Seguro quieres eliminar?",
-            text: "Se eliminaran los del conductor",
+            title: "¿Seguro quieres eliminar este conductor?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Si, eliminalo!",
@@ -54,105 +58,189 @@ const DriverTableView = () => {
                 const response = await dispatch(deleteDriverAction(id))
                 if (response) {
                     Swal.fire({
-                        title: "¡Eliminado!",
-                        text: "Ha sido eliminado el registro.",
+                        title: "¡Eliminado con éxito!",
+                        text: "Ha sido eliminado el conductor.",
                         icon: "success"
                     });
                 }
                 await dispatch(getAllConductores())
 
             } else if (
-                /* Read more about handling dismissals below */
                 result.dismiss === Swal.DismissReason.cancel
             ) {
                 Swal.fire({
                     title: "Cancelado",
-                    text: "Registro sano y salvo :D",
+                    text: "No se ha eliminado al conductor",
                     icon: "error"
                 });
             }
         });
     }
 
+
+    const reactivateDriver = (id) => {
+        Swal.fire({
+            title: "¿Seguro quieres reactivar este conductor?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Si, reactivarlo!",
+            cancelButtonText: "No, cancelar!",
+            reverseButtons: true
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const response = await dispatch(deleteDriverAction(id))
+                Swal.fire({
+                    title: "¡Reactivado con éxito!",
+                    text: "Ha sido reactivado el conductor.",
+                    icon: "success"
+                });
+                await dispatch(getAllConductores());
+            } else if (
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                Swal.fire({
+                    title: "Cancelado",
+                    text: "No se ha reactivado al conductor",
+                    icon: "error"
+                });
+            }
+        });
+    }
+    //***************PAGINADO**********************************/
+    const itemsPerPage = 6;
+    const [currentPage, setCurrentPage] = useState(1);
+    const [tripsToShow, setTripsToShow] = useState([]);
+
+    const prevHandler = () => {
+        const prevPage = currentPage - 1;
+
+        if (prevPage < 1) return;
+
+        const firstCompleted = (prevPage - 1) * 6;
+
+        setCurrentPage(prevPage);
+        setTripsToShow([...driverData].splice(firstCompleted, 6));
+    };
+
+    const nextHandler = () => {
+        const totalCompleted = driverData.length;
+
+        const nextPage = currentPage + 1;
+
+        const firstCompleted = currentPage * 6;
+
+        if (firstCompleted >= totalCompleted) return;
+        setCurrentPage(nextPage);
+        setTripsToShow([...driverData].splice(firstCompleted, 6));
+    };
+
+    // useEffect(() => {
+    //   dispatch(getCanceledTrips());
+    // }, [dispatch]);
+
+    useEffect(() => {
+        setTripsToShow([...driverData].splice(0, 6));
+    }, [driverData]);
+
+    const volerAuno=()=>{
+        setCurrentPage(1);
+    }
+
+    //***************BUSQUEDA Y ORDENAMIENTO**********************************/
+
     return (
-        <Flex alignItem='center' justifyContent='center'>
-        <TableContainer boxShadow="lg" borderRadius="md" bg="purple.500">
-            <Flex bg="purple.500" justify={'center'} ><OrderFilterAlphabetical searcher={searcher}/></Flex>
-            <Table variant='simple' >
-                <TableCaption color="black" bgColor="gray.300">Conductores registrados</TableCaption>
-                <Thead>
-                    <Tr bgColor='gray.300'>
-                        <Th>#</Th>
-                        <Th>Zona</Th>
-                        <Th>Nombre</Th>
-                        <Th>Vehiculo</Th>
-                        <Th>telefono</Th>
-                        <Th>Max. Psjr</Th>
-                        <Th >Aciones</Th>
-                        <Th >Detalles</Th>
-                        <Th >Estado</Th>
-                    </Tr>
-                </Thead>
-                
-                <Tbody>
-                    {results?.map((driver, index) => (
-                        <Tr key={driver.id} bg={driver.inactive  ? 'gray.300' : driver.driverState ? 'white' : 'red.300'} color={driver.inactive ? 'black' : 'black'}>
-                            <Td>{index + 1}</Td>
-                            <Td>{driver.airports}</Td>
+        <Flex
+            aalignItems='center'
+            justifyContent='center'
+            direction="column"
+            width="100%"
+            overflowX="auto"
+            mt={4}
+            border="1px solid black"
+        >
+            <TableContainer boxShadow="lg" borderRadius="md" bg='#009ED1'>
+                <Flex
+                    bg='#009ED1'
+                    justify={'center'}
+                >
+                    <OrderFilterAlphabetical searcher={searcher} volerAuno={volerAuno}/>
+                </Flex>
+                <Table variant='simple' >
+                    <TableCaption color="black" bgColor="gray.300" border="1px solid black">Conductores registrados</TableCaption>
+                    <Thead>
+                        <Tr bgColor='gray.300'>
+                            <Th border="2px solid black">#</Th>
+                            <Th border="2px solid black">Zona</Th>
+                            <Th border="2px solid black">Nombre</Th>
+                            <Th border="2px solid black">Vehiculo</Th>
+                            <Th border="2px solid black">telefono</Th>
+                            <Th border="2px solid black">Max. Psjr</Th>
+                            <Th border="2px solid black">Aciones</Th>
+                            <Th border="2px solid black">Detalles</Th>
+                            <Th border="2px solid black">Estado</Th>
+                        </Tr>
+                    </Thead>
 
-                            <Td>{driver.name}</Td>
-                            <Td>{driver.carType}</Td>
-                            <Td>{driver.phone}</Td>
-                            <Td>{driver.capacityPassengers}</Td>
+                    <Tbody>
+                {tripsToShow.length>0 ? tripsToShow.map((driver, index) => (
+                    <Tr key={driver.id} bg={driver.inactive ? 'gray.300' : driver.driverState ? 'white' : 'red.300'} color={driver.inactive ? 'black' : 'black'}>
+                                <Td border="2px solid black">{index + 1}</Td>
+                                <Td border="2px solid black">{driver.airports}</Td>
 
-                            <Td justifyContent='center'  >
-                                <Flex gap={2} justifyContent={'center'}  >
-                                    {!driver.inactive ? (
+                                <Td border="2px solid black">{driver.name}</Td>
+                                <Td border="2px solid black">{driver.carType}</Td>
+                                <Td border="2px solid black">{driver.phone}</Td>
+                                <Td border="2px solid black">{driver.capacityPassengers}</Td>
 
-                                    <Tooltip hasArrow label='ELiminar' bg='red' placement='left-start'>
+                                <Td border="2px solid black" justifyContent='center'  >
+                                    <Flex gap={2} justifyContent={'center'}  >
+                                        {!driver.inactive ? (
 
-                                        <Button
-                                        onClick={() => deleteDriver(driver.id)}
-                                        colorScheme={!driver.inactive ? 'red' : 'purple'}
-                                        fontSize='1.2rem'
-                                        id={driver.id}
-                                        >
-                                        {!driver.inactive ? <DeleteIcon /> : <RepeatClockIcon />}
-                                        </Button>
-                                    </Tooltip>
-                                    ) : (
-                                        <Tooltip hasArrow label='Reactivar' bg='purple.400' placement='left-start'>
+                                            <Tooltip hasArrow label='Eliminar' bg='red' placement='left-start'>
 
-                                        <Button onClick={()=> deleteDriver(driver.id) }
-                                            bg='purple.400'
-                                            fontSize='1.2rem' 
-                                            id={driver.id} >
-                                            <RepeatClockIcon />
-                                        </Button>
-                                    </Tooltip>
-                                    )}
-                                    <ViewBtnUpdateDriver id={driver.id}
-                                        name={driver.name}
-                                        surname={driver.surname}
-                                        email={driver.email}
-                                        birthday={driver.birthday}
-                                        dni={driver.dni}
-                                        phone={driver.phone}
-                                        driverImg={driver.driverImg}
-                                        airports={driver.airports}
-                                        carType={driver.carType}
-                                        carModel={driver.carModel}
-                                        driverLicense={driver.driverLicense}
-                                        carImg={driver.carImg}
-                                        carPatent={driver.carPatent}
-                                        carSoat={driver.carSoat}
-                                        circulationPermit={driver.circulationPermit}
-                                        capacityPassengers={driver.capacityPassengers}
-                                        driverState={driver.driverState} />
-                                </Flex>
-                            </Td>
-                            <Td>
-                            <ViewBtnDetailDriver id={driver.id}
+                                                <Button
+                                                    onClick={() => deleteDriver(driver.id)}
+                                                    colorScheme={!driver.inactive ? 'red' : 'purple'}
+                                                    fontSize='1.2rem'
+                                                    id={driver.id}
+                                                >
+                                                    {!driver.inactive ? <DeleteIcon /> : <RepeatClockIcon />}
+                                                </Button>
+                                            </Tooltip>
+                                        ) : (
+                                            <Tooltip hasArrow label='Reactivar' bg='purple.400' placement='left-start'>
+
+                                                <Button onClick={() => reactivateDriver(driver.id)}
+                                                    bg='purple.400'
+                                                    fontSize='1.2rem'
+                                                    id={driver.id} >
+                                                    <RepeatClockIcon />
+                                                </Button>
+                                            </Tooltip>
+                                        )}
+                                        <ViewBtnUpdateDriver
+                                            id={driver.id}
+                                            name={driver.name}
+                                            surname={driver.surname}
+                                            email={driver.email}
+                                            birthday={driver.birthday}
+                                            dni={driver.dni}
+                                            phone={driver.phone}
+                                            driverImg={driver.driverImg}
+                                            airports={driver.airports}
+                                            carType={driver.carType}
+                                            carModel={driver.carModel}
+                                            driverLicense={driver.driverLicense}
+                                            carImg={driver.carImg}
+                                            carPatent={driver.carPatent}
+                                            carSoat={driver.carSoat}
+                                            circulationPermit={driver.circulationPermit}
+                                            capacityPassengers={driver.capacityPassengers}
+                                            driverState={driver.driverState} />
+                                    </Flex>
+                                </Td>
+                                <Td border="2px solid black" textAlign="center">
+                                    <ViewBtnDetailDriver id={driver.id}
                                         name={driver.name}
                                         surname={driver.surname}
                                         email={driver.email}
@@ -171,35 +259,136 @@ const DriverTableView = () => {
                                         capacityPassengers={driver.capacityPassengers}
                                         driverState={driver.driverState}
                                     />
+                                </Td>
+
+                                <Td border="2px solid black" textAlign="center">
+                                    {driver.driverState ? (<Badge colorScheme='green' borderRadius={6} px='2'>
+                                        Trabajo
+                                    </Badge>) : (<Badge colorScheme='red' borderRadius={6} px='2'>
+                                        Descanso
+                                    </Badge>)}
+                                </Td>
+                                {/* SIRVE PARA MOSTRAR SI EL USUARIO ESTA ELIMINADO DE LA BASE DE DATOS. */}
+                                {/* <Td>{!driver.inactive ? (<Badge colorScheme='green' borderRadius={5} px='2'>Activo</Badge>) : (<Badge colorScheme='red'  borderRadius={5} px='2'>Retirado</Badge>)}</Td> */}
+
+                            </Tr>
+                        )) 
+                         :(<Tr>
+                            <Td colSpan={6} textAlign="right" align="center">
+                                <span style={{
+                                fontWeight: "bold",
+                                color: "gray.800",
+                                fontSize: "18px",
+                                }}>
+                                No se encontraron coincidencias con la búsqueda.
+                                </span>
                             </Td>
-
-                            <Td> {driver.driverState ? (<Badge colorScheme='green' borderRadius={6} px='2'>Trabajo</Badge>) : (<Badge colorScheme='red'  borderRadius={6} px='2'>Descanso</Badge>)} </Td>
-
-                            {/* SIRVE PARA MOSTRAR SI EL USUARIO ESTA ELIMINADO DE LA BASE DE DATOS. */}
-                            {/* <Td>{!driver.inactive ? (<Badge colorScheme='green' borderRadius={5} px='2'>Activo</Badge>) : (<Badge colorScheme='red'  borderRadius={5} px='2'>Retirado</Badge>)}</Td> */}
-
+                        </Tr>  )
+                }
+                    </Tbody>
+                    <Tfoot>
+                        <Tr bgColor='gray.300'>
+                            <Th border="2px solid black">#</Th>
+                            <Th border="2px solid black">Zona</Th>
+                            <Th border="2px solid black">Nombre</Th>
+                            <Th border="2px solid black">Vehiculo</Th>
+                            <Th border="2px solid black">telefono</Th>
+                            <Th border="2px solid black">Max. Psjr</Th>
+                            <Th border="2px solid black">Aciones</Th>
+                            <Th border="2px solid black">Detalles</Th>
+                            <Th border="2px solid black">Estado</Th>
                         </Tr>
-                    ))}
+                    </Tfoot>
+                </Table>
+            </TableContainer>
+            <Flex
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                flexDirection="row"
+                bgColor="gray.300"
+                w="100%"
+                h="100%"
+                borderBottomLeftRadius="md"
+                borderBottomRightRadius="md"
+                border="1px solid black"
+            >
+                <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    marginTop="1rem"
+                    marginBottom="1rem"
+                >
+                    <Button
+                        color='black'
+                        bgColor='#009ED1'
+                        variant="outline"
+                        colorScheme="teal"
+                        onClick={prevHandler}
+                    >
+                        Anterior
+                    </Button>
 
-                </Tbody>
-                <Tfoot>
-                    <Tr bgColor='gray.300'>
-                    <Th>#</Th>
-                        <Th>Zona</Th>
-                        <Th>Nombre</Th>
-                        <Th>Vehiculo</Th>
-                        <Th>telefono</Th>
-                        <Th>Max. Psjr</Th>
-                        <Th >Aciones</Th>
-                        <Th >Detalles</Th>
-                        <Th >Estado</Th>
-                        {/* <Th >Eliminado</Th> */}
-                    </Tr>
-                </Tfoot>
-            </Table>
-            {/* COMPONENTE DE PAGINADO */}
-            {/* <Paginado/>  */}
-        </TableContainer>
+                    <Box as="span" marginLeft="1rem" marginRight="1rem">
+                        Página {currentPage}
+                    </Box>
+
+                    <Button
+                        color='black'
+                        bgColor='#009ED1'
+                        variant="outline"
+                        colorScheme="teal"
+                        onClick={nextHandler}
+                    >
+                        Siguiente
+                    </Button>
+                </Box>
+            </Flex>
+            {/* <Flex
+    display="flex"
+    justifyContent="center"
+    alignItems="center"
+    flexDirection="row"
+    bgColor="gray.300"
+    w="100%"
+    h="100%"
+    borderBottomLeftRadius="md" 
+    borderBottomRightRadius="md"
+    border="1px solid black"
+    >
+    <Box 
+    display="flex" 
+    justifyContent="center" 
+    alignItems="center" 
+    marginTop="1rem"
+    marginBottom="1rem"
+    >
+      <Button
+        color='black'
+        bgColor='#009ED1'
+        variant="outline"
+        colorScheme="teal"
+        onClick={prevHandler}
+      >
+        Anterior
+      </Button>
+
+      <Box as="span" marginLeft="1rem" marginRight="1rem">
+        Página {currentPage}
+      </Box>
+
+      <Button
+        color='black'
+        bgColor='#009ED1'
+        variant="outline"
+        colorScheme="teal"
+        onClick={nextHandler}
+      >
+        Siguiente
+      </Button>
+    </Box>
+    </Flex> */}
         </Flex>
     )
 }

@@ -9,13 +9,13 @@ import { BsAlarm, BsCalendar3, BsCursorFill, BsFillGeoFill, BsPersonFill, BsCurr
 
 const CardTrips = () => {
     const [trips, setTrips] = useState('')
-    console.log('trips ', trips);
+    
     useEffect(() => {
         // Definir una función asíncrona dentro del useEffect
         async function fetchData() {
             try {
                 // Puedes usar await dentro de esta función
-                const response = await axios('http://localhost:3001/prices');
+                const response = await axios('https://vamosappserver.onrender.com/prices');
                 // Hacer algo con la respuesta
                 if (response.data) {
                     setTrips(response.data);

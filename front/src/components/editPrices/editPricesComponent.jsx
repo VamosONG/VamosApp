@@ -3,12 +3,23 @@ import {
   Button,
   TableContainer,
   Table,
-  TableCaption, Thead, Tr, Th, Tbody, Td, Input
+  Thead,
+  Tr,
+  Th,
+  Tbody,
+  Input,
+  Flex,
+  Box,
+  Heading,
+  Select,
+  Tooltip,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllPrices, updatePrice } from '../../redux/actions';
+import { getAllPrices, orderSearchPrices, updatePrice } from '../../redux/actions';
 import Swal from 'sweetalert2'
 import { renderToString } from 'react-dom/server';
+import EditPrice from './editPrice';
+import { RepeatClockIcon } from '@chakra-ui/icons';
 
 
 
@@ -16,39 +27,23 @@ import { renderToString } from 'react-dom/server';
 const EditPrices = () => {
 
   const dispatch = useDispatch()
+  
 
   const allPrices = useSelector((state) => state.allPrices)
 
-  const [input, setInput] = useState({})
-  const [confirmationText, setConfirmationText] = useState("")
-
-  console.log(allPrices)
+  
 
   useEffect(() => {
     dispatch(getAllPrices())
-  }, [/* dispatch */]);
+  }, [dispatch]);
 
-  const handleChange = (airport, zone, quantityPassengers, inputValue) => {
-    setInput({
-      airport: airport,
-      zone: zone,
-      quantityPassengers,
-      value: Number(inputValue)
-    })
 
-    setConfirmationText(
-      <div>
-        <p>Origen: {airport}</p>
-        <p>Destino: {zone}</p>
-        <p>Cantidad de pasajeros: {quantityPassengers}</p>
-        <p>Nuevo precio: {inputValue}</p>
-      </div>
-    );
-  }
-  const handleUpdate = () => {
-    console.log(confirmationText)
+  
+  const handleUpdate = (input,confirmationText,editar) => {
+    
+    
     Swal.fire({
-      title: "Está por el cambiar el precio",
+      title: "Está por el cambiar el precio del viaje",
       html: renderToString(confirmationText),
       icon: "warning",
       showCancelButton: true,
@@ -58,61 +53,235 @@ const EditPrices = () => {
       htmlMode: true
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await dispatch(updatePrice(input)) //Para actualizar en BD
+        await dispatch(updatePrice(input))
         Swal.fire({
-          title: "Precio modificado",
-          /* text: "Simulando que se abonó..", */
+          title: "¡Precio modificado con éxito!",
           icon: "success"
         }).then(() => {
 
-          window.location.reload();
+          /* window.location.reload(); */
+          /* history.push('/editPrices'); */
+          /* navigate('/editPrices'); */
+          dispatch(getAllPrices())
+          setCurrentPage(1);
+          setEditar(!editar)
         });
       }
     })
   }
 
+  //***************PAGINADO**********************************/
+  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pricesToShow, setPricesToShow] = useState([]);
+
+  const prevHandler = () => {
+    const prevPage = currentPage - 1;
+
+    if (prevPage < 1) return;
+
+    const firstPrice = (prevPage - 1) * 6;
+
+    setCurrentPage(prevPage);
+    setPricesToShow([...allPrices].splice(firstPrice, 6));
+  };
+
+  const nextHandler = () => {
+    const totalPrices = allPrices.length;
+
+    const nextPage = currentPage + 1;
+
+    const firstPrice = currentPage * 6;
+
+    if (firstPrice >= totalPrices) return;
+    setCurrentPage(nextPage);
+    setPricesToShow([...allPrices].splice(firstPrice, 6));
+  };
+
+
+  useEffect(() => {
+    setPricesToShow([...allPrices].splice(0, 6));
+  }, [allPrices]);
+
+  //***************BUSQUEDA Y ORDENAMIENTO**********************************/
+  const [input, setInput] = useState({
+    searchInput: "",
+    order: "",
+  });
+
+  const handleChange = async (e) => {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    dispatch(orderSearchPrices(input));
+    setCurrentPage(1);
+  };
+
+
+  const handleClean = async (e) => {
+    setInput({
+        ...input,
+        searchInput: "",
+        order: "",
+        tripState: 'completed'
+    })
+    dispatch(orderSearchPrices({
+      ...input,
+      searchInput: "",
+      order: "",
+      tripState: 'completed'
+  }));
+  setCurrentPage(1);
+  }
 
   return (
-    <TableContainer marginTop={'10rem'}>
-      <Table variant='striped' colorScheme='teal'>
-        <TableCaption>Precios según ruta y vehículo</TableCaption>
-        <Thead>
+    <Box width={{ base: "25%", lg: "100%" }}
+    marginTop={{ base: "10%", lg: "0%" }}
+    marginBottom={{ base: "25%", lg: "0%" }}
+    >
+      <Flex
+        width={{ base: "185%", lg: "100%" }}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        flexDirection="row"
+        bgColor='#009ED1'
+        borderTopLeftRadius="md"
+        borderTopRightRadius="md"
+        border="1px solid black"
+      >
+        <Heading fontSize={{ base: "xs", md: "2xl", lg: "100%" }} textTransform="uppercase" margin="1rem">
+          Buscar:
+        </Heading>
+        <Box style={{ display: 'flex', alignItems: 'center' }}>
+          <Input
+            width={{ base: "40%", md: "2xl", lg: "40%" }}
+            marginRight='1rem'
+            color="black"
+            bgColor="white"
+            htmlSize={50}
+            placeholder="Buscar por coincidencia"
+            onChange={handleChange}
+            name="searchInput"
+            value={input.searchInput}
+          />
+          <Select
+            width={{ base: "30%", md: "2xl", lg: "40%" }}
+            marginRight='2rem'
+            color="black"
+            bgColor="white"
+            placeholder="Ordenar"
+            
+            name="order"
+            onChange={handleChange}
+            value={input.order}
+          >
+            <option>mayor precio</option>
+            <option>menor precio</option>
+          </Select>
+        </Box>
+        <Button onClick={handleSubmit} 
+        width={{ base: "xs", md: "2xl", lg: "8%" }}
+        style={{marginRight:'1rem'}} 
+        size={{ base: "md", md: "2xl", lg: "10%" }}
+        >
+          APLICAR
+        </Button>
+        <Tooltip hasArrow label='Reiniciar filtro y búsqueda' bg='#009ED1' placement='left-start'>
+                <Button onClick={handleClean} >
+                <RepeatClockIcon/>
+                </Button>
+                </Tooltip>
+      </Flex>
+
+
+    <Flex
+    alignItems='center'
+    justifyContent='center'
+    direction="column"
+    width={{ base: "185%", md: "2xl", lg: "100%" }}
+    overflowX="auto"
+    borderRadius="md"
+    >
+    <TableContainer>
+    <Flex px={0} 
+    bg='gray.300' 
+    overflowX="auto" 
+    >
+      <Table colorScheme='#009ED1' width="100%">
+        <Thead bg='#009ED1'>
+
           <Tr>
-            <Th>RUTA</Th>
-            <Th>TIPO DE CARRO</Th>
-            <Th>PRECIO EN SOLES</Th>
+          <Th border="2px solid black" color='white' width={{ base: "100px", md: "2xl", lg: "700px" }}>RUTA</Th>
+          <Th border="2px solid black" color='white' width={{ base: "100px", md: "2xl", lg: "400px" }}>TIPO DE CARRO</Th>
+          <Th border="2px solid black" color='white' width={{ base: "100px", md: "2xl", lg: "300px" }}>PRECIO EN SOLES / ACTUALIZAR</Th>
           </Tr>
         </Thead>
-        <Tbody>
-          {allPrices?.map((combo, index) => (
-            <Tr>
-              <Td>{combo.airport} - {combo.zone}</Td>
-              {combo.quantityPassengers === 4 ? (
-                <Td>AUTO</Td>
-              ) : (combo.quantityPassengers === 6 ? (
-                <Td>CAMIONETA</Td>
-              ) : (combo.quantityPassengers === 10 ? (
-                <Td>VAN</Td>
-              ) : (<Td>VAN PLUS</Td>)))}
+        <Tbody border="2px solid black" justifyContent="center">
+          {pricesToShow?.map((combo, index) => (
 
-              <Td><Input
-                htmlSize={4}
-                width='auto'
-                border='2px solid black'
-                placeholder={combo.value}
-                name='date'
-                /* value={input.value} */
-                onChange={(e) => handleChange(combo.airport, combo.zone, combo.quantityPassengers, e.target.value)} /></Td>
-              <Td><Button
-                backgroundColor="black"
-                variant="solid"
-                color="white"
-                onClick={() => handleUpdate()}>Actualizar</Button></Td>
-            </Tr>
+            <EditPrice
+            key={index}
+            combo={combo}
+            index={index}
+            handleUpdate={handleUpdate}
+            isEvenRow={index % 2 === 0}
+          />
           ))}
         </Tbody>
       </Table>
+      </Flex>
     </TableContainer>
+    <Flex
+    display="flex"
+    justifyContent="center"
+    alignItems="center"
+    flexDirection="row"
+    bgColor="gray.300"
+    width={{ base: "100%", md: "2xl", lg: "100%" }}
+    h="100%"
+    borderBottomLeftRadius="md" 
+    borderBottomRightRadius="md"
+    border="1px solid black"
+    >
+    <Box 
+    display="flex" 
+    justifyContent="center" 
+    alignItems="center" 
+    marginTop="1rem"
+    marginBottom="1rem"
+    >
+      <Button
+        color='black'
+        bgColor='#009ED1'
+        variant="outline"
+        colorScheme="teal"
+        onClick={prevHandler}
+      >
+        Anterior
+      </Button>
+
+      <Box as="span" marginLeft="1rem" marginRight="1rem">
+        Página {currentPage}
+      </Box>
+
+      <Button
+        color='black'
+        bgColor='#009ED1'
+        variant="outline"
+        colorScheme="teal"
+        onClick={nextHandler}
+      >
+        Siguiente
+      </Button>
+    </Box>
+    </Flex>
+    </Flex>
+    </Box>
   );
 };
 export default EditPrices

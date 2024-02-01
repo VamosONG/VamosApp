@@ -36,7 +36,8 @@ import { useSelector } from 'react-redux'
 import Swal from "sweetalert2";
 import CardUserTrips from '../cardUserTrips/cardUserTrips';
 import UpdateUserDataForm from './updateUserDataForms';
-import CardTrips from '../cards/cardTrips';
+// import CardTrips from '../cards/cardTrips';
+import CeroViaje from '../errorViews/ceroViaje/ceroViajes'; 
 
 const UserProfile = () => {
     const location = useLocation();
@@ -89,23 +90,23 @@ const UserProfile = () => {
     const bgImg = 'https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg'
 
     return (
-        <Box h='90vh' marginTop={'100px'} display={'flex'} justifyContent={'center'} alignContent={'center'} bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
+        <Box h='90vh'  display={'flex'} justifyContent={'center'} alignContent={'center'} bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
             justify="center"
             bgSize="cover"
             bgRepeat="no-repeat">
-            {location.pathname !== '/profile' && <NavBar />}
+         
             <Flex h={'60%'} w='80%' m='auto' justify={'space-evenly'} align={'center'} overflow={'hidden'} borderLeftRadius={10} borderRightRadius={10}>
-                <Flex h='100%' w='50%' position={'relative'}>
-                    <Flex bg={'#009ED1'} flexDirection={'row'} align={'center'} justify={'start'} w={'100%'} p='1rem' gap={4} position={'relative'} borderRadius={8}>
+                <Flex   position={'relative'}>
+                    <Flex bg={'#009ED1'} flexDirection={'row'} align={'center'} justify={'start'} w={'100%'} p='2.2rem' gap={4} position={'relative'} borderRadius={8}>
                         {userDetail && userDetail ? (
                             <>
                                 <Tooltip label='Editar datos' placement='left' bg='#10447E' borderRadius={4}>
-                                    <Button w='1rem' h='1rem' position={'absolute'} bottom={'2rem'} right={'1rem'}>
+                                    <Button w='1rem' h='1rem' position={'absolute'} bottom={'1.5rem'} right={'.5rem'}>
                                         <UpdateUserDataForm userDetail={userDetail} />
                                     </Button>
                                 </Tooltip>
-                                <Flex w={'50%'} justify={'center'} position={'relative'}>
-                                    <Image w={'15rem'} h={'15rem'} name='Segun Adebayo' src={fotoPerfil ? fotoPerfil : 'https://bit.ly/sage-adebayo'} border={'2px solid #10447E'}
+                                <Flex w={'50%'} justify={'center'} position={'relative'} >
+                                    <Image w={'15rem'} h={'15rem'} name='Segun Adebayo' src={fotoPerfil ? fotoPerfil : 'https://res.cloudinary.com/drgnsbah9/image/upload/v1706742586/PERFIL-VACIO_jt5irw.png'} border={'2px solid #10447E'}
                                         alt={fotoPerfil.name}
                                         bg='white'
                                         borderRadius={10}
@@ -113,7 +114,7 @@ const UserProfile = () => {
                                         loading='lazy'
                                     />{' '}
                                     <Tooltip label='Cambiar Foto' placement='left' bg='#10447E' borderRadius={4} >
-                                        <Button position={'absolute'} bottom={0} right={'1rem'} w='2.3rem' h='2.3rem' onClick={changeImgPerfil} bg='#10447E' color={'white'}>
+                                        <Button position={'absolute'} bottom={0} right={'0rem'} w='2.3rem' h='2.3rem' onClick={changeImgPerfil} bg='#10447E' color={'white'}>
                                             <EditIcon />
                                         </Button>
                                     </Tooltip>
@@ -123,29 +124,30 @@ const UserProfile = () => {
 
                                     
                                         <Text fontSize={'1.7rem'} color={'white'}>
-                                            Bienvenido {userDetail.name}
+                                            ¡Bienvenido   {userDetail.name}!
                                         </Text>
                                         <Flex w={'100%'} bg='whitesmoke' justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4' >
                                             <Text textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}>
-                                                {userDetail.name}
+                                                Nombre: {userDetail.name}
                                             </Text>
 
                                         </Flex>
                                         <Flex w={'100%'} bg='whitesmoke' justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4' >
                                             <Text textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}>
-                                                {userDetail.surname}
+                                                Apellido: {userDetail.surname}
                                             </Text>
                                         </Flex>
                                     </Flex>
                                     <Flex w={'100%'} justify={'space-evenly'} gap={4} flexDirection={'column'} >
                                         <Flex w={'100%'} bg='whitesmoke' justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4'>
-                                            <Text textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}>
+                                            
+                                            <Text maxW={"120%"} textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}>
                                                 {userDetail.email}
                                             </Text>
                                         </Flex>
                                         <Flex w={'100%'} bg='whitesmoke' justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4'>
                                             <Text textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}>
-                                                {userDetail.dni ? userDetail.dni : 'DNI, no registrado'}
+                                                DNI: {userDetail.dni ? userDetail.dni : 'DNI, no registrado'}
                                             </Text>
                                     
                                         </Flex>
@@ -178,10 +180,18 @@ const UserProfile = () => {
                                     </TabList>
                                     <TabPanels >
                                         <TabPanel p='0'>
+                                            {userDetail.Trips.length  ? (
                                             <CardUserTrips userDetail={userDetail} stateFilter='reserved' />
+                                            ):(
+                                                <CeroViaje/>
+                                            )}
                                         </TabPanel>
                                         <TabPanel p='0'>
-                                            <CardUserTrips userDetail={userDetail} stateFilter='completed' />
+                                            {userDetail.Trips.length  ? (
+                                                <CardUserTrips userDetail={userDetail} stateFilter='completed' />
+                                            ) : (
+                                                <CeroViaje/>
+                                            )}
                                         </TabPanel>
                                     </TabPanels>
                                 </Tabs>

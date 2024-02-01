@@ -27,8 +27,11 @@ import TripsForMonths from "./tripsForMonths"
 
 function LinesChart() {
     const viajes = TripsForMonths()
-    console.log(viajes);
-    var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+    
+    var meses = [
+        "Ene", "Feb", "Mar", "Abr", "May", "Jun",
+        "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
+      ]
     var midata = {
         labels: meses,
         datasets: [ // Cada una de las líneas del gráfico
@@ -48,9 +51,11 @@ function LinesChart() {
     };
     var misoptions = {
         scales: {
-            y: {
-                min: 0
-            },
+            yAxes: [ // Cambiado de 'y' a 'yAxes'
+                {
+                    min: 0
+                }
+            ],
             x: {
                 ticks: { color: 'rgb(255, 99, 132)' }
             }

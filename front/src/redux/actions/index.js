@@ -6,7 +6,7 @@ import {auth} from "../../firebase/firebase.config"
 
 
 
-import {  ORDER_TRIPS, GET_TRIPS,DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, HANDLE_ADMIN, ORDER_DATE, FILTER_RATING, GET_DATA_USER } from './action.types';
+import {  GET_USUARIOS_FILTRADOS, ORDER_TRIPS, GET_TRIPS,DELETE_DRIVER, GET_TRIP_ID, DRIVER_STATE, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, UPDATE_DRIVER_DATA, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, HANDLE_ADMIN, ORDER_DATE, FILTER_RATING, GET_DATA_USER } from './action.types';
 
 
 //Estas constantes deben ir enotro activo llamado ACTION.TYPES.JS
@@ -26,18 +26,18 @@ export const GET_TRIPS_BY_ID = 'GET_TRIPS_BY_ID'
 export const POST_REVIEW = 'POST_REVIEW'
 export const CLEAN_USER_BY_EMAIL = "CLEAN_USER_BY_EMAIL"
 export const GET_ALL_PRICES = 'GET_ALL_PRICES'
-
+export const GET_CONDUCTORES_FILTRADOS = "GET_CONDUCTORES_FILTRADOS"
 export const USER_BY_EMAIL = 'USER_BY_EMAIL'
 export const GET_PAYMENT_DATA = 'GET_PAYMENT_DATA'
 
-const URL = 'http://localhost:3001'
+const URL = 'https://vamosappserver.onrender.com'
 
 
 
 export const getAllConductores = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios(`http://localhost:3001/drivers`);
+            const { data } = await axios(`https://vamosappserver.onrender.com/drivers`);
             dispatch({
                 type: GET_ALL_CONDUCTORES,
                 payload: data
@@ -53,7 +53,7 @@ export const getAllConductores = () => {
 export const getTripById = (id) => {
     return async (dispatch) => {
         try {
-            const {data} = await axios.get(`http://localhost:3001/trips/tripId/${id}`)
+            const {data} = await axios.get(`https://vamosappserver.onrender.com/trips/tripId/${id}`)
             return dispatch({
                 type:GET_TRIP_ID,
                 payload: data
@@ -65,7 +65,7 @@ export const getTripById = (id) => {
 }
 
 export const createNewChofer = (data) => {
-    console.log('data en actiopn' + data);
+    
     return async (dispatch) => {
         try {
             return dispatch({
@@ -83,7 +83,7 @@ export const createNewChofer = (data) => {
 export const deleteDriverAction = (id) => {
     return async (dispatch) => {
         try {
-            const {data} = await axios.patch(`http://localhost:3001/drivers/logic/${id}`)
+            const {data} = await axios.patch(`https://vamosappserver.onrender.com/drivers/logic/${id}`)
             dispatch({
                 type: DELETE_DRIVER,
                 payload: data
@@ -98,14 +98,14 @@ export const postNewViaje = (infoViaje) => {
 
     //  infoViaje.userId= "762baea5-4422-44de-ae36-ddf9c6a9e43b"
     //infoViaje.userId= "74c99ae0-61f9-4d85-bcb6-fcf680183c48" //(con permisos de admin)
-    console.log(infoViaje)
+   
     return async (dispatch) => {
         try {
 
             /* const { data } = await axios.post(`https://vamosappserver.onrender.com/offer/create`, infoViaje); */
 
-            const { data } = await axios.post(`http://localhost:3001/offer/create`, infoViaje);
-            console.log(data)
+            const { data } = await axios.post(`https://vamosappserver.onrender.com/offer/create`, infoViaje);
+            
             await dispatch({
                 type: POST_NEW_VIAJE,
                 payload: data
@@ -113,63 +113,63 @@ export const postNewViaje = (infoViaje) => {
 
         } catch (error) {
             window.alert('¡Error en la solicitud!');
-            /* throw new Error(error); */
-            console.log(error.message)
+            
+            throw new Error(error.message)
         }
     }
 }
 
 export const getReservedTrips = () =>{
-    console.log('llega aqui');
+   
     return async(dispatch)=> {
-        const endpoint= 'http://localhost:3001/trips/reserves' //Se cambió a la ruta con viajes reservados
+        const endpoint= 'https://vamosappserver.onrender.com/trips/reserves' //Se cambió a la ruta con viajes reservados
         try {
             const { data } = await axios.get(endpoint)
-            console.log(data);
+            
             return dispatch({
                 type: GET_RESERVED_TRIPS,
                 payload: data
             })
         } catch (error) {
-            console.log(error);
+            throw new Error(error.message);
             /* alert("error en getReservedTrips") */
         }
     }
 }
 export const getPendingTrips = () =>{
     return async(dispatch)=> {
-        const endpoint= 'http://localhost:3001/trips/pending' //ruta con viajes pendientes
+        const endpoint= 'https://vamosappserver.onrender.com/trips/pending' //ruta con viajes pendientes
         try {
             const { data } = await axios.get(endpoint)
-            console.log(data);
+            
             return dispatch({
                 type: GET_PENDING_TRIPS,
                 payload: data
             })
         } catch (error) {
-            console.log(error);
-            alert("error en getPendingTrips ")
+            throw new Error(error.message);
+            // alert("error en getPendingTrips ")
         }
     }
 }
 export const getCanceledTrips = () =>{
     return async(dispatch)=> {
-        const endpoint= 'http://localhost:3001/trips/completed' //ruta con viajes completados
+        const endpoint= 'https://vamosappserver.onrender.com/trips/completed' //ruta con viajes completados
         try {
             const { data } = await axios.get(endpoint)
-            console.log(data);
+            
             return dispatch({
                 type: GET_COMPLETED_TRIPS,
                 payload: data
             })
         } catch (error) {
-            console.log(error);
+            throw new Error(error.message);
         }
     }
 }
 
 export const postNewUser = (form) => {
-    console.log(form);
+    
     return async (dispatch) => {
         try {
             return dispatch({
@@ -186,7 +186,7 @@ export const postNewUser = (form) => {
 export const getDataUser = () => {
     return async (dispatch) => {
         try {
-            const {data } = await axios('http://localhost:3001/user')
+            const {data } = await axios('https://vamosappserver.onrender.com/user')
             return dispatch({
                 type: GET_DATA_USER,
                 payload: data
@@ -200,7 +200,7 @@ export const getDataUser = () => {
 export const getDetailUserById = (id) => {
     return async (dispatch)=> {
         try {
-            const {data} = axios.get(`http://localhost:3001/user/${id}`)
+            const {data} = axios.get(`https://vamosappserver.onrender.com/user/${id}`)
             return dispatch({
                 type: GET_DETAIL_USER,
                 payload: data
@@ -215,7 +215,7 @@ export const getDetailUserById = (id) => {
 export const handleAdminUser = (id) => {
     return async (dispatch) => {
         try {
-            const {data} = await axios.patch(`http://localhost:3001/user/admin/${id}`)
+            const {data} = await axios.patch(`https://vamosappserver.onrender.com/user/admin/${id}`)
             dispatch({
                 type: HANDLE_ADMIN,
                 payload: data
@@ -227,7 +227,7 @@ export const handleAdminUser = (id) => {
 }
 
 export const paginateConductores = (order) => {
-    console.log(order);
+   
     return async (dispatch) => {
         try {
             dispatch({
@@ -270,53 +270,55 @@ export const logOutAction = (value) => {
     };
 }
 
+
+
 //NO SE VA A USAR!!!
 // export const viajeConfirmado = (info) => {
-//     console.log(info)
+//    
 //     return async (dispatch) => {
 //         try {
-//             const {data}=await axios.put(`http://localhost:3001/trips/reserves/create`, info)
+//             const {data}=await axios.put(`https://vamosappserver.onrender.com/trips/reserves/create`, info)
 //             /* const mailReserve = {
 //                 userId: info.userId,
 //                 tripId: info.tripId,
 //                 option: "reserve"
 //             }
 //             const[reserveResp, mailResp] = await Promise.all([
-//                 axios.post(`http://localhost:3001/send-mail`,mailReserve)
+//                 axios.post(`https://vamosappserver.onrender.com/send-mail`,mailReserve)
 //             ])
             
-//             console.log(reserveResp.data)
-//             console.log(`Estado de mail reserva: ${mailResp}`); */
+//            
+//              */
 //             dispatch({
 //                 type: VIAJE_CONFIRMADO,
 //                 payload: data
 //             })
 //         } catch (error) {
 //             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-//             console.log(error.message)
+//             throw new Error(error.message)
 //         };
 //     };
 // };
 
 export const filtrarConductores = (info) => {
-    console.log(info)
+    
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`http://localhost:3001/drivers/filter`, info);
-            console.log(data)
+            const { data } = await axios.post(`https://vamosappserver.onrender.com/drivers/filter`, info);
+            
             dispatch({
                 type: GET_FILTERED,
                 payload: data
             })
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-            console.log(error.message)
+            throw new Error(error.message)
         };
     };
 };
 
 export const conductorAsignado = (info) => {
-    console.log(info)
+   
     return async (dispatch) => {
         try {
             const mailReserve = {
@@ -326,18 +328,17 @@ export const conductorAsignado = (info) => {
             }
 
             const[reserveResp, mailResp] = await Promise.all([
-                axios.put(`http://localhost:3001/trips/reserves/update`, info),
-                axios.post(`http://localhost:3001/send-mail`,mailReserve)
+                axios.put(`https://vamosappserver.onrender.com/trips/reserves/update`, info),
+                axios.post(`https://vamosappserver.onrender.com/send-mail`,mailReserve)
             ])
-            console.log(reserveResp.data)
-            console.log(`Estado de mail reserva: ${mailResp}`);
+            
             /* dispatch({
                 type: GET_FILTERED,
                 payload: data
             }) */
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-            console.log(error.message)
+            throw new Error(error.message)
         };
     };
 };
@@ -350,7 +351,7 @@ export const orderListTrips = (data) => {
                 payload: data
             })
         } catch (error) {
-            console.log('Error en orden list' , error)
+            throw new Error('Error en orden list' , error)
         }
     }
 }
@@ -473,11 +474,11 @@ export const stateFilter = (data) => {
 }
 
 export const getTripsById = (id) => {
-    console.log(id)
+    
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`http://localhost:3001/trips/tripId/${id}`)
-            console.log(data)
+            const { data } = await axios.get(`https://vamosappserver.onrender.com/trips/tripId/${id}`)
+            
             return dispatch({
                 type: GET_TRIPS_BY_ID,
                 payload: data
@@ -490,10 +491,10 @@ export const getTripsById = (id) => {
 
 export const postReview = (info) => {
     /* info.driverId='46d639a7-5468-495b-b9a7-f666517d3bfb' */
-    console.log(info)
+    
     return async (dispatch) => {
-        const { data } = await axios.post(`http://localhost:3001/reviews/create`, info);
-        console.log(data)
+        const { data } = await axios.post(`https://vamosappserver.onrender.com/reviews/create`, info);
+       
         try {
             return dispatch({
                 type: POST_REVIEW,
@@ -501,7 +502,7 @@ export const postReview = (info) => {
             })
         } catch (error) {
            /*  throw new Error(error); */
-           console.log(error.message)
+           throw new Error(error.message)
         }
     }
 }
@@ -509,8 +510,8 @@ export const postReview = (info) => {
 export const getReviewsData = () => {
     return async (dispatch) => {
         try {
-            const {data} = await axios.get(`http://localhost:3001/reviews`)
-            console.log('review data ' + data );
+            const {data} = await axios.get(`https://vamosappserver.onrender.com/reviews`)
+            
             return dispatch({
                 type: GET_REVIEWS,
                 payload: data
@@ -523,18 +524,23 @@ export const getReviewsData = () => {
 
 
 export const getUserByEmail = (email) => {
-    console.log(email)
+   
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(`http://localhost:3001/user/email?email=${email}`);
-            console.log(data)
+            const { data } = await axios.get(`https://vamosappserver.onrender.com/user/email?email=${email}`);
+           
+
+            if(data.banned)
+                throw new Error(`El usuario con email ${data.email} se encuentra bloqueado.`)
              dispatch({
+
                 type: USER_BY_EMAIL,
                 payload: data
             })
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-            console.log(error.message)
+            
+            throw new Error(`Error de sesion: ${error.message}`)
         }
     };
 };
@@ -542,7 +548,7 @@ export const getUserByEmail = (email) => {
 export const getAllPrices = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios(`http://localhost:3001/prices`);
+            const { data } = await axios(`https://vamosappserver.onrender.com/prices`);
             dispatch({
                 type: GET_ALL_PRICES,
                 payload: data
@@ -557,18 +563,18 @@ export const getAllPrices = () => {
 }
 
 export const updatePrice = (info) => {
-    console.log(info)
+    
     return async (dispatch) => {
         try {
-            const { data } = await axios.put(`http://localhost:3001/price/update`, info);
-            console.log(data)
+            const { data } = await axios.put(`https://vamosappserver.onrender.com/price/update`, info);
+            
             /* dispatch({
                 type: GET_FILTERED,
                 payload: data
             }) */
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-            console.log(error.message)
+            throw new Error(error.message)
         };
     };
 };
@@ -576,8 +582,8 @@ export const updatePrice = (info) => {
 export const getDataMePago = () => {
     // return async (dispatch) => {
     //     try {
-    //         const { data } = await axios.get(`http://localhost:3001/mepago/success`);
-    //         console.log(data)
+    //         const { data } = await axios.get(`https://vamosappserver.onrender.com/mepago/success`);
+    //        
     //         dispatch({
     //             type: GET_PAYMENT_DATA,
     //             payload: data
@@ -591,15 +597,15 @@ export const getDataMePago = () => {
     return async (dispatch) => {
         try {
             const currentUrl = window.location.href;
-            console.log(currentUrl);
+            
             const urlParams = new URLSearchParams(currentUrl);
-            console.log(urlParams);
+           
             const paymentData = {};
             urlParams.forEach((value, key) => {
                 paymentData[key] = value;
             });
 
-            console.log(paymentData);
+           
 
             dispatch({
                 type: GET_PAYMENT_DATA,
@@ -626,7 +632,7 @@ export const cleanCurrentUser = () => {
 export const orderSearch = (input) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(`http://localhost:3001/trips/filters`, input);
+            const { data } = await axios.post(`https://vamosappserver.onrender.com/trips/filters`, input);
 
             // hacer in if, para que dependiendo del tipo de viaje, sepa donde guardar
             
@@ -648,23 +654,108 @@ export const orderSearch = (input) => {
             ))
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-            console.log(error.message)
+            throw new Error(error.message)
         }
     };
 
-}
+    
 
+}
+//********************************************************************************************************* */
+export const orderSearchDrivers = (input) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`https://vamosappserver.onrender.com/drivers/filter`, input);
+
+            // Asegúrate de tener un tipo de acción que actualice el estado conductores
+            dispatch({
+                type: GET_CONDUCTORES_FILTRADOS,  // Reemplaza con tu tipo de acción específico
+                payload: data
+            });
+        } catch (error) {
+            // Manejo de errores
+            throw new Error(error.message);
+        }
+    };
+}
+//*************************************************************************************************************** */
+export const orderSearchUsers = (input) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`https://vamosappserver.onrender.com/user/filter`, input);
+
+            
+            dispatch({
+                type: GET_USUARIOS_FILTRADOS, 
+                payload: data
+            });
+        } catch (error) {
+            
+            throw new Error(error.message);
+        }
+    };
+}
 export const getTrips = () => {
     return async (dispatch)=> {
         try {
-            const {data} =await  axios.get(`http://localhost:3001/trips`)
+            const {data} =await  axios.get(`https://vamosappserver.onrender.com/trips`)
           
             return dispatch({
                 type: GET_TRIPS,
                 payload: data
             })
         } catch (error) {
-            console.error("Error en trips:", error);
+            // console.error("Error en trips:", error); //throw new Error?
+            throw new Error("Error en trips:", error); 
         }
     }
+}
+export const handlePayment = (infoConfirmacionViaje,currentUserId) => {
+    const product = {
+        viaje:`${infoConfirmacionViaje.origin}${infoConfirmacionViaje.destination}`, 
+        price: Number(infoConfirmacionViaje?.price) ,//Ojo, que esto puede cambiar
+        // quantityPassengers: "1",
+        userId: currentUserId,
+        origin: infoConfirmacionViaje?.origin,
+        destination: infoConfirmacionViaje?.destination,
+        date:infoConfirmacionViaje?.date,
+        hour: infoConfirmacionViaje?.hour,
+        quantityPassengers: Number(infoConfirmacionViaje.quantityPassengers),
+        driverId: null
+      }
+      
+    return async (dispatch)=> {
+        try {
+            const {data} =await axios.post("https://vamosappserver.onrender.com/mepago/create-order", product)
+            window.location.href = data
+            /* return dispatch({
+                type: MERCADO_PAGO,
+                payload: data
+            }) */
+        } catch (error) {
+            console.error("Error en al redirigir", error);
+            throw new Error(error.message)
+        }
+    }
+}
+
+
+
+
+export const orderSearchPrices = (input) => {
+   
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`https://vamosappserver.onrender.com/price/filter`, input);
+            
+            dispatch({
+                type: GET_ALL_PRICES,
+                payload: data
+            })
+            
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            throw new Error(error.message)
+        }
+    };
 }

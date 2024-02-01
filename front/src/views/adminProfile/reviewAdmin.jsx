@@ -16,6 +16,7 @@ import axios from 'axios'
 import ReviewFilter from '../driversViewAdmin/filtersData/reviewFilter';
 import { useDispatch, useSelector } from "react-redux";
 import { getReviewsData } from '../../redux/actions';
+import Pagination from '../../components/paginado/paginadoComponent';
 // import Paginado from '../../components/paginado/paginadoComponent';
 
 
@@ -24,90 +25,169 @@ const ReviewAdmin = () => {
     const reviews = useSelector((state) => state.reviewsData)
     const dispatch = useDispatch()
 
-    const [search , setSearch] = useState('')
+    const [search, setSearch] = useState('')
 
     const searcher = (e) => {
         setSearch(e.target.value)
     }
 
     const results = !search ? reviews : reviews.filter((data) => data.userName && data.userName.toLowerCase().includes(search.toLowerCase()) || data.userMail && data.userMail.toLowerCase().includes(search.toLowerCase()) || data.driverName && data.driverName.toLowerCase().includes(search.toLowerCase())
-)
+    )
+
+    const itemsPerPage = 6;
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [review, setReview] = useState([]);
+
+    const prevHandler = () => {
+        const prevPage = currentPage - 1;
+
+        if (prevPage < 1) return;
+
+        const firstReserved = (prevPage - 1) * 6;
+
+        setCurrentPage(prevPage);
+        setReview([...reviews].splice(firstReserved, 6))
+    }
+
+    const nextHandler = () => {
+        const totalReviews = reviews.length;
+
+        const nextPage = currentPage + 1;
+
+        const firstReserved = currentPage * 6;
+
+        if (firstReserved >= totalReviews) return;
+        setCurrentPage(nextPage);
+        setReview([...reviews].splice(firstReserved, 6))
+    }
 
     useEffect(() => {
         dispatch(getReviewsData())
     }, [])
 
+    useEffect(() => {
+        setReview([...reviews].splice(0, 6));
+    }, [reviews])
+
     return (
-        <Flex alignItem='center' justifyContent='center'>
 
-        <TableContainer >
-            <Flex bg="purple.500" color="#000" justify={'center'} p={4} borderTopLeftRadius="md" borderTopRightRadius="md">
-                <ReviewFilter searcher={searcher} />
+        <Flex 
+        aalignItems='center'
+        justifyContent='center'
+        direction="column"
+        width={{ base: "28%", lg: "100%" }}
+        overflowX="auto"
+        marginTop={{ base: "4%", lg: "0%" }}
+        >
+            <TableContainer >
+                <Flex bg='#009ED1' justify={'center'} p={2} borderTopLeftRadius="md" borderTopRightRadius="md" border="1px solid black">
+                    <ReviewFilter searcher={searcher} />
                 </Flex>
-            <Flex px={4} bg='gray.300' overflowX="auto" borderBottomLeftRadius="md" borderBottomRightRadius="md">
-                <Table variant='striped' colorScheme='gray.100' >
-                    <TableCaption>Reviews</TableCaption>
-                    <Thead>
-                        <Tr>
-                            <Th >Usuario</Th>
-                            <Th >E-mail</Th>
-                            <Th>Fecha</Th>
-                            <Th>comentario</Th>
-                            <Th>chofer</Th>
-                            <Th>Calificacion</Th>
-                        </Tr>
-                    </Thead>
-
-                    <Tbody>
-                        {results?.map((review, index) => (
-                            <Tr key={review.id} bg={review.qualification <= 3 ? 'yellow.400' : null} >
-                                <Td w='auto' >{review.userName ? review.userName : 'User Test'}</Td>
-                                <Td w='min-content' >
-                                    <Tooltip hasArrow label={review.userMail !== 'Email bloqueado' ? 'Enviar Correo' : null} bg='#10447E' placement='top'>
-                                        <Link href={`mailto:${review.userMail}`}>
-                                            {review.userMail} <EmailIcon/>
-                                        </Link>
-                                    </Tooltip>
-                                </Td>
-                                <Td w='auto' >{review.date}</Td>
-                                <Td w='auto' >{review.comments}</Td>
-                                <Td w='auto' display={'flex'} flexDirection={'column'}>
-                                    <Badge variant='solid' colorScheme='green' w='max-content'>
-                                        {review.driverName}
-                                    </Badge>
-
-                                    <Tooltip hasArrow label={review.driverPhone !== 'Numero oculto' ? 'Contactar' : null} bg='#10447E' placement='top'>
-                                        <Link href={`whatsapp://send?phone=+51${review.driverPhone}`} >
-                                            {review.driverPhone} <ChatIcon/>
-                                        </Link>
-                                    </Tooltip>
-                                </Td>
-
-                                <Td w='auto' >  {Array(5)
-                                    .fill('')
-                                    .map((_, i) => (
-                                        <StarIcon key={i} color={i < review.qualification ? 'yellow.500' : 'gray.300'} />
-                                    ))} </Td>
-
+                <Flex px={0} bg='gray.300' overflowX="auto" borderBottomLeftRadius="md" borderBottomRightRadius="md" border="1px solid black">
+                    <Table variant='striped' colorScheme='gray.100' >
+                        <TableCaption border="1px solid black">Reviews</TableCaption>
+                        <Thead>
+                            <Tr>
+                                <Th border="2px solid black">Usuario</Th>
+                                <Th border="2px solid black">E-mail</Th>
+                                <Th border="2px solid black">Fecha</Th>
+                                <Th border="2px solid black">comentario</Th>
+                                <Th border="2px solid black">chofer</Th>
+                                <Th border="2px solid black">Calificacion</Th>
                             </Tr>
-                        ))}
+                        </Thead>
 
-                    </Tbody>
-                    <Tfoot>
-                        <Tr>
-                            <Th >Usuario</Th>
-                            <Th >E-mail</Th>
-                            <Th>Fecha</Th>
-                            <Th>comentario</Th>
-                            <Th>chofer</Th>
-                            <Th>Calificacion</Th>
-                        </Tr>
-                    </Tfoot>
-                </Table>
-            </Flex>
-            {/* COMPONENTE DE PAGINADO */}
-            {/* <Paginado/>  */}
-        </TableContainer>
+                        <Tbody>
+
+                            {review.length>0 ? review?.map((review) => (
+                                <Tr key={review.id} bg={review.qualification <= 3 ? 'blue.200' : null} >
+                                    <Td border="2px solid black" w='auto' >{review.userName ? review.userName : 'User Test'}</Td>
+                                    <Td border="2px solid black" w='min-content' >
+                                        <Tooltip hasArrow label={review.userMail !== 'Email bloqueado' ? 'Enviar Correo' : null} bg='#10447E' placement='top'>
+                                            <Link href={`mailto:${review.userMail}`}>
+                                                {review.userMail} <EmailIcon />
+                                            </Link>
+                                        </Tooltip>
+                                    </Td>
+                                    <Td border="2px solid black" w='auto' >{review.date}</Td>
+                                    <Td border="2px solid black" w='auto' >{review.comments}</Td>
+                                    <Td border="1px solid black" w='auto' display={'flex'} flexDirection={'column'}>
+                                        <Badge variant='solid' colorScheme='green' w='max-content'>
+                                            {review.driverName}
+                                        </Badge>
+
+                                        <Tooltip hasArrow label={review.driverPhone !== 'Numero oculto' ? 'Contactar' : null} bg='#10447E' placement='top'>
+                                            <Link href={`whatsapp://send?phone=+51${review.driverPhone}`} >
+                                                {review.driverPhone} <ChatIcon />
+                                            </Link>
+                                        </Tooltip>
+                                    </Td>
+
+                                    <Td border="2px solid black" w='auto' >  {Array(5)
+                                        .fill('')
+                                        .map((_, i) => (
+                                            <StarIcon key={i} color={i < review.qualification ? '#E83D6F' : 'gray.300'} />
+                                        ))} </Td>
+                                </Tr>
+                            ))
+                            : (<Tr>
+                                <Td colSpan={6} textAlign="center" align="center">
+                                    <span style={{
+                                    fontWeight: "bold",
+                                    color: "gray.800",
+                                    fontSize: "18px",
+                                    }}>
+                                    No se encontraron coincidencias con la búsqueda.
+                                    </span>
+                                </Td>
+                            </Tr>  )
+                        }
+
+                        </Tbody>
+                        <Tfoot>
+                            <Tr>
+                                <Th border="2px solid black">Usuario</Th>
+                                <Th border="2px solid black">E-mail</Th>
+                                <Th border="2px solid black">Fecha</Th>
+                                <Th border="2px solid black">comentario</Th>
+                                <Th border="2px solid black">chofer</Th>
+                                <Th border="2px solid black">Calificacion</Th>
+                            </Tr>
+                        </Tfoot>
+                    </Table>
+                </Flex> 
+                 {/* {reviews.length > 1 ? ( */}
+                    <Box display="flex" justifyContent="center" alignItems="center" marginTop="1rem">
+                        <Button
+                            color='black'
+                            bgColor='#009ED1'
+                            variant="outline"
+                            colorScheme="teal"
+                            onClick={prevHandler}
+                        >
+                            Anterior
+                        </Button>
+
+                        <Box as="span" marginLeft="1rem" marginRight="1rem">
+                            Página {currentPage}
+                        </Box>
+
+                        <Button
+                            color='black'
+                            bgColor='#009ED1'
+                            variant="outline"
+                            colorScheme="teal"
+                            onClick={nextHandler}
+                        >
+                            Siguiente
+                        </Button>
+                    </Box>
+                {/* // ) : (
+                //     null
+                // )}
+                // COMPONENTE DE PAGINADO  */}
+            </TableContainer>
         </Flex>
     )
 }

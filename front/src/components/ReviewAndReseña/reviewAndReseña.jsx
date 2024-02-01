@@ -1,29 +1,24 @@
 import { useEffect, useState } from "react"
 import { getPendingTrips, getTripsById, postReview } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Button, Card, CardBody, CardHeader, Flex, Heading, Stack, StackDivider,Text, Textarea } from "@chakra-ui/react";
+import { Box, Button, Card, CardBody, CardHeader, Center, Flex, Heading, Stack, StackDivider,Text, Textarea } from "@chakra-ui/react";
 import Swal from "sweetalert2";
 
 const ReviewAndReseña=()=> {
 
     const dispatch= useDispatch()
-    /* const tripsById = useSelector((state) => state.tripsById) */
+    const currentUserId = useSelector((state) => state.currentUser?.id)
     const viajesPendientes = useSelector((state) => state.viajesPendientes)
-    const tripPending=viajesPendientes.find((trip)=>trip.userId==="762baea5-4422-44de-ae36-ddf9c6a9e43b") //Luego find con el id del usuario
-    console.log(viajesPendientes)
-    console.log(tripPending)
+    const tripPending=viajesPendientes.find((trip)=>trip.userId===currentUserId)
     
-
+    const bgImg="https://res.cloudinary.com/drgnsbah9/image/upload/v1705767640/Vamos/wavesvamos_rt0ovd.jpg"
     const [input,setInput]=useState({
         qualification:0,
         comments:"",
      
     })
      
-    
-    const id = "762baea5-4422-44de-ae36-ddf9c6a9e43b"
     useEffect(() => {
-        /* dispatch(getTripsById(id)) */
         dispatch(getPendingTrips())
     }, [dispatch]);
 
@@ -36,7 +31,7 @@ const ReviewAndReseña=()=> {
   const handleChange=(e)=>{
       setInput({
           ...input,
-          userId:id, //Luego cambiar esto cuando funcione Log
+          userId:currentUserId, //Luego cambiar esto cuando funcione Log
           driverId:tripPending.driverId,
           date:tripPending.date,
           qualification:rating,
@@ -67,15 +62,17 @@ const ReviewAndReseña=()=> {
 
 
     return (
+      tripPending ? (
         <Flex
         align="center"
         justify="center"
         /* height="100vh" */
         direction="column"
         marginTop={'10rem'}
+        bgImage={bgImg}
       >
-        {/* {tripspending.map((trip, index) => ( */}
-            <Card width="md">
+        
+            <Card width="md" >
             <CardHeader>
               <Heading size='md'>Reseña de tu viaje</Heading>
             </CardHeader>
@@ -143,13 +140,14 @@ const ReviewAndReseña=()=> {
               </Stack>
             </CardBody>
           </Card>
-         {/* ))} 
- */}
-        
-  
-  
-        
       </Flex>
+      ):(<Center bgImage={bgImg} bgSize="cover" bgRepeat="no-repeat"/* h='100px' */h='40rem' color='white' fontSize='3xl'>
+          <Card>
+            <CardBody bgGradient='linear(to-r, blue.200, pink.300)'>
+              <Text>Aún no tienes viajes para calificar</Text>
+            </CardBody>
+          </Card>
+        </Center>)
     )
   }
   

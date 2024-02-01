@@ -23,13 +23,13 @@ const ReviewFilter = ({searcher}) => {
     }
 
     const handleFilterRating = (e) => {
-        console.log(e.target.value);
+       
         dispatch(ratingFilter(e.target.value))
     }
 
     return (
         <>
-            <Flex gap='4' justify={'center'} align={'center'} mx='2rem' py='.5rem'>
+            <Flex gap={{ base: "0%", lg: "5%" }} justify={'center'} align={'center'} mx='2rem' py='.5rem'>
                 <Flex justify='center' align={'center'} gap='4'  >
                 <Flex justify={'center'} align={'center'} fontSize={'1.5rem'}>
                         <Input placeholder='Buscar por nombre / correo / chofer' onChange={searcher} border={'1px solid gray'} bgColor="white" color="black"/>

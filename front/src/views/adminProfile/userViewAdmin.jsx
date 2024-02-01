@@ -1,227 +1,410 @@
 import { useEffect, useState } from 'react';
 import {
-    Table,
-    Thead,
-    Tbody,
-    Tfoot,
-    Tr,
-    Th,
-    Td,
-    TableCaption, Tooltip,
-    TableContainer, Button, Flex, Link,
+
+  Table, Box,
+
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption, Tooltip,
+  TableContainer, Button, Flex, Link,Input
 } from '@chakra-ui/react'
-import { RepeatClockIcon, AddIcon } from '@chakra-ui/icons'
+import { RepeatClockIcon, AddIcon, WarningTwoIcon, UnlockIcon } from '@chakra-ui/icons'
 import { useDispatch, useSelector } from "react-redux";
 import { getDataUser, handleAdminUser, } from '../../redux/actions';
 import UserFilter from '../driversViewAdmin/filtersData/userFilter';
 // import Paginado from '../../components/paginado/paginadoComponent';
 import Swal from 'sweetalert2'
+import axios from 'axios';
 
 const UserViewAdmin = () => {
-    const userData = useSelector((state) => state.dataUser)
-    const dispatch = useDispatch()
-    const [search, setSearch] = useState('')
+  const userData = useSelector((state) => state.dataUser)
+  const dispatch = useDispatch()
+  
 
-    const searcher = (e) => {
-        setSearch(e.target.value)
-    }
+  
 
-    const results = !search ? userData : userData.filter((data) => data.name && data.name.toLowerCase().includes(search.toLowerCase()) || data.email && data.email.toLowerCase().includes(search.toLowerCase())
-    )
+  // const results = !search ? userData : userData.filter((data) => data.name && data.name.toLowerCase().includes(search.toLowerCase()) || data.email && data.email.toLowerCase().includes(search.toLowerCase())
+  // )
 
 
-    console.log(results);
-    const handleAdminAccess = (id) => {
+ 
+  const handleAdminAccess = (id) => {
+    Swal.fire({
+      title: "¿Dar permisos de ADMIN?",
+      text: "SE LE DARA PERMISO A TODOS LOS DATOS DEL SISTEMA",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Si, convertir!",
+      cancelButtonText: "No, cancelar!",
+      reverseButtons: true
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await dispatch(handleAdminUser(id));
+        if (response) {
+          Swal.fire({
+            title: "¡Ha añadido un nuevo ADMINISTRADOR!",
+            text: "El usuario ahora puede ingresar como ADMIN.",
+            icon: "success"
+          });
+        }
+        await dispatch(getDataUser());
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire({
-            title: "¿Convertir ADMIN?",
-            text: "SE LE DARA PERMISO A TODOS LOS DATOS DEL SISTEMA",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Si, convertir!",
-            cancelButtonText: "No, cancelar!",
-            reverseButtons: true
-        }).then(async (result) => {
-            if (result.isConfirmed) {
-                const response = await dispatch(handleAdminUser(id))
-                if (response) {
-                    Swal.fire({
-                        title: "¡Acceso ADMIN!",
-                        text: "El usuario ahora puede ingresar como ADMIN.",
-                        icon: "success"
-                    });
-                }
-                await dispatch(getDataUser())
-
-            } else if (
-                /* Read more about handling dismissals below */
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                Swal.fire({
-                    title: "Cancelado",
-                    text: "Registro sin modificar",
-                    icon: "error"
-                });
-            }
+          title: "Cancelado",
+          text: "Registro sin modificar",
+          icon: "error"
         });
-    }
+      }
+    });
+  };
 
-    useEffect(() => {
-        dispatch(getDataUser())
-    }, [])
+  const handleUnAdminAccess = (id) => {
+    Swal.fire({
+      title: "¿Quitar permisos de ADMIN?",
+      text: "SE LE QUITARAN LOS PERMISOS AL USUARIO",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Si, quitar permisos!",
+      cancelButtonText: "No, cancelar!",
+      reverseButtons: true
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await dispatch(handleAdminUser(id));
+        if (response) {
+          Swal.fire({
+            title: "¡Administrador degradado a usuario normal!",
+            text: "El usuario ya no podra acceder al panel de administrador",
+            icon: "success"
+          });
+        }
+        await dispatch(getDataUser());
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire({
+          title: "Cancelado",
+          text: "No se ha modificado el Administrador",
+          icon: "error"
+        });
+      }
+    });
+  };
+  const handleBanned = (id) => {
+    Swal.fire({
+      title: "¿Seguro quieres banear a este usuario?",
+      text: "El usuario no podra volver acceder a la pagina",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Si, banealo!",
+      cancelButtonText: "No, cancelar!",
+      reverseButtons: true
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await axios.patch(`https://vamosappserver.onrender.com/user/logic/${id}`)
+        if (response) {
+          Swal.fire({
+            title: "¡Usuario baneado!",
+            text: "Puedes deshacer esta accion desde el panel de usuarios",
+            icon: "success"
+          });
+        }
+        await dispatch(getDataUser())
 
-    return (
-        <Flex /* align='center' direction={{base:'column',md:'row'}} */ alignItem='center' justifyContent='center'>
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire({
+          title: "Cancelado",
+          text: "No se ha baneado al usuario",
+          icon: "error"
+        });
+      }
+    });
+  }
+  const handleUnbanned = (id) => {
+    Swal.fire({
+      title: "¡Vas a desbanear a este usuario!",
+      text: "El usuario podra volver acceder a la pagina",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Si, desbanealo!",
+      cancelButtonText: "No, cancelar!",
+      reverseButtons: true
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await axios.patch(`https://vamosappserver.onrender.com/user/logic/${id}`)
+        if (response) {
+          Swal.fire({
+            title: "¡Usuario desbaneado!",
+            text: "Puedes volver a banearlo cuando lo desees",
+            icon: "success"
+          });
+        }
+        await dispatch(getDataUser())
 
-            <TableContainer  >
-                <Flex bg='gray.200' color='#000' justify={'center'} >
-                    <UserFilter searcher={searcher} />
-                </Flex>
-                <Flex px='1rem' >
-                    <Table variant='striped' colorScheme='gray.100' >
-                        <TableCaption>Usuarios</TableCaption>
-                        <Thead>
-                            <Tr>
-                                <Th >Usuario</Th>
-                                <Th >E-mail</Th>
-                                <Th>DNI</Th>
-                                <Th>telefono</Th>
-                                <Th>Viajes</Th>
-                                <Th>Acion</Th>
-                            </Tr>
-                        </Thead>
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire({
+          title: "Cancelado",
+          text: "No se ha desbaneado al usuario",
+          icon: "error"
+        });
+      }
+    });
+  }
 
-                        <Tbody>
-                            {results?.map((user) => (
-                                <Tr key={user.id}  >
-                                    <Td w='auto' >{user.name ? user.name : 'sin nombre'}</Td>
-                                    <Td w='min-content' >
-                                        <Tooltip hasArrow label={user.email ? 'Enviar Correo' : null} bg='#10447E' placement='top'>
-                                            <Link href={`mailto:${user.email}`}>
-                                                {user.email ? user.email : 'Sin correo'}
-                                            </Link>
-                                        </Tooltip>
-                                    </Td>
-                                    <Td w='auto'>{user.dni ? user.dni : 'Desconocido'}</Td>
-                                    <Td w='auto' display={'flex'} flexDirection={'column'}>
-                                        <Tooltip hasArrow label={user.phone ? 'Contactar' : null} bg='#10447E' placement='top'>
-                                            <Link href={`whatsapp://send?phone=+51${user.phone}`}>
-                                                {user.phone ? user.phone : 'Numero desconocido'}
-                                            </Link>
-                                        </Tooltip>
-                                    </Td>
-                                    <Td w='auto'> {user.Trips.length ? user.Trips.length : '0'}
-                                    </Td>
-                                    <Td>
-                                        {user.admin ? (
-                                            <>
-                                                <Tooltip label='Quitar Access Admin' placement='right' bg='#E83D6F'>
+  useEffect(() => {
+    dispatch(getDataUser())
+  }, [])
 
-                                                    <Button onClick={() => handleAdminAccess(user.id)}
-                                                        bg='#E83D6F'
-                                                        fontSize='1.2rem'
-                                                        id={user.id} >
-                                                        <RepeatClockIcon />
-                                                    </Button>
-                                                </Tooltip>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <Tooltip label='Access Admin' placement='right' bg='#009ED1'>
+  //***************PAGINADO**********************************/
+  const itemsPerPage = 6;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [tripsToShow, setTripsToShow] = useState([]);
 
-                                                    <Button onClick={() => handleAdminAccess(user.id)}
-                                                        bg='#009ED1'
-                                                        fontSize='1.2rem'
-                                                        id={user.id} >
-                                                        <AddIcon />
-                                                    </Button>
-                                                </Tooltip>
-                                            </>
-                                        )}
-                                    </Td>
-                                </Tr>
-                            ))}
+  const prevHandler = () => {
+    const prevPage = currentPage - 1;
 
-                        </Tbody>
-                        <Tfoot>
-                            <Tr>
-                                <Th >Usuario</Th>
-                                <Th >E-mail</Th>
-                                <Th>DNI</Th>
-                                <Th>telefono</Th>
-                                <Th>Viajes</Th>
-                                <Th>Acion</Th>
-                            </Tr>
-                        </Tfoot>
-                    </Table>
-                </Flex>
-                {/* COMPONENTE DE PAGINADO */}
-                <Paginado />
-            </TableContainer>
+    if (prevPage < 1) return;
 
-        <Flex align="center" justifyContent="center">
+    const firstCompleted = (prevPage - 1) * 6;
+
+    setCurrentPage(prevPage);
+    setTripsToShow([...userData].splice(firstCompleted, 6));
+  };
+
+  const nextHandler = () => {
+    const totalCompleted = userData.length;
+
+    const nextPage = currentPage + 1;
+
+    const firstCompleted = currentPage * 6;
+
+    if (firstCompleted >= totalCompleted) return;
+    setCurrentPage(nextPage);
+    setTripsToShow([...userData].splice(firstCompleted, 6));
+  };
+
+  // useEffect(() => {
+  //   dispatch(getCanceledTrips());
+  // }, [dispatch]);
+
+  useEffect(() => {
+    setTripsToShow([...userData].splice(0, 6));
+  }, [userData]);
+
+  //***************BUSQUEDA Y ORDENAMIENTO**********************************/
+  // const [input, setInput] = useState({
+  //   searchInput: "",
+  //   order: ""
+  // });
+
+  // const handleChange = async (e) => {
+  //   setInput({
+  //     ...input,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
+
+  // const handleClean = async (e) => {
+  //   setInput({
+  //       ...input,
+  //       searchInput: "",
+  //       order: "",
+  //   })
+  //   dispatch(orderSearch({
+  //     ...input,
+  //     searchInput: "",
+  //     order: "",
+
+  // }));
+  // }
+
+  // const handleSubmit = async (e) => {
+  //   dispatch(orderSearch(input));
+  //   setCurrentPage(1);
+  // };
+  
+  return (
+    <Box>
+      <Flex
+        display="block"
+        justifyContent="center"
+        alignItems="center"
+        flexDirection="row"
+        bgColor='#009ED1'
+        borderTopLeftRadius="md"
+        borderTopRightRadius="md"
+        border="1px solid black"
+      >
+
+
         <TableContainer>
-          <Flex bg="purple.500" color="#000" justify={'center'} p={4} borderTopLeftRadius="md" borderTopRightRadius="md">
-          <UserFilter searcher={searcher}/>
+          <Flex
+            bg='#009ED1'
+            justify={'center'}
+            p={2}
+            borderTopLeftRadius="md"
+            borderTopRightRadius="md"
+          >
+            <UserFilter  />
+        
           </Flex>
-          <Flex px={4} bg="gray.300" overflowX="auto" borderBottomLeftRadius="md" borderBottomRightRadius="md">
+          <Flex px={0} bg="gray.300" overflowX="auto" borderBottomLeftRadius="md" borderBottomRightRadius="md">
             <Table variant="simple">
-              <TableCaption>Usuarios</TableCaption>
+
               <Thead>
                 <Tr>
-                  <Th>Usuario</Th>
-                  <Th>E-mail</Th>
-                  <Th>DNI</Th>
-                  <Th>Teléfono</Th>
-                  <Th>Viajes</Th>
-                  <Th>Acción</Th>
+                  <Th border="2px solid black" minWidth="300px">Usuario</Th>
+                  <Th border="2px solid black" minWidth="300px">E-mail</Th>
+                  <Th border="2px solid black" minWidth="260px">DNI</Th>
+                  <Th border="2px solid black" minWidth="260px">Teléfono</Th>
+                  <Th border="2px solid black">Viajes</Th>
+                  <Th border="2px solid black">Acción</Th>
                 </Tr>
               </Thead>
-  
+
+
               <Tbody>
-                {results?.map((user) => (
+                {tripsToShow.length>0 ? tripsToShow?.map((user) => (
                   <Tr key={user.id}>
-                    <Td>{user.name ? user.name : 'sin nombre'}</Td>
-                    <Td>
+                    <Td border="2px solid black">{user.name ? user.name : 'sin nombre'}</Td>
+                    <Td border="2px solid black">
                       <Tooltip hasArrow label={user.email ? 'Enviar Correo' : null} bg="#10447E" placement="top">
                         <Link href={`mailto:${user.email}`}>{user.email ? user.email : 'Sin correo'}</Link>
                       </Tooltip>
                     </Td>
-                    <Td>{user.dni ? user.dni : 'Desconocido'}</Td>
-                    <Td>
+                    <Td border="2px solid black">{user.dni ? user.dni : 'Desconocido'}</Td>
+                    <Td border="2px solid black">
                       <Tooltip hasArrow label={user.phone ? 'Contactar' : null} bg="#10447E" placement="top">
                         <Link href={`whatsapp://send?phone=+51${user.phone}`}>
                           {user.phone ? user.phone : 'Numero desconocido'}
                         </Link>
                       </Tooltip>
                     </Td>
-                    <Td>{user.Trips.length ? user.Trips.length : '0'}</Td>
-                    <Td>
-                      {user.admin ? (
-                        <Tooltip label="Quitar Acceso Admin" placement="right" bg="#E83D6F">
-                          <Button onClick={() => handleAdminAccess(user.id)} bg="red.300" fontSize="1.2rem" id={user.id}>
-                            <RepeatClockIcon />
-                          </Button>
-                        </Tooltip>
-                      ) : (
-                        <Tooltip label="Acceso Admin" placement="right" bg="#009ED1">
-                          <Button onClick={() => handleAdminAccess(user.id)} bg="blue.300" fontSize="1.2rem" id={user.id}>
-                            <AddIcon />
-                          </Button>
-                        </Tooltip>
-                    )}
+                    <Td border="2px solid black">{user.Trips.length ? user.Trips.length : '0'}</Td>
+                    <Td border="2px solid black" >
+                      <Flex gap={2} justifyContent={'center'} >
+                        {user.admin ? (
+                          <>
+                            <Tooltip label="Quitar Acceso Admin" placement="right" bg="#E83D6F">
+                              <Button onClick={() => handleUnAdminAccess(user.id)} bg="red.300" fontSize="1.2rem" id={user.id}>
+                                <RepeatClockIcon />
+                              </Button>
+                            </Tooltip>
+                            {user.banned !== true ? (
+                              <Tooltip label="Bannear / Bloquear" placement="right" bg="#E83D6F">
+                                <Button onClick={() => handleBanned(user.id)} bg="#E83D6F" fontSize="1.2rem" id={user.id}>
+                                  <WarningTwoIcon />
+                                </Button>
+                              </Tooltip>
+                            ) : (
+                              <Tooltip label="Desbloquear" placement="right" bg="#10447E">
+                                <Button onClick={() => handleBanned(user.id)} bg={'#10447E'} fontSize="1.2rem" id={user.id}>
+                                  <UnlockIcon />
+                                </Button>
+                              </Tooltip>
+                            )}
+                          </>
+                        ) : (
+                          <>
+                            <Tooltip label="Acceso Admin" placement="right" bg="#009ED1">
+                              <Button onClick={() => handleAdminAccess(user.id)} bg="blue.300" fontSize="1.2rem" id={user.id}>
+                                <AddIcon />
+                              </Button>
+                            </Tooltip>
+                            {user.banned !== true ? (
+                              <Tooltip label="Bannear / Bloquear" placement="right" bg="#E83D6F">
+                                <Button onClick={() => handleBanned(user.id)} bg="#E83D6F" fontSize="1.2rem" id={user.id}>
+                                  <WarningTwoIcon />
+                                </Button>
+                              </Tooltip>
+                            ) : (
+                              <Tooltip label="Desbloquear" placement="right" bg="#10447E">
+                                <Button onClick={() => handleUnbanned(user.id)} bg={'#10447E'} fontSize="1.2rem" id={user.id} color={'white'}>
+                                  <UnlockIcon />
+                                </Button>
+                              </Tooltip>
+                            )}
+                          </>
+                        )}
+                      </Flex>
+                    </Td>
+                  </Tr>
+                ))
+                : (<Tr>
+                  <Td colSpan={6} textAlign="center" align="center">
+                      <span style={{
+                      fontWeight: "bold",
+                      color: "gray.800",
+                      fontSize: "18px",
+                      }}>
+                        No se encontraron coincidencias con la búsqueda.
+                      </span>
                   </Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
+              </Tr>  )
+              }
+              </Tbody>
 
+            </Table>
+
+          </Flex>
+
+        </TableContainer>
+        <Flex
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="row"
+          bgColor="gray.300"
+          w="100%"
+          h="100%"
+          borderBottomLeftRadius="md"
+          borderBottomRightRadius="md"
+          border="1px solid black"
+        >
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            marginTop="1rem"
+            marginBottom="1rem"
+          >
+            <Button
+              color='black'
+              bgColor='#009ED1'
+              variant="outline"
+              colorScheme="teal"
+              onClick={prevHandler}
+            >
+              Anterior
+            </Button>
+
+            <Box as="span" marginLeft="1rem" marginRight="1rem">
+              Página {currentPage}
+            </Box>
+
+            <Button
+              color='black'
+              bgColor='#009ED1'
+              variant="outline"
+              colorScheme="teal"
+              onClick={nextHandler}
+            >
+              Siguiente
+            </Button>
+          </Box>
         </Flex>
-        {/* COMPONENTE DE PAGINADO */}
-        {/* <Paginado /> */}
-              </TableContainer>
-            </Flex>
-            </Flex>
+      </Flex>
+
+    </Box>
   );
-};
+}
+
 
 export default UserViewAdmin;

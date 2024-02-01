@@ -1,6 +1,6 @@
 const verificarEstadoDePago = async (preferenceId) => {
     try {
-        const response = await axios.get(`http://localhost:3001/merpago/status/${preferenceId}`);
+        const response = await axios.get(`https://vamosappserver.onrender.com/merpago/status/${preferenceId}`);
         // La respuesta podría contener información sobre el estado del pago, como 'approved', 'pending', etc.
         return response.data.status;
     } catch (error) {

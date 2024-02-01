@@ -27,7 +27,7 @@ import { useAuth } from "../../../context/authContext";
 import googleLogo from "../../../assets/icons/google.png";
 
 //ACTIONS
-import { cleanCurrentUser, getUserByEmail, postNewUser } from "../../../redux/actions";
+import { cleanCurrentUser, getUserByEmail } from "../../../redux/actions";
 // DEPENDENCIES
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -39,7 +39,6 @@ const LoginForm = ({ onSwitchForm }) => {
   // Estados Locales para form de Login
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
-
   //hooks
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -67,12 +66,25 @@ const LoginForm = ({ onSwitchForm }) => {
     event.preventDefault();
     try {
       await auth.login(input.email, input.password); // autenticacion de loginWithGoogle funcion de firebase signInWithPopUp
-        const getUser = await dispatch(getUserByEmail(input.email)); // busca al usuario por email y lo setea como currentUser
-        console.log(getUser);
-        // navigate('/')
+        const getUser =  await dispatch(getUserByEmail(input.email)); // busca al usuario por email y lo setea como currentUser
+        
+        navigate('/')
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "¡Inicio de sesión éxitoso!",
+            showConfirmButton: false,
+            timer: 2500
+          })
+      
 
     } catch (error) {
       console.error("Error al iniciar sesión:", error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: ("Error al iniciar sesión:", error.message),
+      });
     }
   };
 
@@ -84,16 +96,26 @@ const LoginForm = ({ onSwitchForm }) => {
     
     
     //const usuario = auth.user
-    console.log("googleLog",googleLog)
+    
     try {
       if (googleLog) {
          const usr={
           name: googleLog.user.displayName,
-          email: googleLog.user.email
+          email: googleLog.user.email,
+          image: googleLog.user.photoURL
          }
-         console.log(usr)
+         
+        
+
+         Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Inicio de sesión éxitoso",
+          showConfirmButton: false,
+          timer: 2500
+        });
         //Crea un usuario (findOrCreate) utilizando fetch con su metodo post 
-        const response = await fetch('http://localhost:3001/user/create', {
+        const response = await fetch('https://vamosappserver.onrender.com/user/create', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -104,12 +126,20 @@ const LoginForm = ({ onSwitchForm }) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
+        
         const userCreated = await response.json();
   
         // Carga el estado global currentUser con la info del usuario registradi
         const userActual = await dispatch(getUserByEmail(googleLog.user.email))
-        console.log(userActual); 
-  
+        if(response.banned){
+          handleLogOut()
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Este usuario se encuentra bloqueado.",
+          });
+        }
+        navigate('/')
         return response
       }
     } catch (error) {
@@ -117,59 +147,25 @@ const LoginForm = ({ onSwitchForm }) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Hubo un error en el registro",
+        text: ("Error al iniciar sesión con Google:", error.message),
       });
     }
   };
 
 
-
-  // const handleGoogleLogin = async () => {
-  //   const {displayName, email} = auth.user;
-  //   try {
-  //     await auth.loginWithGoogle(); // Autenticacion de google
-  //     if (auth.user) {
-  //       const user = {   // creación de un objeto user con los datos que puedo extraer de firebase
-  //         name: displayName,
-  //         email: email,
-  //       };
-  
-  //       // Crea un usuario (findOrCreate) utilizando fetch con su metodo post 
-  //       const response = await dispatch(postNewUser(user));
-  //       if(response){
-  //         // Carga el estado global currentUser con la info del usuario registrado
-  //         const userActual = await dispatch(getUserByEmail(user.email));
-  //         console.log(userActual);
-  //         return userActual;
-  //       } else {
-  //         console.log("error al crear");
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error("Error al iniciar sesión con Google:", error.message);
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "Oops...",
-  //       text: "Hubo un error en el registro",
-  //     });
-  //   }
-  // };
-
- 
-  
-
   const handleRegister = () => {
     navigate("/register");
   };
-  const handleLogOut = async() => {
-    try {
-      await auth.logOut()
-      dispatch(cleanCurrentUser({}))
-      navigate("/")
-    } catch (error) {
-      console.log("error");
-    }
-  }
+
+  // const handleLogOut = async() => {
+  //   try {
+  //     await auth.logOut()
+  //     dispatch(cleanCurrentUser({}))
+  //     navigate("/")
+  //   } catch (error) {
+  //     throw new Error("error");
+  //   }
+  // }
   
 
   return (
@@ -182,8 +178,9 @@ const LoginForm = ({ onSwitchForm }) => {
     border="none"
     boxShadow="none"
     color="white"
+    display={currentUser?.id ? 'none' : 'block'}
     >
-      {!currentUser.id && (
+      {!currentUser?.id && (
         <>
           <FormControl isInvalid={isError}>
             <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Correo Electrónico</FormLabel>
@@ -228,16 +225,20 @@ const LoginForm = ({ onSwitchForm }) => {
                 _hover={{ bg: "transparent" }}
                 _active={{ bg: "transparent" }}
                 >
-                {show ? <ViewOffIcon /> : <ViewIcon />}
+                 {show ? <ViewOffIcon /> : <ViewIcon />}
                 </Button>
               </InputRightElement>
             </InputGroup>
           </FormControl>
 
-
           <Box>
-            {!currentUser.id && (
-              <Button bg="white" onClick={handleSubmit}>
+            {!currentUser?.id && (
+              <Button 
+              m={2}
+              p={5}
+              bg="white"
+              ml="30%"
+              onClick={handleSubmit} >
                 Entrar
               </Button>
             )}
@@ -270,12 +271,7 @@ const LoginForm = ({ onSwitchForm }) => {
               </Stack>
           </Center>
         </>
-      )}{" "}
-      {currentUser.id && (
-        <Box>
-          <Heading fontSize="md">{currentUser.name}</Heading>
-          <Text fontSize="md">{currentUser.email}</Text>
-        </Box>
+
       )}
     </Stack>
   );

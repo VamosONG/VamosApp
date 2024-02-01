@@ -4,8 +4,8 @@ import {
     ModalContent,
     ModalHeader,
     ModalFooter,
-    ModalBody,
-    ModalCloseButton, useDisclosure, Button, Input, FormControl, FormLabel
+    ModalBody, Image, Tooltip, 
+    ModalCloseButton, useDisclosure, Button, Input, FormControl, FormLabel, Flex
 } from '@chakra-ui/react'
 import { useRef } from 'react'
 import { PhoneIcon, AddIcon, WarningIcon, EditIcon } from '@chakra-ui/icons'
@@ -25,7 +25,7 @@ const UpdateUserDataForm = ({ userDetail }) => {
     const handleChange = (e) => {
         const property = e.target.name;
         let value = e.target.value;
-        console.log(property + " " + value);
+        
         setNewData({
             ...newData,
             [property]: value,
@@ -34,23 +34,24 @@ const UpdateUserDataForm = ({ userDetail }) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (newData) {
-            console.log('1 sub ' , newData);
-            const response = await axios.patch(`http://localhost:3001/user/update/${id}`, {newData})
+            
+            const response = await axios.patch(`https://vamosappserver.onrender.com/user/update/${id}`, {newData})
             if (response) {
-                console.log("des1 de la actualización:", newData);
+                
                 Swal.fire({
-                    title: "Bien hecho!",
-                    text: "Datos actualizados",
+                    title: "¡Bien hecho!",
+                    text: "Datos actualizados con éxito",
                     icon: "success",
                 });
-                await dispatch(getDataUser())
-                await onClose()
+                // await dispatch(getDataUser())
+                // dispatch(getDetailUserById(id))
+                onClose()
             } else {
                 throw new Error(
                     Swal.fire({
                         icon: "error",
                         title: "Oops...",
-                        text: "Hubo un error en la actualizacion",
+                        text: "Hubo un error en la actualizacion, intente nuevamente",
                     })
 
                 );
@@ -87,6 +88,20 @@ const UpdateUserDataForm = ({ userDetail }) => {
                     <ModalHeader>Modifica un dato  {userDetail.name}</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
+                    {/* <Flex w={{base: '100%', md: '50%'}} justify={'center'} position={'relative'}>
+                                    <Image w={{base: '300px', md: '15rem'}} h={{base: '300px', md: '15rem'}} name='Segun Adebayo' src={userDetail.image ? userDetail.image : fotoPerfil} border={'2px solid #10447E'}
+                                        alt={fotoPerfil.name}
+                                        bg='white'
+                                        borderRadius={{base: '50%', md: '10'}}
+                                        objectFit={'cover'}
+                                        loading='lazy'
+                                    />{' '}
+                                    <Tooltip label='Cambiar Foto' placement='left' bg='#10447E' borderRadius={4} >
+                                        <Button position={'absolute'} bottom={0} right={'1rem'} w='2.3rem' h='2.3rem' onClick={changeImgPerfil} bg='#10447E' color={'white'}>
+                                            <EditIcon />
+                                        </Button>
+                                    </Tooltip>
+                                </Flex> */}
                         <FormControl>
                             <FormLabel>Nombre</FormLabel>
                             <Input ref={initialRef} type='text' name='name' onChange={handleChange} value={newData.name} placeholder='Ingresa un nuevo nombre' />

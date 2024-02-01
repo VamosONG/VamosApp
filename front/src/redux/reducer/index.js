@@ -2,11 +2,11 @@
 
 
 
-import { GET_TRIPS,DELETE_DRIVER, GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, ORDER_DATE, FILTER_RATING, GET_DATA_USER, HANDLE_ADMIN, ORDER_TRIPS } from "../actions/action.types";
+import { GET_USUARIOS_FILTRADOS, GET_TRIPS,DELETE_DRIVER, GET_TRIP_ID, FILTER_AIRPORT, FILTER_CAR, ORDER_ALPHABETICAL, ORDER_PASSENGER, ORDER_RATING, FILTER_STATE, ORDER_STATE, GET_DETAIL_USER, GET_REVIEWS, ORDER_DATE, FILTER_RATING, GET_DATA_USER, HANDLE_ADMIN, ORDER_TRIPS, FILTER_NAME } from "../actions/action.types";
 
 
 
-import { GET_PAYMENT_DATA, CREATE_CHOFER, CLEAN_USER_BY_EMAIL, GET_ALL_CONDUCTORES, GET_TRIPS_BY_ID, GET_COMPLETED_TRIPS, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE, USER_BY_EMAIL, GET_ALL_PRICES } from "../actions/index";
+import { GET_CONDUCTORES_FILTRADOS, GET_PAYMENT_DATA, CREATE_CHOFER, CLEAN_USER_BY_EMAIL, GET_ALL_CONDUCTORES, GET_TRIPS_BY_ID, GET_COMPLETED_TRIPS, GET_FILTERED, GET_PENDING_TRIPS, GET_RESERVED_TRIPS, ID_SOLICITUD, LOGIN, LOGOUT, NEW_USER, PAGINATE, POST_NEW_VIAJE, USER_BY_EMAIL, GET_ALL_PRICES } from "../actions/index";
 
 
 
@@ -46,6 +46,7 @@ const initialState = {
     allDataRevies: [],
 
     dataUser: [],
+    
 
     getTrips: [],
 
@@ -58,11 +59,11 @@ const reducer = (state = initialState, action) => {
 
     switch (action.type) {
         case GET_ALL_CONDUCTORES:
-            const driverData = state.allData.filter((drivers) => drivers.inactive === false)
+            /* const driverData = state.allData.filter((drivers) => drivers.inactive === false) */
             return {
                 ...state,
-                conductores: [...driverData].splice(0, PAGE_DATA), //Se configura asi para poder manejar el paginado.
-                pageConductores: action.payload,
+                conductores: action.payload,/* [...driverData] *//* .splice(0, PAGE_DATA) */ //Se configura asi para poder manejar el paginado.
+                /* pageConductores: action.payload, */
                 allData: action.payload
             };
         
@@ -138,7 +139,7 @@ const reducer = (state = initialState, action) => {
             }
 
         case POST_NEW_VIAJE:
-            console.log(action.payload)
+            
             return {
                 ...state,
                 infoConfirmacionViaje: action.payload
@@ -232,17 +233,18 @@ const reducer = (state = initialState, action) => {
             }
             //vjsD = viajes de usuarios
             case ORDER_TRIPS:
-                let orderListTrips = [...state.allDataUser]
-            if (action.payload === 'vjsA') {
-                orderListTrips.sort((a, b) => a.Trips.length < b.Trips.length ? 1 : -1)
-            } else if (action.payload === 'vjsD'){
-            }
-            orderListTrips.sort((a, b) => a.Trips.length > b.Trips.length ? 1 : -1)
+
+             let orderListTrips = [...state.dataUser]
+            const ordenPorPax= (action.payload === 'vjsA')
+           ? (orderListTrips.sort((a, b) => b.Trips.length - a.Trips.length))
+           : (orderListTrips.sort((a, b) => a.Trips.length - b.Trips.length))
             return {
                 ...state,
-                dataUser: orderListTrips,
-                allDataUser: orderListTrips
+                dataUser: ordenPorPax,
+              //  allDataUser: orderListTrips
             }
+
+
         case ORDER_DATE:
             let orderedListDate = [...state.reviewsData]
             
@@ -284,7 +286,7 @@ const reducer = (state = initialState, action) => {
             }
 
         case FILTER_AIRPORT:
-            const filterAirportList = [...state.allData].filter((zone) => zone.airports === action.payload)
+            const filterAirportList = [...state.conductores].filter((zone) => zone.airports === action.payload)
 
             return {
                 ...state,
@@ -426,6 +428,19 @@ const reducer = (state = initialState, action) => {
                 getTrips: action.payload
             }
 
+//******************************************************************************* */
+            case GET_CONDUCTORES_FILTRADOS:
+                return {
+                    ...state,
+                    conductores: action.payload
+                };
+
+                case GET_USUARIOS_FILTRADOS:
+                return {
+                    ...state,
+                    dataUser: action.payload
+                };
+//********************************************************************************** */
                 case NEW_USER:
                     return {
                         ...state,
@@ -433,7 +448,7 @@ const reducer = (state = initialState, action) => {
                     }
                 default:
                     return { ...state };
-
+            
 
     }
 }

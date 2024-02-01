@@ -12,14 +12,15 @@ dotenv.config();
 const createOrder = async (req, res) => {
 
   mercadopago.configure({
-    access_token: process.env.ACCESS_TOKEN
+    access_token: process.env.ACCESS_TOKEN,
+    client_id: process.env.CLIENT_ID,
+    client_secret: process.env.CLIENT_SECRET,
   });
-
   const {
     userId,
     
     price,viaje,driverId, destination,quantityPassengers,date,origin, hour} = req.body
- console.log(userId,price,viaje);
+ 
   try {
     let preference = {
 
@@ -44,12 +45,13 @@ const createOrder = async (req, res) => {
           // picture_url: "",
         }],
       back_urls: {
-        success: "http://localhost:5173/paymentStatus",
-         failure: "http://localhost:5173/paymentFailed",
-        // pending: "http://localhost:5173/pending",
+        success: "https://vamos-app.vercel.app/paymentStatus",
+        pending: "https://vamos-app.vercel.app/pending",
+         failure: "https://vamos-app.vercel.app/paymentFailed"
+         
       },
 
-      notification_url: "https://c8cb-2800-2130-8a40-4f3-f10e-58e6-75e9-edde.ngrok-free.app/mepago/webhook",
+      notification_url: "https://vamosappserver.onrender.com/mepago/webhook",
 
 
       auto_return: "all"
@@ -63,24 +65,24 @@ const createOrder = async (req, res) => {
 
     
   } catch (error) {
-    return res.status(500).json({ message: "Something goes wrong" });
+    return res.status(500).json(`Error en payment controller Create Order: ${error.message}`);
   }
 
 };
 
 const receiveWebhook = async (req, res) => {
   try {
+    
     const payment = req.query;
     // const {date_created, user_id} = req.body
 
-    //  console.log(payment)
-
+    
 
     if (payment.type === "payment" ) {
        const data = await mercadopago.payment.findById(payment["data.id"]);
       // const userPayment = await Trip.findOne({ where: { id: data.body.metadata.trip_id } });//BUSCA EL TRIP
       //  await newTrip.update({ stateOfTrip: "reserved" }); //CAMBIA DE OFFER A RESERVED
-      console.log(data);
+     
       const trip ={
         userId: data.body.metadata.user_id,
         origin: data.body.metadata.origin,
@@ -91,25 +93,24 @@ const receiveWebhook = async (req, res) => {
         driverId: null,
         price:  data.body.metadata.price
       }
-      console.log(trip);
+    
       // await userPayment.reload();
-      // console.log("2",newTrip);
+      
       // await deleteTrip(newTrip.id);
       const resp = await postTrip(trip)
-      console.log(resp);
-
+    
+      localStorage.clear();
       // AGREGAR LO DE ENVIAR MAIL
 res.status(204).json(resp);
     } 
     
   } catch (error) {
     console.error("Error:", error);
-    return res.status(500).json({ message: "Something goes wrong" });
+    return res.status(500).json(`Error en payment controller Receive Webhook: ${error.message}`);
   }
 };
 
 module.exports = { createOrder, receiveWebhook }
-
 
 
 

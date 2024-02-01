@@ -33,7 +33,7 @@ const Solicitud =()=> {
   const dispatch=useDispatch() 
 
   const id = useSelector((state) => state.idSolicitud)
-  console.log(id)
+  
   const viajesReservados = useSelector((state) => state.viajesReservados)
   const viajesPendientes = useSelector((state) => state.viajesPendientes)
   const conductores = useSelector((state) => state.conductoresFiltrados)
@@ -41,7 +41,7 @@ const Solicitud =()=> {
 
   let solicitudFound = viajesReservados.find((solicitud) => solicitud.id === id)
   if (!solicitudFound){solicitudFound = viajesPendientes.find((solicitud) => solicitud.id === id)}
-  console.log(solicitudFound)
+  
 
   const { origin, destination, date, hour, quantityPassengers } = solicitudFound
 
@@ -51,8 +51,8 @@ const Solicitud =()=> {
   else { aeropuertoSolicitud = destination }
   
   const info={airports:aeropuertoSolicitud,quantityPassengers:quantityPassengers}
-  console.log(info)
-  console.log(conductores)
+ 
+  
   
   useEffect(() => {
     dispatch(filtrarConductores(info))
@@ -62,7 +62,7 @@ const Solicitud =()=> {
   const handleClick = (conductorId) => {
     dispatch(conductorAsignado({tripId:id,driverId:conductorId}))
     Swal.fire({
-      title: "Conductor confirmado para el viaje",
+      title: "¡Conductor asignado con éxito!",
       text: "Para cambiar de conductor ir a Solicitudes de viaje --> Viajes con conductor asignado",
       icon: "success"
     }).then(() => {
@@ -74,51 +74,52 @@ const Solicitud =()=> {
 
  
   return (
-
-    <div >
+    
+    <Box bgColor="gray.300">
       <Card
         key={id}
         direction='row'
         marginTop={'10rem'}
+        bgColor='#009ED1'
       >
-        <CardHeader size="md">ASIGNACION DE CONDUCTOR PARA SOLICITUD DE VIAJE</CardHeader>
+        <CardHeader color="white" fontFamily='DIN Medium, sans-serif' fontSize="lg">ASIGNACION DE CONDUCTOR PARA SOLICITUD DE VIAJE</CardHeader>
         
-        <CardBody>Origen: {origin}</CardBody>
-        <CardBody>Destino: {destination}</CardBody>
-        <CardBody>Fecha: {date}</CardBody>
-        <CardBody>Hora: {hour}</CardBody>
-        <CardBody>Cantidad de pasajeros: {quantityPassengers}</CardBody>
+        <CardBody color="white" fontFamily='DIN Medium, sans-serif' fontSize="lg">Origen: {origin}</CardBody>
+        <CardBody color="white" fontFamily='DIN Medium, sans-serif' fontSize="lg">Destino: {destination}</CardBody>
+        <CardBody color="white" fontFamily='DIN Medium, sans-serif' fontSize="lg">Fecha: {date}</CardBody>
+        <CardBody color="white" fontFamily='DIN Medium, sans-serif' fontSize="lg">Hora: {hour}</CardBody>
+        <CardBody color="white" fontFamily='DIN Medium, sans-serif' fontSize="lg">Cantidad de pasajeros: {quantityPassengers}</CardBody>
         <CardFooter>
 
         </CardFooter>
       </Card>
-      <TableContainer >
+      <TableContainer marginBottom={'10rem'}>
             <Table variant='simple' >
-                <TableCaption>Conductores filtrados para esta solicitud según aeropuerto y cantidad de pasajeros</TableCaption>
+                <TableCaption bgColor='#009ED1' >Conductores filtrados para esta solicitud según aeropuerto y cantidad de pasajeros</TableCaption>
                 <Thead>
                     <Tr>
-                        <Th>Nro</Th>
-                        <Th>Aeropuerto</Th>
-                        <Th>Nombre</Th>
-                        <Th>Vehiculo</Th>
-                        <Th>telefono</Th>
-                        <Th /* isNumeric */>Max. Pasajeros</Th>
-                        <Th>Asignar</Th>
-                        <Th>Detalles</Th>
+                        <Th border="1px solid black">Nro</Th>
+                        <Th border="1px solid black">Aeropuerto</Th>
+                        <Th border="1px solid black">Nombre</Th>
+                        <Th border="1px solid black">Vehiculo</Th>
+                        <Th border="1px solid black">telefono</Th>
+                        <Th border="1px solid black">Max. Pasajeros</Th>
+                        <Th border="1px solid black">Asignar</Th>
+                        <Th border="1px solid black">Detalles</Th>
                     </Tr>
                 </Thead>
                 <Tbody >
                     {conductores?.map((driver, index) => (
                         <Tr key={driver.id} bg={driver.driverState ? '#EEFFF5' : '#FFEEEE'}  >
-                            <Td>{index + 1}</Td>
-                            <Td>{driver.airports}</Td>
+                            <Td border="1px solid black">{index + 1}</Td>
+                            <Td border="1px solid black">{driver.airports}</Td>
 
-                            <Td>{driver.name}</Td>
-                            <Td>{driver.carType}</Td>
-                            <Td>{driver.phone}</Td>
-                            <Td>{driver.capacityPassengers}</Td>
+                            <Td border="1px solid black">{driver.name}</Td>
+                            <Td border="1px solid black">{driver.carType}</Td>
+                            <Td border="1px solid black">{driver.phone}</Td>
+                            <Td border="1px solid black">{driver.capacityPassengers}</Td>
 
-                            <Td justifyContent='center'  >
+                            <Td justifyContent='center' border="1px solid black" >
                                 <Flex gap={2} justifyContent={'center'}  >
                                     <Tooltip hasArrow label='Seleccionar' 
                                       bg='#009ED1' placement='left-start'>
@@ -133,7 +134,7 @@ const Solicitud =()=> {
                                     
                                 </Flex>
                             </Td>
-                            <Td>
+                            <Td border="1px solid black" justifyContent='center'>
                             <ViewBtnDetailDriver id={driver.id}
                                         name={driver.name}
                                         surname={driver.surname}
@@ -159,14 +160,14 @@ const Solicitud =()=> {
                 </Tbody>
                 <Tfoot>
                     <Tr>
-                        <Th>Nro</Th>
-                        <Th>Aeropuerto</Th>
-                        <Th>Nombre</Th>
-                        <Th>Vehiculo</Th>
-                        <Th>telefono</Th>
-                        <Th>Max. Pasajeros</Th>
-                        <Th>Asignar</Th>
-                        <Th>Detalles</Th>
+                        <Th border="1px solid black">Nro</Th>
+                        <Th border="1px solid black">Aeropuerto</Th>
+                        <Th border="1px solid black">Nombre</Th>
+                        <Th border="1px solid black">Vehiculo</Th>
+                        <Th border="1px solid black">telefono</Th>
+                        <Th border="1px solid black">Max. Pasajeros</Th>
+                        <Th border="1px solid black">Asignar</Th>
+                        <Th border="1px solid black">Detalles</Th>
                     </Tr>
                 </Tfoot>
             </Table>
@@ -180,7 +181,7 @@ const Solicitud =()=> {
           </Box>
       ):(null)
       } */}
-    </div>
+    </Box>
 
   )
 }

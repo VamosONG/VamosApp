@@ -11,14 +11,21 @@ import {
   VStack,
   IconButton,
   Image,
+  AvatarGroup
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import Vamos from "../../../assets/logoblanco.png";
+import { useSelector } from "react-redux";
+import LogOut from "../../../views/Forms/LogOut/logout";
+import LoginViajes from "../../../views/Forms/Login/LoginViajes"
 
-const MobileNavbar = ({ currentUser }) => {
+
+
+const MobileNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const {currentUser} = useSelector(state=> state)
 
   const onToggleDrawer = () => {
     setIsOpen(!isOpen);
@@ -46,7 +53,7 @@ const MobileNavbar = ({ currentUser }) => {
     width="100%" 
     marginX="auto" 
     bg="#009ED1"
-    position={isScrolled || isOpen ? "fixed" : "relative"}
+    position="fixed"
     zIndex="999"
     >
       <Box p="4">
@@ -74,34 +81,25 @@ const MobileNavbar = ({ currentUser }) => {
                 <Box>
                   <Image src={Vamos} alt="Vamos" w="100px" />
                 </Box>
-                {currentUser && currentUser.admin ? (
+                {
+                 currentUser?.admin ? (
                   <>
-                    <Link to="/solicitudesDeViajes">
+                    <Link to="/profileAdmin">
                       <Button colorScheme="#009ED1" w="100%">
-                        SOLICITUDES DE VIAJE
-                      </Button>
-                    </Link>
-                    <Link to="/detail">
-                      <Button colorScheme="#009ED1" w="100%">
-                        CONDUCTORES
-                      </Button>
-                    </Link>
-                    <Link to="/reservas">
-                      <Button colorScheme="#009ED1" w="100%">
-                        RESERVAS
+                        PERFIL ADMINISTRADOR
                       </Button>
                     </Link>
                   </>
-                ) : currentUser && currentUser.admin === false ? (
+                ) : currentUser?.admin === false ? (
                   <>
-                    <Link to="/solicitarViaje">
+                    <Link to="/profileUser">
                       <Button colorScheme="#009ED1" w="100%">
-                        SOLICITAR VIAJE
+                       MI PERFIL
                       </Button>
                     </Link>
-                    <Link to="/perfil">
+                    <Link to='/review&reseña'>
                       <Button colorScheme="#009ED1" w="100%">
-                        MI PERFIL
+                       RESEÑAS
                       </Button>
                     </Link>
                   </>
@@ -121,15 +119,23 @@ const MobileNavbar = ({ currentUser }) => {
                       <Button colorScheme="#009ED1" w="100%">
                         PREGUNTAS FRECUENTES
                       </Button>
-                    </Link>
+                    </Link>        
                   </>
-                )}
+                )}  
+                   {     !currentUser?.id?
+                     ( 
+                      <Link to= '/loginviajes'>
+                        <Button colorScheme="#009ED1" w="100%">
+                         INICIAR SESION
+                        </Button>
+                      </Link>
+                      )
+                      : currentUser?.id &&
+                      <Button colorScheme="#009ED1" w="100%">
+                        <LogOut/>          
+               </Button>
 
-                <Link to="/perfil">
-                  <Button colorScheme="#009ED1" w="100%">
-                    MI PERFIL
-                  </Button>
-                </Link>
+                }
               </VStack>
             </DrawerBody>
           </DrawerContent>

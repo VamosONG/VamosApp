@@ -28,11 +28,11 @@ const ViewBtnUpdateDriver = (props) => {
                     <ModalHeader>Modificar Datos del Conductor</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody display='flex' justifyContent={'center'} w='100%' >
-                    <UpdateDriverData {...props}   />
+                    <UpdateDriverData {...props}  onClose={onClose} />
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button colorScheme='blue' mr={3} onClick={onClose}>
+                        <Button colorScheme='red' mr={3} onClick={onClose}>
                             Close
                         </Button>
                     </ModalFooter>
