@@ -2,11 +2,11 @@ import { Flex, Box, Stack, Link, Image, Text, Heading, Button } from '@chakra-ui
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 
-import IconFace from '../../assets/icons/LOGOFACE.png'
 import IconLinkdIn from '../../assets/icons/LOGOLINK.png'
 import IconInstagram from '../../assets/icons/LOGOINSTA.png'
 
 function Footer() {
+  const IconGoogle = 'https://res.cloudinary.com/drgnsbah9/image/upload/v1706746887/Vamos/ihssnyf4wphzmddy8a5x.png'
 
   return (
     <Stack>
@@ -20,7 +20,7 @@ function Footer() {
                 <Image
                   w='2rem'
                   h='2rem'
-                  src={IconFace}
+                  src={IconGoogle}
                   alt='Facebook Vamos ONG'
                 />
               </Link>
