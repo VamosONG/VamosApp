@@ -3,6 +3,8 @@ import { getPendingTrips, getTripsById, postReview } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Card, CardBody, CardHeader, Center, Flex, Heading, Stack, StackDivider,Text, Textarea } from "@chakra-ui/react";
 import Swal from "sweetalert2";
+import { PhoneIcon, AddIcon, WarningIcon,ArrowRightIcon } from '@chakra-ui/icons'
+
 
 const ReviewAndReseña=()=> {
 
@@ -11,7 +13,7 @@ const ReviewAndReseña=()=> {
     const viajesPendientes = useSelector((state) => state.viajesPendientes)
     const tripPending=viajesPendientes.find((trip)=>trip.userId===currentUserId)
     
-    const bgImg="https://res.cloudinary.com/drgnsbah9/image/upload/v1705767640/Vamos/wavesvamos_rt0ovd.jpg"
+    const bgImg="https://res.cloudinary.com/drgnsbah9/image/upload/v1706565530/Vamos/d7q4rpqehk0nkjpmwypf.jpg"
     const [input,setInput]=useState({
         qualification:0,
         comments:"",
@@ -66,28 +68,31 @@ const ReviewAndReseña=()=> {
         <Flex
         align="center"
         justify="center"
-        /* height="100vh" */
+        height="100vh"
         direction="column"
-        marginTop={'10rem'}
+        marginTop={{base: '0', md: '80px'}}
         bgImage={bgImg}
+        w='auto'
+        
       >
         
-            <Card width="md" >
+            <Card w={{base: '20rem', md:  "600px"}}  bg='gray.100' >
             <CardHeader>
               <Heading size='md'>Reseña de tu viaje</Heading>
             </CardHeader>
           
-            <CardBody>
-              <Stack divider={<StackDivider />} spacing='4'>
-                <Box>
+            <CardBody >
+              <Stack divider={<StackDivider />} spacing='4' >
+                <Flex gap={4} w={{base:'auto' , md: '100%'}} justify={'space-between'} flexDirection={{base: 'column', md: 'row'}}> 
+                <Box textAlign={'start'}>
                   <Heading size='xs' textTransform='uppercase'>
                     Ruta
                   </Heading>
                   <Text pt='2' fontSize='sm'>
-                    {tripPending?.origin}{"----->"}{tripPending?.destination} 
+                    {tripPending?.origin}{" -----> "}{tripPending?.destination} 
                   </Text>
                 </Box>
-                <Box>
+                <Box textAlign={'start'}>
                   <Heading size='xs' textTransform='uppercase'>
                     Fecha - Hora
                   </Heading>
@@ -95,7 +100,11 @@ const ReviewAndReseña=()=> {
                   {tripPending?.date}{" - "}{tripPending?.hour} 
                   </Text>
                 </Box>
-                <Box>
+                </Flex>
+
+                <Flex  gap={4} w={{base:'auto' , md: '100%'}} justify={'space-between'} flexDirection={{base: 'column', md: 'row'}}>
+                  
+                <Box textAlign={'start'}>
                   <Heading size='xs' textTransform='uppercase'>
                     Conductor
                   </Heading>
@@ -104,7 +113,7 @@ const ReviewAndReseña=()=> {
                   </Text>
                 </Box>
                 
-                <Box>
+                <Box textAlign={'start'}>
                   <Heading size='xs' textTransform='uppercase'>
                     Puntuación
                   </Heading>
@@ -121,6 +130,7 @@ const ReviewAndReseña=()=> {
                   ))}
                 </Box>
                 </Box>
+                </Flex>
                 <Box>
                   <Heading size='xs' textTransform='uppercase'>
                     Reseña
@@ -129,12 +139,12 @@ const ReviewAndReseña=()=> {
                     name='comments'
                     onChange={handleChange} 
                     rows={4} placeholder='Déjanos algún comentario o sugerencia' 
-                    width="sm" 
-                    marginTop={"1rem"}/>
+                    width="90%" 
+                    marginTop={"1rem"} bg='white' color='black' />
                 </Box>
                 <Box>
-                    <Button onClick={handleSubmit}>
-                        Enviar
+                    <Button onClick={handleSubmit} bg='green.400' w='90%' letterSpacing={6}>
+                        ENVIAR
                     </Button>
                 </Box>
               </Stack>
