@@ -90,7 +90,7 @@ const UserProfile = () => {
     }
 
     return (
-        <Box h='90vh' w={{base:'100%', md: 'auto'}} marginTop={{base: '0', md: '100px'}} display={'flex'} justifyContent={'center'} alignContent={'center'} bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
+        <Box h='90vh' w={{base:'100%', md: 'auto'}} marginTop={{base: '0', md: '80px'}} display={'flex'} justifyContent={'center'} alignContent={'center'} bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
         justify="center"
         bgSize="cover"
         bgRepeat="no-repeat" >
