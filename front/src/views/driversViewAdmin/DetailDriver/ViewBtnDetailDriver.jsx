@@ -17,7 +17,7 @@ const ViewBtnDetailDriver = (props) => {
 
     return (
         <Box  >
-            <Tooltip hasArrow label='Ver mas' bg='#10447E' placement='right-start' color='white'>
+            <Tooltip hasArrow label='Ver mas' bg='yellow.200' placement='right-start' color='#000'>
 
                 <Button onClick={onOpen} bg='#10447E' color="white"><ViewIcon /></Button>
             </Tooltip>
@@ -31,7 +31,7 @@ const ViewBtnDetailDriver = (props) => {
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button colorScheme='blue' bg='red' mr={3} onClick={onClose}>
+                        <Button colorScheme='blue' mr={3} onClick={onClose}>
                             Close
                         </Button>
                     </ModalFooter>

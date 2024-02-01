@@ -11,25 +11,23 @@ import {
   TableContainer, Flex, Box, Link, Tooltip
 } from '@chakra-ui/react'
 import { useMediaQuery } from "@chakra-ui/react";
-import { BsEnvelopeArrowUp, BsWhatsapp, BsEnvelopeAtFill, BsFillAirplaneFill, BsFillCake2Fill, BsFillPersonVcardFill,BsFillPersonFill, BsFillTelephoneInboundFill, BsFillTaxiFrontFill, BsFillPersonPlusFill, BsFillCarFrontFill,Bs123, BsAlphabetUppercase, BsCalendar2X } from "react-icons/bs";
+import { BsEnvelopeArrowUp, BsWhatsapp } from "react-icons/bs";
 import DriverDetailMobile from './driverDetailMobile';
-
 
 
 const DriverDetail = (props) => {
   const [isMobile] = useMediaQuery('(max-width: 640px)');
-
   return (
-    <Card boxSize='4xl' overflowX='scroll' w={{base: '25rem', md: '60vw'}} >
+    <Card boxSize='4xl' overflowX='scroll' w={{base: '25rem', md: '60vw'}}>
       <CardBody>
-        <Stack  spacing='3'>
-          <Heading bg='#10447E' py='2' px='4'  borderRadius='8' color={'whitesmoke'} w={'max-content'} alignSelf={'center'} dispaly='flex' justifySelf={'center'}>
+        <Stack mt='6' spacing='3'>
+          <Heading bg='gray.200' py='2' px='4'  borderRadius='8' >
             Conductor:
-            <Badge ml='1' fontSize='2rem' bg='red' color='white' >
+            <Badge ml='1' fontSize='2rem' colorScheme='green'>
               {props.name} 
             </Badge> 
           </Heading>
-          <Flex gap='4' flexDirection={{base: 'column', md: 'row'}} w='100%' h={{base: '200px', md: '300px'}}  position={'relative'}>
+          <Flex gap='4' flexDirection={{base: 'column', md: 'row'}} w='100%'>
             <Flex boxShadow={'0 0px 20px black'} borderRadius='lg' w='100%'  justify={'space-between'}>
               <Image
                 src={props.driverImg}
@@ -40,58 +38,70 @@ const DriverDetail = (props) => {
               />
             </Flex>
             {!isMobile ? (
-            <Flex gap={4} w='50%' justify='space-between' m='0 auto' flexDirection={'row'} >
+            <Flex gap={4} w='50%' justify='center' m='0 auto' flexDirection={'column'} >
               <TableContainer w='auto' h='auto' >
-                <Table variant='striped' bg='gray.300' display={'flex'} >
+                <Table variant='striped' bg='gray.300'  >
+                  <TableCaption fontSize={'1.2rem'}>Datos del Conductor</TableCaption>
                   <Thead >
-                    <Tr display={"flex"}
-                            flexDirection={'column'} >
-                      <Th fontSize={'1.2rem'} h={'2.5rem'} title='Nombre y Apellido'><BsFillPersonFill/></Th>
-                      <Th fontSize={'1.2rem'} h={'2.5rem'} title='DNI'><BsFillPersonVcardFill/></Th>
-                      <Th fontSize={'1.2rem'} h={'2.5rem'} title='Correo'><BsEnvelopeAtFill/></Th>
-                      <Th fontSize={'1.2rem'} h={'2.5rem'} title='Fec.Nac'><BsFillCake2Fill/></Th>
-                      <Th fontSize={'1.2rem'} h={'2.5rem'} title='Telefono'><BsFillTelephoneInboundFill/></Th>
-                      <Th fontSize={'1.2rem'} h={'2.5rem'} title='Zona'><BsFillAirplaneFill/></Th>
+                    <Tr >
+                      <Th fontSize={'1.2rem'}>Apellido</Th>
+                      <Th fontSize={'1.2rem'}>DNI</Th>
+                      <Th fontSize={'1.2rem'}>Correo</Th>
                     </Tr>
                   </Thead>
                   <Tbody>
-                    <Tr display={"flex"}
-                            flexDirection={'column'} >
-                      <Td fontSize={'1.2rem'} h={'2.5rem'} textTransform={'capitalize'} >{props.name} {props.surname}</Td>
-                      <Td fontSize={'1.2rem'} h={'2.5rem'} >{props.dni}</Td>
-                      <Td fontSize={'1.2rem'} h={'2.5rem'} >{props.email}</Td>
-                      <Td fontSize={'1.2rem'} h={'2.5rem'} >{props.birthday}</Td>
-                      <Td fontSize={'1.2rem'} h={'2.5rem'} >{props.phone}</Td>
-                      <Td fontSize={'1.2rem'} h={'2.5rem'} >{props.airports}</Td>
+                    <Tr>
+                      <Td fontSize={'1.2rem'}>{props.surname}</Td>
+                      <Td fontSize={'1.2rem'}>{props.dni}</Td>
+                      <Td fontSize={'1.2rem'}>{props.email}</Td>
+                    </Tr>
+                  </Tbody>
+                  <Thead >
+                    <Tr>
+                      <Th fontSize={'1.2rem'}>Fec. Nac</Th>
+                      <Th fontSize={'1.2rem'}>Telefono</Th>
+                      <Th fontSize={'1.2rem'}>Origen</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    <Tr>
+                      <Td fontSize={'1.2rem'}>{props.birthday}</Td>
+                      <Td fontSize={'1.2rem'}>{props.phone}</Td>
+                      <Td fontSize={'1.2rem'}>{props.airports}</Td>
                     </Tr>
                   </Tbody>
                 </Table>
               </TableContainer>
 
               <TableContainer w='auto'>
-                <Table variant='striped' bg='gray.300'  display={'flex'}>
+                <Table variant='striped' bg='gray.300' >
+                  <TableCaption fontSize={'1.2rem'}>Datos del Vehiculo</TableCaption>
                   <Thead>
-                    <Tr display={"flex"}
-                            flexDirection={'column'}>
-                      <Th fontSize={'1.2rem'} h={'2.5rem'} title='Vehiculo'>
-                          <BsFillTaxiFrontFill/>
-                        </Th>
-                      <Th fontSize={'1.2rem'} h={'2.5rem'} title='Modelo'><BsFillCarFrontFill/></Th>
-                      <Th fontSize={'1.2rem'} h={'2.5rem'} title='Licencia'><Bs123/></Th>
-                      <Th fontSize={'1.2rem'} h={'2.5rem'} title='Soat'><BsCalendar2X/></Th>
-                      <Th fontSize={'1.2rem'} h={'2.5rem'} title='Placa'><BsAlphabetUppercase/></Th>
-                      <Th fontSize={'1.2rem'} h={'2.5rem'} title='Max. Psjr'><BsFillPersonPlusFill/></Th>
+                    <Tr>
+                      <Th fontSize={'1.2rem'}>Vehiculo</Th>
+                      <Th fontSize={'1.2rem'}>Modelo</Th>
+                      <Th fontSize={'1.2rem'}>Licencia</Th>
                     </Tr>
                   </Thead>
                   <Tbody  >
-                    <Tr display={"flex"}
-                            flexDirection={'column'} textTransform={'capitalize'}>
-                      <Td fontSize={'1.2rem'} h={'2.5rem'}>{props.carType}</Td>
-                      <Td fontSize={'1.2rem'} h={'2.5rem'}>{props.carModel}</Td>
-                      <Td fontSize={'1.2rem'} h={'2.5rem'}>{props.driverLicense}</Td>
-                      <Td fontSize={'1.2rem'} h={'2.5rem'}>{props.carSoat}</Td>
-                      <Td fontSize={'1.2rem'} h={'2.5rem'}>{props.carPatent}</Td>
-                      <Td fontSize={'1.2rem'} h={'2.5rem'}>{props.capacityPassengers}</Td>
+                    <Tr>
+                      <Td fontSize={'1.2rem'}>{props.carType}</Td>
+                      <Td fontSize={'1.2rem'}>{props.carModel}</Td>
+                      <Td fontSize={'1.2rem'}>{props.driverLicense}</Td>
+                    </Tr>
+                  </Tbody>
+                  <Thead >
+                    <Tr >
+                      <Th fontSize={'1.2rem'}>Soat</Th>
+                      <Th fontSize={'1.2rem'}>Placa</Th>
+                      <Th fontSize={'1.2rem'}>max. Pasjr.</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    <Tr>
+                      <Td fontSize={'1.2rem'}>{props.carSoat}</Td>
+                      <Td fontSize={'1.2rem'}>{props.carPatent}</Td>
+                      <Td fontSize={'1.2rem'}>{props.capacityPassengers}</Td>
                     </Tr>
                   </Tbody>
                 </Table>
@@ -103,22 +113,22 @@ const DriverDetail = (props) => {
 
           </Flex>
 
-          <Flex w='100%' h={{base: '200px', md: '350px'}} gap={4} p='4' flexDirection={{base: 'column', md: 'row'}}  >
+          <Flex w='100%' gap={4} p='4' flexDirection={{base: 'column', md: 'row'}}>
             <Flex w={{base: '100%', md: '50%'}}
-              h='auto' gap={4} flexDirection={'column'} bg='gray.50' borderRadius='lg' p='4' boxShadow={'0 10px 10px black'} overflow={'hidden'}>
+              h='auto' gap={4} flexDirection={'column'} bg='gray.50' borderRadius='lg' p='4' boxShadow={'0 10px 10px black'}>
               <Text fontSize='1.5rem' fontWeight={'bold'}>Vehiculo</Text>
               <Image
                 src={props.carImg}
                 alt={props.name}
                 borderRadius='lg'
                 w='100%'
+                h='auto'
                 objectFit='cover'
-                h={'240px'}
               />
             </Flex>
 
             <Flex w={{base: '100%', md: '50%'}}
-              h='auto' gap={4} flexDirection={'column'} bg='gray.50' borderRadius='lg' p='4' boxShadow={'0 10px 10px black'} overflow={'hidden'}>
+              h='auto' gap={4} flexDirection={'column'} bg='gray.50' borderRadius='lg' p='4' boxShadow={'0 10px 10px black'}>
               <Text fontSize='1.5rem' fontWeight={'bold'} >Perm. Circulación</Text>
               <Image
                 src={props.circulationPermit}
@@ -126,7 +136,7 @@ const DriverDetail = (props) => {
                 borderRadius='lg'
                 w='100%'
                 objectFit='cover'
-                h={'240px'}
+                h='auto'
               />
             </Flex>
 
@@ -136,7 +146,7 @@ const DriverDetail = (props) => {
         </Stack>
       </CardBody>
       <Divider />
-      <CardFooter > 
+      <CardFooter>
         <ButtonGroup spacing='2'>
         <Link color='teal.500' href={`mailto:${props.email}`}>
           <Tooltip label='Enviar Correo' bg='green' placement='top' fontSize='1.3rem' borderRadius={4} px='2'>
@@ -146,7 +156,7 @@ const DriverDetail = (props) => {
           </Tooltip>
         </Link>
 
-        <Link color='teal.500' href={`whatsapp://send?phone=${props.phone}`}>
+        <Link color='teal.500' href={`whatsapp://send?phone=+51${props.phone}`}>
           <Tooltip label='Mensaje' bg='green' placement='top' fontSize='1.3rem' borderRadius={4} px='2'>
           <Button variant='solid' colorScheme='blue' fontSize='1.5rem'>
             <BsWhatsapp/>

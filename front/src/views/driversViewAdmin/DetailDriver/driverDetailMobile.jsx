@@ -19,7 +19,6 @@ const DriverDetailMobile = (props) => {
             justify="center"
             m="0 auto"
             flexDirection={"column"}
-            
         >
             <TableContainer w="auto" h="auto">
                 <Table
@@ -29,6 +28,7 @@ const DriverDetailMobile = (props) => {
                     flexDirection={{ base: "row", md: "column" }}
                     justifyContent={{ base: "space-between", md: null }}
                 >
+                    {/* <TableCaption fontSize={'1.2rem'}>Datos del Conductor</TableCaption> */}
                     <Thead>
                         <Tr
                             display={"flex"}
