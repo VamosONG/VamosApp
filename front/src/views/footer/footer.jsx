@@ -16,7 +16,7 @@ function Footer() {
 
           <Box w='300px' h='auto'>
             <Flex gap='5' justify='center'>
-              <Link href='#' target='_blank' >
+              <Link href='https://www.google.com/maps/place/Vamos!!/@-4.5870898,-81.2543648,17z/data=!3m1!4b1!4m6!3m5!1s0x903647d4f95c34ef:0xb86801e960c8dec!8m2!3d-4.5870898!4d-81.2543648!16s%2Fg%2F11jttkmn5v?entry=ttu' target='_blank' >
                 <Image
                   w='2rem'
                   h='2rem'
@@ -25,7 +25,7 @@ function Footer() {
                 />
               </Link>
 
-              <Link href='#' target='_blank' >
+              <Link href='https://www.linkedin.com/company/viajaconvamos/' target='_blank' >
                 <Image
                   w='2rem'
                   h='2rem'
@@ -34,7 +34,7 @@ function Footer() {
                   />
               </Link>
 
-              <Link href='#' target='_blank' >
+              <Link href='https://www.instagram.com/viajaconvamos' target='_blank' >
                 <Image
                   w='2rem'
                   h='2rem'
