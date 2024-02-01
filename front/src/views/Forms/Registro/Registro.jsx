@@ -124,15 +124,17 @@ let dataUser = {};
         src="https://res.cloudinary.com/drgnsbah9/image/upload/v1706386608/Vamos/paroh1nlxjsyzeqdv6v5.png" 
         alt="Descripción de la imagen" 
         width="400px"
-        height="596px"
+        height="750px"
         objectFit="cover"
         />
       </Flex>
 
       <Stack
-        spacing={2}
+        marginTop={{ base: "40px", md: "0px" }}
+        spacing={1}
         bg='#009ED1'
-        p={{ base: 4, md: 5 }}
+        height={{ base: "700px", md: "750px" }}
+        p={{ base: 4, md: 6 }}
         borderRadius={{ base: "none", md: "none" }}
         boxShadow="dark-lg"
         w={{ base: "100%", md: "25rem" }}
