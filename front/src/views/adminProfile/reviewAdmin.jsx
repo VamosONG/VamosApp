@@ -71,12 +71,14 @@ const ReviewAdmin = () => {
     }, [reviews])
 
     return (
-        <Flex
-            alignItems='center'
-            justifyContent='center'
-            direction="column"
-            width="100%"
-            overflowX="auto"
+
+        <Flex 
+        aalignItems='center'
+        justifyContent='center'
+        direction="column"
+        width={{ base: "28%", lg: "100%" }}
+        overflowX="auto"
+        marginTop={{ base: "4%", lg: "0%" }}
         >
             <TableContainer >
                 <Flex bg='#009ED1' justify={'center'} p={2} borderTopLeftRadius="md" borderTopRightRadius="md" border="1px solid black">
@@ -97,7 +99,8 @@ const ReviewAdmin = () => {
                         </Thead>
 
                         <Tbody>
-                            {review?.map((review) => (
+
+                            {review.length>0 ? review?.map((review) => (
                                 <Tr key={review.id} bg={review.qualification <= 3 ? 'blue.200' : null} >
                                     <Td border="2px solid black" w='auto' >{review.userName ? review.userName : 'User Test'}</Td>
                                     <Td border="2px solid black" w='min-content' >
@@ -127,7 +130,19 @@ const ReviewAdmin = () => {
                                             <StarIcon key={i} color={i < review.qualification ? '#E83D6F' : 'gray.300'} />
                                         ))} </Td>
                                 </Tr>
-                            ))}
+                            ))
+                            : (<Tr>
+                                <Td colSpan={6} textAlign="center" align="center">
+                                    <span style={{
+                                    fontWeight: "bold",
+                                    color: "gray.800",
+                                    fontSize: "18px",
+                                    }}>
+                                    No se encontraron coincidencias con la búsqueda.
+                                    </span>
+                                </Td>
+                            </Tr>  )
+                        }
 
                         </Tbody>
                         <Tfoot>

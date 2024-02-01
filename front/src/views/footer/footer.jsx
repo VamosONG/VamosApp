@@ -1,7 +1,6 @@
 import { Flex, Box, Stack, Link, Image, Text, Heading, Button } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 
-
 import IconLinkdIn from '../../assets/icons/LOGOLINK.png'
 import IconInstagram from '../../assets/icons/LOGOINSTA.png'
 
@@ -10,10 +9,20 @@ function Footer() {
 
   return (
     <Stack>
-      <Flex flexDirection={{ base: 'column', md: 'column' }} w='100%'  >
-
-      <Flex bg='#009ED1' minWidth='max-content' alignItems='center' gap='5' pt='1rem' boxSize='sm' w='100%' h='auto' color='white' justify='space-evenly' px='2rem' flexDirection={{ base: 'column', md: 'row' }}>
-
+      <Flex flexDirection={{ base: 'column', md: 'column' }} w='100%'>
+      <Flex  
+      bg='#009ED1' 
+      minWidth='max-content' 
+      alignItems='center' 
+      gap='5' pt='1rem' 
+      boxSize='sm' 
+      w='100%' 
+      h='auto' 
+      color='white' 
+      justify='space-evenly' 
+      px='2rem' 
+      flexDirection={{ base: 'column', md: 'row' }}
+      >
           <Box w='300px' h='auto'>
             <Flex gap='5' justify='center'>
               <Link href='https://www.google.com/maps/place/Vamos!!/@-4.5870898,-81.2543648,17z/data=!3m1!4b1!4m6!3m5!1s0x903647d4f95c34ef:0xb86801e960c8dec!8m2!3d-4.5870898!4d-81.2543648!16s%2Fg%2F11jttkmn5v?entry=ttu' target='_blank' >
@@ -86,7 +95,7 @@ function Footer() {
         </Flex>
 
         <Box w='100%' order={{ base: 4, md: 4 }} textAlign='center' textShadow='2px 2px 4px rgb(0, 0, 0, 0.4)'>
-          <Flex justify='center' bg='#10447E' color='white' fontSize='1.1rem' py='2'>
+          <Flex justify='center' bg='#10447E' color='white' fontSize='1.1rem' py='2' marginBottom={{ base: "-100px", lg: "0px" }}>
             <Text>© VAMOS 2024 Todos los Derechos Reservados.</Text>
           </Flex>
         </Box>
