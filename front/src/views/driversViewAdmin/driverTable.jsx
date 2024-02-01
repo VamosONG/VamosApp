@@ -182,7 +182,7 @@ const DriverTableView = () => {
                     </Thead>
 
                     <Tbody>
-                {tripsToShow.map((driver, index) => (
+                {tripsToShow.length>0 ? tripsToShow.map((driver, index) => (
                     <Tr key={driver.id} bg={driver.inactive ? 'gray.300' : driver.driverState ? 'white' : 'red.300'} color={driver.inactive ? 'black' : 'black'}>
                                 <Td border="2px solid black">{index + 1}</Td>
                                 <Td border="2px solid black">{driver.airports}</Td>
@@ -272,8 +272,19 @@ const DriverTableView = () => {
                                 {/* <Td>{!driver.inactive ? (<Badge colorScheme='green' borderRadius={5} px='2'>Activo</Badge>) : (<Badge colorScheme='red'  borderRadius={5} px='2'>Retirado</Badge>)}</Td> */}
 
                             </Tr>
-                        ))}
-
+                        )) 
+                         :(<Tr>
+                            <Td colSpan={6} textAlign="right" align="center">
+                                <span style={{
+                                fontWeight: "bold",
+                                color: "gray.800",
+                                fontSize: "18px",
+                                }}>
+                                No se encontraron coincidencias con la búsqueda.
+                                </span>
+                            </Td>
+                        </Tr>  )
+                }
                     </Tbody>
                     <Tfoot>
                         <Tr bgColor='gray.300'>
