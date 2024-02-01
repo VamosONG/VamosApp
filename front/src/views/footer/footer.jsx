@@ -1,11 +1,11 @@
 import { Flex, Box, Stack, Link, Image, Text, Heading, Button } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 
-import IconFace from '../../assets/icons/LOGOFACE.png'
 import IconLinkdIn from '../../assets/icons/LOGOLINK.png'
 import IconInstagram from '../../assets/icons/LOGOINSTA.png'
 
 function Footer() {
+  const IconGoogle = 'https://res.cloudinary.com/drgnsbah9/image/upload/v1706746887/Vamos/ihssnyf4wphzmddy8a5x.png'
 
   return (
     <Stack>
@@ -25,16 +25,16 @@ function Footer() {
       >
           <Box w='300px' h='auto'>
             <Flex gap='5' justify='center'>
-              <Link href='#' target='_blank' >
+              <Link href='https://www.google.com/maps/place/Vamos!!/@-4.5870898,-81.2543648,17z/data=!3m1!4b1!4m6!3m5!1s0x903647d4f95c34ef:0xb86801e960c8dec!8m2!3d-4.5870898!4d-81.2543648!16s%2Fg%2F11jttkmn5v?entry=ttu' target='_blank' >
                 <Image
                   w='2rem'
                   h='2rem'
-                  src={IconFace}
+                  src={IconGoogle}
                   alt='Facebook Vamos ONG'
                 />
               </Link>
 
-              <Link href='#' target='_blank' >
+              <Link href='https://www.linkedin.com/company/viajaconvamos/' target='_blank' >
                 <Image
                   w='2rem'
                   h='2rem'
@@ -43,7 +43,7 @@ function Footer() {
                   />
               </Link>
 
-              <Link href='#' target='_blank' >
+              <Link href='https://www.instagram.com/viajaconvamos' target='_blank' >
                 <Image
                   w='2rem'
                   h='2rem'

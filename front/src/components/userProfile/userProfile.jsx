@@ -107,6 +107,7 @@ const UserProfile = () => {
                                 </Tooltip>
                                 <Flex w={{base: '100%', md: '50%'}} justify={'center'} position={'relative'}>
                                     <Image w={{base: '100%', md: '15rem'}} h={{base: '300px', md: '15rem'}}name='Segun Adebayo' src={fotoPerfil ? fotoPerfil : 'https://bit.ly/sage-adebayo'} border={'2px solid #10447E'}
+
                                         alt={fotoPerfil.name}
                                         bg='white'
                                         borderRadius={10}
@@ -114,7 +115,7 @@ const UserProfile = () => {
                                         loading='lazy'
                                     />{' '}
                                     <Tooltip label='Cambiar Foto' placement='left' bg='#10447E' borderRadius={4} >
-                                        <Button position={'absolute'} bottom={0} right={'1rem'} w='2.3rem' h='2.3rem' onClick={changeImgPerfil} bg='#10447E' color={'white'}>
+                                        <Button position={'absolute'} bottom={0} right={'0rem'} w='2.3rem' h='2.3rem' onClick={changeImgPerfil} bg='#10447E' color={'white'}>
                                             <EditIcon />
                                         </Button>
                                     </Tooltip>
@@ -124,29 +125,30 @@ const UserProfile = () => {
 
                                     
                                         <Text fontSize={'1.7rem'} color={'white'}>
-                                            Bienvenido {userDetail.name}
+                                            ¡Bienvenido   {userDetail.name}!
                                         </Text>
                                         <Flex w={'100%'} bg='whitesmoke' justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4' >
                                             <Text textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}>
-                                                {userDetail.name}
+                                                Nombre: {userDetail.name}
                                             </Text>
 
                                         </Flex>
                                         <Flex w={'100%'} bg='whitesmoke' justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4' >
                                             <Text textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}>
-                                                {userDetail.surname}
+                                                Apellido: {userDetail.surname}
                                             </Text>
                                         </Flex>
                                     </Flex>
                                     <Flex w={'100%'} justify={'space-evenly'} gap={4} flexDirection={'column'} >
                                         <Flex w={'100%'} bg='whitesmoke' justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4'>
-                                            <Text textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}>
+                                            
+                                            <Text maxW={"120%"} textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}>
                                                 {userDetail.email}
                                             </Text>
                                         </Flex>
                                         <Flex w={'100%'} bg='whitesmoke' justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4'>
                                             <Text textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}>
-                                                {userDetail.dni ? userDetail.dni : 'DNI, no registrado'}
+                                                DNI: {userDetail.dni ? userDetail.dni : 'DNI, no registrado'}
                                             </Text>
                                     
                                         </Flex>
