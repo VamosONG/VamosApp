@@ -12,9 +12,10 @@ dotenv.config();
 const createOrder = async (req, res) => {
 
   mercadopago.configure({
-    access_token: process.env.ACCESS_TOKEN
+    access_token: process.env.ACCESS_TOKEN,
+    client_id: process.env.CLIENT_ID,
+    client_secret: process.env.CLIENT_SECRET,
   });
-
   const {
     userId,
     
