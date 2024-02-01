@@ -1,38 +1,29 @@
-import { PhoneIcon, AddIcon, WarningIcon, EditIcon } from '@chakra-ui/icons'
+
 import { BsAlarm, BsCalendar3, BsCursorFill, BsGeoAltFill, BsPersonFill, BsCurrencyDollar, BsChevronDoubleRight, BsChevronDoubleLeft } from "react-icons/bs";
 import {
-    Box,
     Flex,
-    Image,
-    Heading,
     Link as ChakraLink,
-    Tabs,
-    TabList,
-    Tab,
-    TabPanels,
-    TabPanel,
-    VStack,
-    FormControl,
-    FormLabel,
-    Input,
-    Button,
-    SimpleGrid,
-    Text,
-    Divider, Avatar, Tooltip, Badge
+    Text, Avatar,
 } from '@chakra-ui/react';
 import ImgMancora from '../../assets/imgPlaces/mancora.jpeg'
 import ImgZorrito from '../../assets/imgPlaces/zorritos.jpg'
 import ImgDecameron from '../../assets/imgPlaces/decameron.jpg'
-
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { getDataUser, getDetailUserById } from '../../redux/actions';
 
 
 const CardUserTrips = ({ userDetail, stateFilter }) => {
+    const dispatch = useDispatch()
+    const {id} = userDetail
     const filteredTrips = userDetail.Trips.filter((trip) => trip.stateOfTrip === stateFilter);
-
+useEffect(()=> {
+    dispatch(getDetailUserById(id))
+},[filteredTrips])
     // Verifica si filteredTrips tiene una longitud mayor a 0 antes de renderizar el componente
-    if (filteredTrips.length === 0) {
-        return null; // No renderiza nada si no hay viajes
-    }
+    // if (filteredTrips.length === 0) {
+    //     return null; // No renderiza nada si no hay viajes
+    // }
     return (
         <Flex bg='white' w={'100%'} h='100%' borderRadius={6} px={1} pt='0' flexDirection={'column'}  >
             {filteredTrips.length && filteredTrips.map((trips) => (
