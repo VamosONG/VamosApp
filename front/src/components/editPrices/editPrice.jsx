@@ -29,7 +29,7 @@ const EditPrice = ({combo,handleUpdate,isEvenRow}) => {
       quantityPassengers,
       value: inputValue !== '' ? Number(inputValue) : undefined,
     })
-    console.log(inputValue)
+   
     setConfirmationText(
       <div>
         <p>Origen: {airport}</p>

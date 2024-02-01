@@ -24,9 +24,9 @@ module.exports = async (req, res) => {
             const chofer=await getDriverById(tr.driverId);
             const usuario = await getUserById(tr.userId)
             const reviews = await getReviewById(tr.userId)
-            console.log(reviews)
+            
             const puntaje=reviews.find((revi)=>revi.driverId==tr.driverId && revi.date==tr.date)
-            console.log(puntaje)
+            
             if(puntaje!=undefined){
                 const newTrip={
                     ...dataValues,

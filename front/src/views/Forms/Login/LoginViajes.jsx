@@ -68,7 +68,7 @@ const LoginViajes = ({ onSwitchForm }) => {
     try {
       await auth.login(input.email, input.password); // autenticacion de loginWithGoogle funcion de firebase signInWithPopUp
         const getUser =  await dispatch(getUserByEmail(input.email)); // busca al usuario por email y lo setea como currentUser
-        console.log(getUser);
+       
          navigate('/')////
         Swal.fire({
           position: "center",
@@ -96,7 +96,7 @@ const LoginViajes = ({ onSwitchForm }) => {
     
     
     //const usuario = auth.user
-    console.log("googleLog",googleLog)
+   
     try {
       if (googleLog) {
          const usr={
@@ -160,10 +160,10 @@ const LoginViajes = ({ onSwitchForm }) => {
   //       if(response){
   //         // Carga el estado global currentUser con la info del usuario registrado
   //         const userActual = await dispatch(getUserByEmail(user.email));
-  //         console.log(userActual);
+  //        
   //         return userActual;
   //       } else {
-  //         console.log("error al crear");
+  //         throw new Error("error al crear");
   //       }
   //     }
   //   } catch (error) {
@@ -189,7 +189,7 @@ const LoginViajes = ({ onSwitchForm }) => {
       dispatch(cleanCurrentUser({}))
       navigate("/")
     } catch (error) {
-      console.log("error");
+      throw new Error(error.message);
     }
   }
   

@@ -25,7 +25,7 @@ const UpdateUserDataForm = ({ userDetail }) => {
     const handleChange = (e) => {
         const property = e.target.name;
         let value = e.target.value;
-        console.log(property + " " + value);
+        
         setNewData({
             ...newData,
             [property]: value,
@@ -34,10 +34,10 @@ const UpdateUserDataForm = ({ userDetail }) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (newData) {
-            console.log('1 sub ' , newData);
+            
             const response = await axios.patch(`http://localhost:3001/user/update/${id}`, {newData})
             if (response) {
-                console.log("des1 de la actualización:", newData);
+                
                 Swal.fire({
                     title: "¡Bien hecho!",
                     text: "Datos actualizados con éxito",

@@ -24,7 +24,7 @@ const Home = () => {
     const dispatch= useDispatch();
 
     const conductoresPmostrar= useSelector((state)=>state.pageConductores);
-    console.log(conductoresPmostrar)
+    
     
     useEffect (()=>{
         dispatch(getAllConductores());
