@@ -27,21 +27,21 @@ import { RepeatClockIcon } from '@chakra-ui/icons';
 const EditPrices = () => {
 
   const dispatch = useDispatch()
-  
+
 
   const allPrices = useSelector((state) => state.allPrices)
 
-  
+
 
   useEffect(() => {
     dispatch(getAllPrices())
   }, [dispatch]);
 
 
-  
-  const handleUpdate = (input,confirmationText,editar) => {
-    
-    
+
+  const handleUpdate = (input, confirmationText, editar) => {
+
+
     Swal.fire({
       title: "Está por el cambiar el precio del viaje",
       html: renderToString(confirmationText),
@@ -71,7 +71,7 @@ const EditPrices = () => {
   }
 
   //***************PAGINADO**********************************/
-  
+
   const [currentPage, setCurrentPage] = useState(1);
   const [pricesToShow, setPricesToShow] = useState([]);
 
@@ -124,24 +124,24 @@ const EditPrices = () => {
 
   const handleClean = async (e) => {
     setInput({
-        ...input,
-        searchInput: "",
-        order: "",
-        tripState: 'completed'
+      ...input,
+      searchInput: "",
+      order: "",
+      tripState: 'completed'
     })
     dispatch(orderSearchPrices({
       ...input,
       searchInput: "",
       order: "",
       tripState: 'completed'
-  }));
-  setCurrentPage(1);
+    }));
+    setCurrentPage(1);
   }
 
   return (
     <Box width={{ base: "25%", lg: "100%" }}
-    marginTop={{ base: "10%", lg: "0%" }}
-    marginBottom={{ base: "25%", lg: "0%" }}
+      marginTop={{ base: "10%", lg: "0%" }}
+      marginBottom={{ base: "25%", lg: "0%" }}
     >
       <Flex
         width={{ base: "185%", lg: "100%" }}
@@ -175,7 +175,7 @@ const EditPrices = () => {
             color="black"
             bgColor="white"
             placeholder="Ordenar"
-            
+
             name="order"
             onChange={handleChange}
             value={input.order}
@@ -184,103 +184,103 @@ const EditPrices = () => {
             <option>menor precio</option>
           </Select>
         </Box>
-        <Button onClick={handleSubmit} 
-        width={{ base: "xs", md: "2xl", lg: "8%" }}
-        style={{marginRight:'1rem'}} 
-        size={{ base: "md", md: "2xl", lg: "10%" }}
+        <Button onClick={handleSubmit}
+          width={{ base: "xs", md: "2xl", lg: "8%" }}
+          style={{ marginRight: '1rem' }}
+          size={{ base: "md", md: "2xl", lg: "10%" }}
         >
           APLICAR
         </Button>
         <Tooltip hasArrow label='Reiniciar filtro y búsqueda' bg='#009ED1' placement='left-start'>
-                <Button onClick={handleClean} >
-                <RepeatClockIcon/>
-                </Button>
-                </Tooltip>
+          <Button onClick={handleClean} >
+            <RepeatClockIcon />
+          </Button>
+        </Tooltip>
       </Flex>
 
 
-    <Flex
-    alignItems='center'
-    justifyContent='center'
-    direction="column"
-    width={{ base: "185%", md: "2xl", lg: "100%" }}
-    overflowX="auto"
-    borderRadius="md"
-    >
-    <TableContainer>
-    <Flex px={0} 
-    bg='gray.300' 
-    overflowX="auto" 
-    >
-      <Table colorScheme='#009ED1' width="100%">
-        <Thead bg='#009ED1'>
+      <Flex
+        alignItems='center'
+        justifyContent='center'
+        direction="column"
+        width={{ base: "185%", md: "2xl", lg: "100%" }}
+        overflowX="auto"
+        borderRadius="md"
+      >
+        <TableContainer>
+          <Flex px={0}
+            bg='gray.300'
+            overflowX="auto"
+          >
+            <Table colorScheme='#009ED1' width="100%">
+              <Thead bg='#009ED1'>
 
-          <Tr>
-          <Th border="2px solid black" color='white' width={{ base: "100px", md: "2xl", lg: "700px" }}>RUTA</Th>
-          <Th border="2px solid black" color='white' width={{ base: "100px", md: "2xl", lg: "400px" }}>TIPO DE CARRO</Th>
-          <Th border="2px solid black" color='white' width={{ base: "100px", md: "2xl", lg: "300px" }}>PRECIO EN SOLES / ACTUALIZAR</Th>
-          </Tr>
-        </Thead>
-        <Tbody border="2px solid black" justifyContent="center">
-          {pricesToShow?.map((combo, index) => (
+                <Tr>
+                  <Th border="2px solid black" color='white' width={{ base: "100px", md: "2xl", lg: "700px" }}>RUTA</Th>
+                  <Th border="2px solid black" color='white' width={{ base: "100px", md: "2xl", lg: "400px" }}>TIPO DE CARRO</Th>
+                  <Th border="2px solid black" color='white' width={{ base: "100px", md: "2xl", lg: "300px" }}>PRECIO EN SOLES / ACTUALIZAR</Th>
+                </Tr>
+              </Thead>
+              <Tbody border="2px solid black" justifyContent="center">
+                {pricesToShow?.map((combo, index) => (
 
-            <EditPrice
-            key={index}
-            combo={combo}
-            index={index}
-            handleUpdate={handleUpdate}
-            isEvenRow={index % 2 === 0}
-          />
-          ))}
-        </Tbody>
-      </Table>
+                  <EditPrice
+                    key={index}
+                    combo={combo}
+                    index={index}
+                    handleUpdate={handleUpdate}
+                    isEvenRow={index % 2 === 0}
+                  />
+                ))}
+              </Tbody>
+            </Table>
+          </Flex>
+        </TableContainer>
+        <Flex
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="row"
+          bgColor="gray.300"
+          width={{ base: "100%", md: "2xl", lg: "100%" }}
+          h="100%"
+          borderBottomLeftRadius="md"
+          borderBottomRightRadius="md"
+          border="1px solid black"
+        >
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            marginTop="1rem"
+            marginBottom="1rem"
+          >
+            <Button
+              color='black'
+              bgColor='#009ED1'
+              variant="outline"
+              colorScheme="teal"
+              onClick={prevHandler}
+            >
+              Anterior
+            </Button>
+
+            <Box as="span" marginLeft="1rem" marginRight="1rem">
+              Página {currentPage}
+            </Box>
+
+            <Button
+              color='black'
+              bgColor='#009ED1'
+              variant="outline"
+              colorScheme="teal"
+              onClick={nextHandler}
+            >
+              Siguiente
+            </Button>
+          </Box>
+        </Flex>
       </Flex>
-    </TableContainer>
-    <Flex
-    display="flex"
-    justifyContent="center"
-    alignItems="center"
-    flexDirection="row"
-    bgColor="gray.300"
-    width={{ base: "100%", md: "2xl", lg: "100%" }}
-    h="100%"
-    borderBottomLeftRadius="md" 
-    borderBottomRightRadius="md"
-    border="1px solid black"
-    >
-    <Box 
-    display="flex" 
-    justifyContent="center" 
-    alignItems="center" 
-    marginTop="1rem"
-    marginBottom="1rem"
-    >
-      <Button
-        color='black'
-        bgColor='#009ED1'
-        variant="outline"
-        colorScheme="teal"
-        onClick={prevHandler}
-      >
-        Anterior
-      </Button>
-
-      <Box as="span" marginLeft="1rem" marginRight="1rem">
-        Página {currentPage}
-      </Box>
-
-      <Button
-        color='black'
-        bgColor='#009ED1'
-        variant="outline"
-        colorScheme="teal"
-        onClick={nextHandler}
-      >
-        Siguiente
-      </Button>
-    </Box>
-    </Flex>
-    </Flex>
     </Box>
   );
 };
