@@ -112,7 +112,7 @@ const LoginViajes = ({ onSwitchForm }) => {
           timer: 2500
         });
         //Crea un usuario (findOrCreate) utilizando fetch con su metodo post 
-        const response = await fetch('http://localhost:3001/user/create', {
+        const response = await fetch('https://vamosappserver.onrender.com/user/create', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

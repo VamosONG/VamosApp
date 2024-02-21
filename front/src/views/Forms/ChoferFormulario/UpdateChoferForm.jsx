@@ -41,7 +41,8 @@ const UpdateDriverData = (props) => {
        
         if (newData) {
             
-            const response = await axios.patch(`http://localhost:3001/drivers/update/${id}`, newData);
+            const response = await axios.patch(`https://vamosappserver.onrender.com/drivers/update/${id}`, newData);
+          
             await dispatch(getAllConductores())
             if (response.status === 200) {
                 dispatch(getAllConductores())

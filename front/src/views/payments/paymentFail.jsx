@@ -10,8 +10,8 @@ const PaymentFail = () => {
    
     //     const redirectTimer = setTimeout(() => {
           
-    //       window.location.href = 'http://localhost:5173/';
-    //     }, 5000);
+    //       window.location.href = 'https://vamos-app.vercel.app/solicitarViaje';
+    //     }, 59999999000);
     
        
     //     return () => clearTimeout(redirectTimer);

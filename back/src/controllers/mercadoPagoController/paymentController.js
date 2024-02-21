@@ -12,9 +12,10 @@ dotenv.config();
 const createOrder = async (req, res) => {
 
   mercadopago.configure({
-    access_token: process.env.ACCESS_TOKEN
+    access_token: process.env.ACCESS_TOKEN,
+    client_id: process.env.CLIENT_ID,
+    client_secret: process.env.CLIENT_SECRET,
   });
-
   const {
     userId,
     
@@ -44,13 +45,13 @@ const createOrder = async (req, res) => {
           // picture_url: "",
         }],
       back_urls: {
-        success: "http://localhost:5173/paymentStatus",
-        pending: "http://localhost:5173/pending",
-         failure: "http://localhost:5173/paymentFailed"
+        success: "https://vamos-app.vercel.app/paymentStatus",
+        pending: "https://vamos-app.vercel.app/pending",
+         failure: "https://vamos-app.vercel.app/paymentFailed"
          
       },
 
-      notification_url: "https://ceb1-186-11-77-210.ngrok-free.app/mepago/webhook",
+      notification_url: "https://vamosappserver.onrender.com/mepago/webhook",
 
 
       auto_return: "all"
@@ -71,6 +72,7 @@ const createOrder = async (req, res) => {
 
 const receiveWebhook = async (req, res) => {
   try {
+    
     const payment = req.query;
     // const {date_created, user_id} = req.body
 
@@ -109,7 +111,6 @@ res.status(204).json(resp);
 };
 
 module.exports = { createOrder, receiveWebhook }
-
 
 
 
