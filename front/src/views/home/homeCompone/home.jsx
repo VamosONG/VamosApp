@@ -66,10 +66,11 @@ const Home = () => {
             textAlign={['left', null, 'left']}
             fontFamily="'DIN Alternate Black', sans-serif"
             letterSpacing='2px'
-            fontSize={['2xl', null, '4xl']}
+            fontSize={['xl', null, '4xl']}
             mb='2'
             textShadow='2px 2px 4px rgb(0, 0, 0, 0.9)'
             mt={{ base: "1rem", md: "0" }}
+            marginTop={{ base: "30%", lg: "0%" }}
             >
             Bienvenido a "Vamos".
             </Heading>

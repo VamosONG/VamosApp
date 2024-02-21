@@ -31,15 +31,19 @@ import {
     ModalCloseButton,
   } from '@chakra-ui/react'
 import NavBar from '../navBar/NavBar';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 
 import Swal from "sweetalert2";
 import CardUserTrips from '../cardUserTrips/cardUserTrips';
 import UpdateUserDataForm from './updateUserDataForms';
 import CardTrips from '../cards/cardTrips';
+
 import CeroViaje from '../navBar/ceroViajes';
 
+import { getDataUser } from '../../redux/actions';
+
 const UserProfile = () => {
+    const dispatch = useDispatch()
     const location = useLocation();
     const userDetail = useSelector((state) => state.currentUser)
     // Función para manejar la actualización de información
@@ -52,7 +56,8 @@ const UserProfile = () => {
     useEffect(() => {
         // Guardar la foto de perfil en localStorage cada vez que cambie
         localStorage.setItem('fotoPerfil', fotoPerfil);
-    }, [fotoPerfil]);
+        dispatch(getDataUser())
+    }, [fotoPerfil, userDetail]);
 
     const scrollbarStyles = {
         '&::-webkit-scrollbar': {
@@ -87,7 +92,6 @@ const UserProfile = () => {
             reader.readAsDataURL(file);
         }
     }
-    const bgImg = 'https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg'
 
     return (
         <Box h='90vh'  display={'flex'} justifyContent={'center'} alignContent={'center'} bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
