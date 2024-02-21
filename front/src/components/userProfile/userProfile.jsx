@@ -36,8 +36,13 @@ import { useSelector } from 'react-redux'
 import Swal from "sweetalert2";
 import CardUserTrips from '../cardUserTrips/cardUserTrips';
 import UpdateUserDataForm from './updateUserDataForms';
-// import CardTrips from '../cards/cardTrips';
-import CeroViaje from '../errorViews/ceroViaje/ceroViajes'; 
+
+import CardTrips from '../cards/cardTrips';
+
+import CeroViaje from '../navBar/ceroViajes';
+
+import { getDataUser } from '../../redux/actions';
+
 
 const UserProfile = () => {
     const location = useLocation();

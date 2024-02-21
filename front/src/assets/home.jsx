@@ -18,6 +18,7 @@ return (
       bgImage={`url(${bgImage})`}
       bgRepeat='no-repeat'
       bgSize='cover'
+      
       >
         <Flex
         direction='column'
