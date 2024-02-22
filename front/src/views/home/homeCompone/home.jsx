@@ -84,7 +84,8 @@ const Home = () => {
             display={['none', null, 'block']}
             visibility={['hidden', null, 'visible']}
             >
-            <ListItem>Traslados disponibles desde Tumbes y Talara hacia domicilios y hoteless.</ListItem>
+            
+            <ListItem>Traslados disponibles desde Tumbes y Talara hacia hoteles.</ListItem>
             <ListItem>Tarifas asequibles para nuestros servicios de transporte.</ListItem>
             <ListItem>Brindamos oportunidades laborales a emprendedores adultos mayores.</ListItem>
             <ListItem>Garantizamos vehículos nuevos y cómodos para tu comodidad.</ListItem>
