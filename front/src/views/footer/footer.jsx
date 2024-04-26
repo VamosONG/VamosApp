@@ -24,28 +24,29 @@ function Footer() {
       px='2rem' 
       flexDirection={{ base: 'column', md: 'row' }}
       >
-          <Box w='300px' h='auto' >
-          <Heading fontSize="x-large" justify={"flex-start"}>Nosotros</Heading>
-            <Flex flexDirection='column' fontSize='1.3rem'>
-                <Link href='/about' isExternal>
-                Sobre Nosotros <ExternalLinkIcon mx='2px' />
-                </Link>
-                <Link href='/questions' isExternal>
-                Preguntas Frecuentes <ExternalLinkIcon mx='2px' />
-                </Link>
-                <Link href='mailto:vamos.ong@gmail.com' isExternal>
-                vamos.ong@gmail.com <ExternalLinkIcon mx='2px' />
-                </Link>
-            </Flex>
-          </Box>
+       <Box w='300px' h='auto'>
+    <Heading fontSize="x-large" textAlign="left" mb={4}>Nosotros:</Heading>
+    <Flex flexDirection='column' fontSize='1.3rem'  textAlign="left" > {/* Alineación hacia la izquierda */}
+        <Link href='/about' isExternal mb={2}>
+            Sobre Nosotros <ExternalLinkIcon mx='2px' />
+        </Link>
+        <Link href='/questions' isExternal mb={2}>
+            Preguntas Frecuentes <ExternalLinkIcon mx='2px' />
+        </Link>
+        <Link href='mailto:vamos.ong@gmail.com' isExternal >
+            vamos.ong@gmail.com <ExternalLinkIcon mx='2px' />
+        </Link>
+    </Flex>
+</Box>
 
           <Box w='auto' h='auto' p='1' textAlign='center' order={{ base: 3, md: 2 }} textShadow='2px 2px 4px rgb(0, 0, 0, 0.5)'>
           <Flex flexDirection='column' fontSize='1.5rem' gap='4'>
-              <Text>
-                <b>Aeropuertos:</b>
+              <Text textAlign="left" >
+                <Heading fontSize="x-large" mb={2}>Aeropuertos:</Heading>
                 <div>
-                  <address>Talara, Lima, Peru.</address>
-                  <address>Tumbes, Lima, Peru.</address>
+                  <Text mb={2}> Talara, Lima, Peru.</Text>
+                  <Text mb={2}> Tumbes, Lima, Peru.</Text>
+                  <Text mb={2}> Piura, Lima, Peru.</Text>
                 </div>
               </Text>
             </Flex> 
