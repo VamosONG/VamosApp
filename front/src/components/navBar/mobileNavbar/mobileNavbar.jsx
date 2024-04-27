@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   Button,
   Box,
+  Flex,
   Drawer,
   DrawerOverlay,
   DrawerContent,
@@ -15,17 +16,15 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
-import Vamos from "../../../assets/logoblanco.png";
+import Vamos from "../../../assets/logo.png";
 import { useSelector } from "react-redux";
 import LogOut from "../../../views/Forms/LogOut/logout";
-import LoginViajes from "../../../views/Forms/Login/LoginViajes"
-
-
+import LoginViajes from "../../../views/Forms/Login/LoginViajes";
 
 const MobileNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const {currentUser} = useSelector(state=> state)
+  const { currentUser } = useSelector(state => state);
 
   const onToggleDrawer = () => {
     setIsOpen(!isOpen);
@@ -47,18 +46,20 @@ const MobileNavbar = () => {
   }, []);
 
   return (
-    <Box 
-    maxW="1400px" 
-    minW="375px" 
-    width="100%" 
-    marginX="auto" 
-    bg="#009ED1"
-    position="fixed"
-    zIndex="999"
+    <Flex
+      maxW="1400px"
+      minW="375px"
+      width="100%"
+      marginX="auto"
+      bg="white"
+      position="fixed"
+      zIndex="999"
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+      p="4"
     >
-      <Box p="4">
-        <Image src={Vamos} alt="Vamos" w="80px" />
-      </Box>
+      <Image marginLeft={"43%"} src={Vamos} alt="Vamos" w="80px" mt={"10px"}/>
 
       <IconButton
         aria-label="Open mobile menu"
@@ -67,12 +68,13 @@ const MobileNavbar = () => {
         variant="unstyled"
         position="absolute"
         right="4"
-        top="4"
+        top="4" 
+        marginRight={"85%"}
       />
 
-      <Drawer isOpen={isOpen} placement="top" onClose={onCloseDrawer}>
+      <Drawer  isOpen={isOpen} placement="top" onClose={onCloseDrawer}>
         <DrawerOverlay>
-          <DrawerContent bg="#009ED1">
+          <DrawerContent bg="blue">
             <DrawerCloseButton />
             <DrawerHeader> </DrawerHeader>
 
@@ -81,8 +83,7 @@ const MobileNavbar = () => {
                 <Box>
                   <Image src={Vamos} alt="Vamos" w="100px" />
                 </Box>
-                {
-                 currentUser?.admin ? (
+                {currentUser?.admin ? (
                   <>
                     <Link to="/profileAdmin">
                       <Button colorScheme="#009ED1" w="100%">
@@ -94,12 +95,12 @@ const MobileNavbar = () => {
                   <>
                     <Link to="/profileUser">
                       <Button colorScheme="#009ED1" w="100%">
-                       MI PERFIL
+                        MI PERFIL
                       </Button>
                     </Link>
-                    <Link to='/review&reseña'>
+                    <Link to="/review&reseña">
                       <Button colorScheme="#009ED1" w="100%">
-                       RESEÑAS
+                        RESEÑAS
                       </Button>
                     </Link>
                   </>
@@ -119,29 +120,26 @@ const MobileNavbar = () => {
                       <Button colorScheme="#009ED1" w="100%">
                         PREGUNTAS FRECUENTES
                       </Button>
-                    </Link>        
+                    </Link>
                   </>
-                )}  
-                   {     !currentUser?.id?
-                     ( 
-                      <Link to= '/loginviajes'>
-                        <Button colorScheme="#009ED1" w="100%">
-                         INICIAR SESION
-                        </Button>
-                      </Link>
-                      )
-                      : currentUser?.id &&
-                      <Button colorScheme="#009ED1" w="100%">
-                        <LogOut/>          
-               </Button>
-
-                }
+                )}
+                {!currentUser?.id ? (
+                  <Link to="/loginviajes">
+                    <Button colorScheme="#009ED1" w="100%">
+                      INICIAR SESION
+                    </Button>
+                  </Link>
+                ) : (
+                  <Button colorScheme="#009ED1" w="100%">
+                    <LogOut />
+                  </Button>
+                )}
               </VStack>
             </DrawerBody>
           </DrawerContent>
         </DrawerOverlay>
       </Drawer>
-    </Box>
+    </Flex>
   );
 };
 

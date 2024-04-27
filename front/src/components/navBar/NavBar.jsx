@@ -41,6 +41,7 @@ const NavBar = () => {
 }else{
  return (
   <>
+  <Flex>
     {isMobile ? (
       <MobileNavbar />
     ) : (
@@ -152,6 +153,7 @@ const NavBar = () => {
         </Box>
       </Flex>
     )}
+    </Flex>
   </>
 );
 }

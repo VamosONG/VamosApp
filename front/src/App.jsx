@@ -28,6 +28,7 @@ import LoginViajes from './views/Forms/Login/LoginViajes';
 import { AuthProvider, useAuth} from './context/authContext';
 import { useSelector } from 'react-redux';
 import LogOut from './views/Forms/LogOut/logout';
+import { Flex } from '@chakra-ui/react';
 
 
 function App() {
@@ -37,8 +38,9 @@ function App() {
   return (
     <>
     <AuthProvider>
+      <Flex>
         <NavBar />
-
+        </Flex>
         <TransitionGroup>
         <CSSTransition key={location.key} classNames="slide" timeout={800}>
             <Routes>
