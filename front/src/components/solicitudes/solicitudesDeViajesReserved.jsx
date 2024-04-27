@@ -33,7 +33,7 @@ const SolicitudesDeViajesReserved = () => {
     const dispatch = useDispatch()
     
     const viajesReservados = useSelector((state) => state.viajesReservados)
-    
+
 
     useEffect(() => {
         dispatch(getReservedTrips())
@@ -182,6 +182,7 @@ const handleSubmitReserved = async (e) => {
                   <Th border="2px solid black">Fecha</Th>
                   <Th border="2px solid black">Hora</Th>
                   <Th border="2px solid black">Usuario</Th>
+                  <Th border="2px solid black">Cant pasajeros</Th>
                   <Th border="2px solid black">Buscar conductor</Th>
                   </Tr>
                 </Thead>
@@ -194,6 +195,7 @@ const handleSubmitReserved = async (e) => {
                   <Td border="2px solid black">{solicitud.date}</Td>
                   <Td border="2px solid black">{solicitud.hour}</Td>
                   <Td border="2px solid black"><Link>{solicitud.userEmail}</Link></Td>
+                  <Td border="2px solid black" textAlign="center">{solicitud.quantityPassengers}</Td>
                   <Td border="2px solid black" justifyContent='center'  >
                 <Flex gap={2} justifyContent={'center'}  >
                   <Tooltip hasArrow label='Buscar conductor' bg='#009ED1' placement='left-start'>
