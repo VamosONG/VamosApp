@@ -161,6 +161,7 @@ const SolicitudwViajeForm = () => {
   const origenes = [
     'AEROPUERTO TALARA',
     'AEROPUERTO TUMBES',
+    'AEROPUERTO PIURA',
     'DECAMERON PUNTA SAL',
     'ZORRITOS',
     'MANCORA',
@@ -169,10 +170,11 @@ const SolicitudwViajeForm = () => {
   const destinos = {
     'AEROPUERTO TALARA': ['MANCORA', 'DECAMERON'],
     'AEROPUERTO TUMBES': ['DECAMERON PUNTA SAL', 'ZORRITOS', 'MANCORA'],
+    'AEROPUERTO PIURA':['MANCORA', 'DECAMERON'],
     'DECAMERON PUNTA SAL': ['AEROPUERTO TUMBES'],
     'ZORRITOS': ['AEROPUERTO TUMBES'],
-    'MANCORA': ['AEROPUERTO TUMBES', 'AEROPUERTO TALARA'],
-    'DECAMERON': ['AEROPUERTO TALARA'],
+    'MANCORA': ['AEROPUERTO TUMBES', 'AEROPUERTO TALARA','AEROPUERTO PIURA'],
+    'DECAMERON': ['AEROPUERTO TALARA','AEROPUERTO PIURA'],
   }
   const [origenSeleccionado, setOrigenSeleccionado] = useState('');
   const [destinoSeleccionado, setDestinoSeleccionado] = useState('');
@@ -370,7 +372,8 @@ const SolicitudwViajeForm = () => {
                   >
                     {(() => {
                       setMaxPasajeros((origenSeleccionado === "AEROPUERTO TALARA" && destinoSeleccionado === "MANCORA") ||
-                        (origenSeleccionado === "MANCORA" && destinoSeleccionado === "AEROPUERTO TALARA") ? 15 : 10);
+                        (origenSeleccionado === "MANCORA" && destinoSeleccionado === "AEROPUERTO TALARA") || (origenSeleccionado === "AEROPUERTO PIURA" && destinoSeleccionado === "MANCORA") ||
+                        (origenSeleccionado === "MANCORA" && destinoSeleccionado === "AEROPUERTO PIURA")? 15 : 10);
 
                       return [...Array(maxPasajeros + 1).keys()].map((number) => (
                         <option key={number} value={number}>
