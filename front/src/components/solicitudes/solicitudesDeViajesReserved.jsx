@@ -33,7 +33,7 @@ const SolicitudesDeViajesReserved = () => {
     const dispatch = useDispatch()
     
     const viajesReservados = useSelector((state) => state.viajesReservados)
-    console.log(viajesReservados)
+
 
     useEffect(() => {
         dispatch(getReservedTrips())
