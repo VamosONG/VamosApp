@@ -5,7 +5,8 @@ import {
     Heading, 
     UnorderedList, 
     ListItem,
-    Image
+    Image,
+    Text
 } from '@chakra-ui/react';
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -63,8 +64,9 @@ const Home = () => {
                         letterSpacing='1px'
                         fontSize={['xl', null, '4xl']}
                         mb='2'
-                        mt={{ base: "1rem", md: "0" }}
-                        marginTop={{ base: "80%", lg: "0%" }}
+                        mt={{ base: "2rem", md: "0" }}
+                        paddingTop={"20%"}
+                        pr={"30%"}
                     >
                         ¡Bienvenido a <n>Vamos!</n>
                     </Heading>
@@ -73,12 +75,14 @@ const Home = () => {
                         fontFamily="'DIN Medium',"
                         color='#054C84'
                         fontSize={['lg', null, '2xl']}
-                                
-                        display={['none', null, 'block']}
-                        visibility={['hidden', null, 'visible']}
-                        marginTop={{ base: "90%", lg: "0%" }}
+                        display="flex"
+                        flexDirection="column" // Cambia la dirección a columna en dispositivos pequeños
+                        alignItems="flex-start" // Alinea los elementos a la izquierda
+                        marginTop="1rem" // Agrega un margen superior
+                        marginLeft={"-5px"}
+                        paddingRight={"30%"}
                     >
-                        <ListItem>¡Planea tu viaje ahora! Traslados en Tumbes y Talara con confort y buen precio!</ListItem>
+                        <Text>¡Planea tu viaje ahora! Traslados en Tumbes y Talara con confort y buen precio!</Text>
                     </UnorderedList>
                 </Flex>
                 <Flex
@@ -87,7 +91,7 @@ const Home = () => {
                     justifyContent="center"
                     minHeight="100vh"
                     width={{ base: "100%", md: "auto" }}
-                    mt={{ base: "2rem", md: "0" }}
+                    mt={{ base: "-40%", md: "0" }}
                     ml={{ base: "0", md: "0rem" }}
                     mr={{ base: "0", md: "6rem" }}
                 >
