@@ -15,7 +15,7 @@ import { renderToString } from 'react-dom/server';
 
 const EditPrice = ({combo,handleUpdate,isEvenRow}) => {
 
-  
+
   const [input, setInput] = useState({})
   const [confirmationText, setConfirmationText] = useState("")
 
