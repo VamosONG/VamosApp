@@ -64,7 +64,7 @@ const Home = () => {
                         fontSize={['xl', null, '4xl']}
                         mb='2'
                         mt={{ base: "1rem", md: "0" }}
-                        marginTop={{ base: "30%", lg: "0%" }}
+                        marginTop={{ base: "80%", lg: "0%" }}
                     >
                         ¡Bienvenido a <n>Vamos!</n>
                     </Heading>
@@ -73,9 +73,10 @@ const Home = () => {
                         fontFamily="'DIN Medium',"
                         color='#054C84'
                         fontSize={['lg', null, '2xl']}
-                        mt='0px'
+                                
                         display={['none', null, 'block']}
                         visibility={['hidden', null, 'visible']}
+                        marginTop={{ base: "90%", lg: "0%" }}
                     >
                         <ListItem>¡Planea tu viaje ahora! Traslados en Tumbes y Talara con confort y buen precio!</ListItem>
                     </UnorderedList>
