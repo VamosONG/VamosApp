@@ -20,6 +20,7 @@ import Vamos from "../../../assets/logo.png";
 import { useSelector } from "react-redux";
 import LogOut from "../../../views/Forms/LogOut/logout";
 import LoginViajes from "../../../views/Forms/Login/LoginViajes";
+import User from "../../../assets/user.png"
 
 const MobileNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,9 +60,7 @@ const MobileNavbar = () => {
       alignItems="center"
       p="4"
     >
-      <Image marginLeft={"43%"} src={Vamos} alt="Vamos" w="80px" mt={"10px"}/>
-
-      <IconButton
+       <IconButton
         aria-label="Open mobile menu"
         icon={<HamburgerIcon />}
         onClick={onToggleDrawer}
@@ -69,12 +68,18 @@ const MobileNavbar = () => {
         position="absolute"
         right="4"
         top="4" 
-        marginRight={"85%"}
+         marginRight={"85%"}
       />
+      <Image marginLeft={"43%"} src={Vamos} alt="Vamos" w="80px" mt={"10px"}/>
+
+     <Button bgImage={User}>
+
+      
+     </Button>
 
       <Drawer  isOpen={isOpen} placement="top" onClose={onCloseDrawer}>
         <DrawerOverlay>
-          <DrawerContent bg="blue">
+          <DrawerContent bg="white">
             <DrawerCloseButton />
             <DrawerHeader> </DrawerHeader>
 
@@ -86,7 +91,7 @@ const MobileNavbar = () => {
                 {currentUser?.admin ? (
                   <>
                     <Link to="/profileAdmin">
-                      <Button colorScheme="#009ED1" w="100%">
+                      <Button colorScheme="#009ED1" color="black" w="100%"> {/* Cambio del color del texto a negro */}
                         PERFIL ADMINISTRADOR
                       </Button>
                     </Link>
@@ -94,12 +99,12 @@ const MobileNavbar = () => {
                 ) : currentUser?.admin === false ? (
                   <>
                     <Link to="/profileUser">
-                      <Button colorScheme="#009ED1" w="100%">
+                      <Button colorScheme="#009ED1" color="black" w="100%"> {/* Cambio del color del texto a negro */}
                         MI PERFIL
                       </Button>
                     </Link>
                     <Link to="/review&reseña">
-                      <Button colorScheme="#009ED1" w="100%">
+                      <Button colorScheme="#009ED1" color="black" w="100%"> {/* Cambio del color del texto a negro */}
                         RESEÑAS
                       </Button>
                     </Link>
@@ -107,17 +112,17 @@ const MobileNavbar = () => {
                 ) : (
                   <>
                     <Link to="/">
-                      <Button colorScheme="#009ED1" w="100%">
+                      <Button colorScheme="#009ED1" color="black" w="100%"> {/* Cambio del color del texto a negro */}
                         INICIO
                       </Button>
                     </Link>
                     <Link to="/about">
-                      <Button colorScheme="#009ED1" w="100%">
+                      <Button colorScheme="#009ED1" color="black" w="100%"> {/* Cambio del color del texto a negro */}
                         NOSOTROS
                       </Button>
                     </Link>
                     <Link to="/questions">
-                      <Button colorScheme="#009ED1" w="100%">
+                      <Button colorScheme="#009ED1" color="black" w="100%"> {/* Cambio del color del texto a negro */}
                         PREGUNTAS FRECUENTES
                       </Button>
                     </Link>
@@ -125,12 +130,12 @@ const MobileNavbar = () => {
                 )}
                 {!currentUser?.id ? (
                   <Link to="/loginviajes">
-                    <Button colorScheme="#009ED1" w="100%">
+                    <Button colorScheme="#009ED1" color="black" w="100%"> {/* Cambio del color del texto a negro */}
                       INICIAR SESION
                     </Button>
                   </Link>
                 ) : (
-                  <Button colorScheme="#009ED1" w="100%">
+                  <Button colorScheme="#009ED1" color="black" w="100%"> {/* Cambio del color del texto a negro */}
                     <LogOut />
                   </Button>
                 )}

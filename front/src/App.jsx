@@ -38,9 +38,9 @@ function App() {
   return (
     <>
     <AuthProvider>
-      <Flex>
+      
         <NavBar />
-        </Flex>
+        
         <TransitionGroup>
         <CSSTransition key={location.key} classNames="slide" timeout={800}>
             <Routes>
