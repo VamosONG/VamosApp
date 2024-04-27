@@ -10,7 +10,7 @@ import {
   Progress
 } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
-import Vamos from "../../assets/logoblanco.png";
+import Vamos from "../../assets/logo.png";
 import MobileNavbar from "../navBar/mobileNavbar/mobileNavbar";
 import { useSelector } from "react-redux";
 import LogOut from "../../views/Forms/LogOut/logout";
@@ -46,13 +46,13 @@ const NavBar = () => {
     ) : (
       <Flex
         as="nav"
-        bg={
-          location.pathname === "/"
-            ? navBackground
-              ? "#009ED1"
-              : "transparent"
-            : "#009ED1"
-        }
+        // bg={
+        //   location.pathname === "/"
+        //     ? navBackground
+        //       ? "#054C84"
+        //       : "transparent"
+        //     : "#009ED1"
+        // }
         alignItems="center"
         justify="space-between"
         h="80px"
@@ -122,19 +122,19 @@ const NavBar = () => {
               <Box>
                 <Flex>
                   <Link to="/">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
+                    <Button backgroundColor={"transparent"} color={"#171717"} fontSize="1xl">
                       INICIO
                     </Button>
                   </Link>
 
                   <Link to="/about">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
+                    <Button color={"#171717"} backgroundColor={"transparent"} fontSize="1xl">
                       NOSOTROS
                     </Button>
                   </Link>
 
                   <Link to="/questions">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
+                    <Button color={"#171717"} backgroundColor={"transparent"} fontSize="1xl">
                       PREGUNTAS FRECUENTES
                     </Button>
                   </Link>
