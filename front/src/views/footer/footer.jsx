@@ -21,10 +21,10 @@ function Footer() {
       color='white' 
       paddingBottom={"100px"}
       // justify='space-evenly' 
-      px='2rem' 
+      px='3rem' 
       flexDirection={{ base: 'column', md: 'row' }}
       >
-       <Box w='300px' h='auto'>
+       <Box w='auto' h='auto' p='1' textAlign='center' order={{ base: 3, md: 2 }} pr={"4%"}>
     <Heading fontSize="x-large" textAlign="left" mb={4}>Nosotros:</Heading>
     <Flex flexDirection='column' fontSize='1.3rem'  textAlign="left" > {/* Alineación hacia la izquierda */}
         <Link href='/about' isExternal mb={2}>
@@ -34,15 +34,15 @@ function Footer() {
             Preguntas Frecuentes <ExternalLinkIcon mx='2px' />
         </Link>
         <Link href='mailto:vamos.ong@gmail.com' isExternal >
-            vamos.ong@gmail.com <ExternalLinkIcon mx='2px' />
+            ong.vamos.2024@gmail.com <ExternalLinkIcon mx='2px' />
         </Link>
     </Flex>
 </Box>
 
-          <Box w='auto' h='auto' p='1' textAlign='center' order={{ base: 3, md: 2 }} textShadow='2px 2px 4px rgb(0, 0, 0, 0.5)'>
-          <Flex flexDirection='column' fontSize='1.5rem' gap='4'>
+          <Box w='auto' h='auto' p='1' textAlign='center' order={{ base: 3, md: 2 }} >
+          <Flex flexDirection='column' fontSize='1.3rem' textAlign="left">
               <Text textAlign="left" >
-                <Heading fontSize="x-large" mb={2}>Aeropuertos:</Heading>
+              <Heading fontSize="x-large" textAlign="left" mb={4}>Aeropuertos:</Heading>
                 <div>
                   <Text mb={2}> Talara, Lima, Peru.</Text>
                   <Text mb={2}> Tumbes, Lima, Peru.</Text>
@@ -55,11 +55,11 @@ function Footer() {
           
         </Flex>
 
-        <Box w='100%' order={{ base: 4, md: 4 }}  textShadow='2px 2px 4px rgb(0, 0, 0, 0.4)'>
-          <Flex  bg='#10447E' color='white' fontSize='1.1rem' py='2' 
-           
-          marginBottom={{ base: "-100px", lg: "0px" }}>
-            <Text marginLeft={{ base: "100px", lg: "110px" }}>© VAMOS 2024 Todos los Derechos Reservados.</Text>
+        <Box maxW='100%'  pl={"3%"} pr={"3%"} bgColor={"#054C84"} >
+          <Flex  bg='#054C84' color='white' fontSize='1.1rem' py='2' 
+           borderColor={"white"} borderTop={"1px"}
+          >
+            <Text >© VAMOS 2024 Todos los Derechos Reservados.</Text>
           </Flex>
         </Box>
       </Flex>

@@ -32,7 +32,7 @@ const Home = () => {
     return (
         <>
             <Flex
-                h='100vh'
+                h='70vh'
                 position='relative'
                 direction={{ base: "column", md: "row" }}
                 bgColor={"#FFFFFF"}
@@ -89,7 +89,7 @@ const Home = () => {
                     direction="column"
                     alignItems="center"
                     justifyContent="center"
-                    minHeight="100vh"
+                    minHeight="80vh"
                     width={{ base: "100%", md: "auto" }}
                     mt={{ base: "-40%", md: "0" }}
                     ml={{ base: "0", md: "0rem" }}
