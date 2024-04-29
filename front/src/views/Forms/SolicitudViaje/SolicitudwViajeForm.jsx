@@ -3,7 +3,11 @@ import {
   Button,
   TableContainer,
   Table,
-  TableCaption, Thead, Tr, Th, Tbody, Td, Input, Flex, Box, FormErrorMessage, FormControl, FormLabel, Heading, Select
+  TableCaption, Thead, Tr, Th, Tbody, Td, Input, Flex, Box, FormErrorMessage, FormControl, FormLabel, Heading, Select,
+  InputGroup,
+  InputLeftElement,
+  InputRightElement,
+  Image
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -14,6 +18,12 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 import { Field, Form, Formik } from 'formik';
 import { handlePayment, postNewViaje } from '../../../redux/actions';
+
+
+/* import { PhoneIcon } from '@chakra-ui/icons'; */
+/* import { CiLocationOn } from "react-icons/ci" */;
+import ubicacion from '../../../assets/icons/pngwing.com.png'
+import personas from '../../../assets/icons/people_878820.png'
 
 
 
@@ -226,17 +236,24 @@ const SolicitudwViajeForm = () => {
 
   return (
     <Box
-      bg='#009ED1'
-      width="400px"
-      height="540px"
+      /* bg='#009ED1' */
+      bg='white'
+      /* width="400px" */
+      width="1200px"
+      /* height="540px" */
       padding="1rem"
-      borderRadius="md"
-      marginTop={['0px', '0px']}
+      /* borderRadius="md" */
+      borderRadius="full"
+      /* marginTop={['0px', '0px']} */
+
+      /* boxShadow="xl" */
+      boxShadow="0px 1px 10px rgba(0, 0, 0, 0.3)"
+      
     >
 
-      <Heading size='lg' mb={2}>
+      {/* <Heading size='lg' mb={2}>
         Reserva tu viaje
-      </Heading>
+      </Heading> */}
 
       <Formik
         initialValues={{
@@ -249,26 +266,46 @@ const SolicitudwViajeForm = () => {
         onSubmit={handleSubmit}
       >
         {(props) => (
-          <Form>
+          <Form >
+              <Box 
+                display="flex"
+                justifyContent="space-between" 
+                /* mb="1rem" */ 
+                gap="1rem"
+                marginLeft="2rem" // Margen a la izquierda
+                marginRight="2rem"
+              >
+
             <Field name='name' validate={'hola'}>
               {({ field, form }) => (
-                <FormControl marginBottom='1rem' isInvalid={form.errors.name && form.touched.name} isRequired>{/* Despues probar sacar isRequired para no validacion */}
-
-
-                  <FormLabel
+                <FormControl /* marginBottom='1rem' */ isInvalid={form.errors.name && form.touched.name} isRequired>{/* Despues probar sacar isRequired para no validacion */}
+                    <Box display="flex" justifyContent="space-between" /* mb="1rem" */ gap="0.5rem">
+                  {/* <FormLabel
                     fontSize="xl"
                     fontFamily="'DIN Medium',"
-                  >Desde:
-                  </FormLabel>
-                  <Select
+                    >Desde:
+                  </FormLabel> */}
+                  
+                  <Image
+                    src={ubicacion} // Reemplaza con la ruta de tu ícono
+                    alt='📍' 
+                    boxSize='1.5rem' // Ajusta el tamaño del ícono
+                    mt='0.5rem'
+                  />
+                  
+                    <Select
                     bg="white"
-                    placeholder="Selecciona un origen"
+                    /* placeholder="Selecciona un origen" */
+                    placeholder="Origen"
                     value={origenSeleccionado}
                     onChange={(e) => {
                       setOrigenSeleccionado(e.target.value); /* Setea directamente para determinar los detinos */
                       setInput({ ...input, origin: e.target.value })
                     }}
                     name="origin"
+
+                    /* paddingLeft="0.1rem" */
+                    width="200px"
                   >
                     {origenes.map((origen) => (
                       <option key={origen} value={origen}>
@@ -276,21 +313,34 @@ const SolicitudwViajeForm = () => {
                       </option>
                     ))}
                   </Select>
+                  
+                  
 
-                  <FormLabel
+                  {/* <FormLabel
                     fontSize="xl"
                     fontFamily="'DIN Medium',"
                   >Hasta:
-                  </FormLabel>
+                  </FormLabel> */}
+                  {/* <InputGroup>
+                    <InputLeftElement pointerEvents='none' fontSize='20px' fontWeight='bold'> */}
+                      
+                    {/* </InputLeftElement> */}
+
+                    <Box fontSize='20px' fontWeight='bold' mt='0.1rem'>🏳️</Box>
+
                   <Select
                     bg="white"
-                    placeholder="Selecciona el destino"
+                    /* placeholder="Selecciona el destino" */
+                    placeholder="Destino"
                     value={destinoSeleccionado}
                     onChange={(e) => {
                       setDestinoSeleccionado(e.target.value)
                       setInput({ ...input, destination: e.target.value })
                     }}
                     name="destino"
+
+                    /* paddingLeft="0.1rem" */
+                    width="200px"
                   >
                     {destinosDelOrigen.map((destino) => (
                       <option key={destino} value={destino}>
@@ -298,15 +348,18 @@ const SolicitudwViajeForm = () => {
                       </option>
                     ))}
                   </Select>
+                    
+                  {/* </InputGroup> */}
 
 
-                  <FormLabel
+                  {/* <FormLabel
                     fontSize="xl"
                     fontFamily="'DIN Medium',"
-                  >Fecha</FormLabel>
+                  >Fecha</FormLabel> */}
                   <Input
                     bg="white"
-                    placeholder="Select Date and Time"
+                    /* placeholder="Select Date and Time" */
+                    placeholder="Fecha"
                     size="md"
                     type="date"
                     name='date'
@@ -319,14 +372,16 @@ const SolicitudwViajeForm = () => {
                       setFechaSeleccionada(e.target.value);
                     }}
                     min={currentDate}
+
+                    width="200px"
                   />
+                  
 
-
-                  <FormLabel
+                  {/* <FormLabel
                     fontSize="xl"
                     fontFamily="'DIN Medium',"
                   >Hora
-                  </FormLabel>
+                  </FormLabel> */}
                   <Input
                     bg="white"
                     type='time'
@@ -340,15 +395,24 @@ const SolicitudwViajeForm = () => {
                       setHoraSeleccionada(e.target.value);
                     }}
                     min={minHour}
+
+                    width="130px"
+                  />
+
+                  <Image
+                    src={personas} // Reemplaza con la ruta de tu ícono
+                    alt='📍' 
+                    boxSize='1.5rem' // Ajusta el tamaño del ícono
+                    mt='0.5rem'
                   />
 
 
-                  <FormLabel
+                  {/* <FormLabel
                     htmlFor='pasajeros'
                     fontSize="xl"
                     fontFamily="'DIN Medium',"
                   >Cantidad de pasajeros
-                  </FormLabel>
+                  </FormLabel> */}
                   <Select
                     bg="white"
                     /* placeholder={parsedData.quantityPassengers} 
@@ -356,6 +420,9 @@ const SolicitudwViajeForm = () => {
                     value={cantidadPasajerosSeleccionada}
                     id='pasajeros'
                     name='quantityPassengers'
+
+                    width="100px"
+
                     onChange={(e) => {
                       const selectedValue = parseInt(e.target.value, 10);
 
@@ -384,20 +451,24 @@ const SolicitudwViajeForm = () => {
                   </Select>
 
 
-
+                  </Box>
                   {/* <FormErrorMessage>{form.errors.name}</FormErrorMessage> */}
                 </FormControl>
               )}
             </Field>
             <Button
-              bg='#E83D6F'
-              isLoading={loading}
-              type='submit'
-              width='100%'
-              marginTop='1rem'
+            /* bg='#E83D6F' */
+            bg='#054C84'
+            isLoading={loading}
+            type='submit'
+            /* width='100%' */
+            /* marginTop='1rem' */
+
+            color="white"
             >
-              RESERVAR
+              🡴RESERVAR
             </Button>
+                </Box>
           </Form>
         )}
       </Formik>
