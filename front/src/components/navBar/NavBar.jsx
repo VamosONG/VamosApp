@@ -58,7 +58,7 @@ const NavBar = () => {
         justify="space-between"
         h="80px"
         w="100%"
-        position="fixed"
+        
         top="0"
         left="0"
         zIndex="999"
@@ -77,20 +77,20 @@ const NavBar = () => {
               <Box>
                 <Flex>
                   <Link to="/">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
+                    <Button color="black" bgColor={"transparent"} fontSize="1xl">
                       INICIO
                     </Button>
                   </Link>
 
 
                   <Link to="/about">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
+                    <Button color="black" bgColor={"transparent"} fontSize="1xl">
                       NOSOTROS
                     </Button>
                   </Link>
                   
                   <Link to="/questions">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
+                    <Button color="black" bgColor={"transparent"} fontSize="1xl">
                       PREGUNTAS FRECUENTES
                     </Button>
                   </Link>
@@ -101,19 +101,19 @@ const NavBar = () => {
               <Box>
                 <Flex>
                 <Link to="/">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
+                    <Button color="black" bgColor={"transparent"} fontSize="1xl">
                       INICIO
                     </Button>
                   </Link>
 
                   <Link to="/about">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
+                    <Button color="black" bgColor={"transparent"} fontSize="1xl">
                       NOSOTROS
                     </Button>
                   </Link>
 
                   <Link to="/questions">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
+                    <Button color="black" bgColor={"transparent"} fontSize="1xl">
                       PREGUNTAS FRECUENTES
                     </Button>
                   </Link>
