@@ -171,7 +171,8 @@ const LoginForm = ({ onSwitchForm }) => {
   return (
     <Stack
     spacing={4}
-    bg="rgb(0, 158, 209)"
+    bg="white"
+    
     p="4"
     h="auto"
     rounded="0"
@@ -182,8 +183,8 @@ const LoginForm = ({ onSwitchForm }) => {
     >
       {!currentUser?.id && (
         <>
-          <FormControl isInvalid={isError}>
-            <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Correo Electrónico</FormLabel>
+          <FormControl isInvalid={isError} >
+            <FormLabel fontSize="lg" fontFamily="'DIN Medium'," color={"black"}>Correo Electrónico</FormLabel>
             <Input
               bg="white"
               type="text"
@@ -205,7 +206,7 @@ const LoginForm = ({ onSwitchForm }) => {
           </FormControl>
 
           <FormControl isInvalid={isError} isRequired>
-            <FormLabel fontSize="lg" fontFamily="'DIN Medium',">Contraseña</FormLabel>
+            <FormLabel fontSize="lg" fontFamily="'DIN Medium'," color={"black"}>Contraseña</FormLabel>
             <InputGroup size="md">
               <Input
                 bg="white"
@@ -236,7 +237,7 @@ const LoginForm = ({ onSwitchForm }) => {
               <Button 
               m={2}
               p={5}
-              bg="white"
+              bg="#E8D980 "
               ml="30%"
               onClick={handleSubmit} >
                 Entrar

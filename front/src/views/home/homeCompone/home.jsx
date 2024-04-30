@@ -32,7 +32,7 @@ const Home = () => {
     return (
         <>
             <Flex
-                h='70vh'
+                h='50vh'
                 position='relative'
                 direction={{ base: "column", md: "row" }}
                 bgColor={"#FFFFFF"}
@@ -42,7 +42,7 @@ const Home = () => {
                     top='0'
                     left='0'
                     w='100%'
-                    h='100%'
+                    
                     bgSize='cover'
                     bgPosition='center'
                     filter='blur(2px) brightness(0.5)'
@@ -53,7 +53,7 @@ const Home = () => {
                     alignItems={['flex-start', null, 'flex-start']}
                     justify={['flex-start', null, 'center']}
                     h='100%'
-                    w='100%'
+                    w='110%'
                     mb={{ base: '-10rem', md: '2' }}
                     pl={['130px', null, '150px 10%']}
                 >
@@ -66,7 +66,7 @@ const Home = () => {
                         mb='2'
                         mt={{ base: "2rem", md: "0" }}
                         paddingTop={"20%"}
-                        pr={"30%"}
+                        pr={"10%"}
                     >
                         ¡Bienvenido a <n>Vamos!</n>
                     </Heading>
@@ -80,7 +80,7 @@ const Home = () => {
                         alignItems="flex-start" // Alinea los elementos a la izquierda
                         marginTop="1rem" // Agrega un margen superior
                         marginLeft={"-5px"}
-                        paddingRight={"30%"}
+                        paddingRight={"10%"}
                     >
                         <Text>¡Planea tu viaje ahora! Traslados en Tumbes y Talara con confort y buen precio!</Text>
                     </UnorderedList>
@@ -89,7 +89,7 @@ const Home = () => {
                     direction="column"
                     alignItems="center"
                     justifyContent="center"
-                    minHeight="80vh"
+                    minHeight="50%"
                     width={{ base: "100%", md: "auto" }}
                     mt={{ base: "-40%", md: "0" }}
                     ml={{ base: "0", md: "0rem" }}
@@ -98,7 +98,7 @@ const Home = () => {
                     <Image src={Avion} alt='avion' w={"2000px"} />
                 </Flex>
             </Flex>
-            <Flex alignItems="center" justifyContent="center" minHeight="100vh" width="100%">
+            <Flex alignItems="center" justifyContent="center" minHeight="30vh" width="100%">
                 <SolicitudwViajeForm />
             </Flex>
             <WhatsAppButton />

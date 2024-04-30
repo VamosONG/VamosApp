@@ -198,7 +198,7 @@ const LoginViajes = ({ onSwitchForm }) => {
     <Flex 
     direction="column"
     minHeight="100vh"
-    bgImage="url('https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/re3tjn4g8e4hbdkl7jtc.jpg')"
+    bgColor={"white"}
     bgPosition="center"
     bgRepeat="no-repeat"
     bgSize="cover"
@@ -207,7 +207,7 @@ const LoginViajes = ({ onSwitchForm }) => {
     >
     <Stack
     spacing={4}
-    bg="#10447E"
+    bg="#054C84"
     p="4"
     h="auto"
     color="white"

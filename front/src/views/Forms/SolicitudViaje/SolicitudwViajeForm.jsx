@@ -239,7 +239,7 @@ const SolicitudwViajeForm = () => {
       /* bg='#009ED1' */
       bg='white'
       /* width="400px" */
-      width="1200px"
+      maxWidth="1200px"
       /* height="540px" */
       padding="1rem"
       /* borderRadius="md" */
