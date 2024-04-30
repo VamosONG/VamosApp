@@ -1,4 +1,5 @@
 const { Trip, User, Driver } = require('../../dataBase');
+const sendMailHandler = require('../../utils/mailing/sendMailHandler');
 
 const postTrip = async ({userId, driverId, date, hour, origin, destination, quantityPassengers, price} ) => {
 
@@ -39,6 +40,20 @@ const postTrip = async ({userId, driverId, date, hour, origin, destination, quan
         } else {
             throw new Error('No se encontró el usuario.');
         }
+        
+        //************PARA ENVIAR MENSAJE AL RESERVAR VIAJE ********************/
+        const mailReserve = {
+                 userId: userId,
+                 tripId: newTrip.id,
+                 option: "reserve",
+
+                 email:user.email,
+                 name:user.name
+             }
+             console.log(mailReserve)
+        await sendMailHandler(mailReserve)
+        //**************************************************************************/
+
 
         return newTrip;
     } catch (error) {
