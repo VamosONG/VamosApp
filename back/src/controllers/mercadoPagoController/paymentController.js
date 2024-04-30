@@ -39,7 +39,7 @@ const createOrder = async (req, res) => {
         {
           title: viaje,
           unit_price: price,
-          currency_id: "ARS",
+          currency_id: "PEN",
           quantity: 1,
           //  description: product.quantityPassengers, 
           // picture_url: "",
