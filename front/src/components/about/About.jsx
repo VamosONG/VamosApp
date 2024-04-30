@@ -7,6 +7,7 @@ const About = () => {
     direction="column" 
     minHeight="100vh"
     bgColor={"white"}
+   
     >
 
       <Flex
@@ -16,7 +17,7 @@ const About = () => {
         m={"5%"}
         align="center"
         bgColor={"gray.200"}
-        
+        mt={"100px"}
         borderRadius={"30px"}
       >
         {/* Contenido de la página */}
