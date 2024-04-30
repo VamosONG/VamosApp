@@ -45,7 +45,8 @@ const LogOut = ({ insideMenu }) => {
       /> */}
       <Button onClick={handleLogOut}
       aria-label="Cerrar sesión"
-      rightIcon={<FaSignOutAlt/>}>
+      rightIcon={<FaSignOutAlt/>}
+      bgColor={"#AEE56F"}>
         Cerrar Sesión
       </Button>
     </Stack>

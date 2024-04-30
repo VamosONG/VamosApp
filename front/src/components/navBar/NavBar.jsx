@@ -147,7 +147,7 @@ const NavBar = () => {
         </Box>
 
         <Box>
-          <AvatarGroup spacing="1rem" mx="20px">
+          <AvatarGroup spacing="1rem" mx="20px" >
              <ViewOptionPerfil/> 
           </AvatarGroup>
         </Box>

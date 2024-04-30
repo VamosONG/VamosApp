@@ -12,8 +12,12 @@ const About = () => {
       <Flex
         flex="1"
         direction={{ base: "column", md: "row" }}
-        p="100px"
+        p="3%"
+        m={"5%"}
         align="center"
+        bgColor={"gray.200"}
+        
+        borderRadius={"30px"}
       >
         {/* Contenido de la página */}
         <VStack 
@@ -21,6 +25,7 @@ const About = () => {
         spacing={8} 
         flex={{ base: "1", md: "0.7" }}
         mt={{ base: "20px", md: "0" }}
+        
         >
           <Heading as="h1" 
           size="2xl" 
@@ -51,7 +56,8 @@ const About = () => {
               fontFamily='DIN Alternate Black, sans-serif' 
               as="h2" 
               size="lg"
-              
+              pb={"2%"}
+              pt={"4%"}
               color='#054C84'
               >
                 Misión
@@ -75,7 +81,8 @@ const About = () => {
               fontFamily='DIN Alternate Black, sans-serif' 
               as="h2" 
               size="lg"
-              
+              pb={"2%"}
+              pt={"4%"}
               color='#054C84'
               >
                 Visión
