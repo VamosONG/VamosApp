@@ -32,7 +32,7 @@ const Home = () => {
     return (
         <>
             <Flex
-                h='50vh'
+                h={"40vh"}
                 position='relative'
                 direction={{ base: "column", md: "row" }}
                 bgColor={"#FFFFFF"}
@@ -53,9 +53,9 @@ const Home = () => {
                     alignItems={['flex-start', null, 'flex-start']}
                     justify={['flex-start', null, 'center']}
                     h='100%'
-                    w='110%'
+                    w='100%'
                     mb={{ base: '-10rem', md: '2' }}
-                    pl={['130px', null, '150px 10%']}
+                    pl={['10%', null, '50px 10%']}
                 >
                     <Heading
                         color='#054C84'
@@ -65,10 +65,9 @@ const Home = () => {
                         fontSize={['xl', null, '4xl']}
                         mb='2'
                         mt={{ base: "2rem", md: "0" }}
-                        paddingTop={"20%"}
-                        pr={"10%"}
+                        marginTop={{ base: "30%", lg: "0%" }}
                     >
-                        ¡Bienvenido a <n>Vamos!</n>
+                        ¡Bienvenido a <Text as="strong" fontSize={['xl', null, '5xl']}>Vamos!</Text>
                     </Heading>
                     <UnorderedList
                         textAlign={['left', null, 'left']}
@@ -79,28 +78,31 @@ const Home = () => {
                         flexDirection="column" // Cambia la dirección a columna en dispositivos pequeños
                         alignItems="flex-start" // Alinea los elementos a la izquierda
                         marginTop="1rem" // Agrega un margen superior
-                        marginLeft={"-5px"}
+                         marginLeft={"-5px"}
                         paddingRight={"10%"}
+                        
                     >
                         <Text>¡Planea tu viaje ahora! Traslados en Tumbes y Talara con confort y buen precio!</Text>
                     </UnorderedList>
                 </Flex>
                 <Flex
-                    direction="column"
+                   
+                   
                     alignItems="center"
                     justifyContent="center"
-                    minHeight="50%"
-                    width={{ base: "100%", md: "auto" }}
-                    mt={{ base: "-40%", md: "0" }}
+                    minHeight="40vh"
+                     width={{ base: "100%", md: "center" }}
+                     mt={{ base: "20%", md: "0" }}
                     ml={{ base: "0", md: "0rem" }}
                     mr={{ base: "0", md: "6rem" }}
+                    
                 >
-                    <Image src={Avion} alt='avion' w={"2000px"} />
+                    <Image position={"relative"} src={Avion} zIndex={"2"} alt='avion' minW={"200px"} maxW={"100%"} />
                 </Flex>
             </Flex>
-            <Flex alignItems="center" justifyContent="center" minHeight="30vh" width="100%">
+            {/* <Flex position={"relative"} alignItems="center" justifyContent="center" minHeight="-100px" width="100%" mb={"10%"}>
                 <SolicitudwViajeForm />
-            </Flex>
+            </Flex> */}
             <WhatsAppButton />
         </>
     );
