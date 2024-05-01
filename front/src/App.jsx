@@ -29,7 +29,7 @@ import { AuthProvider, useAuth} from './context/authContext';
 import { useSelector } from 'react-redux';
 import LogOut from './views/Forms/LogOut/logout';
 import { Flex } from '@chakra-ui/react';
-
+import fondoVamos1 from '../src/assets/fondoVamos1.jpg'
 
 function App() {
   const {currentUser} = useSelector(state=> state);
@@ -37,8 +37,9 @@ function App() {
 
   return (
     <>
-    <AuthProvider>
-      
+    <AuthProvider
+    /* backgroundImage={fondoVamos1} */
+    >
         <NavBar />
         
         <TransitionGroup>
