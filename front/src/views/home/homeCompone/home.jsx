@@ -99,6 +99,7 @@ const Home = () => {
                     mr={{ base: "0", md: "6rem" }}
                     
                 >
+
                     <Image position={"relative"} src={Avion} zIndex={"2"} alt='avion' minW={"200px"} maxW={"100%"}  marginBottom={'5rem'}/>
                 </Flex>
             </Flex>
@@ -109,6 +110,7 @@ const Home = () => {
         marginTop={'1rem'}
         marginBottom={'5rem'}
         >
+
                 <SolicitudwViajeForm />
             </Flex>
             <WhatsAppButton />

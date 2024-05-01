@@ -7,7 +7,9 @@ function Footer() {
       <Flex
         flexDirection={{ base: 'column', md: 'column' }}
         w='100%'
+
         position="sticky" // Esto hace que el footer se quede pegado al piso
+
         bottom="0" // Lo posiciona en la parte inferior de la ventana
       >
         <Flex
