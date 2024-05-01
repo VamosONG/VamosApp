@@ -7,7 +7,8 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightElement,
-  Image
+  Image,
+  useBreakpointValue
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -234,20 +235,34 @@ const SolicitudwViajeForm = () => {
   const [fechaSeleccionada, setFechaSeleccionada] = useState(0);
   const [cantidadPasajerosSeleccionada, setCantidadPasajerosSeleccionada] = useState(0);
 
+  const placeholder1 = useBreakpointValue({
+    base: "📍Origen", // Se mostrará en dispositivos móviles
+    md: "Origen", // Se mostrará en pantallas medianas y más grandes
+  });
+
+  const placeholder2 = useBreakpointValue({
+    base: "🏳️Destino", // Se mostrará en dispositivos móviles
+    md: "Destino", // Se mostrará en pantallas medianas y más grandes
+  });
+
   return (
     <Box
       /* bg='#009ED1' */
       bg='white'
       /* width="400px" */
-      maxWidth="1200px"
+      maxWidth={['100%', '1200px']}
       /* height="540px" */
       padding="1rem"
+      marginLeft='1rem'
+      marginRight='1rem'
       /* borderRadius="md" */
-      borderRadius="full"
+      borderRadius={['md', 'lg', 'full']}
       /* marginTop={['0px', '0px']} */
 
       /* boxShadow="xl" */
       boxShadow="0px 1px 10px rgba(0, 0, 0, 0.3)"
+      overflowX='hidden'
+      /* marginX='auto' */
       
     >
 
@@ -267,36 +282,40 @@ const SolicitudwViajeForm = () => {
       >
         {(props) => (
           <Form >
-              <Box 
-                display="flex"
+              <Flex 
+                /* display="flex" */
                 justifyContent="space-between" 
                 /* mb="1rem" */ 
                 gap="1rem"
-                marginLeft="2rem" // Margen a la izquierda
-                marginRight="2rem"
+                marginLeft="1rem" // Margen a la izquierda
+                marginRight="1rem"
+
+                direction={['column', 'row']}
               >
 
             <Field name='name' validate={'hola'}>
               {({ field, form }) => (
                 <FormControl /* marginBottom='1rem' */ isInvalid={form.errors.name && form.touched.name} isRequired>{/* Despues probar sacar isRequired para no validacion */}
-                    <Box display="flex" justifyContent="space-between" /* mb="1rem" */ gap="0.5rem">
+                    <Flex /* display="flex" */ justifyContent="space-between" /* mb="1rem" */ gap="0.5rem" direction={['column', 'row']}>
                   {/* <FormLabel
                     fontSize="xl"
                     fontFamily="'DIN Medium',"
                     >Desde:
                   </FormLabel> */}
                   
+                  <Flex /* direction={['column', 'row']} gap='0.5rem' */direction='row' gap='0.5rem'>
                   <Image
-                    src={ubicacion} // Reemplaza con la ruta de tu ícono
+                    src={ubicacion}
                     alt='📍' 
                     boxSize='1.5rem' // Ajusta el tamaño del ícono
                     mt='0.5rem'
+                    display={['none', 'block']}
                   />
                   
                     <Select
                     bg="white"
                     /* placeholder="Selecciona un origen" */
-                    placeholder="Origen"
+                    placeholder={placeholder1}
                     value={origenSeleccionado}
                     onChange={(e) => {
                       setOrigenSeleccionado(e.target.value); /* Setea directamente para determinar los detinos */
@@ -305,7 +324,10 @@ const SolicitudwViajeForm = () => {
                     name="origin"
 
                     /* paddingLeft="0.1rem" */
-                    width="200px"
+                    /* width="200px" */
+                    maxWidth="200px"
+                    minWidth="100px"
+                    
                   >
                     {origenes.map((origen) => (
                       <option key={origen} value={origen}>
@@ -326,12 +348,18 @@ const SolicitudwViajeForm = () => {
                       
                     {/* </InputLeftElement> */}
 
-                    <Box fontSize='20px' fontWeight='bold' mt='0.1rem'>🏳️</Box>
+                    <Box 
+                      fontSize='20px'
+                      fontWeight='bold' 
+                      mt='0.1rem' 
+                      maxWidth="30px"
+                      display={['none', 'block']}
+                      >🏳️</Box>
 
                   <Select
                     bg="white"
                     /* placeholder="Selecciona el destino" */
-                    placeholder="Destino"
+                    placeholder={placeholder2}
                     value={destinoSeleccionado}
                     onChange={(e) => {
                       setDestinoSeleccionado(e.target.value)
@@ -340,7 +368,9 @@ const SolicitudwViajeForm = () => {
                     name="destino"
 
                     /* paddingLeft="0.1rem" */
-                    width="200px"
+                    /* width="200px" */
+                    maxWidth="200px"
+                    minWidth="100px"
                   >
                     {destinosDelOrigen.map((destino) => (
                       <option key={destino} value={destino}>
@@ -349,6 +379,7 @@ const SolicitudwViajeForm = () => {
                     ))}
                   </Select>
                     
+                  </Flex>
                   {/* </InputGroup> */}
 
 
@@ -356,6 +387,10 @@ const SolicitudwViajeForm = () => {
                     fontSize="xl"
                     fontFamily="'DIN Medium',"
                   >Fecha</FormLabel> */}
+
+                  <Flex direction='row' gap='0.5rem'>
+
+
                   <Input
                     bg="white"
                     /* placeholder="Select Date and Time" */
@@ -373,7 +408,8 @@ const SolicitudwViajeForm = () => {
                     }}
                     min={currentDate}
 
-                    width="200px"
+                    maxWidth="170px"
+                    minWidth="120px"
                   />
                   
 
@@ -396,9 +432,14 @@ const SolicitudwViajeForm = () => {
                     }}
                     min={minHour}
 
-                    width="130px"
+                    maxWidth="170px"
+                    minWidth="120px"
                   />
 
+                  </Flex>
+
+
+                  <Flex direction='row' gap='0.4rem'>
                   <Image
                     src={personas} // Reemplaza con la ruta de tu ícono
                     alt='📍' 
@@ -421,7 +462,7 @@ const SolicitudwViajeForm = () => {
                     id='pasajeros'
                     name='quantityPassengers'
 
-                    width="100px"
+                    width={['100%', '100px']}
 
                     onChange={(e) => {
                       const selectedValue = parseInt(e.target.value, 10);
@@ -450,8 +491,8 @@ const SolicitudwViajeForm = () => {
                     })()}
                   </Select>
 
-
-                  </Box>
+                  </Flex>
+                  </Flex>
                   {/* <FormErrorMessage>{form.errors.name}</FormErrorMessage> */}
                 </FormControl>
               )}
@@ -468,7 +509,7 @@ const SolicitudwViajeForm = () => {
             >
               🡴RESERVAR
             </Button>
-                </Box>
+                </Flex>
           </Form>
         )}
       </Formik>
