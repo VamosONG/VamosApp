@@ -100,9 +100,9 @@ const Home = () => {
                     <Image position={"relative"} src={Avion} zIndex={"2"} alt='avion' minW={"200px"} maxW={"100%"} />
                 </Flex>
             </Flex>
-            {/* <Flex position={"relative"} alignItems="center" justifyContent="center" minHeight="-100px" width="100%" mb={"10%"}>
+            <Flex position={"relative"} alignItems="center" justifyContent="center" minHeight="-100px" width="100%" mb={"10%"}>
                 <SolicitudwViajeForm />
-            </Flex> */}
+            </Flex>
             <WhatsAppButton />
         </>
     );
