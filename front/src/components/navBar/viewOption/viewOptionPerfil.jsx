@@ -122,17 +122,7 @@ const ViewOptionPerfil = () => {
                                                     </Button>
                                                 </Link>
 
-                                                <Link to="/review&reseña">
-                                                    <Button
-                                                        w={"100%"}
-                                                        display={"flex"}
-                                                        justifyContent={"space-between"}
-                                                        bgColor={"#AEE56F"}
-                                                    >
-                                                        <Text>Reseñar viaje</Text>
-                                                        <EditIcon />
-                                                    </Button>
-                                                </Link>
+                                               
                                                 <LogOut />
                                             </>
                                         ) : null}

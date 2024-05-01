@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+
 import {
   Button,
   Box,
@@ -12,8 +13,23 @@ import {
   VStack,
   IconButton,
   Image,
-  AvatarGroup
+  Text,
+  AvatarGroup,
+  useDisclosure,
+  Avatar,
+  
 } from "@chakra-ui/react";
+import {
+  QuestionIcon,
+  AddIcon,
+  ExternalLinkIcon,
+  RepeatIcon,
+  EditIcon,
+  ChevronDownIcon,
+  ViewIcon,
+} from "@chakra-ui/icons";
+import LoginForm from "../../../views/Forms/Login/Login";
+import RegistroForm from "../../../views/Forms/Registro/Registro";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import Vamos from "../../../assets/logo.png";
@@ -23,12 +39,19 @@ import LoginViajes from "../../../views/Forms/Login/LoginViajes";
 import User from "../../../assets/user.png"
 
 const MobileNavbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen2, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { currentUser } = useSelector(state => state);
+  const btnRef = useRef();
+   const { isOpen, onOpen, onClose } = useDisclosure();
+   const [isLoginFormVisible, setIsLoginFormVisible] = useState(true);
+
+   const handleSwitchForm = () => {
+    setIsLoginFormVisible(!isLoginFormVisible);
+};
 
   const onToggleDrawer = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(!isOpen2);
   };
 
   const onCloseDrawer = () => {
@@ -52,7 +75,7 @@ const MobileNavbar = () => {
       minW="375px"
       width="100%"
       marginX="auto"
-      bg="white"
+      bg="tranparent"
       position="fixed"
       zIndex="999"
       display="flex"
@@ -72,12 +95,121 @@ const MobileNavbar = () => {
       />
       <Image marginLeft={"43%"} src={Vamos} alt="Vamos" w="80px" mt={"10px"}/>
 
-     <Button bgImage={User}>
+      <Button
+                ref={btnRef}
+                onClick={onOpen}
+                w={"50px"}
+                h="50px"
+                borderRadius={50}
+            >
+                <Avatar bg="white" name={currentUser.name} src={User ? User : null} />
 
-      
-     </Button>
+            </Button>
+            {currentUser?.id ?
+                <>
+                    <Drawer
+                        isOpen={isOpen}
+                        placement="right"
+                        onClose={onClose}
+                        finalFocusRef={btnRef}
+                    >
+                        <DrawerOverlay />
+                        <DrawerContent
+                            p="4px"
+                            color="white"
+                            bg="white"
+                            rounded="md"
+                            shadow="md"
+                            maxWidth={"200px"}
+                            w={"auto"}
+                            h={"max-content"}
+                            position="fixed"
+                            top="0"
+                            right="0"
+                            bottom="0"
+                        >
+                            <DrawerCloseButton />
+                            <DrawerHeader color={"black"}>Hola {currentUser.name}</DrawerHeader>
 
-      <Drawer  isOpen={isOpen} placement="top" onClose={onCloseDrawer}>
+                            <DrawerBody>
+                                <Box>
+                                    <Flex flexDirection={"column"} gap={2}>
+                                        {currentUser.admin && currentUser.admin === true ? (
+                                            <>
+                                                <Link to="/profileAdmin">
+                                                    <Button
+                                                        w={"100%"}
+                                                        display={"flex"}
+                                                        justifyContent={"space-between"}
+                                                        bgColor={"#AEE56F"}
+                                                    >
+                                                        <Text>Panel</Text>
+                                                        <ViewIcon />
+                                                    </Button>
+                                                </Link>
+                                                <LogOut />
+                                            </>
+                                        ) : currentUser.admin === false ? (
+                                            <>
+                                                <Link to="/profileUser">
+                                                    <Button
+                                                        w={"100%"}
+                                                        display={"flex"}
+                                                        justifyContent={"space-between"}
+                                                        bgColor={"#AEE56F"}
+                                                    >
+                                                        <Text>Mi perfil</Text>
+                                                        <ViewIcon />
+                                                    </Button>
+                                                </Link>
+
+                                               
+                                                <LogOut />
+                                            </>
+                                        ) : null}
+                                    </Flex>
+                                </Box>
+                            </DrawerBody>
+                        </DrawerContent>
+                    </Drawer>
+                </> :
+                <>
+                    <Drawer
+                        isOpen={isOpen}
+                        placement="right"
+                        onClose={onClose}
+                        finalFocusRef={btnRef} >
+                        <DrawerOverlay />
+                        <DrawerContent
+                            mt='2'
+                            w='auto'
+                            
+                            overflow='hidden'
+                            position='absolute'
+                            right='2rem'
+                            borderRadius={0}
+                            h={"max-content"}
+                            bg="white">
+                                
+                            <DrawerBody>
+                                <Box>
+                                    {/* Validacion para mostrar formularios */}
+                                    {isLoginFormVisible ? (
+                                        <>
+                                            <LoginForm onSwitchForm={handleSwitchForm} />
+                                        </>
+                                    ) : (
+                                        <>
+                                            <RegistroForm onSwitchForm={handleSwitchForm} />
+                                        </>
+                                    )}
+                                </Box>
+                            </DrawerBody>
+                        </DrawerContent>
+                    </Drawer>
+                </>}
+
+      <Drawer  isOpen={isOpen2} placement="top" onClose={onCloseDrawer}>
         <DrawerOverlay>
           <DrawerContent bg="white">
             <DrawerCloseButton />
@@ -103,9 +235,14 @@ const MobileNavbar = () => {
                         MI PERFIL
                       </Button>
                     </Link>
-                    <Link to="/review&reseña">
+                    <Link to="/about">
                       <Button colorScheme="#009ED1" color="black" w="100%"> {/* Cambio del color del texto a negro */}
-                        RESEÑAS
+                        SOBRE NOSOTROS
+                      </Button>
+                    </Link>
+                    <Link to="/questions">
+                      <Button colorScheme="#009ED1" color="black" w="100%"> {/* Cambio del color del texto a negro */}
+                        PREGUNTAS FRECUENTES
                       </Button>
                     </Link>
                   </>
