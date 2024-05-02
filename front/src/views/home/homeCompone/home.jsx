@@ -15,6 +15,7 @@ import { getAllConductores } from "../../../redux/actions";
 import WhatsAppButton from "../../whatsAppButton/whatsAppButton";
 import SolicitudwViajeForm from "../../Forms/SolicitudViaje/SolicitudwViajeForm";
 import Avion from '../../../assets/avion.png'
+import fondoVamos1 from '../../../assets/fondoVamos1.jpg'
 
 
 
@@ -35,7 +36,8 @@ const Home = () => {
                 h={"40vh"}
                 position='relative'
                 direction={{ base: "column", md: "row" }}
-                bgColor={"#FFFFFF"}
+                /* bgColor={"#FFFFFF"} */
+                
             >
                 <Box
                     position='absolute'
@@ -97,10 +99,18 @@ const Home = () => {
                     mr={{ base: "0", md: "6rem" }}
                     
                 >
-                    <Image position={"relative"} src={Avion} zIndex={"2"} alt='avion' minW={"200px"} maxW={"100%"} />
+
+                    <Image position={"relative"} src={Avion} zIndex={"2"} alt='avion' minW={"200px"} maxW={"100%"}  marginBottom={'5rem'}/>
                 </Flex>
             </Flex>
-            <Flex position={"relative"} alignItems="center" justifyContent="center" minHeight="-100px" width="100%" mb={"10%"}>
+            <Flex /* alignItems="center" justifyContent="center" minHeight="30vh" width="100%" */direction="column"
+        width="100%" // El ancho es dinámico
+        alignItems="center"
+        justifyContent="center"
+        marginTop={'1rem'}
+        marginBottom={'5rem'}
+        >
+
                 <SolicitudwViajeForm />
             </Flex>
             <WhatsAppButton />
