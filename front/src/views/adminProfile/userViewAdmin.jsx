@@ -10,7 +10,7 @@ import {
   Th,
   Td,
   TableCaption, Tooltip,
-  TableContainer, Button, Flex, Link,Input
+  TableContainer, Button, Flex, Link, Input
 } from '@chakra-ui/react'
 import { RepeatClockIcon, AddIcon, WarningTwoIcon, UnlockIcon } from '@chakra-ui/icons'
 import { useDispatch, useSelector } from "react-redux";
@@ -22,16 +22,17 @@ import axios from 'axios';
 
 const UserViewAdmin = () => {
   const userData = useSelector((state) => state.dataUser)
+  console.log(userData)
   const dispatch = useDispatch()
-  
 
-  
+
+
 
   // const results = !search ? userData : userData.filter((data) => data.name && data.name.toLowerCase().includes(search.toLowerCase()) || data.email && data.email.toLowerCase().includes(search.toLowerCase())
   // )
 
 
- 
+
   const handleAdminAccess = (id) => {
     Swal.fire({
       title: "¿Dar permisos de ADMIN?",
@@ -229,7 +230,7 @@ const UserViewAdmin = () => {
   //   dispatch(orderSearch(input));
   //   setCurrentPage(1);
   // };
-  
+
   return (
     <Box>
       <Flex
@@ -252,8 +253,8 @@ const UserViewAdmin = () => {
             borderTopLeftRadius="md"
             borderTopRightRadius="md"
           >
-            <UserFilter  />
-        
+            <UserFilter />
+
           </Flex>
           <Flex px={0} bg="gray.300" overflowX="auto" borderBottomLeftRadius="md" borderBottomRightRadius="md">
             <Table variant="simple">
@@ -271,8 +272,9 @@ const UserViewAdmin = () => {
 
 
               <Tbody>
-                {tripsToShow.length>0 ? tripsToShow?.map((user) => (
+                {tripsToShow.length > 0 ? tripsToShow?.map((user, index) => (
                   <Tr key={user.id}>
+                    
                     <Td border="2px solid black">{user.name ? user.name : 'sin nombre'}</Td>
                     <Td border="2px solid black">
                       <Tooltip hasArrow label={user.email ? 'Enviar Correo' : null} bg="#10447E" placement="top">
@@ -337,18 +339,18 @@ const UserViewAdmin = () => {
                     </Td>
                   </Tr>
                 ))
-                : (<Tr>
-                  <Td colSpan={6} textAlign="center" align="center">
+                  : (<Tr>
+                    <Td colSpan={6} textAlign="center" align="center">
                       <span style={{
-                      fontWeight: "bold",
-                      color: "gray.800",
-                      fontSize: "18px",
+                        fontWeight: "bold",
+                        color: "gray.800",
+                        fontSize: "18px",
                       }}>
                         No se encontraron coincidencias con la búsqueda.
                       </span>
-                  </Td>
-              </Tr>  )
-              }
+                    </Td>
+                  </Tr>)
+                }
               </Tbody>
 
             </Table>
