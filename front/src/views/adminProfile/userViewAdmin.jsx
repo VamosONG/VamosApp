@@ -274,7 +274,7 @@ const UserViewAdmin = () => {
               <Tbody>
                 {tripsToShow.length > 0 ? tripsToShow?.map((user, index) => (
                   <Tr key={user.id}>
-                    <Td border="2px solid black">{index + 1}</Td>
+                    
                     <Td border="2px solid black">{user.name ? user.name : 'sin nombre'}</Td>
                     <Td border="2px solid black">
                       <Tooltip hasArrow label={user.email ? 'Enviar Correo' : null} bg="#10447E" placement="top">

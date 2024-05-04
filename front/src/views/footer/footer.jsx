@@ -8,7 +8,7 @@ function Footer() {
         flexDirection={{ base: 'column', md: 'column' }}
         w='100%'
 
-        position="sticky" // Esto hace que el footer se quede pegado al piso
+        position="fixed" // Esto hace que el footer se quede pegado al piso
 
         bottom="0" // Lo posiciona en la parte inferior de la ventana
       >
@@ -35,7 +35,7 @@ function Footer() {
                 Preguntas Frecuentes <ExternalLinkIcon mx='2px' />
               </Link>
               <Link href='mailto:vamos.ong@gmail.com' isExternal >
-                ong.vamos.2024@gmail.com <ExternalLinkIcon mx='2px' />
+                hola@vamos.pe <ExternalLinkIcon mx='2px' />
               </Link>
             </Flex>
           </Box>
@@ -45,9 +45,9 @@ function Footer() {
               <Text textAlign="left" >
                 <Heading fontSize="x-large" textAlign="left" mb={4}>Aeropuertos:</Heading>
                 <div>
-                  <Text mb={2}> Talara, Lima, Peru.</Text>
-                  <Text mb={2}> Tumbes, Lima, Peru.</Text>
-                  <Text mb={2}> Piura, Lima, Peru.</Text>
+                  <Text mb={2}> Talara, Piura, Peru.</Text>
+                  <Text mb={2}> Tumbes, Tumbes, Peru.</Text>
+                  <Text mb={2}> Piura, Piura, Peru.</Text>
                 </div>
               </Text>
             </Flex>

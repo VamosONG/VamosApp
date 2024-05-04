@@ -247,47 +247,38 @@ const SolicitudwViajeForm = () => {
 
   return (
     <Box
-      /* bg='#009ED1' */
+     
       bg='white'
-      /* width="400px" */
+      
       maxWidth={['100%', '1200px']}
-      /* height="540px" */
+      
       padding="1rem"
       marginLeft='1rem'
       marginRight='1rem'
-      /* borderRadius="md" */
+      
       borderRadius={['md', 'lg', 'full']}
-      /* marginTop={['0px', '0px']} */
-
-      /* boxShadow="xl" */
+     
       boxShadow="0px 1px 10px rgba(0, 0, 0, 0.3)"
       overflowX='hidden'
-      /* marginX='auto' */
+      
       
     >
 
-      {/* <Heading size='lg' mb={2}>
-        Reserva tu viaje
-      </Heading> */}
-
+    
       <Formik
         initialValues={{
-          /* origin: (JSON.parse(localStorage.getItem('solicitudViajeInput'))).origin || '', */
-          /* destination: (JSON.parse(localStorage.getItem('solicitudViajeInput'))).destination || '', */
-          /* date: parsedInput.date || '',
-          hour: parsedInput.hour || '',
-          quantityPassengers: parsedInput.quantityPassengers || '', */
+          
         }}
         onSubmit={handleSubmit}
       >
         {(props) => (
           <Form >
               <Flex 
-                /* display="flex" */
+                
                 justifyContent="space-between" 
-                /* mb="1rem" */ 
+                 
                 gap="1rem"
-                marginLeft="1rem" // Margen a la izquierda
+                marginLeft="1rem" 
                 marginRight="1rem"
 
                 direction={['column', 'row']}
@@ -295,15 +286,11 @@ const SolicitudwViajeForm = () => {
 
             <Field name='name' validate={'hola'}>
               {({ field, form }) => (
-                <FormControl /* marginBottom='1rem' */ isInvalid={form.errors.name && form.touched.name} isRequired>{/* Despues probar sacar isRequired para no validacion */}
-                    <Flex /* display="flex" */ justifyContent="space-between" /* mb="1rem" */ gap="0.5rem" direction={['column', 'row']}>
-                  {/* <FormLabel
-                    fontSize="xl"
-                    fontFamily="'DIN Medium',"
-                    >Desde:
-                  </FormLabel> */}
+                <FormControl  isInvalid={form.errors.name && form.touched.name} isRequired>{/* Despues probar sacar isRequired para no validacion */}
+                    <Flex  justifyContent="space-between" /* mb="1rem" */ gap="0.5rem" direction={['column', 'row']}>
+                 
                   
-                  <Flex /* direction={['column', 'row']} gap='0.5rem' */direction='row' gap='0.5rem'>
+                  <Flex direction='row' gap='0.5rem'>
                   <Image
                     src={ubicacion}
                     alt='📍' 
@@ -314,7 +301,7 @@ const SolicitudwViajeForm = () => {
                   
                     <Select
                     bg="white"
-                    /* placeholder="Selecciona un origen" */
+                   
                     placeholder={placeholder1}
                     value={origenSeleccionado}
                     onChange={(e) => {
@@ -323,8 +310,7 @@ const SolicitudwViajeForm = () => {
                     }}
                     name="origin"
 
-                    /* paddingLeft="0.1rem" */
-                    /* width="200px" */
+                    
                     maxWidth="200px"
                     minWidth="100px"
                     
@@ -338,15 +324,6 @@ const SolicitudwViajeForm = () => {
                   
                   
 
-                  {/* <FormLabel
-                    fontSize="xl"
-                    fontFamily="'DIN Medium',"
-                  >Hasta:
-                  </FormLabel> */}
-                  {/* <InputGroup>
-                    <InputLeftElement pointerEvents='none' fontSize='20px' fontWeight='bold'> */}
-                      
-                    {/* </InputLeftElement> */}
 
                     <Box 
                       fontSize='20px'
@@ -358,7 +335,7 @@ const SolicitudwViajeForm = () => {
 
                   <Select
                     bg="white"
-                    /* placeholder="Selecciona el destino" */
+                  
                     placeholder={placeholder2}
                     value={destinoSeleccionado}
                     onChange={(e) => {
@@ -380,13 +357,7 @@ const SolicitudwViajeForm = () => {
                   </Select>
                     
                   </Flex>
-                  {/* </InputGroup> */}
-
-
-                  {/* <FormLabel
-                    fontSize="xl"
-                    fontFamily="'DIN Medium',"
-                  >Fecha</FormLabel> */}
+               
 
                   <Flex direction='row' gap='0.5rem'>
 
@@ -413,19 +384,14 @@ const SolicitudwViajeForm = () => {
                   />
                   
 
-                  {/* <FormLabel
-                    fontSize="xl"
-                    fontFamily="'DIN Medium',"
-                  >Hora
-                  </FormLabel> */}
+                 
                   <Input
                     bg="white"
                     type='time'
                     placeholder='Hora'
                     name='hour'
                     value={horaSeleccionada}
-                    /* value={input.hour}
-                    onChange={handleChange} */
+                  
                     onChange={(e) => {
                       setInput({ ...input, hour: e.target.value });
                       setHoraSeleccionada(e.target.value);
@@ -448,16 +414,10 @@ const SolicitudwViajeForm = () => {
                   />
 
 
-                  {/* <FormLabel
-                    htmlFor='pasajeros'
-                    fontSize="xl"
-                    fontFamily="'DIN Medium',"
-                  >Cantidad de pasajeros
-                  </FormLabel> */}
+                  
                   <Select
                     bg="white"
-                    /* placeholder={parsedData.quantityPassengers} 
-                    value ={parsedData.quantityPassengers} */
+               
                     value={cantidadPasajerosSeleccionada}
                     id='pasajeros'
                     name='quantityPassengers'
@@ -467,7 +427,7 @@ const SolicitudwViajeForm = () => {
                     onChange={(e) => {
                       const selectedValue = parseInt(e.target.value, 10);
 
-                      // validación para el valor seleccionado 0
+                   
                       if (selectedValue === 0) {
 
                         alert("La cantidad de pasajeros no puede ser 0");
@@ -493,7 +453,7 @@ const SolicitudwViajeForm = () => {
 
                   </Flex>
                   </Flex>
-                  {/* <FormErrorMessage>{form.errors.name}</FormErrorMessage> */}
+                
                 </FormControl>
               )}
             </Field>
@@ -502,8 +462,7 @@ const SolicitudwViajeForm = () => {
             bg='#054C84'
             isLoading={loading}
             type='submit'
-            /* width='100%' */
-            /* marginTop='1rem' */
+           
 
             color="white"
             >
@@ -518,9 +477,3 @@ const SolicitudwViajeForm = () => {
 };
 export default SolicitudwViajeForm
 
-/* [...Array(maxPasajeros).keys()].map((number) => (
-                        <option key={number + 1} id={`number-${number + 1}`} value={number + 1}>
-                            {number + 1}
-                        </option>
-                    ));
-                    } */

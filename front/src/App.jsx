@@ -29,7 +29,7 @@ import { AuthProvider, useAuth} from './context/authContext';
 import { useSelector } from 'react-redux';
 import LogOut from './views/Forms/LogOut/logout';
 import { Flex, Stack } from '@chakra-ui/react';
-import fondoVamos1 from '../src/assets/fondoVamos1.jpg'
+import fondoVamos1 from '../src/assets/foto_home_2.png'
 
 function App() {
   const {currentUser} = useSelector(state=> state);
@@ -38,7 +38,21 @@ function App() {
   return (
     <Stack
       backgroundImage={fondoVamos1}
+      bgSize="cover"
+      bgRepeat="no-repeat"
+      bgPosition="center"
+      w="100vw"
+      h="100vh"
     >
+      <Stack
+      bg="rgba(255, 255, 255, 0.7)"
+      bgSize="cover"
+      bgRepeat="no-repeat"
+      bgPosition="center"
+      w="100vw"
+      h="100vh">
+
+      
     <AuthProvider
     >
         <NavBar />
@@ -85,9 +99,9 @@ function App() {
         </CSSTransition>
         </TransitionGroup>
 
-      <Footer/>
+      {/* <Footer/> */}
     </AuthProvider>
-
+    </Stack>
     </Stack>
   )
 }
