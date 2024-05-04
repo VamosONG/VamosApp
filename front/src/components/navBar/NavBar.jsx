@@ -46,25 +46,18 @@ const NavBar = () => {
       <MobileNavbar />
     ) : (
       <Flex
-        as="nav"
-        // bg={
-        //   location.pathname === "/"
-        //     ? navBackground
-        //       ? "#054C84"
-        //       : "transparent"
-        //     : "#009ED1"
-        // }
-        alignItems="center"
-        justify="space-between"
-        h="80px"
-        w="100%"
-        
-        top="0"
-        left="0"
-        zIndex="999"
-        px="4"
-        transition="background 0.5s ease"
-      >
+      as="nav"
+      alignItems="center"
+      justify="space-between"
+      h="80px"
+      w="100%"
+      // bgGradient="angular(gray, white)"
+      top="0"
+      left="0"
+      zIndex="999"
+      px="4"
+      transition="background 0.5s ease"
+    >
         <Box>
          <Link to="/">
                 <Image src={Vamos} alt="Vamos" w="150px" />
