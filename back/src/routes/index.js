@@ -52,7 +52,7 @@ const getTripsPendingHandler = require('../handlers/filtersHandlers/getTripsPend
 const filterTripsHandler = require('../handlers/filtersHandlers/filterTripsHandler');
 const searchDriversHandler = require('../handlers/filtersHandlers/searchDriversHandler');
 
-const postPreference = require('../controllers/mercadoPagoController/postPreference');
+/* const postPreference = require('../controllers/mercadoPagoController/postPreference'); */
 const {createOrder, receiveWebhook} = require('../controllers/mercadoPagoController/paymentController')
 const {success} = require('../controllers/mercadoPagoController/backUrlsController')
 
