@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { PhoneIcon, AddIcon, WarningIcon, EditIcon } from '@chakra-ui/icons'
-import { BsAlarm, BsCalendar3, BsCursorFill, BsGeoAltFill, BsPersonFill, BsCurrencyDollar, BsChevronDoubleRight, BsChevronDoubleLeft,BsGlobeAmericas } from "react-icons/bs";
+import { BsAlarm, BsCalendar3, BsCursorFill, BsGeoAltFill, BsPersonFill, BsCurrencyDollar, BsChevronDoubleRight, BsChevronDoubleLeft, BsGlobeAmericas } from "react-icons/bs";
 import {
     Box,
     Flex,
@@ -29,7 +29,7 @@ import {
     ModalFooter,
     ModalBody,
     ModalCloseButton,
-  } from '@chakra-ui/react'
+} from '@chakra-ui/react'
 import NavBar from '../navBar/NavBar';
 import { useSelector } from 'react-redux'
 
@@ -92,130 +92,193 @@ const UserProfile = () => {
             reader.readAsDataURL(file);
         }
     }
-    const bgImg = 'https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg'
 
     return (
-        <Box h='90vh'  display={'flex'} justifyContent={'center'} alignContent={'center'} bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg"
-            justify="center"
-            bgSize="cover"
-            bgRepeat="no-repeat">
-         
-            <Flex h={'60%'} w='80%' m='auto' justify={'space-evenly'} align={'center'} overflow={'hidden'} borderLeftRadius={10} borderRightRadius={10}>
-                <Flex   position={'relative'}>
-                    <Flex bg={'#009ED1'} flexDirection={'row'} align={'center'} justify={'start'} w={'100%'} p='2.2rem' gap={4} position={'relative'} borderRadius={8}>
-                        {userDetail && userDetail ? (
-                            <>
-                                <Tooltip label='Editar datos' placement='left' bg='#10447E' borderRadius={4}>
-                                    <Button w='1rem' h='1rem' position={'absolute'} bottom={'1.5rem'} right={'.5rem'}>
-                                        <UpdateUserDataForm userDetail={userDetail} />
-                                    </Button>
-                                </Tooltip>
-                                <Flex w={'50%'} justify={'center'} position={'relative'} >
-                                    <Image w={'15rem'} h={'15rem'} name='Segun Adebayo' src={fotoPerfil ? fotoPerfil : 'https://res.cloudinary.com/drgnsbah9/image/upload/v1706742586/PERFIL-VACIO_jt5irw.png'} border={'2px solid #10447E'}
-                                        alt={fotoPerfil.name}
-                                        bg='white'
-                                        borderRadius={10}
-                                        objectFit={'cover'}
-                                        loading='lazy'
-                                    />{' '}
-                                    <Tooltip label='Cambiar Foto' placement='left' bg='#10447E' borderRadius={4} >
-                                        <Button position={'absolute'} bottom={0} right={'0rem'} w='2.3rem' h='2.3rem' onClick={changeImgPerfil} bg='#10447E' color={'white'}>
-                                            <EditIcon />
-                                        </Button>
-                                    </Tooltip>
-                                </Flex>
-                                <Flex flexDirection={'column'} w={'50%'} gap={4} bg='#10447E' p='2' borderRadius={4} >
-                                    <Flex w={'100%'} justify={'space-evenly'} gap={4} flexDirection={'column'}  position={'relative'}>
+        <Flex
+      
+        h="80vh"
+        bg="rgba(5, 76, 132, 0.6)"
+        flexDirection="column"
+        borderRadius="20px"
+        m="2%"
+        mt={{ base: '69', md: '6', lg: '8' }}   
+        p={{ base: '13', md: '6', lg: '8' }} // Padding responsive
+    >
+            <Text fontSize={{ base: '2xl', md: '4xl', lg: '6xl' }} color="white">
+                ¡Bienvenido   {userDetail.name}!
+            </Text>
+            <Flex
+                flexDirection={{ base: 'column', md: 'row' }} // Alineación de columnas en dispositivos pequeños y filas en dispositivos medianos y grandes
+                justify="space-between"
+                alignItems="stretch"
+                w="100%"
+                p={{ base: '2', md: '4', lg: '6' }} // Padding responsive
+                gap={{ base: '4', md: '8', lg: '12' }} // Espacio entre elementos responsive
+            >
 
-                                    
-                                        <Text fontSize={'1.7rem'} color={'white'}>
-                                            ¡Bienvenido   {userDetail.name}!
+
+                {userDetail && userDetail ? (
+                    <>
+
+<Flex
+                    flex={{ base: '1', md: '1', lg: '2' }} // Ocupa el 100% del espacio en dispositivos pequeños y medianos, 1/2 en dispositivos grandes
+                    flexDirection="column"
+                    alignItems={{ base: 'center', md: 'flex-start' }}
+                    minW={"300px"} // Alineación al centro en dispositivos pequeños, al inicio en dispositivos medianos y grandes
+                >
+                    <Image
+                        w={{ base: '200px', md: '250px', lg: '300px' }} // Ancho de imagen responsive
+                        h={{ base: '200px', md: '250px', lg: '300px' }} // Altura de imagen responsive
+                        src={fotoPerfil ? fotoPerfil : 'https://res.cloudinary.com/drgnsbah9/image/upload/v1706742586/PERFIL-VACIO_jt5irw.png'}
+                        border="2px solid #10447E"
+                        alt={fotoPerfil.name}
+                        bg="white"
+                        borderRadius="10px"
+                        objectFit="cover"
+                        loading="lazy"
+                        minW={"200px"}
+                    />{' '}
+                            <Tooltip label="Cambiar Foto" placement="left" bg="#10447E" borderRadius={4}>
+                        <Button
+                            
+                            onClick={changeImgPerfil}
+                            bg="#10447E"
+                            color="white"
+                            fontSize={{ base: 'sm', md: 'md', lg: 'lg' }} // Tamaño de fuente responsive
+                        >
+                                    <EditIcon />
+                                </Button>
+                            </Tooltip>
+                        </Flex>
+                        <Flex flexDirection={'column'}
+                            w={'100%'} gap={8} p='7'
+                            borderRadius={4} 
+                            >
+                           <Flex
+                    flex={{ base: '1', md: '2', lg: '3' }} // Ocupa el 100% del espacio en dispositivos pequeños, 2/3 en dispositivos medianos y 3/4 en dispositivos grandes
+                    flexDirection="column"
+                    alignItems="flex-start"
+                    gap="4"
+                >
+
+
+
+                                <Flex w={'100%'} bg='whitesmoke'
+                                    justifyContent={'space-between'} align={'center'}
+                                    borderRadius={'4'} pl='4' >
+                                    <Text 
+                                    fontSize={{ base: 'md', md: 'lg', lg: 'xl' }}
+                                    textAlign={'center'} h='5rem'
+                                        alignItems={'center'} display={'flex'}
+                                        >
+                                        Nombre: {userDetail.name}
+                                    </Text>
+
+                                </Flex>
+                                <Flex w={'100%'} bg='whitesmoke'
+                                    justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4' >
+                                    <Text textAlign={'left'} h='5rem'
+                                        alignItems={'center'} display={'flex'}
+                                        fontSize={{ base: 'md', md: 'lg', lg: 'xl' }}>
+                                        Apellido: {userDetail.surname}
+                                    </Text>
+                                </Flex>
+
+                                <Flex w={'100%'} justify={'space-evenly'}
+                                    gap={4} flexDirection={'column'} >
+                                    <Flex w={'100%'} bg='whitesmoke'
+                                        justifyContent={'space-between'} align={'center'}
+                                        borderRadius={'4'} pl='4'>
+
+                                        <Text maxW={"120%"} textAlign={'left'} h='5rem'
+                                            alignItems={'center'} display={'flex'}
+                                            fontSize={{ base: 'md', md: 'lg', lg: 'xl' }}>
+                                            Email:  {userDetail.email}
                                         </Text>
-                                        <Flex w={'100%'} bg='whitesmoke' justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4' >
-                                            <Text textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}>
-                                                Nombre: {userDetail.name}
-                                            </Text>
-
-                                        </Flex>
-                                        <Flex w={'100%'} bg='whitesmoke' justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4' >
-                                            <Text textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}>
-                                                Apellido: {userDetail.surname}
-                                            </Text>
-                                        </Flex>
                                     </Flex>
-                                    <Flex w={'100%'} justify={'space-evenly'} gap={4} flexDirection={'column'} >
-                                        <Flex w={'100%'} bg='whitesmoke' justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4'>
-                                            
-                                            <Text maxW={"120%"} textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}>
-                                                {userDetail.email}
-                                            </Text>
-                                        </Flex>
-                                        <Flex w={'100%'} bg='whitesmoke' justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4'>
-                                            <Text textAlign={'left'} h='2rem' alignItems={'center'} display={'flex'}>
-                                                DNI: {userDetail.dni ? userDetail.dni : 'DNI, no registrado'}
-                                            </Text>
-                                    
-                                        </Flex>
+                                    <Flex w={'100%'} bg='whitesmoke'
+                                        justifyContent={'space-between'} align={'center'} borderRadius={'4'} pl='4'>
+                                        <Text textAlign={'left'} h='5rem'
+                                            alignItems={'center'} display={'flex'}
+                                            fontSize={{ base: 'md', md: 'lg', lg: 'xl' }}>
+                                            DNI: {userDetail.dni ? userDetail.dni : 'DNI, no registrado'}
+                                        </Text>
                                     </Flex>
                                 </Flex>
-                            </>
-                        ) : (
-                            <>
-                                <Text>Loading..</Text>
-                            </>
-                        )}
-                        <Tooltip label='Viajes' placement='right' bg='#10447E' borderRadius={4}>
-
-                        <Button mt={4} onClick={onOpen} position={'absolute'} left={'1rem'} top={'0'} bg='#10447E' color={'white'} >
-                            <BsGlobeAmericas/>
-                        </Button>
-                        </Tooltip>
-                    <Flex flexDirection={'row'} align={'center'} justify={'center'} bg={'gray.200'} pr='1'>
-                            <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}  >
-                                <ModalOverlay />
-                                <ModalContent h={'70vh'} overflow={'hidden'}>
-                                    <ModalHeader>Ultimos viajes</ModalHeader>
-                                    <ModalCloseButton />
-                                    <ModalBody overflowY={'scroll'} css={scrollbarStyles}>
-                                    <Flex w={'100%'} h='auto' flexDirection={'column'} >
-                                <Tabs isFitted variant='enclosed' >
-                                    <TabList mb='1em'>
-                                        <Tab>Reservados</Tab>
-                                        <Tab>Completos</Tab>
-                                    </TabList>
-                                    <TabPanels >
-                                        <TabPanel p='0'>
-                                            {userDetail.Trips.length  ? (
-                                            <CardUserTrips userDetail={userDetail} stateFilter='reserved' />
-                                            ):(
-                                                <CeroViaje/>
-                                            )}
-                                        </TabPanel>
-                                        <TabPanel p='0'>
-                                            {userDetail.Trips.length  ? (
-                                                <CardUserTrips userDetail={userDetail} stateFilter='completed' />
-                                            ) : (
-                                                <CeroViaje/>
-                                            )}
-                                        </TabPanel>
-                                    </TabPanels>
-                                </Tabs>
-
                             </Flex>
-                                    </ModalBody>
+                            <Tooltip  placement="left" bg='#10447E' borderRadius={4}>
+                               
+                                
+                                    <UpdateUserDataForm userDetail={userDetail} />
+                               
+                            </Tooltip>
+                        </Flex>
+                    </>
+                ) : (
+                    <>
+                        <Text>Loading..</Text>
+                    </>
+                )}
+                <Tooltip  placement='right' bg='#10447E' borderRadius={4}>
 
-                                    <ModalFooter>
-                                        <Button colorScheme='red' mr={3} onClick={onClose}>
-                                            Cerrar
-                                        </Button>
-                                    </ModalFooter>
-                                </ModalContent>
-                            </Modal>
-                    </Flex>
-                    </Flex>
+                <Button
+                    mt={{ base: '4', md: '8', lg: '12' }} // Margen superior responsive
+                    onClick={onOpen}
+                    width={{ base: '100%', md: '50%', lg: '25rem' }} // Ancho del botón responsive
+                    bg="#10447E"
+                    color="white"
+                    fontSize={{ base: 'md', md: 'lg', lg: 'xl' }} // Tamaño de fuente responsive
+                >
+                        Viajes 
+                    </Button>
+                </Tooltip>
+
+
+                <Flex flexDirection={'row'} align={'center'} justify={'center'} bg={'gray.200'} pr='1'>
+                    <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}  >
+                        <ModalOverlay />
+                        <ModalContent h={'70vh'} overflow={'hidden'}>
+                            <ModalHeader>Ultimos viajes</ModalHeader>
+                            <ModalCloseButton />
+                            <ModalBody overflowY={'scroll'} css={scrollbarStyles}>
+                                <Flex w={'100%'} h='auto' flexDirection={'column'} >
+                                    <Tabs isFitted variant='enclosed' >
+                                        <TabList mb='1em'>
+                                            <Tab>Reservados</Tab>
+                                            <Tab>Completos</Tab>
+                                        </TabList>
+                                        <TabPanels >
+                                            <TabPanel p='0'>
+                                                {userDetail.Trips.length ? (
+                                                    <CardUserTrips userDetail={userDetail} stateFilter='reserved' />
+                                                ) : (
+                                                    <CeroViaje />
+                                                )}
+                                            </TabPanel>
+                                            <TabPanel p='0'>
+                                                {userDetail.Trips.length ? (
+                                                    <CardUserTrips userDetail={userDetail} stateFilter='completed' />
+                                                ) : (
+                                                    <CeroViaje />
+                                                )}
+                                            </TabPanel>
+                                        </TabPanels>
+                                    </Tabs>
+
+                                </Flex>
+                            </ModalBody>
+
+                            <ModalFooter>
+                                <Button colorScheme='red' mr={3} onClick={onClose}>
+                                    Cerrar
+                                </Button>
+                            </ModalFooter>
+                        </ModalContent>
+                    </Modal>
+
                 </Flex>
             </Flex>
-        </Box>
+        </Flex>
     );
 };
 
