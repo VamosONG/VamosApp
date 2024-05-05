@@ -16,6 +16,7 @@ function Footer() {
           bg='#054C84'
           minWidth='max-content'
           alignItems="flex-start"
+          pb={"2%"}
           gap='5'
           pt='1rem'
           boxSize='sm'

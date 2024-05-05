@@ -42,7 +42,9 @@ function App() {
       bgRepeat="no-repeat"
       bgPosition="center"
       w="100vw"
+      backgroundAttachment={"fixed"}
       h="100%"
+      overflow={"auto"}
     >
       <Stack
       bg="rgba(255, 255, 255, 0.7)"
@@ -50,7 +52,8 @@ function App() {
       bgRepeat="no-repeat"
       bgPosition="center"
       w="100vw"
-      h="100vh">
+      h="100vh"
+      overflow={"auto"}>
 
       
     <AuthProvider

@@ -6,7 +6,7 @@ const Questions = () =>{
 
     return (
         <Flex
-        bgColor={"white"}
+        bgColor={"transparent"}
         w='100%'
         h='100%'
         >
