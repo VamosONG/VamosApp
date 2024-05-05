@@ -42,7 +42,7 @@ function App() {
       bgRepeat="no-repeat"
       bgPosition="center"
       w="100vw"
-      h="100vh"
+      h="100%"
     >
       <Stack
       bg="rgba(255, 255, 255, 0.7)"

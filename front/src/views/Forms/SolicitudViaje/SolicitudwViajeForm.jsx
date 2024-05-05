@@ -250,7 +250,7 @@ const SolicitudwViajeForm = () => {
      
       bg='white'
       
-      maxWidth={['100%', '1200px']}
+      maxWidth={['80%', '1200px']}
       
       padding="1rem"
       marginLeft='1rem'

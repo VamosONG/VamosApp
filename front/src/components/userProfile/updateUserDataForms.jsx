@@ -69,10 +69,14 @@ const UpdateUserDataForm = ({ userDetail }) => {
 
     return (
         <>
-            <Button onClick={onOpen} bg='#10447E' color={'white'} > <EditIcon /></Button>
-            {/* <Button ml={4} ref={finalRef}>
-        I'll receive focus on close
-      </Button> */}
+            <Button onClick={onOpen} bg='#10447E' color={'white'} w={"100%"}
+            mt={"2%"}
+            h={"4rem"}
+                _hover={"red"}
+                bottom={'1.5rem'}
+                
+                size="lg"> Modificar Datos</Button>
+            
 
             <Modal
                 initialFocusRef={initialRef}
