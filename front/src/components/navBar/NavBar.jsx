@@ -9,7 +9,7 @@ import {
   useMediaQuery,
   Progress
 } from "@chakra-ui/react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import Vamos from "../../assets/logo.png";
 import MobileNavbar from "../navBar/mobileNavbar/mobileNavbar";
 import { useSelector } from "react-redux";
@@ -69,69 +69,47 @@ const NavBar = () => {
             {currentUser?.admin && currentUser?.admin ? (
               <Box>
                 <Flex>
-                  <Link to="/">
-                    <Button color="black" bgColor={"transparent"} fontSize="1xl">
-                      INICIO
-                    </Button>
-                  </Link>
+                <NavLink exact to="/"  style={{ textDecoration: location.pathname === '/' ? 'underline' : 'none', marginRight: '35px'  }}>
+    <span style={{ fontSize: '23px' }}>Inicio</span>
+</NavLink>
+                  <NavLink to="/about" style={{ textDecoration: location.pathname === '/about' ? 'underline' : 'none', marginRight: '35px'  }}>
+                  <span style={{ fontSize: '23px' }} >Nosotros</span>
+                  </NavLink>
 
-
-                  <Link to="/about">
-                    <Button color="black" bgColor={"transparent"} fontSize="1xl">
-                      NOSOTROS
-                    </Button>
-                  </Link>
-                  
-                  <Link to="/questions">
-                    <Button color="black" bgColor={"transparent"} fontSize="1xl">
-                      PREGUNTAS FRECUENTES
-                    </Button>
-                  </Link>
+                  <NavLink to="/questions" style={{ textDecoration: location.pathname === '/questions' ? 'underline' : 'none' }}>  
+                  <span style={{ fontSize: '23px' }} >Preguntas Frecuentes</span>
+                  </NavLink>
 
                 </Flex>
               </Box>
             ) : currentUser?.admin === false ? (
               <Box>
                 <Flex>
-                <Link to="/">
-                    <Button color="black" bgColor={"transparent"} fontSize="1xl">
-                      INICIO
-                    </Button>
-                  </Link>
+                <NavLink exact to="/"  style={{ textDecoration: location.pathname === '/' ? 'underline' : 'none', marginRight: '35px'  }}>
+    <span style={{ fontSize: '23px' }}>Inicio</span>
+</NavLink>
+                  <NavLink to="/about" style={{ textDecoration: location.pathname === '/about' ? 'underline' : 'none', marginRight: '35px'  }}>
+                  <span style={{ fontSize: '23px' }} >Nosotros</span>
+                  </NavLink>
 
-                  <Link to="/about">
-                    <Button color="black" bgColor={"transparent"} fontSize="1xl">
-                      NOSOTROS
-                    </Button>
-                  </Link>
-
-                  <Link to="/questions">
-                    <Button color="black" bgColor={"transparent"} fontSize="1xl">
-                      PREGUNTAS FRECUENTES
-                    </Button>
-                  </Link>
+                  <NavLink to="/questions" style={{ textDecoration: location.pathname === '/questions' ? 'underline' : 'none' }}>  
+                  <span style={{ fontSize: '23px' }} >Preguntas Frecuentes</span>
+                  </NavLink>
                 </Flex>
               </Box>
             ) : (
               <Box>
                 <Flex>
-                  <Link to="/">
-                    <Button backgroundColor={"transparent"} color={"#171717"} fontSize="1xl">
-                      INICIO
-                    </Button>
-                  </Link>
+                <NavLink exact to="/"  style={{ textDecoration: location.pathname === '/' ? 'underline' : 'none', marginRight: '35px'  }}>
+    <span style={{ fontSize: '23px' }}>Inicio</span>
+</NavLink>
+                  <NavLink to="/about" style={{ textDecoration: location.pathname === '/about' ? 'underline' : 'none', marginRight: '35px'  }}>
+                  <span style={{ fontSize: '23px' }} >Nosotros</span>
+                  </NavLink>
 
-                  <Link to="/about">
-                    <Button color={"#171717"} backgroundColor={"transparent"} fontSize="1xl">
-                      NOSOTROS
-                    </Button>
-                  </Link>
-
-                  <Link to="/questions">
-                    <Button color={"#171717"} backgroundColor={"transparent"} fontSize="1xl">
-                      PREGUNTAS FRECUENTES
-                    </Button>
-                  </Link>
+                  <NavLink to="/questions" style={{ textDecoration: location.pathname === '/questions' ? 'underline' : 'none' }}>  
+                  <span style={{ fontSize: '23px' }} >Preguntas Frecuentes</span>
+                  </NavLink>
                   {currentUser && currentUser?.admin ? <LogOut /> : null}
                 </Flex>
               </Box>

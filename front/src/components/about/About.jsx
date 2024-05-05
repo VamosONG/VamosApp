@@ -6,7 +6,7 @@ const About = () => {
     <Flex 
     direction="column" 
     minHeight="100vh"
-    bgColor={"white"}
+    bgColor={"transparent"}
    
     >
 
