@@ -15,7 +15,7 @@ module.exports=async(req,res)=>{
         
         const usuario = await getUserById(userId);
 
-        const reserveEmail = await sendMailHandler({
+         await sendMailHandler({
             id: userId,
             name: usuario.name,
             surname: usuario.surname,
@@ -26,7 +26,7 @@ module.exports=async(req,res)=>{
             tripId: reserve.id,
             option: "reserve"
         });
-        res.status(200).json(reserve);
+        res.status(200).json(reserve); 
     } catch (error) {
         res.status(400).json({error: error.message})
     }
