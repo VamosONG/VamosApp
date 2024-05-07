@@ -6,6 +6,8 @@ const { Trip } = require("../../dataBase");
 const postTrip = require("../tripsControllers/postTrip");
 // const {postTrip} = require('../../controllers/tripsControllers/postTrip');
 dotenv.config();
+const getUserById = require('../../controllers/usersControllers/getUserById');
+const sendMailHandler = require("../../utils/mailing/sendMailHandler")
 
 
 
@@ -98,6 +100,17 @@ const receiveWebhook = async (req, res) => {
       
       // await deleteTrip(newTrip.id);
       const resp = await postTrip(trip)
+      const usuario = await getUserById(data.body.metadata.user_id)
+      console.log(usuario, "usuario")
+      const mailReserve = {
+        userId: data.body.metadata.user_id,
+        tripId: resp.id,
+        option: "reserve",
+        email: usuario.email,
+        name: usuario.name
+    }
+    console.log(mailReserve)
+await sendMailHandler(mailReserve)
     
       localStorage.clear();
       // AGREGAR LO DE ENVIAR MAIL
