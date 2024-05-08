@@ -110,7 +110,7 @@ const receiveWebhook = async (req, res) => {
         name: usuario.name
     }
     console.log(mailReserve)
-await sendMailHandler(mailReserve)
+await sendMailHandler(mailReserve);
     
       localStorage.clear();
       // AGREGAR LO DE ENVIAR MAIL
