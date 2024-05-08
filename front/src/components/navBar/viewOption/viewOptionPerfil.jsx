@@ -39,6 +39,7 @@ import {
 import { useRef, useState } from "react";
 import LoginForm from "../../../views/Forms/Login/Login";
 import RegistroForm from "../../../views/Forms/Registro/Registro";
+import User from "../../../assets/user.png"
 
 const ViewOptionPerfil = () => {
     const { currentUser } = useSelector((state) => state);
@@ -59,7 +60,7 @@ const ViewOptionPerfil = () => {
                 h="50px"
                 borderRadius={50}
             >
-                <Avatar bg="rgb(0, 158, 209)" name={currentUser.name} src={currentUser.image ? currentUser.image : null} />
+                <Avatar bg="white" name={currentUser.name} src={User ? User : null} />
 
             </Button>
 
@@ -75,7 +76,7 @@ const ViewOptionPerfil = () => {
                         <DrawerContent
                             p="4px"
                             color="white"
-                            bg="#009ED1"
+                            bg="white"
                             rounded="md"
                             shadow="md"
                             maxWidth={"200px"}
@@ -87,7 +88,7 @@ const ViewOptionPerfil = () => {
                             bottom="0"
                         >
                             <DrawerCloseButton />
-                            <DrawerHeader>Hola {currentUser.name}</DrawerHeader>
+                            <DrawerHeader color={"black"}>Hola {currentUser.name}</DrawerHeader>
 
                             <DrawerBody>
                                 <Box>
@@ -99,8 +100,9 @@ const ViewOptionPerfil = () => {
                                                         w={"100%"}
                                                         display={"flex"}
                                                         justifyContent={"space-between"}
+                                                        bgColor={"#AEE56F"}
                                                     >
-                                                        <Text>Tablero</Text>
+                                                        <Text>Panel</Text>
                                                         <ViewIcon />
                                                     </Button>
                                                 </Link>
@@ -113,22 +115,14 @@ const ViewOptionPerfil = () => {
                                                         w={"100%"}
                                                         display={"flex"}
                                                         justifyContent={"space-between"}
+                                                        bgColor={"#AEE56F"}
                                                     >
                                                         <Text>Mi perfil</Text>
                                                         <ViewIcon />
                                                     </Button>
                                                 </Link>
 
-                                                <Link to="/review&reseña">
-                                                    <Button
-                                                        w={"100%"}
-                                                        display={"flex"}
-                                                        justifyContent={"space-between"}
-                                                    >
-                                                        <Text>Reseñar viaje</Text>
-                                                        <EditIcon />
-                                                    </Button>
-                                                </Link>
+                                               
                                                 <LogOut />
                                             </>
                                         ) : null}
@@ -143,17 +137,18 @@ const ViewOptionPerfil = () => {
                         isOpen={isOpen}
                         placement="right"
                         onClose={onClose}
-                        finalFocusRef={btnRef}>
+                        finalFocusRef={btnRef} >
                         <DrawerOverlay />
                         <DrawerContent
                             mt='2'
                             w='auto'
+                            
                             overflow='hidden'
                             position='absolute'
                             right='2rem'
                             borderRadius={0}
                             h={"max-content"}
-                            bg="#009ED1">
+                            bg="white">
                                 
                             <DrawerBody>
                                 <Box>

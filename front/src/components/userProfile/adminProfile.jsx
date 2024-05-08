@@ -36,7 +36,7 @@ const AdminProfile = () => {
             return <DriverTableView />;
         case "Usuario":
             return <UserViewAdmin />;
-        case "Reviews":
+        case "Agregar precio":
             return <ReviewAdmin />;
         case "Stadistic":
             return <Stadistic />;
@@ -56,7 +56,8 @@ const AdminProfile = () => {
 
     return (
 
-        <Flex bgImage="https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/aji3qlnocifw7kcs3mvw.jpg" 
+        <Flex 
+        bgColor="#054C84" 
         marginTop={{ base: "0%", lg: "4%" }}>
         {isMobile ? (
             <>
@@ -70,12 +71,12 @@ const AdminProfile = () => {
                 />
                 <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
                     <DrawerOverlay />
-                    <DrawerContent>
+                    <DrawerContent >
                         <DrawerHeader>Menu Admin</DrawerHeader>
                         <DrawerBody>
                             <VStack spacing={2} align="stretch" bg="gray.200" p={4} height="50%" width="100%">
                             <Text 
-                _hover={{ bg: '#E83D6F', color: 'white' }} 
+                _hover={{ bg: '#054C84', color: 'white' }} 
                 bg={activeComponent === "Reservas" ? '#009ED1' : 'white'}
                 color={activeComponent === "Reservas" ? 'white' : 'black'}
                 p={2} 
@@ -115,15 +116,15 @@ const AdminProfile = () => {
             <Divider />
             <Text 
                 _hover={{ bg: '#E83D6F', color: 'white' }} 
-                bg={activeComponent === "Reviews" ? '#009ED1' : 'white'}
-                color={activeComponent === "Reviews" ? 'white' : 'black'}
+                bg={activeComponent === "Agregar precio" ? '#009ED1' : 'white'}
+                color={activeComponent === "Agregar precio" ? 'white' : 'black'}
                 p={2} 
                 borderRadius="md" 
                 textAlign="center" 
                 cursor="pointer"
-                onClick={() => handleMenuClick("Reviews")}
+                onClick={() => handleMenuClick("Agregar precio")}
             >
-                Reseñas
+                Agregar precio
             </Text>
             <Divider />
             <Text 
@@ -172,7 +173,7 @@ const AdminProfile = () => {
             </>
         ) : (
             <Flex flexDirection='column' pt={{ base: "100px", md: "0px" }}>
-        <VStack spacing={3} align="stretch" bg="gray.200" p={5} height={{ base: "0%", lg: "800px" }} width="240px">
+        <VStack spacing={3} align="stretch"  border="4px" bg="gray.200" p={5} height={{ base: "0%", lg: "800px" }} width="240px">
             <Text fontSize="xl" fontWeight="bold" mb={4}>
                 Menu Admin
             </Text>
@@ -217,15 +218,15 @@ const AdminProfile = () => {
             <Divider />
             <Text 
                 _hover={{ bg: '#E83D6F', color: 'white' }} 
-                bg={activeComponent === "Reviews" ? '#009ED1' : 'white'}
-                color={activeComponent === "Reviews" ? 'white' : 'black'}
+                bg={activeComponent === "Agregar precio" ? '#009ED1' : 'white'}
+                color={activeComponent === "Agregar precio" ? 'white' : 'black'}
                 p={2} 
                 borderRadius="md" 
                 textAlign="center" 
                 cursor="pointer"
-                onClick={() => handleMenuClick("Reviews")}
+                onClick={() => handleMenuClick("Agregar precio")}
             >
-                Reseñas
+                Agregar precio
             </Text>
             <Divider />
             <Text 

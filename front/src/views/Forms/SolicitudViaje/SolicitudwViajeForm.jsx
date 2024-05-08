@@ -3,7 +3,12 @@ import {
   Button,
   TableContainer,
   Table,
-  TableCaption, Thead, Tr, Th, Tbody, Td, Input, Flex, Box, FormErrorMessage, FormControl, FormLabel, Heading, Select
+  TableCaption, Thead, Tr, Th, Tbody, Td, Input, Flex, Box, FormErrorMessage, FormControl, FormLabel, Heading, Select,
+  InputGroup,
+  InputLeftElement,
+  InputRightElement,
+  Image,
+  useBreakpointValue
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -14,6 +19,12 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 import { Field, Form, Formik } from 'formik';
 import { handlePayment, postNewViaje } from '../../../redux/actions';
+
+
+/* import { PhoneIcon } from '@chakra-ui/icons'; */
+/* import { CiLocationOn } from "react-icons/ci" */;
+import ubicacion from '../../../assets/icons/pngwing.com.png'
+import personas from '../../../assets/icons/people_878820.png'
 
 
 
@@ -161,6 +172,7 @@ const SolicitudwViajeForm = () => {
   const origenes = [
     'AEROPUERTO TALARA',
     'AEROPUERTO TUMBES',
+    'AEROPUERTO PIURA',
     'DECAMERON PUNTA SAL',
     'ZORRITOS',
     'MANCORA',
@@ -169,10 +181,11 @@ const SolicitudwViajeForm = () => {
   const destinos = {
     'AEROPUERTO TALARA': ['MANCORA', 'DECAMERON'],
     'AEROPUERTO TUMBES': ['DECAMERON PUNTA SAL', 'ZORRITOS', 'MANCORA'],
+    'AEROPUERTO PIURA':['MANCORA', 'DECAMERON'],
     'DECAMERON PUNTA SAL': ['AEROPUERTO TUMBES'],
     'ZORRITOS': ['AEROPUERTO TUMBES'],
-    'MANCORA': ['AEROPUERTO TUMBES', 'AEROPUERTO TALARA'],
-    'DECAMERON': ['AEROPUERTO TALARA'],
+    'MANCORA': ['AEROPUERTO TUMBES', 'AEROPUERTO TALARA','AEROPUERTO PIURA'],
+    'DECAMERON': ['AEROPUERTO TALARA','AEROPUERTO PIURA'],
   }
   const [origenSeleccionado, setOrigenSeleccionado] = useState('');
   const [destinoSeleccionado, setDestinoSeleccionado] = useState('');
@@ -222,51 +235,85 @@ const SolicitudwViajeForm = () => {
   const [fechaSeleccionada, setFechaSeleccionada] = useState(0);
   const [cantidadPasajerosSeleccionada, setCantidadPasajerosSeleccionada] = useState(0);
 
+  const placeholder1 = useBreakpointValue({
+    base: "📍Origen", // Se mostrará en dispositivos móviles
+    md: "Origen", // Se mostrará en pantallas medianas y más grandes
+  });
+
+  const placeholder2 = useBreakpointValue({
+    base: "🏳️Destino", // Se mostrará en dispositivos móviles
+    md: "Destino", // Se mostrará en pantallas medianas y más grandes
+  });
+
   return (
     <Box
-      bg='#009ED1'
-      width="400px"
-      height="540px"
+     
+      bg='white'
+      
+      maxWidth={['80%', '1200px']}
+      
       padding="1rem"
-      borderRadius="md"
-      marginTop={['0px', '0px']}
+      marginLeft='1rem'
+      marginRight='1rem'
+      
+      borderRadius={['md', 'lg', 'full']}
+     
+      boxShadow="0px 1px 10px rgba(0, 0, 0, 0.3)"
+      overflowX='hidden'
+      
+      
     >
 
-      <Heading size='lg' mb={2}>
-        Reserva tu viaje
-      </Heading>
-
+    
       <Formik
         initialValues={{
-          /* origin: (JSON.parse(localStorage.getItem('solicitudViajeInput'))).origin || '', */
-          /* destination: (JSON.parse(localStorage.getItem('solicitudViajeInput'))).destination || '', */
-          /* date: parsedInput.date || '',
-          hour: parsedInput.hour || '',
-          quantityPassengers: parsedInput.quantityPassengers || '', */
+          
         }}
         onSubmit={handleSubmit}
       >
         {(props) => (
-          <Form>
+          <Form >
+              <Flex 
+                
+                justifyContent="space-between" 
+                 
+                gap="1rem"
+                marginLeft="1rem" 
+                marginRight="1rem"
+
+                direction={['column', 'row']}
+              >
+
             <Field name='name' validate={'hola'}>
               {({ field, form }) => (
-                <FormControl marginBottom='1rem' isInvalid={form.errors.name && form.touched.name} isRequired>{/* Despues probar sacar isRequired para no validacion */}
-
-
-                  <FormLabel
-                    fontSize="xl"
-                    fontFamily="'DIN Medium',"
-                  >Desde:
-                  </FormLabel>
-                  <Select
+                <FormControl  isInvalid={form.errors.name && form.touched.name} isRequired>{/* Despues probar sacar isRequired para no validacion */}
+                    <Flex  justifyContent="space-between" /* mb="1rem" */ gap="0.5rem" direction={['column', 'row']}>
+                 
+                  
+                  <Flex direction='row' gap='0.5rem'>
+                  <Image
+                    src={ubicacion}
+                    alt='📍' 
+                    boxSize='1.5rem' // Ajusta el tamaño del ícono
+                    mt='0.5rem'
+                    display={['none', 'block']}
+                  />
+                  
+                    <Select
                     bg="white"
-                    placeholder="Selecciona un origen"
+                   
+                    placeholder={placeholder1}
                     value={origenSeleccionado}
                     onChange={(e) => {
                       setOrigenSeleccionado(e.target.value); /* Setea directamente para determinar los detinos */
                       setInput({ ...input, origin: e.target.value })
                     }}
                     name="origin"
+
+                    
+                    maxWidth="200px"
+                    minWidth="100px"
+                    
                   >
                     {origenes.map((origen) => (
                       <option key={origen} value={origen}>
@@ -274,21 +321,33 @@ const SolicitudwViajeForm = () => {
                       </option>
                     ))}
                   </Select>
+                  
+                  
 
-                  <FormLabel
-                    fontSize="xl"
-                    fontFamily="'DIN Medium',"
-                  >Hasta:
-                  </FormLabel>
+
+                    <Box 
+                      fontSize='20px'
+                      fontWeight='bold' 
+                      mt='0.1rem' 
+                      maxWidth="30px"
+                      display={['none', 'block']}
+                      >🏳️</Box>
+
                   <Select
                     bg="white"
-                    placeholder="Selecciona el destino"
+                  
+                    placeholder={placeholder2}
                     value={destinoSeleccionado}
                     onChange={(e) => {
                       setDestinoSeleccionado(e.target.value)
                       setInput({ ...input, destination: e.target.value })
                     }}
                     name="destino"
+
+                    /* paddingLeft="0.1rem" */
+                    /* width="200px" */
+                    maxWidth="200px"
+                    minWidth="100px"
                   >
                     {destinosDelOrigen.map((destino) => (
                       <option key={destino} value={destino}>
@@ -296,15 +355,17 @@ const SolicitudwViajeForm = () => {
                       </option>
                     ))}
                   </Select>
+                    
+                  </Flex>
+               
+
+                  <Flex direction='row' gap='0.5rem'>
 
 
-                  <FormLabel
-                    fontSize="xl"
-                    fontFamily="'DIN Medium',"
-                  >Fecha</FormLabel>
                   <Input
                     bg="white"
-                    placeholder="Select Date and Time"
+                    /* placeholder="Select Date and Time" */
+                    placeholder="Fecha"
                     size="md"
                     type="date"
                     name='date'
@@ -317,47 +378,56 @@ const SolicitudwViajeForm = () => {
                       setFechaSeleccionada(e.target.value);
                     }}
                     min={currentDate}
+
+                    maxWidth="170px"
+                    minWidth="120px"
                   />
+                  
 
-
-                  <FormLabel
-                    fontSize="xl"
-                    fontFamily="'DIN Medium',"
-                  >Hora
-                  </FormLabel>
+                 
                   <Input
                     bg="white"
                     type='time'
                     placeholder='Hora'
                     name='hour'
                     value={horaSeleccionada}
-                    /* value={input.hour}
-                    onChange={handleChange} */
+                  
                     onChange={(e) => {
                       setInput({ ...input, hour: e.target.value });
                       setHoraSeleccionada(e.target.value);
                     }}
                     min={minHour}
+
+                    maxWidth="170px"
+                    minWidth="120px"
+                  />
+
+                  </Flex>
+
+
+                  <Flex direction='row' gap='0.4rem'>
+                  <Image
+                    src={personas} // Reemplaza con la ruta de tu ícono
+                    alt='📍' 
+                    boxSize='1.5rem' // Ajusta el tamaño del ícono
+                    mt='0.5rem'
                   />
 
 
-                  <FormLabel
-                    htmlFor='pasajeros'
-                    fontSize="xl"
-                    fontFamily="'DIN Medium',"
-                  >Cantidad de pasajeros
-                  </FormLabel>
+                  
                   <Select
                     bg="white"
-                    /* placeholder={parsedData.quantityPassengers} 
-                    value ={parsedData.quantityPassengers} */
+               
                     value={cantidadPasajerosSeleccionada}
                     id='pasajeros'
                     name='quantityPassengers'
+
+                    width={['100%', '100px']}
+
                     onChange={(e) => {
                       const selectedValue = parseInt(e.target.value, 10);
 
-                      // validación para el valor seleccionado 0
+                   
                       if (selectedValue === 0) {
 
                         alert("La cantidad de pasajeros no puede ser 0");
@@ -370,7 +440,8 @@ const SolicitudwViajeForm = () => {
                   >
                     {(() => {
                       setMaxPasajeros((origenSeleccionado === "AEROPUERTO TALARA" && destinoSeleccionado === "MANCORA") ||
-                        (origenSeleccionado === "MANCORA" && destinoSeleccionado === "AEROPUERTO TALARA") ? 15 : 10);
+                        (origenSeleccionado === "MANCORA" && destinoSeleccionado === "AEROPUERTO TALARA") || (origenSeleccionado === "AEROPUERTO PIURA" && destinoSeleccionado === "MANCORA") ||
+                        (origenSeleccionado === "MANCORA" && destinoSeleccionado === "AEROPUERTO PIURA")? 15 : 10);
 
                       return [...Array(maxPasajeros + 1).keys()].map((number) => (
                         <option key={number} value={number}>
@@ -380,21 +451,24 @@ const SolicitudwViajeForm = () => {
                     })()}
                   </Select>
 
-
-
-                  {/* <FormErrorMessage>{form.errors.name}</FormErrorMessage> */}
+                  </Flex>
+                  </Flex>
+                
                 </FormControl>
               )}
             </Field>
             <Button
-              bg='#E83D6F'
-              isLoading={loading}
-              type='submit'
-              width='100%'
-              marginTop='1rem'
+            /* bg='#E83D6F' */
+            bg='#054C84'
+            isLoading={loading}
+            type='submit'
+           
+
+            color="white"
             >
-              RESERVAR
+              🡴RESERVAR
             </Button>
+                </Flex>
           </Form>
         )}
       </Formik>
@@ -403,9 +477,3 @@ const SolicitudwViajeForm = () => {
 };
 export default SolicitudwViajeForm
 
-/* [...Array(maxPasajeros).keys()].map((number) => (
-                        <option key={number + 1} id={`number-${number + 1}`} value={number + 1}>
-                            {number + 1}
-                        </option>
-                    ));
-                    } */

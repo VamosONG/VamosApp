@@ -28,17 +28,38 @@ import LoginViajes from './views/Forms/Login/LoginViajes';
 import { AuthProvider, useAuth} from './context/authContext';
 import { useSelector } from 'react-redux';
 import LogOut from './views/Forms/LogOut/logout';
-
+import { Flex, Stack } from '@chakra-ui/react';
+import fondoVamos1 from '../src/assets/foto_home_2.png'
 
 function App() {
   const {currentUser} = useSelector(state=> state);
   const location = useLocation();
 
   return (
-    <>
-    <AuthProvider>
-        <NavBar />
+    <Stack
+      backgroundImage={fondoVamos1}
+      bgSize="cover"
+      bgRepeat="no-repeat"
+      bgPosition="center"
+      w="100vw"
+      backgroundAttachment={"fixed"}
+      h="100%"
+      overflow={"auto"}
+    >
+      <Stack
+      bg="rgba(255, 255, 255, 0.7)"
+      bgSize="cover"
+      bgRepeat="no-repeat"
+      bgPosition="center"
+      w="100vw"
+      h="100vh"
+      overflow={"auto"}>
 
+      
+    <AuthProvider
+    >
+        <NavBar />
+        
         <TransitionGroup>
         <CSSTransition key={location.key} classNames="slide" timeout={800}>
             <Routes>
@@ -81,10 +102,10 @@ function App() {
         </CSSTransition>
         </TransitionGroup>
 
-      <Footer/>
+      {/* <Footer/> */}
     </AuthProvider>
-
-    </>
+    </Stack>
+    </Stack>
   )
 }
 export default App

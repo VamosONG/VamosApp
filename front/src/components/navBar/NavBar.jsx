@@ -9,8 +9,8 @@ import {
   useMediaQuery,
   Progress
 } from "@chakra-ui/react";
-import { Link, useLocation } from "react-router-dom";
-import Vamos from "../../assets/logoblanco.png";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import Vamos from "../../assets/logo.png";
 import MobileNavbar from "../navBar/mobileNavbar/mobileNavbar";
 import { useSelector } from "react-redux";
 import LogOut from "../../views/Forms/LogOut/logout";
@@ -41,29 +41,23 @@ const NavBar = () => {
 }else{
  return (
   <>
+  <Flex>
     {isMobile ? (
       <MobileNavbar />
     ) : (
       <Flex
-        as="nav"
-        bg={
-          location.pathname === "/"
-            ? navBackground
-              ? "#009ED1"
-              : "transparent"
-            : "#009ED1"
-        }
-        alignItems="center"
-        justify="space-between"
-        h="80px"
-        w="100%"
-        position="fixed"
-        top="0"
-        left="0"
-        zIndex="999"
-        px="4"
-        transition="background 0.5s ease"
-      >
+      as="nav"
+      alignItems="center"
+      justify="space-between"
+      h="80px"
+      w="100%"
+      // bgGradient="angular(gray, white)"
+      top="0"
+      left="0"
+      zIndex="999"
+      px="4"
+      transition="background 0.5s ease"
+    >
         <Box>
          <Link to="/">
                 <Image src={Vamos} alt="Vamos" w="150px" />
@@ -75,69 +69,47 @@ const NavBar = () => {
             {currentUser?.admin && currentUser?.admin ? (
               <Box>
                 <Flex>
-                  <Link to="/">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      INICIO
-                    </Button>
-                  </Link>
+                <NavLink exact to="/"  style={{ textDecoration: location.pathname === '/' ? 'underline' : 'none', marginRight: '35px'  }}>
+    <span style={{ fontSize: '23px' }}>Inicio</span>
+</NavLink>
+                  <NavLink to="/about" style={{ textDecoration: location.pathname === '/about' ? 'underline' : 'none', marginRight: '35px'  }}>
+                  <span style={{ fontSize: '23px' }} >Nosotros</span>
+                  </NavLink>
 
-
-                  <Link to="/about">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      NOSOTROS
-                    </Button>
-                  </Link>
-                  
-                  <Link to="/questions">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      PREGUNTAS FRECUENTES
-                    </Button>
-                  </Link>
+                  <NavLink to="/questions" style={{ textDecoration: location.pathname === '/questions' ? 'underline' : 'none' }}>  
+                  <span style={{ fontSize: '23px' }} >Preguntas Frecuentes</span>
+                  </NavLink>
 
                 </Flex>
               </Box>
             ) : currentUser?.admin === false ? (
               <Box>
                 <Flex>
-                <Link to="/">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      INICIO
-                    </Button>
-                  </Link>
+                <NavLink exact to="/"  style={{ textDecoration: location.pathname === '/' ? 'underline' : 'none', marginRight: '35px'  }}>
+    <span style={{ fontSize: '23px' }}>Inicio</span>
+</NavLink>
+                  <NavLink to="/about" style={{ textDecoration: location.pathname === '/about' ? 'underline' : 'none', marginRight: '35px'  }}>
+                  <span style={{ fontSize: '23px' }} >Nosotros</span>
+                  </NavLink>
 
-                  <Link to="/about">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      NOSOTROS
-                    </Button>
-                  </Link>
-
-                  <Link to="/questions">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      PREGUNTAS FRECUENTES
-                    </Button>
-                  </Link>
+                  <NavLink to="/questions" style={{ textDecoration: location.pathname === '/questions' ? 'underline' : 'none' }}>  
+                  <span style={{ fontSize: '23px' }} >Preguntas Frecuentes</span>
+                  </NavLink>
                 </Flex>
               </Box>
             ) : (
               <Box>
                 <Flex>
-                  <Link to="/">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      INICIO
-                    </Button>
-                  </Link>
+                <NavLink exact to="/"  style={{ textDecoration: location.pathname === '/' ? 'underline' : 'none', marginRight: '35px'  }}>
+    <span style={{ fontSize: '23px' }}>Inicio</span>
+</NavLink>
+                  <NavLink to="/about" style={{ textDecoration: location.pathname === '/about' ? 'underline' : 'none', marginRight: '35px'  }}>
+                  <span style={{ fontSize: '23px' }} >Nosotros</span>
+                  </NavLink>
 
-                  <Link to="/about">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      NOSOTROS
-                    </Button>
-                  </Link>
-
-                  <Link to="/questions">
-                    <Button colorScheme="#009ED1" fontSize="1xl">
-                      PREGUNTAS FRECUENTES
-                    </Button>
-                  </Link>
+                  <NavLink to="/questions" style={{ textDecoration: location.pathname === '/questions' ? 'underline' : 'none' }}>  
+                  <span style={{ fontSize: '23px' }} >Preguntas Frecuentes</span>
+                  </NavLink>
                   {currentUser && currentUser?.admin ? <LogOut /> : null}
                 </Flex>
               </Box>
@@ -146,12 +118,13 @@ const NavBar = () => {
         </Box>
 
         <Box>
-          <AvatarGroup spacing="1rem" mx="20px">
+          <AvatarGroup spacing="1rem" mx="20px" >
              <ViewOptionPerfil/> 
           </AvatarGroup>
         </Box>
       </Flex>
     )}
+    </Flex>
   </>
 );
 }

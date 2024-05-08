@@ -386,7 +386,7 @@ const reducer = (state = initialState, action) => {
         case GET_DATA_USER:
             return {
                 ...state,
-                dataUser: action.payload.slice(0, PAGE_DATA),
+                dataUser: action.payload.slice(0),
                 allDataUser: action.payload
             }
 

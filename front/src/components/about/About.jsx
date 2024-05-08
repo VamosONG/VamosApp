@@ -6,14 +6,19 @@ const About = () => {
     <Flex 
     direction="column" 
     minHeight="100vh"
-    bgImage='https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/eqdrrjmlkojpiiwlhwjo.jpg'
+    bgColor={"transparent"}
+   
     >
 
       <Flex
         flex="1"
         direction={{ base: "column", md: "row" }}
-        p="100px"
+        p="3%"
+        m={"5%"}
         align="center"
+        bgColor={"gray.200"}
+        mt={"100px"}
+        borderRadius={"30px"}
       >
         {/* Contenido de la página */}
         <VStack 
@@ -21,12 +26,13 @@ const About = () => {
         spacing={8} 
         flex={{ base: "1", md: "0.7" }}
         mt={{ base: "20px", md: "0" }}
+        
         >
           <Heading as="h1" 
           size="2xl" 
           fontFamily='DIN Alternate Black, sans-serif'
-          textShadow='2px 2px 4px rgb(0, 0, 0, 0.8)'
-          color='white'
+          
+          color='#054C84'
           >
             Sobre VAMOS!!
           </Heading>
@@ -34,9 +40,9 @@ const About = () => {
           fontFamily='DIN Alternate, sans-serif' 
           fontSize={{ base: "lg", md: "xl" }}
           textAlign={{ base: "start", md: "left" }} 
-          maxW="800px"
-          textShadow='2px 2px 2px rgb(0, 0, 0, 0.8)'
-          color='white'
+          maxW="900px"
+
+          color='#054C84'
           >
             Somos una empresa social que brinda el servicio de taxi aeropuerto 
             y que, al mismo tiempo, da trabajo a adultos mayores sin oportunidades 
@@ -51,16 +57,17 @@ const About = () => {
               fontFamily='DIN Alternate Black, sans-serif' 
               as="h2" 
               size="lg"
-              textShadow='2px 2px 4px rgb(0, 0, 0, 0.8)'
-              color='white'
+              pb={"2%"}
+              pt={"4%"}
+              color='#054C84'
               >
                 Misión
               </Heading>
               <Text 
               fontFamily='DIN Alternate, sans-serif' 
               fontSize={{ base: "lg", md: "xl" }}
-              textShadow='2px 2px 2px rgb(0, 0, 0, 0.8)'
-              color='white'
+              maxW="900px"
+              color='#054C84'
               >
               Emprenderemos nuestro compromiso de proporcionar un servicio de traslado 
               de excelencia, asequible, puntual, confiable y seguro, especializado en 
@@ -75,16 +82,17 @@ const About = () => {
               fontFamily='DIN Alternate Black, sans-serif' 
               as="h2" 
               size="lg"
-              textShadow='2px 2px 4px rgb(0, 0, 0, 0.8)'
-              color='white'
+              pb={"2%"}
+              pt={"4%"}
+              color='#054C84'
               >
                 Visión
               </Heading>
               <Text 
               fontFamily='DIN Alternate, sans-serif' 
               fontSize={{ base: "lg", md: "xl" }}
-              textShadow='2px 2px 2px rgb(0, 0, 0, 0.8)'
-              color='white'
+              
+              color='#054C84'
               >
               Visualizamos un futuro donde VAMOS!! se consolida como una alternativa 
               líder, sostenible y responsable en el transporte, compitiendo con empresas 
@@ -104,7 +112,7 @@ const About = () => {
           objectFit="cover" 
           w="100%" 
           h="auto" 
-          borderRadius="lg"
+          borderRadius="30px"
           />
         </Box>
       </Flex>

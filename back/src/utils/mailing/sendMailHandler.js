@@ -11,7 +11,7 @@ module.exports=async({id, name, surname, email, phone, dni, driverId, tripId, op
         let chofer=null;
         let trip=null;
         const adminsEmails = await getAdminEmails();
-
+console.log(tripId)
         if( option==="reserve" || option==="assignDriver" || option==="update" || option==="infoDriver"){
             trip = await getTripById(tripId);
             if(!trip)
