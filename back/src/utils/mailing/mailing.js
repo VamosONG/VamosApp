@@ -12,7 +12,7 @@ module.exports = async(name, email, preSubject, message)=>{
     
     const oAuth2Client=new google.auth.OAuth2(CLIENT_ID,CLIENT_SECRET,REDIRECT_URI);
     oAuth2Client.setCredentials({refresh_token: REFRESH_TOKEN})
-
+console.log("oauth",oAuth2Client);
     async function sendMail(){
         try {
             const accessToken = await oAuth2Client.getAccessToken();
