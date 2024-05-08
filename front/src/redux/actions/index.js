@@ -29,6 +29,7 @@ export const GET_ALL_PRICES = 'GET_ALL_PRICES'
 export const GET_CONDUCTORES_FILTRADOS = "GET_CONDUCTORES_FILTRADOS"
 export const USER_BY_EMAIL = 'USER_BY_EMAIL'
 export const GET_PAYMENT_DATA = 'GET_PAYMENT_DATA'
+export const POST_PRICE = 'POST_PRICE'
 
 const URL = 'https://vamosappserver.onrender.com'
 
@@ -753,6 +754,25 @@ export const orderSearchPrices = (input) => {
                 payload: data
             })
             
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            throw new Error(error.message)
+        }
+    };
+}
+export const postPrice = (input) => {
+   
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.post(`https://vamosappserver.onrender.com/price/create`, input);
+            /* const { data } = await axios.post(`http://localhost:3001/price/create`, input); */
+            
+            dispatch({
+                type: POST_PRICE,
+                payload: data
+            })
+            
+            if (data) window.alert('Precio subido con éxito');
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
             throw new Error(error.message)
