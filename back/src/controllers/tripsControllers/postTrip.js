@@ -42,16 +42,16 @@ const postTrip = async ({userId, driverId, date, hour, origin, destination, quan
         }
         
         //************PARA ENVIAR MENSAJE AL RESERVAR VIAJE ********************/
-        const mailReserve = {
-                 userId: userId,
-                 tripId: newTrip.id,
-                 option: "reserve",
+        // const mailReserve = {
+        //          userId: userId,
+        //          tripId: newTrip.id,
+        //          option: "reserve",
 
-                 email:user.email,
-                 name:user.name
-             }
-             console.log(mailReserve)
-        await sendMailHandler(mailReserve)
+        //          email:user.email,
+        //          name:user.name
+        //      }
+        //      console.log(mailReserve)
+        // await sendMailHandler(mailReserve)
         //**************************************************************************/
 
 
