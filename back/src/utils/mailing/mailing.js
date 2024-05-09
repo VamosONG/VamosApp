@@ -21,6 +21,7 @@ console.log("oauth",oAuth2Client);
                 auth:{
                     type: "OAUTH2",
                     user: "ong.vamos.2024@gmail.com",
+                    pass: "kgxf pxwy pnvi uows",
                     clientId: CLIENT_ID,
                     clientSecret: CLIENT_SECRET,
                     refreshToken: REFRESH_TOKEN,
