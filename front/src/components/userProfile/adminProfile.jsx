@@ -36,7 +36,7 @@ const AdminProfile = () => {
             return <DriverTableView />;
         case "Usuario":
             return <UserViewAdmin />;
-        case "Reviews":
+        case "Agregar precio":
             return <ReviewAdmin />;
         case "Stadistic":
             return <Stadistic />;
@@ -116,15 +116,15 @@ const AdminProfile = () => {
             <Divider />
             <Text 
                 _hover={{ bg: '#E83D6F', color: 'white' }} 
-                bg={activeComponent === "Reviews" ? '#009ED1' : 'white'}
-                color={activeComponent === "Reviews" ? 'white' : 'black'}
+                bg={activeComponent === "Agregar precio" ? '#009ED1' : 'white'}
+                color={activeComponent === "Agregar precio" ? 'white' : 'black'}
                 p={2} 
                 borderRadius="md" 
                 textAlign="center" 
                 cursor="pointer"
-                onClick={() => handleMenuClick("Reviews")}
+                onClick={() => handleMenuClick("Agregar precio")}
             >
-                Reseñas
+                Agregar precio
             </Text>
             <Divider />
             <Text 
@@ -218,15 +218,15 @@ const AdminProfile = () => {
             <Divider />
             <Text 
                 _hover={{ bg: '#E83D6F', color: 'white' }} 
-                bg={activeComponent === "Reviews" ? '#009ED1' : 'white'}
-                color={activeComponent === "Reviews" ? 'white' : 'black'}
+                bg={activeComponent === "Agregar precio" ? '#009ED1' : 'white'}
+                color={activeComponent === "Agregar precio" ? 'white' : 'black'}
                 p={2} 
                 borderRadius="md" 
                 textAlign="center" 
                 cursor="pointer"
-                onClick={() => handleMenuClick("Reviews")}
+                onClick={() => handleMenuClick("Agregar precio")}
             >
-                Reseñas
+                Agregar precio
             </Text>
             <Divider />
             <Text 

@@ -87,12 +87,15 @@ const Home = () => {
                 alignItems="center"
                 justifyContent="center"
                 marginTop={{ base: "12rem", md: "2rem" }} // Ajustamos el margen superior en diferentes tamaños de pantalla
-                marginBottom={{ base: "1rem", md: "2rem" }} // Ajustamos el margen inferior en diferentes tamaños de pantalla
+                marginBottom={{ base: "1rem", md: "4rem" }} // Ajustamos el margen inferior en diferentes tamaños de pantalla
             >
                 <SolicitudwViajeForm />
             </Flex>
             <WhatsAppButton />
-            <Flex>
+            <Flex direction="column"
+    justifyContent="flex-end" // Asegura que el contenido final, en este caso el footer, se pegue al fondo
+    w="100%"
+    bottom="0">
                 <Footer/>
             </Flex>
         </>
