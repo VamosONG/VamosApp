@@ -27,8 +27,8 @@ const postTrip = async ({userId, driverId, date, hour, origin, destination, quan
             }
         });
 
-        if (!created)
-            throw new Error(`Ya existe un viaje para el usuario, mismo día, hora, origen y destino en la base de datos.`);
+        // if (!created)
+        //     throw new Error(`Ya existe un viaje para el usuario, mismo día, hora, origen y destino en la base de datos.`);
 
         const user = await User.findByPk(userId);
         const driver = await Driver.findByPk(driverId);

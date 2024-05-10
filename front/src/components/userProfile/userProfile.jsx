@@ -96,7 +96,7 @@ const UserProfile = () => {
     return (
         <Flex
       
-        h="80vh"
+        h="82%"
         bg="rgba(5, 76, 132, 0.6)"
         flexDirection="column"
         borderRadius="20px"

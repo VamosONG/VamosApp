@@ -325,7 +325,7 @@ export const conductorAsignado = (info) => {
             const mailReserve = {
                 userId: info.userId,
                 tripId: info.tripId,
-                option: "assignDriver"
+                option: "assignDriver" //reserve???
             }
 
             const[reserveResp, mailResp] = await Promise.all([
@@ -724,10 +724,21 @@ export const handlePayment = (infoConfirmacionViaje,currentUserId) => {
         quantityPassengers: Number(infoConfirmacionViaje.quantityPassengers),
         driverId: null
       }
-      
+      const info = {
+        userId: currentUserId,
+
+        date: infoConfirmacionViaje?.date,
+        hour: infoConfirmacionViaje?.hour,
+        origin: infoConfirmacionViaje?.origin,
+        destination: infoConfirmacionViaje?.destination,
+        quantityPassengers: Number(infoConfirmacionViaje.quantityPassengers),
+        price: Number(infoConfirmacionViaje?.price)
+      }
     return async (dispatch)=> {
         try {
             const {data} =await axios.post("https://vamosappserver.onrender.com/mepago/create-order", product)
+            await axios.post(`https://vamosappserver.onrender.com/trips/reserves/create`, info)
+            
             window.location.href = data
             /* return dispatch({
                 type: MERCADO_PAGO,
