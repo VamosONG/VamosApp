@@ -736,7 +736,7 @@ export const handlePayment = (infoConfirmacionViaje,currentUserId) => {
     return async (dispatch)=> {
         try {
             const {data} =await axios.post("https://vamosappserver.onrender.com/mepago/create-order", product)
-            await axios.post(`https://vamosappserver.onrender.com/trips/reserves/create`, info)
+           
             
             window.location.href = data
             /* return dispatch({
