@@ -8,7 +8,7 @@ function Footer() {
         flexDirection={{ base: 'column', md: 'column' }}
         w='100%'
 
-        position="fixed" // Esto hace que el footer se quede pegado al piso
+        /* position="sticky" */ // Esto hace que el footer se quede pegado al piso (sticky para que no tape el)
 
         bottom="0" // Lo posiciona en la parte inferior de la ventana
       >

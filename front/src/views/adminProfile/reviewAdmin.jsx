@@ -10,20 +10,25 @@ import {
     Th,
     Td,
     TableCaption, Avatar, Tooltip,
-    TableContainer, Button, Flex, useDisclosure, Link, Box, Badge, Text
+    TableContainer, Button, Flex, useDisclosure, Link, Box, Badge, Text,
+    FormControl,
+    FormLabel,
+    Input
 } from '@chakra-ui/react'
 import axios from 'axios'
 import ReviewFilter from '../driversViewAdmin/filtersData/reviewFilter';
 import { useDispatch, useSelector } from "react-redux";
-import { getReviewsData } from '../../redux/actions';
+import { getReviewsData, postPrice } from '../../redux/actions';
 import Pagination from '../../components/paginado/paginadoComponent';
+import { Formik,Form } from 'formik';
+
 // import Paginado from '../../components/paginado/paginadoComponent';
 
 
 const ReviewAdmin = () => {
 
-    const reviews = useSelector((state) => state.reviewsData)
     const dispatch = useDispatch()
+/*     const reviews = useSelector((state) => state.reviewsData)
 
     const [search, setSearch] = useState('')
 
@@ -69,7 +74,35 @@ const ReviewAdmin = () => {
     useEffect(() => {
         setReview([...reviews].splice(0, 6));
     }, [reviews])
+ */
 
+
+    const [input, setInput] = useState({
+        airport:'',
+        zone: '',
+        quantityPassengers: '',
+        value: 0
+    })
+
+    /* const handleChange = (e) => {
+       
+        setInput({
+          ...input,
+          origin: origenSeleccionado,
+          destination: destinoSeleccionado,
+          userId: currentUserId,
+          quantityPassengers: cantidadPasajerosSeleccionada
+        });
+    
+       
+    
+      }; */
+
+    const handleSubmit = ()=>{
+        console.log(input)
+        dispatch(postPrice(input))
+    }
+    
     return (
 
         <Flex 
@@ -79,9 +112,58 @@ const ReviewAdmin = () => {
         width={{ base: "28%", lg: "100%" }}
         overflowX="auto"
         marginTop={{ base: "4%", lg: "0%" }}
+        backgroundColor={'white'}
         >
+            {/* <Formik
+        
+        onSubmit={handleSubmit}
+      > */}
+            <FormControl padding={'1rem'}>
+                <FormLabel>Aeropuerto (En mayúscula, por ej: AEROPUERTO TALARA)</FormLabel>
+                    <Input 
+                        name='airport'
+                        value={input.airport}
+                        onChange={(e) => {
+                      setInput({ ...input, airport: e.target.value })
+                    }} />
+                <FormLabel>Destino (En mayúscula, por ej: DECAMERON)</FormLabel>
+                    <Input name='zone'
+                        value={input.zone}
+                        onChange={(e) => {
+                      setInput({ ...input, zone: e.target.value })
+                    }} />
+                <FormLabel>Cantidad de pasajeros (Para determinar el vehículo)</FormLabel>
+                    <Input name='quantityPassengers'
+                        value={input.quantityPassengers}
+                        onChange={(e) => {
+                      setInput({ ...input, quantityPassengers: e.target.value })
+                    }} />
+                <FormLabel>Precio (Recomendación con decimales, por ej: 169.00)</FormLabel>
+                    <Input name='value'
+                        value={input.value}
+                        onChange={(e) => {
+                      setInput({ ...input, value: e.target.value })
+                    }} />
+
+                    <Button
+            /* bg='#E83D6F' */
+            bg='#054C84'
+            /* isLoading={loading} */
+            /* type='submit' */
+            /* width='100%' */
+            marginTop='1rem'
+            marginBottom='1rem'
+            onClick={/* ()=> */handleSubmit/* () */}
+            color="white"
+            >
+              SUBIR PRECIO
+            </Button>
+            
+            </FormControl>
+            {/* </Formik> */}
+            {/*
             <TableContainer >
-                <Flex bg='#009ED1' justify={'center'} p={2} borderTopLeftRadius="md" borderTopRightRadius="md" border="1px solid black">
+                 <Flex bg='#009ED1' justify={'center'} p={2} borderTopLeftRadius="md" borderTopRightRadius="md" border="1px solid black">
                     <ReviewFilter searcher={searcher} />
                 </Flex>
                 <Flex px={0} bg='gray.300' overflowX="auto" borderBottomLeftRadius="md" borderBottomRightRadius="md" border="1px solid black">
@@ -157,7 +239,7 @@ const ReviewAdmin = () => {
                         </Tfoot>
                     </Table>
                 </Flex> 
-                 {/* {reviews.length > 1 ? ( */}
+                 
                     <Box display="flex" justifyContent="center" alignItems="center" marginTop="1rem">
                         <Button
                             color='black'
@@ -183,12 +265,10 @@ const ReviewAdmin = () => {
                             Siguiente
                         </Button>
                     </Box>
-                {/* // ) : (
-                //     null
-                // )}
-                // COMPONENTE DE PAGINADO  */}
+                
             </TableContainer>
-        </Flex>
+            */}
+        </Flex> 
     )
 }
 
