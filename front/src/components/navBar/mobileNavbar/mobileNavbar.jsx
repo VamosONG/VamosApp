@@ -230,6 +230,11 @@ const MobileNavbar = () => {
                   </>
                 ) : currentUser?.admin === false ? (
                   <>
+                  <Link to="/">
+                      <Button colorScheme="#009ED1" color="black" w="100%"> {/* Cambio del color del texto a negro */}
+                        INICIO
+                      </Button>
+                    </Link>
                     <Link to="/profileUser">
                       <Button colorScheme="#009ED1" color="black" w="100%"> {/* Cambio del color del texto a negro */}
                         MI PERFIL
