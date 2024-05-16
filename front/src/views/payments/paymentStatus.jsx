@@ -46,7 +46,7 @@ const PaymentStatus = () => {
     <Flex 
       direction="column"
       minHeight="100vh"
-      bgImage="url('https://res.cloudinary.com/drgnsbah9/image/upload/v1705962402/Vamos/re3tjn4g8e4hbdkl7jtc.jpg')"
+      
       bgPosition="center"
       bgRepeat="no-repeat"
       bgSize="cover"
@@ -58,7 +58,7 @@ const PaymentStatus = () => {
           paddingLeft={'16rem'}
           paddingRight={'26rem'}
           borderColor={'black'}
-          bg="gray.300"
+          bg="#054C84"
           w={{ base: '1rem', md: '30rem' }}
           spacing={4}
           mt="6rem"
@@ -66,15 +66,15 @@ const PaymentStatus = () => {
           mb="2rem"
         >
           <Flex justifyContent="center" p={20}>
-            <Stack mt={'-2rem'} bg="#009ED1" borderRadius="md" border={'solid'} borderColor={'black'} padding={'7rem'} paddingBottom={'1rem'}>
+            <Stack mt={'-2rem'} bg="white" borderRadius="md" border={'solid'} borderColor={'black'} padding={'7rem'} paddingBottom={'1rem'}>
               <Heading
-                color="white"
+                color="black"
                 textTransform="uppercase"
                 fontFamily="'DIN Alternate Black', sans-serif"
                 letterSpacing="2px"
                 fontSize={['2xl', null, '5xl']}
                 mb="2"
-                textShadow="2px 2px 4px rgb(0, 0, 0, 0.9)"
+                
               >
                 Gracias por elegirnos!!!
 
@@ -84,12 +84,12 @@ const PaymentStatus = () => {
               </Box>
 
               {showButton && (
-                <Button onClick={handleToggle} mb={2}>
-                  Comprobante de Pago
+                <Button onClick={handleToggle} mb={2} bg={"#054C84"} color={"white"}>
+                  <Text color={"gray.100"}>Comprobante de Pago</Text>
                 </Button>
               )}
               <Collapse in={isOpen}>
-                <Stack spacing={2} bg={'white'} borderRadius="md">
+                <Stack spacing={2} bg={'gray.200'} borderRadius="md">
                   <Heading as="h2" size="md" bg={'#10447E'} borderRadius="md" color={'white'}>
                     Comprobante de Pago
                   </Heading>
@@ -99,21 +99,18 @@ const PaymentStatus = () => {
                   <Text>Metodo de Pago: {mePagoData?.site_id === 'MPE' ? 'Mercadopago' : ''}</Text>
                 </Stack>
               </Collapse>
-              <Box bg={'#E83D6F'} borderRadius="md" mt={'4rem'}>
-                <Button bg={'#E83D6F'} onClick={handleToggle2}  _hover={{ bg: 'transparent' }} >
+              <Box bg={'#054C84'} borderRadius="md" mt={'5rem'}>
+                <Button bg={'#054C84'} onClick={handleToggle2}  _hover={{ bg: 'transparent' }} >
                 <Text color={'white'}>¿Llevas equipaje sobredimensionado?</Text>
                 </Button>
                 <Collapse in={isAbierto}>
-                <Text>Comunicate por WhatsApp para evitar inconvenientes</Text>
+                <Text color={"white"}>Comunicate por WhatsApp para evitar inconvenientes</Text>
                 <Button  color={'white'} fontWeight={'bold'} mt={'0.5rem'} variant={'link'}>
-                  <Link href={whatsappLink} isExternal>
-                    <Box
-                      w="30px"
-                      h="30px"
-                    >
-                      <Image src={WSP} alt="WhatsApp" w="100%" h="100%" />
-                    </Box>
-                  </Link>
+                <Box w="30px" h="30px">
+  <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+    <Image src={WSP} alt="WhatsApp" w="100%" h="100%" />
+  </a>
+</Box>
                 </Button>
                 </Collapse>
               </Box>

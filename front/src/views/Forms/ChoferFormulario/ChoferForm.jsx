@@ -154,7 +154,7 @@ const ChoferForm = ({ closeForm }) => {
   };
 
   const carTypeFount = ["auto", "camioneta", "van", 'van plus'];
-  const airportsFount = ["Aeropuerto Tumbes", "Aeropuerto Talara"];
+  const airportsFount = ["Aeropuerto Tumbes", "Aeropuerto Talara", "Aeropuerto Piura"];
   //const carModelFount = ["toyota", "hiunday", "ford"];
 
   return (
