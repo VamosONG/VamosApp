@@ -29,15 +29,39 @@ import { AuthProvider, useAuth} from './context/authContext';
 import { useSelector } from 'react-redux';
 import LogOut from './views/Forms/LogOut/logout';
 import { Flex, Stack } from '@chakra-ui/react';
-import fondoVamos1 from '../src/assets/foto_home_2.png'
+import fondoVamos1 from '../src/assets/foto_home_2.png';
+import fondoVamosMovil from '../src/assets/movilvamos.png'
+import { useEffect, useState } from 'react';
 
 function App() {
   const {currentUser} = useSelector(state=> state);
   const location = useLocation();
+  const [imagenDeFondo, setImagenDeFondo] = useState(fondoVamos1);
 
+  useEffect(() => {
+    function handleResize() {
+      // Verificar el ancho de la ventana y actualizar la imagen de fondo
+      if (window.innerWidth <= 768) {
+        setImagenDeFondo(fondoVamosMovil);
+      } else {
+        setImagenDeFondo(fondoVamos1);
+      }
+    }
+
+    // Escuchar eventos de redimensionamiento de la ventana
+    window.addEventListener('resize', handleResize);
+
+    // Llamar a handleResize() una vez al cargar el componente para establecer la imagen de fondo inicial
+    handleResize();
+
+    // Eliminar el event listener al desmontar el componente
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   return (
     <Stack
-      backgroundImage={fondoVamos1}
+      backgroundImage={imagenDeFondo}
       bgSize="cover"
       bgRepeat="no-repeat"
       bgPosition="center"

@@ -634,14 +634,14 @@ export const orderSearch = (input) => {
     return async (dispatch) => {
         try {
             const { data } = await axios.post(`https://vamosappserver.onrender.com/trips/filters`, input);
-
+console.log(data);
             // hacer in if, para que dependiendo del tipo de viaje, sepa donde guardar
             
             data[0].stateOfTrip==='reserved'?(
             dispatch({
                 type: GET_RESERVED_TRIPS,
                 payload: data
-            })
+            })  
             ):(data[0].stateOfTrip==='pending'?(
                 dispatch({
                     type: GET_PENDING_TRIPS,

@@ -83,7 +83,7 @@ const LoginForm = ({ onSwitchForm }) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: ("Error al iniciar sesión:", error.message),
+        text: ("Contraseña incorrecta, intenta nuevamente"),
       });
     }
   };
