@@ -16,4 +16,4 @@ function CardComponent({conductor}) {
     )
   }
   
-  export default CardComponent
+  export default CardComponent;
