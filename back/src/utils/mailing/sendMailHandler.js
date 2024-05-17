@@ -529,13 +529,13 @@ console.log(tripId)
                                   <td class="es-m-p0r es-m-p20b" align="center" style="padding:0;Margin:0;width:174px">
                                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                      <tr>
-                                      <td align="center" style="padding:0;Margin:0"><!--[if mso]><a href="https://vamos.com" target="_blank" hidden>
-                  <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="https://vamos.com" 
+                                      <td align="center" style="padding:0;Margin:0"><!--[if mso]><a href="https://vamos.pe" target="_blank" hidden>
+                  <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="https://vamos.pe" 
                                 style="height:29px; v-text-anchor:middle; width:112px" arcsize="17%" stroke="f"  fillcolor="#009ed1">
                     <w:anchorlock></w:anchorlock>
                     <center style='color:#ffffff; font-family:arial, "helvetica neue", helvetica, sans-serif; font-size:10px; font-weight:400; line-height:10px;  mso-text-raise:1px'>Ir a la web</center>
                   </v:roundrect></a>
-                <![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#009ed1;background:#009ed1;border-width:0px;display:inline-block;border-radius:5px;width:auto;mso-hide:all"><a href="https://vamos.com" class="es-button es-button-1705711803403" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;display:inline-block;background:#009ed1;border-radius:5px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;padding:5px 10px;mso-padding-alt:0;mso-border-alt:10px solid #009ED1">Ir a la web</a></span><!--<![endif]--></td>
+                <![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#009ed1;background:#009ed1;border-width:0px;display:inline-block;border-radius:5px;width:auto;mso-hide:all"><a href="https://vamos.pe" class="es-button es-button-1705711803403" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;display:inline-block;background:#009ed1;border-radius:5px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;padding:5px 10px;mso-padding-alt:0;mso-border-alt:10px solid #009ED1">Ir a la web</a></span><!--<![endif]--></td>
                                      </tr>
                                    </table></td>
                                   <td class="es-hidden" style="padding:0;Margin:0;width:20px"></td>
@@ -1078,14 +1078,14 @@ console.log(tripId)
                                                                                             <tbody>
                                                                                                 <tr>
                                                                                                     <td align="center" style="padding:0;Margin:0" class="esd-text">
-                                                                                                        <!--[if mso]><a href="https://vamos.com" target="_blank" hidden>
-                  <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="https://vamos.com" 
+                                                                                                        <!--[if mso]><a href="https://vamos.pe" target="_blank" hidden>
+                  <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="https://vamos.pe" 
                                 style="height:29px; v-text-anchor:middle; width:112px" arcsize="17%" stroke="f"  fillcolor="#009ed1">
                     <w:anchorlock></w:anchorlock>
                     <center style='color:#ffffff; font-family:arial, "helvetica neue", helvetica, sans-serif; font-size:10px; font-weight:400; line-height:10px;  mso-text-raise:1px'>Ir a la web</center>
                   </v:roundrect></a>
                 <![endif]-->
-                                                                                                        <!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#009ed1;background:#009ed1;border-width:0px;display:inline-block;border-radius:5px;width:auto;mso-hide:all"><a href="https://vamos.com" class="es-button es-button-1705711803403" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;display:inline-block;background:#009ed1;border-radius:5px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;padding:5px 10px;mso-padding-alt:0;mso-border-alt:10px solid #009ED1">Ir a la web</a></span>
+                                                                                                        <!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#009ed1;background:#009ed1;border-width:0px;display:inline-block;border-radius:5px;width:auto;mso-hide:all"><a href="https://vamos.pe" class="es-button es-button-1705711803403" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;display:inline-block;background:#009ed1;border-radius:5px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;padding:5px 10px;mso-padding-alt:0;mso-border-alt:10px solid #009ED1">Ir a la web</a></span>
                                                                                                         <!--<![endif]-->
                                                                                                     </td>
                                                                                                 </tr>
@@ -1658,14 +1658,14 @@ console.log(tripId)
                                                                                           <tbody>
                                                                                               <tr>
                                                                                                   <td align="center" style="padding:0;Margin:0" class="esd-text">
-                                                                                                      <!--[if mso]><a href="https://vamos.com" target="_blank" hidden>
-                <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="https://vamos.com" 
+                                                                                                      <!--[if mso]><a href="https://vamos.pe" target="_blank" hidden>
+                <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="https://vamos.pe" 
                               style="height:29px; v-text-anchor:middle; width:112px" arcsize="17%" stroke="f"  fillcolor="#009ed1">
                   <w:anchorlock></w:anchorlock>
                   <center style='color:#ffffff; font-family:arial, "helvetica neue", helvetica, sans-serif; font-size:10px; font-weight:400; line-height:10px;  mso-text-raise:1px'>Ir a la web</center>
                 </v:roundrect></a>
               <![endif]-->
-                                                                                                      <!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#009ed1;background:#009ed1;border-width:0px;display:inline-block;border-radius:5px;width:auto;mso-hide:all"><a href="https://vamos.com" class="es-button es-button-1705711803403" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;display:inline-block;background:#009ed1;border-radius:5px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;padding:5px 10px;mso-padding-alt:0;mso-border-alt:10px solid #009ED1">Ir a la web</a></span>
+                                                                                                      <!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#009ed1;background:#009ed1;border-width:0px;display:inline-block;border-radius:5px;width:auto;mso-hide:all"><a href="https://vamos.pe" class="es-button es-button-1705711803403" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;display:inline-block;background:#009ed1;border-radius:5px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;padding:5px 10px;mso-padding-alt:0;mso-border-alt:10px solid #009ED1">Ir a la web</a></span>
                                                                                                       <!--<![endif]-->
                                                                                                   </td>
                                                                                               </tr>
