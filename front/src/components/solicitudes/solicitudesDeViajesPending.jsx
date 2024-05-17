@@ -24,7 +24,7 @@ import Solicitud from "./solicitud"
 
 
 import { getCanceledTrips, getPendingTrips, getReservedTrips, idDeSolicitud, orderSearch } from "../../redux/actions"
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
 
 
