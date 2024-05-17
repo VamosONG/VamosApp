@@ -30,7 +30,7 @@ import { useEffect, useState } from "react"
 
 const SolicitudesDeViajesPending = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     
     const viajesPendientes = useSelector((state) => state.viajesPendientes)
     
